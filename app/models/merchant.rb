@@ -15,6 +15,5 @@ class Merchant < ApplicationRecord
          .where(invoices: {status: 0})
          .where.not(invoice_items: {status: 2})    
   end
-
 end
 

@@ -194,6 +194,7 @@ RSpec.describe 'Merchant Dashboard' do
       expect(@customer_2.first_name).to appear_before(@customer_5.full_name)
     end
   end
+  
   # As a merchant
   # When I visit my merchant dashboard
   # Then I see a section for "Items Ready to Ship"
