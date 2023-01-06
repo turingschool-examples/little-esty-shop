@@ -41,4 +41,24 @@ RSpec.describe 'Merchants Invoice Show' do
 
     expect(page).to have_content('Total invoice revenue: $28,499.29')
   end
+
+  it 'Has a field to update the status of an item on the invoice' do
+    visit merchant_invoice_path(Merchant.find(8), Invoice.find(31))
+
+    invoice_item = Invoice.find(31).invoice_items.first
+
+    expect(invoice_item.status).to eq('shipped')
+
+    within("#item_#{invoice_item.id}") do
+      expect(page).to have_select('invoice_item[status]', selected: 'Shipped')
+      select('Pending', from: 'invoice_item[status]')
+      click_button "Update Item Status"
+    end
+
+    expect(current_path).to eq(merchant_invoice_path(Merchant.find(8), Invoice.find(31)))
+    within("#item_#{invoice_item.id}") do
+      expect(page).to have_content('pending')
+      expect(page).to have_select('invoice_item[status]', selected: 'Pending')
+    end
+  end
 end

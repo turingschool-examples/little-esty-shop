@@ -16,4 +16,10 @@ Rails.application.routes.draw do
     resources :merchants, except: :destroy
     resources :invoices, only: [:index, :show]
   end
+
+  resources :invoices, only: [] do
+    scope module: 'invoices' do
+      resources :invoice_items, only: :update
+    end
+  end
 end
