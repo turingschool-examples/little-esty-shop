@@ -1,5 +1,12 @@
 <h1><%= "#{@merchant.name}'s Items" %></h1>
 
+<div id="top_5_revenue">
+  <h2>Top 5 Items</h2>
+  <% @merchant.top_five_items_by_revenue. each do |item| %>
+    <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> Total Revenue: <%= item.item_revenue %></p>
+  <% end %>
+</div>
+
 <section id="disabled">
 
   <h3>Disabled Items</h3>
@@ -23,6 +30,7 @@
     <% end %>
 </section>
 <br>
+
 <div id= "new_item">
   <p><%= link_to "Create new item", "/merchants/#{@merchant.id}/items/new"%>
 </div>      
