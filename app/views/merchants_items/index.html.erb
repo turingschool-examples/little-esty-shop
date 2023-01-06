@@ -2,5 +2,11 @@
 
 <div id="items">
 <% @items.each do |item| %>
-  <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %><br>
+  <div id="item_id-<%= item.id %>">
+  <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
+  <%= "Status: #{item.status}" %>
+  <%= button_to "Disable/Enable", merchant_item_path(@merchant.id, item.id), method: :patch, params: {swap: "true", status: item.status} %>
+  <br>
+  </div>
 <% end %>
+</div>

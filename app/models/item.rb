@@ -5,4 +5,13 @@ class Item < ApplicationRecord
 
   validates_presence_of :name, :description, :unit_price
   validates :unit_price, numericality: { only_integer: true }
+
+  def toggle_status
+    if self.status == "Enabled"
+      self.status = "Disabled"
+    elsif self.status == "Disabled"
+      self.status = "Enabled"
+    end
+  end
+
 end
