@@ -20,6 +20,7 @@ class Merchant < ApplicationRecord
     .joins(:merchants)
     .where("merchants.id = #{id}")
     .where('invoices.status = 1')
+    .order('invoices.created_at')
     .distinct
   end
 end
