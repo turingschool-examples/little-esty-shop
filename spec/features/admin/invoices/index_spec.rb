@@ -17,7 +17,6 @@ RSpec.describe 'the admin invoices index' do
   describe 'As an admin, When I visit the admin invoice index page' do
     it 'shows links to all invoices in the db' do
       visit admin_invoices_path
-
       expect(page).to have_link(@invoice_1.id)
       expect(page).to have_link(@invoice_2.id)
       expect(page).to have_link(@invoice_3.id)

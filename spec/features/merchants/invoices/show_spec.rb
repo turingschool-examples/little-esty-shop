@@ -28,7 +28,7 @@ RSpec.describe 'merchant invoice show' do
     @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1)
     @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_2)
     @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_3, status: 0)
-    @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_3, status: 0) 
+    @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_3, status: 1) 
     @invoice_item_5 = create(:invoice_item, item: @item_5, invoice: @invoice_4)
     @invoice_item_6 = create(:invoice_item, item: @item_7, invoice: @invoice_4)
   end
@@ -66,23 +66,19 @@ RSpec.describe 'merchant invoice show' do
       expect(page).to_not have_content("Invoice Total: $#{@invoice_3.total_revenue}")
     end
 
-# I see that each invoice item status is a select field
-# And I see that the invoice item's current status is selected
-# When I click this select field,
-# Then I can select a new status for the Item,
-# And next to the select field I see a button to "Update Item Status"
-# When I click this button
-# I am taken back to the merchant invoice show page
-# And I see that my Item's status has now been updated
     it 'shows each invoice items status is a select field and item current status is selected' do
  
       visit merchant_invoice_path(@merchant_2, @invoice_3)
+      within "#item-#{@item_3.id}" do
+        expect(page).to have_select("status", selected: "packaged")
+        expect(page).to_not have_select("status", selected: "pending")
+        
+        select("shipped", from: "status")
+        click_on "Update Item Status"
+      end
 
-      # save_and_open_page
-      within("div")
-      expect(page).to have_select("status", selected: "packaged")
-      
+      expect(current_path).to eq("/merchants/#{@merchant_2.id}/invoices/#{@invoice_3.id}")
+      expect(page).to have_select("status", selected: "shipped")
     end
-
   end
 end

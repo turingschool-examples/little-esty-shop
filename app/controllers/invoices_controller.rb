@@ -6,6 +6,19 @@ class InvoicesController < ApplicationController
   end
 
   def show
+    @merchant = Merchant.find(params[:merchant_id])
     @invoice = Invoice.find(params[:id])
+  end
+
+  def update
+    @merchant = Merchant.find(params[:merchant_id])
+    @invoice = Invoice.find(params[:invoice_id])
+    @invoice.invoice_items.update(invoice_params)
+    redirect_to "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", notice: "Item Status Updated"
+  end
+
+  private
+  def invoice_params
+    params.permit(:status)
   end
 end
