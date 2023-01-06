@@ -7,9 +7,10 @@
     <div id="item_<%= item.id%>">
       <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> Status: <%= item.status%>
       <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: 1} %>
+    </div>  
   <% end %>
 </section>
-    </div>
+    
 
 <section id="enabled">
 
@@ -18,7 +19,8 @@
       <div id="item_<%= item.id%>">
         <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> Status: <%= item.status%>
         <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: 0} %>
-        
-</section>
       </div>
     <% end %>
+</section>
+      
+    

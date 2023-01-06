@@ -100,16 +100,17 @@ RSpec.describe "item index page" do
 
   it 'has a seperate section for Enabled and Disabled' do
     visit "/merchants/#{@merchant_1.id}/items"
-    within('#disabled') do
+    
+    within("#disabled") do
       expect(page).to have_content('Disabled Items')
       expect(page).to have_content(@item_1.name)
       expect(page).to_not have_content(@item_3.name)
     end
 
-      within('#enabled') do
-        expect(page).to have_content('Enabled Items')
-        expect(page).to have_content(@item_3.name)
-        expect(page).to_not have_content(@item_1.name)
-      end
+    within("#enabled") do
+      expect(page).to have_content('Enabled Items')
+      expect(page).to have_content(@item_3.name)
+      expect(page).to_not have_content(@item_1.name)
+    end
   end
 end

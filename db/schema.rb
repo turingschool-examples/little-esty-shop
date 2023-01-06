@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2023_01_05_183546) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
-    t.index ["merchant_id"], name: "index_items_on_merchant_id"
+    t.index ["merchant_id"], name: "index_i tems_on_merchant_id"
   end
 
   create_table "merchants", force: :cascade do |t|
