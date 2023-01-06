@@ -70,16 +70,33 @@ RSpec.describe Merchant, type: :model do
     @transaction_12 = Transaction.create!(credit_card_number: "4654405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_12.id)
     @transaction_13 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_13.id)
   end
-
-  describe '#top_five_customers'
-    it 'can return top 5 customers with most transactions' do
-        expect(@merchant_1.top_five_customers).to eq([@customer_2, @customer_1, @customer_3, @customer_4, @customer_7])
-        expect(@merchant_1.top_five_customers.length).to eq(5)
-    end
   
-  describe 'items_ready_to_ship' do
-    it 'will list all the items ready to ship' do
-      expect(@merchant_1.items_ready_to_ship).to eq([@ii_1, @ii_3, @ii_7, @ii_9])
+  describe 'instance_methods' do
+
+    describe '#top_five_customers'
+      it 'can return top 5 customers with most transactions' do
+          expect(@merchant_1.top_five_customers).to eq([@customer_2, @customer_1, @customer_3, @customer_4, @customer_7])
+          expect(@merchant_1.top_five_customers.length).to eq(5)
+      end
+    
+    describe 'items_ready_to_ship' do
+      it 'will list all the items ready to ship' do
+        expect(@merchant_1.items_ready_to_ship).to eq([@ii_1, @ii_3, @ii_7, @ii_9])
+      end
+    end
+
+    describe '#change_status' do
+      it 'changes an items status' do
+        expect(@merchant_1.status).to eq('disabled')
+        
+        @merchant_1.change_status
+        
+        expect(@merchant_1.status).to eq('enabled')
+
+        @merchant_1.change_status
+        
+        expect(@merchant_1.status).to eq('disabled')
+      end
     end
   end
 end
