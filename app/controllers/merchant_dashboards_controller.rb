@@ -3,6 +3,6 @@ class MerchantDashboardsController < ApplicationController
     # require 'pry';binding.pry
     @merchant = Merchant.find(params[:merchant_id])
 
-    @vip_customsers = Customer.top_customers
+    @vip_customers = Customer.top_customers_for(@merchant)
   end
 end
