@@ -97,7 +97,6 @@ RSpec.describe 'admins dashboard' do
       expect(page).to have_content("Invoice ##{@invoice_1.id}")
       expect(page).to have_content("Invoice ##{@invoice_3.id}")
       expect(page).to_not have_content("Invoice ##{@invoice_2.id}")
-      save_and_open_page
 
       click_link "Invoice ##{@invoice_1.id}"
 
