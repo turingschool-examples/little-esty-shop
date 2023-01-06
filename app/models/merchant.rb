@@ -6,4 +6,8 @@ class Merchant < ApplicationRecord
     has_many :invoices, through: :invoice_items, dependent: :destroy
     has_many :customers, through: :invoices, dependent: :destroy
     has_many :transactions, through: :invoices, dependent: :destroy
+
+    def self.find_by_status(merchant_status) 
+        Merchant.where(status: merchant_status).order(updated_at: :desc)
+    end
 end

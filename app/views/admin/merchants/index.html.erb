@@ -8,12 +8,20 @@
 <%= link_to "Invoices", admin_invoices_path %><br><br>
 
 
-<% @merchants.each do |merchant| %>
-  <a name="<%merchant.name%>"> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></a>
-  <div> Status: <%= merchant.status %> </div>
-  <% if merchant.status == "disabled"  %> 
-    <%= button_to "enable", "merchants/#{merchant.id}?status=enabled", method: :patch, id: merchant.id %>
-  <% else %>
+<div id="enabled_merchants">
+  <h3>Enabled Merchants</h3>
+  <% @enabled_merchants.each do |merchant| %>
+    <a name="<%merchant.name%>"> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></a>
     <%= button_to "disable", "merchants/#{merchant.id}?status=disabled", method: :patch, id: merchant.id %>
-  <% end %><br>
-<% end %>
+  <% end%>
+</div>
+
+
+<div id="disabled_merchants">
+  <h3>Disabled Merchants</h3>
+  <% @disabled_merchants.each do |merchant| %>
+    <a name="<%merchant.name%>"> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></a>
+    <%= button_to "enable", "merchants/#{merchant.id}?status=enabled", method: :patch, id: merchant.id %>
+  <% end%>
+</div>
+

@@ -150,5 +150,32 @@ RSpec.describe "Admin/Merchant/Index" do
         expect(@merchant_1.status).to eq('enabled')
       end
     end
+
+    describe 'user story 28' do 
+      it 'displays enabled and disabled merchant sections' do
+        visit '/admin/merchants' 
+        
+        expect(page).to have_content("Enabled Merchants")
+        expect(page).to have_content("Disabled Merchants")
+      end
+
+      it 'displays only enabled merchants in enabled_merchants section' do 
+        visit '/admin/merchants' 
+
+        save_and_open_page
+
+        within('#enabled_merchants') do 
+          expect(page).to have_content('Rempel and Jones')
+          expect(page).to_not have_content('Willms and Sons')
+          expect(page).to_not have_content('Schroeder-Jerde')
+        end
+
+        within('#disabled_merchants') do 
+          expect(page).to_not have_content('Rempel and Jones')
+          expect(page).to have_content('Willms and Sons')
+          expect(page).to have_content('Schroeder-Jerde')  
+        end
+      end
+    end
   end
 end

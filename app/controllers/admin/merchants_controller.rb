@@ -1,7 +1,8 @@
 module Admin
   class MerchantsController < ApplicationController
     def index
-      @merchants = Merchant.all.order(:id)
+      @enabled_merchants = Merchant.find_by_status('enabled')
+      @disabled_merchants = Merchant.find_by_status('disabled')
     end
 
     def show

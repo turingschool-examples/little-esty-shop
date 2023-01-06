@@ -8,4 +8,20 @@ RSpec.describe Merchant, type: :model do
     it {should have_many(:customers).through(:invoices)}
     it {should have_many(:transactions).through(:invoices)}
   end
+
+  before :each do 
+    @merchant_1 = Merchant.create!(name: 'Schroeder-Jerde', status: :disabled)
+    @merchant_2 = Merchant.create!(name: 'Rempel and Jones', status: :enabled)
+    @merchant_3 = Merchant.create!(name: 'Willms and Sons', status: :disabled)
+  end
+
+  describe 'model methods' do 
+    it '#find_by_status' do 
+      enabled_merchants = Merchant.find_by_status('enabled')
+      expect(enabled_merchants).to eq([@merchant_2])
+
+      disabled_merchants = Merchant.find_by_status('disabled')
+      expect(disabled_merchants).to eq([@merchant_1, @merchant_3])
+    end
+  end
 end
