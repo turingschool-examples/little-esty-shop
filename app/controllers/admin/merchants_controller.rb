@@ -9,8 +9,7 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     @merchant = Merchant.find(params[:id])
-    @merchant.toggle_status
-    @merchant.save
+    @merchant.toggle_status if params[:status].present?
     
     redirect_to admin_merchants_path
   end
