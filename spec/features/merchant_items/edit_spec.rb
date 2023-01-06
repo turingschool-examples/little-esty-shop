@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchant items index page' do
+RSpec.describe 'merchant items edit page' do
   before(:all) do
     Transaction.delete_all
     InvoiceItem.delete_all
@@ -157,41 +157,30 @@ RSpec.describe 'merchant items index page' do
     @transaction28 = Transaction.create!(invoice_id: @invoice28.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "failed")
   end
 
-  it 'lists the names of all the items for that merchant' do
-    visit merchant_items_path(@merchant3.id)
+  it 'has a prefilled form with existing data for that item' do
+    visit edit_merchant_item_path(@merchant1.id, @item1.id)
 
-    expect(page).to have_content(@merchant3.name)
-
-    within "#items" do
-      expect(page).to have_content(@item24.name)
-      expect(page).to have_content(@item25.name)
-      expect(page).to have_content(@item26.name)
-      expect(page).to have_content(@item27.name)
-      expect(page).to have_content(@item28.name)
-      expect(page).to have_content(@item29.name)
-      expect(page).to have_content(@item30.name)
-      expect(page).to_not have_content(@item23.name)
-      expect(page).to_not have_content(@item31.name)
-    end
+    expect(page).to have_field :name, with: @item1.name
+    expect(page).to have_field :description, with: @item1.description
+    expect(page).to have_field :unit_price, with: @item1.unit_price
   end
 
-  it 'has links for each item that links to the merchants items show page' do
-    visit merchant_items_path(@merchant3.id)
+  it 'correctly updates the database when submitted and redirects back to the show page with a flash message' do
+    visit edit_merchant_item_path(@merchant1.id, @item1.id)
 
-    within "#items" do
-      expect(page).to have_link "#{@item24.name}", href: "/merchants/#{@merchant3.id}/items/#{@item24.id}"
-      expect(page).to have_link "#{@item30.name}", href: "/merchants/#{@merchant3.id}/items/#{@item30.id}"
-    end
+    fill_in :name, with: "test item name"
+    fill_in :description, with: "test item description"
+    fill_in :unit_price, with: 29392
+    click_button "Submit"
 
-    click_link "#{@item24.name}"
-    expect(page).to have_content(@item24.name)
-    expect(page).to have_content(@item24.description)
-    expect(page).to have_content(@item24.unit_price)
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")
+    expect(page).to have_content("Item Updated Successfully")
+    expect(page).to have_content("test item name")
+    expect(page).to have_content("test item description")
+    expect(page).to have_content(29392)
+
   end
 
-  it 'has links on the merchant item show page that links to the edit page of that item' do
-    visit merchant_item_path(@merchant1.id, @item1.id)
 
-    expect(page).to have_link "Update Item", href: "/merchants/#{@merchant1.id}/items/#{@item1.id}/edit"
-  end
+
 end
