@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Items Index page' do
+RSpec.describe 'Merchant Items Show page' do
   before :each do 
     @merchant_1 = Merchant.create!(name: 'Schroeder-Jerde')
     @merchant_2 = Merchant.create!(name: 'Rempel and Jones')
@@ -17,25 +17,7 @@ RSpec.describe 'Merchant Items Index page' do
     @item_9 = @merchant_2.items.create!(name: 'Quo Magnam', description: 'Culpa deleniti adipisci voluptates aut. Sed eum quisquam nisi', unit_price: 22582)
     @item_10 = @merchant_2.items.create!(name: 'Quidem Suscipit', description: 'Reiciendis sed aperiam culpa animi laudantium', unit_price: 34018)
   end
-  
-#  As a merchant,
-# When I visit my merchant items index page ("merchants/merchant_id/items")
-# I see a list of the names of all of my items
-# And I do not see items for any other merchant
-  describe 'User story 6' do
-    it 'displays a list of all merchant items for that particular merchant' do
-      visit merchant_items_path(@merchant_1.id)
-      
-      expect(page).to have_content(@item_1.name)
-      expect(page).to have_content(@item_2.name)
-      expect(page).to have_content(@item_3.name)
-      expect(page).to have_content(@item_4.name)
-      expect(page).to have_content(@item_5.name)
-      expect(page).to_not have_content(@item_6.name)
-      expect(page).to_not have_content(@item_7.name)
-    end
-  end
-  
+
   # Part 1:
   # As a merchant,
   # When I click on the name of an item from the merchant items index page,
@@ -46,15 +28,15 @@ RSpec.describe 'Merchant Items Index page' do
   # - Name
   # - Description
   # - Current Selling Price
-  describe 'User story 7 (part 1)' do
-    it 'displays the item name as a link which links to the items show page' do
-      visit merchant_items_path(@merchant_1.id)
-      
-      expect(page).to have_link("#{@item_1.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
-      expect(page).to have_link("#{@item_2.name}")
-
-      click_link("#{@item_1.name}")
-      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+  describe 'User story 7 (part 2)' do
+    it 'displays all the items name, description, current selling price' do
+      visit merchant_item_path(@merchant_1.id, @item_1.id)
+     
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content(@item_1.description)
+      expect(page).to have_content(@item_1.unit_price)
+      expect(page).to_not have_content(@item_7.description)
+      expect(page).to_not have_content(@item_8.unit_price)
     end
   end
 end
