@@ -249,7 +249,7 @@ RSpec.describe 'merchant show' do
 
       visit merchant_dashboards_path(merchant1.id)
 
-      expect(invoice3.id).to appear_before(invoice2.id)
+      expect(invoice3.id.to_s).to appear_before(invoice2.id.to_s)
     end
   end
 end
