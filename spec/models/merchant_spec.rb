@@ -60,8 +60,11 @@ RSpec.describe Merchant do
         ii2 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice2.id)
         invoice3 = Invoice.create!(status: 1, customer_id: customer.id, created_at: Time.now-15.days)
         ii3 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice3.id)
-
-        expect(merchant1.pending_invoices).to eq([invoicer3, invoice2, invoice1])
+        
+        expect(merchant1.pending_invoices).to eq([invoice3, invoice2, invoice1])
+        invoice4 = Invoice.create!(status: 1, customer_id: customer.id, created_at: Time.now-4.days)
+        ii = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice4.id)
+        expect(merchant1.pending_invoices).to eq([invoice3, invoice2, invoice4, invoice1])
       end
     end
   end
