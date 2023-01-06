@@ -6,5 +6,21 @@ class Item < ApplicationRecord
 
   validates_presence_of :name, :description, :unit_price, :merchant_id
 
-  enum status: { disabled: 0, enabled: 1}
+  enum status: { 'disabled' => 0, 'enabled' => 1}
+
+  def change_status
+    if self.status == 'disabled'
+      self.enabled!
+    elsif self.status == 'enabled'
+      self.disabled!
+    end
+  end
+
+  def self.enabled_items
+    where(status: "enabled")
+  end
+
+  def self.disabled_items
+    where(status: "disabled")
+  end
 end
