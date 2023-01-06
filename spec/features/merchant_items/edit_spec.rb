@@ -160,9 +160,9 @@ RSpec.describe 'merchant items edit page' do
   it 'has a prefilled form with existing data for that item' do
     visit edit_merchant_item_path(@merchant1.id, @item1.id)
 
-    expect(page).to have_field "#name"
-    expect(page).to have_field "#description"
-    expect(page).to have_field "#unit_price"
+    expect(page).to have_field :name, with: @item1.name
+    expect(page).to have_field :description, with: @item1.description
+    expect(page).to have_field :unit_price, with: @item1.unit_price
   end
 
 
