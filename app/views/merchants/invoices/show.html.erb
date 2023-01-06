@@ -7,8 +7,15 @@ Total invoice revenue: <%= @invoice.total_invoice_revenue %><br>
 
 <h4>Items on this invoice:</h4><br>
 <% @invoice.invoice_items.each do |invoice_item| %>
-  <h5><%= invoice_item.item.name %></h5>
-  Quantity: <%= invoice_item.quantity %>
-  Selling Price: <%= invoice_item.unit_price_to_dollars %>
-  Status: <%= invoice_item.status %>
+  <div id='item_<%= invoice_item.id %>'>
+    <h5><%= invoice_item.item.name %></h5>
+    Quantity: <%= invoice_item.quantity %>
+    Selling Price: <%= invoice_item.unit_price_to_dollars %>
+    Status: <%= invoice_item.status.capitalize %>
+    <%= form_with model: [@invoice, invoice_item], local: true do |form| %>
+      <% form.label :status %>
+      <%= form.select :status, options_for_select(['Pending', 'Packaged', 'Shipped'], invoice_item.status.capitalize) %>
+      <%= form.submit 'Update Item Status' %>
+    <% end %>
+  </div>
 <% end %>
