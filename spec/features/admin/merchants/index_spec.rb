@@ -132,5 +132,13 @@ RSpec.describe "Admin/Merchant/Index" do
         expect(current_path).to eq("/admin/merchants/#{@merchant_2.id}")
       end
     end
+
+    # describe 'user story 27' do 
+    #   it 'displays enable and disable buttons next to each merchant' do 
+    #     visit '/admin/merchants'
+    #     save_and_open_page
+    #     #expect(page).to have_button("enable")
+    #   end
+    # end
   end
 end
