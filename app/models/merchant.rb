@@ -7,6 +7,8 @@ class Merchant < ApplicationRecord
 
   validates_presence_of :name
 
+  enum status: { 'disabled' => 0, 'enabled' => 1}
+
   def top_five_customers
     customers.joins(invoices: :transactions)
       .where(transactions: { result: "success"})
@@ -20,5 +22,13 @@ class Merchant < ApplicationRecord
     invoice_items.joins(:invoice)
     .where.not(status: 2)
     .order("invoices.created_at")
+  end
+
+  def change_status
+    if self.status == 'disabled'
+      self.enabled!
+    elsif self.status == 'enabled'
+      self.disabled!
+    end
   end
 end
