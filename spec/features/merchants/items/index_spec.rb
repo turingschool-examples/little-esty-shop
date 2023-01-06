@@ -26,13 +26,25 @@ RSpec.describe 'Merchant Items Index page' do
     it 'displays a list of all merchant items for that particular merchant' do
       visit merchant_items_path(@merchant_1.id)
       
-      expect(page).to have_content(@item_1.name)
-      expect(page).to have_content(@item_2.name)
-      expect(page).to have_content(@item_3.name)
-      expect(page).to have_content(@item_4.name)
-      expect(page).to have_content(@item_5.name)
-      expect(page).to_not have_content(@item_6.name)
-      expect(page).to_not have_content(@item_7.name)
+      within("#item_#{@item_1.id}") do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to_not have_content(@item_2.name)
+      end
+      
+      within("#item_#{@item_2.id}") do
+        expect(page).to have_content(@item_2.name)
+        expect(page).to_not have_content(@item_4.name)
+      end
+
+      within("#item_#{@item_3.id}") do
+        expect(page).to have_content(@item_3.name)
+        expect(page).to_not have_content(@item_8.name)
+      end
+
+      within("#item_#{@item_4.id}") do
+        expect(page).to have_content(@item_4.name)
+        expect(page).to_not have_content(@item_1.name)
+      end
     end
   end
   
@@ -50,11 +62,38 @@ RSpec.describe 'Merchant Items Index page' do
     it 'displays the item name as a link which links to the items show page' do
       visit merchant_items_path(@merchant_1.id)
       
-      expect(page).to have_link("#{@item_1.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
-      expect(page).to have_link("#{@item_2.name}")
-
-      click_link("#{@item_1.name}")
-      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+      within("#item_#{@item_1.id}") do
+        expect(page).to have_link("#{@item_1.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+        expect(page).to_not have_link("#{@item_2.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_2.id}")
+        
+        click_link("#{@item_1.name}")
+        
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+      end
+      
+      visit merchant_items_path(@merchant_1.id)
+      
+      within("#item_#{@item_2.id}") do
+        expect(page).to have_link("#{@item_2.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_2.id}")
+        expect(page).to_not have_link("#{@item_1.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+      end
     end
+  end
+  
+# As a merchant
+# When I visit my items index page ("merchants/merchant_id/items")
+# Next to each item name I see a button to disable or enable that item.
+# When I click this button
+# Then I am redirected back to the items index
+# And I see that the items status has changed
+  describe 'User story 9' do
+    xit 'has a button to disable or enable this item' do
+      visit merchant_items_path(@merchant_1.id)
+
+      expect(page).to have_button('Enable')
+      expect(page).to have_button('Disable')
+    end
+
+    it 'click the button and be redirected to the items index page, where the items status is changed'
   end
 end
