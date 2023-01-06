@@ -53,4 +53,8 @@ class Merchant < ApplicationRecord
   def revenue_in_dollars
     number_to_currency(total_revenue/100.0)
   end
+
+  def top_5_items
+    invoice_items.joins(:transactions).distinct.where(transactions: {result: 'success'}).group(:item_id).sum('invoice_items.quantity * invoice_items.unit_price')
+  end
 end

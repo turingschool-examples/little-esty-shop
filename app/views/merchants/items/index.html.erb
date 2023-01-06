@@ -26,3 +26,12 @@
   <% end %>
   </ul>
 </div>
+
+<div id="top_items">
+  <h3>Top Items</h3>
+  <ol>
+    <% @merchant.top_5_items.each do |item| %>
+      <li><%= "#{item.name} - $#{item.unit_price_to_dollars} in sales" %></li>
+    <% end %>
+  </ol>
+</div>
