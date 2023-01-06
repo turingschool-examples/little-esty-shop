@@ -189,5 +189,9 @@ RSpec.describe 'merchant items index page' do
     expect(page).to have_content(@item24.unit_price)
   end
 
+  it 'has links on the merchant item show page that links to the edit page of that item' do
+    visit merchant_item_path(@merchant1.id, @item1.id)
 
+    expect(page).to have_link "Update Item", href: "/merchants/#{@merchant1.id}/items/#{@item1.id}/edit"
+  end
 end
