@@ -88,5 +88,19 @@ RSpec.describe Item, type: :model do
         expect(@item_1.status).to eq('disabled')
       end
     end
+
+    describe '#enabled_items' do
+      it 'returns an array of enabled items' do
+        items = Item.all
+        expect(items.enabled_items).to eq([@item_3])
+      end
+    end
+
+    describe '#disabled_items' do
+      it 'returns an array of disabled items' do
+        items = Item.all
+        expect(items.disabled_items).to eq([@item_1, @item_2])
+      end
+    end
   end
 end
