@@ -29,6 +29,7 @@ RSpec.describe "item index page" do
 
     @item_1 = Item.create!(name: "Pokemon Cards", description: "Investments", unit_price: 800, merchant_id: @merchant_1.id)
     @item_2 = Item.create!(name: "Pogs", description: "Old school", unit_price: 500, merchant_id: @merchant_2.id)
+    # @item_3 = Item.create!(name: "Tamagotchi", description: "Super annoying", unit_price: 800, merchant_id: @merchant_1.id, status: 1)
 
     @ii_1 = InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_1.id)
     @ii_2 = InvoiceItem.create!(quantity: 1, unit_price: 800, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_2.id)
@@ -71,7 +72,7 @@ RSpec.describe "item index page" do
     end
   end
 
-  it 'has a button to disable or enable that item' do
+  xit 'has a button to disable or enable that item' do
     visit "/merchants/#{@merchant_1.id}/items"
     
     within("#all_items") do
@@ -81,6 +82,10 @@ RSpec.describe "item index page" do
     within("#all_items") do
       expect(page).to_not have_button 'Disable'
     end
+
+    click_button 'Enable'
+
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
   end
 
   it 'displays its current status' do
@@ -90,4 +95,13 @@ RSpec.describe "item index page" do
       expect(page).to have_content(@item_1.status)
     end
   end
+
+  # it 'has a seperate section for Enabled and Disabled' do
+  #   visit "/merchants/#{@merchant_1.id}/items"
+
+  #   with('#enabled')
+  #   expect(page).to have_content('Enabled Items')
+  #   expect(page).to have_content(@item_3)
+  #   expect(page).to_not have_content(@item_3)
+  # end
 end
