@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Merchant do
   describe 'Relationships' do
-    it {should have_many :items}    
+    it {should have_many :items}
     it {should validate_presence_of :name}
   end
 
@@ -25,8 +25,8 @@ RSpec.describe Merchant do
         expect(item).to be_a Item
         expect(item.merchant_id).to eq(1)
         expect(item.status).to eq(1)
-      end   
-      
+      end
+
       expect(merchants_ready_items.length).to eq(16)
     end
 
@@ -66,6 +66,18 @@ RSpec.describe Merchant do
       item_3 = merchant.items.create!(name: "bob3", description: "very best at things", unit_price: 99999, enabled: false)
       item_4 = merchant.items.create!(name: "bob4", description: "very okay at things", unit_price: 999, enabled: false)
       expect(merchant.get_disabled_items).to eq([item_1, item_2, item_3, item_4])
+    end
+  end
+  
+  describe '#best_day_by_revenue' do
+    it 'returns the best day by revenue for a given merchant' do
+      expect(Merchant.find(8).best_day_by_revenue).to eq('3/13/2012')
+    end
+  end
+
+  describe '#revenue_in_dollars' do
+    it 'returns the total revenue for a given merchant in dollars' do
+      expect(Merchant.top_5_by_revenue.first.revenue_in_dollars).to eq('$18,159,238.96')
     end
   end
 end

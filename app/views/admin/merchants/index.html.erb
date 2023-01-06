@@ -30,7 +30,9 @@
 <h5>Top Merchants:</h5>
 <ol>
 <% Merchant.top_5_by_revenue.each do |merchant| %>
-  <li><%= merchant.name %> - <%= number_to_currency(merchant.total_revenue/100.0) %></li>
+  <li><%= merchant.name %> - <%= merchant.revenue_in_dollars %><br>
+  The top selling date for <%= merchant.name %> was <%= merchant.best_day_by_revenue %>
+  </li>
 <% end %>
 </ol>
 </div>
