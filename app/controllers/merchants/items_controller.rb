@@ -18,6 +18,7 @@ module Merchants
 
     def new
       @merchant = Merchant.find(params[:merchant_id])
+      @item = Item.new
     end
 
     def create
@@ -30,7 +31,7 @@ module Merchants
       merchant = Merchant.find(params[:merchant_id])
       item = Item.find(params[:id])
 
-      unless params[:description]
+      if !params[:item][:description]
         item.update(item_params)
         redirect_to merchant_items_path(merchant)
       elsif item.update(item_params)

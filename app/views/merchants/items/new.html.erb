@@ -1,13 +1,2 @@
 <h2>New Item</h2>
-<%= form_with url: "/merchants/#{@merchant.id}/items?enabled=false", method: :post, local: true do |f| %>
-  <p><%= f.label :name %>
-  <%= f.text_field :name, required: true %></p>
-
-  <p><%= f.label :description %>
-  <%= f.text_area :description, required: true %></p>
-
-  <p><%= f.label :current_price, "Current Price: $" %>
-  <%= f.number_field :current_price, step:'any', required: true %></p>
-
-  <%= f.submit 'Submit' %>
-<% end %>
+<%= render partial: '/merchants/shared/item_form' %>

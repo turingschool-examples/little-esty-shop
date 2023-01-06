@@ -8,11 +8,11 @@ RSpec.describe 'Item creation' do
     click_link("New Item")
 
     expect(current_path).to eq(new_merchant_item_path(1))
-    fill_in 'Name', with: 'New item name'
-    fill_in 'Description', with: 'Fancy item does fancy things'
-    fill_in 'current_price', with: '99.99'
+    fill_in 'item[name]', with: 'New item name'
+    fill_in 'item[description]', with: 'Fancy item does fancy things'
+    fill_in 'item[current_price]', with: '99.99'
 
-    click_button 'Submit'
+    click_button 'Create Item'
 
     expect(current_path).to eq(merchant_items_path(1))
     within 'div#disabled' do
