@@ -68,4 +68,16 @@ RSpec.describe 'Merchant Items Edit page' do
       expect(page).to have_content('Qui Esse version 2')
     end
   end
+
+  describe 'Sad Path testing' do
+    it 'cannot update a merchant item if a field is empty' do
+      visit edit_merchant_item_path(@merchant_1.id, @item_1.id)
+
+      fill_in('Name', with: '')
+      click_button('Update')
+
+      expect(page).to have_content('Item was not updated, please update one of the fields.')
+      expect(page).to have_button('Update')
+    end
+  end
 end
