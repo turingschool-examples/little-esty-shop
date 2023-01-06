@@ -4,11 +4,4 @@ class Item < ApplicationRecord
   has_many :invoices, through: :invoice_items, dependent: :destroy
   has_many :customers, through: :invoices, dependent: :destroy
   has_many :transactions, through: :invoices, dependent: :destroy
-
-  def self.unshipped_items
-    Item.joins(:invoice_items).where('invoice_items.status!=2').group(:id)
-      #  require 'pry'; binding.pry
-      # invoice_items.where.not(status: :shipped)
-      # Item.joins(:invoice_items).select(:id).where('invoice_items.status!=2').distinct.pluck(:name)
-  end
 end
