@@ -165,7 +165,6 @@ RSpec.describe 'admin dashboard' do
 
   it 'has links to the admin merch and invoices indices' do
     visit admin_index_path
-    save_and_open_page
     expect(page).to have_link 'Merchants Index', href: admin_merchants_path
     expect(page).to have_link 'Invoices Index', href: admin_invoices_path
     click_link("Merchants Index")
