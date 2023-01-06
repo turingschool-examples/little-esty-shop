@@ -5,8 +5,8 @@ RSpec.describe 'Admin Merchant New' do
     visit admin_merchants_path
     click_on('Create a new merchant')
 
-    fill_in('name', with: "Jimbob's Carpentry")
-    click_button('Submit')
+    fill_in('merchant[name]', with: "Jimbob's Carpentry")
+    click_button('Create Merchant')
 
     expect(current_path).to eq(admin_merchants_path)
     expect(page).to have_content("Jimbob's Carpentry")

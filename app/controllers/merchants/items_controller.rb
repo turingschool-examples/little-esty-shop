@@ -20,7 +20,6 @@ module Merchants
       merchant = Merchant.find(params[:merchant_id])
       item = Item.find(params[:id])
 
-
       if item.update(item_params)
         flash[:notice] = "Item Updated Successfully"
         redirect_to merchant_item_path(merchant, item)
@@ -33,10 +32,10 @@ module Merchants
     private
 
     def item_params
-      if params[:current_price]
-        params[:unit_price] = Item.dollars_to_unit_price(params[:current_price])
+      if params[:item][:current_price]
+        params[:item][:unit_price] = Item.dollars_to_unit_price(params[:item][:current_price])
       end
-      params.permit(:id, :name, :unit_price, :description)
+      params.require(:item).permit(:id, :name, :unit_price, :description)
     end
   end
 end
