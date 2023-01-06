@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Invoice, type: :model do
+RSpec.describe 'admin merchant show page' do
   before :each do
     @merchant_1 = Merchant.create!(name: "Billy the Guy")
     @merchant_2 = Merchant.create!(name: "Different Guy")
@@ -51,29 +51,11 @@ RSpec.describe Invoice, type: :model do
     @transaction_13 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_13.id)
   end
 
-  describe 'relationships' do
-    it { should belong_to :customer }
-    it { should have_many :invoice_items }
-    it { should have_many :transactions }
-    it { should have_many(:items).through(:invoice_items) }
-    it { should have_many(:merchants).through(:items) }
-  end
+  it 'contains a link to update the merchants information' do
+    visit admin_merchant_path(@merchant_1)
 
-  describe 'validations' do
-    it { should validate_presence_of :status }
-    it { should validate_presence_of :customer_id }
-  end
+    click_link "Update"
 
-  describe 'class methods' do
-    describe '#incomplete_invoices' do
-      it 'returns a list of the ids of all invoices of items that have not been shipped ordered by the created_at date' do
-        invoice_14 = Invoice.create!(status: 1, customer_id: @customer_1.id, created_at: Time.now - 4.days)
-        InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: invoice_14.id)
-        transaction_14 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: invoice_14.id)
-
-        expect(Invoice.incomplete_invoices).to eq([invoice_14, @invoice_1, @invoice_3])
-        expect(Invoice.incomplete_invoices.length).to eq(3)
-      end
-    end
+    expect(current_path).to eq(edit_admin_merchant_path(@merchant_1))
   end
 end

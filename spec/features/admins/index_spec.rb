@@ -12,7 +12,7 @@ RSpec.describe 'admins dashboard' do
     @customer_5 = Customer.create!(first_name: "Mark", last_name: "Bologna")
     @customer_6 = Customer.create!(first_name: "Anthony", last_name: "Tall")
 
-    @invoice_1 = Invoice.create!(status: 1, customer_id: @customer_1.id)
+    @invoice_1 = Invoice.create!(status: 1, customer_id: @customer_1.id, created_at: Time.now - 3.days)
     @invoice_2 = Invoice.create!(status: 1, customer_id: @customer_2.id)
     @invoice_3 = Invoice.create!(status: 1, customer_id: @customer_3.id)
     @invoice_4 = Invoice.create!(status: 1, customer_id: @customer_4.id)
@@ -97,10 +97,29 @@ RSpec.describe 'admins dashboard' do
       expect(page).to have_content("Invoice ##{@invoice_1.id}")
       expect(page).to have_content("Invoice ##{@invoice_3.id}")
       expect(page).to_not have_content("Invoice ##{@invoice_2.id}")
+      save_and_open_page
 
       click_link "Invoice ##{@invoice_1.id}"
 
       expect(current_path).to eq(admin_invoice_path(@invoice_1))
+    end
+  end
+
+  it 'shows the incomplete invoices ordered by the date oldest to newest' do
+    invoice_14 = Invoice.create!(status: 1, customer_id: @customer_1.id, created_at: Time.now - 4.days)
+    InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: invoice_14.id)
+    transaction_14 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: invoice_14.id)
+
+    visit admin_index_path
+
+    within("#incomplete_invoices") do
+      expect(page).to have_content("Invoice ##{@invoice_1.id}")
+      expect(page).to have_content("Invoice ##{@invoice_3.id}")
+      expect(page).to have_content("Invoice ##{invoice_14.id}")
+
+      expect("#{invoice_14.id}").to appear_before("#{@invoice_1.id}")
+      expect("#{@invoice_1.id}").to appear_before("#{@invoice_3.id}")
+      expect("#{@invoice_3.id}").to_not appear_before("#{invoice_14.id}")
     end
   end
 end
