@@ -132,9 +132,10 @@ RSpec.describe Customer, type: :model do
         end
       end
     end
- 
+  end
+    
   describe 'admin user story spec' do
-      before :each do
+    before :each do
       @merchant_1 = Merchant.create!(name: 'Schroeder-Jerde')
       @merchant_2 = Merchant.create!(name: 'Rempel and Jones')
       @merchant_3 = Merchant.create!(name: 'Willms and Sons')
@@ -241,3 +242,4 @@ RSpec.describe Customer, type: :model do
       expect(Customer.top_5_customers_by_successful_transactions).to match([@customer_6, @customer_2, @customer_3, @customer_5, @customer_1])
     end
   end
+end
