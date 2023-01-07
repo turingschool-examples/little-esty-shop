@@ -10,7 +10,7 @@ RSpec.describe 'admin index page' do
   describe 'header' do
     it 'indicates we are on admin dashboard with header' do
       visit admin_index_path
-
+      
       within('header') do
         expect(page).to have_content('Admin Dashboard')
       end
@@ -73,7 +73,6 @@ RSpec.describe 'admin index page' do
       visit admin_index_path
 
       within("#incomplete-invoices") do
-        save_and_open_page
         expect(page).to have_content(invoice_1.created)
         expect(page).to have_content(invoice_2.created)
         expect(page).to have_content(invoice_3.created)
