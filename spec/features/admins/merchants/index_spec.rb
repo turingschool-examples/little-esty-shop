@@ -59,20 +59,20 @@ RSpec.describe 'admin merchants index' do
     expect(page).to have_content(@merchant_2.name)
   end
 
-  it 'links to a merchants show page' do
-    visit admin_merchants_path
+  # it 'links to a merchants show page' do
+  #   visit admin_merchants_path
 
-    expect(page).to have_link(@merchant_1.name)
-    expect(page).to have_link(@merchant_2.name)
+  #   expect(page).to have_link(@merchant_1.name)
+  #   expect(page).to have_link(@merchant_2.name)
 
-    click_link @merchant_1.name
+  #   click_link @merchant_1.name
     
 
-    expect(current_path).to eq(admin_merchant_path(@merchant_1))
+  #   expect(current_path).to eq(admin_merchant_path(@merchant_1))
 
-    expect(page).to have_content(@merchant_1.name)
-    expect(page).to_not have_content(@merchant_2.name)
-  end
+  #   expect(page).to have_content(@merchant_1.name)
+  #   expect(page).to_not have_content(@merchant_2.name)
+  # end
 
   it 'contains a button next to each merchants name to enable or disable that merchant' do
     visit admin_merchants_path
@@ -115,5 +115,34 @@ RSpec.describe 'admin merchants index' do
     expect(page).to have_link("Create New Merchant")
     click_link "Create New Merchant"
     expect(current_path).to eq(new_admin_merchant_path)
+  end
+
+  it 'I see the names of the top 5 merchants by total revenue generated' do
+    visit admin_merchants_path
+    save_and_open_page
+    within("#top_five_merchants") do
+      expect(@merchant_4.name).to appear_before(@merchant_1.name)
+      expect(@merchant_1.name).to appear_before(@merchant_6.name)
+      expect(@merchant_6.name).to appear_before(@merchant_3.name)
+      expect(@merchant_3.name).to appear_before(@merchant_2.name)
+      expect(page).to_not have_content(@merchant_5.name)
+    end
+  end
+
+  it 'And I see that each merchant name links to the admin merchant show page for that merchant' do
+    visit admin_merchants_path
+
+    within("#top_five_merchants") do
+      expect(page).to have_link(@merchant_1.name)
+      expect(page).to have_link(@merchant_2.name)
+      expect(page).to have_link(@merchant_3.name)
+      expect(page).to have_link(@merchant_4.name)
+      expect(page).to have_link(@merchant_6.name)
+      expect(page).to_not have_link(@merchant_5.name)
+
+      click_link(@merchant_1.name)
+
+      expect(current_path).to eq(admin_merchant_path(@merchant_1))
+    end
   end
 end

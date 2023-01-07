@@ -1,6 +1,7 @@
 class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
+    @top_five_merchants = Merchant.top_five_merchants
   end
 
   def new
