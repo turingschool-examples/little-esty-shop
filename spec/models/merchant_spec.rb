@@ -8,6 +8,7 @@ RSpec.describe Merchant, type: :model do
     it {should have_many(:customers).through(:invoices)}
     it {should have_many(:transactions).through(:invoices)}
   end
+
 describe 'class methods' do
   before :each do 
     @merchant_1 = Merchant.create!(name: 'Schroeder-Jerde')
@@ -87,4 +88,3 @@ describe 'class methods' do
       end
     end
   end
-end
