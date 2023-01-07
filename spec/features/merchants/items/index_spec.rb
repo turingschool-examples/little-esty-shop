@@ -96,32 +96,26 @@ RSpec.describe 'Merchant Items Index page' do
 # Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
 # And I see that each Item is listed in the appropriate section
   describe 'User story 10' do
-    xit 'has two sections for enabled and disabled items' do
+    it 'has two sections for enabled and disabled items' do
       visit merchant_items_path(@merchant_1.id)
       # visit "merchants/#{@merchant_1.id}/items"
 
       within("#enabled_item_#{@item_1.id}") do
-        expect(page).to have_content('Enabled Items')
         expect(page).to have_button('Disable')
         expect(page).to_not have_button('Enable')
       end
       
-      within("#enabled_item_#{@item_2.id}") do
-        expect(page).to have_content('Enabled Items')
+      within("#enabled_item_#{@item_3.id}") do
         expect(page).to have_button('Disable')
       end
       
-      within("#disabled_item_#{@item_3.id}") do
-        expect(page).to have_content('Disabled Items')
+      within("#disabled_item_#{@item_2.id}") do
         expect(page).to have_button('Enable')
-        expect(page).to_not have_content('Enable Items')
-        expect(page).to have_button('Disable')
+        expect(page).to_not have_button('Disable')
       end
       
-      within("#enabled_item_#{@item_4.id}") do
-        expect(page).to have_content('Disabled Items')
-        expect(page).to have_button('Enable')
-      end
+      expect(page).to have_content('Enabled Items')
+      expect(page).to have_content('Disabled Items')
     end 
   end
 end
