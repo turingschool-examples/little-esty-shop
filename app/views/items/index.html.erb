@@ -1,7 +1,12 @@
 <h2><%= @merchant.name %>'s Items </h2>
 
+<h4><%= link_to "Create a new item", "/merchants/#{@merchant.id}/items/new" %></h4>
+
 <% @merchant.items.each do |item| %>
-  <p><%=link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+  <p>Name: <%=link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+    <p>Description: <%= item.description %></p>
+    <p>Description: <%= item.description %></p>
+    <p>Status: <%= item.status %></p>
     <%= button_to 'Enable',  "merchants/#{@merchant.id}/items", method: :patch %> |
     <%= button_to 'Disable', "merchants/#{@merchant.id}/items", method: :patch %></p>
 <% end %>
