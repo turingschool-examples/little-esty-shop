@@ -59,26 +59,6 @@ RSpec.describe 'admin merchants index' do
     expect(page).to have_content(@merchant_2.name)
   end
 
-
-  # it 'links to a merchants show page' do
-  #   visit admin_merchants_path
-
-  # xit 'links to a merchants show page' do
-  #  visit admin_merchants_path
-
-
-  #   expect(page).to have_link(@merchant_1.name)
-  #   expect(page).to have_link(@merchant_2.name)
-
-  #   click_link @merchant_1.name
-    
-
-  #   expect(current_path).to eq(admin_merchant_path(@merchant_1))
-
-  #   expect(page).to have_content(@merchant_1.name)
-  #   expect(page).to_not have_content(@merchant_2.name)
-  # end
-
   it 'contains a button next to each merchants name to enable or disable that merchant' do
     visit admin_merchants_path
 
@@ -124,7 +104,7 @@ RSpec.describe 'admin merchants index' do
 
   it 'I see the names of the top 5 merchants by total revenue generated' do
     visit admin_merchants_path
-    save_and_open_page
+
     within("#top_five_merchants") do
       expect(@merchant_4.name).to appear_before(@merchant_1.name)
       expect(@merchant_1.name).to appear_before(@merchant_6.name)
@@ -148,6 +128,18 @@ RSpec.describe 'admin merchants index' do
       click_link(@merchant_1.name)
 
       expect(current_path).to eq(admin_merchant_path(@merchant_1))
+    end
+  end
+
+  it 'displays the total revenue next to each merchant' do
+    visit admin_merchants_path
+
+    within("#top_five_merchants") do
+      expect(page).to have_content(80000)
+      expect(page).to have_content(20000)
+      expect(page).to have_content(12500)
+      expect(page).to have_content(3200)
+      expect(page).to have_content(800)
     end
   end
 end
