@@ -14,6 +14,7 @@ RSpec.describe Merchant, type: :model do
     @merchant_1 = create(:merchant, status: "enabled")
     @merchant_2 = create(:merchant)
     @merchant_3 = create(:merchant)
+    @merchant_4 = create(:merchant, status: "disabled")
 
     @item_1 = create(:item, merchant: @merchant_1)
     @item_2 = create(:item, merchant: @merchant_2)
@@ -58,6 +59,20 @@ RSpec.describe Merchant, type: :model do
       @merchant_1.toggle_status
 
       expect(@merchant_1.status).to eq("enabled")
+    end
+  end
+
+  describe '#group_by_status' do
+    it 'returns merchants based on status argument' do
+      enabled_expected_1 = @merchant_1
+      enabled_expected_2 = @merchant_2
+      enabled_expected_3 = @merchant_3
+      disabled_expected_1 = @merchant_4
+
+      expect(Merchant.group_by_status("enabled")).to include(enabled_expected_1)
+      expect(Merchant.group_by_status("enabled")).to include(enabled_expected_2)
+      expect(Merchant.group_by_status("enabled")).to include(enabled_expected_3)
+      expect(Merchant.group_by_status("disabled")).to include(disabled_expected_1)
     end
   end
 end

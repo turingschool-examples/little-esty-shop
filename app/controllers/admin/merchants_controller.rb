@@ -5,6 +5,21 @@ class Admin::MerchantsController < ApplicationController
     @merchants_disabled = Merchant.group_by_status("disabled")
   end
 
+  def new
+    @merchant = Merchant.new
+  end
+
+  def create
+    @merchant = Merchant.new(merchant_params)
+    @merchant.status = "disabled"
+    if @merchant.save 
+      redirect_to admin_merchants_path
+    else
+      redirect_to new_admin_merchant_path
+      flash[:alert] = "Error: #{@merchant.errors.full_messages}"
+    end
+  end
+
   def show
     @merchant = Merchant.find(params[:id])
   end
