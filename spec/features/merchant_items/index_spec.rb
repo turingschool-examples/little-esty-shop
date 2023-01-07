@@ -234,7 +234,7 @@ RSpec.describe 'merchant items index page' do
     @item28.update(status: "Disabled")
 
     visit merchant_items_path(@merchant3.id)
-save_and_open_page
+
     within "#enabled_items" do
       expect(page).to have_content("Enabled Items:")
       expect(page).to have_content(@item24.name)
@@ -256,7 +256,10 @@ save_and_open_page
       expect(page).to_not have_content(@item26.name)
       expect(page).to_not have_content(@item27.name)
     end
+  end
 
-
+  it 'has a link to create a new item' do
+    visit merchant_items_path(@merchant1.id)
+    expect(page).to have_link "Create New Item", href: new_merchant_item_path(@merchant1.id)
   end
 end
