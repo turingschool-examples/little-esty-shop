@@ -67,7 +67,34 @@ RSpec.describe 'Merchant Items Index page' do
 # Then I am redirected back to the items index
 # And I see that the items status has changed
   describe 'User story 9' do
-    xit 'has a button to disable or enable this item' do
+    it 'next to each name, I see a button to enable or disable that item' do
+      visit merchant_items_path(@merchant_1.id)
+
+      expect(page).to have_button('Enable')
+      expect(page).to have_button('Disable')
+    end
+
+    xit 'click the button and be redirected to the items index page, where the items status is changed' do
+      visit merchant_items_path(@merchant_1.id)
+
+      within("#enabled_item_#{@item_1.id}") do
+        expect(page).to have_content('Enabled Items')
+        expect(page).to have_button('Disable')
+        
+        click_button('Disable')
+        redirect_to(merchant_items_path(@merchant_1.id))
+        expect(page).to have_content('Disabled Items')
+        expect(page).to have_button('Enable')
+      end
+    end
+  end
+
+# As a merchant,
+# When I visit my merchant items index page
+# Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
+# And I see that each Item is listed in the appropriate section
+  describe 'User story 10' do
+    xit 'has two sections for enabled and disabled items' do
       visit merchant_items_path(@merchant_1.id)
       # visit "merchants/#{@merchant_1.id}/items"
 
@@ -93,21 +120,6 @@ RSpec.describe 'Merchant Items Index page' do
         expect(page).to have_content('Disabled Items')
         expect(page).to have_button('Enable')
       end
-    end
-
-    xit 'click the button and be redirected to the items index page, where the items status is changed' do
-      visit merchant_items_path(@merchant_1.id)
-
-      within("#enabled_item_#{@item_1.id}") do
-        expect(page).to have_content('Enabled Items')
-        expect(page).to have_button('Disable')
-        
-        click_button('Disable')
-        redirect_to(merchant_items_path(@merchant_1.id))
-        expect(page).to have_content('Disabled Items')
-        expect(page).to have_button('Enable')
-      end
-    end
-
+    end 
   end
 end
