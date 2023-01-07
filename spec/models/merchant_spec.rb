@@ -18,10 +18,10 @@ RSpec.describe Merchant, type: :model do
   describe 'model methods' do 
     it '#find_by_status' do 
       enabled_merchants = Merchant.find_by_status('enabled')
-      expect(enabled_merchants).to eq([@merchant_2])
+      expect(enabled_merchants.to_a).to eq([@merchant_2])
 
       disabled_merchants = Merchant.find_by_status('disabled')
-      expect(disabled_merchants).to eq([@merchant_1, @merchant_3])
+      expect(disabled_merchants.to_a).to eq([@merchant_3, @merchant_1])
     end
   end
 end
