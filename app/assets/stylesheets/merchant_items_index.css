@@ -1,0 +1,16 @@
+
+
+.items {
+  display: flex;
+}
+
+.left {
+  flex: 1;
+  border: 2px green
+}
+
+.right {
+  flex: 1;
+  border: 2px red
+}
+
