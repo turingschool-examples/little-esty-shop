@@ -162,8 +162,6 @@ RSpec.describe "Admin/Merchant/Index" do
       it 'displays only enabled merchants in enabled_merchants section' do 
         visit '/admin/merchants' 
 
-        save_and_open_page
-
         within('#enabled_merchants') do 
           expect(page).to have_content('Rempel and Jones')
           expect(page).to_not have_content('Willms and Sons')
