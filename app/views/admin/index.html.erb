@@ -5,7 +5,7 @@
     <% @incomplete_invoices.each do |invoice| %>
       <p>
         <%= link_to "Invoice ##{invoice.id.to_s}", admin_invoice_path(invoice) %>
-        - <%= invoice.updated_at.strftime("%A, %B %e, %Y") %>
+        - <%= invoice.created %>
       </p>
     <% end %>
   </section>

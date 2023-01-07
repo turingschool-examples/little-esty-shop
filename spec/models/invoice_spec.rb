@@ -26,4 +26,14 @@ RSpec.describe Invoice do
       end
     end
   end
+
+  describe 'instance methods' do
+    describe '.created' do
+      it 'returns created_at in a readable format' do
+        invoice = FactoryBot.create(:invoice, created_at: Time.new(1963, 11, 23))
+
+        expect(invoice.created).to eq("Saturday, November 23, 1963")
+      end
+    end
+  end
 end

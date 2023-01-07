@@ -64,5 +64,23 @@ RSpec.describe 'admin index page' do
         expect(page).to have_link(invoice_3.id.to_s, href: admin_invoice_path(invoice_3))
       end
     end
+
+    it 'shows invoice created_at and is sorted oldest to newest' do
+      invoice_1 = FactoryBot.create(:invoice_with_invoice_item, invoice_item_status: 0, created_at: (Time.new(1950, 1, 1)))
+      invoice_2 = FactoryBot.create(:invoice_with_invoice_item, invoice_item_status: 1, created_at: (Time.new(2050, 1, 1)))
+      invoice_3 = FactoryBot.create(:invoice_with_invoice_item, invoice_item_status: 1, created_at: (Time.new(2000, 1, 1)))
+
+      visit admin_index_path
+
+      within("#incomplete-invoices") do
+        save_and_open_page
+        expect(page).to have_content(invoice_1.created)
+        expect(page).to have_content(invoice_2.created)
+        expect(page).to have_content(invoice_3.created)
+
+        expect(invoice_1.id.to_s).to appear_before(invoice_3.id.to_s)
+        expect(invoice_3.id.to_s).to appear_before(invoice_2.id.to_s)
+      end
+    end
   end
 end
