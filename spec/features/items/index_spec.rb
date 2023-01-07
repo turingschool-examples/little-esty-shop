@@ -136,7 +136,7 @@ RSpec.describe "item index page" do
 
   it 'top 5 items by revenue' do
     visit "/merchants/#{@merchant_1.id}/items"
-#digimon, magic *, stretch, yugi, barbi
+
     within("#top_5_revenue") do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@item_7.name)
@@ -172,6 +172,18 @@ RSpec.describe "item index page" do
       expect(page).to have_content(@merchant_1.top_five_items_by_revenue[2].item_revenue)
       expect(page).to have_content(@merchant_1.top_five_items_by_revenue[3].item_revenue)
       expect(page).to have_content(@merchant_1.top_five_items_by_revenue[4].item_revenue)
+    end
+  end
+
+  it ' displays the date with the most sales next to each of the 5 most pop items' do
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    within("#top_5_revenue") do
+      expect(page).to have_content(@item_1.created_at)
+      expect(page).to have_content(@item_7.created_at)
+      expect(page).to have_content(@item_4.created_at)
+      expect(page).to have_content(@item_5.created_at)
+      expect(page).to have_content(@item_6.created_at)
     end
   end
 end

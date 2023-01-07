@@ -23,4 +23,14 @@ class Item < ApplicationRecord
   def self.disabled_items
     where(status: "disabled")
   end
+
+  def top_selling_days
+    invoices.joins(:transactions)
+    .where(transactions: {result: "success"}, invoices: {status: 1})
+    .select('invoices.*, invoices.created_at as invoice_date, sum(invoice_items.quantity * invoice_items.unit_price) as item_revenue')
+    .group('invoices.id')
+    .order(item_revenue: :desc, invoice_date: :desc)
+    .first
+    .invoice_date
+  end
 end
