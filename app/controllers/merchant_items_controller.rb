@@ -20,7 +20,7 @@ class MerchantItemsController < ApplicationController
       redirect_to merchant_item_index_path(@merchant)
     else
       redirect_to merchant_item_path(@merchant, @item)
-      flash[:alert] = "Succesfully updated"
+      flash[:alert] = "Successfully updated"
     end
   end
 
