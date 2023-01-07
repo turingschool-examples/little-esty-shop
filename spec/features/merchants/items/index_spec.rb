@@ -86,4 +86,31 @@ RSpec.describe 'merchant items index page' do
       
     end
   end
+
+  describe "story 10" do
+    #     As a merchant,
+    # When I visit my merchant items index page
+    # Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
+    # And I see that each Item is listed in the appropriate section
+    
+    it 'has has a section for enabled and one for disabled items' do
+      mariah = Merchant.create!(name: "Mariah Ahmed")
+      terry = Merchant.create!(name: "Terry Peeples")
+      
+      pen = mariah.items.create!(name: "pen", description: "writes stuff", unit_price: 33)
+      marker = mariah.items.create!(name: "marker", description: "writes stuff", unit_price: 23)
+      pencil = mariah.items.create!(name: "pencil", description: "writes stuff", unit_price: 13)
+      
+      socks = terry.items.create!(name: "socks", description: "keeps feet warm", unit_price: 8)
+      shoes = terry.items.create!(name: "shoes", description: "provides arch support", unit_price: 68)
+
+      visit merchant_item_index_path(mariah)
+      save_and_open_page
+
+      expect(page).to have_content("Enabled")
+      expect(page).to have_content("Disabled")
+    end
+    
+    it "has each item under the correct section"
+  end
 end
