@@ -1,0 +1,5 @@
+<h1>Welcome to Little Esty Shop</h1>
+<h3>Our Merchants:</h3>
+<% @merchants.each do |merchant| %>
+  <p><%= link_to "#{merchant.name}'s Dashboard", "/merchants/#{merchant.id}/dashboard" %></p>
+<% end %>

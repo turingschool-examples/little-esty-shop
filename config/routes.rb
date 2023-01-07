@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  
+  root 'home#index'
+
   resources :merchants, only: [] do
     resources :items, except: [:destroy]
     resources :invoices, only: [:index, :show]
