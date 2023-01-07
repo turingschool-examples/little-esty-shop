@@ -16,8 +16,9 @@ class ItemsController < ApplicationController
   def update
     merchant = Merchant.find(params[:merchant_id])
     item = Item.find(params[:id])
+
     if item.update(item_params)
-      if params[:status]
+      if item_params[:status]
         item.save
         redirect_to "/merchants/#{merchant.id}/items"
       else

@@ -53,7 +53,7 @@ RSpec.describe 'Merchant Items Index page' do
       expect(page).to have_link("#{@item_1.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
       expect(page).to have_link("#{@item_2.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_2.id}")
       expect(page).to_not have_link("#{@item_8.name}", :href => "/merchants/#{@merchant_2.id}/items/#{@item_8.id}")
-       
+
       click_link("#{@item_1.name}")
       
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
