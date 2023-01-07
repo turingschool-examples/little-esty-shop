@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   patch '/merchants/:merchant_id/invoices/:invoice_id', to: "invoices#update"
 
   resources :merchants, only: [:index, :show] do
-    resources :items, :controller => :merchants_items, only: [:index, :show, :update, :edit]
+    resources :items, :controller => :merchants_items, only: [:index, :show, :update, :edit, :new, :create]
     resources :invoices, only: [:index, :show]
   end
 
