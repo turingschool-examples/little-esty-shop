@@ -67,5 +67,25 @@ RSpec.describe 'the admin merchants index' do
         expect(page).to have_content("Status: #{@merchant_10.status}")
       end
     end
+
+    describe 'link to create a new merchant, click on the link, form that allows me to add merchant information' do
+      describe 'fill out the form I click ‘Submit’ redirect to admin merchants index page' do
+        it 'creates a new merchant, displayed on index, created with a default status of disabled' do
+          visit admin_merchants_path
+
+          click_on("Create Merchant")
+
+          expect(current_path).to eq('/admin/merchants/new')
+          fill_in('merchant_name', with: 'Isaac Hayes')
+          click_on('Submit')
+
+          expect(current_path).to eq('/admin/merchants')
+          expect(page).to have_content('Isaac Hayes')
+
+          isaac_hayes = Merchant.find_by(name: 'Isaac Hayes')
+          expect(isaac_hayes.status).to eq("disabled")
+        end
+      end
+    end
   end
 end
