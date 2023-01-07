@@ -6,7 +6,7 @@ RSpec.describe 'Merchant Items Index page' do
     @merchant_2 = Merchant.create!(name: 'Rempel and Jones')
     @merchant_3 = Merchant.create!(name: 'Willms and Sons')
 
-    @item_1 = @merchant_1.items.create!(name: 'Qui Esse', description: 'Nihil autem sit odio inventore deleniti', unit_price: 75107)
+    @item_1 = @merchant_1.items.create!(name: 'Qui Esse', description: 'Nihil autem sit odio inventore deleniti', unit_price: 75107, status: 'enabled')
     @item_2 = @merchant_1.items.create!(name: 'Autem Minima', description: 'Cumque consequuntur ad', unit_price: 67076)
     @item_3 = @merchant_1.items.create!(name: 'Ea Voluptatum', description: 'Sunt officia eum qui molestiae', unit_price: 32301)
     @item_4 = @merchant_1.items.create!(name: 'Nemo Facere', description: 'Sunt eum id eius magni consequuntur delectus veritatis', unit_price: 4291)
@@ -73,19 +73,18 @@ RSpec.describe 'Merchant Items Index page' do
       expect(page).to have_button('Enable')
       expect(page).to have_button('Disable')
     end
-
-    xit 'click the button and be redirected to the items index page, where the items status is changed' do
+    
+    it 'click the button and be redirected to the items index page, where the items status is changed' do
       visit merchant_items_path(@merchant_1.id)
+      
+      expect(page).to have_button('Disable', id: @item_1.id)
+      expect(@item_1.status).to eq('enabled')
+      
+      click_button('Disable', id: @item_1.id)
 
-      within("#enabled_item_#{@item_1.id}") do
-        expect(page).to have_content('Enabled Items')
-        expect(page).to have_button('Disable')
-        
-        click_button('Disable')
-        redirect_to(merchant_items_path(@merchant_1.id))
-        expect(page).to have_content('Disabled Items')
-        expect(page).to have_button('Enable')
-      end
+      expect(current_path).to eq(merchant_items_path(@merchant_1.id))
+      @item_1.reload
+      expect(@item_1.status).to eq('disabled')
     end
   end
 

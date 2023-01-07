@@ -2,6 +2,6 @@
 
 <% @merchant.items.each do |item| %>
   <p><%=link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-    <%= button_to 'Enable',  "merchants/#{@merchant.id}/items", method: :patch %> |
-    <%= button_to 'Disable', "merchants/#{@merchant.id}/items", method: :patch %></p>
+    <%= button_to 'Enable',  "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled", id: "#{item.id}", method: :patch %> |
+    <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled", id: "#{item.id}", method: :patch %></p>
 <% end %>
