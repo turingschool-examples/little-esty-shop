@@ -27,6 +27,11 @@
   column-gap: 10px;
 }
 
+.flex-body {
+  display: flex;
+  justify-content: space-around;
+}
+
 .title {
   text-align: center;
   font-size: 300%;

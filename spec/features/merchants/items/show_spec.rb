@@ -107,7 +107,7 @@ RSpec.describe "Merchant items show page" do
       fill_in 'Unit price', with: 40
       click_button 'Save'
 
-      expect(page).to have_content("Succesfully updated") #comeback and refeactor if time
+      expect(page).to have_content("Successfully updated") #comeback and refeactor if time
     end
   end
 
