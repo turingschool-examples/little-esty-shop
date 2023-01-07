@@ -122,6 +122,7 @@ RSpec.describe Customer, type: :model do
           expect(@customer_1.successful_transaction_count).to_not eq(2)
         end
       end
+    end
 
       describe '#full_name' do
         it 'displays the customers first and last name as one string' do
@@ -133,7 +134,7 @@ RSpec.describe Customer, type: :model do
       end
     end
  
-  describe 'admin user story spec' do
+    describe 'admin user story spec' do
       before :each do
       @merchant_1 = Merchant.create!(name: 'Schroeder-Jerde')
       @merchant_2 = Merchant.create!(name: 'Rempel and Jones')
@@ -241,3 +242,5 @@ RSpec.describe Customer, type: :model do
       expect(Customer.top_5_customers_by_successful_transactions).to match([@customer_6, @customer_2, @customer_3, @customer_5, @customer_1])
     end
   end
+end
+
