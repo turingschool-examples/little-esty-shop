@@ -40,7 +40,7 @@ class Merchant < ApplicationRecord
     elsif self.status == 'enabled'
       self.disabled!
     end
-
+  end
   def top_five_items_by_revenue
     items.joins(invoices: :transactions)
     .where(transactions: {result: "success"}, invoices: {status: 1})
@@ -48,6 +48,5 @@ class Merchant < ApplicationRecord
     .group('items.id')
     .order(item_revenue: :desc)
     .limit(5)
-    
   end
 end
