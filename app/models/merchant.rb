@@ -33,11 +33,21 @@ class Merchant < ApplicationRecord
     .order("invoices.created_at")
   end
 
+
   def change_status
     if self.status == 'disabled'
       self.enabled!
     elsif self.status == 'enabled'
       self.disabled!
     end
+
+  def top_five_items_by_revenue
+    items.joins(invoices: :transactions)
+    .where(transactions: {result: "success"}, invoices: {status: 1})
+    .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as item_revenue')
+    .group('items.id')
+    .order(item_revenue: :desc)
+    .limit(5)
+    
   end
 end
