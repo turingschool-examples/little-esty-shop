@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'rake'
 
 RSpec.describe 'admin index page' do
   before :each do
