@@ -226,6 +226,37 @@ RSpec.describe 'merchant items index page' do
       expect(page).to have_content("Status: Disabled")
       expect(page).to_not have_content("Enabled")
     end
+  end
+
+  it 'displays the enabled and disabled items in two separate columns' do
+    @item30.update(status: "Disabled")
+    @item29.update(status: "Disabled")
+    @item28.update(status: "Disabled")
+
+    visit merchant_items_path(@merchant3.id)
+save_and_open_page
+    within "#enabled_items" do
+      expect(page).to have_content("Enabled Items:")
+      expect(page).to have_content(@item24.name)
+      expect(page).to have_content(@item25.name)
+      expect(page).to have_content(@item26.name)
+      expect(page).to have_content(@item27.name)
+      expect(page).to_not have_content(@item28.name)
+      expect(page).to_not have_content(@item29.name)
+      expect(page).to_not have_content(@item30.name)
+    end
+
+    within "#disabled_items" do
+      expect(page).to have_content("Disabled Items:")
+      expect(page).to have_content(@item28.name)
+      expect(page).to have_content(@item29.name)
+      expect(page).to have_content(@item30.name)
+      expect(page).to_not have_content(@item24.name)
+      expect(page).to_not have_content(@item25.name)
+      expect(page).to_not have_content(@item26.name)
+      expect(page).to_not have_content(@item27.name)
+    end
+
 
   end
 end

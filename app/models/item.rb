@@ -14,4 +14,8 @@ class Item < ApplicationRecord
     end
   end
 
+  def self.find_merchant_items_by_status(merchant_id, status)
+    self.where(merchant_id: merchant_id, status: status)
+  end
+
 end
