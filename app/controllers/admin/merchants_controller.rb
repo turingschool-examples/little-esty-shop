@@ -6,11 +6,18 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def new
-
+    @merchant = Merchant.new
   end
 
   def create
-    
+    @merchant = Merchant.new(merchant_params)
+    @merchant.status = "disabled"
+    if @merchant.save 
+      redirect_to admin_merchants_path
+    else
+      redirect_to new_admin_merchants_path
+      flash[:alert] = "Error: #{error_message(@merchant.errors)}"
+    end
   end
 
   def show
