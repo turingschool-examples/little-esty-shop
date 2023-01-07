@@ -6,8 +6,8 @@
 </div>
 
 <ul>
-<% binding.pry%>
+
 <% @vip_customers.each do |customer| %>
   <li><h5 style="color: MAROON"> Customer Name: <%= customer.complete_name %> &nbsp - &nbsp
-  Transaction Count: <%= customer.successful_transactions_count %></h5></li>
+  Transaction Count: <%= customer.trans_count %></h5></li>
 <% end %>

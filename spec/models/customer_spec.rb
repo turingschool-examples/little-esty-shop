@@ -120,12 +120,6 @@ RSpec.describe Customer, type: :model do
     it "returns the customer' first and last names as a singular, complete name" do
       expect(@customer_1.complete_name).to eq("test customer 1 doe")
     end
-
-    xit 'returns the 5 customers with most successful transactions for a merchant' do
-      # require 'pry';binding.pry
-      # expect(Customer.top_customers_for(@merchant_1).length).to eq(5)
-      expect(Customer.top_customers_for(@merchant_1)).to eq([@customer_7, @customer_8, @customer_1, @customer_4, @customer_3])
-    end
   end
 
 end
