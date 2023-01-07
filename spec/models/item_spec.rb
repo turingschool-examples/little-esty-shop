@@ -9,6 +9,12 @@ RSpec.describe Item, type: :model do
     it {should have_many(:transactions).through(:invoices)}
   end
 
+  describe 'validations' do
+    it {should validate_presence_of :name}
+    it {should validate_presence_of :description}
+    it {should validate_presence_of :unit_price}
+  end
+
   describe 'class methods' do
     before :each do 
       @merchant_1 = Merchant.create!(name: 'Schroeder-Jerde')
@@ -81,3 +87,4 @@ RSpec.describe Item, type: :model do
     end
   end
 end
+
