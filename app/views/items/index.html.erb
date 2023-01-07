@@ -10,3 +10,23 @@
     <%= button_to 'Enable',  "merchants/#{@merchant.id}/items", method: :patch %> |
     <%= button_to 'Disable', "merchants/#{@merchant.id}/items", method: :patch %></p>
 <% end %>
+
+<h3>Enabled Items</h3>
+<% @merchant.items.each do |item| %>
+  <% if item.status == 'enabled' %>
+    <div id='enabled_item_<%= item.id %>'>
+      <p><%=link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+      <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled", id: "#{item.id}", method: :patch %></p>
+    </div>
+  <% end %>
+<% end %>
+
+<h3>Disabled Items</h3>
+<% @merchant.items.each do |item| %>
+  <% if item.status == 'disabled' %>
+    <div id='disabled_item_<%= item.id %>'>
+      <p><%=link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+      <%= button_to 'Enable',  "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled", id: "#{item.id}", method: :patch %></p> 
+    </div>
+  <% end %>
+<% end %>
