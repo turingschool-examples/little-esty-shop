@@ -12,6 +12,17 @@ RSpec.describe 'the admin merchants index' do
     @merchant_8 = create(:merchant, status: 1)
     @merchant_9 = create(:merchant, status: 1)
     @merchant_10 = create(:merchant, status: 1)
+
+    @customers = create_list(:customer, 10)
+    @items = create_list(:item, 10, merchant: @merchant_1)
+    @invoices = []
+    @customers.each do |customer|
+      @invoices << create(:invoice, customer: customer)
+    end
+    @transactions = []
+    @invoices.each do |invoice|
+      @transactions << create_list(:transaction, 10, invoice: invoice)
+    end
   end
 
   describe 'As an admin, When I visit the admin merchants index page' do
@@ -93,6 +104,20 @@ RSpec.describe 'the admin merchants index' do
 
           expect(current_path).to eq('/admin/merchants/new')
           expect(page).to have_content("Error")
+        end
+      end
+      
+      describe 'lists the names of the top 5 merchants by total revenue generated' do
+        it 'has merchant names as links to the admin merchant\'s show page' do
+          visit admin_merchants_path
+
+          expect(page).to have_content("Top 5 Revenue Earners")
+
+          binding.pry
+
+          within ("#admin-merchants-#{@merchant_1.id}") do
+            expect(page).to have_link("#{@merchant_1.name}")
+          end
         end
       end
     end
