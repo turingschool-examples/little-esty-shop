@@ -1,19 +1,49 @@
+<%= stylesheet_link_tag "admin_merchants" %>
+
 <h1>Merchants</h1>
 <h2>Admin</h2>
 
 <% if @merchants.any? %>
-  <% @merchants.each do |merchant| %>
-    <ul>
-      <div id=<%= "admin-merchants-#{merchant.id}" %> >
-        <li>
-          <%= link_to merchant.name, admin_merchant_path(merchant.id) %>
-          <%= form_with model: merchant, url: admin_merchant_path(merchant.id), method: :patch do |f| %>
-            <%= "Status: #{merchant.status}" %>
-            <%= f.hidden_field :status %>
-            <%= f.submit "Disable/Enable" %>
-          <% end %>
-        </li>
+  <div class="split left">
+    <div class="centered">
+      <div id=admin-merchants-enabled>
+        <h2>Enabled</h2>
+        <% @merchants_enabled.each do |merchant| %>
+          <ul>
+            <div id=<%= "admin-merchants-#{merchant.id}" %> >
+              <li>
+                <%= link_to merchant.name, admin_merchant_path(merchant.id) %>
+                <%= form_with model: merchant, url: admin_merchant_path(merchant.id), method: :patch do |f| %>
+                  <%= "Status: #{merchant.status}" %>
+                  <%= f.hidden_field :status %>
+                  <%= f.submit "Disable/Enable" %>
+                <% end %>
+              </li>
+            </div>
+          </ul>
+        <% end %>
       </div>
-    </ul>
-  <% end %>
+    </div>
+  </div>  
+  <div class="split right">
+    <div class="centered">  
+      <div id=admin-merchants-disabled>
+        <h2>Disabled</h2>
+        <% @merchants_disabled.each do |merchant| %>
+          <ul>
+            <div id=<%= "admin-merchants-#{merchant.id}" %> >
+              <li>
+                <%= link_to merchant.name, admin_merchant_path(merchant.id) %>
+                <%= form_with model: merchant, url: admin_merchant_path(merchant.id), method: :patch do |f| %>
+                  <%= "Status: #{merchant.status}" %>
+                  <%= f.hidden_field :status %>
+                  <%= f.submit "Disable/Enable" %>
+                <% end %>
+              </li>
+            </div>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>

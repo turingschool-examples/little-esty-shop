@@ -13,4 +13,8 @@ class Merchant < ApplicationRecord
   def toggle_status
     self.status == "enabled" ? self.disabled! : self.enabled!
   end
+
+  def self.group_by_status(status)
+    self.where(status: status)
+  end
 end
