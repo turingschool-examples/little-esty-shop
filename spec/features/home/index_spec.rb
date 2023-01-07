@@ -9,7 +9,6 @@ RSpec.describe 'home index' do
   it 'contains links to merchant dashboards' do
     visit "/"
 
-
     expect(page).to have_content("Welcome to Little Esty Shop")
     expect(page).to have_content("Our Merchants:")
     expect(page).to have_link(@merchant_1.name)
