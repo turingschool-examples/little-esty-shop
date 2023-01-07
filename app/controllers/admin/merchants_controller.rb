@@ -15,8 +15,8 @@ class Admin::MerchantsController < ApplicationController
     if @merchant.save 
       redirect_to admin_merchants_path
     else
-      redirect_to new_admin_merchants_path
-      flash[:alert] = "Error: #{error_message(@merchant.errors)}"
+      redirect_to new_admin_merchant_path
+      flash[:alert] = "Error: #{@merchant.errors.full_messages}"
     end
   end
 

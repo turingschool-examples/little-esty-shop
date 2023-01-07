@@ -84,6 +84,15 @@ RSpec.describe 'the admin merchants index' do
 
           isaac_hayes = Merchant.find_by(name: 'Isaac Hayes')
           expect(isaac_hayes.status).to eq("disabled")
+
+          visit admin_merchants_path
+
+          click_on("Create Merchant")
+
+          click_on('Submit')
+
+          expect(current_path).to eq('/admin/merchants/new')
+          expect(page).to have_content("Error")
         end
       end
     end
