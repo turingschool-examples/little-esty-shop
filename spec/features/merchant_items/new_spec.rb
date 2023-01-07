@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchant items index page' do
+RSpec.describe 'new merchant_item page' do
   before(:all) do
     Transaction.delete_all
     InvoiceItem.delete_all
@@ -157,109 +157,41 @@ RSpec.describe 'merchant items index page' do
     @transaction28 = Transaction.create!(invoice_id: @invoice28.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "failed")
   end
 
-  it 'lists the names of all the items for that merchant' do
-    visit merchant_items_path(@merchant3.id)
+  it 'has a form with all the fields to create a new item' do
+    visit new_merchant_item_path(@merchant2.id)
 
-    expect(page).to have_content(@merchant3.name)
-
-    within "#items" do
-      expect(page).to have_content(@item24.name)
-      expect(page).to have_content(@item25.name)
-      expect(page).to have_content(@item26.name)
-      expect(page).to have_content(@item27.name)
-      expect(page).to have_content(@item28.name)
-      expect(page).to have_content(@item29.name)
-      expect(page).to have_content(@item30.name)
-      expect(page).to_not have_content(@item23.name)
-      expect(page).to_not have_content(@item31.name)
-    end
+    expect(page).to have_field :name
+    expect(page).to have_field :description
+    expect(page).to have_field :unit_price
+    expect(page).to have_button("Create")
   end
 
-  it 'has links for each item that links to the merchants items show page' do
-    visit merchant_items_path(@merchant3.id)
+  it 'creates a new item and redirects to item index page where item is displayed as disabled' do
+    visit new_merchant_item_path(@merchant2.id)
+    
+    fill_in :name, with: "Test Item Name"
+    fill_in :description, with: "This is only a test description"
+    fill_in :unit_price, with: 3452
+    click_button "Create"
 
-    within "#items" do
-      expect(page).to have_link "#{@item24.name}", href: "/merchants/#{@merchant3.id}/items/#{@item24.id}"
-      expect(page).to have_link "#{@item30.name}", href: "/merchants/#{@merchant3.id}/items/#{@item30.id}"
-    end
-
-    click_link "#{@item24.name}"
-    expect(page).to have_content(@item24.name)
-    expect(page).to have_content(@item24.description)
-    expect(page).to have_content(@item24.unit_price)
-  end
-
-  it 'has links on the merchant item show page that links to the edit page of that item' do
-    visit merchant_item_path(@merchant1.id, @item1.id)
-
-    expect(page).to have_link "Update Item", href: "/merchants/#{@merchant1.id}/items/#{@item1.id}/edit"
-  end
-
-  it 'displays each items status enabled/disabled next to the item and has a button to change status' do
-    visit merchant_items_path(@merchant3.id)
-
-    within "#item_id-#{@item24.id}" do
-      expect(page).to have_content(@item24.status)
-      expect(page).to have_button("Disable/Enable")
-    end
-      
-    within "#item_id-#{@item26.id}" do
-      expect(page).to have_content(@item26.status)
-      expect(page).to have_button("Disable/Enable")
-    end
-
-    within "#item_id-#{@item30.id}" do
-      expect(page).to have_content(@item26.status)
-      expect(page).to have_button("Disable/Enable")
-    end
-  end
-
-  it 'changes the status of an item when the toggle button is pressed' do
-    visit merchant_items_path(@merchant3.id)
-
-    within "#item_id-#{@item24.id}" do
-      click_button("Disable/Enable")
-    end
-
-    expect(current_path).to eq(merchant_items_path(@merchant3.id))
-    within "#item_id-#{@item24.id}" do
-      expect(page).to have_content("Status: Disabled")
-      expect(page).to_not have_content("Enabled")
-    end
-  end
-
-  it 'displays the enabled and disabled items in two separate columns' do
-    @item30.update(status: "Disabled")
-    @item29.update(status: "Disabled")
-    @item28.update(status: "Disabled")
-
-    visit merchant_items_path(@merchant3.id)
-
-    within "#enabled_items" do
-      expect(page).to have_content("Enabled Items:")
-      expect(page).to have_content(@item24.name)
-      expect(page).to have_content(@item25.name)
-      expect(page).to have_content(@item26.name)
-      expect(page).to have_content(@item27.name)
-      expect(page).to_not have_content(@item28.name)
-      expect(page).to_not have_content(@item29.name)
-      expect(page).to_not have_content(@item30.name)
-    end
+    expect(current_path).to eq(merchant_items_path(@merchant2.id))
+    expect(Item.last.name).to eq("Test Item Name")
+    expect(Item.last.description).to eq("This is only a test description")
+    expect(Item.last.unit_price).to eq(3452)
+    expect(Item.last.status).to eq("Disabled")
+    @new_item = Item.last
 
     within "#disabled_items" do
-      expect(page).to have_content("Disabled Items:")
-      expect(page).to have_content(@item28.name)
-      expect(page).to have_content(@item29.name)
-      expect(page).to have_content(@item30.name)
-      expect(page).to_not have_content(@item24.name)
-      expect(page).to_not have_content(@item25.name)
-      expect(page).to_not have_content(@item26.name)
-      expect(page).to_not have_content(@item27.name)
+      expect(page).to have_content(@new_item.name)
     end
+    
+    within "#enabled_items" do
+      expect(page).to_not have_content(@new_item.name)
+    end
+
+
   end
 
-  it 'has a link to create a new item' do
-    visit merchant_items_path(@merchant1.id)
-    expect(page).to have_link "Create New Item", href: new_merchant_item_path(@merchant1.id)
-  end
+
+
 end
