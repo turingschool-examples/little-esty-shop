@@ -1,2 +1,4 @@
-<h1><%= @merchant.name %></h1>
+<%= render partial: "/admin/admin_navbar" %>
+
+<h2><%= @merchant.name %></h2>
 <p><%= link_to "Update", edit_admin_merchant_path(@merchant) %></p>
