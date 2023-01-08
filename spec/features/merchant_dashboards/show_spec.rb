@@ -55,7 +55,6 @@ RSpec.describe 'Merchant Dashboard' do
     @transaction_18 = create(:transaction, invoice: @invoice_17, result: "success") 
     @transaction_19 = create(:transaction, invoice: @invoice_18, result: "success") 
     @transaction_20 = create(:transaction, invoice: @invoice_19, result: "success")    
-    # @transaction_21 = create(:transaction, invoice: @invoice_10, result: "success")
 
     @merchant_1 = create(:merchant, name: "merchant 1")
     @merchant_2 = create(:merchant)
@@ -131,7 +130,6 @@ RSpec.describe 'Merchant Dashboard' do
 
   describe "Story 3 - merchant's top 5 customers by successful transactions" do
     it "displays the customer's complete name and with their transaction count" do
-      # save_and_open_page
       within("#customer_info-#{@customer_6.id}") do
         expect(page).to have_content(@customer_6.complete_name)
         expect(page).to have_content(@merchant_1.top_customers.first.trans_count)
