@@ -1,9 +1,11 @@
 class Customer < ApplicationRecord 
   has_many :invoices, dependent: :destroy
   has_many :transactions, through: :invoices
+  has_many :merchants, through: :invoices
+  has_many :items, through: :invoices
 
   def self.successful_transactions
-    joins(:transactions).where("transactions.result = 'success'")
+    joins(:transactions).where("transactions.result = 1")
   end
 
   def self.order_by_purchases
