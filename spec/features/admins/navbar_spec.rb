@@ -16,20 +16,20 @@ RSpec.describe 'admin navbar' do
   it 'shows header indicating that I am on the admin dashboard' do
     visit admin_invoices_path
 
-      within("#admin_navbar") do
-        expect(page).to have_content("Admin Dashboard")
-        expect(page).to have_link('Merchants')
-        expect(page).to have_link('Invoices')
-      end
+    within("#admin_navbar") do
+      expect(page).to have_content("Admin Dashboard")
+      expect(page).to have_link('Merchants')
+      expect(page).to have_link('Invoices')
+    end
   end
 
   it 'shows header indicating that I am on the admin dashboard' do
     visit admin_merchants_path
 
-      within("#admin_navbar") do
-        expect(page).to have_content("Admin Dashboard")
-        expect(page).to have_link('Merchants')
-        expect(page).to have_link('Invoices')
-      end
+    within("#admin_navbar") do
+      expect(page).to have_content("Admin Dashboard")
+      expect(page).to have_link('Merchants')
+      expect(page).to have_link('Invoices')
+    end
   end
 end
