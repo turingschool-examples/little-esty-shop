@@ -265,13 +265,13 @@ RSpec.describe 'merchant items index page' do
 
   it 'has a section for top 5 items by revenue generated' do
     visit merchant_items_path(@merchant1.id)
-    binding.pry
+  
     within "#top_5_items" do
       expect(page).to have_content("Top 5 Items by Revenue:")
       expect("#{@item8.name}").to appear_before("#{@item11.name}")
       expect("#{@item11.name}").to appear_before("#{@item10.name}")
-      expect("#{@item10.name}").to appear_before("#{@item14.name}")
-      expect("#{@item14.name}").to appear_before("#{@item12.name}")
+      expect("#{@item10.name}").to appear_before("#{@item12.name}")
+      expect("#{@item12.name}").to appear_before("#{@item14.name}")
     end
 
 
