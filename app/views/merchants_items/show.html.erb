@@ -1,0 +1,7 @@
+<% flash.each do |type, msg| %>
+    <%= msg %>
+<% end %>
+<h2><%= @item.name %></h2>
+<h3>Description: <%= @item.description %><br>
+<h3>Item Unit Price: <%= @item.unit_price %>
+<%= link_to "Update Item", edit_merchant_item_path(@merchant.id, @item.id) %>

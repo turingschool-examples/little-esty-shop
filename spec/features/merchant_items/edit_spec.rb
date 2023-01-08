@@ -1,18 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Invoice, type: :model do
-  describe 'relationships' do
-    it {should belong_to(:customer)}
-    it {should have_many(:transactions)}
-    it {should have_many(:invoice_items)}
-    it {should have_many(:items).through(:invoice_items)}
-    it {should have_many(:merchants).through(:items)}
-  end
-
-  describe 'validations' do
-    it {should validate_presence_of(:status)}
-  end
-
+RSpec.describe 'merchant items edit page' do
   before(:all) do
     Transaction.delete_all
     InvoiceItem.delete_all
@@ -169,71 +157,30 @@ RSpec.describe Invoice, type: :model do
     @transaction28 = Transaction.create!(invoice_id: @invoice28.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "failed")
   end
 
-  it 'can find all invoice IDs that have unshipped items on them' do
-    expect(Invoice.find_unshipped).to eq([@invoice2, @invoice3, @invoice4, @invoice6, @invoice7, @invoice13, @invoice14, @invoice17, @invoice18, @invoice20])
+  it 'has a prefilled form with existing data for that item' do
+    visit edit_merchant_item_path(@merchant1.id, @item1.id)
+
+    expect(page).to have_field :name, with: @item1.name
+    expect(page).to have_field :description, with: @item1.description
+    expect(page).to have_field :unit_price, with: @item1.unit_price
   end
 
-  it 'can sort invoices from last created first' do
-    @invoice2.update!(created_at: Date.parse("22-11-2022"))
-    @invoice3.update!(created_at: Date.parse("23-11-2022"))
-    @invoice4.update!(created_at: Date.parse("24-11-2022"))
-    @invoice6.update!(created_at: Date.parse("1-11-2022"))
-    @invoice7.update!(created_at: Date.parse("2-11-2022"))
-    @invoice13.update!(created_at: Date.parse("3-11-2022"))
-    @invoice14.update!(created_at: Date.parse("4-11-2022"))
-    @invoice17.update!(created_at: Date.parse("5-11-2022"))
-    @invoice18.update!(created_at: Date.parse("1-1-2023"))
+  it 'correctly updates the database when submitted and redirects back to the show page with a flash message' do
+    visit edit_merchant_item_path(@merchant1.id, @item1.id)
 
-    expect(Invoice.find_unshipped.sort_by_created_date).to match_array([Invoice.find(@invoice6.id),
-                                                               Invoice.find(@invoice7.id), 
-                                                               Invoice.find(@invoice13.id),
-                                                               Invoice.find(@invoice14.id),
-                                                               Invoice.find(@invoice17.id), 
-                                                               Invoice.find(@invoice2.id), 
-                                                               Invoice.find(@invoice3.id), 
-                                                               Invoice.find(@invoice4.id), 
-                                                               Invoice.find(@invoice18.id),
-                                                               Invoice.find(@invoice20.id)])
+    fill_in :name, with: "test item name"
+    fill_in :description, with: "test item description"
+    fill_in :unit_price, with: 29392
+    click_button "Submit"
+
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")
+    expect(page).to have_content("Item Updated Successfully")
+    expect(page).to have_content("test item name")
+    expect(page).to have_content("test item description")
+    expect(page).to have_content(29392)
+
   end
-  
-  describe 'instance methods' do
-    before(:each) do
-      @customer_1 = create(:customer)
-      @invoice_1 = create(:invoice, customer: @customer_1)
-      @invoice_2 = create(:invoice, customer: @customer_1)
-      @invoice_3 = create(:invoice, customer: @customer_1, created_at: "2023-01-04 16:29:30 +0000".to_datetime)
-      @merchant_1 = create(:merchant)
-      @item_1 = create(:item, merchant: @merchant_1)
-      @item_2 = create(:item, merchant: @merchant_1)
-      @item_3 = create(:item, merchant: @merchant_1)
-      @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1)
-      @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2, unit_price: 15000)
-      @invoice_item_3 = create(:invoice_item, item: @item_2, invoice: @invoice_2, unit_price: 4700)
-      @invoice_item_4 = create(:invoice_item, item: @item_3, invoice: @invoice_2, unit_price: 12005)
-    end
 
-    describe '#format_date_long' do
-      it 'returns the date in specified story format Wednesday, January 04, 2023' do
-        expected = "Wednesday, January 04, 2023"        
-        
-        expect(@invoice_3.format_date_long).to eq(expected)
-      end
-    end
 
-    describe '#invoice_item' do
-      it 'returns the invoice item associated with the item specified' do
-        expect(@invoice_1.invoice_item(@item_1).quantity).to eq(@invoice_item_1.quantity)
-        expect(@invoice_1.invoice_item(@item_1).unit_price).to eq(@invoice_item_1.unit_price)
-        expect(@invoice_1.invoice_item(@item_1).status).to eq(@invoice_item_1.status)
-      end
-    end
 
-    describe '#total_revenue' do
-      it 'returns the total cost (InvoiceItems: unit_price) of all items on invoice' do
-        expected = [(@invoice_item_2.unit_price * @invoice_item_2.quantity), (@invoice_item_3.unit_price * @invoice_item_3.quantity), (@invoice_item_4.unit_price * @invoice_item_4.quantity)].sum
-
-        expect(@invoice_2.total_revenue).to eq(expected / 100.00)
-      end
-    end
-  end
 end

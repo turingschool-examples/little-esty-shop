@@ -27,5 +27,9 @@ class Invoice < ApplicationRecord
   def invoice_item(item)
     self.invoice_items.find_by(item_id: item)
   end
+
+  def total_revenue
+    self.invoice_items.sum("unit_price * quantity") / 100.00
+  end
 end
 

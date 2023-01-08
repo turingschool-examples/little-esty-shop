@@ -1,0 +1,12 @@
+<ul>
+  <div id=<%= "admin-merchants-#{merchant.id}" %> >
+    <li>
+      <%= link_to merchant.name, admin_merchant_path(merchant.id) %>
+      <%= form_with model: merchant, url: admin_merchant_path(merchant.id), method: :patch do |f| %>
+        <%= "Status: #{merchant.status}" %>
+        <%= f.hidden_field :status %>
+        <%= f.submit "Disable/Enable" %>
+      <% end %>
+    </li>
+  </div>
+</ul>

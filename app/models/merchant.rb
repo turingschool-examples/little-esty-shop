@@ -7,6 +7,8 @@ class Merchant < ApplicationRecord
 
   validates_presence_of :name
 
+  enum status: { enabled: 0, disabled: 1 }
+
   def all_invoice_ids
     self.invoice_items.distinct.pluck(:invoice_id) #uniq is a ruby method
   end
@@ -19,5 +21,13 @@ class Merchant < ApplicationRecord
             .group("merchants.id, customers.id")
             .order(trans_count: :desc)
             .limit(5)
+  end
+
+  def toggle_status
+    self.status == "enabled" ? self.disabled! : self.enabled!
+  end
+
+  def self.group_by_status(status)
+    self.where(status: status)
   end
 end

@@ -1,0 +1,34 @@
+<% stylesheet_link_tag "merchant_items_index" %>
+<h2><%= "#{@merchant.name}" %></h2><br>
+<h2><%= link_to "Create New Item", new_merchant_item_path(@merchant.id) %></h2><br>
+<div id="items">
+  <div class="items">
+    <div class="items-left">
+      <div id="enabled_items">
+        <h3>Enabled Items:</h3><br>
+          <% @enabled_items.each do |item| %>
+            <div id="item_id-<%= item.id %>">
+              <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
+              <%= "Status: #{item.status}" %>
+              <%= button_to "Disable/Enable", merchant_item_path(@merchant.id, item.id), method: :patch, params: {swap: "true", status: item.status} %>
+              <br>
+            </div>
+          <% end %>
+      </div>
+    </div>
+
+    <div class="items-right">
+      <div id="disabled_items">
+        <h3>Disabled Items:</h3><br>
+          <% @disabled_items.each do |item| %>
+            <div id="item_id-<%= item.id %>">
+              <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
+              <%= "Status: #{item.status}" %>
+              <%= button_to "Disable/Enable", merchant_item_path(@merchant.id, item.id), method: :patch, params: {swap: "true", status: item.status} %>
+              <br>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

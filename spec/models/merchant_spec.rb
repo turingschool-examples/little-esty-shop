@@ -14,10 +14,11 @@ RSpec.describe Merchant, type: :model do
   end
 
   before(:each) do
-    @merchant_1 = create(:merchant, name: "merchant 1")
+    @merchant_1 = create(:merchant, name: "merchant 1", status: "enabled")
     @merchant_2 = create(:merchant, name: "merchant 2")
     @merchant_3 = create(:merchant, name: "merchant 3")
-    @merchant_4 = create(:merchant, name: "merchant 4")
+    @merchant_4 = create(:merchant, name: "merchant 4", status: "disabled")
+
 
     @item_1 = create(:item, merchant: @merchant_1)
     @item_2 = create(:item, merchant: @merchant_2)
@@ -132,6 +133,34 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant_4.top_customers.second).to eq(@customer_3)
       expect(@merchant_4.top_customers.third).to eq(@customer_5)    
       expect(@merchant_4.top_customers.fourth).to eq(@customer_9)    
+    end
+  end
+
+  describe '#toggle_status' do
+    it 'changes merchant status to disabled if currently enabled and the inverse' do
+      expect(@merchant_1.status).to eq("enabled")
+
+      @merchant_1.toggle_status
+
+      expect(@merchant_1.status).to eq("disabled")
+
+      @merchant_1.toggle_status
+
+      expect(@merchant_1.status).to eq("enabled")
+    end
+  end
+
+  describe '#group_by_status' do
+    it 'returns merchants based on status argument' do
+      enabled_expected_1 = @merchant_1
+      enabled_expected_2 = @merchant_2
+      enabled_expected_3 = @merchant_3
+      disabled_expected_1 = @merchant_4
+
+      expect(Merchant.group_by_status("enabled")).to include(enabled_expected_1)
+      expect(Merchant.group_by_status("enabled")).to include(enabled_expected_2)
+      expect(Merchant.group_by_status("enabled")).to include(enabled_expected_3)
+      expect(Merchant.group_by_status("disabled")).to include(disabled_expected_1)
     end
   end
 end

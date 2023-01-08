@@ -1,0 +1,29 @@
+<%= stylesheet_link_tag "admin_merchants" %>
+
+<h1>Merchants</h1>
+<h2>Admin</h2>
+
+<%= button_to "Create Merchant", new_admin_merchant_path, method: :get %>
+
+<% if @merchants.any? %>
+  <div class="split left">
+    <div class="centered">
+      <div id=admin-merchants-enabled>
+        <h2>Enabled</h2>
+        <% @merchants_enabled.each do |merchant| %>
+          <%= render partial: "shared/admin_merchants_split", locals: {merchant: merchant} %>
+        <% end %>
+      </div>
+    </div>
+  </div>  
+  <div class="split right">
+    <div class="centered">  
+      <div id=admin-merchants-disabled>
+        <h2>Disabled</h2>
+        <% @merchants_disabled.each do |merchant| %>
+          <%= render partial: "shared/admin_merchants_split", locals: {merchant: merchant} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
