@@ -10,4 +10,8 @@ class InvoiceItem < ApplicationRecord
   def revenue
     self.quantity * self.unit_price / 100.00
   end
+
+  def self.revenue
+    self.sum("(quantity * unit_price) / 100.00")
+  end
 end

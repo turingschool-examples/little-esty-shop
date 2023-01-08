@@ -36,7 +36,7 @@
         <h3>Top 5 Items by Revenue:</h3><br>
           <% @top_5_items.each do |item| %>
             <div id="item_id-<%= item.id %>">
-              <%= item.name %>
+              <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
               <br>
             </div>
           <% end %>

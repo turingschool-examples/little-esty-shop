@@ -19,5 +19,7 @@ class Item < ApplicationRecord
     self.where(merchant_id: merchant_id, status: status)
   end
 
- 
+  # def revenue_sum
+  #   self.invoices.sum
+  # end
 end
