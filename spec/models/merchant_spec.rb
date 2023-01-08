@@ -88,7 +88,6 @@ RSpec.describe Merchant, type: :model do
     @transaction_14 = create(:transaction, invoice: @invoice_12, result: "failed")
     @transaction_15 = create(:transaction, invoice: @invoice_13, result: "success")
     @transaction_16 = create(:transaction, invoice: @invoice_14, result: "success")
-  
   end
 
   describe 'merchant invoices' do
@@ -134,6 +133,5 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant_4.top_customers.third).to eq(@customer_5)    
       expect(@merchant_4.top_customers.fourth).to eq(@customer_9)    
     end
-
   end
 end

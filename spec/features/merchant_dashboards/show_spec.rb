@@ -130,37 +130,48 @@ RSpec.describe 'Merchant Dashboard' do
   end
 
   describe "Story 3 - merchant's top 5 customers by successful transactions" do
-    it "displays the customer's transactions count" do
-      expect(page).to have_content(@merchant_1.top_customers.first.trans_count)
-      expect(page).to have_content(@merchant_1.top_customers.second.trans_count)
-      expect(page).to have_content(@merchant_1.top_customers.third.trans_count)
-      expect(page).to have_content(@merchant_1.top_customers.fourth.trans_count)
-      expect(page).to have_content(@merchant_1.top_customers.last.trans_count)
-    end
+    it "displays the customer's complete name and transactions count" do
+      
+      within("#customer_info-#{@customer_6.id}") do
+        expect(page).to have_content(@customer_6.complete_name)
+        expect(page).to have_content(@merchant_1.top_customers.first.trans_count)
 
-    it "displays the customer's complete name" do
-      expect(page).to have_content(@customer_1.complete_name)
-      expect(page).to have_content(@customer_2.complete_name)
-      expect(page).to have_content(@customer_4.complete_name)
-      expect(page).to have_content(@customer_5.complete_name)
-    end
+        expect(@customer_6.complete_name).to appear_before(@merchant_1.top_customers.first.trans_count)
+      end 
+      
+      within("#customer_info-#{@customer_6.id}") do
+        expect(page).to have_content(@customer_6.complete_name)
+        expect(page).to have_content(@merchant_1.top_customers.first.trans_count)
+      end 
+
+      within("#customer_info-#{@customer_2.id}") do
+        expect(page).to have_content(@customer_2.complete_name)
+        expect(page).to have_content(@merchant_1.top_customers.third.trans_count)
+      end 
+
+      within("#customer_info-#{@customer_5.id}") do
+        expect(@customer_5.complete_name).to appear_before(@merchant_1.top_customers.fourth.trans_count)
+      end 
+
+      within("#customer_info-#{@customer_1.id}") do
+        expect(@customer_1.complete_name).to appear_before(@merchant_1.top_customers.last.trans_count)     
+      end 
 
     it 'lists the customers ordered from most to least transactions count' do
       expect(@customer_6.complete_name).to appear_before(@customer_4.complete_name)
       expect(@customer_4.complete_name).to appear_before(@customer_2.complete_name)
-      expect(@customer_2.complete_name).to appear_before(@customer_5.complete_name)
+      expect(@customer_2.complete_name).to appear_before(@customer_1.complete_name)
       expect(@customer_5.complete_name).to appear_before(@customer_1.complete_name)
     end
 
     it 'when multiple customers have the same number of successful transactions, customer.id determins order' do 
-        # expect(@customer_4.complete_name).to appear_before(@customer_5.complete_name)
+        expect(@customer_2.complete_name).to appear_before(@customer_5.complete_name)
         expect(@merchant_1.top_customers.third).to eq(@customer_2)
         expect(@merchant_1.top_customers.fourth).to eq(@customer_5)
         # expect(page).to have_content(@merchant_1.top_customers.fourth.trans_count)
-
-        # visit merchants_merchantid_dashboard_path(@merchant_4)
-        
-      end
+# save_and_open_page
+        visit merchants_merchantid_dashboard_path(@merchant_4)
+        # save_and_open_page
     end
   end
 end

@@ -8,6 +8,8 @@
 <ul>
 
 <% @vip_customers.each do |customer| %>
-  <li><h5 style="color: MAROON"> Customer Name: <%= customer.complete_name %> &nbsp - &nbsp
-  Transaction Count: <%= customer.trans_count %></h5></li>
+  <div id="customer_info-<%= customer.id %>">
+    <li><h5 style="color: MAROON"> Customer Name: <%= customer.complete_name %> &nbsp - &nbsp
+    Transaction Count: <%= customer.trans_count %></h5></li>
+  </div>
 <% end %>
