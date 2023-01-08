@@ -241,17 +241,19 @@ RSpec.describe 'Merchant Dashboard' do
 
     describe "a section for 'Items Ready to Ship'" do
       describe "lists all the ordered items and have not yet been shipped" do
-        it "displays the invoice id of the ordered item next to the items" do
-          expect(page).to have_content("Items Ready to Ship")
-# save_and_open_page
-          within("#ready_to_ship-#{@invoice_1.id}")do
-            expect(page).to have_content("#{@item_1.name}")
-            # expect(page).to have_content(@invoice_1.id)
-            # expect(page).to have_link(@invoice_1.id)
-            # click_link (@invoice_1.id)
+        describe "displays the invoice id of the ordered item next to the items" do
+          it "links to the merchant invoice show page when user click the invoice id link" do
+            expect(page).to have_content("Items Ready to Ship")
 
-            # expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
-
+            within("#ready_to_ship-#{@invoice_1.id}")do
+              expect(page).to have_content("#{@item_1.name}")
+              expect(page).to_not have_content(@invoice_7.id)
+              expect(page).to have_content(@invoice_1.id)
+              expect(page).to have_link(@invoice_1.id)
+              click_link (@invoice_1.id)
+            end
+            expect(current_path).to_not eq(merchants_merchantid_dashboard_path(@merchant_1))
+            expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
           end
         end
       end
