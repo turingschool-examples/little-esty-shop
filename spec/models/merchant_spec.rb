@@ -149,4 +149,39 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.top_five).to eq(expected)
     end
   end
+
+  describe '#top_five' do
+    it 'returns the top five merchants based on total revenue' do
+      Transaction.delete_all
+      InvoiceItem.delete_all
+      Invoice.delete_all
+      Item.delete_all
+      Customer.delete_all
+      Merchant.delete_all
+
+      merchant_1 = create(:merchant, name: "Alpha")
+
+      customer_1 = create(:customer)
+
+      invoice_1 = create(:invoice, customer: customer_1)
+      invoice_2 = create(:invoice, customer: customer_1)
+      invoice_3 = create(:invoice, customer: customer_1)
+
+      item_1 = create(:item, merchant: merchant_1)
+      item_2 = create(:item, merchant: merchant_1)
+      item_3 = create(:item, merchant: merchant_1)
+      item_4 = create(:item, merchant: merchant_1)
+
+      invoice_item_1 = create(:invoice_item, unit_price: 1000, quantity: 1, item: item_1, invoice: invoice_1)
+      invoice_item_2 = create(:invoice_item, unit_price: 900, quantity: 1, item: item_2, invoice: invoice_2)
+      invoice_item_3 = create(:invoice_item, unit_price: 800, quantity: 1, item: item_3, invoice: invoice_3)
+
+      transaction_1 = create(:transaction, result: 0, invoice: invoice_1)
+      transaction_2 = create(:transaction, result: 0, invoice: invoice_2)
+      transaction_3 = create(:transaction, result: 1, invoice: invoice_3)
+      
+      expected = 1900
+      expect(merchant_1.total_revenue).to eq(expected)
+    end
+  end
 end

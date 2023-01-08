@@ -164,16 +164,29 @@ RSpec.describe 'the admin merchants index' do
       end
       
       describe 'lists the names of the top 5 merchants by total revenue generated' do
-        it 'has merchant names as links to the admin merchant\'s show page' do
+        it 'has generated revenue next to merchant names as links to the admin merchant\'s show page' do
           visit admin_merchants_path
 
           expect(page).to have_content("Top 5 Revenue Earners")
-          within("#admin-merchants-top-five") do
+          within("#admin-merchants-top-five-#{@merchant_1.id}") do
             expect(page).to have_link(@merchant_1.name)
+            expect(page).to have_content(@merchant_1.total_revenue)
+          end
+          within("#admin-merchants-top-five-#{@merchant_2.id}") do
             expect(page).to have_link(@merchant_2.name)
+            expect(page).to have_content(@merchant_2.total_revenue)
+          end
+          within("#admin-merchants-top-five-#{@merchant_4.id}") do
             expect(page).to have_link(@merchant_4.name)
+            expect(page).to have_content(@merchant_4.total_revenue)
+          end
+          within("#admin-merchants-top-five-#{@merchant_5.id}") do
             expect(page).to have_link(@merchant_5.name)
+            expect(page).to have_content(@merchant_5.total_revenue)
+          end
+          within("#admin-merchants-top-five-#{@merchant_7.id}") do  
             expect(page).to have_link(@merchant_7.name)
+            expect(page).to have_content(@merchant_7.total_revenue)
           end
         end
       end
