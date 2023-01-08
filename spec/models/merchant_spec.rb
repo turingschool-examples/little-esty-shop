@@ -181,7 +181,7 @@ RSpec.describe Merchant, type: :model do
       transaction_3 = create(:transaction, result: 1, invoice: invoice_3)
       
       expected = 19.00
-      expect(merchant_1.total_revenue).to eq(expected)
+      expect(merchant_1.total_revenue / 100.00).to eq(expected)
     end
   end
 end
