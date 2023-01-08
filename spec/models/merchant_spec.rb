@@ -36,13 +36,13 @@ RSpec.describe Merchant do
 
     @ii4 = InvoiceItem.create!(quantity: 5, unit_price: @item4.unit_price, item_id: @item4.id, invoice_id: @invoice4.id)
   end
-
-  describe 'Relationships' do
-    it { should have_many :items }
-    it { should have_many(:invoice_items).through(:items) }
-    it { should have_many(:invoices).through(:invoice_items) }
-    it { should have_many(:customers).through(:invoices) }
-    it { should have_many(:transactions).through(:invoices) }
+   
+  describe "Relationships" do
+    it {should have_many :items} 
+    it {should have_many(:invoice_items).through(:items)}
+    it {should have_many(:invoices).through(:invoice_items)}
+    it {should have_many(:customers).through(:invoices)}
+    it {should have_many(:transactions).through(:invoices)}
   end
 
   describe '#top5' do
@@ -72,11 +72,9 @@ RSpec.describe Merchant do
 
       item8 = Item.create!(name: 'fak121212e', description: 'T121212ing', unit_price: 30, merchant_id: @merchant1.id)
       invoice8 = Invoice.create!(status: 1, customer_id: @customer2.id)
-      transaction8 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07',
-                                         invoice_id: invoice8.id)
-      ii8 = InvoiceItem.create!(quantity: 5, unit_price: item8.unit_price, item_id: item8.id,
-                                invoice_id: invoice8.id)
-
+      transaction8 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07', invoice_id: invoice8.id)
+      ii8 = InvoiceItem.create!(quantity: 5, unit_price: item8.unit_price, item_id: item8.id, invoice_id: invoice8.id)    
+      
       item9 = Item.create!(name: 'fak121212e', description: 'T121212ing', unit_price: 30, merchant_id: @merchant1.id)
       invoice9 = Invoice.create!(status: 1, customer_id: customer3.id)
       transaction9 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07',
@@ -92,11 +90,9 @@ RSpec.describe Merchant do
 
       item11 = Item.create!(name: 'fak121212e', description: 'T121212ing', unit_price: 30, merchant_id: @merchant1.id)
       invoice11 = Invoice.create!(status: 1, customer_id: customer3.id)
-      transaction11 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07',
-                                          invoice_id: invoice11.id)
-      ii11 = InvoiceItem.create!(quantity: 5, unit_price: item11.unit_price, item_id: item11.id,
-                                 invoice_id: invoice11.id)
-
+      transaction11 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07', invoice_id: invoice11.id)
+      ii11 = InvoiceItem.create!(quantity: 5, unit_price: item11.unit_price, item_id: item11.id, invoice_id: invoice11.id)
+      
       item12 = Item.create!(name: 'fak121212e', description: 'T121212ing', unit_price: 30, merchant_id: @merchant1.id)
       invoice12 = Invoice.create!(status: 1, customer_id: customer4.id)
       transaction12 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07',
@@ -141,18 +137,14 @@ RSpec.describe Merchant do
 
       item18 = Item.create!(name: 'fak121212e', description: 'T121212ing', unit_price: 30, merchant_id: @merchant1.id)
       invoice18 = Invoice.create!(status: 1, customer_id: customer6.id)
-      transaction18 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07',
-                                          invoice_id: invoice18.id)
-      ii18 = InvoiceItem.create!(quantity: 5, unit_price: item18.unit_price, item_id: item18.id,
-                                 invoice_id: invoice18.id)
-
+      transaction18 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07', invoice_id: invoice18.id)
+      ii18 = InvoiceItem.create!(quantity: 5, unit_price: item18.unit_price, item_id: item18.id, invoice_id: invoice18.id)
+      
       item19 = Item.create!(name: 'fak121212e', description: 'T121212ing', unit_price: 30, merchant_id: @merchant1.id)
       invoice19 = Invoice.create!(status: 1, customer_id: @customer1.id)
-      transaction19 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07',
-                                          invoice_id: invoice19.id)
-      ii19 = InvoiceItem.create!(quantity: 5, unit_price: item19.unit_price, item_id: item19.id,
-                                 invoice_id: invoice19.id)
-
+      transaction19 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07', invoice_id: invoice19.id)
+      ii19 = InvoiceItem.create!(quantity: 5, unit_price: item19.unit_price, item_id: item19.id, invoice_id: invoice19.id)
+  
       item20 = Item.create!(name: 'fak121212e', description: 'T121212ing', unit_price: 30, merchant_id: @merchant1.id)
       invoice20 = Invoice.create!(status: 1, customer_id: customer3.id)
       transaction20 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07',
@@ -166,6 +158,7 @@ RSpec.describe Merchant do
       expect(Merchant.top5(@merchant1.id).fourth.transactions_count).to eq(9)
       expect(Merchant.top5(@merchant1.id).fifth.transactions_count).to eq(4)
     end
+  end
 
     describe 'instance methods' do
       describe '#pending_invoices' do
@@ -214,19 +207,24 @@ RSpec.describe Merchant do
           ii1 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id,
                                     invoice_id: invoice1.id)
 
-          expect(merchant1.pending_invoices).to eq([])
-        end
+        expect(merchant1.pending_invoices).to eq([])
       end
-    end
-    describe '#total_revenue' do
-      it 'totals revenue of a invoice' do
-        item5 = @merchant1.items.create!(name: 'food1', description: 'a', unit_price: 10)
-        item6 = @merchant1.items.create!(name: 'food2', description: 'b', unit_price: 5)
 
-        ii5 = InvoiceItem.create!(quantity: 5, unit_price: 10, item_id: item5.id, invoice_id: @invoice1.id)
-        ii6 = InvoiceItem.create!(quantity: 5, unit_price: 5, item_id: item6.id, invoice_id: @invoice1.id)
-
-        expect(Merchant.total_revenue(@invoice1.id)).to eq(175)
+      it 'orders invoices from oldest to newest' do
+        merchant1 = Merchant.create!(name: 'Rays Hand Made Jewlery')
+        item1 = Item.create!(name: 'Chips', description: 'Ring', unit_price: 20, merchant_id: merchant1.id)
+        customer = Customer.create!(first_name: 'Kyle', last_name: 'Ledin')
+        invoice1 = Invoice.create!(status: 1, customer_id: customer.id)
+        ii1 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice1.id)
+        invoice2 = Invoice.create!(status: 1, customer_id: customer.id, created_at: Time.now-5.days)
+        ii2 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice2.id)
+        invoice3 = Invoice.create!(status: 1, customer_id: customer.id, created_at: Time.now-15.days)
+        ii3 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice3.id)
+        
+        expect(merchant1.pending_invoices).to eq([invoice3, invoice2, invoice1])
+        invoice4 = Invoice.create!(status: 1, customer_id: customer.id, created_at: Time.now-4.days)
+        ii = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice4.id)
+        expect(merchant1.pending_invoices).to eq([invoice3, invoice2, invoice4, invoice1])
       end
     end
   end

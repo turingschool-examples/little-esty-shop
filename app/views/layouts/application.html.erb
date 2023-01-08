@@ -18,6 +18,9 @@
 
   <body>
     <div class="title">Little Esty Shop</div>
+    <% if controller_path.starts_with?("admin") %>
+      <%= render partial: "partials/admin_header" %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

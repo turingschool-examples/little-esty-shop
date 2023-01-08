@@ -1,7 +1,17 @@
-<%= render 'header' %>
-<section id='top-cust'>
-  <h2>Top Customers</h2>
-  <% @top_customers.each do |customer| %>
-    <p><%= "#{customer.first_name} #{customer.last_name} - #{customer.purchases} purchases" %></p>
-  <% end %>
-</section>
+<div class="flex-body">
+  <section id='incomplete-invoices'>
+    <h2>Incomplete Invoices</h2>
+    <% @incomplete_invoices.each do |invoice| %>
+      <p>
+        <%= link_to "Invoice ##{invoice.id.to_s}", admin_invoice_path(invoice) %>
+        - <%= invoice.created %>
+      </p>
+    <% end %>
+  </section>
+  <section id='top-customers'>
+    <h2>Top Customers</h2>
+    <% @top_customers.each do |customer| %>
+      <p><%= "#{customer.first_name} #{customer.last_name} - #{customer.purchases} purchases" %></p>
+    <% end %>
+  </section>
+</div>
