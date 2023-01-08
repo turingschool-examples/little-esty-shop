@@ -38,6 +38,7 @@ class Merchant < ApplicationRecord
         .where(transactions: { result: "success" })
         .order(Arel.sql("sum(invoice_items.unit_price * invoice_items.quantity) desc"))
         .limit(5)
+  end
         
   def self.top_five #merchant
     self.joins(invoices: [:invoice_items, :transactions])
@@ -55,4 +56,12 @@ class Merchant < ApplicationRecord
         .select('invoices.*')
         .sum('invoice_items.quantity * invoice_items.unit_price')
   end
+
+  def unshipped_items
+    InvoiceItem.joins(item: :merchant)
+    .where("invoice_items.status != 2 AND merchants.id = ?", self.id)
+    .select("invoice_items.status AS shipping_status, items.*, invoice_items.invoice_id AS inv_num")
+    .group("items.id, merchants.id, inv_num, shipping_status")
+  end 
+
 end
