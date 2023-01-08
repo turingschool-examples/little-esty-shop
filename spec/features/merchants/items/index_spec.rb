@@ -68,11 +68,7 @@ RSpec.describe 'merchant items index page' do
       end
 
       pen.reload
-<<<<<<< HEAD
       
-=======
-
->>>>>>> bdef70bb7b1a5a06f1e35c697675a609529e04a0
       expect(page).to have_current_path(merchant_item_index_path(mariah))
       expect(pen.status).to eq(1)
       expect(page).to have_button('Disable')

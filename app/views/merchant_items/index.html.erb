@@ -1,3 +1,5 @@
+<p><%= link_to "New Item", new_merchant_item_path(@merchant) %>
+
 <%= "Enabled"%>
   <% @merchant.items.each do |item|%>
     <% if item.status == 1 %>
