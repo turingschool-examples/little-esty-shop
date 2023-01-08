@@ -247,9 +247,15 @@ RSpec.describe 'admin dashboard' do
       expect(page).to have_css("#invoice_id-#{@invoice18.id} ~ #invoice_id-#{@invoice20.id}")
     end
 
-    within "#incomplete_invoices" do
+    within "#invoice_id-#{@invoice6.id}" do
       expect(page).to have_content("#{@invoice6.id} Created: Tuesday, November 1, 2022")
+    end
+
+    within "#invoice_id-#{@invoice14.id}" do
       expect(page).to have_content("#{@invoice14.id} Created: Friday, November 4, 2022")
+    end
+
+    within "#invoice_id-#{@invoice18.id}" do
       expect(page).to have_content("#{@invoice18.id} Created: Sunday, January 1, 2023")
     end
   end
