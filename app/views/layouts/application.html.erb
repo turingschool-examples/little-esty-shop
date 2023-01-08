@@ -7,13 +7,14 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application' %>
   </head>
 
   <body>
   <% flash.each do |type, message| %>
       <p><%= message %></p>
     <% end %>
-    
+    <h1 id="welcome_header">Little Esty Shop</h1>
     <%= yield %>
   </body>
 </html>
