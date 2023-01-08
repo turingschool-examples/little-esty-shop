@@ -1,0 +1,4 @@
+<section id="merchant_navbar">
+<h2><%= @merchant.name %></h2>
+<%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %> <%= link_to "My Items", merchant_items_path(@merchant) %> <%= link_to "My Invoices", merchant_invoices_path(@merchant) %>
+</section>

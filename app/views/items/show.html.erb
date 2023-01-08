@@ -1,4 +1,6 @@
-<h1><%= @item.name %></h1>
+<%= render partial: '/merchants_navbar'%>
+
+<h2><%= @item.name %></h2>
 <p><%= @item.description %></p>
 <p><%= "Current Price: #{@item.unit_price}" %></p>
 <p><%= "Merchant ID: #{@item.merchant_id}" %></p>
