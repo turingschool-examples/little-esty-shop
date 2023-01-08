@@ -273,7 +273,18 @@ RSpec.describe 'merchant items index page' do
       expect("#{@item10.name}").to appear_before("#{@item12.name}")
       expect("#{@item12.name}").to appear_before("#{@item14.name}")
     end
+  end
 
+  it 'has links for the top 5 items by revenue' do
+    visit merchant_items_path(@merchant1.id)
+
+    within "#top_5_items" do
+      expect(page).to have_link "#{@item8.name}", href: merchant_item_path(@merchant1.id, @item8.id)
+      expect(page).to have_link "#{@item11.name}", href: merchant_item_path(@merchant1.id, @item11.id)
+      expect(page).to have_link "#{@item10.name}", href: merchant_item_path(@merchant1.id, @item10.id)
+      expect(page).to have_link "#{@item12.name}", href: merchant_item_path(@merchant1.id, @item12.id)
+      expect(page).to have_link "#{@item14.name}", href: merchant_item_path(@merchant1.id, @item14.id)
+    end
 
   end
 end
