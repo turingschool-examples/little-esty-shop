@@ -18,3 +18,8 @@ h3 {
   text-align: center;
   background-color: lightblue;
 }
+
+#admin_navbar {
+  text-align: right;
+  margin: 0 1.5%;
+}
