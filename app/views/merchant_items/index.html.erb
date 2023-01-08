@@ -3,7 +3,7 @@
     <p><%= link_to item.name, merchant_item_path(@merchant, item) %>
       <% if item.status == 0 %>
         <%= button_to  "Enable", "/merchant/#{@merchant.id}/item/#{item.id}", method: :patch, params: { :status => 1 } %>
-      <% else item.status == 1 %>
+      <% elsif item.status == 1 %>
         <%= button_to  "Disable", "/merchant/#{@merchant.id}/item/#{item.id}", method: :patch, params: { :status => 0 } %>
       <% end %>
     </p>
