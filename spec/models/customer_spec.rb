@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Customer, type: :model do
-
-  # before(:all) do
-  #   Rails.application.load_seed
-  # end
-
   describe 'relationships' do
     it {should have_many(:invoices)}
     it {should have_many(:transactions).through(:invoices)}
