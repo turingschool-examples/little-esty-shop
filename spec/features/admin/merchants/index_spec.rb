@@ -44,7 +44,7 @@ RSpec.describe 'the admin merchants index' do
       it 'Then redirects back to the admin merchants index showing that the merchant\'s status has changed' do
         visit admin_merchants_path
 
-        within ("#admin-merchants-#{@merchant_1.id}") do
+        within("#admin-merchants-#{@merchant_1.id}") do
           expect(page).to have_content("Status: #{@merchant_1.status}")
           expect(page).to have_content("Status: enabled")
           expect(page).to have_button("Disable/Enable")
@@ -53,7 +53,7 @@ RSpec.describe 'the admin merchants index' do
 
         expect(current_path).to eq("/admin/merchants")
         
-        within ("#admin-merchants-#{@merchant_1.id}") do
+        within("#admin-merchants-#{@merchant_1.id}") do
           expect(page).to have_content("Status: disabled")
         end
       end
@@ -62,7 +62,7 @@ RSpec.describe 'the admin merchants index' do
     it 'shows merchants seperated by status' do
       visit admin_merchants_path
 
-      within ("#admin-merchants-enabled") do
+      within("#admin-merchants-enabled") do
         expect(page).to have_content("Status: #{@merchant_1.status}")
         expect(page).to have_content("Status: #{@merchant_2.status}")
         expect(page).to have_content("Status: #{@merchant_3.status}")
@@ -70,7 +70,7 @@ RSpec.describe 'the admin merchants index' do
         expect(page).to have_content("Status: #{@merchant_5.status}")
       end
 
-      within ("#admin-merchants-disabled") do
+      within("#admin-merchants-disabled") do
         expect(page).to have_content("Status: #{@merchant_6.status}")
         expect(page).to have_content("Status: #{@merchant_7.status}")
         expect(page).to have_content("Status: #{@merchant_8.status}")
@@ -111,11 +111,18 @@ RSpec.describe 'the admin merchants index' do
         it 'has merchant names as links to the admin merchant\'s show page' do
           visit admin_merchants_path
 
+          save_and_open_page
+
           expect(page).to have_content("Top 5 Revenue Earners")
+          within("#admin-merchants-top-five") do
+            expect(page).to have_link(@merchant_1.name)
+            expect(page).to have_link(@merchant_2.name)
+            expect(page).to have_link(@merchant_3.name)
+            expect(page).to have_link(@merchant_4.name)
+            expect(page).to have_link(@merchant_5.name)
+          end
 
-          binding.pry
-
-          within ("#admin-merchants-#{@merchant_1.id}") do
+          within("#admin-merchants-#{@merchant_1.id}") do
             expect(page).to have_link("#{@merchant_1.name}")
           end
         end
