@@ -51,18 +51,28 @@ RSpec.describe 'admins dashboard' do
     @transaction_13 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_13.id)
   end
 
+  it 'shows the little esty shop header' do
+    visit admin_index_path
+    
+    expect(page).to have_content("Little Esty Shop")
+  end
+
   it 'shows header indicating that I am on the admin dashboard' do
     visit admin_index_path
 
-    expect(page).to have_content("Welcome to the Admin Dashboard")
+      within("#admin_index") do
+        expect(page).to have_content("Admin Dashboard")
+        expect(page).to have_link('Merchants')
+        expect(page).to have_link('Invoices')
+      end
   end
 
   it 'contains links to the admin merchants index' do
     visit admin_index_path
 
-    expect(page).to have_link('Merchants')
-
-    click_link 'Merchants'
+    within("#admin_index") do
+      click_link 'Merchants'
+    end
 
     expect(current_path).to eq(admin_merchants_path)
   end
@@ -70,9 +80,9 @@ RSpec.describe 'admins dashboard' do
   it 'contains links to the admin invoices index' do
     visit admin_index_path
     
-    expect(page).to have_link('Invoices')
-
-    click_link 'Invoices'
+    within("#admin_index") do
+      click_link 'Invoices'
+    end
 
     expect(current_path).to eq(admin_invoices_path)
   end
