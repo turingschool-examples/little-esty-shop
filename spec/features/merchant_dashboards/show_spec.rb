@@ -55,6 +55,7 @@ RSpec.describe 'Merchant Dashboard' do
     @transaction_18 = create(:transaction, invoice: @invoice_17, result: "success") 
     @transaction_19 = create(:transaction, invoice: @invoice_18, result: "success") 
     @transaction_20 = create(:transaction, invoice: @invoice_19, result: "success")    
+    # @transaction_21 = create(:transaction, invoice: @invoice_10, result: "success")
 
     @merchant_1 = create(:merchant, name: "merchant 1")
     @merchant_2 = create(:merchant)
@@ -92,8 +93,19 @@ RSpec.describe 'Merchant Dashboard' do
     @invoice_item_19 = create(:invoice_item, item: @item_2, invoice: @invoice_13, status: "packaged" )
     @invoice_item_20 = create(:invoice_item, item: @item_2, invoice: @invoice_18, status: "packaged" )
     @invoice_item_21 = create(:invoice_item, item: @item_9, invoice: @invoice_16, status: "shipped" )
-    @invoice_item_22 = create(:invoice_item, item: @item_1, invoice: @invoice_19, status: "packaged" )
-    
+    @invoice_item_22 = create(:invoice_item, item: @item_9, invoice: @invoice_4, status: "packaged" )
+    @invoice_item_23 = create(:invoice_item, item: @item_9, invoice: @invoice_4, status: "packaged" )
+    @invoice_item_24 = create(:invoice_item, item: @item_9, invoice: @invoice_4, status: "packaged" )
+    @invoice_item_26 = create(:invoice_item, item: @item_9, invoice: @invoice_9, status: "pending" )
+    @invoice_item_27 = create(:invoice_item, item: @item_9, invoice: @invoice_9, status: "pending" )
+    @invoice_item_28 = create(:invoice_item, item: @item_9, invoice: @invoice_9, status: "pending" )
+    @invoice_item_29 = create(:invoice_item, item: @item_9, invoice: @invoice_9, status: "pending" )
+    @invoice_item_25 = create(:invoice_item, item: @item_9, invoice: @invoice_1, status: "packaged" )
+    @invoice_item_30 = create(:invoice_item, item: @item_9, invoice: @invoice_8, status: "pending" )
+    @invoice_item_31 = create(:invoice_item, item: @item_9, invoice: @invoice_14, status: "pending" )
+    @invoice_item_32 = create(:invoice_item, item: @item_9, invoice: @invoice_10, status: "pending" )
+    @invoice_item_33 = create(:invoice_item, item: @item_2, invoice: @invoice_15, status: "shipped" )
+
     visit merchants_merchantid_dashboard_path(@merchant_1)
   end
 
@@ -118,34 +130,37 @@ RSpec.describe 'Merchant Dashboard' do
   end
 
   describe "Story 3 - merchant's top 5 customers by successful transactions" do
-    it "displays the customer's name and their transactions count with this merchant" do
-      # save_and_open_page
-      # require 'pry';binding.pry
-      expect(page).to have_content(@customer_1.complete_name)
+    it "displays the customer's transactions count" do
       expect(page).to have_content(@merchant_1.top_customers.first.trans_count)
-      # expect(page).to have_content(@customer_2.complete_name)
-      expect(page).to have_content(@merchant_1.top_customers.first.trans_count)
-      # expect(page).to have_content(@customer_4.complete_name)
-      # expect(page).to have_content(@customer_4.successful_transactions_count)
-      # expect(page).to have_content(@customer_5.complete_name)
-      # expect(page).to have_content(@customer_5.successful_transactions_count)
-      # expect(page).to have_content(@customer_6.complete_name)
-      # expect(page).to have_content(@customer_6.successful_transactions_count)
+      expect(page).to have_content(@merchant_1.top_customers.second.trans_count)
+      expect(page).to have_content(@merchant_1.top_customers.third.trans_count)
+      expect(page).to have_content(@merchant_1.top_customers.fourth.trans_count)
+      expect(page).to have_content(@merchant_1.top_customers.last.trans_count)
     end
 
-    it 'lists the customers based on the transactions count - greatest to least' do
-      # require 'pry';binding.pry
-      expect(@customer_6.complete_name).to appear_before(@customer_2.complete_name)
-      expect(@customer_2.complete_name).to appear_before(@customer_4.complete_name)
-      expect(@customer_4.complete_name).to appear_before(@customer_5.complete_name)
-      expect(@customer_5.complete_name).to appear_before(@customer_1.complete_name)
-      # expect(@customer_5.complete_name).to appear_before(@customer_1.complete_name)
+    it "displays the customer's complete name" do
+      expect(page).to have_content(@customer_1.complete_name)
+      expect(page).to have_content(@customer_2.complete_name)
+      expect(page).to have_content(@customer_4.complete_name)
+      expect(page).to have_content(@customer_5.complete_name)
+    end
 
-      #when multiple customers have the same number of successful transactions, customer.id determins order 
-      expect(@customer_4.complete_name).to appear_before(@customer_5.complete_name)
-# require 'pry';binding.pry
-      # expect(@customer_4.trans_count).to eq(2)
-      # expect(@customer_5.successful_transactions_count).to eq(2)
+    it 'lists the customers ordered from most to least transactions count' do
+      expect(@customer_6.complete_name).to appear_before(@customer_4.complete_name)
+      expect(@customer_4.complete_name).to appear_before(@customer_2.complete_name)
+      expect(@customer_2.complete_name).to appear_before(@customer_5.complete_name)
+      expect(@customer_5.complete_name).to appear_before(@customer_1.complete_name)
+    end
+
+    it 'when multiple customers have the same number of successful transactions, customer.id determins order' do 
+        # expect(@customer_4.complete_name).to appear_before(@customer_5.complete_name)
+        expect(@merchant_1.top_customers.third).to eq(@customer_2)
+        expect(@merchant_1.top_customers.fourth).to eq(@customer_5)
+        # expect(page).to have_content(@merchant_1.top_customers.fourth.trans_count)
+
+        # visit merchants_merchantid_dashboard_path(@merchant_4)
+        
+      end
     end
   end
 end
