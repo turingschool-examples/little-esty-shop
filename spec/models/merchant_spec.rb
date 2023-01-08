@@ -180,7 +180,7 @@ RSpec.describe Merchant, type: :model do
       transaction_2 = create(:transaction, result: 0, invoice: invoice_2)
       transaction_3 = create(:transaction, result: 1, invoice: invoice_3)
       
-      expected = 1900
+      expected = 19.00
       expect(merchant_1.total_revenue).to eq(expected)
     end
   end
