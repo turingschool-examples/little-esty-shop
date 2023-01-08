@@ -103,20 +103,20 @@ RSpec.describe 'merchant items index page' do
     @invoice27 = Invoice.create!(customer_id: @customer6.id, status: "completed")
     @invoice28 = Invoice.create!(customer_id: @customer6.id, status: "completed")
 
-    @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 23, unit_price: @item1.unit_price, status: "shipped")
-    @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 2, unit_price: @item2.unit_price, status: "packaged")
-    @invoice_item3 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice3.id, quantity: 4, unit_price: @item3.unit_price, status: "pending")
-    @invoice_item4 = InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice4.id, quantity: 7, unit_price: @item4.unit_price, status: "pending")
-    @invoice_item5 = InvoiceItem.create!(item_id: @item5.id, invoice_id: @invoice5.id, quantity: 3, unit_price: @item5.unit_price, status: "shipped")
-    @invoice_item6 = InvoiceItem.create!(item_id: @item6.id, invoice_id: @invoice6.id, quantity: 14, unit_price: @item6.unit_price, status: "packaged")
-    @invoice_item7 = InvoiceItem.create!(item_id: @item7.id, invoice_id: @invoice7.id, quantity: 13, unit_price: @item7.unit_price, status: "pending")
-    @invoice_item8 = InvoiceItem.create!(item_id: @item8.id, invoice_id: @invoice8.id, quantity: 54, unit_price: @item8.unit_price, status: "shipped")
-    @invoice_item9 = InvoiceItem.create!(item_id: @item9.id, invoice_id: @invoice9.id, quantity: 9, unit_price: @item9.unit_price, status: "shipped")
-    @invoice_item10 = InvoiceItem.create!(item_id: @item10.id, invoice_id: @invoice10.id, quantity: 23, unit_price: @item10.unit_price, status: "shipped")
-    @invoice_item11 = InvoiceItem.create!(item_id: @item11.id, invoice_id: @invoice11.id, quantity: 2, unit_price: @item11.unit_price, status: "shipped")
-    @invoice_item12 = InvoiceItem.create!(item_id: @item12.id, invoice_id: @invoice12.id, quantity: 4, unit_price: @item12.unit_price, status: "shipped")
-    @invoice_item13 = InvoiceItem.create!(item_id: @item13.id, invoice_id: @invoice13.id, quantity: 6, unit_price: @item13.unit_price, status: "packaged")
-    @invoice_item14 = InvoiceItem.create!(item_id: @item14.id, invoice_id: @invoice14.id, quantity: 8, unit_price: @item14.unit_price, status: "pending")
+    @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 23, unit_price: 2, status: "shipped")
+    @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 2, unit_price: 3, status: "packaged")
+    @invoice_item3 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice3.id, quantity: 4, unit_price: 4, status: "pending")
+    @invoice_item4 = InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice4.id, quantity: 7, unit_price: 5, status: "pending")
+    @invoice_item5 = InvoiceItem.create!(item_id: @item5.id, invoice_id: @invoice5.id, quantity: 3, unit_price: 6, status: "shipped")
+    @invoice_item6 = InvoiceItem.create!(item_id: @item6.id, invoice_id: @invoice6.id, quantity: 14, unit_price: 7, status: "packaged")
+    @invoice_item7 = InvoiceItem.create!(item_id: @item7.id, invoice_id: @invoice7.id, quantity: 13, unit_price: 8, status: "pending")
+    @invoice_item8 = InvoiceItem.create!(item_id: @item8.id, invoice_id: @invoice8.id, quantity: 54, unit_price: 9, status: "shipped")
+    @invoice_item9 = InvoiceItem.create!(item_id: @item9.id, invoice_id: @invoice9.id, quantity: 9, unit_price: 10, status: "shipped")
+    @invoice_item10 = InvoiceItem.create!(item_id: @item10.id, invoice_id: @invoice10.id, quantity: 23, unit_price: 11, status: "shipped")
+    @invoice_item11 = InvoiceItem.create!(item_id: @item11.id, invoice_id: @invoice11.id, quantity: 29, unit_price: 12, status: "shipped")
+    @invoice_item12 = InvoiceItem.create!(item_id: @item12.id, invoice_id: @invoice11.id, quantity: 14, unit_price: 13, status: "shipped")
+    @invoice_item13 = InvoiceItem.create!(item_id: @item13.id, invoice_id: @invoice13.id, quantity: 6, unit_price: 14, status: "packaged")
+    @invoice_item14 = InvoiceItem.create!(item_id: @item14.id, invoice_id: @invoice14.id, quantity: 8, unit_price: 15, status: "pending")
     @invoice_item15 = InvoiceItem.create!(item_id: @item15.id, invoice_id: @invoice15.id, quantity: 9, unit_price: @item15.unit_price, status: "shipped")
     @invoice_item16 = InvoiceItem.create!(item_id: @item16.id, invoice_id: @invoice16.id, quantity: 3, unit_price: @item16.unit_price, status: "shipped")
     @invoice_item17 = InvoiceItem.create!(item_id: @item17.id, invoice_id: @invoice17.id, quantity: 5, unit_price: @item17.unit_price, status: "packaged")
@@ -261,5 +261,41 @@ RSpec.describe 'merchant items index page' do
   it 'has a link to create a new item' do
     visit merchant_items_path(@merchant1.id)
     expect(page).to have_link "Create New Item", href: new_merchant_item_path(@merchant1.id)
+  end
+
+  it 'has a section for top 5 items by revenue generated' do
+    visit merchant_items_path(@merchant1.id)
+  
+    within "#top_5_items" do
+      expect(page).to have_content("Top 5 Items by Revenue:")
+      expect("#{@item8.name}").to appear_before("#{@item11.name}")
+      expect("#{@item11.name}").to appear_before("#{@item10.name}")
+      expect("#{@item10.name}").to appear_before("#{@item12.name}")
+      expect("#{@item12.name}").to appear_before("#{@item14.name}")
+    end
+  end
+
+  it 'has links for the top 5 items by revenue' do
+    visit merchant_items_path(@merchant1.id)
+
+    within "#top_5_items" do
+      expect(page).to have_link "#{@item8.name}", href: merchant_item_path(@merchant1.id, @item8.id)
+      expect(page).to have_link "#{@item11.name}", href: merchant_item_path(@merchant1.id, @item11.id)
+      expect(page).to have_link "#{@item10.name}", href: merchant_item_path(@merchant1.id, @item10.id)
+      expect(page).to have_link "#{@item12.name}", href: merchant_item_path(@merchant1.id, @item12.id)
+      expect(page).to have_link "#{@item14.name}", href: merchant_item_path(@merchant1.id, @item14.id)
+    end
+  end
+
+  it 'displays the total revenue for each item in the top 5 list' do
+    visit merchant_items_path(@merchant1.id)
+
+    within "#top_5_items" do
+      expect(page).to have_content("1. #{@item8.name}, Revenue: $4.86")
+      expect(page).to have_content("2. #{@item11.name}, Revenue: $3.48")
+      expect(page).to have_content("3. #{@item10.name}, Revenue: $2.53")
+      expect(page).to have_content("4. #{@item12.name}, Revenue: $1.82")
+      expect(page).to have_content("5. #{@item14.name}, Revenue: $1.2")
+    end
   end
 end

@@ -9,8 +9,13 @@
   border: 2px green
 }
 
-.right {
+.center {
   flex: 1;
   border: 2px red
+}
+
+.right {
+  flex: 1;
+  border: 2px blue
 }
 

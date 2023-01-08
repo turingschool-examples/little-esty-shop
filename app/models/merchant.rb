@@ -31,7 +31,15 @@ class Merchant < ApplicationRecord
     self.where(status: status)
   end
 
-  def self.top_five
+  def top_5_revenue_items
+    self.items
+        .joins(:transactions)
+        .group(:id)
+        .where(transactions: { result: "success" })
+        .order(Arel.sql("sum(invoice_items.unit_price * invoice_items.quantity) desc"))
+        .limit(5)
+        
+  def self.top_five #merchant
     self.joins(invoices: [:invoice_items, :transactions])
         .where('result = 0')
         .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')

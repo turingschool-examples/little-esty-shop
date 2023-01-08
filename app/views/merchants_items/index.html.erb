@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="items-right">
+    <div class="items-center">
       <div id="disabled_items">
         <h3>Disabled Items:</h3><br>
           <% @disabled_items.each do |item| %>
@@ -25,6 +25,18 @@
               <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
               <%= "Status: #{item.status}" %>
               <%= button_to "Disable/Enable", merchant_item_path(@merchant.id, item.id), method: :patch, params: {swap: "true", status: item.status} %>
+              <br>
+            </div>
+          <% end %>
+      </div>
+    </div>
+
+    <div class="items-right">
+      <div id="top_5_items">
+        <h3>Top 5 Items by Revenue:</h3><br>
+          <% @top_5_items.each.with_index(1) do |item, i| %>
+            <div id="item_id-<%= item.id %>">
+              <h3><%= "#{i}." %> <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id)%><%= ", Revenue: $#{item.invoice_items.revenue}" %>
               <br>
             </div>
           <% end %>
