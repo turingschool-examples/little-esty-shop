@@ -285,6 +285,17 @@ RSpec.describe 'merchant items index page' do
       expect(page).to have_link "#{@item12.name}", href: merchant_item_path(@merchant1.id, @item12.id)
       expect(page).to have_link "#{@item14.name}", href: merchant_item_path(@merchant1.id, @item14.id)
     end
+  end
 
+  it 'displays the total revenue for each item in the top 5 list' do
+    visit merchant_items_path(@merchant1.id)
+
+    within "#top_5_items" do
+      expect(page).to have_content("1. #{@item8.name}, Revenue: $4.86")
+      expect(page).to have_content("2. #{@item11.name}, Revenue: $3.48")
+      expect(page).to have_content("3. #{@item10.name}, Revenue: $2.53")
+      expect(page).to have_content("4. #{@item12.name}, Revenue: $1.82")
+      expect(page).to have_content("5. #{@item14.name}, Revenue: $1.2")
+    end
   end
 end
