@@ -23,4 +23,20 @@ class Merchant < ApplicationRecord
     .order('invoices.created_at')
     .distinct
   end
+
+  def self.total_revenue(invoice_id)
+    Invoice 
+    .joins(:invoice_items)
+    .where("invoice_items.invoice_id = #{invoice_id}")
+    .sum('invoice_items.quantity * invoice_items.unit_price')
+    
+  end
+
+  def self.enabled 
+    where(status: 1)
+  end
+
+  def self.disabled
+    where(status: 0)
+  end
 end
