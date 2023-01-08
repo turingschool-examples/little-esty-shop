@@ -1,3 +1,13 @@
-<% @merchants.each do |merchant| %>
+<div id=enabled>
+<h3>Enabled: </h3>
+<% @enabled.each do |merchant| %>
   <p><%= link_to merchant.name, admin_merchant_path(merchant) %></p>
 <% end %>
+</div>
+
+<div id=disabled>
+<h3>Disabled: </h3>
+<% @disabled.each do |merchant| %>
+  <p><%= link_to merchant.name, admin_merchant_path(merchant) %></p>
+<% end %>
+</div>

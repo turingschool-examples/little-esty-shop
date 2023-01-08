@@ -228,4 +228,11 @@ RSpec.describe Merchant do
       end
     end
   end
+  describe '#enabled and #disabled' do
+    it 'pulls up merchants based on status' do
+      @merchant1.update(status: 1)
+      expect(Merchant.enabled).to eq([@merchant1])
+      expect(Merchant.disabled).to eq([@merchant2])
+    end
+  end
 end

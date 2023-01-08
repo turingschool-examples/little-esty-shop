@@ -30,12 +30,13 @@ class Merchant < ApplicationRecord
     .where("invoice_items.invoice_id = #{invoice_id}")
     .sum('invoice_items.quantity * invoice_items.unit_price')
     
-    
-    # .select('items.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS item_revenue')
-    # .select('(invoice_items.quantity * invoice_items.unit_price)')
-    # .group(:id)
-    
+  end
 
-    #invoiceitems: quantity unit_price
+  def self.enabled 
+    where(status: 1)
+  end
+
+  def self.disabled
+    where(status: 0)
   end
 end

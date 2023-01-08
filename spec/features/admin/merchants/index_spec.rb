@@ -14,4 +14,22 @@ RSpec.describe 'admin merchants index' do
       expect(page).to have_link(@merchants.third.name, href: admin_merchant_path(@merchants.third))
     end
   end
+  describe 'userstory 28' do
+    it "When I visit the admin merchants index
+    Then I see two sections, one for 'Enabled Merchants' and one for 'Disabled Merchants'
+    And I see that each Merchant is listed in the appropriate section" do
+      @merchants.first.update(status: 1)
+      visit "/admin/merchants"
+      within("div#enabled") do
+        expect(page).to have_content(@merchants.first.name)
+
+      end
+      within("div#disabled") do
+        expect(page).to have_content(@merchants.second.name)
+        expect(page).to have_content(@merchants.third.name)
+      end
+
+
+    end
+  end
 end
