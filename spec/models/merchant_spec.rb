@@ -342,7 +342,6 @@ RSpec.describe Merchant, type: :model do
     end
 
     it "returns the items name and invoice number that have not been shipped for the merchant" do
-      # require 'pry';binding.pry
       expect(@merchant_1.unshipped_items).to eq([[@item_1.name, @invoice_1.id], [@item_1.name, @invoice_4.id], [@item_1.name, @invoice_7.id], [@item_1.name, @invoice_8.id], [@item_5.name, @invoice_2.id], [@item_5.name, @invoice_5.id]])
       expect(@merchant_4.unshipped_items).to eq([[@item_4.name, @invoice_4.id]])
     end
