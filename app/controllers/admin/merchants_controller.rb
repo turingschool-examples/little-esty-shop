@@ -3,6 +3,7 @@ class Admin::MerchantsController < ApplicationController
     @merchants = Merchant.all
     @merchants_enabled = Merchant.group_by_status("enabled")
     @merchants_disabled = Merchant.group_by_status("disabled")
+    @merchants_top_five = Merchant.top_five
   end
 
   def new
