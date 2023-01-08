@@ -18,4 +18,13 @@ class Merchant < ApplicationRecord
   def self.group_by_status(status)
     self.where(status: status)
   end
+
+  def self.top_five
+    self.joins(invoices: [:invoice_items, :transactions])
+    .where('result = 0')
+    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
+    .group(:id)
+    .order('total_revenue desc')
+    .first(5)
+  end
 end

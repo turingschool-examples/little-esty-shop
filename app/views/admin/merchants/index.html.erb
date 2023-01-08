@@ -6,8 +6,10 @@
 <%= button_to "Create Merchant", new_admin_merchant_path, method: :get %>
 
 <h2>Top 5 Revenue Earners</h2>
-<div id="admin-merchants-top-5" >
-  <%  %>
+<div id="admin-merchants-top-five" >
+  <% @merchants_top_five.each do |merchant| %>
+   <%= link_to merchant.name, admin_merchant_path(merchant.id) %>
+  <% end %>
 </div>
 
 <% if @merchants.any? %>
