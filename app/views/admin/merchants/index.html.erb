@@ -1,13 +1,19 @@
 <div id=enabled>
 <h3>Enabled: </h3>
-<% @enabled.each do |merchant| %>
+<% Merchant.enabled.each do |merchant| %>
   <p><%= link_to merchant.name, admin_merchant_path(merchant) %></p>
 <% end %>
 </div>
 
 <div id=disabled>
 <h3>Disabled: </h3>
-<% @disabled.each do |merchant| %>
+<% Merchant.disabled.each do |merchant| %>
   <p><%= link_to merchant.name, admin_merchant_path(merchant) %></p>
 <% end %>
 </div>
+
+<h4>Top 5 Merchant's: </h4>
+
+<% @merchants.top5_merchants.each do |merchant| %>
+  <p><%= merchant.name %></p>
+<% end %>
