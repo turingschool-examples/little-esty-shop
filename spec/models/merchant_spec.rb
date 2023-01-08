@@ -332,23 +332,23 @@ RSpec.describe Merchant, type: :model do
       @invoice_item_7 = create(:invoice_item, unit_price: 400, quantity: 1, item: @item_7, invoice: @invoice_7, status: "packaged")
       @invoice_item_8 = create(:invoice_item, unit_price: 300, quantity: 1, item: @item_8, invoice: @invoice_8, status: "shipped")
       @invoice_item_9 = create(:invoice_item, unit_price: 200, quantity: 1, item: @item_5, invoice: @invoice_2, status: "pending")
-      @invoice_item_10 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_5, invoice: @invoice_1, status: "packaged")
-      @invoice_item_11 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_1, status: "pending")
+      @invoice_item_10 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_5, invoice: @invoice_1, status: "shipped")
+      @invoice_item_11 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_8, status: "pending")
       @invoice_item_12 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_5, status: "shipped")
-      @invoice_item_13 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_5, invoice: @invoice_7, status: "pending")
+      @invoice_item_13 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_5, invoice: @invoice_5, status: "pending")
       @invoice_item_14 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_7, status: "packaged")
       @invoice_item_15 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_4, status: "packaged")
       @invoice_item_16 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_8, status: "shipped")
     end
 
-    it "returns the items that have not been shipped for the merchant" do
-      require 'pry';binding.pry
-      expect(@merchant_1.unshipped_items).to_not eq([@item_11])
-      expect(@merchant_1.unshipped_items).to eq([@item_1])
+    it "returns the items name and invoice number that have not been shipped for the merchant" do
+      # require 'pry';binding.pry
+      expect(@merchant_1.unshipped_items).to eq([[@item_1.name, @invoice_1.id], [@item_1.name, @invoice_4.id], [@item_1.name, @invoice_7.id], [@item_1.name, @invoice_8.id], [@item_5.name, @invoice_2.id], [@item_5.name, @invoice_5.id]])
     end
 
-    it "returns the invoices' number for the unshipped items for the merchant" do
-
-    end
+    # it "returns the invoices' number for the unshipped items for the merchant" do
+    #   expect(@merchant_1.unshipped_items.first.inv_num.distinct).to eq([@invoice_1.id, @invoice_4.id, @invoice_5.id, @invoice_7.id, @invoice_8.id])
+    #   expect(@merchant_1.unshipped_items.second.inv_num.distinct).to eq([@invoice_1.id, @invoice_4.id, @invoice_5.id, @invoice_7.id, @invoice_8.id])
+    # end
   end
 end
