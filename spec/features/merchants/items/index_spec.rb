@@ -79,14 +79,14 @@ RSpec.describe 'merchant items index page' do
       end
       
       pen.reload
-            
+      
       expect(page).to have_current_path(merchant_item_index_path(mariah))
       expect(pen.status).to eq(1)
       expect(page).to have_button("Disable")
       
     end
   end
-
+  
   describe "story 10" do
     #     As a merchant,
     # When I visit my merchant items index page
@@ -103,14 +103,12 @@ RSpec.describe 'merchant items index page' do
       
       socks = terry.items.create!(name: "socks", description: "keeps feet warm", unit_price: 8)
       shoes = terry.items.create!(name: "shoes", description: "provides arch support", unit_price: 68)
-
+      
       visit merchant_item_index_path(mariah)
-      save_and_open_page
-
+      
+      
       expect(page).to have_content("Enabled")
       expect(page).to have_content("Disabled")
     end
-    
-    it "has each item under the correct section"
   end
 end
