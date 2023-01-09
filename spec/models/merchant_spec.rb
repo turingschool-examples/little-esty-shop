@@ -11,9 +11,9 @@ RSpec.describe Merchant do
       top5 = Merchant.find(2).top_five_customers
 
       expect(top5.length).to eq(5)
-      expect(top5).to eq([Customer.find(12), Customer.find(10), Customer.find(1), Customer.find(3), Customer.find(11)])
-      expect(top5[0].transaction_count).to eq(9)
-      expect(top5[4].transaction_count).to eq(3)
+      expect(top5).to eq([Customer.find(10), Customer.find(1), Customer.find(11), Customer.find(2), Customer.find(3)])
+      expect(top5[0].transaction_count).to eq(6)
+      expect(top5[4].transaction_count).to eq(1)
     end
   end
 

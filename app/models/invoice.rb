@@ -6,7 +6,9 @@ class Invoice < ApplicationRecord
   enum status: { 'in progress' => 0, completed: 1, cancelled: 2 }
 
   def self.incomplete_invoices
-    Invoice.left_joins(:invoice_items).where.not('invoice_items.status = ?', 2).distinct.order(:updated_at)
+    Invoice.left_joins(:invoice_items)
+           .where.not(invoice_items: { status: 2 })
+           .distinct.order(:updated_at)
   end
 
   def total_invoice_revenue
