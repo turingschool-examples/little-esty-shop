@@ -8,7 +8,7 @@ class Customer < ApplicationRecord
     Customer.left_joins(:transactions)
             .select('customers.*, count(transactions) as transaction_count')
             .group(:id)
-            .where('transactions.result = ?', 'success')
+            .where(transactions: { result: 'success' })
             .order('transaction_count DESC', :first_name)
             .limit(5)
   end
