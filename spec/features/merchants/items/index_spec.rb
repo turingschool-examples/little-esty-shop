@@ -77,32 +77,31 @@ RSpec.describe 'merchants items index' do
     end
   end
 
-  it 'has a top items section that lists top 5 items by revenue' do
+  it 'has a top items section that lists top 5 items with links by revenue' do
     visit merchant_items_path(1)
+    item12 = Item.find(12)
+    item5 = Item.find(5)
+    item15 = Item.find(15)
+    item8 = Item.find(8)
+    item6 = Item.find(6)
 
     expect(page).to have_content("Top Items")
 
     within("div#top_items")do
-      expect(page).to have_content(Item.find(2).name)
-      expect(page).to have_content(Item.find(3).name)
-      expect(page).to have_content(Item.find(6).name)
-      expect(page).to have_content(Item.find(1).name)
-      expect(page).to have_content(Item.find(4).name)
+      expect(item12.name).to appear_before(item5.name)
+      expect(item5.name).to appear_before(item15.name)
+      expect(item15.name).to appear_before(item8.name)
+      expect(item8.name).to appear_before(item6.name)
+      expect(page).to have_link(item12.name, href: merchant_item_path(1, 12))
+      expect(page).to have_link(item6.name, href: merchant_item_path(1, 6))
+    end
+    
+    within("li#top-item-#{item12.id}")do
+      expect(page).to have_content("$10,733.62 in sales")
+    end
+    within("li#top-item-#{item6.id}")do
+      expect(page).to have_content("$7,877.77 in sales")
     end
   end
 end
 
-# As a merchant
-# When I visit my items index page
-# Then I see the names of the top 5 most popular items ranked by total revenue generated
-# And I see that each item name links to my merchant item show page for that item
-# And I see the total revenue generated next to each item name
-
-# Notes on Revenue Calculation:
-
-# Only invoices with at least one successful transaction should count towards revenue
-# Revenue for an invoice should be calculated as the sum of the revenue of all invoice 
-# items
-
-# Revenue for an invoice item should be calculated as the invoice item unit price 
-# multiplied by the quantity (do not use the item unit price)

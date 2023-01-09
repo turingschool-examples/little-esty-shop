@@ -2,36 +2,39 @@
 <h3>My Items</h3>
 
 <%= link_to("New Item", new_merchant_item_path(@merchant))%>
-
-<div id="enabled">
-<h3>Enabled Items</h3>
-  <ul>
-  <% @merchant.get_enabled_items.each do |item| %>
-  <div id="item-<%= item.id %>">
-    <li><%= link_to item.name, merchant_item_path(@merchant, item) %> <%= item.id %></li>
-    <%= button_to("Disable", merchant_item_path(@merchant, item), method: :patch, params: { item: { enabled: false } })%>
-    </div>
-  <% end %>
-  </ul>
+<div id='items'>
+  <div id="enabled">
+    <h3>Enabled Items</h3>
+    <ul>
+      <% @merchant.get_enabled_items.each do |item| %>
+      <div id="item-<%= item.id %>">
+        <li><%= link_to item.name, merchant_item_path(@merchant, item) %> <%= item.id %></li>
+        <%= button_to("Disable", merchant_item_path(@merchant, item), method: :patch, params: { item: { enabled: false } })%>
+        </div>
+      <% end %>
+    </ul>
+  </div>
+  <br>
+  <div id="disabled">
+  <h3>Disabled Items</h3>
+    <ul>
+    <% @merchant.get_disabled_items.each do |item| %>
+    <div id="item-<%= item.id %>">
+      <li><%= link_to item.name, merchant_item_path(@merchant, item) %> <%= item.id %></li>
+        <%= button_to("Enable", merchant_item_path(@merchant, item), method: :patch, params: { item: { enabled: true } })%>
+      </div>
+    <% end %>
+    </ul>
+  </div>
 </div>
-
-<div id="disabled">
-<h3>Disabled Items</h3>
-  <ul>
-  <% @merchant.get_disabled_items.each do |item| %>
-  <div id="item-<%= item.id %>">
-    <li><%= link_to item.name, merchant_item_path(@merchant, item) %> <%= item.id %></li>
-      <%= button_to("Enable", merchant_item_path(@merchant, item), method: :patch, params: { item: { enabled: true } })%>
-    </div>
-  <% end %>
-  </ul>
-</div>
-
 <div id="top_items">
   <h3>Top Items</h3>
   <ol>
     <% @merchant.top_5_items.each do |item| %>
-      <li><%= "#{item.name} - $#{item.unit_price_to_dollars} in sales" %></li>
+      <li id="top-item-<%= item.id %>">
+        <%= link_to item.name, merchant_item_path(@merchant, item) %> 
+        <%= "- #{number_to_currency(item.item_revenue)} in sales" %>
+      </li>
     <% end %>
   </ol>
 </div>
