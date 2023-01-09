@@ -14,4 +14,14 @@ class Invoice < ApplicationRecord
   def created
     created_at.strftime("%A, %B %-d, %Y")
   end
+
+  def self.total_revenue(id)
+    # binding.pry
+    joins(:transactions, :invoice_items)
+    .where("invoices.id = #{id} AND transactions.result = 1")
+    .group(:id)
+    .select('sum(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
+    
+    # .sum('invoice_items.quantity * invoice_items.unit_price')
+  end
 end

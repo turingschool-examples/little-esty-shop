@@ -36,4 +36,22 @@ RSpec.describe Invoice do
       end
     end
   end
+
+  describe '#total_revenue' do 
+    it 'totals the revenue for all items on the invoice' do
+      @merchant1 = Merchant.create!(name: 'Rays Hand Made Jewlery')
+      @item1 = Item.create!(name: 'Chips', description: 'Ring', unit_price: 20, merchant_id: @merchant1.id)
+      @merchant2 = Merchant.create!(name: 'Jays Foot Made Jewlery')
+      @customer1 = Customer.create!(first_name: 'Kyle', last_name: 'Ledin')
+      @item4 = Item.create!(name: 'fake', description: 'Toe Ring', unit_price: 30, merchant_id: @merchant2.id)
+      @invoice1 = Invoice.create!(status: 1, customer_id: @customer1.id)
+      @transaction1 = Transaction.create!(credit_card_number: '123456789', credit_card_expiration_date: '05/07', invoice_id: @invoice1.id)
+      @ii1 = InvoiceItem.create!(quantity: 5, unit_price: @item1.unit_price, item_id: @item1.id, invoice_id: @invoice1.id)
+      @ii5 = InvoiceItem.create!(quantity: 10, unit_price: @item4.unit_price, item_id: @item4.id, invoice_id: @invoice1.id)
+
+    
+
+      expect(Invoice.total_revenue(@invoice1.id).first.total_revenue).to eq(400)
+    end
+  end
 end
