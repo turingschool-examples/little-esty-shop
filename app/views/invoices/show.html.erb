@@ -12,4 +12,5 @@
   <p>Price: <%= ii.unit_price %></p>
   <p>Status: <%= ii.status %></p>
 <% end %>
+<p>Total Revenue: <%= @invoice.calculate_total_revenue %></p>
 </div>
