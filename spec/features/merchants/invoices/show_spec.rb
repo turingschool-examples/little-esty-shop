@@ -26,7 +26,7 @@ RSpec.describe 'Merchants Invoice Show' do
     invoice.invoice_items.each do |invoice_item|
       expect(page).to have_content(invoice_item.quantity)
       expect(page).to have_content(invoice_item.unit_price_to_dollars)
-      expect(page).to have_content(invoice_item.status)
+      expect(page).to have_content(invoice_item.status.capitalize)
     end
 
     not_invoice = Merchant.find(2).invoices.second
@@ -57,7 +57,7 @@ RSpec.describe 'Merchants Invoice Show' do
 
     expect(current_path).to eq(merchant_invoice_path(Merchant.find(8), Invoice.find(31)))
     within("#item_#{invoice_item.id}") do
-      expect(page).to have_content('pending')
+      expect(page).to have_content('Pending')
       expect(page).to have_select('invoice_item[status]', selected: 'Pending')
     end
   end
