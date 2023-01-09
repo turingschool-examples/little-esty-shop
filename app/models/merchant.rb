@@ -41,6 +41,7 @@ class Merchant < ApplicationRecord
       self.disabled!
     end
   end
+
   def top_five_items_by_revenue
     items.joins(invoices: :transactions)
     .where(transactions: {result: "success"}, invoices: {status: 1})
@@ -48,5 +49,15 @@ class Merchant < ApplicationRecord
     .group('items.id')
     .order(item_revenue: :desc)
     .limit(5)
+  end
+
+  def top_selling_date
+    invoices.joins(:transactions)
+            .where(transactions: {result: "success"}, invoices: {status: 1})
+            .select('invoices.*, invoices.created_at as invoice_date, sum(invoice_items.quantity * invoice_items.unit_price) as item_revenue')
+            .group(:id)
+            .order(item_revenue: :desc, invoice_date: :desc)
+            .first
+            .invoice_date
   end
 end

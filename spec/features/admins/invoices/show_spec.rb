@@ -29,12 +29,12 @@ RSpec.describe 'admin invoices show' do
     @item_1 = Item.create!(name: "Pokemon Cards", description: "Investments", unit_price: 800, merchant_id: @merchant_1.id)
     @item_2 = Item.create!(name: "Pogs", description: "Old school", unit_price: 500, merchant_id: @merchant_2.id)
 
-    InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_1.id)
-    InvoiceItem.create!(quantity: 1, unit_price: 800, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_2.id)
-    InvoiceItem.create!(quantity: 2, unit_price: 1600, status: "pending", item_id: @item_1.id, invoice_id: @invoice_3.id)
-    InvoiceItem.create!(quantity: 10, unit_price: 8000, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_4.id)
-    InvoiceItem.create!(quantity: 1, unit_price: 500, status: "shipped", item_id: @item_2.id, invoice_id: @invoice_5.id)
-    InvoiceItem.create!(quantity: 5, unit_price: 2500, status: "shipped", item_id: @item_2.id, invoice_id: @invoice_6.id)
+    @ii_1 = InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_1.id)
+    @ii_2 = InvoiceItem.create!(quantity: 1, unit_price: 800, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_2.id)
+    @ii_3 = InvoiceItem.create!(quantity: 2, unit_price: 1600, status: "pending", item_id: @item_1.id, invoice_id: @invoice_3.id)
+    @ii_4 = InvoiceItem.create!(quantity: 10, unit_price: 8000, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_4.id)
+    @ii_5 = InvoiceItem.create!(quantity: 1, unit_price: 500, status: "shipped", item_id: @item_2.id, invoice_id: @invoice_5.id)
+    @ii_6 = InvoiceItem.create!(quantity: 5, unit_price: 2500, status: "shipped", item_id: @item_2.id, invoice_id: @invoice_6.id)
     
     @transaction_1 = Transaction.create!(credit_card_number: "4654405418249633", credit_card_expiration_date: nil, result: "success", invoice_id: @invoice_1.id)
     @transaction_2 = Transaction.create!(credit_card_number: "4654405418249635", credit_card_expiration_date: nil, result: "success", invoice_id: @invoice_2.id)
@@ -58,5 +58,24 @@ RSpec.describe 'admin invoices show' do
     expect(page).to have_content("Invoice status: #{@invoice_1.status}")
     expect(page).to have_content("Created at: #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
     expect(page).to have_content("Customer name: #{@customer_1.first_name} #{@customer_1.last_name}")
+  end
+
+  it 'contains item name, quantity of item ordered, price item sold for, invoice item status' do
+    visit admin_invoice_path(@invoice_1)
+
+    within("#item-#{@ii_1.id}") do
+      expect(page).to have_content("Item Name: #{@item_1.name}")
+      expect(page).to have_content("Quantity: #{@ii_1.quantity}")
+      expect(page).to have_content("Price: #{@ii_1.unit_price}")
+      expect(page).to have_content("Status: #{@ii_1.status}")
+    end
+  end
+
+  it ' displays the total revenue that will be generated from this invoice' do
+    visit admin_invoice_path(@invoice_1)
+
+    within("#total_revenue") do
+      expect(page).to have_content("Total Revenue: #{@invoice_1.calculate_total_revenue}")
+    end
   end
 end
