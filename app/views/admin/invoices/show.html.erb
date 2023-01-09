@@ -14,3 +14,7 @@
 <p> Status: <%= invoice_item.status %> </p>
 </div>
 <% end %>
+
+<div id='total_revenue'>
+<p> Total Revenue: <%= @invoice.calculate_total_revenue%></p>
+</div>
