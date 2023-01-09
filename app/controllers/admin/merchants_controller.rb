@@ -17,8 +17,9 @@ class Admin::MerchantsController < ApplicationController
     merchant.update!(merchant_params)
 
     return redirect_to admin_merchants_path if params[:merchant][:enabled]
+
     redirect_to admin_merchant_path(merchant)
-    flash[:notice] = "Merchant name has been changed"
+    flash[:notice] = 'Merchant name has been changed'
   end
 
   def new

@@ -1,8 +1,8 @@
-require_relative 'csv_parser.rb'
+require_relative 'csv_parser'
 require 'csv'
 
 namespace :csv_load do
-  task :merchants => :environment do
+  task merchants: :environment do
     puts 'Loading Merchant Information!'
     Merchant.destroy_all
     CSV.foreach('./db/data/merchants.csv', headers: true) do |row|
@@ -11,7 +11,7 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
   end
 
-  task :items => :environment do
+  task items: :environment do
     puts 'Loading Item Information!'
     Item.destroy_all
     CSV.foreach('./db/data/items.csv', headers: true) do |row|
@@ -20,7 +20,7 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('items')
   end
 
-  task :invoices => :environment do
+  task invoices: :environment do
     puts 'Loading Invoice Information!'
     Invoice.destroy_all
     CSV.foreach('./db/data/invoices.csv', headers: true) do |row|
@@ -29,7 +29,7 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
   end
 
-  task :invoice_items => :environment do
+  task invoice_items: :environment do
     puts 'Loading Invoice Item Information!'
     InvoiceItem.destroy_all
     CSV.foreach('./db/data/invoice_items.csv', headers: true) do |row|
@@ -38,7 +38,7 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
   end
 
-  task :transactions => :environment do
+  task transactions: :environment do
     puts 'Loading Transaction Information!'
     Transaction.destroy_all
     CSV.foreach('./db/data/transactions.csv', headers: true) do |row|
@@ -47,7 +47,7 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
   end
 
-  task :customers => :environment do
+  task customers: :environment do
     puts 'Loading Customer Information!'
     Customer.destroy_all
     CSV.foreach('./db/data/customers.csv', headers: true) do |row|

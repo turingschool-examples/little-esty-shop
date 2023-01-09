@@ -52,7 +52,7 @@ RSpec.describe 'Merchants Invoice Show' do
     within("#item_#{invoice_item.id}") do
       expect(page).to have_select('invoice_item[status]', selected: 'Shipped')
       select('Pending', from: 'invoice_item[status]')
-      click_button "Update Item Status"
+      click_button 'Update Item Status'
     end
 
     expect(current_path).to eq(merchant_invoice_path(Merchant.find(8), Invoice.find(31)))
