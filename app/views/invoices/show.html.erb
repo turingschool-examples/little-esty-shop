@@ -1,3 +1,5 @@
 <%= render partial: '/merchants_navbar'%>
-
-<h2>Invoice</h2>
+<p>Invoice #<%= @invoice.id %></p>
+<p>Status: <%= @invoice.status %></p>
+<p>Created At: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
