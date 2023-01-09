@@ -1,4 +1,4 @@
-<h1>Create A New Item</h1>
+<h2>Create A New Item</h2>
 <%= form_with url: "/merchants/#{@merchant.id}/items", method: :post, local: true do |f| %>
 <%= f.label :name, 'Name:' %>
 <%= f.text_field :name %>
