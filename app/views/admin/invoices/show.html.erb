@@ -1,7 +1,15 @@
 <h3>Invoice <%= @invoice.id %>: </h3>
 <%= render partial: 'admin/shared/nav' %>
 
-<h5>Invoice Status: <%= @invoice.status %></h5>
+<h5>Invoice Status: </h5>
+<div id='invoice_<%= @invoice.id %>_status'>
+  <%= form_with model: [:admin, @invoice], local: true do |form| %>   
+    <% form.label :status %>
+    <%= form.select :status, options_for_select(['In Progress', 'Cancelled', 'Complete'], @invoice.status.capitalize) %>
+    <%= form.submit 'Update Invoice Status' %>
+  <% end %>
+</div>
+
 <h5>Invoice Created: <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %></h5>
 <h5>Customer Name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></h5>
 <h5>Invoice Total: <%= @invoice.total_invoice_revenue %></h5>
