@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :merchants, except: [:destroy]
-    resources :invoices, only: [:index, :show]
+    resources :invoices, only: [:index, :show, :update]
   end
   
   get '/merchants/:merchant_id/dashboard', to: 'merchants#show'

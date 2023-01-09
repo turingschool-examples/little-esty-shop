@@ -24,7 +24,7 @@ RSpec.describe 'admin invoices show' do
     @invoice_10 = Invoice.create!(status: 1, customer_id: @customer_3.id)
     @invoice_11 = Invoice.create!(status: 1, customer_id: @customer_5.id)
     @invoice_12 = Invoice.create!(status: 1, customer_id: @customer_6.id)
-    @invoice_13 = Invoice.create!(status: 1, customer_id: @customer_6.id)
+    @invoice_13 = Invoice.create!(status: 0, customer_id: @customer_6.id)
 
     @item_1 = Item.create!(name: "Pokemon Cards", description: "Investments", unit_price: 800, merchant_id: @merchant_1.id)
     @item_2 = Item.create!(name: "Pogs", description: "Old school", unit_price: 500, merchant_id: @merchant_2.id)
@@ -77,5 +77,20 @@ RSpec.describe 'admin invoices show' do
     within("#total_revenue") do
       expect(page).to have_content("Total Revenue: #{@invoice_1.calculate_total_revenue}")
     end
+  end
+
+  it 'can update a status for an invoice' do
+    visit admin_invoice_path(@invoice_1)
+  
+    expect(@invoice_1.status).to eq "completed"
+    within ("#invoice_info") do
+      expect(page).to have_content('Status: completed')
+      select "cancelled", :from => "invoice_status"
+      click_on 'Update invoice status'
+      @invoice_1.reload
+    end
+
+    expect(current_path).to eq admin_invoice_path(@invoice_1)
+    expect(@invoice_1.status).to eq "cancelled"
   end
 end
