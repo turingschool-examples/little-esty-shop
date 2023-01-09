@@ -12,10 +12,15 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
+    # require 'pry'; binding.pry
     merchant = Merchant.find(params[:id])
     if merchant.update(merchant_params)
-      redirect_to admin_merchant_path(merchant)
       flash[:alert] = "Successfully updated"
+      if params[:merchant][:name]
+        redirect_to admin_merchant_path(merchant)
+      else
+        redirect_to admin_merchants_path
+      end
     else
       redirect_to edit_admin_merchant_path(merchant)
       flash[:alert] = "Update failed"
@@ -25,6 +30,6 @@ class Admin::MerchantsController < ApplicationController
   private
 
   def merchant_params
-    params.require(:merchant).permit(:name)
+    params.require(:merchant).permit(:name, :status)
   end
 end
