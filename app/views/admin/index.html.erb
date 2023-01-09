@@ -1,20 +1,27 @@
+<% stylesheet_link_tag "admin_dashboard" %>
 <h2>Admin Dashboard</h2>
 <%= link_to "Merchants Index", admin_merchants_path %>
 <%= link_to "Invoices Index", admin_invoices_path %>
 
-<div id="top_5_customers">
-<h3>Top 5 Customers by Successful Transactions:</h3>
-<% @top_5_customers.each.with_index(1) do |customer, i| %>
-  <%= "#{i}. #{customer.first_name} #{customer.last_name}" %>
-  <%= "Successful Transactions: #{customer.successful_transactions_count}" %><br>
-<% end%>
-</div>
-
-<div id="incomplete_invoices">
-<h3>Incomplete Invoice IDs:</h3>
-<% @incomplete_invoices.each do |invoice| %>
-  <div id="invoice_id-<%= invoice.id %>">
-    <%= link_to "#{invoice.id}", admin_invoice_path(invoice.id) %> Created: <%= invoice.created_at.strftime('%A, %B %-d, %Y')%><br>
+<div class="dashboard">
+  <div class="dashboard-left">
+    <div id="top_5_customers">
+      <h3>Top 5 Customers by Successful Transactions:</h3>
+      <% @top_5_customers.each.with_index(1) do |customer, i| %>
+        <%= "#{i}. #{customer.first_name} #{customer.last_name}" %>
+        <%= "Successful Transactions: #{customer.successful_transactions_count}" %><br>
+      <% end%>
+    </div>
   </div>
-<% end %>
+
+  <div class="dashboard-right">
+    <div id="incomplete_invoices">
+      <h3>Incomplete Invoice IDs:</h3>
+      <% @incomplete_invoices.each do |invoice| %>
+        <div id="invoice_id-<%= invoice.id %>">
+          <%= link_to "#{invoice.id}", admin_invoice_path(invoice.id) %> Created: <%= invoice.created_at.strftime('%A, %B %-d, %Y')%><br>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
