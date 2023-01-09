@@ -42,6 +42,7 @@ RSpec.describe 'merchants items index' do
 
   it 'contains sepeartes sections for disabled and enabled items' do
     visit merchant_items_path(1)
+
     i = 1
     merch_items = []
     15.times do 
@@ -75,4 +76,32 @@ RSpec.describe 'merchants items index' do
       expect(page).to have_content(Item.find(4).name)
     end
   end
+
+  it 'has a top items section that lists top 5 items with links by revenue' do
+    visit merchant_items_path(1)
+    item12 = Item.find(12)
+    item5 = Item.find(5)
+    item15 = Item.find(15)
+    item8 = Item.find(8)
+    item6 = Item.find(6)
+
+    expect(page).to have_content("Top Items")
+
+    within("div#top_items")do
+      expect(item12.name).to appear_before(item5.name)
+      expect(item5.name).to appear_before(item15.name)
+      expect(item15.name).to appear_before(item8.name)
+      expect(item8.name).to appear_before(item6.name)
+      expect(page).to have_link(item12.name, href: merchant_item_path(1, 12))
+      expect(page).to have_link(item6.name, href: merchant_item_path(1, 6))
+    end
+    
+    within("li#top-item-#{item12.id}")do
+      expect(page).to have_content("$10,733.62 in sales")
+    end
+    within("li#top-item-#{item6.id}")do
+      expect(page).to have_content("$7,877.77 in sales")
+    end
+  end
 end
+

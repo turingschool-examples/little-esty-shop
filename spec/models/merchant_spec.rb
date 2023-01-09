@@ -80,4 +80,22 @@ RSpec.describe Merchant do
       expect(Merchant.top_5_by_revenue.first.revenue_in_dollars).to eq('$227,757.77')
     end
   end
+
+  describe '#top_5_items' do
+    it 'returns the top 5 items by revenue for a given merchant' do
+      merchant = Merchant.find(1)
+      top_item = Item.find(12)
+      top_5 = merchant.top_5_items
+
+      expect(top_5.length).to eq(5)
+      expect(top_5.first).to eq(top_item)
+      expect(top_5.first.item_revenue).to eq(10733.62)
+
+      top_5.each do |item|
+        expect(item).to be_a Item
+      end
+
+      expect(Merchant.find(10).top_5_items).to eq([])
+    end
+  end
 end
