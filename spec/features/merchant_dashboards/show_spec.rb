@@ -181,4 +181,84 @@ RSpec.describe 'Merchant Dashboard' do
       expect(@customer_2.complete_name).to appear_before(@customer_6.complete_name)
     end
   end
+
+  describe 'US 4- Merchant Dashboard Items Ready to Ship' do
+    before(:each) do
+      Transaction.delete_all
+      InvoiceItem.delete_all
+      Invoice.delete_all
+      Item.delete_all
+      Customer.delete_all
+      Merchant.delete_all
+
+      @merchant_1 = create(:merchant, name: "merchant 1", status: "enabled")
+      @merchant_2 = create(:merchant, name: "merchant 2", status: "disabled")
+      @merchant_3 = create(:merchant, name: "merchant 3", status: "enabled")
+      @merchant_4 = create(:merchant, name: "merchant 4", status: "disabled")
+
+      @customer_1 = create(:customer, first_name: "Customer 1")
+      @customer_2 = create(:customer, first_name: "Customer 2")
+      @customer_3 = create(:customer, first_name: "Customer 3")
+      @customer_4 = create(:customer, first_name: "Customer 4")
+
+      @invoice_1 = create(:invoice, customer: @customer_1)
+      @invoice_2 = create(:invoice, customer: @customer_2)
+      @invoice_3 = create(:invoice, customer: @customer_3)
+      @invoice_4 = create(:invoice, customer: @customer_4)
+      @invoice_5 = create(:invoice, customer: @customer_1)
+      @invoice_6 = create(:invoice, customer: @customer_2)
+      @invoice_7 = create(:invoice, customer: @customer_3)
+      @invoice_8 = create(:invoice, customer: @customer_4)
+
+      @item_1 = create(:item, merchant: @merchant_1, name: "plane 1")
+      @item_2 = create(:item, merchant: @merchant_2, name: "plane 2")
+      @item_3 = create(:item, merchant: @merchant_3, name: "plane 3")
+      @item_4 = create(:item, merchant: @merchant_4, name: "plane 4")
+      @item_5 = create(:item, merchant: @merchant_1, name: "plane 5")
+      @item_6 = create(:item, merchant: @merchant_2, name: "plane 6")
+      @item_7 = create(:item, merchant: @merchant_3, name: "plane 7")
+      @item_8 = create(:item, merchant: @merchant_4, name: "plane 8")
+
+      @invoice_item_1 = create(:invoice_item, unit_price: 1000, quantity: 1, item: @item_1, invoice: @invoice_1, status: "pending")
+      @invoice_item_2 = create(:invoice_item, unit_price: 900, quantity: 1, item: @item_2, invoice: @invoice_2, status: "pending")
+      @invoice_item_3 = create(:invoice_item, unit_price: 800, quantity: 1, item: @item_3, invoice: @invoice_3, status: "packaged")
+      @invoice_item_4 = create(:invoice_item, unit_price: 700, quantity: 1, item: @item_4, invoice: @invoice_4, status: "packaged")
+      @invoice_item_5 = create(:invoice_item, unit_price: 600, quantity: 1, item: @item_5, invoice: @invoice_5, status: "shipped")
+      @invoice_item_6 = create(:invoice_item, unit_price: 500, quantity: 1, item: @item_6, invoice: @invoice_6, status: "pending")
+      @invoice_item_7 = create(:invoice_item, unit_price: 400, quantity: 1, item: @item_7, invoice: @invoice_7, status: "packaged")
+      @invoice_item_8 = create(:invoice_item, unit_price: 300, quantity: 1, item: @item_8, invoice: @invoice_8, status: "shipped")
+      @invoice_item_9 = create(:invoice_item, unit_price: 200, quantity: 1, item: @item_5, invoice: @invoice_2, status: "pending")
+      @invoice_item_10 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_5, invoice: @invoice_1, status: "shipped")
+      @invoice_item_11 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_8, status: "pending")
+      @invoice_item_12 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_5, status: "shipped")
+      @invoice_item_13 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_5, invoice: @invoice_5, status: "pending")
+      @invoice_item_14 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_7, status: "packaged")
+      @invoice_item_15 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_4, status: "packaged")
+      @invoice_item_16 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_8, status: "shipped")
+    
+      visit merchants_merchantid_dashboard_path(@merchant_1)
+    end
+
+    describe "a section for 'Items Ready to Ship'" do
+      describe "lists all the ordered items and have not yet been shipped" do
+        describe "displays the invoice id of the ordered item next to the items" do
+          it "links to the merchant invoice show page when user click the invoice id link" do
+            expect(page).to have_content("Items Ready to Ship")
+
+            within("#ready_to_ship-#{@invoice_1.id}")do
+              expect(page).to have_content("#{@item_1.name}")
+              expect(page).to_not have_content(@invoice_7.id)
+              expect(page).to have_content(@invoice_1.id)
+              expect(page).to have_link(@invoice_1.id)
+              click_link (@invoice_1.id)
+            end
+            expect(current_path).to_not eq(merchants_merchantid_dashboard_path(@merchant_1))
+            expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+          end
+        end
+      end
+    end
+
+
+  end
 end

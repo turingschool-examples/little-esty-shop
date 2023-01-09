@@ -13,3 +13,11 @@
     Transaction Count: <%= customer.trans_count %></h5></li>
   </div>
 <% end %>
+
+    <h3>Items Ready to Ship</h3>
+<% @all_merchant_unshipped_items.each do |item_name, invoice_id| %>
+  <div id="ready_to_ship-<%=invoice_id %>">
+    <li><h5> Item Name: <%=item_name%>&nbsp - &nbsp
+    Item Invoice: <%=link_to invoice_id, "/merchants/#{@merchant.id}/invoices/#{invoice_id}" %></h5></li>
+  </div>
+<% end %>

@@ -56,4 +56,13 @@ class Merchant < ApplicationRecord
         .select('invoices.*')
         .sum('invoice_items.quantity * invoice_items.unit_price')
   end
+
+  def unshipped_items
+    self.items.joins(invoices: [invoice_items: :merchant])
+    .where("invoice_items.status != 2 AND merchants.id = ?", self.id)
+    .select("invoice_items.status AS shipping_status, items.name, invoice_items.invoice_id AS inv_num")
+    .group("items.id, merchants.id, invoice_items.invoice_id, invoice_items.status")
+    .pluck("items.name, invoice_items.invoice_id")
+  end 
+
 end

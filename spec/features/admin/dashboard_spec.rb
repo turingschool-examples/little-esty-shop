@@ -199,7 +199,7 @@ RSpec.describe 'admin dashboard' do
     result = Invoice.joins(:invoice_items).where.not(invoice_items: {status: "shipped"}).pluck(:id)
     
     visit admin_index_path
-
+# save_and_open_page
     within "#incomplete_invoices" do
       expect(page).to have_content("Incomplete Invoice IDs:")
       expect(page).to have_content(@invoice2.id)
