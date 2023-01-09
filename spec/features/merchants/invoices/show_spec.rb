@@ -58,13 +58,13 @@ RSpec.describe 'Merchant invoice show page' do
 
 
     visit "merchant/#{@merchant1.id}/invoices/#{@invoice1.id}"
-    save_and_open_page
     expect(page).to have_content("Total Revenue: 175")
-
+    
     #calculation
-
+    
     #start from invoice
     #items, invoiceitems
-    end
   end
+end
+
 end
