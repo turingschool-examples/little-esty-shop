@@ -32,7 +32,7 @@ RSpec.describe "admin invoice #show" do
 
     @ii4 = InvoiceItem.create!(quantity: 5, unit_price: @item4.unit_price, item_id: @item4.id, invoice_id: @invoice4.id)
   end
-  describe "story 30" do
+  describe "story 35" do
     # As an admin
     # When I visit an admin invoice show page
     # Then I see the total revenue that will be generated from this invoice
@@ -43,7 +43,38 @@ RSpec.describe "admin invoice #show" do
       
       expect(page).to have_content(400)
     end
+  end
+  
+  describe 'story 33' do
+    #     As an admin,
+    # When I visit an admin invoice show page
+    # Then I see information related to that invoice including:
+    # - Invoice id
+    # - Invoice status
+    # - Invoice created_at date in the format "Monday, July 18, 2019"
+    # - Customer first and last name
+    it 'shows the invoice id' do
+      visit "admin/invoices/#{@invoice1.id}"
+      
+      expect(page).to have_content(@invoice1.id)
+    end
+    it 'shows the invoice status' do
+      visit "admin/invoices/#{@invoice1.id}"
+
+      expect(page).to have_content(@invoice1.status)
+    end
     
-    
+    it 'shows the invoice created_at date' do
+      visit "admin/invoices/#{@invoice1.id}"
+  
+      expect(page).to have_content(@invoice1.created_at)
+    end
+    it 'shows the invoice customer first and last name' do
+      visit "admin/invoices/#{@invoice1.id}"
+
+      expect(page).to have_content(@customer1.first_name)
+      expect(page).to have_content(@customer1.last_name)
+    end
+
   end
 end
