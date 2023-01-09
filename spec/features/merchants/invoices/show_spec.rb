@@ -33,6 +33,7 @@ RSpec.describe 'Merchant invoice show page' do
 
     @ii1 = InvoiceItem.create!(quantity: 5, unit_price: @item1.unit_price, item_id: @item1.id, invoice_id: @invoice1.id)
     @ii2 = InvoiceItem.create!(quantity: 5, unit_price: @item2.unit_price, item_id: @item2.id, invoice_id: @invoice2.id)
+    @ii3 = InvoiceItem.create!(quantity: 5, unit_price: @item3.unit_price, item_id: @item3.id, invoice_id: @invoice3.id)
     @ii4 = InvoiceItem.create!(quantity: 5, unit_price: @item4.unit_price, item_id: @item4.id, invoice_id: @invoice4.id)
   end
   it 'lists invoices attributes' do
@@ -44,4 +45,26 @@ RSpec.describe 'Merchant invoice show page' do
     expect(page).to have_content(@customer1.first_name)
     expect(page).to have_content(@customer1.last_name)
   end
+  describe "total revenue (userstory 17)" do
+    it "As a merchant
+    When I visit my merchant invoice show page
+    Then I see the total revenue that will be generated from all of my items on the invoice" do
+
+    item5 = @merchant1.items.create!(name: 'food1', description: "a", unit_price: 10)
+    item6 = @merchant1.items.create!(name: 'food2', description: "b", unit_price: 5)
+
+    ii5 = InvoiceItem.create!(quantity: 5, unit_price: 10, item_id: item5.id, invoice_id: @invoice1.id)
+    ii6 = InvoiceItem.create!(quantity: 5, unit_price: 5, item_id: item6.id, invoice_id: @invoice1.id)
+
+
+    visit "merchant/#{@merchant1.id}/invoices/#{@invoice1.id}"
+    expect(page).to have_content("Total Revenue: 175")
+    
+    #calculation
+    
+    #start from invoice
+    #items, invoiceitems
+  end
+end
+
 end
