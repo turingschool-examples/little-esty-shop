@@ -48,4 +48,8 @@ class Merchant < ApplicationRecord
     .order(total_revenue: :desc)
     .limit(5)
   end
+
+  def top_5_items
+    require 'pry'; binding.pry
+  end
 end
