@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Merchant do
   describe 'Relationships' do
-    it {should have_many :items}
-    it {should validate_presence_of :name}
+    it { should have_many :items }
+    it { should validate_presence_of :name }
   end
 
   describe '#top_five_customers' do
@@ -43,7 +43,8 @@ RSpec.describe Merchant do
 
   describe '#top_5_by_revenue' do
     it 'returns the top 5 merchants by revenue' do
-      expect(Merchant.top_5_by_revenue).to eq([Merchant.find(8), Merchant.find(2), Merchant.find(7), Merchant.find(3), Merchant.find(4)])
+      expect(Merchant.top_5_by_revenue).to eq([Merchant.find(8), Merchant.find(2), Merchant.find(7), Merchant.find(3),
+                                               Merchant.find(4)])
     end
   end
 
@@ -61,14 +62,16 @@ RSpec.describe Merchant do
     it 'returns all of a merchants disabled items' do
       merchant = Merchant.find(1)
       expect(merchant.get_disabled_items.length).to eq(0)
-      item_1 = merchant.items.create!(name: "bob", description: "very good at things", unit_price: 9999, enabled: false)
-      item_2 = merchant.items.create!(name: "bob2", description: "very better at things", unit_price: 99999, enabled: false)
-      item_3 = merchant.items.create!(name: "bob3", description: "very best at things", unit_price: 99999, enabled: false)
-      item_4 = merchant.items.create!(name: "bob4", description: "very okay at things", unit_price: 999, enabled: false)
+      item_1 = merchant.items.create!(name: 'bob', description: 'very good at things', unit_price: 9999, enabled: false)
+      item_2 = merchant.items.create!(name: 'bob2', description: 'very better at things', unit_price: 99_999,
+                                      enabled: false)
+      item_3 = merchant.items.create!(name: 'bob3', description: 'very best at things', unit_price: 99_999,
+                                      enabled: false)
+      item_4 = merchant.items.create!(name: 'bob4', description: 'very okay at things', unit_price: 999, enabled: false)
       expect(merchant.get_disabled_items).to eq([item_1, item_2, item_3, item_4])
     end
   end
-  
+
   describe '#best_day_by_revenue' do
     it 'returns the best day by revenue for a given merchant' do
       expect(Merchant.find(8).best_day_by_revenue).to eq('3/13/2012')
@@ -89,15 +92,15 @@ RSpec.describe Merchant do
 
       expect(top_5.length).to eq(5)
       expect(top_5.first).to eq(top_item)
-      expect(top_5.first.item_revenue).to eq(10733.62)
+      expect(top_5.first.item_revenue).to eq(10_733.62)
 
       top_5.each do |item|
         expect(item).to be_a Item
       end
 
       expect(Merchant.find(10).top_5_items).to eq([])
-      Merchant.find(10).items.create!(name: 'FlexTape', description: "Seals things", unit_price: 2499)
-      Merchant.find(10).items.create!(name: 'FlexyTape', description: "Seals things", unit_price: 1499)
+      Merchant.find(10).items.create!(name: 'FlexTape', description: 'Seals things', unit_price: 2499)
+      Merchant.find(10).items.create!(name: 'FlexyTape', description: 'Seals things', unit_price: 1499)
       expect(Merchant.find(10).top_5_items).to eq([])
     end
   end

@@ -27,9 +27,9 @@ RSpec.describe 'Admin Invoice Show' do
     expect(page).to have_content('Invoice Total: $21,067.77')
   end
 
-  it 'Has a select field to update the invoice status' do   
+  it 'Has a select field to update the invoice status' do
     invoice_1 = Invoice.first
-    
+
     visit admin_invoice_path(invoice_1.id)
 
     expect(invoice_1.status).to eq('cancelled')
@@ -37,7 +37,7 @@ RSpec.describe 'Admin Invoice Show' do
     within "#invoice_#{invoice_1.id}_status" do
       expect(page).to have_select('invoice[status]', selected: 'Cancelled')
       select('In Progress', from: 'invoice[status]')
-      click_button "Update Invoice Status"
+      click_button 'Update Invoice Status'
     end
   end
 end

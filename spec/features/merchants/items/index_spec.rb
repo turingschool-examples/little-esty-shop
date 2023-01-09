@@ -20,23 +20,23 @@ RSpec.describe 'merchants items index' do
     visit merchant_items_path(1)
 
     within "div#item-#{item.id}" do
-      expect(page).to have_button("Disable")
-      click_button "Disable"
+      expect(page).to have_button('Disable')
+      click_button 'Disable'
     end
 
     item = Item.find(10)
     expect(current_path).to eq(merchant_items_path(1))
 
     within "div#item-#{item.id}" do
-      expect(page).to have_button("Enable")
-      click_button "Enable"
+      expect(page).to have_button('Enable')
+      click_button 'Enable'
     end
 
     item = Item.find(10)
     expect(current_path).to eq(merchant_items_path(1))
 
     within "div#item-#{item.id}" do
-      expect(page).to have_button("Disable")
+      expect(page).to have_button('Disable')
     end
   end
 
@@ -45,31 +45,31 @@ RSpec.describe 'merchants items index' do
 
     i = 1
     merch_items = []
-    15.times do 
+    15.times do
       merch_items << Item.find(i)
       i += 1
     end
 
-    within "div#enabled" do
+    within 'div#enabled' do
       merch_items.each do |item|
         expect(page).to have_content(item.name)
       end
     end
 
-    within "div#item-1" do
-      click_button "Disable"
+    within 'div#item-1' do
+      click_button 'Disable'
     end
-    within "div#item-2" do
-      click_button "Disable"
+    within 'div#item-2' do
+      click_button 'Disable'
     end
-    within "div#item-3" do
-      click_button "Disable"
+    within 'div#item-3' do
+      click_button 'Disable'
     end
-    within "div#item-4" do
-      click_button "Disable"
+    within 'div#item-4' do
+      click_button 'Disable'
     end
 
-    within "div#disabled" do
+    within 'div#disabled' do
       expect(page).to have_content(Item.find(1).name)
       expect(page).to have_content(Item.find(2).name)
       expect(page).to have_content(Item.find(3).name)
@@ -85,9 +85,9 @@ RSpec.describe 'merchants items index' do
     item8 = Item.find(8)
     item6 = Item.find(6)
 
-    expect(page).to have_content("Top Items")
+    expect(page).to have_content('Top Items')
 
-    within("div#top_items")do
+    within('div#top_items') do
       expect(item12.name).to appear_before(item5.name)
       expect(item5.name).to appear_before(item15.name)
       expect(item15.name).to appear_before(item8.name)
@@ -95,12 +95,12 @@ RSpec.describe 'merchants items index' do
       expect(page).to have_link(item12.name, href: merchant_item_path(1, 12))
       expect(page).to have_link(item6.name, href: merchant_item_path(1, 6))
     end
-    
-    within("li#top-item-#{item12.id}")do
-      expect(page).to have_content("$10,733.62 in sales")
+
+    within("li#top-item-#{item12.id}") do
+      expect(page).to have_content('$10,733.62 in sales')
     end
-    within("li#top-item-#{item6.id}")do
-      expect(page).to have_content("$7,877.77 in sales")
+    within("li#top-item-#{item6.id}") do
+      expect(page).to have_content('$7,877.77 in sales')
     end
   end
 
@@ -110,13 +110,12 @@ RSpec.describe 'merchants items index' do
 
     visit merchant_items_path(1)
 
-    within("li#top-item-#{item12.id}")do
+    within("li#top-item-#{item12.id}") do
       expect(page).to have_content("Top day for #{item12.name} was #{item12.best_day_by_revenue}")
     end
 
-    within("li#top-item-#{item6.id}")do
+    within("li#top-item-#{item6.id}") do
       expect(page).to have_content("Top day for #{item6.name} was #{item6.best_day_by_revenue}")
     end
   end
 end
-

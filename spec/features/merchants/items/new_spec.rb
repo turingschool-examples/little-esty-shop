@@ -4,8 +4,8 @@ RSpec.describe 'Item creation' do
   it 'from the index page a link leads to a form that will create a new item and redirect back to the index page' do
     visit merchant_items_path(1)
 
-    expect(page).to have_link("New Item", href: new_merchant_item_path(1))
-    click_link("New Item")
+    expect(page).to have_link('New Item', href: new_merchant_item_path(1))
+    click_link('New Item')
 
     expect(current_path).to eq(new_merchant_item_path(1))
     fill_in 'item[name]', with: 'New item name'

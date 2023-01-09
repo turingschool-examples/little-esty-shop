@@ -12,6 +12,6 @@ class Invoice < ApplicationRecord
   end
 
   def total_invoice_revenue
-    number_to_currency(invoice_items.sum('invoice_items.quantity * invoice_items.unit_price')/100.0)
+    number_to_currency(invoice_items.sum('invoice_items.quantity * invoice_items.unit_price') / 100.0)
   end
 end

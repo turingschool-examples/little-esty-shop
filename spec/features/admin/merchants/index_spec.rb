@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Merchants index' do
-
   it 'Displays the name of each merchant' do
     visit admin_merchants_path
 
@@ -46,11 +45,11 @@ RSpec.describe 'Admin Merchants index' do
   it 'Displays merchants by enabled true/false' do
     visit admin_merchants_path
 
-    within "#enabled_merchants" do
+    within '#enabled_merchants' do
       expect(page).to have_content(Merchant.first.name)
     end
 
-    within "#disabled_merchants" do
+    within '#disabled_merchants' do
       expect(page).to_not have_content(Merchant.first.name)
     end
 
@@ -58,11 +57,11 @@ RSpec.describe 'Admin Merchants index' do
       click_button 'Disable'
     end
 
-    within "#disabled_merchants" do
+    within '#disabled_merchants' do
       expect(page).to have_content(Merchant.first.name)
     end
 
-    within "#enabled_merchants" do
+    within '#enabled_merchants' do
       expect(page).to_not have_content(Merchant.first.name)
     end
 
@@ -70,7 +69,7 @@ RSpec.describe 'Admin Merchants index' do
       click_button 'Enable'
     end
 
-    within "#enabled_merchants" do
+    within '#enabled_merchants' do
       expect(page).to have_content(Merchant.first.name)
     end
   end
@@ -78,7 +77,7 @@ RSpec.describe 'Admin Merchants index' do
   it 'Shows the top 5 merchants by revenue' do
     visit admin_merchants_path
 
-    within("#top_by_revenue") do
+    within('#top_by_revenue') do
       expect('Osinski, Pollich and Koelpin').to appear_before('Klein, Rempel and Jones')
       expect('Klein, Rempel and Jones').to appear_before('Bernhard-Johns')
       expect('Bernhard-Johns').to appear_before('Willms and Sons')
