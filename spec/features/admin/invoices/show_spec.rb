@@ -24,7 +24,7 @@ RSpec.describe 'Admin Invoice Show' do
 
   it 'Displays the total revenue for the invoice' do
     visit admin_invoice_path(Invoice.first.id)
-save_and_open_page
+
     expect(page).to have_content('Invoice Total: $21,067.77')
   end
 end
