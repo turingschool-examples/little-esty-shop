@@ -55,9 +55,12 @@ class Merchant < ApplicationRecord
   end
 
   def top_5_items
-    invoice_items.joins(:transactions).distinct
-                 .where(transactions: {result: 'success'})
-                 .group(:item_id)
-                 .sum('invoice_items.quantity * invoice_items.unit_price')
+    items.select('items.*, sum(distinct invoice_items.unit_price * invoice_items.quantity / 100.00) as item_revenue')
+         .joins(:invoice_items, :transactions)
+         .where(transactions: {result: 'success'})
+         .group(:id)
+         .order('item_revenue desc')
+         .distinct
+         .limit(5)
   end
 end
