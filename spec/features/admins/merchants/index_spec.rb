@@ -16,19 +16,19 @@ RSpec.describe 'admin merchants index' do
     @customer_5 = Customer.create!(first_name: "Mark", last_name: "Bologna")
     @customer_6 = Customer.create!(first_name: "Anthony", last_name: "Tall")
 
-    @invoice_1 = Invoice.create!(status: 1, customer_id: @customer_1.id)
-    @invoice_2 = Invoice.create!(status: 1, customer_id: @customer_2.id)
-    @invoice_3 = Invoice.create!(status: 1, customer_id: @customer_3.id)
-    @invoice_4 = Invoice.create!(status: 1, customer_id: @customer_4.id)
-    @invoice_5 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_6 = Invoice.create!(status: 1, customer_id: @customer_1.id)
-    @invoice_7 = Invoice.create!(status: 1, customer_id: @customer_1.id)
-    @invoice_8 = Invoice.create!(status: 1, customer_id: @customer_2.id)
-    @invoice_9 = Invoice.create!(status: 1, customer_id: @customer_2.id)
-    @invoice_10 = Invoice.create!(status: 1, customer_id: @customer_3.id)
-    @invoice_11 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_12 = Invoice.create!(status: 1, customer_id: @customer_6.id)
-    @invoice_13 = Invoice.create!(status: 1, customer_id: @customer_6.id)
+    @invoice_1 = Invoice.create!(status: 1, customer_id: @customer_1.id, created_at: '2001-01-01 00:00:00')
+    @invoice_2 = Invoice.create!(status: 1, customer_id: @customer_2.id, created_at: '2002-01-01 00:00:00')
+    @invoice_3 = Invoice.create!(status: 1, customer_id: @customer_3.id, created_at: '2003-01-01 00:00:00')
+    @invoice_4 = Invoice.create!(status: 1, customer_id: @customer_4.id, created_at: '2004-01-01 00:00:00')
+    @invoice_5 = Invoice.create!(status: 1, customer_id: @customer_5.id, created_at: '2005-01-01 00:00:00')
+    @invoice_6 = Invoice.create!(status: 1, customer_id: @customer_1.id, created_at: '2006-01-01 00:00:00')
+    @invoice_7 = Invoice.create!(status: 1, customer_id: @customer_1.id, created_at: '2007-01-01 00:00:00')
+    @invoice_8 = Invoice.create!(status: 1, customer_id: @customer_2.id, created_at: '2008-01-01 00:00:00')
+    @invoice_9 = Invoice.create!(status: 1, customer_id: @customer_2.id, created_at: '2009-01-01 00:00:00')
+    @invoice_10 = Invoice.create!(status: 1, customer_id: @customer_3.id, created_at: '2010-01-01 00:00:00')
+    @invoice_11 = Invoice.create!(status: 1, customer_id: @customer_5.id, created_at: '2011-01-01 00:00:00')
+    @invoice_12 = Invoice.create!(status: 1, customer_id: @customer_6.id, created_at: '2012-01-01 00:00:00')
+    @invoice_13 = Invoice.create!(status: 1, customer_id: @customer_6.id, created_at: '2013-01-01 00:00:00')
 
     @item_1 = Item.create!(name: "Pokemon Cards", description: "Investments", unit_price: 800, merchant_id: @merchant_1.id)
     @item_2 = Item.create!(name: "Pogs", description: "Old school", unit_price: 500, merchant_id: @merchant_2.id)
@@ -140,6 +140,18 @@ RSpec.describe 'admin merchants index' do
       expect(page).to have_content(12500)
       expect(page).to have_content(3200)
       expect(page).to have_content(800)
+    end
+  end
+
+  it 'displays the top selling date for each of the top 5 merchants' do
+    visit admin_merchants_path
+
+    within("#top_five_merchants") do
+      expect(page).to have_content("Top selling date was: #{@merchant_1.top_selling_date.strftime("%m/%d/%y")}")
+      expect(page).to have_content("Top selling date was: #{@merchant_2.top_selling_date.strftime("%m/%d/%y")}")
+      expect(page).to have_content("Top selling date was: #{@merchant_3.top_selling_date.strftime("%m/%d/%y")}")
+      expect(page).to have_content("Top selling date was: #{@merchant_4.top_selling_date.strftime("%m/%d/%y")}")
+      expect(page).to have_content("Top selling date was: #{@merchant_6.top_selling_date.strftime("%m/%d/%y")}")
     end
   end
 end
