@@ -4,7 +4,6 @@ RSpec.describe 'merchant item edit page' do
   it 'has a form that is prepopulated with existing item attribute info' do
     visit edit_merchant_item_path(1, 10)
     item = Item.find(10)
-    # save_and_open_page
 
     expect(page).to have_field('item[name]', with: item.name)
     expect(page).to have_field('item[current_price]', with: item.unit_price_to_dollars)
