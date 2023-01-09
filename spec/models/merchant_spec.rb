@@ -87,30 +87,30 @@ RSpec.describe Merchant, type: :model do
     @customer_7 = Customer.create!(first_name: "Donald", last_name: "Duck")
     @customer_8 = Customer.create!(first_name: "Goofy", last_name: "Dog")
 
-    @invoice_1 = Invoice.create!(status: 1, customer_id: @customer_1.id)
-    @invoice_2 = Invoice.create!(status: 1, customer_id: @customer_2.id)
-    @invoice_3 = Invoice.create!(status: 1, customer_id: @customer_3.id)
-    @invoice_4 = Invoice.create!(status: 1, customer_id: @customer_4.id)
-    @invoice_5 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_6 = Invoice.create!(status: 1, customer_id: @customer_6.id)
-    @invoice_7 = Invoice.create!(status: 1, customer_id: @customer_7.id)
-    @invoice_8 = Invoice.create!(status: 1, customer_id: @customer_1.id)
-    @invoice_9 = Invoice.create!(status: 1, customer_id: @customer_2.id)
-    @invoice_10 = Invoice.create!(status: 1, customer_id: @customer_2.id)
-    @invoice_11 = Invoice.create!(status: 1, customer_id: @customer_3.id)
-    @invoice_12 = Invoice.create!(status: 1, customer_id: @customer_4.id)
-    @invoice_13 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_14 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_15 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_16 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_17 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_18 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_19 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_20 = Invoice.create!(status: 1, customer_id: @customer_8.id)
-    @invoice_21 = Invoice.create!(status: 1, customer_id: @customer_8.id)
-    @invoice_22 = Invoice.create!(status: 1, customer_id: @customer_8.id)
-    @invoice_23 = Invoice.create!(status: 1, customer_id: @customer_8.id)
-    @invoice_24 = Invoice.create!(status: 1, customer_id: @customer_8.id)
+    @invoice_1 = Invoice.create!(status: 1, customer_id: @customer_1.id, created_at: '2001-01-01 00:00:00')
+    @invoice_2 = Invoice.create!(status: 1, customer_id: @customer_2.id, created_at: '2002-01-01 00:00:00')
+    @invoice_3 = Invoice.create!(status: 1, customer_id: @customer_3.id, created_at: '2003-01-01 00:00:00')
+    @invoice_4 = Invoice.create!(status: 1, customer_id: @customer_4.id, created_at: '2004-01-01 00:00:00')
+    @invoice_5 = Invoice.create!(status: 1, customer_id: @customer_5.id, created_at: '2005-01-01 00:00:00')
+    @invoice_6 = Invoice.create!(status: 1, customer_id: @customer_6.id, created_at: '2006-01-01 00:00:00')
+    @invoice_7 = Invoice.create!(status: 1, customer_id: @customer_7.id, created_at: '2007-01-01 00:00:00')
+    @invoice_8 = Invoice.create!(status: 1, customer_id: @customer_1.id, created_at: '2008-01-01 00:00:00')
+    @invoice_9 = Invoice.create!(status: 1, customer_id: @customer_2.id, created_at: '2009-01-01 00:00:00')
+    @invoice_10 = Invoice.create!(status: 1, customer_id: @customer_2.id, created_at: '2010-01-01 00:00:00')
+    @invoice_11 = Invoice.create!(status: 1, customer_id: @customer_3.id, created_at: '2011-01-01 00:00:00')
+    @invoice_12 = Invoice.create!(status: 1, customer_id: @customer_4.id, created_at: '2012-01-01 00:00:00')
+    @invoice_13 = Invoice.create!(status: 1, customer_id: @customer_5.id, created_at: '2013-01-01 00:00:00')
+    @invoice_14 = Invoice.create!(status: 1, customer_id: @customer_5.id, created_at: '2014-01-01 00:00:00')
+    @invoice_15 = Invoice.create!(status: 1, customer_id: @customer_5.id, created_at: '2015-01-01 00:00:00')
+    @invoice_16 = Invoice.create!(status: 1, customer_id: @customer_5.id, created_at: '2016-01-01 00:00:00')
+    @invoice_17 = Invoice.create!(status: 1, customer_id: @customer_5.id, created_at: '2017-01-01 00:00:00')
+    @invoice_18 = Invoice.create!(status: 1, customer_id: @customer_5.id, created_at: '2018-01-01 00:00:00')
+    @invoice_19 = Invoice.create!(status: 1, customer_id: @customer_5.id, created_at: '2019-01-01 00:00:00')
+    @invoice_20 = Invoice.create!(status: 1, customer_id: @customer_8.id, created_at: '2020-01-01 00:00:00')
+    @invoice_21 = Invoice.create!(status: 1, customer_id: @customer_8.id, created_at: '2021-01-01 00:00:00')
+    @invoice_22 = Invoice.create!(status: 1, customer_id: @customer_8.id, created_at: '2022-01-01 00:00:00')
+    @invoice_23 = Invoice.create!(status: 1, customer_id: @customer_8.id, created_at: '2023-01-01 00:00:00')
+    @invoice_24 = Invoice.create!(status: 1, customer_id: @customer_8.id, created_at: '1999-01-01 00:00:00')
 
     @item_1 = Item.create!(name: "Pokemon Cards", description: "Investments", unit_price: 800, merchant_id: @merchant_1.id)
     @item_2 = Item.create!(name: "Pogs", description: "Old school", unit_price: 500, merchant_id: @merchant_2.id)
@@ -207,6 +207,11 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
+    describe '#top_selling_date' do
+      it ' returns the date where the merchant had the best sales' do
+        expect(@merchant_1.top_selling_date).to eq("2010-01-01 00:00:00 UTC")
+      end
+    end
   end
 
 
