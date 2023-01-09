@@ -96,6 +96,9 @@ RSpec.describe Merchant do
       end
 
       expect(Merchant.find(10).top_5_items).to eq([])
+      Merchant.find(10).items.create!(name: 'FlexTape', description: "Seals things", unit_price: 2499)
+      Merchant.find(10).items.create!(name: 'FlexyTape', description: "Seals things", unit_price: 1499)
+      expect(Merchant.find(10).top_5_items).to eq([])
     end
   end
 end
