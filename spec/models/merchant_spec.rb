@@ -13,63 +13,6 @@ RSpec.describe Merchant, type: :model do
     it { should validate_presence_of :name }
   end
 
-  # describe 'Class Methods' do
-  #   it 'returns the top 5 merchants' do
-  #     # merchant_1 = Merchant.create!(name: "Billy the Guy", status: "enabled")
-  #     # merchant_2 = Merchant.create!(name: "Different Guy")
-  #     # merchant_3 = Merchant.create!(name: "Christian")
-  #     # merchant_4 = Merchant.create!(name: "Braxton")
-  #     # merchant_5 = Merchant.create!(name: "Alastair")
-  #     # merchant_6 = Merchant.create!(name: "Anthony")
-
-  #     # customer_1 = Customer.create!(first_name: "Steve", last_name: "Martin")
-  #     # customer_2 = Customer.create!(first_name: "Tony", last_name: "Stark")
-  #     # customer_3 = Customer.create!(first_name: "Henry", last_name: "Ford")
-  #     # customer_4 = Customer.create!(first_name: "Randy", last_name: "Pepperoni")
-  #     # customer_5 = Customer.create!(first_name: "Mark", last_name: "Bologna")
-  #     # customer_6 = Customer.create!(first_name: "Anthony", last_name: "Tall")
-
-  #     # invoice_1 = Invoice.create!(status: 1, customer_id: customer_1.id)
-  #     # invoice_2 = Invoice.create!(status: 1, customer_id: customer_2.id)
-  #     # invoice_3 = Invoice.create!(status: 1, customer_id: customer_3.id)
-  #     # invoice_4 = Invoice.create!(status: 1, customer_id: customer_4.id)
-  #     # invoice_5 = Invoice.create!(status: 1, customer_id: customer_5.id)
-  #     # invoice_6 = Invoice.create!(status: 1, customer_id: customer_1.id)
-  #     # invoice_7 = Invoice.create!(status: 1, customer_id: customer_1.id)
-  #     # invoice_8 = Invoice.create!(status: 1, customer_id: customer_2.id)
-  #     # invoice_9 = Invoice.create!(status: 1, customer_id: customer_2.id)
-  #     # invoice_10 = Invoice.create!(status: 1, customer_id: customer_3.id)
-  #     # invoice_11 = Invoice.create!(status: 1, customer_id: customer_5.id)
-  #     # invoice_12 = Invoice.create!(status: 1, customer_id: customer_6.id)
-  #     # invoice_13 = Invoice.create!(status: 1, customer_id: customer_6.id)
-
-  #     # item_1 = Item.create!(name: "Pokemon Cards", description: "Investments", unit_price: 800, merchant_id: merchant_1.id)
-  #     # item_2 = Item.create!(name: "Pogs", description: "Old school", unit_price: 500, merchant_id: merchant_2.id)
-  #     # item_3 = Item.create!(name: "Digimon Cards", description: "What are these again?", unit_price: 300, merchant_id: merchant_3.id, status: 1)
-  #     # item_4 = Item.create!(name: "Magic 8 Ball", description: "Fortune Telling", unit_price: 2000, merchant_id: merchant_4.id, status: 1)
-  #     # item_5 = Item.create!(name: "Stretch Armstrong", description: "Stretchy", unit_price: 100, merchant_id: merchant_5.id, status: 1)
-  #     # item_6 = Item.create!(name: "Yu-Gi-Oh Cards", description: "It's time to duel", unit_price: 1000, merchant_id: merchant_6.id, status: 1)
-
-  #     # InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: item_1.id, invoice_id: invoice_1.id) # 20000
-  #     # InvoiceItem.create!(quantity: 1, unit_price: 800, status: "shipped", item_id: item_2.id, invoice_id: invoice_2.id) # 800
-  #     # InvoiceItem.create!(quantity: 2, unit_price: 1600, status: "pending", item_id: item_3.id, invoice_id: invoice_3.id) # 3200
-  #     # InvoiceItem.create!(quantity: 10, unit_price: 8000, status: "shipped", item_id: item_4.id, invoice_id: invoice_4.id) # 80000
-  #     # InvoiceItem.create!(quantity: 1, unit_price: 500, status: "shipped", item_id: item_5.id, invoice_id: invoice_5.id) # 500
-  #     # InvoiceItem.create!(quantity: 5, unit_price: 2500, status: "shipped", item_id: item_6.id, invoice_id: invoice_6.id) # 12500
-      
-      # transaction_1 = Transaction.create!(credit_card_number: "4654405418249633", credit_card_expiration_date: nil, result: "success", invoice_id: invoice_1.id)
-      # transaction_2 = Transaction.create!(credit_card_number: "4654405418249635", credit_card_expiration_date: nil, result: "success", invoice_id: invoice_2.id)
-      # transaction_3 = Transaction.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: nil, result: "success", invoice_id: invoice_3.id)
-      # transaction_4 = Transaction.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: nil, result: "success", invoice_id: invoice_4.id)
-      # transaction_5 = Transaction.create!(credit_card_number: "4654405418249638", credit_card_expiration_date: nil, result: "success", invoice_id: invoice_5.id)
-      # transaction_6 = Transaction.create!(credit_card_number: "4654405418249639", credit_card_expiration_date: nil, result: "success", invoice_id: invoice_6.id)
-
-  #     expect(Merchant.top_five_merchants).to eq([@merchant_4, @merchant_1, @merchant_6, @merchant_3, @merchant_2])
-  #     expect(Merchant.top_five_merchants).to_not include(@merchant_5)
-  #   end
-  # end
-
-
   before :each do
     @merchant_1 = Merchant.create!(name: "Billy the Guy")
     @merchant_2 = Merchant.create!(name: "Different Guy")
