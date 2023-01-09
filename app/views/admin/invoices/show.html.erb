@@ -18,3 +18,12 @@
 <div id='total_revenue'>
 <p> Total Revenue: <%= @invoice.calculate_total_revenue%></p>
 </div>
+<div id='invoice_info'>
+<h2> Invoice Status </h2>
+<p> Invoice Status: <%=@invoice.status %></p>
+<p> Update invoice status:</p>
+<%= form_with model: [:admin, @invoice], url: admin_invoice_path(@invoice), local: true do |form|%>
+<%= form.select(:status, ['cancelled', 'in progress', 'completed'], :selected => @invoice.status) %>
+<%= form.submit 'Update invoice status'%>
+<% end %>
+</div>
