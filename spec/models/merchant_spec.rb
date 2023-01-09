@@ -286,7 +286,7 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  describe 'US 4- Merchant Dashboard Items Ready to Ship' do
+  describe 'US 4-Items Ready to Ship & US 5-Invoices sorted oldest to newest' do
     before(:each) do
       Transaction.delete_all
       InvoiceItem.delete_all
@@ -305,14 +305,14 @@ RSpec.describe Merchant, type: :model do
       @customer_3 = create(:customer, first_name: "Customer 3")
       @customer_4 = create(:customer, first_name: "Customer 4")
 
-      @invoice_1 = create(:invoice, customer: @customer_1)
-      @invoice_2 = create(:invoice, customer: @customer_2)
-      @invoice_3 = create(:invoice, customer: @customer_3)
-      @invoice_4 = create(:invoice, customer: @customer_4)
-      @invoice_5 = create(:invoice, customer: @customer_1)
-      @invoice_6 = create(:invoice, customer: @customer_2)
-      @invoice_7 = create(:invoice, customer: @customer_3)
-      @invoice_8 = create(:invoice, customer: @customer_4)
+      @invoice_1 = create(:invoice, customer: @customer_1, created_at: Time.now - 5.years)
+      @invoice_2 = create(:invoice, customer: @customer_2, created_at: Time.now - 1.years)
+      @invoice_3 = create(:invoice, customer: @customer_3, created_at: Time.now - 3.years)
+      @invoice_4 = create(:invoice, customer: @customer_4, created_at: Time.now - 30.days)
+      @invoice_5 = create(:invoice, customer: @customer_1, created_at: Time.now - 1.years)
+      @invoice_6 = create(:invoice, customer: @customer_2, created_at: Time.now - 31.days)
+      @invoice_7 = create(:invoice, customer: @customer_3, created_at: 10.hours.ago)
+      @invoice_8 = create(:invoice, customer: @customer_4, created_at: 20.seconds.ago)
 
       @item_1 = create(:item, merchant: @merchant_1, name: "plane 1")
       @item_2 = create(:item, merchant: @merchant_2, name: "plane 2")
@@ -339,16 +339,15 @@ RSpec.describe Merchant, type: :model do
       @invoice_item_14 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_7, status: "packaged")
       @invoice_item_15 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_4, status: "packaged")
       @invoice_item_16 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_1, invoice: @invoice_8, status: "shipped")
+      @invoice_item_16 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_4, invoice: @invoice_2, status: "packaged")
+      @invoice_item_16 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_4, invoice: @invoice_6, status: "shipped")
     end
 
-    it "returns the items name and invoice number that have not been shipped for the merchant" do
-      expect(@merchant_1.unshipped_items).to eq([[@item_1.name, @invoice_1.id], [@item_1.name, @invoice_4.id], [@item_1.name, @invoice_7.id], [@item_1.name, @invoice_8.id], [@item_5.name, @invoice_2.id], [@item_5.name, @invoice_5.id]])
-      expect(@merchant_4.unshipped_items).to eq([[@item_4.name, @invoice_4.id]])
+    describe "returns the items name and invoice number that have not been shipped for the merchant" do
+      it "returns the invoices ordered from oldest to newest creation date" do
+        expect(@merchant_1.unshipped_items).to eq([[@item_1.name, @invoice_1.id], [@item_5.name, @invoice_2.id], [@item_5.name, @invoice_5.id], [@item_1.name, @invoice_4.id], [@item_1.name, @invoice_7.id], [@item_1.name, @invoice_8.id]])
+        expect(@merchant_4.unshipped_items).to eq([[@item_4.name, @invoice_2.id], [@item_4.name, @invoice_4.id]])
+      end
     end
-
-    # it "returns the invoices' number for the unshipped items for the merchant" do
-    #   expect(@merchant_1.unshipped_items.first.inv_num.distinct).to eq([@invoice_1.id, @invoice_4.id, @invoice_5.id, @invoice_7.id, @invoice_8.id])
-    #   expect(@merchant_1.unshipped_items.second.inv_num.distinct).to eq([@invoice_1.id, @invoice_4.id, @invoice_5.id, @invoice_7.id, @invoice_8.id])
-    # end
   end
 end
