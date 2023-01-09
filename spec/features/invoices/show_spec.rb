@@ -29,8 +29,8 @@ RSpec.describe 'merchant invoices show page' do
     @item_1 = Item.create!(name: "Pokemon Cards", description: "Investments", unit_price: 800, merchant_id: @merchant_1.id)
     @item_2 = Item.create!(name: "Pogs", description: "Old school", unit_price: 500, merchant_id: @merchant_2.id)
 
-    InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_1.id)
-    InvoiceItem.create!(quantity: 1, unit_price: 800, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_2.id)
+    @ii = InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_1.id)
+    @ii2 = InvoiceItem.create!(quantity: 1, unit_price: 800, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_2.id)
     InvoiceItem.create!(quantity: 2, unit_price: 1600, status: "pending", item_id: @item_1.id, invoice_id: @invoice_3.id)
     InvoiceItem.create!(quantity: 10, unit_price: 8000, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_4.id)
     InvoiceItem.create!(quantity: 1, unit_price: 500, status: "shipped", item_id: @item_2.id, invoice_id: @invoice_5.id)
@@ -58,5 +58,21 @@ RSpec.describe 'merchant invoices show page' do
     expect(page).to have_content("Status: #{@invoice_1.status}")
     expect(page).to have_content("Created At: #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
     expect(page).to have_content("Customer: #{@customer_1.first_name} #{@customer_1.last_name}")
+  end
+
+  it 'will show the merchant invoice items and their attributes' do
+    visit merchant_invoice_path(@merchant_1, @invoice_1)
+
+    within("#items") do
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content("Quantity: #{@ii.quantity}")
+      expect(page).to have_content("Price: #{@ii.unit_price}")
+      expect(page).to have_content("Status: #{@ii.status}")
+
+      expect(page).to_not have_content(@item_2.name)
+      expect(page).to_not have_content("Quantity: #{@ii2.quantity}")
+      expect(page).to_not have_content("Price: #{@ii2.unit_price}")
+      expect(page).to_not have_content("Status: #{@ii2.status}")
+    end
   end
 end
