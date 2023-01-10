@@ -11,7 +11,7 @@ RSpec.describe 'Admin Merchant New' do
     expect(current_path).to eq(admin_merchants_path)
     expect(page).to have_content("Jimbob's Carpentry")
     within("#merchant_#{Merchant.find_by_name("Jimbob's Carpentry").id}") do
-      expect(page).to have_button("Enable")
+      expect(page).to have_button('Enable')
     end
   end
 end

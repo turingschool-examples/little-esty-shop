@@ -4,7 +4,6 @@ RSpec.describe 'merchant item edit page' do
   it 'has a form that is prepopulated with existing item attribute info' do
     visit edit_merchant_item_path(1, 10)
     item = Item.find(10)
-    # save_and_open_page
 
     expect(page).to have_field('item[name]', with: item.name)
     expect(page).to have_field('item[current_price]', with: item.unit_price_to_dollars)
@@ -21,7 +20,7 @@ RSpec.describe 'merchant item edit page' do
 
     click_button 'Update Item'
 
-    expect(current_path).to eq(merchant_item_path(1,10))
+    expect(current_path).to eq(merchant_item_path(1, 10))
     expect(page).to have_content('New item name')
     expect(page).to_not have_content('Item Quidem Suscipit')
     expect(page).to have_content('Current Price: $99')
@@ -39,10 +38,8 @@ RSpec.describe 'merchant item edit page' do
     fill_in 'item[current_price]', with: '99.99'
 
     click_button 'Update Item'
-    
+
     expect(current_path).to eq(edit_merchant_item_path(1, 10))
     expect(page).to have_content('Error: All fields must be filled in')
   end
-
 end
-

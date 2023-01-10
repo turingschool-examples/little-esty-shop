@@ -14,16 +14,14 @@ class Item < ApplicationRecord
     (dollars.to_f * 100).to_i
   end
 
-  
   def best_day_by_revenue
     invoices.joins(:transactions)
-            .where(transactions: { result: "success" })
-            .select('date(invoices.created_at) as invoice_date, sum(invoice_items.unit_price * invoice_items.quantity) as total_date_revenue')              
+            .where(transactions: { result: 'success' })
+            .select('date(invoices.created_at) as invoice_date, sum(invoice_items.unit_price * invoice_items.quantity) as total_date_revenue')
             .group('invoice_date')
             .order('total_date_revenue DESC', 'invoice_date DESC')
             .limit(1)
             .first
             .invoice_date.strftime('%-m/%-d/%Y')
   end
-
 end

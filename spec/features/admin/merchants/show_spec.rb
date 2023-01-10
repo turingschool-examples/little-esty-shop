@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Merchants Show' do
-
   it 'Displays the name of the merchant' do
     visit admin_merchant_path(Merchant.all.first)
 
