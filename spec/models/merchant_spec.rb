@@ -68,7 +68,7 @@ RSpec.describe Merchant do
       item_3 = merchant.items.create!(name: 'bob3', description: 'very best at things', unit_price: 99_999,
                                       enabled: false)
       item_4 = merchant.items.create!(name: 'bob4', description: 'very okay at things', unit_price: 999, enabled: false)
-      expect(merchant.get_disabled_items).to eq([item_1, item_2, item_3, item_4])
+      expect(merchant.get_disabled_items.sort).to eq([item_1, item_2, item_3, item_4].sort)
     end
   end
 

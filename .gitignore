@@ -16,6 +16,7 @@ capybara-*.html
 /coverage/*
 /coverage/index.html
 /spec/tmp
+.DS_Store
 
 /.bundle
 
