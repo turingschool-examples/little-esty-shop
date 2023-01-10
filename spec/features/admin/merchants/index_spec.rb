@@ -166,7 +166,7 @@ RSpec.describe 'admin merchants index' do
     ii20 = InvoiceItem.create!(quantity: 5, unit_price: item20.unit_price, item_id: item20.id, invoice_id: invoice20.id)
 
     visit "/admin/merchants"
-    save_and_open_page
+    
     expect(merchant1.name).to appear_before(merchant2.name)
     expect(merchant2.name).to appear_before(merchant3.name)
     expect(merchant3.name).to appear_before(merchant4.name)
