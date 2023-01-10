@@ -348,5 +348,43 @@ RSpec.describe Merchant, type: :model do
         expect(@merchant_4.unshipped_items).to eq([[@item_4.name, @invoice_2.id, @invoice_2.created_at], [@item_4.name, @invoice_4.id, @invoice_4.created_at]])
       end
     end
+
+    describe '#best_day' do
+      it 'returns the highest total revenue day for a merchant' do
+        Transaction.delete_all
+        InvoiceItem.delete_all
+        Invoice.delete_all
+        Item.delete_all
+        Customer.delete_all
+        Merchant.delete_all
+
+        merchant_1 = create(:merchant, name: "Alpha")
+
+        customer_1 = create(:customer)
+
+        invoice_1 = create(:invoice, customer: customer_1, created_at: "01/01/2020".to_date, status: 2)
+        invoice_2 = create(:invoice, customer: customer_1, created_at: "05/05/2021".to_date, status: 2)
+        invoice_3 = create(:invoice, customer: customer_1, created_at: "11/11/2022".to_date, status: 2)
+        invoice_4 = create(:invoice, customer: customer_1, created_at: "12/12/2023".to_date, status: 2)
+        
+
+        item_1 = create(:item, merchant: merchant_1)
+        item_2 = create(:item, merchant: merchant_1)
+        item_3 = create(:item, merchant: merchant_1)
+        item_4 = create(:item, merchant: merchant_1)
+
+        invoice_item_1 = create(:invoice_item, unit_price: 1000, quantity: 1, item: item_1, invoice: invoice_1)
+        invoice_item_2 = create(:invoice_item, unit_price: 900, quantity: 1, item: item_2, invoice: invoice_2)
+        invoice_item_3 = create(:invoice_item, unit_price: 800, quantity: 1, item: item_3, invoice: invoice_3)
+        
+        expect(merchant_1.best_day).to eq(invoice_1)
+        expect(merchant_1.best_day.format_date_long).to eq(invoice_1.format_date_long)
+
+        invoice_item_4 = create(:invoice_item, unit_price: 1000, quantity: 1, item: item_4, invoice: invoice_4)
+        
+        expect(merchant_1.best_day).to eq(invoice_4)
+        expect(merchant_1.best_day.format_date_long).to eq(invoice_4.format_date_long)
+      end
+    end
   end
 end

@@ -41,20 +41,30 @@ class Merchant < ApplicationRecord
       end
         
   def self.top_five #merchant
-    self.joins(invoices: [:invoice_items, :transactions])
+    self.joins(:invoice_items, :transactions)
         .where('result = 0')
         .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
         .group(:id)
         .order('total_revenue desc')
-        .first(5)
+        .limit(5)
   end
 
   def total_revenue
     self.invoices
         .joins(:invoice_items, :transactions)
         .where('transactions.result = 0')
-        .select('invoices.*')
         .sum('invoice_items.quantity * invoice_items.unit_price')
+  end
+
+  def best_day
+    self.invoices
+        .where("invoices.status = 2")
+        .joins(:invoice_items)
+        .select('invoices.id, invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
+        .group("invoices.id, invoices.created_at")
+        .order("total_revenue desc", "invoices.created_at desc")
+        .limit(1)
+        .first
   end
 
   def unshipped_items
