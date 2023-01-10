@@ -257,8 +257,13 @@ RSpec.describe 'Merchant Dashboard' do
           end
         end
       end
+      describe 'Story 5' do
+        it "shows the invoice creation date next to the name of each item" do
+          within("#ready_to_ship-#{@invoice_1.id}")do
+          expect(page).to have_content(@invoice_1.created_at.to_formatted_s(:admin_invoice_date))
+          end
+        end
+      end
     end
-
-
   end
 end

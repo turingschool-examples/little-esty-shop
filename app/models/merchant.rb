@@ -63,7 +63,7 @@ class Merchant < ApplicationRecord
     .select("invoice_items.status AS shipping_status, items.name, invoice_items.invoice_id AS inv_num")
     .group("items.id, merchants.id, invoice_items.invoice_id, invoice_items.status, invoices.created_at")
     .order("invoices.created_at asc")
-    .pluck("items.name, invoice_items.invoice_id")
+    .pluck("items.name, invoice_items.invoice_id, invoices.created_at")
   end 
 
 end
