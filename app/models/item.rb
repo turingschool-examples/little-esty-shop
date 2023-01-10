@@ -22,7 +22,8 @@ class Item < ApplicationRecord
 
   def item_top_sales_dates
     self.invoices
-    .where("invoices.status != ?", 0)
+    .joins(:transactions)
+    .where("transactions.result = ?", 0)
     .order(Arel.sql("sum(invoice_items.unit_price * invoice_items.quantity) desc"))
     .group(:id)
     .limit(1).first

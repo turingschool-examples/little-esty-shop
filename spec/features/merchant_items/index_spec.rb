@@ -303,13 +303,13 @@ RSpec.describe 'merchant items index page' do
     describe "next to each of the 5 most popular items I see the date with the most sales for each item" do
       it "display label “Top selling date for <item name> was <date with most sales>" do
         visit merchant_items_path(@merchant1.id)
-        save_and_open_page
-        expect(page).to have_content(@invoice8.updated_at)
-        expect(page).to have_content(@invoice11.updated_at)
-        expect(page).to have_content(@invoice10.updated_at)
-        expect(page).to have_content(@invoice12.updated_at)
-        expect(page).to have_content(@invoice14.updated_at)
-      
+
+        expect(page).to have_content(@invoice8.updated_at.to_formatted_s(:admin_invoice_date))
+        expect(page).to have_content(@invoice11.updated_at.to_formatted_s(:admin_invoice_date))
+        expect(page).to have_content(@invoice10.updated_at.to_formatted_s(:admin_invoice_date))
+        expect(page).to have_content(@invoice12.updated_at.to_formatted_s(:admin_invoice_date))
+        expect(page).to have_content(@invoice14.updated_at.to_formatted_s(:admin_invoice_date))
+
       end
     end
   end
