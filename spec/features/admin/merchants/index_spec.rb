@@ -24,16 +24,16 @@ RSpec.describe 'the admin merchants index' do
 
     @customer_1 = create(:customer)
 
-    @invoice_1 = create(:invoice, customer: @customer_1)
-    @invoice_2 = create(:invoice, customer: @customer_1)
-    @invoice_3 = create(:invoice, customer: @customer_1)
-    @invoice_4 = create(:invoice, customer: @customer_1)
-    @invoice_5 = create(:invoice, customer: @customer_1)
-    @invoice_6 = create(:invoice, customer: @customer_1)
-    @invoice_7 = create(:invoice, customer: @customer_1)
-    @invoice_8 = create(:invoice, customer: @customer_1)
-    @invoice_9 = create(:invoice, customer: @customer_1)
-    @invoice_10 = create(:invoice, customer: @customer_1)
+    @invoice_1 = create(:invoice, customer: @customer_1, status: 2)
+    @invoice_2 = create(:invoice, customer: @customer_1, status: 2)
+    @invoice_3 = create(:invoice, customer: @customer_1, status: 2)
+    @invoice_4 = create(:invoice, customer: @customer_1, status: 2)
+    @invoice_5 = create(:invoice, customer: @customer_1, status: 2)
+    @invoice_6 = create(:invoice, customer: @customer_1, status: 2)
+    @invoice_7 = create(:invoice, customer: @customer_1, status: 2)
+    @invoice_8 = create(:invoice, customer: @customer_1, status: 2)
+    @invoice_9 = create(:invoice, customer: @customer_1, status: 2)
+    @invoice_10 = create(:invoice, customer: @customer_1, status: 2)
 
     @item_1 = create(:item, merchant: @merchant_1)
     @item_2 = create(:item, merchant: @merchant_2)
@@ -46,13 +46,13 @@ RSpec.describe 'the admin merchants index' do
     @item_9 = create(:item, merchant: @merchant_9)
     @item_10 = create(:item, merchant: @merchant_10)
 
-    @invoice_item_1 = create(:invoice_item, unit_price: 1000, quantity: 1, item: @item_1, invoice: @invoice_1)
-    @invoice_item_2 = create(:invoice_item, unit_price: 900, quantity: 1, item: @item_2, invoice: @invoice_2)
-    @invoice_item_3 = create(:invoice_item, unit_price: 800, quantity: 1, item: @item_3, invoice: @invoice_3)
-    @invoice_item_4 = create(:invoice_item, unit_price: 700, quantity: 1, item: @item_4, invoice: @invoice_4)
-    @invoice_item_5 = create(:invoice_item, unit_price: 600, quantity: 1, item: @item_5, invoice: @invoice_5)
-    @invoice_item_6 = create(:invoice_item, unit_price: 500, quantity: 1, item: @item_6, invoice: @invoice_6)
-    @invoice_item_7 = create(:invoice_item, unit_price: 400, quantity: 1, item: @item_7, invoice: @invoice_7)
+    @invoice_item_1 = create(:invoice_item, unit_price: 800, quantity: 1, item: @item_1, invoice: @invoice_1)
+    @invoice_item_2 = create(:invoice_item, unit_price: 1000, quantity: 1, item: @item_2, invoice: @invoice_2)
+    @invoice_item_3 = create(:invoice_item, unit_price: 900, quantity: 1, item: @item_3, invoice: @invoice_3)
+    @invoice_item_4 = create(:invoice_item, unit_price: 600, quantity: 1, item: @item_4, invoice: @invoice_4)
+    @invoice_item_5 = create(:invoice_item, unit_price: 500, quantity: 1, item: @item_5, invoice: @invoice_5)
+    @invoice_item_6 = create(:invoice_item, unit_price: 700, quantity: 1, item: @item_6, invoice: @invoice_6)
+    @invoice_item_7 = create(:invoice_item, unit_price: 600, quantity: 1, item: @item_7, invoice: @invoice_7)
     @invoice_item_8 = create(:invoice_item, unit_price: 300, quantity: 1, item: @item_8, invoice: @invoice_8)
     @invoice_item_9 = create(:invoice_item, unit_price: 200, quantity: 1, item: @item_9, invoice: @invoice_9)
     @invoice_item_10 = create(:invoice_item, unit_price: 100, quantity: 1, item: @item_10, invoice: @invoice_10)
@@ -167,6 +167,11 @@ RSpec.describe 'the admin merchants index' do
         it 'has generated revenue next to merchant names as links to the admin merchant\'s show page' do
           visit admin_merchants_path
 
+          expect(@merchant_2.name).to appear_before(@merchant_1.name)
+          expect(@merchant_1.name).to appear_before(@merchant_4.name)
+          expect(@merchant_4.name).to appear_before(@merchant_7.name)
+          expect(@merchant_7.name).to appear_before(@merchant_5.name)
+
           expect(page).to have_content("Top 5 Revenue Earners")
           within("#admin-merchants-top-five-#{@merchant_1.id}") do
             expect(page).to have_link(@merchant_1.name)
@@ -187,6 +192,16 @@ RSpec.describe 'the admin merchants index' do
           within("#admin-merchants-top-five-#{@merchant_7.id}") do  
             expect(page).to have_link(@merchant_7.name)
             expect(page).to have_content(@merchant_7.total_revenue / 100.00)
+          end
+        end
+
+        describe "shows the date with the most revenue for each merchant and shows a label “Top selling date for was: " do
+          it 'shows best day info next to merchant link' do
+            visit admin_merchants_path
+            
+            within("#admin-merchants-top-five-#{@merchant_1.id}") do
+              expect(page).to have_content("Top selling date for was: #{@merchant_1.best_day.format_date_long}")
+            end
           end
         end
       end
