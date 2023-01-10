@@ -128,26 +128,70 @@ RSpec.describe 'merchant items index page' do
   # And I see that each item name links to my merchant item show page for that item
   # And I see the total revenue generated next to each item name
 
-  before :each do
-    FactoryBot.reload
-    @customers = FactoryBot.create_list(:customer_with_invoice, 10)
-    @invoices = Invoice.all
-    FactoryBot.create_list(:transaction, 6, result: 'success', invoice_id: @invoices[0].id)
-    FactoryBot.create_list(:transaction, 5, result: 'success', invoice_id: @invoices[3].id)
-    FactoryBot.create_list(:transaction, 4, result: 'success', invoice_id: @invoices[1].id)
-    FactoryBot.create_list(:transaction, 3, result: 'success', invoice_id: @invoices[4].id)
-    FactoryBot.create_list(:transaction, 2, result: 'success', invoice_id: @invoices[2].id)
-  end
+  # before :each do
+  #   FactoryBot.reload
+  #   @customers = FactoryBot.create_list(:customer_with_invoice, 10)
+  #   @invoices = Invoice.all
+  #   FactoryBot.create_list(:transaction, 6, result: 'success', invoice_id: @invoices[0].id)
+  #   FactoryBot.create_list(:transaction, 5, result: 'success', invoice_id: @invoices[3].id)
+  #   FactoryBot.create_list(:transaction, 4, result: 'success', invoice_id: @invoices[1].id)
+  #   FactoryBot.create_list(:transaction, 3, result: 'success', invoice_id: @invoices[4].id)
+  #   FactoryBot.create_list(:transaction, 2, result: 'success', invoice_id: @invoices[2].id)
+  # end
+  describe '5 most popular items' do
+    #     Merchant Items Index: 5 most popular items
+    # As a merchant
+    # When I visit my items index page
+    # Then I see the names of the top 5 most popular items ranked by total revenue generated
+    # And I see that each item name links to my merchant item show page for that item
+    # And I see the total revenue generated next to each item name
 
-  it 'shows names of top 5 most popular items ranked by total revenue generated' do
-    mariah = Merchant.create!(name: 'Mariah Ahmed')
-    visit merchant_item_index_path(mariah)
-    
- 
     # Notes on Revenue Calculation:
 
     # Only invoices with at least one successful transaction should count towards revenue
     # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
     # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+    it 'shows names of top 5 most popular items ranked by total revenue generated' do
+      mariah = Merchant.create!(name: 'Mariah Ahmed')
+      items = FactoryBot.create_list(:item, 10, merchant_id: mariah.id)
+      items.each_with_index do |item, index|
+        FactoryBot.create_list(:invoice_item, 2, item_id: item.id, quantity: 1, unit_price: (index * 10))
+      end
+      Invoice.all.each_with_index do |invoice, _index|
+        FactoryBot.create(:transaction, invoice_id: invoice.id, result: 1)
+      end
+      top_5 = mariah.top_5_items
+      visit merchant_item_index_path(mariah)
+
+      within('#top-5-items') do
+        expect(page).to have_content(top_5.first.name)
+        click_link top_5.first.name
+        expect(current_path).to eq(merchant_item_path(mariah.id, top_5.first.id))
+      end
+      visit merchant_item_index_path(mariah)
+      within('#top-5-items') do
+        expect(page).to have_content(top_5.second.name)
+        click_link top_5.second.name
+        expect(current_path).to eq(merchant_item_path(mariah.id, top_5.second.id))
+      end
+      visit merchant_item_index_path(mariah)
+      within('#top-5-items') do
+        expect(page).to have_content(top_5.third.name)
+        click_link top_5.third.name
+        expect(current_path).to eq(merchant_item_path(mariah.id, top_5.third.id))
+      end
+      visit merchant_item_index_path(mariah)
+      within('#top-5-items') do
+        expect(page).to have_content(top_5.fourth.name)
+        click_link top_5.fourth.name
+        expect(current_path).to eq(merchant_item_path(mariah.id, top_5.fourth.id))
+      end
+      visit merchant_item_index_path(mariah)
+      within('#top-5-items') do
+        expect(page).to have_content(top_5.fifth.name)
+        click_link top_5.fifth.name
+        expect(current_path).to eq(merchant_item_path(mariah.id, top_5.fifth.id))
+      end
+    end
   end
 end
