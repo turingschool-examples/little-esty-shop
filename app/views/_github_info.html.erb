@@ -1,0 +1,5 @@
+<%= @info.repo_name %> 
+<% @info.commits_per_collaborator.each do |collaborator, commit| %>
+  <p><%= collaborator %> - <%= commit %> commits</p>
+<% end %>
+<p><%= @info.pr_count %> Merged PRs</p>
