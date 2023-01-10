@@ -256,6 +256,8 @@ RSpec.describe Merchant do
           end
 
           expect(merchant.top_5_items).to eq(items.last(5).reverse)
+          # binding.pry
+          # expect(merchant.top_5_items.first.total_revenue).to eq(items)
         end
       end
     end
