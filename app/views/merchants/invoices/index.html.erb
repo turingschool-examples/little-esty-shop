@@ -1,5 +1,8 @@
-<h3><%= @merchant.name %>'s Invoices:</h3>
+<%= render partial: 'merchants/shared/header' %>
 
-<% @invoices.each do |invoice| %>
-  Invoice ID: <%= link_to invoice.id, merchant_invoice_path(@merchant.id, invoice.id) %>
-<% end %>
+<div class='merchant_invoices_index'>
+  <h4>My Invoices</h4>
+  <% @invoices.each do |invoice| %>
+    <p class='column'>Invoice #<%= link_to invoice.id, merchant_invoice_path(@merchant.id, invoice.id) %></p><br>
+  <% end %>
+</div>

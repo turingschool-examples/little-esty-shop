@@ -1,38 +1,38 @@
-<h3>All Merchants: </h3>
-<%= render partial: 'admin/shared/nav' %>
+<%= render partial: 'admin/shared/header' %>
 <%= button_to 'Create a new merchant', new_admin_merchant_path, method: :get %>
+<div class='admin_merchants_body'>
+  <div id='enabled_merchants'>
+    <h4>Enabled Merchants: </h4>
+    <% @merchants.each do |merchant| %>
+      <% if merchant.enabled %>
+        <div class='column' id="merchant_<%= merchant.id %>">
+        <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+        <%= button_to 'Disable', admin_merchant_path(merchant.id), method: :patch, params: { merchant: { enabled: false } } %></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 
-<div id='enabled_merchants'>
-<h5>Enabled Merchants: </h5>
-<% @merchants.each do |merchant| %>
-  <% if merchant.enabled %>
-    <div id="merchant_<%= merchant.id %>">
-    <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
-    <%= button_to 'Disable', admin_merchant_path(merchant.id), method: :patch, params: { merchant: { enabled: false } } %></p>
-    </div>
-  <% end %>
-<% end %>
-</div>
+  <div id='disabled_merchants'>
+    <h4>Disabled Merchants: </h4>
+    <% @merchants.each do |merchant| %>
+      <% unless merchant.enabled %>
+        <div class='column' id="merchant_<%= merchant.id %>">
+        <p ><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+        <%= button_to 'Enable', admin_merchant_path(merchant.id), method: :patch, params: { merchant: { enabled: true } } %></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 
-<div id='disabled_merchants'>
-<h5>Disabled Merchants: </h5>
-<% @merchants.each do |merchant| %>
-  <% unless merchant.enabled %>
-    <div id="merchant_<%= merchant.id %>">
-    <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
-    <%= button_to 'Enable', admin_merchant_path(merchant.id), method: :patch, params: { merchant: { enabled: true } } %></p>
-    </div>
-  <% end %>
-<% end %>
-</div>
-
-<div id='top_by_revenue'>
-<h5>Top Merchants:</h5>
-<ol>
-<% Merchant.top_5_by_revenue.each do |merchant| %>
-  <li><%= merchant.name %> - <%= merchant.revenue_in_dollars %><br>
-  The top selling date for <%= merchant.name %> was <%= merchant.best_day_by_revenue %>
-  </li>
-<% end %>
-</ol>
+  <div id='top_by_revenue' class='column'>
+    <h4>Top Merchants:</h4>
+    <ol>
+      <% Merchant.top_5_by_revenue.each do |merchant| %>
+        <li class='column'><%= merchant.name %> - <%= merchant.revenue_in_dollars %><br>
+        The top selling date for <%= merchant.name %> was <%= merchant.best_day_by_revenue %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
 </div>

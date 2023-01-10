@@ -1,21 +1,31 @@
-<h3>Merchant: <%= @merchant.name %></h3>
-<h4>Invoice ID: <%= @invoice.id %></h4>
-Invoice Status: <%= @invoice.status %><br>
-This invoice was created at: <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %><br>
-The customer that created this invoice is: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %><br>
+<%= render partial: 'merchants/shared/header' %>
+<h4>Invoice #<%= @invoice.id %></h4>
+Status: <%= @invoice.status.capitalize %><br>
+Created on: <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %><br>
 Total invoice revenue: <%= @invoice.total_invoice_revenue %><br>
+<h3>Customer:</h3>
+ <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %><br>
 
-<h4>Items on this invoice:</h4><br>
-<% @invoice.invoice_items.each do |invoice_item| %>
-  <div id='item_<%= invoice_item.id %>'>
-    <h5><%= invoice_item.item.name %></h5>
-    Quantity: <%= invoice_item.quantity %>
-    Selling Price: <%= invoice_item.unit_price_to_dollars %>
-    Status: <%= invoice_item.status.capitalize %>
-    <%= form_with model: [@invoice, invoice_item], local: true do |form| %>
-      <% form.label :status %>
-      <%= form.select :status, options_for_select(['Pending', 'Packaged', 'Shipped'], invoice_item.status.capitalize) %>
-      <%= form.submit 'Update Item Status' %>
-    <% end %>
-  </div>
-<% end %>
+<h3>Items on this invoice:</h3>
+<table>
+  <tr>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Status</th>
+  </tr>
+  <% @invoice.invoice_items.each do |invoice_item| %>
+    <div id='item_<%= invoice_item.id %>'>
+      <tr>
+        <td><%= invoice_item.item.name %></td>
+        <td><%= invoice_item.quantity %></td>
+        <td><%= invoice_item.unit_price_to_dollars %></td>
+        <td><%= form_with model: [@invoice, invoice_item], local: true do |form| %>
+          <% form.label :status %>
+          <%= form.select :status, options_for_select(['Pending', 'Packaged', 'Shipped'], invoice_item.status.capitalize) %>
+          <%= form.submit 'Update Item Status' %></td>
+        <% end %>
+      <tr>
+    </div>
+  <% end %>
+</table>

@@ -1,0 +1,8 @@
+<div class="header">
+  <h3 class='dash_header'><%= @merchant.name %></h3><br>
+  <nav>
+  <%= link_to 'Items', merchant_items_path(@merchant) %>
+  <%= link_to 'Invoices', merchant_invoices_path(@merchant) %>
+  <%= link_to 'Dashboard', "/merchants/#{@merchant.id}/dashboard" %>
+ </nav>
+</div>
