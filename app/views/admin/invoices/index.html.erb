@@ -1,4 +1,7 @@
 <h3>All Invoices: </h3>
+
+<%= render partial: "/github_info" %>
+
 <%= render partial: 'admin/shared/nav' %>
 <% @invoices.each do |invoice| %>
   <p><%= link_to "Invoice ID #{invoice.id}", admin_invoice_path(invoice.id) %></p>

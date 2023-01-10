@@ -1,5 +1,8 @@
 <h3>All Merchants: </h3>
 <%= render partial: 'admin/shared/nav' %>
+
+<%= render partial: "/github_info" %>
+
 <%= button_to 'Create a new merchant', new_admin_merchant_path, method: :get %>
 
 <div id='enabled_merchants'>

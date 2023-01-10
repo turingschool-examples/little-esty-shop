@@ -1,5 +1,7 @@
 <h3><%= @merchant.name %>'s Invoices:</h3>
 
+<%= render partial: "/github_info" %>
+
 <% @invoices.each do |invoice| %>
   Invoice ID: <%= link_to invoice.id, merchant_invoice_path(@merchant.id, invoice.id) %>
 <% end %>

@@ -1,6 +1,8 @@
 <h3>Invoice <%= @invoice.id %>: </h3>
 <%= render partial: 'admin/shared/nav' %>
 
+<%= render partial: "/github_info" %>
+
 <h5>Invoice Status: </h5>
 <div id='invoice_<%= @invoice.id %>_status'>
   <%= form_with model: [:admin, @invoice], local: true do |form| %>   
