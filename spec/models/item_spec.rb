@@ -131,7 +131,7 @@ RSpec.describe Item, type: :model do
     end
   
     it "returns the date with the most sales for each of the top 5 items" do
-      expect(@item_1.item_top_sales_dates).to eq([@invoice_3.updated_at])
+      expect(@item_1.item_top_sales_dates.updated_at).to eq(@invoice_3.updated_at)
     end
   end
         

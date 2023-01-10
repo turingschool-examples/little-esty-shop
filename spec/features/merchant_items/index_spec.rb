@@ -299,11 +299,11 @@ RSpec.describe 'merchant items index page' do
     end
   end
 
-  xdescribe "13. Merchant Items Index: Top Item's Best Day" do
+  describe "13. Merchant Items Index: Top Item's Best Day" do
     describe "next to each of the 5 most popular items I see the date with the most sales for each item" do
       it "display label “Top selling date for <item name> was <date with most sales>" do
         visit merchant_items_path(@merchant1.id)
-
+        save_and_open_page
         expect(page).to have_content(@invoice8.updated_at)
         expect(page).to have_content(@invoice11.updated_at)
         expect(page).to have_content(@invoice10.updated_at)
