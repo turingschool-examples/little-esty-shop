@@ -81,13 +81,13 @@ RSpec.describe 'merchant items index page' do
     @invoice5 = Invoice.create!(customer_id: @customer1.id, status: "cancelled")
     @invoice6 = Invoice.create!(customer_id: @customer2.id, status: "in_progress")
     @invoice7 = Invoice.create!(customer_id: @customer2.id, status: "completed")
-    @invoice8 = Invoice.create!(customer_id: @customer2.id, status: "completed")
+    @invoice8 = Invoice.create!(customer_id: @customer2.id, status: "completed", created_at: Time.now - 3.years)
     @invoice9 = Invoice.create!(customer_id: @customer2.id, status: "completed")
-    @invoice10 = Invoice.create!(customer_id: @customer3.id, status: "cancelled")
-    @invoice11 = Invoice.create!(customer_id: @customer3.id, status: "in_progress")
-    @invoice12 = Invoice.create!(customer_id: @customer3.id, status: "cancelled")
+    @invoice10 = Invoice.create!(customer_id: @customer3.id, status: "cancelled", created_at: Time.now - 5.years)
+    @invoice11 = Invoice.create!(customer_id: @customer3.id, status: "in_progress", created_at: Time.now - 2.years)
+    @invoice12 = Invoice.create!(customer_id: @customer3.id, status: "cancelled", created_at: Time.now - 30.days.ago)
     @invoice13 = Invoice.create!(customer_id: @customer3.id, status: "completed")
-    @invoice14 = Invoice.create!(customer_id: @customer3.id, status: "completed")
+    @invoice14 = Invoice.create!(customer_id: @customer3.id, status: "completed", created_at: Time.now - 1.years)
     @invoice15 = Invoice.create!(customer_id: @customer4.id, status: "in_progress")
     @invoice16 = Invoice.create!(customer_id: @customer4.id, status: "cancelled")
     @invoice17 = Invoice.create!(customer_id: @customer4.id, status: "in_progress")
@@ -296,6 +296,21 @@ RSpec.describe 'merchant items index page' do
       expect(page).to have_content("3. #{@item10.name}, Revenue: $2.53")
       expect(page).to have_content("4. #{@item12.name}, Revenue: $1.82")
       expect(page).to have_content("5. #{@item14.name}, Revenue: $1.2")
+    end
+  end
+
+  describe "13. Merchant Items Index: Top Item's Best Day" do
+    describe "next to each of the 5 most popular items I see the date with the most sales for each item" do
+      it "display label “Top selling date for <item name> was <date with most sales>" do
+        visit merchant_items_path(@merchant1.id)
+
+        expect(page).to have_content(@invoice8.updated_at.to_formatted_s(:admin_invoice_date))
+        expect(page).to have_content(@invoice11.updated_at.to_formatted_s(:admin_invoice_date))
+        expect(page).to have_content(@invoice10.updated_at.to_formatted_s(:admin_invoice_date))
+        expect(page).to have_content(@invoice12.updated_at.to_formatted_s(:admin_invoice_date))
+        expect(page).to have_content(@invoice14.updated_at.to_formatted_s(:admin_invoice_date))
+
+      end
     end
   end
 end

@@ -20,4 +20,14 @@ class Item < ApplicationRecord
     self.where(merchant_id: merchant_id, status: status)
   end
 
+  def item_top_sales_dates
+    self.invoices
+    .joins(:transactions)
+    .where("transactions.result = ?", 0)
+    .order(Arel.sql("sum(invoice_items.unit_price * invoice_items.quantity) desc"))
+    .group(:id)
+    .limit(1)
+    .pluck(:updated_at).first
+  end
+
 end

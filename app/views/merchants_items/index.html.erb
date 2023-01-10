@@ -36,7 +36,8 @@
         <h3>Top 5 Items by Revenue:</h3><br>
           <% @top_5_items.each.with_index(1) do |item, i| %>
             <div id="item_id-<%= item.id %>">
-              <h3><%= "#{i}." %> <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id)%><%= ", Revenue: $#{item.invoice_items.revenue}" %>
+
+              <h3><%= "#{i}." %> <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id)%><%= ", Revenue: $#{item.invoice_items.revenue}, Best Sales Date: #{item.item_top_sales_dates.to_formatted_s(:admin_invoice_date)}" %></h3>
               <br>
             </div>
           <% end %>
