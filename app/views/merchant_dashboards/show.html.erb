@@ -15,9 +15,9 @@
 <% end %>
 
     <h3>Items Ready to Ship</h3>
-<% @all_merchant_unshipped_items.each do |item_name, invoice_id| %>
+<% @all_merchant_unshipped_items.each do |item_name, invoice_id, invoice_date| %>
   <div id="ready_to_ship-<%=invoice_id %>">
-    <li><h5> Item Name: <%=item_name%>&nbsp - &nbsp
+    <li><h5> Item Name: <%=item_name%> - Invoice Created: <%= invoice_date.to_formatted_s(:admin_invoice_date) %> &nbsp - &nbsp
     Item Invoice: <%=link_to invoice_id, "/merchants/#{@merchant.id}/invoices/#{invoice_id}" %></h5></li>
   </div>
 <% end %>
