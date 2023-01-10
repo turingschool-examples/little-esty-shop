@@ -206,9 +206,9 @@ RSpec.describe 'Merchant Dashboard' do
       @invoice_3 = create(:invoice, customer: @customer_3, created_at: Time.now - 3.years)
       @invoice_4 = create(:invoice, customer: @customer_4, created_at: Time.now - 22.days)
       @invoice_5 = create(:invoice, customer: @customer_1, created_at: Time.now - 128.days)
-      @invoice_6 = create(:invoice, customer: @customer_2)
-      @invoice_7 = create(:invoice, customer: @customer_3)
-      @invoice_8 = create(:invoice, customer: @customer_4)
+      @invoice_6 = create(:invoice, customer: @customer_2, created_at: Time.now - 127.days)
+      @invoice_7 = create(:invoice, customer: @customer_3, created_at: Time.now - 126.days)
+      @invoice_8 = create(:invoice, customer: @customer_4, created_at: Time.now - 125.days)
 
       @item_1 = create(:item, merchant: @merchant_1, name: "plane 1")
       @item_2 = create(:item, merchant: @merchant_2, name: "plane 2")
@@ -258,10 +258,15 @@ RSpec.describe 'Merchant Dashboard' do
         end
       end
       describe 'Story 5' do
-        it "shows the invoice creation date next to the name of each item" do
+        it "shows the invoice creation date next to the name of each item with date formatted like Monday, July 18, 2019 " do
           within("#ready_to_ship-#{@invoice_1.id}")do
             expect(page).to have_content(@invoice_1.created_at.to_formatted_s(:admin_invoice_date))
           end
+        end
+        it "shows the list is ordered from oldest to newest invoice date" do
+          expect(@invoice_2.created_at.to_formatted_s(:admin_invoice_date)).to appear_before(@invoice_1.created_at.to_formatted_s(:admin_invoice_date))
+          expect(@invoice_2.created_at.to_formatted_s(:admin_invoice_date)).to appear_before(@invoice_4.created_at.to_formatted_s(:admin_invoice_date))
+
         end
       end
     end
