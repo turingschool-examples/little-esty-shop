@@ -38,8 +38,15 @@ class Merchant < ApplicationRecord
         .where(transactions: { result: "success" })
         .order(Arel.sql("sum(invoice_items.unit_price * invoice_items.quantity) desc"))
         .limit(5)
-  end
+      end
         
+  def top_items_sales_dates
+    self.top_5_revenue_items
+    .where("invoice.status != ?", 0)
+    .pluck("invoice.updated_at")
+  end
+
+
   def self.top_five #merchant
     self.joins(invoices: [:invoice_items, :transactions])
         .where('result = 0')
