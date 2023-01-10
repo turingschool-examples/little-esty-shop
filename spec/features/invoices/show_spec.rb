@@ -67,12 +67,10 @@ RSpec.describe 'merchant invoices show page' do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content("Quantity: #{@ii.quantity}")
       expect(page).to have_content("Price: #{@ii.unit_price}")
-      expect(page).to have_content("Status: #{@ii.status}")
 
       expect(page).to_not have_content(@item_2.name)
       expect(page).to_not have_content("Quantity: #{@ii2.quantity}")
       expect(page).to_not have_content("Price: #{@ii2.unit_price}")
-      expect(page).to_not have_content("Status: #{@ii2.status}")
     end
   end
 
@@ -81,6 +79,26 @@ RSpec.describe 'merchant invoices show page' do
     
     within("#items") do
       expect(page).to have_content("Total Revenue: 20000")
+    end
+  end
+  
+  it 'contains a select field for the invoice items status' do
+    visit merchant_invoice_path(@merchant_1, @invoice_1)
+
+    expect(page).to have_field("status", with: @ii.status) 
+  end
+
+  it 'can update its status' do
+    visit merchant_invoice_path(@merchant_1, @invoice_1)
+
+    select "shipped", from: "status"
+
+    click_button "Update"
+
+    expect(current_path).to eq(merchant_invoice_path(@merchant_1, @invoice_1))
+
+    within("#items") do
+      expect(page).to have_field("status", with: "shipped")
     end
   end
 end
