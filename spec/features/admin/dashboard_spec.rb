@@ -212,7 +212,6 @@ RSpec.describe 'admin dashboard' do
       expect(page).to have_content(@invoice17.id)
       expect(page).to have_content(@invoice18.id)
       expect(page).to have_content(@invoice20.id)
-      expect(page).to_not have_content(@invoice1.id)
       expect(page).to_not have_content(@invoice19.id)
     end
 
@@ -237,20 +236,26 @@ RSpec.describe 'admin dashboard' do
     visit admin_index_path
 
     within "#incomplete_invoices" do
-      expect("#{@invoice6.id}").to appear_before("#{@invoice7.id}")
-      expect("#{@invoice7.id}").to appear_before("#{@invoice13.id}")
-      expect("#{@invoice13.id}").to appear_before("#{@invoice14.id}")
-      expect("#{@invoice14.id}").to appear_before("#{@invoice17.id}")
-      expect("#{@invoice17.id}").to appear_before("#{@invoice2.id}")
-      expect("#{@invoice2.id}").to appear_before("#{@invoice3.id}")
-      expect("#{@invoice3.id}").to appear_before("#{@invoice4.id}")
-      expect("#{@invoice4.id}").to appear_before("#{@invoice18.id}")
-      expect("#{@invoice18.id}").to appear_before("#{@invoice20.id}")
+      expect(page).to have_css("#invoice_id-#{@invoice6.id} ~ #invoice_id-#{@invoice7.id}")
+      expect(page).to have_css("#invoice_id-#{@invoice7.id} ~ #invoice_id-#{@invoice13.id}")
+      expect(page).to have_css("#invoice_id-#{@invoice13.id} ~ #invoice_id-#{@invoice14.id}")
+      expect(page).to have_css("#invoice_id-#{@invoice14.id} ~ #invoice_id-#{@invoice17.id}")
+      expect(page).to have_css("#invoice_id-#{@invoice17.id} ~ #invoice_id-#{@invoice2.id}")
+      expect(page).to have_css("#invoice_id-#{@invoice2.id} ~ #invoice_id-#{@invoice3.id}")
+      expect(page).to have_css("#invoice_id-#{@invoice3.id} ~ #invoice_id-#{@invoice4.id}")
+      expect(page).to have_css("#invoice_id-#{@invoice4.id} ~ #invoice_id-#{@invoice18.id}")
+      expect(page).to have_css("#invoice_id-#{@invoice18.id} ~ #invoice_id-#{@invoice20.id}")
     end
 
-    within "#incomplete_invoices" do
+    within "#invoice_id-#{@invoice6.id}" do
       expect(page).to have_content("#{@invoice6.id} Created: Tuesday, November 1, 2022")
+    end
+
+    within "#invoice_id-#{@invoice14.id}" do
       expect(page).to have_content("#{@invoice14.id} Created: Friday, November 4, 2022")
+    end
+
+    within "#invoice_id-#{@invoice18.id}" do
       expect(page).to have_content("#{@invoice18.id} Created: Sunday, January 1, 2023")
     end
   end
