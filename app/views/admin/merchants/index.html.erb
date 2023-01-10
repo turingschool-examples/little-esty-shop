@@ -1,19 +1,34 @@
-<div id=enabled>
-<h3>Enabled: </h3>
-<% Merchant.enabled.each do |merchant| %>
-  <p><%= link_to merchant.name, admin_merchant_path(merchant) %></p>
-<% end %>
+<div class="flex-body">
+  <div id='all_merchants'>
+    <div id=enabled>
+      <h3>Enabled Merchants</h3>
+      <% @merchants.enabled.each do |merchant| %>
+        <section id='merchant-<%= merchant.id %>'>
+          <p style="display: inline;">
+            <%= link_to merchant.name, admin_merchant_path(merchant) %>
+            <%= button_to "Disable", admin_merchant_path(merchant), method: :patch, form_class: "inline-button", params: { :merchant => { :status => 0 } } %>
+          </p>
+        </section>
+      <% end %>
+    </div>
+
+    <div id=disabled>
+      <h3>Disabled Merchants</h3>
+      <% @merchants.disabled.each do |merchant| %>
+        <section id='merchant-<%= merchant.id %>'>
+          <p style="display: inline;">
+            <%= link_to merchant.name, admin_merchant_path(merchant) %>
+            <%= button_to "Enable", admin_merchant_path(merchant), method: :patch, form_class: "inline-button", params: { :merchant => { :status => 1 } } %>
+          </p>
+        </section>
+      <% end %>
+    </div>
+  </div>
+
+  <div id='top_merchants'>
+    <h3>Top Merchants</h3>
+    <% @merchants.top5_merchants.each do |merchant| %>
+      <p><%= merchant.name %></p>
+    <% end %>
+  </div>
 </div>
-
-<div id=disabled>
-<h3>Disabled: </h3>
-<% Merchant.disabled.each do |merchant| %>
-  <p><%= link_to merchant.name, admin_merchant_path(merchant) %></p>
-<% end %>
-</div>
-
-<h4>Top 5 Merchant's: </h4>
-
-<% @merchants.top5_merchants.each do |merchant| %>
-  <p><%= merchant.name %></p>
-<% end %>

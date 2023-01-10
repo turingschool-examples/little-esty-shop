@@ -2,31 +2,50 @@ require 'rails_helper'
 
 RSpec.describe 'admin merchants index' do
   before :each do
-    @merchants = FactoryBot.create_list(:merchant, 3)
+    @merchant_1 = FactoryBot.create(:merchant, status: 0)
+    @merchant_2 = FactoryBot.create(:merchant, status: 1)
   end
 
   describe 'User Story 24 & 25' do
     it 'shows the name of all merchants with links to admin merchant show' do
       visit admin_merchants_path
 
-      expect(page).to have_link(@merchants.first.name, href: admin_merchant_path(@merchants.first))
-      expect(page).to have_link(@merchants.second.name, href: admin_merchant_path(@merchants.second))
-      expect(page).to have_link(@merchants.third.name, href: admin_merchant_path(@merchants.third))
+      expect(page).to have_link(@merchant_1.name, href: admin_merchant_path(@merchant_1))
+      expect(page).to have_link(@merchant_2.name, href: admin_merchant_path(@merchant_2))
     end
   end
+
+  describe 'User Story 27' do
+    it 'adds buttons to enable and disable merchants' do
+      visit admin_merchants_path
+
+      expect(page).to have_button('Enable')
+      expect(page).to have_button('Disable')
+
+      within("#merchant-#{@merchant_1.id}") { click_button 'Enable' }
+      @merchant_1.reload
+
+      expect(@merchant_1.status).to eq(1)
+
+      within("#merchant-#{@merchant_2.id}") { click_button 'Disable' }
+      @merchant_2.reload
+
+      expect(@merchant_2.status).to eq(0)
+    end
+  end
+
   describe 'userstory 28' do
     it "When I visit the admin merchants index
     Then I see two sections, one for 'Enabled Merchants' and one for 'Disabled Merchants'
     And I see that each Merchant is listed in the appropriate section" do
-      @merchants.first.update(status: 1)
       visit "/admin/merchants"
-      within("div#enabled") do
-        expect(page).to have_content(@merchants.first.name)
 
+      within("div#enabled") do
+        expect(page).to have_content(@merchant_2.name)
       end
+
       within("div#disabled") do
-        expect(page).to have_content(@merchants.second.name)
-        expect(page).to have_content(@merchants.third.name)
+        expect(page).to have_content(@merchant_1.name)
       end
 
 
@@ -166,7 +185,7 @@ RSpec.describe 'admin merchants index' do
     ii20 = InvoiceItem.create!(quantity: 5, unit_price: item20.unit_price, item_id: item20.id, invoice_id: invoice20.id)
 
     visit "/admin/merchants"
-    
+
     expect(merchant1.name).to appear_before(merchant2.name)
     expect(merchant2.name).to appear_before(merchant3.name)
     expect(merchant3.name).to appear_before(merchant4.name)
