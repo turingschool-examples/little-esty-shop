@@ -101,11 +101,6 @@ RSpec.describe 'merchant items index page' do
   end
 
   describe 'story 10' do
-    #     As a merchant,
-    # When I visit my merchant items index page
-    # Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
-    # And I see that each Item is listed in the appropriate section
-
     it 'has has a section for enabled and one for disabled items' do
       mariah = Merchant.create!(name: 'Mariah Ahmed')
       terry = Merchant.create!(name: 'Terry Peeples')
@@ -124,34 +119,8 @@ RSpec.describe 'merchant items index page' do
     end
   end
 
-  # Then I see the names of the top 5 most popular items ranked by total revenue generated
-  # And I see that each item name links to my merchant item show page for that item
-  # And I see the total revenue generated next to each item name
-
-  # before :each do
-  #   FactoryBot.reload
-  #   @customers = FactoryBot.create_list(:customer_with_invoice, 10)
-  #   @invoices = Invoice.all
-  #   FactoryBot.create_list(:transaction, 6, result: 'success', invoice_id: @invoices[0].id)
-  #   FactoryBot.create_list(:transaction, 5, result: 'success', invoice_id: @invoices[3].id)
-  #   FactoryBot.create_list(:transaction, 4, result: 'success', invoice_id: @invoices[1].id)
-  #   FactoryBot.create_list(:transaction, 3, result: 'success', invoice_id: @invoices[4].id)
-  #   FactoryBot.create_list(:transaction, 2, result: 'success', invoice_id: @invoices[2].id)
-  # end
   describe '5 most popular items' do
-    #     Merchant Items Index: 5 most popular items
-    # As a merchant
-    # When I visit my items index page
-    # Then I see the names of the top 5 most popular items ranked by total revenue generated
-    # And I see that each item name links to my merchant item show page for that item
-    # And I see the total revenue generated next to each item name
-
-    # Notes on Revenue Calculation:
-
-    # Only invoices with at least one successful transaction should count towards revenue
-    # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-    # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
-    it 'shows names of top 5 most popular items ranked by total revenue generated with link to show page' do
+    it 'lists top 5 most popular items by total revenue with link to show page' do
       mariah = Merchant.create!(name: 'Mariah Ahmed')
       items = FactoryBot.create_list(:item, 10, merchant_id: mariah.id)
       items.each_with_index do |item, index|
@@ -161,6 +130,7 @@ RSpec.describe 'merchant items index page' do
         FactoryBot.create(:transaction, invoice_id: invoice.id, result: 1)
       end
       top_5 = mariah.top_5_items
+
       visit merchant_item_index_path(mariah)
 
       within('#top-5-items') do
@@ -169,28 +139,36 @@ RSpec.describe 'merchant items index page' do
         click_link top_5.first.name
         expect(current_path).to eq(merchant_item_path(mariah.id, top_5.first.id))
       end
+
       visit merchant_item_index_path(mariah)
+
       within('#top-5-items') do
         expect(page).to have_content(top_5.second.name)
         expect(page).to have_content(top_5.second.total_revenue)
         click_link top_5.second.name
         expect(current_path).to eq(merchant_item_path(mariah.id, top_5.second.id))
       end
+
       visit merchant_item_index_path(mariah)
+
       within('#top-5-items') do
         expect(page).to have_content(top_5.third.name)
         expect(page).to have_content(top_5.third.total_revenue)
         click_link top_5.third.name
         expect(current_path).to eq(merchant_item_path(mariah.id, top_5.third.id))
       end
+
       visit merchant_item_index_path(mariah)
+
       within('#top-5-items') do
         expect(page).to have_content(top_5.fourth.name)
         expect(page).to have_content(top_5.fourth.total_revenue)
         click_link top_5.fourth.name
         expect(current_path).to eq(merchant_item_path(mariah.id, top_5.fourth.id))
       end
+
       visit merchant_item_index_path(mariah)
+
       within('#top-5-items') do
         expect(page).to have_content(top_5.fifth.name)
         expect(page).to have_content(top_5.fifth.total_revenue)
@@ -198,19 +176,5 @@ RSpec.describe 'merchant items index page' do
         expect(current_path).to eq(merchant_item_path(mariah.id, top_5.fifth.id))
       end
     end
-
-    # it 'lists total revenue generated next to each item name' do
-    #   mariah = Merchant.create!(name: 'Mariah Ahmed')
-    #   items = FactoryBot.create_list(:item, 10, merchant_id: mariah.id)
-    #   items.each_with_index do |item, index|
-    #     FactoryBot.create_list(:invoice_item, 2, item_id: item.id, quantity: 1, unit_price: (index * 10))
-    #   end
-    #   Invoice.all.each_with_index do |invoice, _index|
-    #     FactoryBot.create(:transaction, invoice_id: invoice.id, result: 1)
-    #   end
-    #   top_5 = mariah.top_5_items
-
-    #   visit merchant_item_index_path(mariah)
-    # end
   end
 end
