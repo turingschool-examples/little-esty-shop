@@ -9,7 +9,7 @@
 <% @merchants_top_five.each do |merchant| %>
   <div id=<%= "admin-merchants-top-five-#{merchant.id}" %> >
     <%= link_to merchant.name, admin_merchant_path(merchant.id) %>
-    <%= "$#{merchant.total_revenue / 100.00}" %>
+    <%= "$#{merchant.total_revenue / 100.00}, Top selling date for was: #{merchant.best_day.format_date_long}" %>
   </div>
 <% end %>
 
