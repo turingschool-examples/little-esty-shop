@@ -249,13 +249,13 @@ RSpec.describe Merchant do
           merchant = FactoryBot.create(:merchant)
           items = FactoryBot.create_list(:item, 10, merchant_id: merchant.id)
           items.each_with_index do |item, index|
-            FactoryBot.create_list(:invoice_item, 2, item_id: item.id, unit_price: (index * 10))
+            FactoryBot.create_list(:invoice_item, 2, item_id: item.id, quantity: 1, unit_price: (index * 10))
           end
           Invoice.all.each_with_index do |invoice, _index|
             FactoryBot.create(:transaction, invoice_id: invoice.id, result: 1)
           end
 
-          expect(merchant.top_5_items).to eq(items.last(5))
+          expect(merchant.top_5_items).to eq(items.last(5).reverse)
         end
       end
     end
