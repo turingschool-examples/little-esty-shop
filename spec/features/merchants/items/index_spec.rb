@@ -129,51 +129,18 @@ RSpec.describe 'merchant items index page' do
       Invoice.all.each_with_index do |invoice, _index|
         FactoryBot.create(:transaction, invoice_id: invoice.id, result: 1)
       end
-      top_5 = mariah.top_5_items
 
-      visit merchant_item_index_path(mariah)
+      mariah.top_5_items.each do |item|
+        visit merchant_item_index_path(mariah)
 
-      within('#top-5-items') do
-        expect(page).to have_content(top_5.first.name)
-        expect(page).to have_content(top_5.first.total_revenue)
-        click_link top_5.first.name
-        expect(current_path).to eq(merchant_item_path(mariah.id, top_5.first.id))
-      end
+        within('#top-5-items') do
+          expect(page).to have_content(item.name)
+          expect(page).to have_content(item.total_revenue)
 
-      visit merchant_item_index_path(mariah)
+          click_link item.name
 
-      within('#top-5-items') do
-        expect(page).to have_content(top_5.second.name)
-        expect(page).to have_content(top_5.second.total_revenue)
-        click_link top_5.second.name
-        expect(current_path).to eq(merchant_item_path(mariah.id, top_5.second.id))
-      end
-
-      visit merchant_item_index_path(mariah)
-
-      within('#top-5-items') do
-        expect(page).to have_content(top_5.third.name)
-        expect(page).to have_content(top_5.third.total_revenue)
-        click_link top_5.third.name
-        expect(current_path).to eq(merchant_item_path(mariah.id, top_5.third.id))
-      end
-
-      visit merchant_item_index_path(mariah)
-
-      within('#top-5-items') do
-        expect(page).to have_content(top_5.fourth.name)
-        expect(page).to have_content(top_5.fourth.total_revenue)
-        click_link top_5.fourth.name
-        expect(current_path).to eq(merchant_item_path(mariah.id, top_5.fourth.id))
-      end
-
-      visit merchant_item_index_path(mariah)
-
-      within('#top-5-items') do
-        expect(page).to have_content(top_5.fifth.name)
-        expect(page).to have_content(top_5.fifth.total_revenue)
-        click_link top_5.fifth.name
-        expect(current_path).to eq(merchant_item_path(mariah.id, top_5.fifth.id))
+          expect(current_path).to eq(merchant_item_path(mariah.id, item.id))
+        end
       end
     end
   end
