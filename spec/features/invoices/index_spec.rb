@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchant invoices show page' do
+RSpec.describe 'merchant invoices index page' do
   before :each do
     @merchant_1 = Merchant.create!(name: "Billy the Guy")
     @merchant_2 = Merchant.create!(name: "Different Guy")
@@ -29,8 +29,8 @@ RSpec.describe 'merchant invoices show page' do
     @item_1 = Item.create!(name: "Pokemon Cards", description: "Investments", unit_price: 800, merchant_id: @merchant_1.id)
     @item_2 = Item.create!(name: "Pogs", description: "Old school", unit_price: 500, merchant_id: @merchant_2.id)
 
-    @ii = InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_1.id)
-    @ii2 = InvoiceItem.create!(quantity: 1, unit_price: 800, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_2.id)
+    InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_1.id)
+    InvoiceItem.create!(quantity: 1, unit_price: 800, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_2.id)
     InvoiceItem.create!(quantity: 2, unit_price: 1600, status: "pending", item_id: @item_1.id, invoice_id: @invoice_3.id)
     InvoiceItem.create!(quantity: 10, unit_price: 8000, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_4.id)
     InvoiceItem.create!(quantity: 1, unit_price: 500, status: "shipped", item_id: @item_2.id, invoice_id: @invoice_5.id)
@@ -51,54 +51,25 @@ RSpec.describe 'merchant invoices show page' do
     @transaction_13 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_13.id)
   end
 
-  it 'will show the merchant invoices attributes and its customers first and last name' do
-    visit merchant_invoice_path(@merchant_1, @invoice_1)
+  it 'will show all of the merchants invoices that include at least one of its items' do
+    visit merchant_invoices_path(@merchant_1)
 
-    expect(page).to have_content("Invoice ##{@invoice_1.id}")
-    expect(page).to have_content("Status: #{@invoice_1.status}")
-    expect(page).to have_content("Created At: #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
-    expect(page).to have_content("Customer: #{@customer_1.first_name} #{@customer_1.last_name}")
-  end
-
-  it 'will show the merchant invoice items and their attributes' do
-    visit merchant_invoice_path(@merchant_1, @invoice_1)
-
-    within("#items") do
-      expect(page).to have_content(@item_1.name)
-      expect(page).to have_content("Quantity: #{@ii.quantity}")
-      expect(page).to have_content("Price: #{@ii.unit_price}")
-
-      expect(page).to_not have_content(@item_2.name)
-      expect(page).to_not have_content("Quantity: #{@ii2.quantity}")
-      expect(page).to_not have_content("Price: #{@ii2.unit_price}")
+    @merchant_1.invoices.each do |invoice|
+      expect(page).to have_content("Invoice ##{invoice.id}")
     end
+
+    expect(page).to_not have_content("Invoice ##{@invoice_5.id}")
+    expect(page).to_not have_content("Invoice ##{@invoice_6.id}")
   end
 
-  it 'will show the total revenue from the invoice item' do
-    visit merchant_invoice_path(@merchant_1, @invoice_1)
-    
-    within("#items") do
-      expect(page).to have_content("Total Revenue: 20000")
-    end
-  end
-  
-  it 'contains a select field for the invoice items status' do
-    visit merchant_invoice_path(@merchant_1, @invoice_1)
+  it 'contains links to each merchant invoice show page as the invoice id' do
+    visit merchant_invoices_path(@merchant_1)
 
-    expect(page).to have_field("status", with: @ii.status) 
-  end
+    expect(page).to have_link "#{@invoice_1.id}"
+    expect(page).to_not have_link "#{@invoice_6.id}"
 
-  it 'can update its status' do
-    visit merchant_invoice_path(@merchant_1, @invoice_1)
-
-    select "shipped", from: "status"
-
-    click_button "Update"
+    click_link "#{@invoice_1.id}"
 
     expect(current_path).to eq(merchant_invoice_path(@merchant_1, @invoice_1))
-
-    within("#items") do
-      expect(page).to have_field("status", with: "shipped")
-    end
   end
 end

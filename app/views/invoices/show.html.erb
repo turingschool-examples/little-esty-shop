@@ -1,3 +1,22 @@
 <%= render partial: '/merchants_navbar'%>
+<p>Invoice #<%= @invoice.id %></p>
+<p>Status: <%= @invoice.status %></p>
+<p>Created At: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 
-<h2>Invoice</h2>
+<div id="items">
+<h2>Items:</h2>
+<% @invoice.invoice_items.each do |ii| %>
+  <h4><%= ii.item.name %></h4>
+  <p>Quantity: <%= ii.quantity %></p>
+  <p>Price: <%= ii.unit_price %></p>
+
+  <%# <%= form_with url: merchant_invoice_item_path(@merchant, ii), method: :patch, local: true do |form| %> 
+  <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}?item_id=#{ii.item.id}", method: :patch, local: true do |form| %>
+    <%= form.label :status %>
+    <%= form.select :status, ["pending", "packaged", "shipped"], :selected => ii.status %>
+    <%= form.submit "Update" %>
+  <% end %>
+<% end %>
+<p>Total Revenue: <%= @invoice.calculate_total_revenue %></p>
+</div>
