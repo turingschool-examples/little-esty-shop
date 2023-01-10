@@ -26,7 +26,8 @@ class Item < ApplicationRecord
     .where("transactions.result = ?", 0)
     .order(Arel.sql("sum(invoice_items.unit_price * invoice_items.quantity) desc"))
     .group(:id)
-    .limit(1).first
+    .limit(1)
+    .pluck(:updated_at).first
   end
 
 end
