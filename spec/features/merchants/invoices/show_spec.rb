@@ -32,7 +32,7 @@ RSpec.describe 'Merchant invoice show page' do
     @transaction4 = @invoice4.transactions.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07')
 
     @ii1 = InvoiceItem.create!(quantity: 5, unit_price: @item1.unit_price, item_id: @item1.id, invoice_id: @invoice1.id)
-    @ii2 = InvoiceItem.create!(quantity: 5, unit_price: @item2.unit_price, item_id: @item2.id, invoice_id: @invoice2.id)
+    @ii2 = InvoiceItem.create!(quantity: 10, unit_price: @item2.unit_price, item_id: @item2.id, invoice_id: @invoice2.id)
     @ii3 = InvoiceItem.create!(quantity: 5, unit_price: @item3.unit_price, item_id: @item3.id, invoice_id: @invoice3.id)
     @ii4 = InvoiceItem.create!(quantity: 5, unit_price: @item4.unit_price, item_id: @item4.id, invoice_id: @invoice4.id)
   end
@@ -49,14 +49,14 @@ RSpec.describe 'Merchant invoice show page' do
     it "As a merchant
     When I visit my merchant invoice show page
     Then I see the total revenue that will be generated from all of my items on the invoice" do
-
+    
     item5 = @merchant1.items.create!(name: 'food1', description: "a", unit_price: 10)
     item6 = @merchant1.items.create!(name: 'food2', description: "b", unit_price: 5)
-
+    
     ii5 = InvoiceItem.create!(quantity: 5, unit_price: 10, item_id: item5.id, invoice_id: @invoice1.id)
     ii6 = InvoiceItem.create!(quantity: 5, unit_price: 5, item_id: item6.id, invoice_id: @invoice1.id)
-
-
+    
+    
     visit "merchant/#{@merchant1.id}/invoices/#{@invoice1.id}"
     expect(page).to have_content("Total Revenue: 175")
     
@@ -64,6 +64,38 @@ RSpec.describe 'Merchant invoice show page' do
     
     #start from invoice
     #items, invoiceitems
+  end
+end
+
+describe "story 16" do 
+  #   As a merchant
+  # When I visit my merchant invoice show page
+  # Then I see all of my items on the invoice including:
+  # Item name
+  # The quantity of the item ordered
+  # The price the Item sold for
+  # The Invoice Item status
+  # And I do not see any information related to Items for other merchants
+  it 'shows all items on the invoice' do
+    ii5 = InvoiceItem.create!(quantity: 5, unit_price: @item4.unit_price, item_id: @item4.id, invoice_id: @invoice1.id)
+    ii6 = InvoiceItem.create!(quantity: 10, unit_price: @item2.unit_price, item_id: @item2.id, invoice_id: @invoice1.id)
+    visit "merchant/#{@merchant1.id}/invoices/#{@invoice1.id}"
+    save_and_open_page
+    expect(page).to have_content(@item1.name)
+  end
+  it 'shows items name, quantity of item ordered, price item sold for, invoice item status' do
+    visit "merchant/#{@merchant1.id}/invoices/#{@invoice1.id}"
+    
+    expect(page).to have_content(@ii1.quantity)
+    expect(page).to have_content(@ii1.unit_price)
+    expect(page).to have_content(@item1.status)
+    
+  end
+  
+  it 'does not show any information from other merchants' do 
+    visit "merchant/#{@merchant1.id}/invoices/#{@invoice1.id}"
+    
+    expect(page).to_not have_content(@item4.name)
   end
 end
 

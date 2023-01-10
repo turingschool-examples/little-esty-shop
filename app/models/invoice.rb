@@ -24,4 +24,10 @@ class Invoice < ApplicationRecord
     
     # .sum('invoice_items.quantity * invoice_items.unit_price')
   end
+
+  def self.merchant_ii(merchant_id, invoice_id) 
+    InvoiceItem.joins(:item)
+    .where("items.merchant_id = #{merchant_id} AND invoice_items.invoice_id = #{invoice_id}")
+  end
+
 end

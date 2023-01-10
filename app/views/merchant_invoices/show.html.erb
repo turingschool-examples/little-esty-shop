@@ -4,3 +4,13 @@
 <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 
 <h5>Total Revenue: <%= Merchant.total_revenue(@invoice.id) %><h5>
+
+<h1>Items on this Invoice:</h1> 
+
+<% Invoice.merchant_ii(@merchant.id, @invoice.id).each do |invoice_item| %>
+  <p>Item Name: <%= invoice_item.item.name%></p>
+  <p>Quantity: <%= invoice_item.quantity%></p>
+  <p>Unit Price: <%= invoice_item.unit_price%></p>
+  <p>Status: <%= invoice_item.item.status%></p>
+<% end %>
+
