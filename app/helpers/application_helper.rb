@@ -50,6 +50,5 @@ module ApplicationHelper
       end
     end
     hash
-    binding.pry
   end
 end
