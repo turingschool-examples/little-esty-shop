@@ -2,7 +2,7 @@
   <% if @merchant.id == nil %>
     <%= form.hidden_field :enabled, value: false %>
   <% end %>
-  <% form.label :name %>
+  <%= form.label :name %>
   <%= form.text_field :name %>
   <%= form.submit %>
 <% end %>

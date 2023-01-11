@@ -1,5 +1,19 @@
-<%= @info.repo_name %> 
-<% @info.commits_per_collaborator.each do |collaborator, commit| %>
-  <p><%= collaborator %> - <%= commit %> commits</p>
-<% end %>
-<p><%= @info.pr_count %> Merged PRs</p>
+<div id='github_info'>
+  <h3>Github Repository:</h3>
+  <%= link_to @info.repo_name, 'https://github.com/sambcox/little-esty-shop', target: :_blank %>
+  <h3>Commits for each project member:</h3>
+  <table>
+    <tr>
+      <th>Github Username</th>
+      <th>Total Commits</th>
+    </tr>
+    <% @info.commits_per_collaborator.each do |collaborator, commit| %>
+      <tr>
+        <td><%= collaborator %></td>
+        <td><%= commit %> commits</td>
+      </tr>
+    <% end %>
+  </table>
+  <h3>Total Merged Pull Requests:</h3>
+  <p><%= @info.pr_count %> Merged PRs</p>
+</div>

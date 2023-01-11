@@ -45,7 +45,7 @@ RSpec.describe Item do
       item3 = Item.create!(name: 'FlexSeal', description: 'Seals things', unit_price: 2799, merchant_id: 1)
 
       expect(item.best_day_by_revenue).to eq('3/14/2012')
-      expect(item2.best_day_by_revenue).to eq(Time.now.strftime('%-m/%-d/%Y'))
+      expect(item2.best_day_by_revenue).to eq(Time.now.utc.strftime('%-m/%-d/%Y'))
     end
   end
 end

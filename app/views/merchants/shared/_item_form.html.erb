@@ -7,7 +7,7 @@
   <%= f.text_field :name %></p>
 
   <p><%= f.label :description %>
-  <%= f.text_area :description %></p>
+  <%= f.text_area :description, size: '30x10' %></p>
 
   <p><%= f.label :current_price %>
   <%= f.number_field :current_price, step:'any', value: "#{@item.unit_price_to_dollars}", required: true %></p>
