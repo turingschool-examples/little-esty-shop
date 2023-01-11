@@ -33,6 +33,7 @@ module ApplicationHelper
         break
       end
     end
+    @commits
   end
 
   def commit_count

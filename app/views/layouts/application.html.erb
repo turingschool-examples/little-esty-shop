@@ -16,13 +16,13 @@
     <% end %>
     <h1 id="welcome_header">Little Esty Shop</h1>
     <%= yield %>
-    <footer>
+    <footer id="github_api">
     <div>
     <h3>The Collaborators</h3>
     <% commit_count.each do |name, commits| %>
       <p><%= name %> has <%= commits %> commits.</p>
     <% end %>
-    Repo name: <%= repo_name %>
+    Repo Name: <%= repo_name %>
     <h4>Pull Requests: <%= pull_request %></h4>
 
     </div>
