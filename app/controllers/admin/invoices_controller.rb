@@ -1,11 +1,9 @@
 class Admin::InvoicesController < ApplicationController
   def index
-    @info = GithubInfo.new
     @invoices = Invoice.all
   end
 
   def show
-    @info = GithubInfo.new
     @invoice = Invoice.find(params[:id])
   end
 

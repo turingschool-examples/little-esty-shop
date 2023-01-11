@@ -1,16 +1,13 @@
 class Admin::MerchantsController < ApplicationController
   def index
-    @info = GithubInfo.new
     @merchants = Merchant.all
   end
 
   def show
-    @info = GithubInfo.new
     @merchant = Merchant.find(params[:id])
   end
 
   def edit
-    @info = GithubInfo.new
     @merchant = Merchant.find(params[:id])
   end
 
@@ -26,7 +23,6 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def new
-    @info = GithubInfo.new
     @merchant = Merchant.new
   end
 

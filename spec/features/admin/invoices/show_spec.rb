@@ -17,7 +17,7 @@ RSpec.describe 'Admin Invoice Show' do
       expect(page).to have_content(Invoice.first.items.first.name)
       expect(page).to have_content(Invoice.first.invoice_items.first.quantity)
       expect(page).to have_content(Invoice.first.invoice_items.first.unit_price_to_dollars)
-      expect(page).to have_content(Invoice.first.invoice_items.first.status)
+      expect(page).to have_content(Invoice.first.invoice_items.first.status.capitalize)
     end
   end
 

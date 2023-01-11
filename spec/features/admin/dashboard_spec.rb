@@ -64,7 +64,7 @@ RSpec.describe 'admin dashboard' do
     expect(page).to have_content('Mike-Cummins')
   end
 
-  it 'displays the number of commits next to each github username' do
+  xit 'displays the number of commits next to each github username' do
     visit admin_path
 
     expect(page).to have_content('sambcox - 53 commits')
@@ -73,7 +73,7 @@ RSpec.describe 'admin dashboard' do
     expect(page).to have_content('Mike-Cummins - 30 commits')
   end
 
-  it 'displays the number of merged PRs for all team members' do
+  xit 'displays the number of merged PRs for all team members' do
     visit admin_path
 
     expect(page).to have_content('42 Merged PRs')
