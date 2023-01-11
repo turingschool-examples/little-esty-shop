@@ -38,3 +38,16 @@ This project requires Ruby 2.7.4.
 1. [User Stories](./doc/user_stories.md)
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
+
+
+Little-Esty-Shop description
+
+Little Esty Shop shows our knowledge of Active Record and MVC relationships. 
+What we were able to accomplish
+- We got through all our user stories
+- We got through all the api stories
+- We learned a lot through trial and error
+- We made PLENTY of mistakes along the way and have a better grasp on how to specifically use AR and MVC relationships
+
+If we could go back and refactor the api methods out of our application helper and into other files where they would be more properly placed, we would.
+Given more time we'd love to refactor more, especially as we learn more about rails and all of it inticacies.
