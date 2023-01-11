@@ -63,10 +63,10 @@ RSpec.describe 'merchant invoices show page' do
   it 'will show the merchant invoice items and their attributes' do
     visit merchant_invoice_path(@merchant_1, @invoice_1)
 
-    within("#items") do
+    within("#attributes") do
       expect(page).to have_content(@item_1.name)
-      expect(page).to have_content("Quantity: #{@ii.quantity}")
-      expect(page).to have_content("Price: #{@ii.unit_price}")
+      expect(page).to have_content(@ii.quantity)
+      expect(page).to have_content("$40.00")
 
       expect(page).to_not have_content(@item_2.name)
       expect(page).to_not have_content("Quantity: #{@ii2.quantity}")
@@ -78,7 +78,7 @@ RSpec.describe 'merchant invoices show page' do
     visit merchant_invoice_path(@merchant_1, @invoice_1)
     
     within("#items") do
-      expect(page).to have_content("Total Revenue: 20000")
+      expect(page).to have_content("Total Revenue: $200.00")
     end
   end
   

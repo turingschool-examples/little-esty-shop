@@ -1,7 +1,15 @@
 <%= render partial: '/merchants_navbar'%>
 
-<h2><%= @item.name %></h2>
-<p><%= @item.description %></p>
-<p><%= "Current Price: #{@item.unit_price}" %></p>
-<p><%= "Merchant ID: #{@item.merchant_id}" %></p>
-<p><%= link_to "Edit Item", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></p>
+<div id="item">
+  <h2><%= @item.name %></h2>
+</div>
+
+<div id="description">
+  <p><%= @item.description %></p>
+  <p><%= "Current Price: #{price_round(@item.unit_price)}" %></p>
+  <p><%= "Merchant ID: #{@item.merchant_id}" %></p>
+</div>
+
+<div id="edit">
+  <p><%= link_to "Edit Item", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></p>
+</div>

@@ -1,0 +1,14 @@
+#top_5_revenue {
+  float: right;
+  margin: 0 1.5%;
+  width: 40%;
+}
+#items {
+  float: left;
+  margin: 0 1.5%;
+  width: 40%;
+}
+#new_item {
+  margin-left: 20px;
+}
+
