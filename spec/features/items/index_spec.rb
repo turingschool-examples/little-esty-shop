@@ -171,11 +171,16 @@ RSpec.describe "item index page" do
     visit "/merchants/#{@merchant_1.id}/items"
 
     within("#top_5_revenue") do
-      expect(page).to have_content(@merchant_1.top_five_items_by_revenue[0].item_revenue)
-      expect(page).to have_content(@merchant_1.top_five_items_by_revenue[1].item_revenue)
-      expect(page).to have_content(@merchant_1.top_five_items_by_revenue[2].item_revenue)
-      expect(page).to have_content(@merchant_1.top_five_items_by_revenue[3].item_revenue)
-      expect(page).to have_content(@merchant_1.top_five_items_by_revenue[4].item_revenue)
+      expect(page).to have_content("$2080.00")
+      expect(page).to have_content("$750.00")
+      expect(page).to have_content("$325.00")
+      expect(page).to have_content("$275.00")
+      expect(page).to have_content("$225.00")
+      # expect(page).to have_content(@merchant_1.top_five_items_by_revenue[0].item_revenue)
+      # expect(page).to have_content(@merchant_1.top_five_items_by_revenue[1].item_revenue)
+      # expect(page).to have_content(@merchant_1.top_five_items_by_revenue[2].item_revenue)
+      # expect(page).to have_content(@merchant_1.top_five_items_by_revenue[3].item_revenue)
+      # expect(page).to have_content(@merchant_1.top_five_items_by_revenue[4].item_revenue)
     end
   end
 
