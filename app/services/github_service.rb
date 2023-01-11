@@ -1,6 +1,6 @@
-require 'httparty'
-require 'json'
-require 'pry'
+# require 'httparty'
+# require 'json'
+# require 'pry'
 
 # class GithubService
 #   attr_reader :allastair, :braxton, :christian, :anthony
@@ -29,39 +29,39 @@ require 'pry'
   # end
 
   # def commits
-  @user_names = nil
-  def get_names
-    response = HTTParty.get("https://api.github.com/repos/anthonytallent/little-esty-shop/contributors")
-    parsed_json = JSON.parse(response.body, symbolize_names: true)
-    @user_names = parsed_json.map{|user| user[:login]}
-  end
+  # @user_names = nil
+  # def get_names
+  #   response = HTTParty.get("https://api.github.com/repos/anthonytallent/little-esty-shop/contributors")
+  #   parsed_json = JSON.parse(response.body, symbolize_names: true)
+  #   @user_names = parsed_json.map{|user| user[:login]}
+  # end
 
-    @commits = []
-    def get_commits
-      loop.with_index do |_, page_count|
-        response = HTTParty.get("https://api.github.com/repos/anthonytallent/little-esty-shop/commits?per_page=100&page=#{page_count + 1}")
-        parsed_json = JSON.parse(response.body, symbolize_names: true)
-        @commits << parsed_json
-        if response.count < 100
-          @commits.flatten!
-          break
-        end
-      end
-    end
+  #   @commits = []
+  #   def get_commits
+  #     loop.with_index do |_, page_count|
+  #       response = HTTParty.get("https://api.github.com/repos/anthonytallent/little-esty-shop/commits?per_page=100&page=#{page_count + 1}")
+  #       parsed_json = JSON.parse(response.body, symbolize_names: true)
+  #       @commits << parsed_json
+  #       if response.count < 100
+  #         @commits.flatten!
+  #         break
+  #       end
+  #     end
+  #   end
 
-    def commit_count
-      hash = {}
-      @commits.each do |commit|
-        if commit[:author].nil?
-        else
-          if @user_names.include? commit[:author][:login]
-            hash[commit[:author][:login].to_sym] ||= 0
-            hash[commit[:author][:login].to_sym] += 1
-          end
-        end
-      end
-      hash
-    end
+  #   def commit_count
+  #     hash = {}
+  #     @commits.each do |commit|
+  #       if commit[:author].nil?
+  #       else
+  #         if @user_names.include? commit[:author][:login]
+  #           hash[commit[:author][:login].to_sym] ||= 0
+  #           hash[commit[:author][:login].to_sym] += 1
+  #         end
+  #       end
+  #     end
+  #     hash
+  #   end
     # commit_count
     # end
     # hash = {}
