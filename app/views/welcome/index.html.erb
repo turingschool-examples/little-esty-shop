@@ -1,0 +1,8 @@
+<h3><%= link_to 'Admin Dashboard', admin_dashboard_path %></h3>
+
+<h3>Fill in Merchant ID to go to your Dashboard:</h3>
+<%= form_with url: merchant_dashboard_path(:id), method: :get, local: true do |form| %>
+  <% form.label :merchant_id %>
+  <%= form.text_field :merchant_id %>
+  <%= form.submit 'Go to Merchant Dashboard' %>
+<% end %>
