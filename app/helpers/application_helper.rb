@@ -2,8 +2,7 @@ module ApplicationHelper
   def format_time
   end
 
-    @user_names = nil
-    # @commits = []
+  @user_names = nil
 
   def get_names
     response = HTTParty.get("https://api.github.com/repos/anthonytallent/little-esty-shop/collaborators", headers: { 'User-Agent' => 'anthonytallent', 'Authorization' => "token #{Rails.application.credentials.config[:github]}"})
@@ -38,8 +37,6 @@ module ApplicationHelper
 
   def commit_count
     get_names
-    # @user_names = []
-    # @user_names = parsed_json.map{|user| user[:login]}
     @commits = []
     @commits << get_commits
     hash = {}
@@ -53,5 +50,9 @@ module ApplicationHelper
       end
     end
     hash
+  end
+  
+  def price_round(totalcost)
+    '$' + sprintf("%.2f", totalcost/100.to_f)
   end
 end

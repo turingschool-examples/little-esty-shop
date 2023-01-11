@@ -76,7 +76,11 @@ RSpec.describe 'admin merchants index' do
       expect(page).to have_content("Status: enabled")
       expect(page).to_not have_button 'Enable'
       expect(page).to have_button 'Disable'
+      
+      click_button 'Disable'
     end
+    
+    expect(current_path).to eq(admin_merchants_path)
   end
 
   it 'groups merchants by their status' do
