@@ -1,4 +1,3 @@
-require_relative 'csv_parser'
 require 'csv'
 
 namespace :csv_load do
