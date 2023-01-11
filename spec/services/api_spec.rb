@@ -5,5 +5,6 @@ require './app/services/github_info.rb'
 RSpec.describe 'API and Service classes' do
   it 'does' do
     info = GithubInfo.new
+    info.commits_per_collaborator
   end
 end

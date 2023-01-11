@@ -1,3 +1,4 @@
+
 <%= render partial: 'admin/shared/header' %>
 <h4>Invoices</h4>
 <div id='invoice_body'>
@@ -5,3 +6,4 @@
     <p class='column'><%= link_to "Invoice ID #{invoice.id}", admin_invoice_path(invoice.id) %></p>
   <% end %>
 </div>
+<%= render partial: "/github_info" %>

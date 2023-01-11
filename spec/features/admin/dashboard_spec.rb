@@ -48,4 +48,34 @@ RSpec.describe 'admin dashboard' do
       expect(page).to have_content('Tuesday, March 6, 2012')
     end
   end
+
+  it 'displays the name of the github repo' do
+    visit admin_path
+
+    expect(page).to have_content("sambcox/little-esty-shop")
+  end
+
+  it 'displays all contibutors usernames' do
+    visit admin_path
+
+    expect(page).to have_content('sambcox')
+    expect(page).to have_content('this-is-joeking')
+    expect(page).to have_content('ryancanton')
+    expect(page).to have_content('Mike-Cummins')
+  end
+
+  it 'displays the number of commits next to each github username' do
+    visit admin_path
+
+    expect(page).to have_content('sambcox - 53 commits')
+    expect(page).to have_content('this-is-joeking - 29 commits')
+    expect(page).to have_content('ryancanton - 33 commits')
+    expect(page).to have_content('Mike-Cummins - 30 commits')
+  end
+
+  it 'displays the number of merged PRs for all team members' do
+    visit admin_path
+
+    expect(page).to have_content('42 Merged PRs')
+  end
 end

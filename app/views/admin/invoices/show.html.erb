@@ -2,6 +2,7 @@
 <h4>Invoice #<%= @invoice.id %></h4>
 
 <h3>Status: </h3>
+
 <div id='invoice_<%= @invoice.id %>_status'>
   <%= form_with model: [:admin, @invoice], local: true do |form| %>   
     <% form.label :status %>
@@ -34,3 +35,5 @@ Invoice Total: <%= @invoice.total_invoice_revenue %>
     </div>
   <% end%>
 </table>
+
+<%= render partial: "/github_info" %>

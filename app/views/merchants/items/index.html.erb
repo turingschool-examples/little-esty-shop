@@ -1,5 +1,6 @@
 <%= render partial: 'merchants/shared/header' %>
 <h4>My Items</h4>
+
 <%= link_to("New Item", new_merchant_item_path(@merchant))%>
 <div class='admin_merchants_body'>
   <div id='items'>
@@ -41,3 +42,5 @@
     </ol>
   </div>
 </div>
+
+<%= render partial: "/github_info" %>

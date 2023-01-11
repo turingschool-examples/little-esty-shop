@@ -1,4 +1,5 @@
 <%= render partial: 'admin/shared/header' %>
+
 <%= button_to 'Create a new merchant', new_admin_merchant_path, method: :get %>
 <div class='admin_merchants_body'>
   <div id='enabled_merchants'>
@@ -36,3 +37,5 @@
     </ol>
   </div>
 </div>
+
+<%= render partial: "/github_info" %>

@@ -1,3 +1,4 @@
+
 <%= render partial: 'merchants/shared/header' %>
 <h4>Invoice #<%= @invoice.id %></h4>
 Status: <%= @invoice.status.capitalize %><br>
@@ -29,3 +30,5 @@ Total invoice revenue: <%= @invoice.total_invoice_revenue %><br>
     </div>
   <% end %>
 </table>
+
+<%= render partial: "/github_info" %>

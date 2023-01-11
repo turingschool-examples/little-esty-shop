@@ -4,3 +4,5 @@
 <p>Current Price: $<%= '%.2f' % @price %>
 <br>
 <%= link_to "Update Item", edit_merchant_item_path(@merchant, @item) %>
+
+<%= render partial: "/github_info" %>

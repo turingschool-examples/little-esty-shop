@@ -6,3 +6,5 @@
     <p class='column'>Invoice #<%= link_to invoice.id, merchant_invoice_path(@merchant.id, invoice.id) %></p><br>
   <% end %>
 </div>
+
+<%= render partial: "/github_info" %>

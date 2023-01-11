@@ -1,4 +1,6 @@
 <%= flash[:notice] %>
+
 <%= render partial: 'admin/shared/header' %>
 <h4><%= @merchant.name %></h4>
 <p><%= link_to 'Edit this merchant', edit_admin_merchant_path(@merchant) %>
+<%= render partial: "/github_info" %>
