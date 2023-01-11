@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  get '/', to: 'welcome#index'
+
   get '/merchants/:id/dashboard', to: 'merchants/dashboard#show', as: 'merchant_dashboard'
 
   resources :merchants, only: [] do
@@ -10,7 +12,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/admin', to: 'admin/dashboard#index'
+  get '/admin', to: 'admin/dashboard#index', as: 'admin_dashboard'
 
   namespace :admin do
     resources :merchants, except: :destroy
