@@ -1,29 +1,42 @@
 <%= render partial: "/admin/admin_navbar" %>
 
 <h2 id="invoice_">Invoice #<%= @invoice.id %></h2>
-<p> Invoice status: <%= @invoice.status %></p>
-<p> Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
-<p> Customer name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
-
-<h2> Invoice Items </h2>
-<% @invoice.invoice_items.each do |invoice_item| %>
-<div id="item-<%= invoice_item.id %>">
-<p> Item Name: <%= invoice_item.item.name %> </p>
-<p> Quantity: <%= invoice_item.quantity %> </p>
-<p> Price: <%= invoice_item.unit_price %> </p>
-<p> Status: <%= invoice_item.status %> </p>
-</div>
-<% end %>
-
-<div id='total_revenue'>
-<p> Total Revenue: <%= @invoice.calculate_total_revenue%></p>
-</div>
 <div id='invoice_info'>
-<h2> Invoice Status </h2>
-<p> Invoice Status: <%=@invoice.status %></p>
-<p> Update invoice status:</p>
 <%= form_with model: [:admin, @invoice], url: admin_invoice_path(@invoice), local: true do |form|%>
+<%= form.label :status %>
 <%= form.select(:status, ['cancelled', 'in progress', 'completed'], :selected => @invoice.status) %>
 <%= form.submit 'Update invoice status'%>
 <% end %>
 </div>
+<p> Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+
+<div id='total_revenue'>
+  <p> Total Revenue: <%= price_round(@invoice.calculate_total_revenue) %></p>
+</div>
+
+<h4>Customer:</h4>
+<p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
+
+<h4>Items on this Invoice:</h4>
+<table>
+
+    <tr>
+      <th>Item Name</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Status</th>
+    </tr>
+
+<% @invoice.invoice_items.each do |invoice_item| %>
+
+    <tr>
+      <div id="item-<%= invoice_item.id %>">
+      <td><%= invoice_item.item.name %></td>
+      <td><%= invoice_item.quantity %></td>
+      <td><%= price_round(invoice_item.unit_price) %></td>
+      <td><%= invoice_item.status %></td>
+      </div>
+    </tr>
+
+<% end %>
+</table>

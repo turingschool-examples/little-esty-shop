@@ -55,19 +55,19 @@ RSpec.describe 'admin invoices show' do
     visit admin_invoice_path(@invoice_1)
 
     expect(page).to have_content("Invoice ##{@invoice_1.id}")
-    expect(page).to have_content("Invoice status: #{@invoice_1.status}")
+    expect(page).to have_content(@invoice_1.status)
     expect(page).to have_content("Created at: #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
-    expect(page).to have_content("Customer name: #{@customer_1.first_name} #{@customer_1.last_name}")
+    expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name}")
   end
 
   it 'contains item name, quantity of item ordered, price item sold for, invoice item status' do
     visit admin_invoice_path(@invoice_1)
 
     within("#item-#{@ii_1.id}") do
-      expect(page).to have_content("Item Name: #{@item_1.name}")
-      expect(page).to have_content("Quantity: #{@ii_1.quantity}")
-      expect(page).to have_content("Price: #{@ii_1.unit_price}")
-      expect(page).to have_content("Status: #{@ii_1.status}")
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content(@ii_1.quantity)
+      expect(page).to have_content("$40.00")
+      expect(page).to have_content(@ii_1.status)
     end
   end
 
@@ -75,7 +75,7 @@ RSpec.describe 'admin invoices show' do
     visit admin_invoice_path(@invoice_1)
 
     within("#total_revenue") do
-      expect(page).to have_content("Total Revenue: #{@invoice_1.calculate_total_revenue}")
+      expect(page).to have_content("Total Revenue: $200.00")
     end
   end
 
@@ -84,7 +84,7 @@ RSpec.describe 'admin invoices show' do
   
     expect(@invoice_1.status).to eq "completed"
     within ("#invoice_info") do
-      expect(page).to have_content('Status: completed')
+      expect(page).to have_content(@invoice_1.status)
       select "cancelled", :from => "invoice_status"
       click_on 'Update invoice status'
       @invoice_1.reload
