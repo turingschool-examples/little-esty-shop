@@ -1,0 +1,104 @@
+h1 {
+  text-align: center;
+  padding: 10px;
+  margin: 40px;
+  background-color: lightgray;
+}
+
+h4 {
+  background-color: lightgray;
+  border-top: 1px solid black;
+  text-align: center;
+  padding: 10px;
+}
+
+#invoice_body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+table {
+  border: 1px solid black;
+}
+
+#items {
+  float: left;
+}
+
+th {
+  color: white;
+  background-color: gray;
+  border: 1px solid black;
+}
+
+td {
+  border: 1px solid black;
+}
+
+#top_items {
+  float: right;
+}
+
+.dash_header {
+  float: left;
+  margin: 20px
+}
+
+.column {
+  margin: 10px;
+}
+nav {
+  float: right;
+  margin: 20px
+}
+
+#top_customers {
+  float: right;
+}
+
+#incomplete_invoices {
+  float: left;
+}
+
+.general_body {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+}
+body {
+  font-family: sans-serif;
+}
+
+#enabled_merchants {
+  float: left;
+}
+
+#disabled_merchants {
+  float: left;
+}
+
+#favorite_customers {
+  float: right;
+}
+
+#top_by_revenue {
+  float: right;
+}
+
+.admin_merchants_body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.merchnat_invoices_index {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
