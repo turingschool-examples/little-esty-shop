@@ -139,11 +139,11 @@ RSpec.describe 'admin merchants index' do
     visit admin_merchants_path
 
     within("#top_five_merchants") do
-      expect(page).to have_content(80000)
-      expect(page).to have_content(20000)
-      expect(page).to have_content(12500)
-      expect(page).to have_content(3200)
-      expect(page).to have_content(800)
+      expect(page).to have_content('Total Revenue: $800.00')
+      expect(page).to have_content('Total Revenue: $200.00')
+      expect(page).to have_content('Total Revenue: $125.00')
+      expect(page).to have_content('Total Revenue: $32.00')
+      expect(page).to have_content('Total Revenue: $8.00')
     end
   end
 

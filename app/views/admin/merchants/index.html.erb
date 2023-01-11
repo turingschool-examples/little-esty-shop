@@ -1,38 +1,40 @@
 <%= render partial: "/admin/admin_navbar" %>
 
-<h2>Admin Merchants Index</h2>
+<p id="new"><%= link_to "Create New Merchant", new_admin_merchant_path %></p>
 
-<%= link_to "Create New Merchant", new_admin_merchant_path %>
-
-<div id="disabled">
-<h3> Disabled Merchants </h3>
-<% @merchants.each do |merchant| %>
-  <% if merchant.status == "disabled" %>
-      <section id="merchant_<%= merchant.id %>">
-      <p><%= link_to merchant.name, admin_merchant_path(merchant) %> Status: <%= merchant.status%></p>
-      <p><%= button_to 'Enable', admin_merchant_path(merchant), method: :patch, params: {status: 1} %></p>
-      </section>
+<div id="merchants">
+  <div id="disabled">
+  <h3> Disabled Merchants </h3>
+  <% @merchants.each do |merchant| %>
+    <% if merchant.status == "disabled" %>
+        <section id="merchant_<%= merchant.id %>">
+        <p><%= link_to merchant.name, admin_merchant_path(merchant) %> Status: <%= merchant.status%></p>
+        <p><%= button_to 'Enable', admin_merchant_path(merchant), method: :patch, params: {status: 1} %></p>
+        </section>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
 
-<div id="enabled">
-<h3> Enabled Merchants </h3>
-<% @merchants.each do |merchant| %>
-  <% if merchant.status == "enabled" %>
-      <section id="merchant_<%= merchant.id %>">
-      <p><%= link_to merchant.name, admin_merchant_path(merchant) %> Status: <%= merchant.status%></p>
-      <p><%= button_to 'Disable', admin_merchant_path(merchant), method: :patch, params: {status: 0} %></p>
-      </section>
+  <div id="enabled">
+  <h3> Enabled Merchants </h3>
+  <% @merchants.each do |merchant| %>
+    <% if merchant.status == "enabled" %>
+        <section id="merchant_<%= merchant.id %>">
+        <p><%= link_to merchant.name, admin_merchant_path(merchant) %> Status: <%= merchant.status%></p>
+        <p><%= button_to 'Disable', admin_merchant_path(merchant), method: :patch, params: {status: 0} %></p>
+        </section>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
 
 <div id="top_five_merchants">
 <h3> Top Five Merchants </h3>
 <% @top_five_merchants.each do |merchant| %>
-  <%= link_to merchant.name, admin_merchant_path(merchant) %> Total Revenue: <%= merchant.total_rev %>
+<ol>
+  <li><%= link_to merchant.name, admin_merchant_path(merchant) %> - Total Revenue: <%= price_round(merchant.total_rev) %>
+  <br>
   Top selling date was: <%= merchant.top_selling_date.strftime("%m/%d/%y") %>
-  <br> 
+</ol>
 <% end %>
 </div>

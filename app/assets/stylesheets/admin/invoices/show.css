@@ -26,3 +26,27 @@ th {
   background-color: rgb(0, 0, 0);
   color: white;
 }
+
+#invoice_info {
+  margin-left: 20px;
+}
+
+#date {
+  margin-left: 20px;
+}
+
+#total_revenue {
+  margin-left: 20px;
+}
+
+#customer_header {
+  margin-left: 20px;
+}
+
+#customer {
+  margin-left: 40px;
+}
+
+#invoice_items {
+  margin-left: 20px;
+}
