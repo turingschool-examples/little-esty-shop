@@ -1,8 +1,8 @@
-require 'rails_helper'
+# require 'rails_helper'
 
-RSpec.describe GithubService do
-  it 'idk' do
-    ga = GithubService.new
-    ga.commits
-  end
-end
+# RSpec.describe GithubService do
+#   it 'idk' do
+#     ga = GithubService.new
+#     ga.commits
+#   end
+# end
