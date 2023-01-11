@@ -8,16 +8,16 @@
 <%= form.submit 'Update invoice status'%>
 <% end %>
 </div>
-<p> Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<p id="date"> Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 
 <div id='total_revenue'>
   <p> Total Revenue: <%= price_round(@invoice.calculate_total_revenue) %></p>
 </div>
 
-<h4>Customer:</h4>
-<p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
+<h4 id="customer_header">Customer:</h4>
+<p id="customer"><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 
-<h4>Items on this Invoice:</h4>
+<h4 id="invoice_items">Items on this Invoice:</h4>
 <table>
 
     <tr>

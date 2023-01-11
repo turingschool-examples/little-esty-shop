@@ -1,0 +1,15 @@
+#top_five_merchants {
+  float: right;
+  margin: 0 1.5%;
+  width: 40%;
+}
+
+#merchants {
+  float: left;
+  margin: 0 1.5%;
+  width: 40%;
+}
+
+#new {
+  margin-left: 20px;
+}
