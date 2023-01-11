@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe Merchant do
   describe 'Relationships' do
     it { should have_many :items }
+    it { should have_many(:invoice_items).through(:items) }
+    it { should have_many(:invoices).through(:invoice_items) }
+    it { should have_many(:customers).through(:invoices) }
+    it { should have_many(:transactions).through(:invoices) }
     it { should validate_presence_of :name }
   end
 
@@ -20,13 +24,15 @@ RSpec.describe Merchant do
   describe '#ready_to_ship_items' do
     it 'returns the items that are ordered but not shipped for the given merchant' do
       merchants_ready_items = Merchant.find(1).ready_to_ship_items
-
+      new_merchant = Merchant.create!(name: "Bob")
+      
       merchants_ready_items.each do |item|
         expect(item).to be_a Item
         expect(item.merchant_id).to eq(1)
         expect(item.status).to eq(1)
       end
-
+      
+      expect(new_merchant.ready_to_ship_items).to eq([])
       expect(merchants_ready_items.length).to eq(16)
     end
 
