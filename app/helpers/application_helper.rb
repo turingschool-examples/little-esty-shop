@@ -7,7 +7,11 @@ module ApplicationHelper
   def get_names
     response = HTTParty.get("https://api.github.com/repos/anthonytallent/little-esty-shop/collaborators", headers: { 'User-Agent' => 'anthonytallent', 'Authorization' => "token #{Rails.application.credentials.config[:github]}"})
     parsed_json = JSON.parse(response.body, symbolize_names: true)
-    @user_names = parsed_json.map{|user| user[:login]}
+    @user_names = parsed_json.map do |user|
+      user[:login] if user[:login]
+      # binding.pry
+      # user[:login]
+    end
   end
 
   def repo_name
@@ -38,8 +42,7 @@ module ApplicationHelper
 
   def commit_count
     get_names
-    @commits = []
-    @commits << get_commits
+    get_commits
     hash = {}
     @commits.each do |commit|
       if commit[:author].nil?
