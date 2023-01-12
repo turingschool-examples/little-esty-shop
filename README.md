@@ -16,8 +16,10 @@
 - all code must be tested via feature tests and model tests, respectively
 - must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
 - must include a thorough README to describe the project
+   - README should include a basic description of the project, a summary of the work completed, and some ideas for a potential contributor to work on/refactor next. Also include the names and GitHub links of all student contributors on your project. 
 - must deploy completed code to Heroku
 - Continuous Integration / Continuous Deployment is not allowed
+- Use of scaffolding is not allowed
 - Any gems added to the project must be approved by an instructor
 
 ## Setup
