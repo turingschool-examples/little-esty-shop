@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'admin invoices index' do
+RSpec.describe 'Discounts index' do
   before :each do
     @merchant_1 = Merchant.create!(name: "Billy the Guy")
     @merchant_2 = Merchant.create!(name: "Different Guy")
@@ -49,30 +49,39 @@ RSpec.describe 'admin invoices index' do
     @transaction_11 = Transaction.create!(credit_card_number: "4654405418259638", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_11.id)
     @transaction_12 = Transaction.create!(credit_card_number: "4654405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_12.id)
     @transaction_13 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_13.id)
+
+    @discount_1 = Discount.create!(name: "Sale Time", threshold: 10, percentage: 20, merchant_id: @merchant_1.id)
+    @discount_2 = Discount.create!(name: "Labor Day Sale", threshold: 10, percentage: 20, merchant_id: @merchant_1.id)
+    @discount_3 = Discount.create!(name: "Holiday Sale", threshold: 15, percentage: 30, merchant_id: @merchant_1.id)
+    @discount_4 = Discount.create!(name: "Halloween Sale", threshold: 10, percentage: 20, merchant_id: @merchant_1.id)
+    @discount_5 = Discount.create!(name: "Christmas Sale", threshold: 15, percentage: 30, merchant_id: @merchant_1.id)
+    @discount_6 = Discount.create!(name: "Buy it", threshold: 20, percentage: 35, merchant_id: @merchant_2.id)
+  end
+  it 'lists all of the merchants discounts and their attributes' do
+    visit merchant_discounts_path(@merchant_1)
+
+    within("#discount_list") do
+      @merchant_1.discounts.each do |discount|
+        expect(page).to have_content(discount.name)
+        expect(page).to have_content(discount.threshold)
+        expect(page).to have_content(discount.percentage)
+      end
+    end
+
+    expect(page).to_not have_content(@discount_6.name)
   end
 
-  it 'contains all the invoice IDs in the system' do
-    visit admin_invoices_path
+  it 'has links to all the discounts show pages' do
+    visit merchant_discounts_path(@merchant_1)
 
-    expect(page).to have_link("Invoice ##{@invoice_1.id}")
-    expect(page).to have_link("Invoice ##{@invoice_13.id}")
+    within("#discount_list") do
+      @merchant_1.discounts.each do |discount|
+        expect(page).to have_link(discount.name)
+      end
 
-    click_link("Invoice ##{@invoice_1.id}")
-    
-    expect(current_path).to eq(admin_invoice_path(@invoice_1))
+      click_link "#{@discount_1.name}"
+    end
+
+    expect(current_path).to eq(merchant_discount_path(@merchant_1, @discount_1))
   end
-
-  # it 'has all the api information from Github at the bottom of the page' do
-  #   visit admin_invoices_path
-    
-  #   within("#github_api") do
-  #     expect(page).to have_content("The Collaborators")
-  #     expect(page).to have_content("cemccabe")
-  #     expect(page).to have_content("beddings81")
-  #     expect(page).to have_content("anthonytallent")
-  #     expect(page).to have_content("Adrlloyd")
-  #     expect(page).to have_content("Repo Name: anthonytallent/little-esty-shop")
-  #     expect(page).to have_content("Pull Requests:")
-  #   end
-  # end
 end
