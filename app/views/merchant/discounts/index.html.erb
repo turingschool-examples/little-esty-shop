@@ -6,5 +6,6 @@
     <p>threshold: <%= discount.threshold %></p>
     <p>percentage: <%= discount.percentage %></p>
     <p>Click here for details: <%= link_to "#{discount.name}", merchant_discount_path(@merchant, discount) %></p>
+    <%= button_to "Delete #{discount.name}", "/merchants/#{@merchant.id}/discounts/#{discount.id}", method: :delete %>
   <% end %>
 </section>
