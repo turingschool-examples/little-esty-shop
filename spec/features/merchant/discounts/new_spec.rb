@@ -1,6 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe 'Discounts index' do
+RSpec.describe "new discount page" do
   before :each do
     @merchant_1 = Merchant.create!(name: "Billy the Guy")
     @merchant_2 = Merchant.create!(name: "Different Guy")
@@ -57,41 +57,35 @@ RSpec.describe 'Discounts index' do
     @discount_5 = Discount.create!(name: "Christmas Sale", threshold: 15, percentage: 30, merchant_id: @merchant_1.id)
     @discount_6 = Discount.create!(name: "Buy it", threshold: 20, percentage: 35, merchant_id: @merchant_2.id)
   end
-  it 'lists all of the merchants discounts and their attributes' do
-    visit merchant_discounts_path(@merchant_1)
+  it 'has a form to fill out to create a new discount' do
+    visit new_merchant_discount_path(@merchant_1)
 
-    within("#discount_list") do
-      @merchant_1.discounts.each do |discount|
-        expect(page).to have_content(discount.name)
-        expect(page).to have_content(discount.threshold)
-        expect(page).to have_content(discount.percentage)
-      end
-    end
-
-    expect(page).to_not have_content(@discount_6.name)
+    expect(page).to have_field(:name)
+    expect(page).to have_field(:threshold)
+    expect(page).to have_field(:percentage)
   end
 
-  it 'has links to all the discounts show pages' do
-    visit merchant_discounts_path(@merchant_1)
+  it 'can create a new discount and display it on the discount index page' do
+    visit new_merchant_discount_path(@merchant_1)
 
-    within("#discount_list") do
-      @merchant_1.discounts.each do |discount|
-        expect(page).to have_link(discount.name)
-      end
+    fill_in(:name, with: "I need it gone")
+    fill_in(:threshold, with: 10)
+    fill_in(:percentage, with: 20)
 
-      click_link "#{@discount_1.name}"
-    end
+    click_button "Create"
 
-    expect(current_path).to eq(merchant_discount_path(@merchant_1, @discount_1))
+    expect(current_path).to eq(merchant_discounts_path(@merchant_1))
+
+    expect(page).to have_content("I need it gone")
   end
 
-  it 'has a link to create a new discount for this merchant' do
-    visit merchant_discounts_path(@merchant_1)
+  it 'will not let you create a discount if any fields are blank' do
+    visit new_merchant_discount_path(@merchant_1)
 
-    expect(page).to have_link("Create Discount")
-
-    click_link "Create Discount"
+    click_button "Create"
 
     expect(current_path).to eq(new_merchant_discount_path(@merchant_1))
+
+    expect(page).to have_content("Fill in all areas before creating")
   end
 end
