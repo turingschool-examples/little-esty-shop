@@ -154,4 +154,12 @@ RSpec.describe "merchant dashboard" do
         end
       end
   end
+
+  it 'has a link to a merchants discounts index page' do
+    visit "/merchants/#{@merchant_1.id}/dashboard"
+
+    within("#discounts") do
+      expect(page).to have_link("Discounts")
+    end
+  end
 end

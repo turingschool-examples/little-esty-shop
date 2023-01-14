@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :items, except: [:destroy]
     resources :invoices, only: [:index, :show]
     resources :invoice_items, only: [:update]
+    resources :discounts, only: [:index]
     patch "invoices/:invoice_id", to: 'invoice_items#update'
   end
   
