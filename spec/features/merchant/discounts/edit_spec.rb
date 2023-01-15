@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe 'Discount show page' do
+RSpec.describe 'Discount edit page' do
   before :each do
     @merchant_1 = Merchant.create!(name: "Billy the Guy")
     @merchant_2 = Merchant.create!(name: "Different Guy")
@@ -57,22 +57,27 @@ RSpec.describe 'Discount show page' do
     @discount_5 = Discount.create!(name: "Christmas Sale", threshold: 15, percentage: 30, merchant_id: @merchant_1.id)
     @discount_6 = Discount.create!(name: "Buy it", threshold: 20, percentage: 35, merchant_id: @merchant_2.id)
   end
-  
-  it 'displays the discounts attributes' do
-    visit merchant_discount_path(@merchant_1, @discount_1)
 
-    expect(page).to have_content(@discount_1.name)
-    expect(page).to have_content(@discount_1.threshold)
-    expect(page).to have_content(@discount_1.percentage)
+  it 'has a form to edit the discount that is prefilled with the existing attributes' do
+    visit edit_merchant_discount_path(@merchant_1, @discount_1)
+
+    expect(page).to have_field(:name, with: @discount_1.name)
+    expect(page).to have_field(:threshold, with: @discount_1.threshold)
+    expect(page).to have_field(:percentage, with: @discount_1.percentage)
   end
 
-  it 'has a link to edit the discount' do
-    visit merchant_discount_path(@merchant_1, @discount_1)
+  it 'can update the item' do
+    visit edit_merchant_discount_path(@merchant_1, @discount_1)
 
-    expect(page).to have_link("Edit #{@discount_1.name}")
+    fill_in(:name, with: "Go Time")
+    fill_in(:threshold, with: 90)
+    fill_in(:percentage, with: 95)
 
-    click_link "Edit #{@discount_1.name}"
+    click_button "Update Discount"
 
-    expect(current_path).to eq(edit_merchant_discount_path(@merchant_1, @discount_1))
+    expect(current_path).to eq(merchant_discount_path(@merchant_1, @discount_1))
+
+    expect(page).to have_content("Go Time")
+    expect(page).to_not have_content("Sale Time")
   end
 end
