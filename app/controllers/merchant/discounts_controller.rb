@@ -31,6 +31,23 @@ class Merchant::DiscountsController < ApplicationController
     redirect_to merchant_discounts_path(merchant)
   end
 
+  def edit
+    @merchant = Merchant.find(params[:merchant_id])
+    @discount = Discount.find(params[:id])
+
+  end
+
+  def update
+    merchant = Merchant.find(params[:merchant_id])
+    discount = Discount.find(params[:id])
+    if discount.update(discount_params)
+      redirect_to merchant_discount_path(merchant, discount)
+    else
+      redirect_to edit_merchant_discount_path(merchant, discount)
+      flash[:error] = "Please leave no field blank"
+    end
+  end
+
   private
 
   def discount_params
