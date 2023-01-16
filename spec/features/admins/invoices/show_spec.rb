@@ -49,6 +49,13 @@ RSpec.describe 'admin invoices show' do
     @transaction_11 = Transaction.create!(credit_card_number: "4654405418259638", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_11.id)
     @transaction_12 = Transaction.create!(credit_card_number: "4654405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_12.id)
     @transaction_13 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_13.id)
+
+    @discount_1 = Discount.create!(name: "Sale Time", threshold: 5, percentage: 20, merchant_id: @merchant_1.id)
+    @discount_2 = Discount.create!(name: "Labor Day Sale", threshold: 10, percentage: 20, merchant_id: @merchant_1.id)
+    @discount_3 = Discount.create!(name: "Holiday Sale", threshold: 15, percentage: 30, merchant_id: @merchant_1.id)
+    @discount_4 = Discount.create!(name: "Halloween Sale", threshold: 10, percentage: 20, merchant_id: @merchant_1.id)
+    @discount_5 = Discount.create!(name: "Christmas Sale", threshold: 15, percentage: 30, merchant_id: @merchant_1.id)
+    @discount_6 = Discount.create!(name: "Buy it", threshold: 20, percentage: 35, merchant_id: @merchant_2.id)
   end
 
   it 'contains an invoice\'s ID, status, created_at date, customer first/last name' do
@@ -92,5 +99,13 @@ RSpec.describe 'admin invoices show' do
 
     expect(current_path).to eq admin_invoice_path(@invoice_1)
     expect(@invoice_1.status).to eq "cancelled"
+  end
+
+  it 'will display the new discounted total if there is any' do
+    visit admin_invoice_path(@invoice_1)
+
+    within("#discounted_total") do
+      expect(page).to have_content("Total Discounted Revenue: $160.00")
+    end
   end
 end
