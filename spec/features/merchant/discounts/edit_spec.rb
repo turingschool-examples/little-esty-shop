@@ -80,4 +80,14 @@ RSpec.describe 'Discount edit page' do
     expect(page).to have_content("Go Time")
     expect(page).to_not have_content("Sale Time")
   end
+
+  it 'will not let you leave a field blank' do
+    visit edit_merchant_discount_path(@merchant_1, @discount_1)
+
+    fill_in(:name, with: "")
+    click_button "Update Discount"
+
+    expect(current_path).to eq(edit_merchant_discount_path(@merchant_1, @discount_1))
+    expect(page).to have_content("Please leave no field blank")
+  end
 end
