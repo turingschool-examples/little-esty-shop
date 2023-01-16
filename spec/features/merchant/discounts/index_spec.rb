@@ -113,9 +113,9 @@ RSpec.describe 'Discounts index' do
     @holidays = HolidaySearch.new
 
     within("#next_three_holidays") do
-      @holidays.next_three_holidays do |holiday|
-        expect(page).to have_content(holiday.local_name)
-      end
+        expect(page).to have_content(@holidays.next_three_holidays.first.local_name)
+        expect(page).to have_content(@holidays.next_three_holidays.second.local_name)
+        expect(page).to have_content(@holidays.next_three_holidays.third.local_name)
     end
   end
 end
