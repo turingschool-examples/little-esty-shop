@@ -7,8 +7,4 @@ class Discount < ApplicationRecord
   validates_presence_of :name, 
                         :threshold, 
                         :percentage
-
-  def discounted_invoice_total
-    merchant.invoices.calculate_total_revenue
-  end
 end
