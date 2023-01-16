@@ -4,6 +4,7 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :items, through: :invoice_items
   has_many :merchants, through: :items
+  has_many :discounts, through: :merchants
   
   validates_presence_of :status, :customer_id
 
@@ -15,5 +16,11 @@ class Invoice < ApplicationRecord
 
   def calculate_total_revenue
     self.invoice_items.sum("quantity * unit_price")
+  end
+
+  def discounted_invoice_total
+    self.invoice_items.sum do |ii|
+      ii.discounted_revenue
+    end
   end
 end
