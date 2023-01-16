@@ -108,14 +108,18 @@ RSpec.describe 'Discounts index' do
     end
   end
 
-  it 'has a section that lists the next 3 holidays' do
+  it 'has a section that lists the next 3 holidays and their dates' do
     visit merchant_discounts_path(@merchant_1)
     @holidays = HolidaySearch.new
 
     within("#next_three_holidays") do
-        expect(page).to have_content(@holidays.next_three_holidays.first.local_name)
-        expect(page).to have_content(@holidays.next_three_holidays.second.local_name)
-        expect(page).to have_content(@holidays.next_three_holidays.third.local_name)
+      expect(page).to have_content("Upcoming Holidays:")
+      expect(page).to have_content(@holidays.next_three_holidays.first.local_name)
+      expect(page).to have_content(@holidays.next_three_holidays.second.local_name)
+      expect(page).to have_content(@holidays.next_three_holidays.third.local_name)
+      expect(page).to have_content(@holidays.next_three_holidays.first.date)
+      expect(page).to have_content(@holidays.next_three_holidays.second.date)
+      expect(page).to have_content(@holidays.next_three_holidays.third.date)
     end
   end
 end

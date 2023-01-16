@@ -2,8 +2,9 @@
 <%= link_to "Create Discount", new_merchant_discount_path(@merchant) %>
 
 <section id="next_three_holidays">
+  <h2>Upcoming Holidays:</h2>
   <% @holidays.next_three_holidays.each do |holiday| %>
-    <p><%= holiday.local_name %></p>
+    <p><%= holiday.local_name %>: <%= holiday.date %></p>
   <% end %>
 </section>
 <section id="discount_list">
