@@ -120,7 +120,6 @@ RSpec.describe 'merchant invoices show page' do
   it 'will have a link next to each invoice item that has a discount that links you to the discounts show page' do
     visit merchant_invoice_path(@merchant_1, @invoice_1)
 
-    # within("#attributes") do
       expect(page).to have_link(@discount_1.name)
 
       click_link @discount_1.name

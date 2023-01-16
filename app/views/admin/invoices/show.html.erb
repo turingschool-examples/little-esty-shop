@@ -14,6 +14,12 @@
   <p> Total Revenue: <%= price_round(@invoice.calculate_total_revenue) %></p>
 </div>
 
+<section id="discounted_total">
+  <% if @invoice.calculate_total_revenue != @invoice.discounted_invoice_total %>
+    <p>Total Discounted Revenue: <%= price_round(@invoice.discounted_invoice_total) %></p>
+  <% end %>
+</section>
+
 <h4 id="customer_header">Customer:</h4>
 <p id="customer"><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 
@@ -40,3 +46,4 @@
 
 <% end %>
 </table>
+
