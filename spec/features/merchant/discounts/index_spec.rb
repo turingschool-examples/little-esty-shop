@@ -107,4 +107,15 @@ RSpec.describe 'Discounts index' do
       expect(page).to_not have_content(@discount_1.name)
     end
   end
+
+  it 'has a section that lists the next 3 holidays' do
+    visit merchant_discounts_path(@merchant_1)
+    @holidays = HolidaySearch.new
+
+    within("#next_three_holidays") do
+      @holidays.next_three_holidays do |holiday|
+        expect(page).to have_content(holiday.local_name)
+      end
+    end
+  end
 end
