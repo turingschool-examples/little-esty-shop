@@ -52,7 +52,7 @@ def load_test_data1
     @item_10 = Item.create!(name: "Hot Sauce", description: "It's hot", unit_price: 1000, merchant_id: @merchant_1.id, status: 1)
     @item_11 = Item.create!(name: "Barbie Dream House", description: "Barbie Time", unit_price: 4000, merchant_id: @merchant_1.id, status: 1)
 
-    @ii_1 = InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_1.id)
+    @ii_1 = InvoiceItem.create!(quantity: 10, unit_price: 400, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_1.id)
     @ii_2 = InvoiceItem.create!(quantity: 1, unit_price: 800, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_2.id)
     @ii_3 = InvoiceItem.create!(quantity: 2, unit_price: 1600, status: "pending", item_id: @item_1.id, invoice_id: @invoice_3.id)
     @ii_4 = InvoiceItem.create!(quantity: 10, unit_price: 8000, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_4.id)
@@ -101,4 +101,12 @@ def load_test_data1
     @transaction_22 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "success", invoice_id: @invoice_22.id)
     @transaction_23 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "success", invoice_id: @invoice_23.id)
     @transaction_24 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "success", invoice_id: @invoice_24.id)
-end
+
+    @discount_1 = Discount.create!(name: "Sale Time", threshold: 10, percentage: 20, merchant_id: @merchant_1.id)
+    @discount_2 = Discount.create!(name: "Labor Day Sale", threshold: 10, percentage: 20, merchant_id: @merchant_1.id)
+    @discount_3 = Discount.create!(name: "Holiday Sale", threshold: 15, percentage: 30, merchant_id: @merchant_1.id)
+    @discount_4 = Discount.create!(name: "Halloween Sale", threshold: 10, percentage: 20, merchant_id: @merchant_1.id)
+    @discount_5 = Discount.create!(name: "Christmas Sale", threshold: 15, percentage: 30, merchant_id: @merchant_1.id)
+    @discount_6 = Discount.create!(name: "Buy it", threshold: 20, percentage: 35, merchant_id: @merchant_2.id)
+
+  end

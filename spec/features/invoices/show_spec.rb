@@ -29,7 +29,7 @@ RSpec.describe 'merchant invoices show page' do
     @item_1 = Item.create!(name: "Pokemon Cards", description: "Investments", unit_price: 800, merchant_id: @merchant_1.id)
     @item_2 = Item.create!(name: "Pogs", description: "Old school", unit_price: 500, merchant_id: @merchant_2.id)
 
-    @ii = InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_1.id)
+    @ii = InvoiceItem.create!(quantity: 10, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_1.id)
     @ii2 = InvoiceItem.create!(quantity: 1, unit_price: 800, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_2.id)
     InvoiceItem.create!(quantity: 2, unit_price: 1600, status: "pending", item_id: @item_1.id, invoice_id: @invoice_3.id)
     InvoiceItem.create!(quantity: 10, unit_price: 8000, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_4.id)
@@ -49,6 +49,13 @@ RSpec.describe 'merchant invoices show page' do
     @transaction_11 = Transaction.create!(credit_card_number: "4654405418259638", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_11.id)
     @transaction_12 = Transaction.create!(credit_card_number: "4654405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_12.id)
     @transaction_13 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_13.id)
+
+    @discount_1 = Discount.create!(name: "Sale Time", threshold: 10, percentage: 20, merchant_id: @merchant_1.id)
+    @discount_2 = Discount.create!(name: "Labor Day Sale", threshold: 10, percentage: 20, merchant_id: @merchant_1.id)
+    @discount_3 = Discount.create!(name: "Holiday Sale", threshold: 15, percentage: 30, merchant_id: @merchant_1.id)
+    @discount_4 = Discount.create!(name: "Halloween Sale", threshold: 10, percentage: 20, merchant_id: @merchant_1.id)
+    @discount_5 = Discount.create!(name: "Christmas Sale", threshold: 15, percentage: 30, merchant_id: @merchant_1.id)
+    @discount_6 = Discount.create!(name: "Buy it", threshold: 20, percentage: 35, merchant_id: @merchant_2.id)
   end
 
   it 'will show the merchant invoices attributes and its customers first and last name' do
@@ -78,7 +85,7 @@ RSpec.describe 'merchant invoices show page' do
     visit merchant_invoice_path(@merchant_1, @invoice_1)
     
     within("#items") do
-      expect(page).to have_content("Total Revenue: $200.00")
+      expect(page).to have_content("Total Revenue: $400.00")
     end
   end
   
@@ -100,5 +107,25 @@ RSpec.describe 'merchant invoices show page' do
     within("#items") do
       expect(page).to have_field("status", with: "shipped")
     end
+  end
+
+  it 'will display the new discounted total if there is any' do
+    visit merchant_invoice_path(@merchant_1, @invoice_1)
+
+    within("#discounted_total") do
+      expect(page).to have_content("Total Discounted Revenue: $320.00")
+    end
+  end
+
+  it 'will have a link next to each invoice item that has a discount that links you to the discounts show page' do
+    visit merchant_invoice_path(@merchant_1, @invoice_1)
+
+    # within("#attributes") do
+      expect(page).to have_link(@discount_1.name)
+
+      click_link @discount_1.name
+
+      expect(current_path).to eq(merchant_discount_path(@merchant_1, @discount_1))
+    # end
   end
 end
