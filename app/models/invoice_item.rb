@@ -20,9 +20,7 @@ class InvoiceItem < ApplicationRecord
   end
 
   def discounted_revenue
-    # binding.pry
     if self.return_discount
-      
       discount =  self.full_revenue * (self.return_discount.percentage.to_f/100.0)
       self.full_revenue - discount
     else
