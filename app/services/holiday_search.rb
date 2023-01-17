@@ -1,5 +1,5 @@
 require_relative "./holiday_service"
-# this only exists to make plain old ruby objects (POROS)
+# this exists to make plain old ruby objects (POROS)
 # performs any "business logic" that needs to be performed
 # It transforms the data into what your controller is going to need
 class HolidaySearch
