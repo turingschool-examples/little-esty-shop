@@ -43,7 +43,6 @@ group :development, :test do
   gem 'orderly'
   gem 'capybara'
   gem 'launchy'
-  gem 'pry'
   gem 'simplecov'
   gem 'shoulda-matchers'
   gem 'net-http'
