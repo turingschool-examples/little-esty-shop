@@ -14,7 +14,7 @@
 - must use Rails 5.2.x
 - must use PostgreSQL
 - all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
+- must use GitHub branching, team code reviews via GitHub PR comments, and either GitHub Projects or a project management tool of your group's choice (Trello, Notion, etc.)
 - must include a thorough README to describe the project
    - README should include a basic description of the project, a summary of the work completed, and some ideas for a potential contributor to work on/refactor next. Also include the names and GitHub links of all student contributors on your project. 
 - must deploy completed code to Heroku
