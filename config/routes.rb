@@ -12,7 +12,8 @@ Rails.application.routes.draw do
  #merchants
   #customers
   #invoices
-  #transactions
+  get '/merchants/:merchant_id/invoices', to: 'invoices#index'
+   #transactions
   #items
   #invoice_items
 
