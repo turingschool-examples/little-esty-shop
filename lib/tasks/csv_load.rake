@@ -1,68 +1,62 @@
 require 'csv'
 
 namespace :csv_load do
-  task :all => [:merchants, :customers, :items, :invoices, :invoice_items, :transactions]
+  task :all => [:merchants, :customers, :items, :invoices, :invoice_items, :transactions, :reset]
+  
+  task :reset => :environment do
+    ActiveRecord::Base.connection.tables.each do |t|
+      ActiveRecord::Base.connection.reset_pk_sequence!(t)
+    end
+  end
 
   task :merchants => :environment do
-    csv_text = File.read('./db/data/merchants.csv')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      Merchant.create!(row.to_hash)
+    CSV.foreach('./db/data/merchants.csv', headers: true, header_converters: :symbol ) do |info|
+      Merchant.create!(info.to_hash)
     end
   end
   
   task :customers => :environment do
-    csv_text = File.read('./db/data/customers.csv')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      Customer.create!(row.to_hash)
+    CSV.foreach('./db/data/customers.csv', headers: true, header_converters: :symbol ) do |info|
+      Customer.create!(info.to_hash)
     end
   end
   
   task :items => :environment do
-    csv_text = File.read('./db/data/items.csv')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      Item.create!(row.to_hash)
+    CSV.foreach('./db/data/items.csv', headers: true, header_converters: :symbol ) do |info|
+      Item.create!(info.to_hash)
     end
   end
   
   task :invoices => :environment do
-    csv_text = File.read('./db/data/invoices.csv')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      if row["status"] == "in progress"
-        row["status"] = 0
-      elsif row["status"] == "cancelled"
-        row["status"] = 1
+    CSV.foreach('./db/data/invoices.csv', headers: true) do |info|
+      if info["status"] == "in progress"
+        info["status"] = 0
+      elsif info["status"] == "cancelled"
+        info["status"] = 1
       else
-        row["status"] = 2
+        info["status"] = 2
       end
-      Invoice.create!(row.to_hash)
+      Invoice.create!(info.to_hash)
     end
   end
   
   task :invoice_items => :environment do
-    csv_text = File.read('./db/data/invoice_items.csv')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      if row["status"] == "pending"
-        row["status"] = 0
-      elsif row["status"] == "packaged"
-        row["status"] = 1
+    CSV.foreach('./db/data/invoice_items.csv', headers: true) do |info|
+      if info["status"] == "pending"
+        info["status"] = 0
+      elsif info["status"] == "packaged"
+        info["status"] = 1
       else
-        row["status"] = 2
+        info["status"] = 2
       end
-      InvoiceItem.create!(row.to_hash)
+      InvoiceItem.create!(info.to_hash)
     end
   end
   
   task :transactions => :environment do
-    csv_text = File.read('./db/data/transactions.csv')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      row["result"] == "success" ? row[:result] = 0 : row[:result] = 1
-      Transaction.create!(row.to_hash)
+    CSV.foreach('./db/data/transactions.csv', headers: true) do |info|
+      info["result"] == "success" ? info[:result] = 0 : info[:result] = 1
+      Transaction.create!(info.to_hash)
     end
   end
 end 
