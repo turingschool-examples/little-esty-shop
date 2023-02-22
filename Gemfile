@@ -47,6 +47,7 @@ group :development, :test do
   gem 'simplecov' # requires add'l setup
   gem 'shoulda-matchers' # requires add'l setup
   gem 'orderly' # tests order of appearance on webpage
+  gem 'net-http'
 end
 
 group :development do
