@@ -5,6 +5,6 @@ class Merchant < ApplicationRecord
 
 
   def top_five_customers
-    require 'pry'; binding.pry
+	binding.pry
   end
 end
