@@ -10,6 +10,13 @@ Rails.application.routes.draw do
   #invoice_items
   
  #merchants
+
+#  namespace :merchants do 
+
+#  end
+
+get "merchants/:merchant_id/dashboard", to: "merchants#dashboard"
+ 
   #customers
   #invoices
   #transactions
