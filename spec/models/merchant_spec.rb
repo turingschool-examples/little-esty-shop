@@ -36,7 +36,8 @@ RSpec.describe Merchant, type: :model do
   describe "#top_five_customers" do
     it "returns the top five customers and their total number of transactions" do
       expect(@merchant.top_five_customers).to eq([@cust1, @cust2, @cust3, @cust4, @cust6])
-      expect(@merchant.top_five_customers).to_not contain(@cust5)
+      expect(@merchant.top_five_customers).to_not include(@cust5)
     end
   end
 end
+
