@@ -15,6 +15,7 @@ RSpec.describe Transaction, type: :model do
 
       @inv_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 1, unit_price: 1500, uuid: 4)
     
+      # can't continue: date time? how to enter
       # @transation1 = Transation.create!(credit_card_number: 12345, credit_card_expiration_date: 12/23, result: 0, uuid: 5)
     end
 
