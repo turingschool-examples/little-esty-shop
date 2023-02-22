@@ -1,31 +1,39 @@
 require 'csv'
 namespace :csv_load do
   
-  task :customers do
-    #environment
+  task customers: :environment do
     CSV.foreach('db/data/customers.csv', headers: true) do |row|
-      require 'pry'; binding.pry
-      Customer.create!(row.to_h)
+      Customer.create(row.to_h)
     end
   end
 
-  task :invoice_items do
-    CSV.read(invoice_items.csv)
+  task invoice_items: :environment do
+    CSV.foreach('db/data/invoice_items.csv', headers: true) do |row|
+      InvoiceItem.create(row.to_h)
+    end
   end
 
-  task :invoices do
-    CSV.read(invoices.csv)
+  task invoices: :environment do
+    CSV.foreach('db/data/invoices.csv', headers: true) do |row|
+      Invoice.create(row.to_h)
+    end
   end
 
-  task :items do
-    CSV.read(items.csv)
+  task items: :environment do
+    CSV.foreach('db/data/items.csv', headers: true) do |row|
+      Item.create(row.to_h)
+    end
   end
 
-  task :merchants do
-    CSV.read(merchants.csv)
+  task merchants: :environment do
+    CSV.foreach('db/data/merchants.csv', headers: true) do |row|
+      Merchant.create(row.to_h)
+    end
   end
 
-  task :transactions do
-    CSV.read(transactions.csv)
+  task transactions: :environment do
+    CSV.foreach('db/data/transactions.csv', headers: true) do |row|
+      Transaction.create(row.to_h)
+    end
   end
 end
