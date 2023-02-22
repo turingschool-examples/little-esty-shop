@@ -27,4 +27,4 @@
 /config/master.key
 
 #Ignore coverage folder for SimpleCov
-/coverage
+coverage
