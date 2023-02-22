@@ -40,6 +40,13 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
+  gem 'capybara' # feature tests
+  gem 'launchy' # save_and_open_page
+  gem 'faker' # use with factory_bot to generate fake data for tests
+  gem 'factory_bot_rails'
+  gem 'simplecov' # requires add'l setup
+  gem 'shoulda-matchers' # requires add'l setup
+  gem 'orderly' # tests order of appearance on webpage
 end
 
 group :development do
