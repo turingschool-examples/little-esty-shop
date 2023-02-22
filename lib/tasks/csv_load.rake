@@ -36,4 +36,7 @@ namespace :csv_load do
       Transaction.create(row.to_h)
     end
   end
+
+  task :all => [:customers, :invoice_items, :invoices, :items, :merchants, :transactions]
+
 end
