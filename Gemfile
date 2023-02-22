@@ -42,6 +42,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.1'
   gem 'net-http'
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'simplecov'
 end
 
 group :development do
