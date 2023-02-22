@@ -25,6 +25,9 @@ ActiveRecord::Schema.define(version: 2023_02_21_235554) do
   create_table "invoice_items", force: :cascade do |t|
     t.bigint "item_id"
     t.bigint "invoice_id"
+    t.integer "quantity"
+    t.integer "unit_price"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
