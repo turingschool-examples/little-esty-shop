@@ -11,8 +11,21 @@ describe "As an admin" do
     it "I see a link to the admin merchants index" do
       visit "/admin"
 
-      expect(page).to have_link("Admin Merchants")
-      expect(page).to have_link("Admin Invoices")
+      expect(page).to have_link("Admin Merchants", href: admin_merchants_path)
+
+      click_link "Admin Merchants"
+
+      expect(current_path).to eq("/admin/merchants")
+    end
+
+    it "I see a link to the admin invoices index" do
+      visit "/admin"
+
+      expect(page).to have_link("Admin Invoices", href: admin_invoices_path)
+
+      click_link "Admin Invoices"
+
+      expect(current_path).to eq("/admin/invoices")
     end
   end
 end
