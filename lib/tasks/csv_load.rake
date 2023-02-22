@@ -12,7 +12,6 @@ namespace :csv_load do
   task invoice_items: :environment do
     InvoiceItem.destroy_all
     CSV.foreach('db/data/invoice_items.csv', headers: true) do |row|
-      # require 'pry'; binding.pry
       InvoiceItem.create(row.to_h)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
@@ -21,7 +20,9 @@ namespace :csv_load do
   task invoices: :environment do
     Invoice.destroy_all
     CSV.foreach('db/data/invoices.csv', headers: true) do |row|
-      Invoice.create(row.to_h)
+      rowhash = row.to_h
+      rowhash['status'] = :in_progress if rowhash['status'] == 'in progress'
+      Invoice.create(rowhash)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
 

@@ -1,4 +1,4 @@
 class Invoice < ApplicationRecord
-  enum status: [ 'in progress', :completed, :cancelled ]
+  enum status: [ :in_progress, :completed, :cancelled ]
 
 end
