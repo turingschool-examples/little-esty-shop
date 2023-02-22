@@ -4,7 +4,6 @@ RSpec.describe Invoice, type: :model do
   describe 'relationships' do 
     it { should belong_to :customer }
     it { should have_many :transactions }
-  #OR does one invoice belong to ONE transations??
   end
 
   describe 'enums tests' do
@@ -13,7 +12,7 @@ RSpec.describe Invoice, type: :model do
       @invoice1 = @customer1.invoices.create!(uuid: 1)
     end
 
-    it "can return in progress by default and can change" do 
+    it "can return a status of 'in progress' by default and can change" do 
       expect(@invoice1.status).to eq("in progress")
 
       @invoice1.status = 1
