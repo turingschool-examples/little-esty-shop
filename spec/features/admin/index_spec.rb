@@ -7,5 +7,12 @@ describe "As an admin" do
 
       expect(page).to have_content("Admin Dashboard")
     end
+
+    it "I see a link to the admin merchants index" do
+      visit "/admin"
+
+      expect(page).to have_link("Admin Merchants")
+      expect(page).to have_link("Admin Invoices")
+    end
   end
 end
