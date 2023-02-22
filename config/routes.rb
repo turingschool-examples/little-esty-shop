@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   # end
   
   get '/merchants/:id/dashboard', to: "dashboard#index"
+  get '/merchants/:id/items', to: "items#index"
+  get '/merchants/:id/invoices', to: "invoices#index"
 end
