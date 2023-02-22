@@ -43,8 +43,10 @@ ActiveRecord::Schema.define(version: 2023_02_21_235554) do
     t.string "name"
     t.string "description"
     t.integer "unit_price"
+    t.bigint "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
   create_table "merchants", force: :cascade do |t|
@@ -57,8 +59,10 @@ ActiveRecord::Schema.define(version: 2023_02_21_235554) do
     t.integer "credit_card_number"
     t.datetime "credit_card_expiration_date"
     t.integer "result"
+    t.bigint "invoice_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_transactions_on_invoice_id"
   end
 
   add_foreign_key "invoices", "customers"
