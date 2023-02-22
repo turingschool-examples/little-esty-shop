@@ -40,7 +40,14 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
-end
+  gem 'net-http'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'orderly'
+  gem 'shoulda-matchers', '~> 5.0'
+  gem 'factory_bot_rails'
+  gem 'faker'
+ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -54,3 +61,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
