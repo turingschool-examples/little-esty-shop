@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(version: 2023_02_22_025719) do
   end
 
   create_table "invoice_items", force: :cascade do |t|
-    t.string "item_id"
-    t.string "invoice_id"
-    t.string "quantity"
+    t.integer "item_id"
+    t.integer "invoice_id"
+    t.integer "quantity"
     t.integer "unit_price"
     t.integer "status"
     t.datetime "created_at", null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2023_02_22_025719) do
   end
 
   create_table "invoices", force: :cascade do |t|
-    t.string "customer_id"
+    t.integer "customer_id"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2023_02_22_025719) do
     t.string "name"
     t.string "description"
     t.integer "unit_price"
-    t.string "merchant_id"
+    t.integer "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

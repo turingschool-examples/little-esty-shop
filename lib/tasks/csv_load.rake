@@ -25,7 +25,6 @@ namespace :csv_load do
       Invoice.create(rowhash)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
-
   end
 
   task items: :environment do
