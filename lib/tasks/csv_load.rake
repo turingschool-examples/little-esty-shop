@@ -1,31 +1,56 @@
 require 'csv'
 namespace :csv_load do
   
-  task :customers do
-    #environment
+  task customers: :environment do
+    Customer.destroy_all
     CSV.foreach('db/data/customers.csv', headers: true) do |row|
-      require 'pry'; binding.pry
-      Customer.create!(row.to_h)
+      Customer.create(row.to_h)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('customers')
   end
 
-  task :invoice_items do
-    CSV.read(invoice_items.csv)
+  task invoice_items: :environment do
+    InvoiceItem.destroy_all
+    CSV.foreach('db/data/invoice_items.csv', headers: true) do |row|
+      InvoiceItem.create(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
   end
 
-  task :invoices do
-    CSV.read(invoices.csv)
+  task invoices: :environment do
+    Invoice.destroy_all
+    CSV.foreach('db/data/invoices.csv', headers: true) do |row|
+      rowhash = row.to_h
+      rowhash['status'] = :in_progress if rowhash['status'] == 'in progress'
+      Invoice.create(rowhash)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
   end
 
-  task :items do
-    CSV.read(items.csv)
+  task items: :environment do
+    Item.destroy_all
+    CSV.foreach('db/data/items.csv', headers: true) do |row|
+      Item.create(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('items')
   end
 
-  task :merchants do
-    CSV.read(merchants.csv)
+  task merchants: :environment do
+    Merchant.destroy_all
+    CSV.foreach('db/data/merchants.csv', headers: true) do |row|
+      Merchant.create(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
   end
 
-  task :transactions do
-    CSV.read(transactions.csv)
+  task transactions: :environment do
+    Transaction.destroy_all
+    CSV.foreach('db/data/transactions.csv', headers: true) do |row|
+      Transaction.create(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
   end
+
+  task :all => [:customers, :invoice_items, :invoices, :items, :merchants, :transactions]
+
 end
