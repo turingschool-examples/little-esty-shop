@@ -40,3 +40,12 @@ This project requires Ruby 2.7.4.
 1. [User Stories](./doc/user_stories.md)
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
+
+######### Before Final Project Delete all Lines Above & Keep Lines Below ############
+# Little Esty Shop by Team JazzyCoders
+## Name of Contributors & Github Links
+## Descirption of Project
+## Summary of all Works Completed
+## Ideas for Potential Future Contributors
+(What would they refactor next)
+
