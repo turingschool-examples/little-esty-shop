@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   
   get "/admin", to: 'admin#index'
 
+
+	resources :merchants do
+		member do 
+			get 'dashboard'
+		end
+	end
+
   namespace :admin do
     resources :merchants, only: [:index]
     resources :invoices, only: [:index]
