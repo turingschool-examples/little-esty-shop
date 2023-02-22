@@ -40,6 +40,12 @@ namespace :csv_load do
 			InvoiceItem.create!(uuid: row["id"], item_id: row["item_id"], invoice_id: row["invoice_id"], quantity: row["quantity"], unit_price: row["unit_price"], status: row["status"], created_at: row["created_at"], updated_at: row["updated_at"])
 		end
 	end
+	 	
+	task :invoices => [:environment] do
+		CSV.foreach('db/data/invoice_items.csv', headers: true) do |row|
+			Invoice.create!(uuid: row["id"], item_id: row["item_id"], invoice_id: row["invoice_id"], quantity: row["quantity"], unit_price: row["unit_price"], status: row["status"], created_at: row["created_at"], updated_at: row["updated_at"])
+		end
+	end
 
 	task :all => [:environment] do
     ActiveRecord::Base.connection.tables.each do |t|
