@@ -8,6 +8,7 @@ namespace :csv_load do
     csv.each do |row|
       Customer.create!(row.to_hash)
     end
+    puts "Imported Customers!"
   end
 
   desc "Import Invoice Items CSV data in db"
@@ -17,6 +18,7 @@ namespace :csv_load do
     csv.each do |row|
       InvoiceItem.create!(row.to_hash)
     end
+    puts "Imported Invoice Items!"
   end
 
   desc "Import Invoices CSV data in db"
@@ -26,6 +28,7 @@ namespace :csv_load do
     csv.each do |row|
       Invoice.create!(row.to_hash)
     end
+    puts "Imported Invoices!"
   end
 
   desc "Import Items CSV data in db"
@@ -35,6 +38,7 @@ namespace :csv_load do
     csv.each do |row|
       Item.create!(row.to_hash)
     end
+    puts "Imported Items!"
   end
 
   desc "Import Merchants CSV data in db"
@@ -44,6 +48,7 @@ namespace :csv_load do
     csv.each do |row|
       Merchant.create!(row.to_hash)
     end
+    puts "Imported Merchants!"
   end
 
   desc "Import Transactions CSV data in db"
@@ -53,6 +58,10 @@ namespace :csv_load do
     csv.each do |row|
       Transaction.create!(row.to_hash)
     end
+    puts "Imported Transactions!"
   end
 
+  desc "Load all CSV files into db"
+  task all: [:merchants, :customers, :invoices, :items, :invoice_items, :transactions]
+  
 end
