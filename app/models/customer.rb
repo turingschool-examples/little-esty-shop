@@ -1,3 +1,3 @@
 class Customer < ApplicationRecord
-  has_many :invoces
+  has_many :invoices
 end
