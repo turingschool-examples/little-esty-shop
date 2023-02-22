@@ -2,7 +2,7 @@ require 'csv'
 
 namespace :csv_load do
 desc "This task loads csv data"
-task :customers => :environment do
+  task :customers => :environment do
     CSV.foreach('././db/data/customers.csv', headers: true) do |row|
       Customer.create!(row.to_h)
     end
@@ -43,5 +43,13 @@ task :customers => :environment do
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
   end
-end
 
+  task :all => :environment do
+    Rake::Task['csv_load:customers'].execute
+    Rake::Task['csv_load:merchants'].execute
+    Rake::Task['csv_load:items'].execute
+    Rake::Task['csv_load:invoices'].execute
+    Rake::Task['csv_load:invoice_items'].execute
+    Rake::Task['csv_load:transactions'].execute
+  end
+end
