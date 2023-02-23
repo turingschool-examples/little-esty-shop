@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   #invoices
 namespace :admin do 
   get "/invoices", to: "invoices#index"
+  get "/invoices/:invoice_id", to: "invoices#show"
 end 
   #transactions
   #items
