@@ -1,7 +1,14 @@
-
-<% @merchant.invoices.each do |invoice| %>
-  <h3><%= invoice.id %></h3>
-  <p><%= invoice.status %></p>
-  <p><%= invoice.created_at %></p>
-  <p><%= invoice.customer.first_name %> <%= invoice.customer.last_name %></p>
+<h2>Invoice ID: <%= @invoice.id %></h2>
+  <%= @merchant.name %>
+  <p>Status: <%= @invoice.status %></p>
+  <p>Created at: <%= @invoice.created_at %></p>
+  <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
+  <br>
+<% @invoice.items.each do |item| %>
+  <h3><%= item.name %></h3>
+  <p>Quantity: <%= @invoice_item.quantity %></p>
+  <p>Sold for: <%= item.unit_price * @invoice_item.quantity %></p>
+  <p>Status: <%= @invoice_item.status %></p>
 <% end %>
+
+
