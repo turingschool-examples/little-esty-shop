@@ -6,7 +6,7 @@
 
 <%@items_for_specific_merchant.each do |item|%>
   <div id= "item_number_<%="#{item.id}"%>">
-  <h5><%=item.name%></h5>
+  <h5><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></h5>
     <p>Status <%=item.status%> 
         <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |form| %>
           <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %>
@@ -14,5 +14,3 @@
         <% end %>
   <%end%>
 </div>
-
-
