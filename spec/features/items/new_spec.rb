@@ -24,7 +24,6 @@ end
 
       it "I am taken to a form that allows me to add item information" do 
         visit "/merchants/#{@merchant1.id}/items"
-save_and_open_page
         
         expect(page).to_not have_content("medicine- 3467typeadvil")
 
