@@ -7,4 +7,11 @@ Rails.application.routes.draw do
 
   get '/admin', to: 'admin/dashboards#index'
 
+  #/admin/merchants
+
+  namespace :admin do 
+    resources :merchants, only: :index
+    resources :invoices, only: :index
+  end
+
 end
