@@ -1,0 +1,5 @@
+<h1>Merchant Name: <%=@merchant.name%></h2>
+
+<%=link_to "#{@merchant.name}'s Items", "/merchants/#{@merchant.id}/items"%>
+
+<%=link_to "#{@merchant.name}'s Invoices", "/merchants/#{@merchant.id}/invoices"%>

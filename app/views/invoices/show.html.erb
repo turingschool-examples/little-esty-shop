@@ -1,0 +1,7 @@
+
+<% @merchant.invoices.each do |invoice| %>
+  <h3><%= invoice.id %></h3>
+  <p><%= invoice.status %></p>
+  <p><%= invoice.created_at %></p>
+  <p><%= invoice.customer.first_name %> <%= invoice.customer.last_name %></p>
+<% end %>
