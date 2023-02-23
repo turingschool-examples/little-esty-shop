@@ -1,0 +1,8 @@
+<h1>Edit <%= @merchant.name %>'s Profile</h1>
+
+<%= render partial: 'merchant_form', locals: {
+	url: admin_merchant_path,
+	label: :name,
+	default_value: @merchant.name,
+	button_text: 'Edit Name'
+} %>
