@@ -45,6 +45,9 @@ get "merchants/:merchant_id/dashboard", to: "merchants#dashboard"
 
  #items
 
+ get '/merchants/:merchant_id/items', to: 'merchants/items#index'
+ get '/merchants/:merchant_id/items/new', to: 'items#new'
+ post '/merchants/:merchant_id/items', to: 'items#create'
 
 
  #invoice_items
