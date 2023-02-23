@@ -1,0 +1,18 @@
+  
+  
+  <h3>Add Item to Merchant's List of Items</h3>
+  <%= form_with url: "/merchants/#{@merchant.id}/items", method: :post, local: true do |form| %>
+    <%= form.label :name%>
+    <%= form.text_field :name, id: "item_name" %>
+
+    <br>
+    <%= form.label :description%>
+    <%= form.text_area :description, id: "item_description" %>
+    <br>
+    <%=form.label :unit_price%>
+    <%= form.number_field :unit_price, id: "item_unit_price" %>
+
+    <%= form.hidden_field :uuid, value: (Item.all.last.uuid) +1 %>
+
+    <%= form.submit "Create Item" %>
+  <%end %>

@@ -1,4 +1,16 @@
-<h2> Items: </h2>
-<% @items.each do |item|%>
- <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> 
-<% end %>
+<%= link_to "Add Item", "/merchants/#{@merchant.id}/items/new" %>
+
+
+
+<h3> List of all Items</h3>
+
+<%@items_for_specific_merchant.each do |item|%>
+  <div id= "item_number_<%="#{item.id}"%>">
+  <h5><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></h5>
+    <p>Status <%=item.status%> 
+        <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |form| %>
+          <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %>
+        <%= form.submit "Enable/Disable Item #{item.name}" %>
+        <% end %>
+  <%end%>
+</div>
