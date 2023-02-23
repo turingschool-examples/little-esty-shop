@@ -9,5 +9,16 @@ describe 'admin index page' do
         expect(page).to have_content("Admin Dashboard")
       end
     end
+
+    describe 'user story 20' do 
+      it 'has links to the admin merchants index and the admin invoices index' do 
+  
+        visit admin_path 
+
+        expect(page).to have_link("Admin Merchants")
+        expect(page).to have_link("Admin Invoices")
+      end
+    end
+  
   # end
 end  
