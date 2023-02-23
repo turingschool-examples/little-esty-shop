@@ -23,13 +23,22 @@ end
       end
 
       it "I am taken to a form that allows me to add item information" do 
+        visit "/merchants/#{@merchant1.id}/items"
+save_and_open_page
+        
+        expect(page).to_not have_content("medicine- 3467typeadvil")
+
         visit "/merchants/#{@merchant1.id}/items/new"
 
-        fill_in "item_name", with: "medicine"
+        fill_in "item_name", with: "medicine- 3467typeadvil"
         fill_in "item_description", with: "advil"
         fill_in "item_unit_price", with: 1200
 
         click_button("Create Item")
+save_and_open_page
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
+# Need to work on test for this. 
+        expect(page).to have_content("medicine- 3467typeadvil")
       end
 
 

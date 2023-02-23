@@ -1,1 +1,12 @@
 <%= link_to "Add Item", "/merchants/#{@merchant.id}/items/new" %>
+
+
+
+<h3> List of all Items</h3>
+
+<%@items_for_specific_merchant.each do |item|%>
+  <h5><%=item.name%></h5>
+    <p><%=item.status%>
+  <%end%>
+
+</div>
