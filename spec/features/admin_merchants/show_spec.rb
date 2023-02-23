@@ -7,9 +7,9 @@ describe 'Admin Merchants show page' do
         merchant_1 = Merchant.create!(name: 'The Best Goods')
 
         visit admin_merchants_path
-        save_and_open_page
+        # save_and_open_page
         click_link('The Best Goods')
-        save_and_open_page
+        # save_and_open_page
         expect(current_path).to eq(admin_merchant_path(merchant_1))
         expect(page).to have_content("#{merchant_1.name}")
       end
