@@ -8,17 +8,18 @@ describe 'dashboard' do
         expect(page).to have_css('h1', text: "Admin Dashboard")
       end
     end
+  end
 
   describe 'user story 20' do
     it 'should have a link to admin merchants index' do
       visit '/admin'
-      expect(page).to have_link('/admin/merchants')
+      expect(page).to have_link('Admin Merchants', href: '/admin/merchants')
     end
 
     it 'should have a link to admin invoices index' do
       visit '/admin'
-      expect(page).to have_link('/admin/invoices')
+      expect(page).to have_link('Admin Invoices', href: '/admin/invoices')
     end
   end 
-  end
+  
 end
