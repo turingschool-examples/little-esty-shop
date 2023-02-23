@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   #merchants
   #customers
   #invoices
+namespace :admin do 
+  get "/invoices", to: "invoices#index"
+end 
   #transactions
   #items
   #invoice_items
