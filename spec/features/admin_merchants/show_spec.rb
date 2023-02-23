@@ -8,7 +8,7 @@ describe 'Admin Merchants show page' do
         merchant_2 = create(:merchant)
 
         visit admin_merchants_path
-    
+
         click_link("#{merchant_1.name}")
      
         expect(current_path).to eq(admin_merchant_path(merchant_1))
