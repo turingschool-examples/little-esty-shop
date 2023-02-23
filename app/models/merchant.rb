@@ -5,4 +5,7 @@ class Merchant < ApplicationRecord
 	has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
+  def unshipped_items
+    invoice_items.where(status: 'pending').or(invoice_items.where(status: 'packaged'))
+  end
 end
