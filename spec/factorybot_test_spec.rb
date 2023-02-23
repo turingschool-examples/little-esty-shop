@@ -26,7 +26,6 @@ describe 'factorybot' do
 
     it 'creates one for transactions' do
       x = create(:transaction)
-      require 'pry'; binding.pry
       expect(x).to be_a(Transaction)
     end
   end
