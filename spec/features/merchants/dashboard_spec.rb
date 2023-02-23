@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'Merchant Dashboard' do
 	before(:each) do
 		Merchant.destroy_all

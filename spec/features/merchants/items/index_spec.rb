@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant Items Index' do
-  before do
+  before (:each) do
     Merchant.destroy_all
 		Customer.destroy_all
 		Invoice.destroy_all
@@ -18,11 +18,11 @@ RSpec.describe 'Merchant Items Index' do
     @scarf = @pete.items.create!(name: "Scarf", description: "scarf, knitted", unit_price: 350) 
 		@tshirt = @pete.items.create!(name: "Tshirt", description: "tshirt, screenprinted", unit_price: 250)
 
-    visit "/merchants/#{@carlos.id}/items}"
   end
-
+  
   describe 'As a merchant, when I visit my merchant items index page' do
     it 'I see a list of the names of all of my items, no items from other merchants' do
+      visit "/merchants/#{@carlos.id}/items"
       expect(page).to have_content("bowl")
       expect(page).to have_content("knife")
 
