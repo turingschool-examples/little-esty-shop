@@ -1,5 +1,5 @@
 class Merchant < ApplicationRecord
 	validates :name, presence: true
-	enum status: { active: 0, disabled: 1 }
+	enum status: [ "active", "disabled" ]
   has_many :items
 end
