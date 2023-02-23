@@ -21,24 +21,24 @@ RSpec.describe 'merchant invoice index' do
     @customer_2 = Customer.create(first_name: "Steve", last_name: "Stevinson")
     
     @invoice_1 = Invoice.create(customer: @customer_1)
-    @invoice_1.items << @item_1
-    @invoice_1.items << @item_2
-    @invoice_1.items << @item_3
+    # @invoice_1.items << @item_1
     @invoice_2 = Invoice.create(customer: @customer_2, status: 0)
-    @invoice_2.items << @item_4
-    @invoice_2.items << @item_5
-    @invoice_2.items << @item_6
+
 
     InvoiceItem.create(item: @item_1, invoice: @invoice_1, quantity: 1, unit_price: @item_1.unit_price)
+    InvoiceItem.create(item: @item_2, invoice: @invoice_2, quantity: 1, unit_price: @item_2.unit_price)
 
   end
 
   describe 'mercants invoices index' do
-    it 'shows all invoices' do
+    it 'shows all invoices with links to their show page' do
       visit "merchants/#{@merchant_1.id}/invoices"
-      require 'pry'; binding.pry
-
+      
+      expect(page).to have_content(@invoice_1.id)
       expect(page).to have_content(@invoice_2.id)
+
+      expect(page).to have_link(@invoice_1.id)
+      expect(page).to have_link(@invoice_2.id)
     end
   end
 end
