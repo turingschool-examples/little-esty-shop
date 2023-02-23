@@ -1,0 +1,7 @@
+<ul>
+  <% @invoices.each do |invoice| %>
+    <div id="invoice-<%= invoice.id %>">
+      <li> <%= link_to "#{invoice.id}", admin_invoices_path(invoice.id) %> </li>
+    </div>
+  <% end %>
+</ul>
