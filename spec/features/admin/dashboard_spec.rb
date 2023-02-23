@@ -78,5 +78,10 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to have_content "Bob Fiel -- Transactions: 2"
       expect(page).to have_content "Laura Fiel -- Transactions: 2"
     end
+
+    xit 'I see the IDs of all invoices with unshipped items and links to their show page' do 
+      expect(page).to have_content "Incomplete Invoices"
+
+    end
   end
 end

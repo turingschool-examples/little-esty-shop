@@ -123,7 +123,6 @@ RSpec.describe 'Merchant Dashboard' do
 
 		it 'And I see that the list is ordered from oldest to newest' do 
 			within '#items_to_ship' do
-			save_and_open_page
 				expect("#{@invit1.invoice_id}").to appear_before("#{@invit2.invoice_id}")
 				expect("#{@invit3.invoice_id}").to appear_before("#{@invit4.invoice_id}")
 				expect("#{@invit3.invoice_id}").to_not appear_before("#{@invit1.invoice_id}")
