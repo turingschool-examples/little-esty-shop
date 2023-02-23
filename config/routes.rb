@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-
-  get 'dashboard/index'
+  
   resources :merchant do
+    resources :items, :invoices
     resources :dashboard, only: [:index]
   end
 

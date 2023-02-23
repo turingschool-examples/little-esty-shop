@@ -1,2 +1,7 @@
-<h1>Merchant Dashboard</h1>
-<p><%=@merchant.name%></p>
+<div class="links">
+  <ul>
+    <h1><%= @merchant.name %>'s Dashbaord</h1>
+    <%= button_to "My Items", "/merchant/#{@merchant.id}/items", method: :get%>
+    <%= button_to "My Invoices", "/merchant/#{@merchant.id}/invoices", method: :get%>
+  </ul>
+</div>
