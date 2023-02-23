@@ -45,8 +45,9 @@ group :development, :test do
   gem 'simplecov'
   gem 'capybara'
   gem 'orderly'
+  gem 'launchy'
   # gem 'rspec-html', '~> 0.2.13' *inquire with group [https://github.com/bobf/rspec-html] - AKH
-end
+  
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
