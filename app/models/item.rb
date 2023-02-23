@@ -5,4 +5,6 @@ class Item < ApplicationRecord
   has_many :customers, through: :invoices
 
   enum status: ["disabled", "enabled" ]
+
+
 end

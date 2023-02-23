@@ -16,7 +16,6 @@ end
     describe "visit items new page" do 
       it "I am taken to a form that allows me to add item information" do 
         visit "/merchants/#{@merchant1.id}/items/new"
-        save_and_open_page
         expect(page).to have_selector('form')
         expect(page).to have_field("item_name")
         expect(page).to have_field("item_description")
@@ -25,7 +24,6 @@ end
 
       it "I am taken to a form that allows me to add item information" do 
         visit "/merchants/#{@merchant1.id}/items"
-save_and_open_page
         
         expect(page).to_not have_content("medicine- 3467typeadvil")
 
@@ -36,14 +34,10 @@ save_and_open_page
         fill_in "item_unit_price", with: 1200
 
         click_button("Create Item")
-save_and_open_page
         expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
 # Need to work on test for this. 
         expect(page).to have_content("medicine- 3467typeadvil")
       end
-
-
-
 
     end
   end 

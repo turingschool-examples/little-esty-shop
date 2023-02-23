@@ -17,13 +17,11 @@ before(:each) do
   @invoice_1 = @customer_1.invoices.create(status: 0)
   @invoice_2 = @customer_1.invoices.create(status: 0)
   @invoice_3 = @customer_1.invoices.create(status: 0)
-  
-  # InvoiceItem.create(item: @item_1, invoice: @invoice_1, quantity: 1, unit_price: @item_1.unit_price)
 
 end 
 
   describe "as a merchant" do 
-    describe "visit items index page" do 
+    describe "visit merchant items index page" do 
       it "see link to create new item" do 
 
         visit "/merchants/#{@merchant1.id}/items"
@@ -76,12 +74,35 @@ end
         within("div#item_number_#{@item_5.id}") do 
           expect(page).to have_content("Status disabled")
         end 
+      end
 
+      it "see sections for disabled and enabled items and items are sorted accordingly to their respective statuses" do 
+
+        visit "/merchants/#{@merchant1.id}/items"
+        
+
+        within("div#enabled_items") do 
+          expect(page).to have_content("List of Enabled Items")
+          expect(page).to have_content(@item_5.name)
+        end 
+
+        within("div#disabled_items") do 
+          expect(page).to have_content("List of Disabled Items")
+          expect(page).to have_content(@item_1.name)
+          expect(page).to have_content(@item_2.name)
+
+        end 
 
       end
+
+
+
+
     end
   end 
 end 
+
+# HUY'S TESTS BELOW; HADYS ABOVE. NEED TO FIX THESE AT SOME POINT 
 
 RSpec.describe 'index', type: :feature do
   describe "when merchant visit 'merchants/merchant_id/items'" do
