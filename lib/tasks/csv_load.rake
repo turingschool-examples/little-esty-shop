@@ -8,6 +8,7 @@ namespace :csv_load do
     csv.each do |row|
       Customer.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!("customers")
     puts "Imported Customers!"
   end
 
@@ -18,6 +19,7 @@ namespace :csv_load do
     csv.each do |row|
       InvoiceItem.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!("invoice_items")
     puts "Imported Invoice Items!"
   end
 
@@ -28,6 +30,7 @@ namespace :csv_load do
     csv.each do |row|
       Invoice.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!("invoices")
     puts "Imported Invoices!"
   end
 
@@ -38,6 +41,7 @@ namespace :csv_load do
     csv.each do |row|
       Item.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!("items")
     puts "Imported Items!"
   end
 
@@ -48,6 +52,7 @@ namespace :csv_load do
     csv.each do |row|
       Merchant.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!("merchants")
     puts "Imported Merchants!"
   end
 
@@ -58,6 +63,7 @@ namespace :csv_load do
     csv.each do |row|
       Transaction.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!("transactions")
     puts "Imported Transactions!"
   end
 
