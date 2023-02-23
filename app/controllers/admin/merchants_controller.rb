@@ -6,4 +6,13 @@ class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
   end
+
+  def new
+ 
+  end
+
+  def create 
+   Merchant.create!(name: params[:name])
+   redirect_to admin_merchants_path
+  end
 end
