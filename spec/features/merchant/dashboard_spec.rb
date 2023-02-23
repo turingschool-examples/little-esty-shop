@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'Merchant Dashboard' do
 	before(:each) do
 		Merchant.destroy_all
@@ -41,12 +43,12 @@ RSpec.describe 'Merchant Dashboard' do
 		@trans15 = @inv5.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
 		@trans16 = @inv6.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
     
-		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id)
-		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv2.id)
-		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id)
-		InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id)
-		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv5.id)
-		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id)
+		@invit1 = InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id, status: 1)
+		@invit2 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv2.id, status: 1)
+		@invit3 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id, status: 1)
+		@invit4 =InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id, status: 0)
+		@invit5 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv5.id, status: 0)
+		@invit6 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id, status: 2)
     
     visit "/merchants/#{@merchant.id}/dashboard"
 	end
@@ -72,5 +74,49 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_content "Bob Fiel -- Transactions: 2"
       expect(page).to have_content "Laura Fiel -- Transactions: 2"
     end
+
+		describe 'Merchant Dashboard Items Ready to Ship' do
+			it 'I see a section for "Items Ready to Ship"' do
+				within '#items_to_ship' do
+					expect(page).to have_content("Items Ready to Ship")
+				end
+			end
+
+			it 'In that section I see a list of the names of all of my items that have been ordered and have not yet been shipped' do
+				within '#items_to_ship' do
+
+					save_and_open_page
+					expect(page).to have_content("bowl", :count => 4)
+
+					expect(page).to have_content("knife")
+				end
+			end
+
+			it 'next to each Item I see the id of the invoice that ordered my item' do
+				within '#items_to_ship' do
+					expect(page).to have_content(@invit1.invoice_id)
+					expect(page).to have_content(@invit2.invoice_id)
+					expect(page).to have_content(@invit3.invoice_id)
+					expect(page).to have_content(@invit4.invoice_id)
+					expect(page).to have_content(@invit5.invoice_id)
+				end
+			end
+			
+			it "And each invoice id is a link to my merchant's invoice show page" do
+				within '#items_to_ship' do
+					expect(page).to have_link("#{@invit1.invoice_id}")
+					expect(page).to have_link("#{@invit2.invoice_id}")
+					expect(page).to have_link("#{@invit3.invoice_id}")
+					expect(page).to have_link("#{@invit4.invoice_id}")
+					expect(page).to have_link("#{@invit5.invoice_id}")
+					# expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invit1.invoice_id}")
+
+					click_on "#{@invit1.invoice_id}"
+
+					expect(current_path).to eq(merchant_invoice_path(@merchant.id, @invit1.invoice_id))
+				# require 'pry'; binding.pry
+				end
+			end
+		end
 	end
 end
