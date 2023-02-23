@@ -58,7 +58,7 @@ RSpec.describe "Merchant Dashboard Index" do
 
       # 3. Merchant Dashboard Statistics - Favorite Customers
       it "I see the names of the top 5 customers w/ the largest number of transactions" do
-        expect(page).to have_content("#{customer1.name}: transactions )
+        expect(page).to have_content("#{customer1.name}: transactions")
       end
     end
   end
