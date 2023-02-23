@@ -16,6 +16,7 @@ end
     describe "visit items new page" do 
       it "I am taken to a form that allows me to add item information" do 
         visit "/merchants/#{@merchant1.id}/items/new"
+        save_and_open_page
         expect(page).to have_selector('form')
         expect(page).to have_field("item_name")
         expect(page).to have_field("item_description")
