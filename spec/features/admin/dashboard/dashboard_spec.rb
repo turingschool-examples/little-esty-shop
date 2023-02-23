@@ -42,6 +42,7 @@ describe 'dashboard' do
     invoice8 = create(:invoice, customer_id: customer8.id)
     transaction1_1 = create(:transaction, invoice_id: invoice1.id)
     transaction1_2 = create(:transaction, invoice_id: invoice1.id)
+    transaction1_3 = create(:transaction, invoice_id: invoice1.id)
     transaction2_1 = create(:transaction, invoice_id: invoice2.id)
     transaction2_2 = create(:transaction, invoice_id: invoice2.id)
     transaction3_1 = create(:transaction, invoice_id: invoice3.id)
@@ -55,11 +56,11 @@ describe 'dashboard' do
     transaction8 = create(:transaction, invoice_id: invoice8.id)
     visit '/admin'
     expect(page).to have_content('Top 5 Customers')
-    expect(page).to have_content("#{customer1.first_name + customer1.last_name}: 2 transactions")
-    expect(page).to have_content("#{customer2.first_name + customer2.last_name}: 2 transactions")
-    expect(page).to have_content("#{customer3.first_name + customer3.last_name}: 2 transactions")
-    expect(page).to have_content("#{customer4.first_name + customer4.last_name}: 2 transactions")
-    expect(page).to have_content("#{customer5.first_name + customer5.last_name}: 2 transactions")
+    expect(page).to have_content("#{customer1.first_name + " " + customer1.last_name}: 3 transactions")
+    expect(page).to have_content("#{customer2.first_name + " " + customer2.last_name}: 2 transactions")
+    expect(page).to have_content("#{customer3.first_name + " " + customer3.last_name}: 2 transactions")
+    expect(page).to have_content("#{customer4.first_name + " " + customer4.last_name}: 2 transactions")
+    expect(page).to have_content("#{customer5.first_name + " " + customer5.last_name}: 2 transactions")
     end
   end
   
