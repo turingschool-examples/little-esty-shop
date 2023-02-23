@@ -1,0 +1,11 @@
+<h1>Admin DashBoard</h1>
+
+<%= link_to "Admin Merchants Index", "/admin/merchants" %> <br>
+<%= link_to "Admin Invoices Index", "/admin/invoices" %>
+
+<h3>Top Five Customers:</h3>
+<% @top_five_customers.each do |customer| %>
+<%= "#{customer.first_name} #{customer.last_name} -- Transactions: #{customer.trans_count}" %> <br><br>
+<% end %>
+
+<h3> Incomplete Invoices </h3>
