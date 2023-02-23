@@ -21,6 +21,13 @@ describe 'dashboard' do
       expect(page).to have_link('Admin Invoices', href: '/admin/invoices')
     end
   end 
+
+  describe 'user story 21' do
+    xit 'should have a list of the top 5 customers' do
+      expect(page).to have_content('Top 5 Customers')
+
+    end
+  end
   
-  
+
 end
