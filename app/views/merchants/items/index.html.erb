@@ -5,8 +5,14 @@
 <h3> List of all Items</h3>
 
 <%@items_for_specific_merchant.each do |item|%>
+  <div id= "item_number_<%="#{item.id}"%>">
   <h5><%=item.name%></h5>
-    <p><%=item.status%>
+    <p>Status <%=item.status%> 
+        <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |form| %>
+          <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %>
+        <%= form.submit "Enable/Disable Item #{item.name}" %>
+        <% end %>
   <%end%>
-
 </div>
+
+
