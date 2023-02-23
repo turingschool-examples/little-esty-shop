@@ -14,7 +14,6 @@ RSpec.describe 'show', type: :feature do
       expect(page).to have_content("#{qui.name}")
       expect(page).to have_content("#{qui.description}")
       expect(page).to have_content("#{qui.unit_price}")
-      save_and_open_page
     end
   end
 end

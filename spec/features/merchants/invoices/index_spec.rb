@@ -30,7 +30,7 @@ RSpec.describe 'merchant invoice index' do
 
   end
 
-  describe 'mercants invoices index' do
+  describe 'merchants invoices index' do
     it 'shows all invoices with links to their show page' do
       visit "merchants/#{@merchant_1.id}/invoices"
       

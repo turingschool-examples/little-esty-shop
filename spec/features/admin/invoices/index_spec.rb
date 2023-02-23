@@ -27,7 +27,7 @@ end
       it "see list of invoice IDs in the system" do 
 
         visit "/admin/invoices"
-save_and_open_page
+        
         expect(page).to have_link("Invoice Number #{@invoice_1.id}", href: "/invoices/#{@invoice_1.id}")
         expect(page).to have_link("Invoice Number #{@invoice_2.id}", href: "/invoices/#{@invoice_2.id}")
         expect(page).to have_link("Invoice Number #{@invoice_3.id}", href: "/invoices/#{@invoice_3.id}")

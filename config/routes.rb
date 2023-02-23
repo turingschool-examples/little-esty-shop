@@ -25,8 +25,8 @@ get "merchants/:merchant_id/dashboard", to: "merchants#dashboard"
  
   #customers
   #invoices
-  get '/merchants/:merchant_id/invoices', to: 'invoices#index'
-  get '/merchants/:merchant_id/invoices/:id', to: 'invoices#show'
+  get '/merchants/:merchant_id/invoices', to: 'merchants/invoices#index'
+  get '/merchants/:merchant_id/invoices/:id', to: 'merchants/invoices#show'
    #transactions
   #items
   get '/merchants/:merchant_id/items', to: 'merchants/items#index'
