@@ -6,12 +6,19 @@ class Customer < ApplicationRecord
 
   def self.top_five_customers
 
-    select("customers.*, count(transactions) as trans_count")
+    select(:id, :first_name, :last_name, 'count(transactions.*) as trans_count')
              .joins(:transactions)
              .where(transactions: {result: "success"})
              .group(:id)
              .order("trans_count desc")
              .limit(5)
+             
+    # select("customers.*, count(transactions) as trans_count")
+    #          .joins(:transactions)
+    #          .where(transactions: {result: "success"})
+    #          .group(:id)
+    #          .order("trans_count desc")
+    #          .limit(5)
 	end
   
 end
