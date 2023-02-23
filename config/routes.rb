@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'welcome#index'
  #admins
+ get '/admin', to: "admin#index"
+
   #merchants
   #customers
   #invoices
@@ -10,6 +12,13 @@ Rails.application.routes.draw do
   #invoice_items
   
  #merchants
+
+#  namespace :merchants do 
+
+#  end
+
+get "merchants/:merchant_id/dashboard", to: "merchants#dashboard"
+ 
   #customers
   #invoices
   get '/merchants/:merchant_id/invoices', to: 'invoices#index'
