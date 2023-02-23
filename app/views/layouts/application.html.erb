@@ -7,9 +7,21 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <style>
+  header {
+    background-color: #666;
+    padding: 15px;
+    text-align: center;
+    font-size: 15px;
+    color: white;
+  }
+  </style>
   </head>
 
-  <body>
+  <body> 
+  <header>
+    <h1>Little Esty Shop</h1>
+  </header>
     <%= yield %>
   </body>
 </html>
