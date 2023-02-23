@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Merchant, type: :feature do
+RSpec.describe 'Merchant Items', type: :feature do
   describe 'Merchant Items Index' do
 
     let!(:sam) { Merchant.create!(name: "Sam's Sports") }
