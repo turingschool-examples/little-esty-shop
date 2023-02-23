@@ -29,6 +29,26 @@ RSpec.describe 'merchant show dashboard index page', type: :feature do
     let!(:item4) { merchant1.items.create!(name: "wireless mouse", description: "wireless computer mouse for mac", unit_price: 40) }    
     let!(:item5) { merchant1.items.create!(name: "chapstick", description: "coconut flavor chapstick", unit_price: 2) }    
 
+    let!(:transaction1) {invoice1.transactions.create!(uuid: 1, credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+    let!(:transaction2) {invoice2.transactions.create!(uuid: 2, credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+    
+    let!(:transaction3) {invoice3.transactions.create!(uuid: 3, credit_card_number: 4140149827486249, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+    let!(:transaction4) {invoice4.transactions.create!(uuid: 4, credit_card_number: 4140149827486249, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+   
+    let!(:transaction5) {invoice5.transactions.create!(uuid: 6, credit_card_number: 4763141973880496, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+    let!(:transaction6) {invoice6.transactions.create!(uuid: 7, credit_card_number: 4763141973880496, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+   
+    let!(:transaction14) {invoice7.transactions.create!(uuid: 15, credit_card_number: 4504301557459341, credit_card_expiration_date: Date.new(2024, 1, 3), result: "failed") }
+    let!(:transaction15) {invoice7.transactions.create!(uuid: 16, credit_card_number: 4504301557459341, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+    
+    let!(:transaction7) {invoice8.transactions.create!(uuid: 8, credit_card_number: 4173081602435789, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+    let!(:transaction8) {invoice9.transactions.create!(uuid: 9, credit_card_number: 4173081602435789, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+    
+    let!(:transaction9) {invoice10.transactions.create!(uuid: 10, credit_card_number: 4972246905754900, credit_card_expiration_date: Date.new(2024, 1, 3), result: "failed") }
+    let!(:transaction10) {invoice10.transactions.create!(uuid: 11, credit_card_number: 4972246905754900, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+    let!(:transaction11) {invoice11.transactions.create!(uuid: 12, credit_card_number: 4972246905754900, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+    
+    
     before do
       InvoiceItem.create!(item: item1, invoice: invoice1)
       InvoiceItem.create!(item: item2, invoice: invoice1)
