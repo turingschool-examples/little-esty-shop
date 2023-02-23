@@ -4,7 +4,7 @@ describe 'dashboard' do
   describe 'user story 19' do
     it 'should have a header \'admin dashboard\'' do
       visit '/admin'
-      within('div#header') do
+      within('header') do
         expect(page).to have_css('h1', text: "Admin Dashboard")
       end
     end
