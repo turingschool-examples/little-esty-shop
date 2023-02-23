@@ -11,8 +11,7 @@
 <div id="items_to_ship">
 <h2>Items Ready to Ship</h2>
 <%@items_to_ship.each do |inv_item|%>
-  <%= link_to "#{inv_item.invoice_id}", merchant_invoice_path(@merchant.id, inv_item.invoice_id)%>: <%=inv_item.item.name%>
-<br>
+  <%= link_to "#{inv_item.invoice_id}", merchant_invoice_path(@merchant.id, inv_item.invoice_id)%>: <%=inv_item.item.name%> created on <%= inv_item.created_at.strftime("%A, %B %e, %Y") %>
 <br>
 <%end%>
 </div>

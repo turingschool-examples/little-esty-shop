@@ -71,7 +71,6 @@ RSpec.describe 'Admin Dashboard' do
     end
     
     it 'I see the top 5 customers and their total successful transactions' do 
-      save_and_open_page
       expect(page).to have_content "Top Five Customers:"
       expect(page).to have_content "Lucy Fiel -- Transactions: 5"
       expect(page).to have_content "Tim Fiel -- Transactions: 4"
