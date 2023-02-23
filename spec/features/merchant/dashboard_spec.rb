@@ -23,8 +23,8 @@ RSpec.describe 'Merchant Dashboard' do
 		@inv6 = @cust5.invoices.create!(status: 1)
     
     
-		@bowl = @merchant.items.create!(name: "bowl", description: "it's a bowl", unit_price: 350) 
-		@knife = @merchant.items.create!(name: "knife", description: "it's a knife", unit_price: 250) 
+		@bowl = @merchant.items.create!(name: "Bowl", description: "it's a bowl", unit_price: 350) 
+		@knife = @merchant.items.create!(name: "Knife", description: "it's a knife", unit_price: 250) 
 		@trans1 = @inv1.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
 		@trans1_5 = @inv1.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
 		@trans2 = @inv2.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
@@ -74,6 +74,7 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_content "Bob Fiel -- Transactions: 2"
       expect(page).to have_content "Laura Fiel -- Transactions: 2"
     end
+	end
 
 		describe 'Merchant Dashboard Items Ready to Ship' do
 			it 'I see a section for "Items Ready to Ship"' do
@@ -84,11 +85,8 @@ RSpec.describe 'Merchant Dashboard' do
 
 			it 'In that section I see a list of the names of all of my items that have been ordered and have not yet been shipped' do
 				within '#items_to_ship' do
-
-					save_and_open_page
-					expect(page).to have_content("bowl", :count => 4)
-
-					expect(page).to have_content("knife")
+					expect(page).to have_content("Bowl", :count => 4)
+					expect(page).to have_content("Knife")
 				end
 			end
 
@@ -109,13 +107,26 @@ RSpec.describe 'Merchant Dashboard' do
 					expect(page).to have_link("#{@invit3.invoice_id}")
 					expect(page).to have_link("#{@invit4.invoice_id}")
 					expect(page).to have_link("#{@invit5.invoice_id}")
-					# expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invit1.invoice_id}")
-
-					click_on "#{@invit1.invoice_id}"
-
-					expect(current_path).to eq(merchant_invoice_path(@merchant.id, @invit1.invoice_id))
-				# require 'pry'; binding.pry
 				end
+					# expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invit1.invoice_id}")
+				click_on "#{@invit1.invoice_id}"
+
+				expect(current_path).to eq(merchant_invoice_path(@merchant.id, @invit1.invoice_id))
+			end
+
+		it "Next to each Item name I see the date that the invoice was created" do
+			within '#items_to_ship' do
+				expect(page).to have_content("Bowl created on Thursday, February 23, 2023")
+				expect(page).to have_content("Knife created on Thursday, February 23, 2023")
+			end
+		end
+
+		it 'And I see that the list is ordered from oldest to newest' do 
+			within '#items_to_ship' do
+			save_and_open_page
+				expect("#{@invit1.invoice_id}").to appear_before("#{@invit2.invoice_id}")
+				expect("#{@invit3.invoice_id}").to appear_before("#{@invit4.invoice_id}")
+				expect("#{@invit3.invoice_id}").to_not appear_before("#{@invit1.invoice_id}")
 			end
 		end
 	end

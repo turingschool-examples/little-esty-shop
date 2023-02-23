@@ -47,16 +47,17 @@ RSpec.describe Merchant, type: :model do
       
       @invit1 = InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id, status: 1)
       @invit2 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv2.id, status: 1)
-      @invit3 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id, status: 1)
       @invit4 =InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id, status: 0)
+      @invit3 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id, status: 1)
       @invit5 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv5.id, status: 0)
       @invit6 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id, status: 2)
     end
 
     it '#unshipped_items' do
-      expect(@merchant.unshipped_items).to include(@invit1, @invit2, @invit3, @invit4, @invit5)
-    end
-  end
-
+      	expect(@merchant.unshipped_items).to eq([@invit1, @invit2, @invit4, @invit3, @invit5])
+      	expect(@merchant.unshipped_items).to_not eq([@invit1, @invit2, @invit3, @invit4, @invit5])
+      	expect(@merchant.unshipped_items).to_not include(@invit6)							
+  	end
+	end
 end
 
