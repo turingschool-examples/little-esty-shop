@@ -14,15 +14,14 @@ RSpec.describe "Dashboard", type: :feature do
     end
   end
 
-  xdescribe "User story 2" do
+  describe "User story 2" do
     describe "When I visit my merchant dashboard" do
       it "shows a link to my merchant items index (/merchants/merchant_id/items)" do
         expect(page).to have_link("Items", href: "/items")
-        expect(page).to have_link("Merchants", href: "/merchants")
       end
 
       it "show a link to my merchant invoices index (/merchants/merchant_id/invoices)" do
-        
+        expect(page).to have_link("Invoices", href: "/invoices")
       end
     end
   end
