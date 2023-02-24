@@ -21,12 +21,11 @@ RSpec.describe 'merchant invoice show' do
     @customer_2 = Customer.create!(first_name: "Steve", last_name: "Stevinson")
     
     @invoice_1 = Invoice.create!(customer: @customer_1)
-    # @invoice_1.items << @item_1
     @invoice_2 = Invoice.create!(customer: @customer_2, status: 0)
 
 
-    InvoiceItem.create!(item: @item_1, invoice: @invoice_1, quantity: 1, unit_price: @item_1.unit_price)
-    InvoiceItem.create!(item: @item_2, invoice: @invoice_2, quantity: 1, unit_price: @item_2.unit_price)
+    @invoice_item_1 = InvoiceItem.create!(item: @item_1, invoice: @invoice_1, quantity: 1, unit_price: @item_1.unit_price)
+    @invoice_item_2 = InvoiceItem.create!(item: @item_2, invoice: @invoice_2, quantity: 1, unit_price: @item_2.unit_price)
 
   end
 
@@ -59,17 +58,39 @@ RSpec.describe 'merchant invoice show' do
     it 'shows item with attributes' do
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 
-      expect(page).to have_content(@invoice_1.items.first.name)
-      expect(page).to have_content(@invoice_1.invoice_items.first.quantity)
-      expect(page).to have_content(@invoice_1.items.first.unit_price)
-      expect(page).to have_content(@invoice_1.invoice_items.first.status)
+      expect(page).to have_content("#{@invoice_1.items.first.name}")
+      expect(page).to have_content("#{@invoice_1.invoice_items.first.quantity}")
+      expect(page).to have_content("#{@invoice_1.items.first.unit_price}")
+      expect(page).to have_content("#{@invoice_1.invoice_items.first.status}")
       
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_2.id}"
 
-      expect(page).to have_content(@invoice_2.items.first.name)
-      expect(page).to have_content(@invoice_2.invoice_items.first.quantity)
-      expect(page).to have_content(@invoice_2.items.first.unit_price)
-      expect(page).to have_content(@invoice_2.invoice_items.first.status)
+      expect(page).to have_content("#{@invoice_2.items.first.name}")
+      expect(page).to have_content("#{@invoice_2.invoice_items.first.quantity}")
+      expect(page).to have_content("#{@invoice_2.items.first.unit_price}")
+      expect(page).to have_content("#{@invoice_2.invoice_items.first.status}")
+    end
+
+    it 'shows total revenue' do
+      visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+
+      expect(page).to have_content("#{@invoice_1.total_revenue}")
+    end
+
+    it 'has a select field to update the status of an item' do
+      visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+      save_and_open_page
+
+      within "#item-" do 
+        expect(page).to have_select("status", selected: "pending")
+        expect(page).to_not have_select("status", selected: "shipped")
+
+        select("shipped", from: "status")
+        click_on "Update Item Status"
+      end
+
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+      expect(page).to have_select("status", selected: "shipped")
     end
   end
 end
