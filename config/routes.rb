@@ -24,7 +24,7 @@ end
 
 #  end
 
-get "merchants/:merchant_id/dashboard", to: "merchants#dashboard"
+  get "merchants/:merchant_id/dashboard", to: "merchants#dashboard"
  
   #customers
   #invoices
@@ -33,8 +33,12 @@ get "merchants/:merchant_id/dashboard", to: "merchants#dashboard"
   patch '/merchants/:merchant_id/invoices/:invoice_id', to: 'merchants/invoices#update'
   #transactions
   #items
+  get '/merchants/:merchant_id/items/new', to: 'merchants/items#new'
   get '/merchants/:merchant_id/items', to: 'merchants/items#index'
   get '/merchants/:merchant_id/items/:item_id', to: 'merchants/items#show'
+  get '/merchants/:merchant_id/items/:item_id/edit', to: 'merchants/items#edit'
+  patch '/merchants/:merchant_id/items/:item_id', to: 'merchants/items#update'
+
   #invoice_items
 
  #customers
