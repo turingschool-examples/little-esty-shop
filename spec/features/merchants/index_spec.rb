@@ -18,7 +18,7 @@ RSpec.describe Merchant, type: :feature do
       InvoiceItem.create!(invoice_id: invoice1.id, item_id: coochie_copi.id, status: 0)
       InvoiceItem.create!(invoice_id: invoice2.id, item_id: napkin_holder.id, status: 1)
       InvoiceItem.create!(invoice_id: invoice3.id, item_id: window_planter.id, status: 2)
-      
+
       visit merchant_dashboard_index_path(bob.id)
     end
 
@@ -42,7 +42,7 @@ RSpec.describe Merchant, type: :feature do
       # context 'in the section for Items Ready to Ship' do 
  #user 4
         it 'displays a list of names of all items that have been ordered but not shipped' do
-          save_and_open_page
+    
           within "#ready_items" do 
             expect(page).to have_content("Items Ready to Ship")
             expect(page).to have_content("Coochie Copi Night Light")
