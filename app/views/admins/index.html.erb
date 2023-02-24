@@ -1,0 +1,29 @@
+<h1> Admin Dashboard </h1>
+
+<p>
+  <%= link_to "Merchants", admin_merchants_path %>
+  <%= link_to "Invoices", admin_invoices_path %>
+</p>
+
+<h3> Incomplete Invoices </h3>
+<div id="incomplete_invoices">
+  <ul>
+    <% @incomplete_item_invoices.each do |item_invoice| %>
+      <div id= "incomplete_invoice_item-<%=item_invoice.id%>">
+        <p>
+          Invoice #<%= link_to "#{item_invoice.invoice_id}", admin_invoice_path(item_invoice.invoice)%>
+          - <%= item_invoice.invoice.created_at.strftime("%A, %B %d, %Y") %>
+        </p>
+      </div>
+    <% end %>
+  </ul>
+</div>
+
+<h3> Top Customers </h3>
+<div id="top_customers">
+  <ol>
+    <% @top_five_customers.each do |customer| %>
+      <li><%= "#{customer.first_name} #{customer.last_name} - #{customer.total_purchases} purchases" %></li>
+    <% end %>
+  </ol>
+</div>
