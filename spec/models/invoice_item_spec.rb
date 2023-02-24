@@ -1,6 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe InvoiceItem, type: :model do
-  it { should belong_to :invoice }
-  it { should belong_to :item }
+  before(:each) do
+    merchant = Merchant.create!(name: "Cabbage Merchant")
+    dis_gai_ovah_hea = Customer.create!(first_name: "Dis", last_name: "Gai")
+    
+    item1 = merchant.items.create!(name: "Ramen Noodles", description: "A dang good pack-a ramen", unit_price: 99)
+    item2 = merchant.items.create!(name: "Cabbages", description: "NOT MY CABBAGES!!!", unit_price: 500)
+    item3 = merchant.items.create!(name: "Freesh Avacadoo", description: "Cream Freesh", unit_price: 200)
+    
+    @invoice1 = Invoice.create!(customer_id: dis_gai_ovah_hea.id, status: 0 )
+    @invoice2 = Invoice.create!(customer_id: dis_gai_ovah_hea.id, status: 0 )
+    @invoice3 = Invoice.create!(customer_id: dis_gai_ovah_hea.id, status: 2 ) 
+    
+    InvoiceItem.create!(item_id: item1.id, invoice_id: @invoice1.id, quantity: 100, unit_price: item1.unit_price, status: 0 )
+    InvoiceItem.create!(item_id: item2.id, invoice_id: @invoice2.id, quantity: 100, unit_price: item2.unit_price, status: 1 )
+    InvoiceItem.create!(item_id: item3.id, invoice_id: @invoice3.id, quantity: 100, unit_price: item3.unit_price, status: 2 )
+  end
+
+  describe "Relationships" do
+    it { should belong_to :invoice }
+    it { should belong_to :item }
+  end
+
+  describe "scope#not_shipped" do
+    it "shows all InvoiceItems that dont have a status of 2 ('shipped')." do
+      expect(InvoiceItem.not_shipped).to eq([InvoiceItem.first, InvoiceItem.second])
+    end
+  end
 end
