@@ -13,9 +13,18 @@ RSpec.describe 'admin merchants index page' do
 			expect(page).to have_content('Merchants List')
 			
 			within "#merchant-list" do
-				expect(page).to have_content('John Doe - Status: active')
-				expect(page).to have_content('Brians Beads - Status: active')
-				expect(page).to have_content('Soras Chains - Status: active')
+				within "##{merchant_1.id}" do
+					expect(page).to have_content('John Doe')
+					expect(page).to have_content('Status: active')
+				end
+				within "##{merchant_2.id}" do
+					expect(page).to have_content('Brians Beads')
+					expect(page).to have_content('Status: active')
+				end
+				within "##{merchant_3.id}" do
+					expect(page).to have_content('Soras Chains')
+					expect(page).to have_content('Status: active')
+				end
 			end
 		end
 	end
@@ -55,17 +64,34 @@ RSpec.describe 'admin merchants index page' do
 			end
 		end
 
-		it 'changes status of merchant when button is clicked' do
+		it 'changes status of merchant to disabled when disable button is clicked' do
 			visit admin_merchants_path
 
-			expect(page).to have_content('John Doe - Status: active')
+			expect(page).to have_content("John Doe\nStatus: active")
 
 			within "##{merchant_1.id}" do
 				click_button 'Disable'
 			end
 
 			expect(current_path).to eq(admin_merchants_path)
-			expect(page).to have_content('John Doe - Status: disabled')
+			expect(page).to have_content("John Doe\nStatus: disabled")
+		end
+
+		it 'changes status of merchant to enabled when enable button is clicked' do
+			visit admin_merchants_path
+
+			within "##{merchant_1.id}" do
+				click_button 'Disable'
+			end
+
+			expect(page).to have_content("John Doe\nStatus: disabled")
+
+			within "##{merchant_1.id}" do
+				click_button 'Enable'
+			end
+
+			expect(current_path).to eq(admin_merchants_path)
+			expect(page).to have_content("John Doe\nStatus: active")
 		end
 	end
 end

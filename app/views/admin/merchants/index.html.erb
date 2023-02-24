@@ -5,6 +5,7 @@
 		<div id='<%= merchant.id %>'>
 			<%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
 			<p>Status: <%= merchant.status %></p>
+			<%= button_to 'Enable', admin_merchant_path(merchant), params: {status: 'active'}, method: :patch %>
 			<%= button_to 'Disable', admin_merchant_path(merchant), params: {status: 'disabled'}, method: :patch %>
 		</div>
 		</br></br>
