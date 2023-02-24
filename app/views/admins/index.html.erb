@@ -5,9 +5,22 @@
   <%= link_to "Invoices", "/admin/invoices" %>
 </p>
 
+<h3> Incomplete Invoices </h3>
+<div id="incomplete_invoices">
+  <ul>
+    <% @incomplete_item_invoices.each do |item_invoice| %>
+      <div id= "incomplete_invoice_item-<%=item_invoice.id%>">
+        <p>Invoice #<%= link_to "#{item_invoice.invoice_id}", "/admin/invoice/#{item_invoice.invoice_id}"%></p>
+      </div>
+    <% end %>
+  </ul>
+</div>
+
+<h3> Top Customers </h3>
 <div id="top_customers">
   <ol>
     <% @top_five_customers.each do |customer| %>
       <li><%= "#{customer.first_name} #{customer.last_name} - #{customer.total_purchases} purchases" %></li>
     <% end %>
+  </ol>
 </div>
