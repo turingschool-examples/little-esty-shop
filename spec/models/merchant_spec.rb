@@ -36,7 +36,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     it '#items_not_yet_shipped' do 
-      expect(sam.items_not_yet_shipped).to eq(["Football", "Baseball"])
+      expect(sam.items_not_yet_shipped).to eq([["Football", invoice1.id] , ["Baseball", invoice1.id]])
     end
   end
 end
