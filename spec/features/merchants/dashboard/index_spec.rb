@@ -3,6 +3,19 @@ require 'rails_helper'
 RSpec.describe "Dashboard", type: :feature do
   before(:each) do
     @merchant = create(:merchant, name: "Trader Bob's")
+
+    @customer_1 = create(:customer)
+    @customer_2 = create(:customer)
+    @customer_3 = create(:customer)
+    @customer_4 = create(:customer)
+    @customer_5 = create(:customer)
+    @customer_6 = create(:customer)
+
+    @invoice_1 = create(:invoice, customer_id: @customer_1.id)
+    @invoice_2 = create(:invoice, customer_id: @customer_2.id)
+    @invoice_3 = create(:invoice, customer_id: @customer_3.id)
+    @invoice_4 = create(:invoice, customer_id: @customer_4.id)
+    @invoice_5 = create(:invoice, customer_id: @customer_5.id)
     
     visit "/merchants/#{@merchant.id}/dashboard"
   end
@@ -33,26 +46,26 @@ RSpec.describe "Dashboard", type: :feature do
 
   describe "User story 3" do
     describe "When I visit my merchant dashboard" do
-      it "I see the names of the top 5 customers who have conducted 
-        the largest number of successful transactions with my merchant" do
-       
-        expect(page).to have_content("customer1_name")
-        expect(page).to have_content("customer2_name")
-        expect(page).to have_content("customer3_name")
-        expect(page).to have_content("customer4_name")
-        expect(page).to have_content("customer5_name")
-        expect(page).to_not have_content("customer6_name")
-      end
-
-      it "next to each customer name I see the number of successful transactions they have
-        conducted with my merchant" do
-        
-        expect(page).to have_content("customer1_transactions")
-        expect(page).to have_content("customer2_transactions")
-        expect(page).to have_content("customer3_transactions")
-        expect(page).to have_content("customer4_transactions")
-        expect(page).to have_content("customer5_transactions")
-        expect(page).to_not have_content("customer6_transactions")
+      it "I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant
+        and next to each customer name I see the number of successful transactions they have conducted with my merchant" do
+        create(:transaction, invoice_id: @invoice_1.id, result: 0)
+        2.times { create(:transaction, invoice_id: @invoice_2.id, result: 0) }
+        3.times { create(:transaction, invoice_id: @invoice_3.id, result: 0) }
+        4.times { create(:transaction, invoice_id: @invoice_4.id, result: 0) }
+        5.times { create(:transaction, invoice_id: @invoice_5.id, result: 0) }
+  
+        visit "/merchants/#{@merchant.id}/dashboard"
+  
+        customer_5_full_name = "#{@customer_5.first_name} #{@customer_5.last_name}"
+        customer_4_full_name = "#{@customer_4.first_name} #{@customer_4.last_name}"
+        customer_3_full_name = "#{@customer_3.first_name} #{@customer_3.last_name}"
+        customer_2_full_name = "#{@customer_2.first_name} #{@customer_2.last_name}"
+        customer_1_full_name = "#{@customer_1.first_name} #{@customer_1.last_name}"
+  
+        expect("#{customer_5_full_name} - 5 purchases").to appear_before("#{customer_4_full_name} - 4 purchases")
+        expect("#{customer_4_full_name} - 4 purchases").to appear_before("#{customer_3_full_name} - 3 purchases")
+        expect("#{customer_3_full_name} - 3 purchases").to appear_before("#{customer_2_full_name} - 2 purchases")
+        expect("#{customer_2_full_name} - 2 purchases").to appear_before("#{customer_1_full_name} - 1 purchases")
       end
     end
   end
