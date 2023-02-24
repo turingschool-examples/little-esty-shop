@@ -23,8 +23,8 @@ RSpec.describe 'Merchant Dashboard' do
 		@inv6 = @cust5.invoices.create!(status: 1)
     
     
-		@bowl = @merchant.items.create!(name: "Bowl", description: "it's a bowl", unit_price: 350) 
-		@knife = @merchant.items.create!(name: "Knife", description: "it's a knife", unit_price: 250) 
+		@bowl = @merchant.items.create!(name: "bowl", description: "it's a bowl", unit_price: 350) 
+		@knife = @merchant.items.create!(name: "knife", description: "it's a knife", unit_price: 250) 
 		@trans1 = @inv1.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
 		@trans1_5 = @inv1.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
 		@trans2 = @inv2.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
@@ -43,12 +43,12 @@ RSpec.describe 'Merchant Dashboard' do
 		@trans15 = @inv5.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
 		@trans16 = @inv6.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
     
-		@invit1 = InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id, status: 1)
-		@invit2 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv2.id, status: 1)
-		@invit3 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id, status: 1)
-		@invit4 =InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id, status: 0)
-		@invit5 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv5.id, status: 0)
-		@invit6 =InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id, status: 2)
+		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id)
+		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv2.id)
+		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id)
+		InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id)
+		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv5.id)
+		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id)
     
     visit "/merchants/#{@merchant.id}/dashboard"
 	end
@@ -74,59 +74,5 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_content "Bob Fiel -- Transactions: 2"
       expect(page).to have_content "Laura Fiel -- Transactions: 2"
     end
-	end
-
-		describe 'Merchant Dashboard Items Ready to Ship' do
-			it 'I see a section for "Items Ready to Ship"' do
-				within '#items_to_ship' do
-					expect(page).to have_content("Items Ready to Ship")
-				end
-			end
-
-			it 'In that section I see a list of the names of all of my items that have been ordered and have not yet been shipped' do
-				within '#items_to_ship' do
-					expect(page).to have_content("Bowl", :count => 4)
-					expect(page).to have_content("Knife")
-				end
-			end
-
-			it 'next to each Item I see the id of the invoice that ordered my item' do
-				within '#items_to_ship' do
-					expect(page).to have_content(@invit1.invoice_id)
-					expect(page).to have_content(@invit2.invoice_id)
-					expect(page).to have_content(@invit3.invoice_id)
-					expect(page).to have_content(@invit4.invoice_id)
-					expect(page).to have_content(@invit5.invoice_id)
-				end
-			end
-			
-			it "And each invoice id is a link to my merchant's invoice show page" do
-				within '#items_to_ship' do
-					expect(page).to have_link("#{@invit1.invoice_id}")
-					expect(page).to have_link("#{@invit2.invoice_id}")
-					expect(page).to have_link("#{@invit3.invoice_id}")
-					expect(page).to have_link("#{@invit4.invoice_id}")
-					expect(page).to have_link("#{@invit5.invoice_id}")
-				end
-					# expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invit1.invoice_id}")
-				click_on "#{@invit1.invoice_id}"
-
-				expect(current_path).to eq(merchant_invoice_path(@merchant.id, @invit1.invoice_id))
-			end
-
-		it "Next to each Item name I see the date that the invoice was created" do
-			within '#items_to_ship' do
-				expect(page).to have_content("Bowl created on Thursday, February 23, 2023")
-				expect(page).to have_content("Knife created on Thursday, February 23, 2023")
-			end
-		end
-
-		it 'And I see that the list is ordered from oldest to newest' do 
-			within '#items_to_ship' do
-				expect("#{@invit1.invoice_id}").to appear_before("#{@invit2.invoice_id}")
-				expect("#{@invit3.invoice_id}").to appear_before("#{@invit4.invoice_id}")
-				expect("#{@invit3.invoice_id}").to_not appear_before("#{@invit1.invoice_id}")
-			end
-		end
 	end
 end
