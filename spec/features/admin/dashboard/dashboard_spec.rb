@@ -65,6 +65,43 @@ describe 'dashboard' do
       expect(page).to have_content("#{@customer5.first_name + " " + @customer5.last_name}: 2 transactions")
     end
   end
+
+  describe 'user story 22' do
+
+    before do
+      @customer = create(:customer)
+      @invoice1 = create(:invoice, customer_id: @customer.id)
+      @invoice2 = create(:invoice, customer_id: @customer.id)
+      @invoice3 = create(:invoice, customer_id: @customer.id)
+      @invoice4 = create(:invoice, customer_id: @customer.id)
+      @invoice5 = create(:invoice, customer_id: @customer.id)
+      @merchant = create(:merchant)
+      @item = create(:item, merchant_id: @merchant.id)
+      #StatusKey: 0 => packaged, 1 => pending, 2 => shipped
+      @invoice_item1 = create(:invoice_item, invoice_id: @invoice1.id, item_id: @item.id, status: 2)
+      @invoice_item2 = create(:invoice_item, invoice_id: @invoice2.id, item_id: @item.id, status: 0)
+      @invoice_item3 = create(:invoice_item, invoice_id: @invoice3.id, item_id: @item.id, status: 2)
+      @invoice_item4 = create(:invoice_item, invoice_id: @invoice4.id, item_id: @item.id, status: 0)
+      @invoice_item5 = create(:invoice_item, invoice_id: @invoice5.id, item_id: @item.id, status: 1)
+    end
+    it 'should have a list of invoices that have unshipped items' do
+      visit '/admin'
+      within ('div#incomplete_invoices') do
+        expect(page).to have_content("Incomplete Invoices")
+        expect(page).to have_content("id: #{@invoice2.id}")
+        expect(page).to have_content("id: #{@invoice4.id}")
+        expect(page).to have_content("id: #{@invoice5.id}")
+      end
+    end
+
+    it 'should have links to invoices admin show page' do
+      visit '/admin'
+      within ('div#incomplete_invoices') do
+        click_on "#{@invoice2.id}"
+      end
+      expect(current_path).to eq("/admin/invoices/#{@invoice2.id}")
+    end
+  end
   
 
 end
