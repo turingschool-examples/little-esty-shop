@@ -30,31 +30,39 @@ RSpec.describe "Admin Invoices", type: :feature do
         within "#invoice-#{invoice1.id}" do
           click_link "#{invoice1.id}"
 
-          expect(page).to have_current_path(admin_invoices_path(invoice1.id))
+          expect(page).to have_current_path(admin_invoice_path(invoice1.id))
         end
+
+        visit admin_invoices_path
 
         within "#invoice-#{invoice2.id}" do
           click_link "#{invoice2.id}"
 
-          expect(page).to have_current_path(admin_invoices_path(invoice2.id))
+          expect(page).to have_current_path(admin_invoice_path(invoice2.id))
         end
-       
+        
+        visit admin_invoices_path
+
         within "#invoice-#{invoice3.id}" do
           click_link "#{invoice3.id}"
 
-          expect(page).to have_current_path(admin_invoices_path(invoice3.id))
+          expect(page).to have_current_path(admin_invoice_path(invoice3.id))
         end
+
+        visit admin_invoices_path
 
         within "#invoice-#{invoice4.id}" do
           click_link "#{invoice4.id}"
 
-          expect(page).to have_current_path(admin_invoices_path(invoice4.id))
+          expect(page).to have_current_path(admin_invoice_path(invoice4.id))
         end
+
+        visit admin_invoices_path
 
         within "#invoice-#{invoice5.id}" do
           click_link "#{invoice5.id}"
 
-          expect(page).to have_current_path(admin_invoices_path(invoice5.id))
+          expect(page).to have_current_path(admin_invoice_path(invoice5.id))
         end
       end
     end
