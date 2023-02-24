@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Items Index' do
+RSpec.describe 'When I visit the merchant show page of an item' do
   before do
     Merchant.destroy_all
 		Customer.destroy_all
@@ -19,7 +19,6 @@ RSpec.describe 'Merchant Items Index' do
 		@tshirt = @pete.items.create!(name: "Tshirt", description: "tshirt, screenprinted", unit_price: 250)
 
     visit "/merchants/#{@carlos.id}/items"
-		save_and_open_page
 		click_link "Bowl"
   end
 
@@ -33,6 +32,24 @@ RSpec.describe 'Merchant Items Index' do
 			expect(page).to have_content("Name: Bowl")
 			expect(page).to have_content("Description: it's a bowl")
 			expect(page).to have_content("Current Selling Price: 350")
+		end
+  end
+
+  describe 'I see a link to update the item information' do
+		it 'has link' do
+			expect(page).to have_link("Update Bowl", href: "/merchants/#{@carlos.id}/items/#{@bowl.id}/edit")		
+		end
+
+		it 'When I click the link then I am taken to a page to edit this item' do
+			click_link("Update Bowl")
+			expect(current_path).to eq("/merchants/#{@carlos.id}/items/#{@bowl.id}/edit")	
+		end
+
+		it 'I see a form filled in with the existing item attribute information' do
+			click_link("Update Bowl")
+			expect(find_field('Name').value).to eq('Bowl')
+  		expect(find_field('Description').value).to eq("it's a bowl")
+  		expect(find_field('Unit price').value).to eq('350')
 		end
   end
 end
