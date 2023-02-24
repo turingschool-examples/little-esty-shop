@@ -79,7 +79,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     it "should have items ready to be shipped" do
-      expect(merchant1.items_ready_to_ship).to eq([item1.name, item2.name, item4.name, item5.name, item6.name, item9.name, item10.name])
+      expect(merchant1.items_ready_to_ship).to eq([item1, item2, item4, item5, item6, item9, item10])
     end
   end
 
