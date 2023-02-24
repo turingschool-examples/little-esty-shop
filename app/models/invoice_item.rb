@@ -5,6 +5,6 @@ class InvoiceItem < ApplicationRecord
   enum status: ["pending", "packaged", "shipped"]
 
   def self.incomplete_item_invoices
-    where.not(status: "shipped")
+    joins(:invoice).where.not(status: "shipped").order("invoices.created_at")
   end
 end
