@@ -45,6 +45,7 @@ RSpec.describe Customer, type: :model do
       @transaction7 = create(:transaction, invoice_id: @invoice7.id)
       @transaction8 = create(:transaction, invoice_id: @invoice8.id, result: "success")
     end
+    
     describe '.top_5_by_transactions' do
       it 'counts successful transactions' do
         expect(Customer.top_5_by_transactions.sort).to eq([@customer1, @customer2, @customer3, @customer4, @customer5].sort)
@@ -53,7 +54,6 @@ RSpec.describe Customer, type: :model do
       it 'does not count failed transactions' do
         expect(Customer.top_5_by_transactions.sort).not_to include(@customer6)
       end
-
     end
 
     describe 'transaction_count' do
@@ -66,7 +66,6 @@ RSpec.describe Customer, type: :model do
       it 'does not count unsuccessful transactions' do
         expect(@customer6.transaction_count).to eq(0)
       end
-
     end
   end
 end
