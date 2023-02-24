@@ -1,10 +1,11 @@
 class Merchant < ApplicationRecord
-  validates :name, presence: true
   has_many :items
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
+  
+  validates :name, presence: true
 
   def top_five_customers
     customers.joins(:transactions).where(transactions: {result: 'success'})
@@ -35,5 +36,11 @@ class Merchant < ApplicationRecord
       ORDER BY revenue desc
       LIMIT 5;
       ")
+    end
+
+    def items_ready_to_ship
+      Item.joins(:invoice_items)
+      .where("invoice_items.status != ?", 2)
+      # list of items != :shipped
     end
 end

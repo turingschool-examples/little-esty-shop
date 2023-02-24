@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/environment.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -10,7 +10,7 @@
           1
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/application.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/application.rb": {
         "lines": [
           1,
           1,
@@ -34,7 +34,7 @@
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/boot.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -42,7 +42,7 @@
           1
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/environments/test.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -92,7 +92,7 @@
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/initializers/application_controller_renderer.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/initializers/application_controller_renderer.rb": {
         "lines": [
           null,
           null,
@@ -104,7 +104,7 @@
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/initializers/assets.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
@@ -122,7 +122,7 @@
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/initializers/backtrace_silencers.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/initializers/backtrace_silencers.rb": {
         "lines": [
           null,
           null,
@@ -133,7 +133,7 @@
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/initializers/content_security_policy.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/initializers/content_security_policy.rb": {
         "lines": [
           null,
           null,
@@ -162,7 +162,7 @@
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/initializers/cookies_serializer.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/initializers/cookies_serializer.rb": {
         "lines": [
           null,
           null,
@@ -171,7 +171,7 @@
           1
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/initializers/filter_parameter_logging.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -179,7 +179,7 @@
           1
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/initializers/inflections.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -199,7 +199,7 @@
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/initializers/mime_types.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/initializers/mime_types.rb": {
         "lines": [
           null,
           null,
@@ -207,7 +207,7 @@
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/initializers/new_framework_defaults_5_2.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/initializers/new_framework_defaults_5_2.rb": {
         "lines": [
           null,
           null,
@@ -249,7 +249,7 @@
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/initializers/wrap_parameters.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/initializers/wrap_parameters.rb": {
         "lines": [
           null,
           null,
@@ -267,17 +267,17 @@
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/factories/customers.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/spec/factories/customers.rb": {
         "lines": [
           1,
           1,
-          71,
-          71,
+          31,
+          31,
           null,
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/factories/invoice_items.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/spec/factories/invoice_items.rb": {
         "lines": [
           1,
           1,
@@ -290,17 +290,17 @@
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/factories/invoices.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/spec/factories/invoices.rb": {
         "lines": [
           1,
           1,
           1,
-          96,
+          56,
           null,
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/factories/items.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/spec/factories/items.rb": {
         "lines": [
           1,
           1,
@@ -312,28 +312,28 @@
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/factories/merchants.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/spec/factories/merchants.rb": {
         "lines": [
           1,
           1,
-          16,
+          11,
           null,
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/factories/transactions.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/spec/factories/transactions.rb": {
         "lines": [
           1,
           1,
           1,
-          177,
-          177,
-          8,
+          91,
+          91,
+          1,
           null,
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/config/routes.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/config/routes.rb": {
         "lines": [
           1,
           null,
@@ -341,404 +341,27 @@
           1,
           1,
           1,
+          1,
           null,
           null,
           1,
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/app/helpers/application_helper.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/support/factory_bot.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/features/admin/dashboard/dashboard_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/features/admin_merchants/index_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/features/admin_merchants/show_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/features/merchants/dashboard_index_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          null,
-          1,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          null,
-          4,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/models/customer_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          1,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/app/models/customer.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          6,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          35,
-          null,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/app/models/application_record.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/spec/support/factory_bot.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/models/invoice_item_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/app/models/invoice_item.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/models/invoice_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/app/models/invoice.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
           1,
@@ -746,209 +369,144 @@
           1,
           1,
           1,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/models/item_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          2,
-          2,
-          2,
-          2,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/app/models/item.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/models/merchant_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/app/models/merchant.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          6,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/spec/models/transaction_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/app/models/transaction.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/app/controllers/admin/dashboard_controller.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          4,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/app/controllers/admin/merchants_controller.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          4,
-          null,
           null,
           1,
           null,
+          1,
+          5,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           1,
-          1,
-          1,
-          1,
-          null,
-          0,
           0,
           null,
           null,
           null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           1,
-          1,
+          5,
+          null,
+          null,
           null,
           null
         ]
       },
-      "/Users/samwalker/Documents/Turing/2mod/projects/little-esty-shop/app/controllers/merchants_controller.rb": {
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/app/models/application_record.rb": {
         "lines": [
           1,
           1,
-          4,
+          null
+        ]
+      },
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/app/models/customer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          31,
+          null,
+          null
+        ]
+      },
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          39,
+          null,
+          null
+        ]
+      },
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/app/models/invoice_item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/app/controllers/merchants_controller.rb": {
+        "lines": [
+          1,
+          1,
+          5,
+          null,
+          null
+        ]
+      },
+      "/Users/kassandraleyba/turing_work/2mod/projects/little-esty-shop/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
           null
         ]
       }
     },
-    "timestamp": 1677210060
+    "timestamp": 1677280791
   }
 }
