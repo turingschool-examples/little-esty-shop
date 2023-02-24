@@ -13,4 +13,12 @@ class Merchant < ApplicationRecord
   def customer_successful_transactions(customer_id)
     Transaction.joins(invoice: [:items, :customer]).where(result: 'success').where(items: { merchant_id: self.id }).where(customers: { id: customer_id }).distinct.count
   end
+
+	def self.active_merchants
+		Merchant.where(status: 0)
+	end
+
+	def self.disabled_merchants
+		Merchant.where(status: 1)
+	end
 end
