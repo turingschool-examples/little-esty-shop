@@ -23,11 +23,11 @@ RSpec.describe 'Merchant Items Index' do
   describe 'As a merchant, when I visit my merchant items index page' do
     it 'I see a list of the names of all of my items, no items from other merchants' do
       visit "/merchants/#{@carlos.id}/items"
-      expect(page).to have_content("bowl")
-      expect(page).to have_content("knife")
+      expect(page).to have_content("Bowl")
+      expect(page).to have_content("Knife")
 
-      expect(page).to_not have_content("scarf")
-      expect(page).to_not have_content("tshirt")
+      expect(page).to_not have_content("Scarf")
+      expect(page).to_not have_content("Tshirt")
     end
   end
 end
