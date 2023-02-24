@@ -13,9 +13,9 @@ RSpec.describe 'admin merchants index page' do
 			expect(page).to have_content('Merchants List')
 			
 			within "#merchant-list" do
-				expect(page).to have_content('John Doe')
-				expect(page).to have_content('Brians Beads')
-				expect(page).to have_content('Soras Chains')
+				expect(page).to have_content('John Doe - Status: active')
+				expect(page).to have_content('Brians Beads - Status: active')
+				expect(page).to have_content('Soras Chains - Status: active')
 			end
 		end
 	end
@@ -39,6 +39,33 @@ RSpec.describe 'admin merchants index page' do
 			expect(current_path).to eq(admin_merchant_path(merchant_1))
 			expect(page).to have_content('John Doe')
 			expect(page).to_not have_content('Brians Beads')
+		end
+	end
+
+	describe 'admin merchant enable/disable' do
+		it 'has a button next to each merchant to disable merchant' do
+			visit admin_merchants_path
+
+			within "##{merchant_1.id}" do
+				expect(page).to have_button('Disable')
+			end
+
+			within "##{merchant_2.id}" do
+				expect(page).to have_button('Disable')
+			end
+		end
+
+		it 'changes status of merchant when button is clicked' do
+			visit admin_merchants_path
+
+			expect(page).to have_content('John Doe - Status: active')
+
+			within "##{merchant_1.id}" do
+				click_button 'Disable'
+			end
+
+			expect(current_path).to eq(admin_merchants_path)
+			expect(page).to have_content('John Doe - Status: disabled')
 		end
 	end
 end
