@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchant show dashboard index page', type: :feature do
+RSpec.describe 'merchant show dashboard page', type: :feature do
   describe "as a merchant visiting '/merchants/merchant_id/dashboard'" do
     let!(:merchant1) {Merchant.create!(uuid: 101, name: "Brian's Beads")}
 
