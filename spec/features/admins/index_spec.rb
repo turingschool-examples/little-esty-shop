@@ -9,9 +9,9 @@ RSpec.describe "The Admin Index" do
     @customer_5 = create(:customer)
     @customer_6 = create(:customer)
 
-    @invoice_1 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new)
-    @invoice_2 = create(:invoice, customer_id: @customer_2.id, created_at: Date.new.next)
-    @invoice_3 = create(:invoice, customer_id: @customer_3.id, created_at: Date.new.next.next)
+    @invoice_1 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,1,1))
+    @invoice_2 = create(:invoice, customer_id: @customer_2.id, created_at: Date.new(2023,1,1).next)
+    @invoice_3 = create(:invoice, customer_id: @customer_3.id, created_at: Date.new(2023,1,1).next.next)
     @invoice_4 = create(:invoice, customer_id: @customer_4.id)
     @invoice_5 = create(:invoice, customer_id: @customer_5.id)
 
@@ -63,49 +63,69 @@ RSpec.describe "The Admin Index" do
       }
     end
   end
-
-  describe "User Story 22" do
-    it "When I visit the admin dashboard, I see a section for 'Incomplete Invoices', In that section I see a list of the ids of all invoices 
-      that have items that have not yet been shipped, and each invoice id links to that invoice's admin show page" do
+  context 'Incomplete Invoices' do
+    before(:each) do
       item_1 = create(:item, merchant_id: @merchant_1.id)
       item_2 = create(:item, merchant_id: @merchant_1.id)
       item_3 = create(:item, merchant_id: @merchant_1.id)
       item_4 = create(:item, merchant_id: @merchant_1.id)
       item_5 = create(:item, merchant_id: @merchant_1.id) 
       
-      invoice_item_1 = create(:invoice_item, invoice_id: @invoice_1.id, item_id: item_1.id, status: 0)
-      invoice_item_2 = create(:invoice_item, invoice_id: @invoice_2.id, item_id: item_2.id, status: 0)
-      invoice_item_3 = create(:invoice_item, invoice_id: @invoice_3.id, item_id: item_3.id, status: 0)
-      invoice_item_4 = create(:invoice_item, invoice_id: @invoice_3.id, item_id: item_4.id, status: 0)
-      invoice_item_5 = create(:invoice_item, invoice_id: @invoice_4.id, item_id: item_5.id, status: 2)
-      
+      @invoice_item_1 = create(:invoice_item, invoice_id: @invoice_1.id, item_id: item_1.id, status: 0)
+      @invoice_item_2 = create(:invoice_item, invoice_id: @invoice_2.id, item_id: item_2.id, status: 0)
+      @invoice_item_3 = create(:invoice_item, invoice_id: @invoice_3.id, item_id: item_3.id, status: 0)
+      @invoice_item_4 = create(:invoice_item, invoice_id: @invoice_3.id, item_id: item_4.id, status: 0)
+      @invoice_item_5 = create(:invoice_item, invoice_id: @invoice_4.id, item_id: item_5.id, status: 2)
+
       visit "/admin"
-
-      within("#incomplete_invoices") {
-        within("#incomplete_invoice_item-#{invoice_item_1.id}")  {
-          expect(page).to have_content("Invoice ##{@invoice_1.id}")
-          expect(page).to have_link("#{@invoice_1.id}", href: "/admin/invoice/#{@invoice_1.id}")
-        }
-        within("#incomplete_invoice_item-#{invoice_item_2.id}")  {
-          expect(page).to have_content("Invoice ##{@invoice_2.id}")
-          expect(page).to have_link("#{@invoice_2.id}", href: "/admin/invoice/#{@invoice_2.id}")
-        }
-        within("#incomplete_invoice_item-#{invoice_item_3.id}")  {
-          expect(page).to have_content("Invoice ##{@invoice_3.id}")
-          expect(page).to have_link("#{@invoice_3.id}", href: "/admin/invoice/#{@invoice_3.id}")
-        }
-        within("#incomplete_invoice_item-#{invoice_item_4.id}")  {
-          expect(page).to have_content("Invoice ##{@invoice_3.id}")
-          expect(page).to have_link("#{@invoice_3.id}", href: "/admin/invoice/#{@invoice_3.id}")
-        }
-        expect(page).to_not have_content("Invoice ##{@invoice_4.id}")
-      }
     end
-  end
 
-  describe "User Story 23" do
-    it "Next to each invoice id I see the date that the invoice was created formatted like 'Monday, July 18, 2019', ordered from oldest to newest" do
-      
+    describe "User Story 22" do
+      it "When I visit the admin dashboard, I see a section for 'Incomplete Invoices', In that section I see a list of the ids of all invoices 
+        that have items that have not yet been shipped, and each invoice id links to that invoice's admin show page" do
+
+        within("#incomplete_invoices") {
+          within("#incomplete_invoice_item-#{@invoice_item_1.id}")  {
+            expect(page).to have_content("Invoice ##{@invoice_1.id}")
+            expect(page).to have_link("#{@invoice_1.id}", href: "/admin/invoice/#{@invoice_1.id}")
+          }
+          within("#incomplete_invoice_item-#{@invoice_item_2.id}")  {
+            expect(page).to have_content("Invoice ##{@invoice_2.id}")
+            expect(page).to have_link("#{@invoice_2.id}", href: "/admin/invoice/#{@invoice_2.id}")
+          }
+          within("#incomplete_invoice_item-#{@invoice_item_3.id}")  {
+            expect(page).to have_content("Invoice ##{@invoice_3.id}")
+            expect(page).to have_link("#{@invoice_3.id}", href: "/admin/invoice/#{@invoice_3.id}")
+          }
+          within("#incomplete_invoice_item-#{@invoice_item_4.id}")  {
+            expect(page).to have_content("Invoice ##{@invoice_3.id}")
+            expect(page).to have_link("#{@invoice_3.id}", href: "/admin/invoice/#{@invoice_3.id}")
+          }
+          expect(page).to_not have_content("Invoice ##{@invoice_4.id}")
+        }
+      end
+    end
+
+    describe "User Story 23" do
+      it "Next to each invoice id I see the date that the invoice was created formatted like 'Monday, July 18, 2019', ordered from oldest to newest" do
+        within("#incomplete_invoices") {
+          expect("Sunday, January 01, 2023").to appear_before("Monday, January 02, 2023")
+          expect("Monday, January 02, 2023").to appear_before("Tuesday, January 03, 2023")
+
+          within("#incomplete_invoice_item-#{@invoice_item_1.id}")  {
+            expect(page).to have_content("Invoice ##{@invoice_1.id} - Sunday, January 01, 2023")
+          }
+          within("#incomplete_invoice_item-#{@invoice_item_2.id}")  {
+            expect(page).to have_content("Invoice ##{@invoice_2.id} - Monday, January 02, 2023")
+          }
+          within("#incomplete_invoice_item-#{@invoice_item_3.id}")  {
+            expect(page).to have_content("Invoice ##{@invoice_3.id} - Tuesday, January 03, 2023")
+          }
+          within("#incomplete_invoice_item-#{@invoice_item_4.id}")  {
+            expect(page).to have_content("Invoice ##{@invoice_3.id} - Tuesday, January 03, 2023")
+          }
+        }
+      end
     end
   end
 end
