@@ -51,5 +51,22 @@ RSpec.describe 'When I visit the merchant show page of an item' do
   		expect(find_field('Description').value).to eq("it's a bowl")
   		expect(find_field('Unit price').value).to eq('350')
 		end
+
+		it 'I update the information in the form and I click submit, I am redirected back to the item show page where I see the updated information' do
+			click_link("Update Bowl")
+
+			fill_in('Name', with: 'Blue bowl')
+  		fill_in('Description', with: "it's a blue bowl")
+  		fill_in('Unit price', with: '400')
+			save_and_open_page
+
+			click_button("Update Item")
+			save_and_open_page
+			expect(current_path).to eq("/merchants/#{@carlos.id}/items/#{@bowl.id}")		
+			expect(page).to have_content("Item updated successfully")
+			expect(page).to have_content("Name: Blue bowl")
+			expect(page).to have_content("Description: it's a blue bowl")
+			expect(page).to have_content("Current Selling Price: 400")
+		end
   end
 end
