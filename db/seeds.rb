@@ -6,14 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-merchant1 = Merchant.create!(uuid: 101, name: "Brian's Beads")
+merchant1 = Merchant.create!(name: "Brian's Beads")
 
-customer1 = Customer.create!(uuid: 1, first_name: "Britney", last_name: "Spears")
-customer2 = Customer.create!(uuid: 2, first_name: "Bob", last_name: "Smith")
-customer3 = Customer.create!(uuid: 3, first_name: "Bill", last_name: "Johnson")
-customer4 = Customer.create!(uuid: 4, first_name: "Boris", last_name: "Nelson")
-customer5 = Customer.create!(uuid: 5, first_name: "Barbara", last_name: "Hilton")
-customer6 = Customer.create!(uuid: 6, first_name: "Bella", last_name: "Thomas" )
+customer1 = Customer.create!(first_name: "Britney", last_name: "Spears")
+customer2 = Customer.create!(first_name: "Bob", last_name: "Smith")
+customer3 = Customer.create!(first_name: "Bill", last_name: "Johnson")
+customer4 = Customer.create!(first_name: "Boris", last_name: "Nelson")
+customer5 = Customer.create!(first_name: "Barbara", last_name: "Hilton")
+customer6 = Customer.create!(first_name: "Bella", last_name: "Thomas" )
 
 invoice1 = customer1.invoices.create!(id: 10, status: 2)
 invoice2 = customer1.invoices.create!(id: 11, status: 2)
