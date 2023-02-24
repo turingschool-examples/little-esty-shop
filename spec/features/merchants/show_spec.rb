@@ -1,16 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Merchant, type: :model do
-  describe 'validations' do
-		it { should validate_presence_of(:name) }
-	end
-
-  describe 'relationships' do
-    it { should have_many :items }
-		it { should define_enum_for(:status).with_values(["active", "disabled"])}
-  end
-
-  describe '#instance methods' do
+RSpec.describe 'merchant show dashboard page', type: :feature do
+  describe "as a merchant visiting '/merchants/merchant_id/dashboard'" do
     let!(:merchant1) {Merchant.create!(uuid: 101, name: "Brian's Beads")}
 
     let!(:customer1) { Customer.create!(uuid: 1, first_name: "Britney", last_name: "Spears")}
@@ -83,14 +74,47 @@ RSpec.describe Merchant, type: :model do
       InvoiceItem.create!(item: item1, invoice: invoice11)
       InvoiceItem.create!(item: item4, invoice: invoice11)
     end
+    
 
-    it '#top_five_customers' do
-      expect(merchant1.top_five_customers).to eq([customer1, customer2, customer3, customer5, customer6])
+    it 'shows my name(merchant)' do
+      
+      visit "/merchants/#{merchant1.id}/dashboard"
+
+      expect(page).to have_content("Brian's Beads")
     end
 
-    it '#customer_successful_transactions(customer_id)' do
-      expect(merchant1.customer_successful_transactions(customer1.id)).to eq(2)
-      expect(merchant1.customer_successful_transactions(customer4.id)).to eq(1)
+    it "will have a link that takes me to the 'merchants/merchant_id/items index page" do 
+
+      visit "/merchants/#{merchant1.id}/dashboard"
+
+      expect(page).to have_link("Merchant Items")
+
+      click_link("Merchant Items")
+
+      expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+    end
+
+    it "will have a link that takes me to the 'merchants/merchant_id/invoices index page" do 
+
+      visit "/merchants/#{merchant1.id}/dashboard"
+
+      expect(page).to have_link("Merchant Invoices")
+
+      click_link("Merchant Invoices")
+
+      expect(current_path).to eq("/merchants/#{merchant1.id}/invoices")
+    end 
+
+    it 'shows the names of the top 5 customers(largest number of successful transactions with merchant) and the number of transactions conducted with merchant' do
+      visit "/merchants/#{merchant1.id}/dashboard"
+
+      expect(page).to have_content("Top 5 customers with largest transactions")
+      expect(page).to have_content("Britney Spears- number of transactions: 2")
+      expect(page).to have_content("Bob Smith- number of transactions: 2")
+      expect(page).to have_content("Bill Johnson- number of transactions: 2")
+      expect(page).to have_content("Barbara Hilton- number of transactions: 2")
+      expect(page).to have_content("Bella Thomas- number of transactions: 2")
+      expect(page).to_not have_content("Boris Nelson")
     end
   end
 end
