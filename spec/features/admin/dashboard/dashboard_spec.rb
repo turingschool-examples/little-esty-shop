@@ -86,7 +86,7 @@ describe 'dashboard' do
     end
     it 'should have a list of invoices that have unshipped items' do
       visit '/admin'
-      within ('div#incomplete_invoices')
+      within ('div#incomplete_invoices') do
         expect(page).to have_content("Incomplete Invoices")
         expect(page).to have_content("id: #{@invoice2.id}")
         expect(page).to have_content("id: #{@invoice4.id}")
@@ -96,10 +96,10 @@ describe 'dashboard' do
 
     it 'should have links to invoices admin show page' do
       visit '/admin'
-      within ('div#incomplete_invoices')
-        click_on " #{@invoice2.id}"
+      within ('div#incomplete_invoices') do
+        click_on "#{@invoice2.id}"
       end
-      expect(current_path).to eq("/admin/#{@invoice2.id}")
+      expect(current_path).to eq("/admin/invoices/#{@invoice2.id}")
     end
   end
   
