@@ -3,7 +3,7 @@
   <p>Status: <%= @invoice.status %></p>
   <p>Created at: <%= @invoice.created_at %></p>
   <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
-  <br>
+  <br><br>
 <% @invoice.invoice_items.each do |invoice_item| %>
   <div id="item-"<%= invoice_item.id %>>
   <h3><%= invoice_item.item.name %></h3>
