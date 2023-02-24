@@ -23,6 +23,21 @@ RSpec.describe 'Admin Dashboard:', type: :feature do
           expect(page).to have_link('Invoices')
         end
       end
+
+      it "I see a section for 'Incomplete Invoices'," do
+
+        within('section#incomplete_invoices') do
+          expect(page).to have_content("Incomplete Invoices")
+        end
+      end
+
+      it "In that section I see a list of the ids of all invoices that have items that have not yet been shipped" do
+
+        within('section#incomplete_invoices') do
+          expect(page).to have_content("Incomplete Invoices")
+        end
+      end
+    end
     end
   end
 end
