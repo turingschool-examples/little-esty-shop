@@ -98,12 +98,22 @@ RSpec.describe '/admin', type: :feature do
 
     it 'I see names of top 5 customers with largest number of successful transactions' do
       expect(page).to have_content("Top 5 Customers with Highest Successful Transactions")
-      # expect(page).to have_content()
+      expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}")
+      expect(page).to have_content("#{@customer3.first_name} #{@customer3.last_name}")
+      expect(page).to have_content("#{@customer4.first_name} #{@customer4.last_name}")
+      expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name}")
+      expect(page).to have_content("#{@customer6.first_name} #{@customer6.last_name}")
+
+      expect(page).to_not have_content("#{@customer2.first_name} #{@customer2.last_name}")
     end 
 
-    xit 'next to customer names, I see total count of their successful transactions' do
-      within "#top_customers-#{XXX}" do
-        expect(page).to have_content()
+    it 'next to customer names, I see total count of their successful transactions' do
+      within "#top_customers-#{@customer1.id}" do
+        expect(page).to have_content("Steve Stevinson has 4 successful transactions!")
+      end
+
+      within "#top_customers-#{@customer6.id}" do
+        expect(page).to have_content("Yukon Dooheet has 3 successful transactions!")
       end
     end 
 
