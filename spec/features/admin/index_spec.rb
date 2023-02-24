@@ -24,8 +24,8 @@ describe "As an admin" do
   let!(:invoice8) { customer5.invoices.create!(status: 2) }
   let!(:invoice9) { customer5.invoices.create!(status: 2) }
   
-  let!(:invoice10) { customer6.invoices.create!(ustatus: 2) }
-  let!(:invoice11) { customer6.invoices.create!(ustatus: 2) }
+  let!(:invoice10) { customer6.invoices.create!(status: 2) }
+  let!(:invoice11) { customer6.invoices.create!(status: 2) }
 
   let!(:item1) { merchant1.items.create!(name: "water bottle", description: "24oz metal container for water", unit_price: 8) }    
   let!(:item2) { merchant1.items.create!(name: "rubber duck", description: "toy for bath", unit_price: 1) }    
