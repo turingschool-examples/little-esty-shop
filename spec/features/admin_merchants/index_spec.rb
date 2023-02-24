@@ -81,7 +81,6 @@ describe 'Admin Merchants index page' do
 
       it "I see the names of the top 5 merchants by total revenue generated and I see that each merchant name links to the admin merchant show page for that merchant and I see the total reveneue generated next to each merchant name" do
         visit admin_merchants_path
-        save_and_open_page
 
         expect(page).to have_content('Top 5 merchants by total revenue generated:')
         within('.top') do
