@@ -44,7 +44,7 @@ namespace :csv_load do
       else 
         nil 
       end 
-      Transaction.create!(credit_card_number: row['credit_card_number'], credit_card_expiration_date: row['credit_card_expiration_date'], result: row['result']== 'success' ? 1 : 2, invoice_id: row['invoice_id'], created_at: row['created_at'], updated_at: row['updated_at'], uuid: row['id'])
+      Transaction.create!(credit_card_number: row['credit_card_number'], credit_card_expiration_date: row['credit_card_expiration_date'], result: row['result']== 'success' ? 0 : 1, invoice_id: row['invoice_id'], created_at: row['created_at'], updated_at: row['updated_at'], uuid: row['id'])
     end
   end
 
