@@ -22,13 +22,34 @@ RSpec.describe 'Merchant Items', type: :feature do
           expect(page).to have_content("New Item")
 
           within 'ul#items_list' do
-            expect(page).to have_content("#{football.name }")
-            expect(page).to have_content("#{baseball.name }")
-            expect(page).to have_content("#{glove.name }")
+            expect(page).to have_content("#{football.name}")
+            expect(page).to have_content("#{baseball.name}")
+            expect(page).to have_content("#{glove.name}")
           end
           
-          expect(page).to_not have_content("#{arugula.name }")
-          expect(page).to_not have_content("#{tomato.name }")
+          expect(page).to_not have_content("#{arugula.name}")
+          expect(page).to_not have_content("#{tomato.name}")
+        end
+
+        it "each item name is a link to that merchant's item's show page " do
+          within 'ul#items_list' do
+            click_link football.name
+            expect(current_path).to eq(merchant_item_path(sam.id, football.id))
+          end
+        end
+
+        it "each item name is a link to that merchant's item's show page " do
+          within 'ul#items_list' do
+            click_link baseball.name
+            expect(current_path).to eq(merchant_item_path(sam.id, baseball.id))
+          end
+        end
+
+        it "each item name is a link to that merchant's item's show page " do
+          within 'ul#items_list' do
+            click_link glove.name
+            expect(current_path).to eq(merchant_item_path(sam.id, glove.id))
+          end
         end
       end
     end
