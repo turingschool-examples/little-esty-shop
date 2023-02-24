@@ -2,3 +2,9 @@
 <p>Name: <%=@merchant.name%></p>
 <%=link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
 <%=link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
+<div id= "ready_items">
+<h3>Items Ready to Ship</h3>
+  <%@ready_merchant_items.each do |item| %>
+    <%= item %>
+  <% end %>
+</div>
