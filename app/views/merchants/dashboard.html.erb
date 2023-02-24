@@ -1,0 +1,17 @@
+<h1>Welcome to your dashboard, <%= @merchant.name %></h1>
+
+<%= link_to "My Merchant Items Index", "/merchants/#{@merchant.id}" %> <br>
+<%= link_to "My Merchant Invoices Index", "/merchants/#{@merchant.id}/invoices" %> <br>
+
+<h2>Top Five Customers:</h3>
+<% @top_five_customers.each do |customer| %>
+<%= "#{customer.first_name} #{customer.last_name} -- Transactions: #{customer.trans_count}" %> <br><br>
+<% end %>
+<br>
+<div id="items_to_ship">
+<h2>Items Ready to Ship</h2>
+<%@items_to_ship.each do |inv_item|%>
+  <%= link_to "#{inv_item.invoice_id}", merchant_invoice_path(@merchant.id, inv_item.invoice_id)%>: <%=inv_item.item.name%> created on <%= inv_item.created_at.strftime("%A, %B %e, %Y") %>
+<br>
+<%end%>
+</div>

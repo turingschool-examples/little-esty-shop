@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 		member do 
 			get 'dashboard'
 		end
-
     resources :invoices, only: [:show]
 	end
 
@@ -17,6 +16,8 @@ Rails.application.routes.draw do
     resources :invoices, only: [:index]
   end
 
-  get "/merchants/:id/items", to: "merchant_items#index"
+  
+  get "/merchant/:id/items", to: "merchant_items#index"
+  patch "/merchant/:id/items/:item_id", to: "merchant_items#update"
 
 end
