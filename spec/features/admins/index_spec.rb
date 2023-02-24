@@ -20,7 +20,7 @@ RSpec.describe "The Admin Index" do
   
   describe "User Story 19" do
     it "When an admin the admin dashboard (/admin), they see a header indicating that they are on the admin dashboard" do 
-      visit "/admin"
+      visit admin_index_path
 
       expect(page).to have_content("Admin Dashboard")
     end
@@ -30,10 +30,10 @@ RSpec.describe "The Admin Index" do
     it "When I visit the admin dashboard (/admin) then I see a link to the admin merchants index (/admin/merchants)
     and I see a link to the admin invoices index (/admin/invoices)" do
     
-      visit "/admin"
+      visit admin_index_path
 
-      expect(page).to have_link("Merchants", href: "/admin/merchants")
-      expect(page).to have_link("Invoices", href: "/admin/invoices")
+      expect(page).to have_link("Merchants", href: admin_merchants_path)
+      expect(page).to have_link("Invoices", href: admin_invoices_path)
     end
   end
 
@@ -46,7 +46,7 @@ RSpec.describe "The Admin Index" do
       4.times { create(:transaction, invoice_id: @invoice_4.id, result: 0) }
       5.times { create(:transaction, invoice_id: @invoice_5.id, result: 0) }
 
-      visit "/admin"
+      visit admin_index_path
 
       customer_5_full_name = "#{@customer_5.first_name} #{@customer_5.last_name}"
       customer_4_full_name = "#{@customer_4.first_name} #{@customer_4.last_name}"
@@ -77,29 +77,29 @@ RSpec.describe "The Admin Index" do
       @invoice_item_4 = create(:invoice_item, invoice_id: @invoice_3.id, item_id: item_4.id, status: 0)
       @invoice_item_5 = create(:invoice_item, invoice_id: @invoice_4.id, item_id: item_5.id, status: 2)
 
-      visit "/admin"
+      visit admin_index_path
     end
 
     describe "User Story 22" do
       it "When I visit the admin dashboard, I see a section for 'Incomplete Invoices', In that section I see a list of the ids of all invoices 
         that have items that have not yet been shipped, and each invoice id links to that invoice's admin show page" do
-
+        save_and_open_page
         within("#incomplete_invoices") {
           within("#incomplete_invoice_item-#{@invoice_item_1.id}")  {
             expect(page).to have_content("Invoice ##{@invoice_1.id}")
-            expect(page).to have_link("#{@invoice_1.id}", href: "/admin/invoice/#{@invoice_1.id}")
+            expect(page).to have_link("#{@invoice_1.id}", href: admin_invoice_path(@invoice_1))
           }
           within("#incomplete_invoice_item-#{@invoice_item_2.id}")  {
             expect(page).to have_content("Invoice ##{@invoice_2.id}")
-            expect(page).to have_link("#{@invoice_2.id}", href: "/admin/invoice/#{@invoice_2.id}")
+            expect(page).to have_link("#{@invoice_2.id}", href: admin_invoice_path(@invoice_2))
           }
           within("#incomplete_invoice_item-#{@invoice_item_3.id}")  {
             expect(page).to have_content("Invoice ##{@invoice_3.id}")
-            expect(page).to have_link("#{@invoice_3.id}", href: "/admin/invoice/#{@invoice_3.id}")
+            expect(page).to have_link("#{@invoice_3.id}", href: admin_invoice_path(@invoice_3))
           }
           within("#incomplete_invoice_item-#{@invoice_item_4.id}")  {
             expect(page).to have_content("Invoice ##{@invoice_3.id}")
-            expect(page).to have_link("#{@invoice_3.id}", href: "/admin/invoice/#{@invoice_3.id}")
+            expect(page).to have_link("#{@invoice_3.id}", href: admin_invoice_path(@invoice_3))
           }
           expect(page).to_not have_content("Invoice ##{@invoice_4.id}")
         }
