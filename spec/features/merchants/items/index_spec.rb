@@ -5,11 +5,11 @@ before(:each) do
   @merchant1 = Merchant.create!(name: "Hady", uuid: 1) 
   @merchant2 = Merchant.create!(name: "Malena", uuid: 2) 
 
-  @item_1 = @merchant1.items.create(name: "Salt", description: "it is salty", unit_price: 12)
-  @item_2 = @merchant1.items.create(name: "Pepper", description: "it is peppery", unit_price: 11)
-  @item_3 = @merchant2.items.create(name: "Spices", description: "it is spicy", unit_price: 13)
-  @item_4 = @merchant2.items.create(name: "Sand", description: "its all over the place", unit_price: 14)
-  @item_5 = @merchant1.items.create(name: "Water", description: "nice and liquidy", unit_price: 15, status: 1)
+  @item_1 = @merchant1.items.create(name: "Salt", description: "it is salty", unit_price: 12, uuid: 1)
+  @item_2 = @merchant1.items.create(name: "Pepper", description: "it is peppery", unit_price: 11, uuid: 2)
+  @item_3 = @merchant2.items.create(name: "Spices", description: "it is spicy", unit_price: 13, uuid: 3)
+  @item_4 = @merchant2.items.create(name: "Sand", description: "its all over the place", unit_price: 14, uuid: 4)
+  @item_5 = @merchant1.items.create(name: "Water", description: "nice and liquidy", unit_price: 15, status: 1, uuid: 5)
 
   @customer_1 = Customer.create(first_name: "Diego", last_name: "Flores")
   @customer_2 = Customer.create(first_name: "Sebastian", last_name: "Beltran")

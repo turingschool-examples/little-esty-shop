@@ -28,4 +28,8 @@ class Merchants::ItemsController < ApplicationController
   def item_params
     params.permit(:name, :description, :unit_price)
   end
+
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
 end
