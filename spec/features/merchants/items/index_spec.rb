@@ -35,15 +35,15 @@ RSpec.describe 'Merchant Items Index' do
       # save_and_open_page
 
       within "#name-Bowl" do
-        expect(page).to have_button("Disable")
-        click_button "Disable"
-
-        expect(current_path).to eq("/merchant/#{@carlos.id}/items")
         expect(page).to have_button("Enable")
         click_button "Enable"
 
         expect(current_path).to eq("/merchant/#{@carlos.id}/items")
         expect(page).to have_button("Disable")
+        click_button "Disable"
+
+        expect(current_path).to eq("/merchant/#{@carlos.id}/items")
+        expect(page).to have_button("Enable")
       end
     end
   end

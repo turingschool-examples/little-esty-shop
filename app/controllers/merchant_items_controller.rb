@@ -6,7 +6,7 @@ class MerchantItemsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:id])
     @item = Item.find(params[:item_id])
-    if params[:status] == "enabled"
+    if params[:status] == "disabled"
       @item.update(status: 1)
       redirect_to "/merchant/#{@merchant.id}/items"
     else
