@@ -7,7 +7,7 @@
 
 <div id="top_customers">
   <ol>
-    <% @top_five_customers.each do |customer| %>
+    <% @top_five_merchant_customers.each do |customer| %>
       <li><%= "#{customer.first_name} #{customer.last_name} - #{customer.total_purchases} purchases" %></li>
     <% end %>
 </div>
