@@ -4,7 +4,7 @@
 
 <h3> List of all Items</h3>
 
-<%@items_for_specific_merchant.each do |item|%>
+<% @items_for_specific_merchant.each do |item|%>
   <div id= "item_number_<%="#{item.id}"%>">
   <h5><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></h5>
     <p>Status <%=item.status%> 
