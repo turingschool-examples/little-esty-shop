@@ -82,6 +82,7 @@ RSpec.describe Merchant, type: :feature do
         it 'displays the date that the invoice was created ordered by oldest to newest' do 
           within "#items_and_invoices" do 
             expect(coochie_copi.name).to appear_before(napkin_holder.name)
+            expect(page).to_not have_content(window_planter.name)
           end
         end
       end
