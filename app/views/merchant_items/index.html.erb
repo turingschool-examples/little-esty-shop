@@ -1,5 +1,14 @@
 <h1>Items</h1>
 
 <% @merchant.items.each do |item| %>
-  <%= item.name %>
+  <div id="name-<%= item.name %>">
+  <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %><br><br>   
+  <%= item.status %>
+    <% if item.status == "enabled" %>
+        <%= button_to "Disable", "/merchant/#{@merchant.id}/items/#{item.id}", method: :patch, local: true, params: {status: item.status} %>
+    <% elsif item.status == "disabled" %>
+        <%= button_to "Enable", "/merchant/#{@merchant.id}/items/#{item.id}", method: :patch, local: true, params: {status: item.status} %>
+    <% end %>
+  </div>
+
 <% end %>
