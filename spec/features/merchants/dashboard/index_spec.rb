@@ -79,7 +79,7 @@ RSpec.describe "Dashboard", type: :feature do
 
   describe "User Story 4" do
     describe "Items Ready to Ship" do
-      xit "shows a list of ordered items ready to ship" do
+      xit "shows a list of items that have been ordered yet have not been shipped" do
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content(@item_2.name)
       end

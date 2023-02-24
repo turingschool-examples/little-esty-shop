@@ -15,4 +15,10 @@ class Merchant < ApplicationRecord
       .order(count: :desc)
       .limit(5)
   end
+
+  def invoice_items_ready_to_ship
+    self.invoice_items
+    .joins(:invoice)
+    .where(status: "packaged")
+  end
 end
