@@ -18,21 +18,21 @@ RSpec.describe 'Merchant Items Index' do
     @scarf = @pete.items.create!(name: "Scarf", description: "scarf, knitted", unit_price: 350) 
 		@tshirt = @pete.items.create!(name: "Tshirt", description: "tshirt, screenprinted", unit_price: 250)
 
-    # visit "/merchants/#{@carlos.id}/items"
-		# click_link "Bowl"
+    visit "/merchants/#{@carlos.id}/items"
+		save_and_open_page
+		click_link "Bowl"
   end
 
   describe 'When I click on the name of an item from the merchant items index page' do
 		it 'then I am taken to that merchants items show page' do
-			visit "/merchants/#{@carlos.id}/items/#{@bowl.id}"
-
 			expect(current_path).to eq("/merchants/#{@carlos.id}/items/#{@bowl.id}")		
 		end
 
 		it "I see all of the item's attributes" do
+
 			expect(page).to have_content("Name: Bowl")
 			expect(page).to have_content("Description: it's a bowl")
-			expect(page).to have_content("Current Selling Price: $3.50")
+			expect(page).to have_content("Current Selling Price: 350")
 		end
   end
 end
