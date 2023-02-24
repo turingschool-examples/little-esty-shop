@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'admin merchant show page' do
-	let!(:merchant_1) { Merchant.create!(uuid: 8, name: 'John Doe') }
-	let!(:merchant_2) { Merchant.create!(uuid: 43, name: 'Brians Beads') }
-	let!(:merchant_3) { Merchant.create!(uuid: 46, name: 'Soras Chains') }
+	let!(:merchant_1) { Merchant.create!(name: 'John Doe') }
+	let!(:merchant_2) { Merchant.create!(name: 'Brians Beads') }
+	let!(:merchant_3) { Merchant.create!(name: 'Soras Chains') }
 
 
 	describe 'update merchant' do
