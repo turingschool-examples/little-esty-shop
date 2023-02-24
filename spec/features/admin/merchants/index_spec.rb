@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe "Admin Merchants", type: :feature do 
+RSpec.describe "Admin Merchants Index", type: :feature do 
   let!(:bob) { Merchant.create!(name: "Bob's Beauties") } 
   let!(:rob) { Merchant.create!(name: "Rob's Rarities") } 
   let!(:hob) { Merchant.create!(name: "Hob's Hoootenanies") } 
