@@ -16,6 +16,17 @@ RSpec.describe "Dashboard", type: :feature do
     @invoice_3 = create(:invoice, customer_id: @customer_3.id)
     @invoice_4 = create(:invoice, customer_id: @customer_4.id)
     @invoice_5 = create(:invoice, customer_id: @customer_5.id)
+    @invoice_6 = create(:invoice, customer_id: @customer_6.id)
+
+    @item_1 = create(:item, merchant: @merchant)
+    @item_2 = create(:item, merchant: @merchant)
+    
+    InvoiceItem.create(item: @item_1, invoice: @invoice_1)
+    InvoiceItem.create(item: @item_1, invoice: @invoice_2)
+    InvoiceItem.create(item: @item_1, invoice: @invoice_3)
+    InvoiceItem.create(item: @item_1, invoice: @invoice_4)
+    InvoiceItem.create(item: @item_1, invoice: @invoice_5)
+    InvoiceItem.create(item: @item_2, invoice: @invoice_6)
     
     visit "/merchants/#{@merchant.id}/dashboard"
   end
@@ -53,7 +64,7 @@ RSpec.describe "Dashboard", type: :feature do
         3.times { create(:transaction, invoice_id: @invoice_3.id, result: 0) }
         4.times { create(:transaction, invoice_id: @invoice_4.id, result: 0) }
         5.times { create(:transaction, invoice_id: @invoice_5.id, result: 0) }
-  
+
         visit "/merchants/#{@merchant.id}/dashboard"
   
         customer_5_full_name = "#{@customer_5.first_name} #{@customer_5.last_name}"
