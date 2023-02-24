@@ -7,3 +7,9 @@
 
 <div> <%= link_to "Create a new merchant", new_admin_merchant_path %> </div>
 
+<div class = 'top'> 
+  <h3>Top 5 merchants by total revenue generated:<h3>
+    <% @top_merchants.each do |top_merchant| %>
+      <li> <%= link_to "#{top_merchant.name}:" , admin_merchant_path(top_merchant) %> <%= "#{top_merchant.revenue}" %> </li>
+      <% end %>
+</div>
