@@ -12,6 +12,7 @@ namespace :admin do
   get "/invoices/:invoice_id", to: "invoices#show"
   
   get '/merchants', to: "merchants#index"
+  get '/merchants/:merchant_id', to: 'merchants#show'
 end 
   #transactions
   #items
