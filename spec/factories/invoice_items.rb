@@ -3,8 +3,7 @@ FactoryBot.define do
     quantity {Faker::Number.number(digits: 2)}
     unit_price {Faker::Number.number(digits: 2)}
     status { "pending" }
-    association :invoice
-    association :item
+    association :invoice, :item
     trait :shipped do 
       status {"shipped"}
     end

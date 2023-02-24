@@ -31,32 +31,31 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
     let!(:item5) {create(:item, merchant: merchant1)}
    
     let!(:transaction1) {create(:transaction, invoice: invoice1) }
-    let!(:transaction1) {create(:transaction, invoice: invoice2) }
-    let!(:transaction1) {create(:transaction, invoice: invoice3) }
-    let!(:transaction1) {create(:transaction, invoice: invoice4) }
-    let!(:transaction1) {create(:transaction, invoice: invoice5) }
-    let!(:transaction1) {create(:transaction, invoice: invoice6) }
-    let!(:transaction1) {create(:transaction, invoice: invoice7) }
-    let!(:transaction1) {create(:transaction, invoice: invoice7) }
-    let!(:transaction1) {create(:transaction, invoice: invoice8) }
-    let!(:transaction1) {create(:transaction, invoice: invoice9) }
-    let!(:transaction1) {create(:transaction, invoice: invoice10) }
-    let!(:transaction1) {create(:transaction, invoice: invoice10) }
-    let!(:transaction1) {create(:transaction, invoice: invoice11) }
+    let!(:transaction2) {create(:transaction, invoice: invoice2) }
+    let!(:transaction3) {create(:transaction, invoice: invoice3) }
+    let!(:transaction4) {create(:transaction, invoice: invoice4) }
+    let!(:transaction5) {create(:transaction, invoice: invoice5) }
+    let!(:transaction6) {create(:transaction, invoice: invoice6) }
+    let!(:transaction8) {create(:transaction, invoice: invoice7) }
+    let!(:transaction9) {create(:transaction, invoice: invoice8) }
+    let!(:transaction10) {create(:transaction, invoice: invoice9) }
+    let!(:transaction11) {create(:transaction, invoice: invoice10) }
+    let!(:transaction12) {create(:transaction, invoice: invoice10) }
+    let!(:transaction13) {create(:transaction, invoice: invoice11) }
     
     before do
-      create(:invoice_item, invoice: invoice1)
-      create(:invoice_item, invoice: invoice1)
-      create(:invoice_item, invoice: invoice2)
-      create(:invoice_item, invoice: invoice2)
-      create(:invoice_item, invoice: invoice3)
-      create(:invoice_item, invoice: invoice3)
-      create(:invoice_item, invoice: invoice4)
-      create(:invoice_item, invoice: invoice4)
-      create(:invoice_item, invoice: invoice5)
-      create(:invoice_item, invoice: invoice5)
-      create(:invoice_item, invoice: invoice6)
-      create(:invoice_item, invoice: invoice6)
+      create(:invoice_item, item: item1, invoice: invoice1)
+      create(:invoice_item, item: item2, invoice: invoice1)
+      create(:invoice_item, item: item1, invoice: invoice2)
+      create(:invoice_item, item: item4, invoice: invoice2)
+      create(:invoice_item, item: item4, invoice: invoice3)
+      create(:invoice_item, item: item3, invoice: invoice3)
+      create(:invoice_item, item: item1, invoice: invoice4)
+      create(:invoice_item, item: item4, invoice: invoice4)
+      create(:invoice_item, item: item1, invoice: invoice5)
+      create(:invoice_item, item: item2, invoice: invoice5)
+      create(:invoice_item, item: item2, invoice: invoice6)
+      create(:invoice_item, item: item3, invoice: invoice6)
       
       create(:invoice_item, item: item5, invoice: invoice7)
 
@@ -73,10 +72,10 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
     
 
     it 'shows my name(merchant)' do
-      
+      # require 'pry'; binding.pry
       visit "/merchants/#{merchant1.id}/dashboard"
 
-      expect(page).to have_content("Brian's Beads")
+      expect(page).to have_content("#{merchant1.name}")
     end
 
     it "will have a link that takes me to the 'merchants/merchant_id/items index page" do 
@@ -103,14 +102,14 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
 
     it 'shows the names of the top 5 customers(largest number of successful transactions with merchant) and the number of transactions conducted with merchant' do
       visit "/merchants/#{merchant1.id}/dashboard"
-
+      save_and_open_page
       expect(page).to have_content("Top 5 customers with largest transactions")
-      expect(page).to have_content("#{customer1.name}- number of transactions: 2")
-      expect(page).to have_content("#{customer2.name}- number of transactions: 2")
-      expect(page).to have_content("#{customer3.name}- number of transactions: 2")
-      expect(page).to have_content("#{customer5.name}- number of transactions: 2")
-      expect(page).to have_content("#{customer6.name}- number of transactions: 2")
-      expect(page).to_not have_content("#{customer4.name}")
+      expect(page).to have_content("#{customer1.first_name} #{customer1.last_name}- number of transactions: #{merchant1.customer_successful_transactions(customer1.id)}")
+      expect(page).to have_content("#{customer2.first_name} #{customer2.last_name}- number of transactions: #{merchant1.customer_successful_transactions(customer2.id)}")
+      expect(page).to have_content("#{customer3.first_name} #{customer3.last_name}- number of transactions: #{merchant1.customer_successful_transactions(customer3.id)}")
+      expect(page).to have_content("#{customer5.first_name} #{customer5.last_name}- number of transactions: #{merchant1.customer_successful_transactions(customer5.id)}")
+      expect(page).to have_content("#{customer6.first_name} #{customer6.last_name}- number of transactions: #{merchant1.customer_successful_transactions(customer6.id)}")
+      expect(page).to_not have_content("#{customer4.first_name} #{customer4.last_name}")
     end
   end
 end

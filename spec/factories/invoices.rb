@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :invoice do
-    customer_id { Faker::Number.between(from: 1, to: 174)}
     status { 1 }
     association :customer
     
