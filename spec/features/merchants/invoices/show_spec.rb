@@ -23,10 +23,10 @@ RSpec.describe 'Merchant Invoices', type: :feature do
       context "When I visit my merchant's invoice's show page" do
         it 'I see information related to that invoice' do
           visit merchant_invoice_path(sam.id, invoice1.id)
-
+          
           expect(page).to have_content("Invoice ##{invoice1.id}")
           expect(page).to have_content("Status: #{invoice1.status}")
-          expect(page).to have_content("Created on: #{invoice1.created_at}")
+          expect(page).to have_content("Created on: #{invoice1.created_at.strftime("%A, %B %d, %Y")}")
           expect(page).to have_content("#{this_gai_ovah_hea.first_name} #{this_gai_ovah_hea.last_name}")
         end
       end
