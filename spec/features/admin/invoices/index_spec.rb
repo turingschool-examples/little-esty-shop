@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe "Admin Invoices", type: :feature do 
+RSpec.describe "Admin Invoices Index", type: :feature do 
   let!(:this_gai_ovah_hea) { Customer.create!(first_name: "Dis", last_name: "Gai") }
 
   let!(:invoice1) { Invoice.create!(customer_id: this_gai_ovah_hea.id) } 
@@ -30,7 +30,7 @@ RSpec.describe "Admin Invoices", type: :feature do
         within "#invoice-#{invoice1.id}" do
           click_link "#{invoice1.id}"
 
-          expect(page).to have_current_path(admin_invoice_path(invoice1.id))
+          expect(page).to have_current_path(admin_invoice_path(invoice1))
         end
 
         visit admin_invoices_path
@@ -38,7 +38,7 @@ RSpec.describe "Admin Invoices", type: :feature do
         within "#invoice-#{invoice2.id}" do
           click_link "#{invoice2.id}"
 
-          expect(page).to have_current_path(admin_invoice_path(invoice2.id))
+          expect(page).to have_current_path(admin_invoice_path(invoice2))
         end
         
         visit admin_invoices_path
@@ -46,7 +46,7 @@ RSpec.describe "Admin Invoices", type: :feature do
         within "#invoice-#{invoice3.id}" do
           click_link "#{invoice3.id}"
 
-          expect(page).to have_current_path(admin_invoice_path(invoice3.id))
+          expect(page).to have_current_path(admin_invoice_path(invoice3))
         end
 
         visit admin_invoices_path
@@ -54,7 +54,7 @@ RSpec.describe "Admin Invoices", type: :feature do
         within "#invoice-#{invoice4.id}" do
           click_link "#{invoice4.id}"
 
-          expect(page).to have_current_path(admin_invoice_path(invoice4.id))
+          expect(page).to have_current_path(admin_invoice_path(invoice4))
         end
 
         visit admin_invoices_path
@@ -62,7 +62,7 @@ RSpec.describe "Admin Invoices", type: :feature do
         within "#invoice-#{invoice5.id}" do
           click_link "#{invoice5.id}"
 
-          expect(page).to have_current_path(admin_invoice_path(invoice5.id))
+          expect(page).to have_current_path(admin_invoice_path(invoice5))
         end
       end
     end
