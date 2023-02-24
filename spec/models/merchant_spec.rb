@@ -4,6 +4,8 @@ RSpec.describe Merchant, type: :model do
   describe 'relationships' do
     it { should have_many :items }
     it { should have_many :invoices }
+    it { should have_many(:invoices).through(:items)}
+    it { should have_many(:invoice_items).through(:items) }
   end
 
   let!(:this_gai_ovah_hea) { Customer.create!(first_name: "Dis", last_name: "Gai") }
@@ -17,9 +19,9 @@ RSpec.describe Merchant, type: :model do
   let!(:glove) { sam.items.create!(name: "Baseball Glove", description: "This a baseball glove", unit_price: 4000) }
 
   before (:each) do
-    InvoiceItem.create!(invoice_id: invoice1.id, item_id: football.id)
-    InvoiceItem.create!(invoice_id: invoice1.id, item_id: baseball.id)
-    InvoiceItem.create!(invoice_id: invoice2.id, item_id: glove.id)
+    InvoiceItem.create!(invoice_id: invoice1.id, item_id: football.id, status: 0)
+    InvoiceItem.create!(invoice_id: invoice1.id, item_id: baseball.id, status: 1)
+    InvoiceItem.create!(invoice_id: invoice2.id, item_id: glove.id, status: 2)
   end
 
   describe 'instance methods' do
@@ -31,6 +33,10 @@ RSpec.describe Merchant, type: :model do
       InvoiceItem.create!(invoice_id: invoice3.id, item_id: cleats.id)
 
       expect(sam.merchant_invoices).to eq([invoice1, invoice2, invoice3])
+    end
+
+    it '#items_not_yet_shipped' do 
+      expect(sam.items_not_yet_shipped).to eq(["Football", "Baseball"])
     end
   end
 end
