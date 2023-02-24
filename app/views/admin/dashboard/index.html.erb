@@ -5,4 +5,16 @@
 <div id="body">
  <p> <%= link_to "Admin Merchants", '/admin/merchants' %> </p>
  <p> <%= link_to "Admin Invoices", '/admin/invoices' %> </p>
+
+ <h3> Top 5 Customers:</h3>
+  <%@top_5.each do |customer|%>
+    <p> <%= "#{customer.first_name + " " + customer.last_name}: #{customer.transaction_count} transactions"%> </p>
+  <% end %>
+</div>
+
+<div id='incomplete_invoices'>
+  <h3> Incomplete Invoices:</h3>
+  <% @incomplete.each do |invoice| %>
+    <p>id: <%= link_to "#{invoice.id}", "admin/invoices/#{invoice.id}" %> </p>
+  <% end %>
 </div>

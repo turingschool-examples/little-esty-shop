@@ -4,3 +4,10 @@
 
 <p><%= link_to "Items Index", "/merchants/#{@merchant.id}/items" %></p>
 <p><%= link_to "Invoices", "/merchants/#{@merchant.id}/invoices" %></p>
+
+<h2>Top 5 Customers:</h2>
+<ol>
+<% @merchant.top_five_customers.each do |customer|%>
+<li><%= customer.first_name %> <%= customer.last_name %>: <%= customer.transaction_count %> successful transactions </li>
+<% end %>
+</ol>
