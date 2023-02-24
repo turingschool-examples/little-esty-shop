@@ -8,6 +8,6 @@
 
  <p> Top 5 Customers:</p>
   <%@top_5.each do |customer|%>
-    <p> <%= "#{customer.first_name + " " + customer.last_name}: #{customer.transactions.count} transactions"%> </p>
+    <p> <%= "#{customer.first_name + " " + customer.last_name}: #{customer.transaction_count} transactions"%> </p>
   <% end %>
 </div>
