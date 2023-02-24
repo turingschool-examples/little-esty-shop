@@ -94,5 +94,4 @@ RSpec.describe Customer, type: :model do
       expect(Customer.top_5_successful_customers.to_a).to eq([@customer1, @customer6, @customer3, @customer4, @customer5])
     end
   end
-
 end
