@@ -1,6 +1,12 @@
 <h1> Merchants </h1>
-<div id="merchant_name-<%= merchant.id %>"> 
 <% @merchants.each do |merchant| %>
+<div id="merchant_name-<%= merchant.id %>"> 
   <%= link_to "#{merchant.name}", "/admin/merchants//#{merchant.id}"  %>
+  <div id= "change_status">
+  <p>Status: <%= merchant.status %></p>
+  <%= form_with url: "/admin/merchants/#{merchant.id}", method: :post, local: true do |form| %>
+    <%= form.submit "Disable/Enable" %>
+  <%end %>
+  </div>
 </div>
 <% end %>

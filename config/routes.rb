@@ -13,6 +13,7 @@ namespace :admin do
   
   get '/merchants', to: "merchants#index"
   get '/merchants/:merchant_id', to: 'merchants#show'
+  post '/merchants/:merchant_id', to: 'merchants#edit'
 end 
   #transactions
   #items
