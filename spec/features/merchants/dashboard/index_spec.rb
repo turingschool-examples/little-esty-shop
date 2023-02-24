@@ -27,6 +27,12 @@ RSpec.describe "Dashboard", type: :feature do
     InvoiceItem.create(item: @item_1, invoice: @invoice_4)
     InvoiceItem.create(item: @item_1, invoice: @invoice_5)
     InvoiceItem.create(item: @item_2, invoice: @invoice_6)
+
+    create(:transaction, invoice_id: @invoice_1.id, result: 0)
+    2.times { create(:transaction, invoice_id: @invoice_2.id, result: 0) }
+    3.times { create(:transaction, invoice_id: @invoice_3.id, result: 0) }
+    4.times { create(:transaction, invoice_id: @invoice_4.id, result: 0) }
+    5.times { create(:transaction, invoice_id: @invoice_5.id, result: 0) }
     
     visit "/merchants/#{@merchant.id}/dashboard"
   end
@@ -44,12 +50,10 @@ RSpec.describe "Dashboard", type: :feature do
   describe "User story 2" do
     describe "When I visit my merchant dashboard" do
       it "shows a link to my merchant items index (/merchants/merchant_id/items)" do
-       
         expect(page).to have_link("Items", href: "/merchants/#{@merchant.id}/items")
       end
 
       it "show a link to my merchant invoices index (/merchants/merchant_id/invoices)" do
-        
         expect(page).to have_link("Invoices", href: "/merchants/#{@merchant.id}/invoices")
       end
     end
@@ -58,15 +62,7 @@ RSpec.describe "Dashboard", type: :feature do
   describe "User story 3" do
     describe "When I visit my merchant dashboard" do
       it "I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant
-        and next to each customer name I see the number of successful transactions they have conducted with my merchant" do
-        create(:transaction, invoice_id: @invoice_1.id, result: 0)
-        2.times { create(:transaction, invoice_id: @invoice_2.id, result: 0) }
-        3.times { create(:transaction, invoice_id: @invoice_3.id, result: 0) }
-        4.times { create(:transaction, invoice_id: @invoice_4.id, result: 0) }
-        5.times { create(:transaction, invoice_id: @invoice_5.id, result: 0) }
-
-        visit "/merchants/#{@merchant.id}/dashboard"
-  
+        and next to each customer name I see the number of successful transactions they have conducted with my merchant" do  
         customer_5_full_name = "#{@customer_5.first_name} #{@customer_5.last_name}"
         customer_4_full_name = "#{@customer_4.first_name} #{@customer_4.last_name}"
         customer_3_full_name = "#{@customer_3.first_name} #{@customer_3.last_name}"
@@ -77,6 +73,25 @@ RSpec.describe "Dashboard", type: :feature do
         expect("#{customer_4_full_name} - 4 purchases").to appear_before("#{customer_3_full_name} - 3 purchases")
         expect("#{customer_3_full_name} - 3 purchases").to appear_before("#{customer_2_full_name} - 2 purchases")
         expect("#{customer_2_full_name} - 2 purchases").to appear_before("#{customer_1_full_name} - 1 purchases")
+      end
+    end
+  end
+
+  describe "User Story 4" do
+    describe "Items Ready to Ship" do
+      xit "shows a list of ordered items ready to ship" do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content(@item_2.name)
+      end
+
+      xit "shows the id of the invoice that ordered the item" do
+        expect(page).to have_content("Invoice ##{@invoice_1.id}")
+        expect(page).to have_content("Invoice ##{@invoice_2.id}")
+      end
+
+      xit "each invoice id is a link to my merchant's invoice show page" do
+        expect(page).to have_link("Invoice ##{@invoice_1.id}",
+        href: "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
       end
     end
   end
