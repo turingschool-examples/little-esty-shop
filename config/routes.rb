@@ -31,6 +31,8 @@ get "merchants/:merchant_id/dashboard", to: "merchants#dashboard"
   #items
   get '/merchants/:merchant_id/items', to: 'merchants/items#index'
   get '/merchants/:merchant_id/items/:item_id', to: 'merchants/items#show'
+  get '/merchants/:merchant_id/items/:item_id/edit', to: 'merchants/items#edit'
+  patch '/merchants/:merchant_id/items/:item_id', to: 'merchants/items#update'
   #invoice_items
 
  #customers
