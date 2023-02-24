@@ -35,7 +35,6 @@ GEM
       arel (>= 9.0)
     activerecord-import (1.4.1)
       activerecord (>= 4.2)
-    activerecord-reset-pk-sequence (0.2.1)
     activestorage (5.2.8.1)
       actionpack (= 5.2.8.1)
       activerecord (= 5.2.8.1)
@@ -249,7 +248,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import
-  activerecord-reset-pk-sequence
   bootsnap (>= 1.1.0)
   capybara
   coffee-rails (~> 4.2)
