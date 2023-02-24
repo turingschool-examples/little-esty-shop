@@ -60,22 +60,26 @@ RSpec.describe Merchant, type: :model do
     let!(:transaction18) { create(:transaction, invoice_id: invoice2.id, result: "failed")}
 
     before do
-      InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id) 
-      InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id) 
-      InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id) 
-      InvoiceItem.create!(item_id: item4.id, invoice_id: invoice4.id) 
-      InvoiceItem.create!(item_id: item5.id, invoice_id: invoice5.id) 
-      InvoiceItem.create!(item_id: item6.id, invoice_id: invoice6.id) 
-      InvoiceItem.create!(item_id: item7.id, invoice_id: invoice7.id) 
-      InvoiceItem.create!(item_id: item8.id, invoice_id: invoice8.id) 
-      InvoiceItem.create!(item_id: item9.id, invoice_id: invoice9.id) 
-      InvoiceItem.create!(item_id: item10.id, invoice_id: invoice10.id) 
-      InvoiceItem.create!(item_id: item11.id, invoice_id: invoice11.id)
+      InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, status: "packaged") 
+      InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, status: "pending") 
+      InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, status: "shipped") 
+      InvoiceItem.create!(item_id: item4.id, invoice_id: invoice4.id, status: "packaged") 
+      InvoiceItem.create!(item_id: item5.id, invoice_id: invoice5.id, status: "pending") 
+      InvoiceItem.create!(item_id: item6.id, invoice_id: invoice6.id, status: "pending") 
+      InvoiceItem.create!(item_id: item7.id, invoice_id: invoice7.id, status: "shipped") 
+      InvoiceItem.create!(item_id: item8.id, invoice_id: invoice8.id, status: "shipped") 
+      InvoiceItem.create!(item_id: item9.id, invoice_id: invoice9.id, status: "packaged") 
+      InvoiceItem.create!(item_id: item10.id, invoice_id: invoice10.id, status: "packaged") 
+      InvoiceItem.create!(item_id: item11.id, invoice_id: invoice11.id, status: "shipped")
     end
 
     it '#top_five_customers' do
       expect(merchant1.top_five_customers).to eq([customer2, customer3, customer1, customer5, customer4])
       expect(merchant1.top_five_customers).to_not eq([customer6])
+    end
+
+    it "should have items ready to be shipped" do
+      expect(merchant1.items_ready_to_ship).to eq([item1, item2, item4, item5, item6, item9, item10])
     end
   end
 

@@ -52,17 +52,17 @@ RSpec.describe "Merchant Dashboard Index" do
     let!(:transaction18) { create(:transaction, invoice_id: invoice2.id, result: "failed")}
 
     before do
-      InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id) 
-      InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id) 
-      InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id) 
-      InvoiceItem.create!(item_id: item4.id, invoice_id: invoice4.id) 
-      InvoiceItem.create!(item_id: item5.id, invoice_id: invoice5.id) 
-      InvoiceItem.create!(item_id: item6.id, invoice_id: invoice6.id) 
-      InvoiceItem.create!(item_id: item7.id, invoice_id: invoice7.id) 
-      InvoiceItem.create!(item_id: item8.id, invoice_id: invoice8.id) 
-      InvoiceItem.create!(item_id: item9.id, invoice_id: invoice9.id) 
-      InvoiceItem.create!(item_id: item10.id, invoice_id: invoice10.id) 
-      InvoiceItem.create!(item_id: item11.id, invoice_id: invoice11.id)
+      InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, status: "packaged") 
+      InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, status: "pending") 
+      InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, status: "shipped") 
+      InvoiceItem.create!(item_id: item4.id, invoice_id: invoice4.id, status: "packaged") 
+      InvoiceItem.create!(item_id: item5.id, invoice_id: invoice5.id, status: "pending") 
+      InvoiceItem.create!(item_id: item6.id, invoice_id: invoice6.id, status: "pending") 
+      InvoiceItem.create!(item_id: item7.id, invoice_id: invoice7.id, status: "shipped") 
+      InvoiceItem.create!(item_id: item8.id, invoice_id: invoice8.id, status: "shipped") 
+      InvoiceItem.create!(item_id: item9.id, invoice_id: invoice9.id, status: "packaged") 
+      InvoiceItem.create!(item_id: item10.id, invoice_id: invoice10.id, status: "packaged") 
+      InvoiceItem.create!(item_id: item11.id, invoice_id: invoice11.id, status: "shipped")
 
       visit "/merchants/#{merchant1.id}/dashboards"
     end
@@ -91,6 +91,18 @@ RSpec.describe "Merchant Dashboard Index" do
         expect(page).to have_content("#{customer5.first_name} #{customer5.last_name}: #{customer5.transaction_count} successful transactions")
         expect(page).to have_content("#{customer4.first_name} #{customer4.last_name}: #{customer4.transaction_count} successful transactions")
         expect(page).to_not have_content("#{customer6.first_name} #{customer6.last_name}: #{customer6.transaction_count} successful transactions")
+      end
+      
+      # 4. Merchant Dashboard Items Ready to Ship
+
+      it "I see a section for Items Ready to Ship & names of items that have not been shipped" do
+        expect(page).to have_content("Items Ready to Ship")
+        expect(page).to have_content(("#{item1.name}: #{item1.item_invoice_id}"))
+        expect(page).to have_link(item1.item_invoice_id)
+        # to merchant's invoice show page
+
+        expect(page).to_not have_content(("#{item3.name}: #{item3.item_invoice_id}"))
+        expect(page).to_not have_link(item3.item_invoice_id)
       end
     end
   end
