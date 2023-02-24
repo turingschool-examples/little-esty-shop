@@ -45,6 +45,7 @@ group :development, :test do
   gem 'launchy'
   gem 'orderly'
   gem 'simplecov'
+  gem 'net-http'
 end
 
 group :development do

@@ -20,7 +20,11 @@ RSpec.describe 'Admin Dashboard' do
     @inv3 = @cust3.invoices.create!(status: 1)
     @inv4 = @cust4.invoices.create!(status: 1)
     @inv5 = @cust6.invoices.create!(status: 1)
-    @inv6 = @cust5.invoices.create!(status: 1)
+    @inv6 = @cust5.invoices.create!(status: 0)
+    @inv7 = @cust6.invoices.create!(status: 0)
+    @inv8 = @cust6.invoices.create!(status: 0)
+    @inv9 = @cust4.invoices.create!(status: 0)
+
     
     
     @bowl = @merchant.items.create!(name: "bowl", description: "it's a bowl", unit_price: 350) 
@@ -43,12 +47,18 @@ RSpec.describe 'Admin Dashboard' do
     @trans15 = @inv5.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
     @trans16 = @inv6.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
     
-    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id)
-    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv2.id)
-    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id)
-    InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id)
-    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv5.id)
-    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id)
+    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id, status: 2)
+    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv2.id, status: 2)
+    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id, status: 2)
+    InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id, status: 2)
+    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv5.id, status: 2)
+    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id, status: 0)
+    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv7.id, status: 0)
+    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv8.id, status: 1)
+    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv9.id, status: 1)
+    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv9.id, status: 2)
+
+
     
     visit "/admin"
   end
@@ -79,9 +89,32 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to have_content "Laura Fiel -- Transactions: 2"
     end
 
-    xit 'I see the IDs of all invoices with unshipped items and links to their show page' do 
-      expect(page).to have_content "Incomplete Invoices"
+    it 'I see a section for "Incomplete Invoices"' do 
+      within "#incomplete_invoices" do
+        expect(page).to have_content "Incomplete Invoices"
+      end
+    end
 
+    it 'In that section I see a list of the ids of all invoices that have items that have not yet been shipped' do
+      within '#incomplete_invoices' do
+        expect(page).to have_content(@inv6.id)
+        expect(page).to have_content(@inv7.id)
+        expect(page).to have_content(@inv8.id)
+        expect(page).to have_content(@inv9.id)
+      end
+    end
+
+    it "And each invoice id links to that invoice's admin show page" do
+      within '#incomplete_invoices' do
+        expect(page).to have_link("#{@inv6.id}")
+        expect(page).to have_link("#{@inv7.id}")
+        expect(page).to have_link("#{@inv8.id}")
+        expect(page).to have_link("#{@inv9.id}")
+
+        click_on "#{@inv6.id}"
+
+        expect(page.current_path).to eq(admin_invoice_path(@inv6.id))
+      end
     end
   end
 end

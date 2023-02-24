@@ -13,11 +13,12 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :merchants, only: [:index]
-    resources :invoices, only: [:index]
+    resources :invoices, only: [:index, :show]
   end
 
-  
-  get "/merchant/:id/items", to: "merchant_items#index"
-  patch "/merchant/:id/items/:item_id", to: "merchant_items#update"
+  get "/merchants/:id/items", to: "merchant_items#index"
+  get "/merchants/:merchant_id/items/:item_id", to: "merchant_items#show"
+  get "/merchants/:merchant_id/items/:item_id/edit", to: "merchant_items#edit"
+  patch "/merchants/:merchant_id/items/:item_id", to: "merchant_items#update"
 
 end
