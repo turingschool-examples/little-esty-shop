@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe "Admin Invoices", type: :feature do 
+RSpec.describe "Admin Invoices Index", type: :feature do 
   let!(:this_gai_ovah_hea) { Customer.create!(first_name: "Dis", last_name: "Gai") }
 
   let!(:invoice1) { Invoice.create!(customer_id: this_gai_ovah_hea.id) } 
