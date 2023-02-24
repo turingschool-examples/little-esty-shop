@@ -34,6 +34,8 @@ end
         fill_in "item_unit_price", with: 1200
 
         click_button("Create Item")
+
+
         expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
 # Need to work on test for this. 
         expect(page).to have_content("medicine- 3467typeadvil")

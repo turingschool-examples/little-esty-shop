@@ -11,9 +11,19 @@ RSpec.describe 'show', type: :feature do
       visit "/merchants/#{schroeder_jerde.id}/items"
       click_link("#{qui.name}")
       expect(current_path).to eq("/merchants/#{schroeder_jerde.id}/items/#{qui.id}")
-      expect(page).to have_content("#{qui.name}")
-      expect(page).to have_content("#{qui.description}")
-      expect(page).to have_content("#{qui.unit_price}")
+      expect(page).to have_content("Name: #{qui.name}")
+      expect(page).to have_content("Description: #{qui.description}")
+      expect(page).to have_content("Unit Price: #{qui.unit_price}")
+    end
+
+    it 'have form to update and edit the item' do
+      visit "/merchants/#{schroeder_jerde.id}/items/#{qui.id}"
+
+      within "#item-#{qui.id}" do
+        expect(page).to have_link("Edit Item", href: "/merchants/#{schroeder_jerde.id}/items/#{qui.id}/edit")
+        click_link("Edit Item")
+      end
+      expect(current_path).to eq("/merchants/#{schroeder_jerde.id}/items/#{qui.id}/edit")
     end
   end
 end
