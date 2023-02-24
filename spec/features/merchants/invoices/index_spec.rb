@@ -33,7 +33,7 @@ RSpec.describe 'merchant invoice index' do
   describe 'merchants invoices index' do
     it 'shows all invoices with links to their show page' do
       visit "merchants/#{@merchant_1.id}/invoices"
-      
+    
       expect(page).to have_content(@invoice_1.id)
       expect(page).to have_content(@invoice_2.id)
 
