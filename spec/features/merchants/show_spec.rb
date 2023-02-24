@@ -72,7 +72,6 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
     
 
     it 'shows my name(merchant)' do
-      # require 'pry'; binding.pry
       visit "/merchants/#{merchant1.id}/dashboard"
 
       expect(page).to have_content("#{merchant1.name}")
@@ -102,7 +101,7 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
 
     it 'shows the names of the top 5 customers(largest number of successful transactions with merchant) and the number of transactions conducted with merchant' do
       visit "/merchants/#{merchant1.id}/dashboard"
-      save_and_open_page
+      
       expect(page).to have_content("Top 5 customers with largest transactions")
       expect(page).to have_content("#{customer1.first_name} #{customer1.last_name}- number of transactions: #{merchant1.customer_successful_transactions(customer1.id)}")
       expect(page).to have_content("#{customer2.first_name} #{customer2.last_name}- number of transactions: #{merchant1.customer_successful_transactions(customer2.id)}")
