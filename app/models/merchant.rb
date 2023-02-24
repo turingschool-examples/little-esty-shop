@@ -8,6 +8,6 @@ class Merchant < ApplicationRecord
   end
 
   def items_not_yet_shipped
-    invoice_items.where(status: ["pending", "packaged"]).pluck(:name)
+    invoice_items.where(status: ["pending", "packaged"]).pluck([:name, :invoice_id])
   end
 end
