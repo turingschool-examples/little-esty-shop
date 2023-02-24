@@ -30,39 +30,28 @@ RSpec.describe Item, type: :model do
   end 
 
     describe "factory bot and faker methods" do 
-      before :each do 
-
-        @merchant= FactoryBot.create_list(:merchant, 3)
-
-        @customer = FactoryBot.create_list(:customer, 2)
-
-        @item = FactoryBot.create_list(:item, 25, merchant: @merchant[0])
-        
-        @item2 = FactoryBot.create_list(:item, 25, merchant: @merchant[1])
-
-        @invoices = FactoryBot.create_list(:invoice, 2, customer: @customer[0])
-
-        @invoices2 = FactoryBot.create_list(:invoice, 2, customer: @customer[1])
-
-        @transactions= FactoryBot.create_list(:transaction, 5, invoice: @invoices[0])
-      
-        @transactions= FactoryBot.create_list(:transaction, 5, invoice: @invoices[1])
-
-        @invoice_items_1 = FactoryBot.create_list(:invoice_item, 5, invoice: @invoices[1], item: @item[0])
-
-        @invoice_items_2 = FactoryBot.create_list(:invoice_item, 5, invoice: @invoices[1], item: @item[1])
-
-        @invoice_items_3 = FactoryBot.create_list(:invoice_item, 5, invoice: @invoices[1], item: @item[2])
-
-      end
-
       it "selects the five most popular items" do 
-        
-        require 'pry'; binding.pry
-        expect(merchant).to be_an_instance_of(Merchant)
+        @merchant= FactoryBot.create_list(:merchant, 2)
+        @customer = FactoryBot.create(:customer)
+        @item = FactoryBot.create_list(:item, 15, merchant: @merchant[0])
+        @invoices = FactoryBot.create_list(:invoice, 2, customer: @customer)
+        @transactions= FactoryBot.create_list(:transaction, 1, invoice: @invoices[0], result: 0)
+        @transactions_2= FactoryBot.create_list(:transaction, 1, invoice: @invoices[1], result: 1)
+        @invoice_items_1 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[0], unit_price: 1, quantity: 1)
+        @invoice_items_2 = FactoryBot.create(:invoice_item, invoice: @invoices[1], item: @item[12], unit_price: 2, quantity: 1)
+        @invoice_items_3 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[1], unit_price: 3, quantity: 1)
+        @invoice_items_4 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[2], unit_price: 4, quantity: 1)      
+        @invoice_items_5 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[3], unit_price: 5, quantity: 1)
+        @invoice_items_6 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[4], unit_price: 6, quantity: 1)
+        @invoice_items_7 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[5], unit_price: 7, quantity: 1) 
+        @invoice_items_9 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[7], unit_price: 8, quantity: 1)
+        @invoice_items_10 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[8], unit_price: 9, quantity: 1)
+        @invoice_items_11 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[9], unit_price: 10, quantity: 1)
+        @invoice_items_12 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[10], unit_price: 11, quantity: 1)
+        @invoice_items_14 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[3], unit_price: 9, quantity: 1)
+        @invoice_items_11 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[9], unit_price: 1, quantity: 7)
 
-        expect(Item.five_popular_items(merchant_id)).to be_an_instance_of(ActiveRecord::Relation)
-
+        expect(Item.five_popular_items(@merchant[0])).to eq([@item[9], @item[3], @item[10], @item[8], @item[7]])
 
       end
     end

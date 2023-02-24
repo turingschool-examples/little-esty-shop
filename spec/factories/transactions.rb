@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :transaction do
-    sequence(:id)
+    sequence(:id, start: 0)
     sequence(:uuid)
     credit_card_number { Faker::Business.credit_card_number }
     result {Faker::Number.between(from: 0, to: 1)}
