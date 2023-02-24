@@ -85,12 +85,12 @@ RSpec.describe "Merchant Dashboard Index" do
 
       # 3. Merchant Dashboard Statistics - Favorite Customers
       it "I see the names of the top 5 customers w/ the largest number of transactions" do
-        expect(page).to have_content("#{customer2.first_name} #{customer2.last_name}: #{customer2.successful_transaction_count} successful transactions")
-        expect(page).to have_content("#{customer3.first_name} #{customer3.last_name}: #{customer3.successful_transaction_count} successful transactions")
-        expect(page).to have_content("#{customer1.first_name} #{customer1.last_name}: #{customer1.successful_transaction_count} successful transactions")
-        expect(page).to have_content("#{customer5.first_name} #{customer5.last_name}: #{customer5.successful_transaction_count} successful transactions")
-        expect(page).to have_content("#{customer4.first_name} #{customer4.last_name}: #{customer4.successful_transaction_count} successful transactions")
-        expect(page).to_not have_content("#{customer6.first_name} #{customer6.last_name}: #{customer6.successful_transaction_count} successful transactions")
+        expect(page).to have_content("#{customer2.first_name} #{customer2.last_name}: #{customer2.transaction_count} successful transactions")
+        expect(page).to have_content("#{customer3.first_name} #{customer3.last_name}: #{customer3.transaction_count} successful transactions")
+        expect(page).to have_content("#{customer1.first_name} #{customer1.last_name}: #{customer1.transaction_count} successful transactions")
+        expect(page).to have_content("#{customer5.first_name} #{customer5.last_name}: #{customer5.transaction_count} successful transactions")
+        expect(page).to have_content("#{customer4.first_name} #{customer4.last_name}: #{customer4.transaction_count} successful transactions")
+        expect(page).to_not have_content("#{customer6.first_name} #{customer6.last_name}: #{customer6.transaction_count} successful transactions")
       end
     end
   end

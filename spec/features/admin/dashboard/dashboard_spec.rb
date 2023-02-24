@@ -1,14 +1,28 @@
 require 'rails_helper'
 
-RSpec.describe Customer, type: :model do
-  describe 'relationships' do
-    it { should have_many :invoices }
-    it { should have_many(:transactions).through(:invoices) }
-    it { should have_many(:invoice_items).through(:invoices) }
-    it { should have_many(:items).through(:invoice_items) }
+describe 'dashboard' do
+  describe 'user story 19' do
+    it 'should have a header \'admin dashboard\'' do
+      visit '/admin'
+      within('header') do
+        expect(page).to have_css('h1', text: "Admin Dashboard")
+      end
+    end
   end
 
-  describe 'transactions (user story 21)' do
+  describe 'user story 20' do
+    it 'should have a link to admin merchants index' do
+      visit '/admin'
+      expect(page).to have_link('Admin Merchants', href: '/admin/merchants')
+    end
+
+    it 'should have a link to admin invoices index' do
+      visit '/admin'
+      expect(page).to have_link('Admin Invoices', href: '/admin/invoices')
+    end
+  end 
+
+  describe 'user story 21' do
     before do
       @customer1 = create(:customer)
       @customer2 = create(:customer)
@@ -28,44 +42,29 @@ RSpec.describe Customer, type: :model do
       @invoice8 = create(:invoice, customer_id: @customer8.id)
       @transaction1_1 = create(:transaction, invoice_id: @invoice1.id, result: "success")
       @transaction1_2 = create(:transaction, invoice_id: @invoice1.id, result: "success")
+      @transaction1_3 = create(:transaction, invoice_id: @invoice1.id, result: "success")
       @transaction2_1 = create(:transaction, invoice_id: @invoice2.id, result: "success")
       @transaction2_2 = create(:transaction, invoice_id: @invoice2.id, result: "success")
-      @transaction2_3 = create(:transaction, invoice_id: @invoice2.id, result: "success")
       @transaction3_1 = create(:transaction, invoice_id: @invoice3.id, result: "success")
       @transaction3_2 = create(:transaction, invoice_id: @invoice3.id, result: "success")
       @transaction4_1 = create(:transaction, invoice_id: @invoice4.id, result: "success")
       @transaction4_2 = create(:transaction, invoice_id: @invoice4.id, result: "success")
       @transaction5_1 = create(:transaction, invoice_id: @invoice5.id, result: "success")
       @transaction5_1 = create(:transaction, invoice_id: @invoice5.id, result: "success")
-      @transaction6_1 = create(:transaction, invoice_id: @invoice6.id, result: "failed")
-      @transaction6_2 = create(:transaction, invoice_id: @invoice6.id, result: "failed")
-      @transaction6_3 = create(:transaction, invoice_id: @invoice6.id, result: "failed")
-      @transaction6_4 = create(:transaction, invoice_id: @invoice6.id, result: "failed")
-      @transaction6_5 = create(:transaction, invoice_id: @invoice6.id, result: "failed")
+      @transaction6 = create(:transaction, invoice_id: @invoice6.id)
       @transaction7 = create(:transaction, invoice_id: @invoice7.id)
-      @transaction8 = create(:transaction, invoice_id: @invoice8.id, result: "success")
+      @transaction8 = create(:transaction, invoice_id: @invoice8.id)
     end
-    
-    describe '.top_5_by_transactions' do
-      it 'counts successful transactions' do
-        expect(Customer.top_5_by_transactions.sort).to eq([@customer1, @customer2, @customer3, @customer4, @customer5].sort)
-      end
-
-      it 'does not count failed transactions' do
-        expect(Customer.top_5_by_transactions.sort).not_to include(@customer6)
-      end
-    end
-
-    describe 'transaction_count' do
-      it 'counts successful transactions' do
-        expect(@customer1.transaction_count).to eq(2)
-        expect(@customer2.transaction_count).to eq(3)
-        expect(@customer8.transaction_count).to eq(1)
-      end
-
-      it 'does not count unsuccessful transactions' do
-        expect(@customer6.transaction_count).to eq(0)
-      end
+    it 'should have a list of the top 5 customers' do
+      visit '/admin'
+      expect(page).to have_content('Top 5 Customers')
+      expect(page).to have_content("#{@customer1.first_name + " " + @customer1.last_name}: 3 transactions")
+      expect(page).to have_content("#{@customer2.first_name + " " + @customer2.last_name}: 2 transactions")
+      expect(page).to have_content("#{@customer3.first_name + " " + @customer3.last_name}: 2 transactions")
+      expect(page).to have_content("#{@customer4.first_name + " " + @customer4.last_name}: 2 transactions")
+      expect(page).to have_content("#{@customer5.first_name + " " + @customer5.last_name}: 2 transactions")
     end
   end
+  
+
 end
