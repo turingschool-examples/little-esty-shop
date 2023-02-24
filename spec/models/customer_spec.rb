@@ -43,7 +43,7 @@ RSpec.describe Customer, type: :model do
       @transaction6_4 = create(:transaction, invoice_id: @invoice6.id, result: "failed")
       @transaction6_5 = create(:transaction, invoice_id: @invoice6.id, result: "failed")
       @transaction7 = create(:transaction, invoice_id: @invoice7.id)
-      @transaction8 = create(:transaction, invoice_id: @invoice8.id)
+      @transaction8 = create(:transaction, invoice_id: @invoice8.id, result: "success")
     end
     describe '.top_5_by_transactions' do
       it 'counts successful transactions' do
