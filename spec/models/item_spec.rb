@@ -6,6 +6,7 @@ RSpec.describe Item, type: :model do
   it { should have_many(:customers).through(:invoices) }
 
   describe "#class methods" do 
+    describe "handwritten test data" do 
     before(:each) do 
     @merchant1 = Merchant.create!(name: "Hady", uuid: 1) 
     @merchant2 = Merchant.create!(name: "Malena", uuid: 2) 
@@ -26,7 +27,44 @@ RSpec.describe Item, type: :model do
       params = {"controller"=>"merchants/items", "action"=>"index", :merchant_id=>"#{@merchant1.id}"}
       expect(Item.enabled_status_items(params)).to eq([@item_5])
     end
+  end 
+
+    describe "factory bot and faker methods" do 
+      before :each do 
+
+        @merchant= FactoryBot.create_list(:merchant, 3)
+
+        @customer = FactoryBot.create_list(:customer, 2)
+
+        @item = FactoryBot.create_list(:item, 25, merchant: @merchant[0])
+        
+        @item2 = FactoryBot.create_list(:item, 25, merchant: @merchant[1])
+
+        @invoices = FactoryBot.create_list(:invoice, 2, customer: @customer[0])
+
+        @invoices2 = FactoryBot.create_list(:invoice, 2, customer: @customer[1])
+
+        @transactions= FactoryBot.create_list(:transaction, 5, invoice: @invoices[0])
+      
+        @transactions= FactoryBot.create_list(:transaction, 5, invoice: @invoices[1])
+
+        @invoice_items_1 = FactoryBot.create_list(:invoice_item, 5, invoice: @invoices[1], item: @item[0])
+
+        @invoice_items_2 = FactoryBot.create_list(:invoice_item, 5, invoice: @invoices[1], item: @item[1])
+
+        @invoice_items_3 = FactoryBot.create_list(:invoice_item, 5, invoice: @invoices[1], item: @item[2])
+
+      end
+
+      it "selects the five most popular items" do 
+        
+        require 'pry'; binding.pry
+        expect(merchant).to be_an_instance_of(Merchant)
+
+        expect(Item.five_popular_items(merchant_id)).to be_an_instance_of(ActiveRecord::Relation)
+
+
+      end
+    end
   end
-
-
 end
