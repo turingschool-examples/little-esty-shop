@@ -2,77 +2,99 @@ require 'rails_helper'
 
 RSpec.describe 'merchant show dashboard index page', type: :feature do
   describe "as a merchant visiting '/merchants/merchant_id/dashboard'" do
-    let!(:merchant1) {Merchant.create!(uuid: 101, name: "Brian's Beads")}
+    let!(:merchant1) { create(:merchant)}
 
-    let!(:customer1) { Customer.create!(uuid: 1, first_name: "Britney", last_name: "Spears")}
-    let!(:customer2) { Customer.create!(uuid: 2, first_name: "Bob", last_name: "Smith")}
-    let!(:customer3) { Customer.create!(uuid: 3, first_name: "Bill", last_name: "Johnson")}
-    let!(:customer4) { Customer.create!(uuid: 4, first_name: "Boris", last_name: "Nelson")}
-    let!(:customer5) { Customer.create!(uuid: 5, first_name: "Barbara", last_name: "Hilton")}
-    let!(:customer6) { Customer.create!(uuid: 6, first_name: "Bella", last_name: "Thomas")}
+    let!(:customer1) { create(:customer)}
+    let!(:customer2) { create(:customer)}
+    let!(:customer3) { create(:customer)}
+    let!(:customer4) { create(:customer)}
+    let!(:customer5) { create(:customer)}
+    let!(:customer6) { create(:customer)}
+  
 
-    let!(:invoice1) { customer1.invoices.create!(uuid: 10, status: 2) }
-    let!(:invoice2) { customer1.invoices.create!(uuid: 11, status: 2) }
-    let!(:invoice3) { customer2.invoices.create!(uuid: 12, status: 2) }
-    let!(:invoice4) { customer2.invoices.create!(uuid: 13, status: 2) }
-    let!(:invoice5) { customer3.invoices.create!(uuid: 14, status: 2) }
-    let!(:invoice6) { customer3.invoices.create!(uuid: 15, status: 2) }
-    let!(:invoice7) { customer4.invoices.create!(uuid: 16, status: 2) }
-    let!(:invoice8) { customer5.invoices.create!(uuid: 17, status: 2) }
-    let!(:invoice9) { customer5.invoices.create!(uuid: 18, status: 2) }
-    let!(:invoice10) { customer6.invoices.create!(uuid: 19, status: 2) }
-    let!(:invoice11) { customer6.invoices.create!(uuid: 20, status: 2) }
+    let!(:invoice1) { create(:completed_invoice, customer: customer1)}
+    let!(:invoice2) { create(:completed_invoice, customer: customer1)}
+    let!(:invoice3) { create(:completed_invoice, customer: customer2)} 
+    let!(:invoice4) { create(:completed_invoice, customer: customer2)}
+    let!(:invoice5) { create(:completed_invoice, customer: customer3)}
+    let!(:invoice6) { create(:completed_invoice, customer: customer3)}
+    let!(:invoice7) { create(:completed_invoice, customer: customer4)}
+    let!(:invoice8) { create(:completed_invoice, customer: customer5)}
+    let!(:invoice9) { create(:completed_invoice, customer: customer5)}
+    let!(:invoice10) { create(:completed_invoice, customer: customer6)}
+    let!(:invoice11) { create(:completed_invoice, customer: customer6)}
 
-    let!(:item1) { merchant1.items.create!(name: "water bottle", description: "24oz metal container for water", unit_price: 8) }    
-    let!(:item2) { merchant1.items.create!(name: "rubber duck", description: "toy for bath", unit_price: 1) }    
-    let!(:item3) { merchant1.items.create!(name: "lamp", description: "12 inch desk lamp", unit_price: 16) }    
-    let!(:item4) { merchant1.items.create!(name: "wireless mouse", description: "wireless computer mouse for mac", unit_price: 40) }    
-    let!(:item5) { merchant1.items.create!(name: "chapstick", description: "coconut flavor chapstick", unit_price: 2) }    
-
-    let!(:transaction1) {invoice1.transactions.create!(uuid: 1, credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-    let!(:transaction2) {invoice2.transactions.create!(uuid: 2, credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+    let!(:item1) {create(:item, merchant: merchant1)}  
+    let!(:item2) {create(:item, merchant: merchant1)}
+    let!(:item3) {create(:item, merchant: merchant1)}
+    let!(:item4) {create(:item, merchant: merchant1)}
+    let!(:item5) {create(:item, merchant: merchant1)}
     
-    let!(:transaction3) {invoice3.transactions.create!(uuid: 3, credit_card_number: 4140149827486249, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-    let!(:transaction4) {invoice4.transactions.create!(uuid: 4, credit_card_number: 4140149827486249, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-   
-    let!(:transaction5) {invoice5.transactions.create!(uuid: 6, credit_card_number: 4763141973880496, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-    let!(:transaction6) {invoice6.transactions.create!(uuid: 7, credit_card_number: 4763141973880496, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-   
-    let!(:transaction14) {invoice7.transactions.create!(uuid: 15, credit_card_number: 4504301557459341, credit_card_expiration_date: Date.new(2024, 1, 3), result: "failed") }
-    let!(:transaction15) {invoice7.transactions.create!(uuid: 16, credit_card_number: 4504301557459341, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
     
-    let!(:transaction7) {invoice8.transactions.create!(uuid: 8, credit_card_number: 4173081602435789, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-    let!(:transaction8) {invoice9.transactions.create!(uuid: 9, credit_card_number: 4173081602435789, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-    
-    let!(:transaction9) {invoice10.transactions.create!(uuid: 10, credit_card_number: 4972246905754900, credit_card_expiration_date: Date.new(2024, 1, 3), result: "failed") }
-    let!(:transaction10) {invoice10.transactions.create!(uuid: 11, credit_card_number: 4972246905754900, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-    let!(:transaction11) {invoice11.transactions.create!(uuid: 12, credit_card_number: 4972246905754900, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
+
+
+    # let!(:transaction1) {create(:transaction, invoice_id:) }
+    let!(:transaction1) {create(:transaction, invoice: invoice1) }
+    let!(:transaction1) {create(:transaction, invoice: invoice2) }
+    let!(:transaction1) {create(:transaction, invoice: invoice3) }
+    let!(:transaction1) {create(:transaction, invoice: invoice4) }
+    let!(:transaction1) {create(:transaction, invoice: invoice5) }
+    let!(:transaction1) {create(:transaction, invoice: invoice6) }
+    let!(:transaction1) {create(:transaction, invoice: invoice7) }
+    let!(:transaction1) {create(:transaction, invoice: invoice7) }
+    let!(:transaction1) {create(:transaction, invoice: invoice8) }
+    let!(:transaction1) {create(:transaction, invoice: invoice9) }
+    let!(:transaction1) {create(:transaction, invoice: invoice10) }
+    let!(:transaction1) {create(:transaction, invoice: invoice10) }
+    let!(:transaction1) {create(:transaction, invoice: invoice11) }
     
     
     before do
-      InvoiceItem.create!(item: item1, invoice: invoice1)
-      InvoiceItem.create!(item: item2, invoice: invoice1)
-      InvoiceItem.create!(item: item1, invoice: invoice2)
-      InvoiceItem.create!(item: item4, invoice: invoice2)
-      InvoiceItem.create!(item: item4, invoice: invoice3)
-      InvoiceItem.create!(item: item3, invoice: invoice3)
-      InvoiceItem.create!(item: item1, invoice: invoice4)
-      InvoiceItem.create!(item: item4, invoice: invoice4)
-      InvoiceItem.create!(item: item1, invoice: invoice5)
-      InvoiceItem.create!(item: item2, invoice: invoice5)
-      InvoiceItem.create!(item: item2, invoice: invoice6)
-      InvoiceItem.create!(item: item3, invoice: invoice6)
+      create(:invoice_item, invoice: invoice1)
+      create(:invoice_item, invoice: invoice1)
+      create(:invoice_item, invoice: invoice2)
+      create(:invoice_item, invoice: invoice2)
+      create(:invoice_item, invoice: invoice3)
+      create(:invoice_item, invoice: invoice3)
+      create(:invoice_item, invoice: invoice4)
+      create(:invoice_item, invoice: invoice4)
+      create(:invoice_item, invoice: invoice5)
+      create(:invoice_item, invoice: invoice5)
+      create(:invoice_item, invoice: invoice6)
+      create(:invoice_item, invoice: invoice6)
+      
+      # InvoiceItem.create!(item: item2, invoice: invoice1)
+      # InvoiceItem.create!(item: item1, invoice: invoice2)
+      # InvoiceItem.create!(item: item4, invoice: invoice2)
+      # InvoiceItem.create!(item: item4, invoice: invoice3)
+      # InvoiceItem.create!(item: item3, invoice: invoice3)
+      # InvoiceItem.create!(item: item1, invoice: invoice4)
+      # InvoiceItem.create!(item: item4, invoice: invoice4)
+      # InvoiceItem.create!(item: item1, invoice: invoice5)
+      # InvoiceItem.create!(item: item2, invoice: invoice5)
+      # InvoiceItem.create!(item: item2, invoice: invoice6)
+      # InvoiceItem.create!(item: item3, invoice: invoice6)
 
-      InvoiceItem.create!(item: item5, invoice: invoice7)
+      # InvoiceItem.create!(item: item5, invoice: invoice7)
+      create(:invoice_item, item: item5, invoice: invoice7)
 
-      InvoiceItem.create!(item: item1, invoice: invoice8)
-      InvoiceItem.create!(item: item3, invoice: invoice8)
-      InvoiceItem.create!(item: item2, invoice: invoice9)
-      InvoiceItem.create!(item: item3, invoice: invoice9)
-      InvoiceItem.create!(item: item3, invoice: invoice10)
-      InvoiceItem.create!(item: item4, invoice: invoice10)
-      InvoiceItem.create!(item: item1, invoice: invoice11)
-      InvoiceItem.create!(item: item4, invoice: invoice11)
+      # InvoiceItem.create!(item: item1, invoice: invoice8)
+      # InvoiceItem.create!(item: item3, invoice: invoice8)
+      # InvoiceItem.create!(item: item2, invoice: invoice9)
+      # InvoiceItem.create!(item: item3, invoice: invoice9)
+      # InvoiceItem.create!(item: item3, invoice: invoice10)
+      # InvoiceItem.create!(item: item4, invoice: invoice10)
+      # InvoiceItem.create!(item: item1, invoice: invoice11)
+      # InvoiceItem.create!(item: item4, invoice: invoice11)
+      create(:invoice_item, item: item1, invoice: invoice8)
+      create(:invoice_item, item: item3, invoice: invoice8)
+      create(:invoice_item, item: item2, invoice: invoice9)
+      create(:invoice_item, item: item3, invoice: invoice9)
+      create(:invoice_item, item: item3, invoice: invoice10)
+      create(:invoice_item, item: item4, invoice: invoice10)
+      create(:invoice_item, item: item1, invoice: invoice11)
+      create(:invoice_item, item: item4, invoice: invoice11)
+
     end
     
 
