@@ -8,11 +8,19 @@ RSpec.describe "admin merchants index" do
     @merchant_3 = Merchant.create!(name: "Huy's Cheese")
   end
 
-  it 'displays the name of each merchant in the system' do
-    visit '/admin/merchants'
+  describe 'merchant index' do
+    it 'displays the name of each merchant in the system' do
+      visit '/admin/merchants'
 
-    expect(page).to have_content("#{@merchant_1.name}")
-    expect(page).to have_content("#{@merchant_2.name}")
-    expect(page).to have_content("#{@merchant_3.name}")
+      within "#merchant_name-#{@merchant_1.id}" do
+        expect(page).to have_content("#{@merchant_1.name}")
+      end
+      within "#merchant_name-#{@merchant_2.id}" do
+        expect(page).to have_content("#{@merchant_2.name}")
+      end
+      within "#merchant_name-#{@merchant_3.id}" do
+        expect(page).to have_content("#{@merchant_3.name}")
+      end
+    end
   end
 end
