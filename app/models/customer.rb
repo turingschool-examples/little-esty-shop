@@ -6,6 +6,7 @@ class Customer < ApplicationRecord
 
   def self.top_5_by_transactions
     joins(:transactions)
+    .where("transactions.result = 'success'")
     .select("customers.*, count(transactions.id) AS transaction_count")
     .group(:id)
     .order("transaction_count DESC")
@@ -13,6 +14,6 @@ class Customer < ApplicationRecord
   end
 
   def transaction_count
-    transactions.count
+    transactions.where("transactions.result = 'success'").count
   end
 end

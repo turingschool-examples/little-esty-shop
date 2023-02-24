@@ -26,32 +26,45 @@ RSpec.describe Customer, type: :model do
       @invoice6 = create(:invoice, customer_id: @customer6.id)
       @invoice7 = create(:invoice, customer_id: @customer7.id)
       @invoice8 = create(:invoice, customer_id: @customer8.id)
-      @transaction1_1 = create(:transaction, invoice_id: @invoice1.id)
-      @transaction1_2 = create(:transaction, invoice_id: @invoice1.id)
-      @transaction2_1 = create(:transaction, invoice_id: @invoice2.id)
-      @transaction2_2 = create(:transaction, invoice_id: @invoice2.id)
-      @transaction2_3 = create(:transaction, invoice_id: @invoice2.id)
-      @transaction3_1 = create(:transaction, invoice_id: @invoice3.id)
-      @transaction3_2 = create(:transaction, invoice_id: @invoice3.id)
-      @transaction4_1 = create(:transaction, invoice_id: @invoice4.id)
-      @transaction4_2 = create(:transaction, invoice_id: @invoice4.id)
-      @transaction5_1 = create(:transaction, invoice_id: @invoice5.id)
-      @transaction5_1 = create(:transaction, invoice_id: @invoice5.id)
-      @transaction6 = create(:transaction, invoice_id: @invoice6.id)
+      @transaction1_1 = create(:transaction, invoice_id: @invoice1.id, result: "success")
+      @transaction1_2 = create(:transaction, invoice_id: @invoice1.id, result: "success")
+      @transaction2_1 = create(:transaction, invoice_id: @invoice2.id, result: "success")
+      @transaction2_2 = create(:transaction, invoice_id: @invoice2.id, result: "success")
+      @transaction2_3 = create(:transaction, invoice_id: @invoice2.id, result: "success")
+      @transaction3_1 = create(:transaction, invoice_id: @invoice3.id, result: "success")
+      @transaction3_2 = create(:transaction, invoice_id: @invoice3.id, result: "success")
+      @transaction4_1 = create(:transaction, invoice_id: @invoice4.id, result: "success")
+      @transaction4_2 = create(:transaction, invoice_id: @invoice4.id, result: "success")
+      @transaction5_1 = create(:transaction, invoice_id: @invoice5.id, result: "success")
+      @transaction5_1 = create(:transaction, invoice_id: @invoice5.id, result: "success")
+      @transaction6_1 = create(:transaction, invoice_id: @invoice6.id, result: "failed")
+      @transaction6_2 = create(:transaction, invoice_id: @invoice6.id, result: "failed")
+      @transaction6_3 = create(:transaction, invoice_id: @invoice6.id, result: "failed")
+      @transaction6_4 = create(:transaction, invoice_id: @invoice6.id, result: "failed")
+      @transaction6_5 = create(:transaction, invoice_id: @invoice6.id, result: "failed")
       @transaction7 = create(:transaction, invoice_id: @invoice7.id)
-      @transaction8 = create(:transaction, invoice_id: @invoice8.id)
+      @transaction8 = create(:transaction, invoice_id: @invoice8.id, result: "success")
     end
-    describe 'produces the top 5 customers for a transaction' do
-      it '.top_5_by_transactions' do
+    
+    describe '.top_5_by_transactions' do
+      it 'counts successful transactions' do
         expect(Customer.top_5_by_transactions.sort).to eq([@customer1, @customer2, @customer3, @customer4, @customer5].sort)
+      end
+
+      it 'does not count failed transactions' do
+        expect(Customer.top_5_by_transactions.sort).not_to include(@customer6)
       end
     end
 
-    describe 'can count the number of transactions' do
-      it '#transaction_count' do
+    describe 'transaction_count' do
+      it 'counts successful transactions' do
         expect(@customer1.transaction_count).to eq(2)
         expect(@customer2.transaction_count).to eq(3)
         expect(@customer8.transaction_count).to eq(1)
+      end
+
+      it 'does not count unsuccessful transactions' do
+        expect(@customer6.transaction_count).to eq(0)
       end
     end
   end
