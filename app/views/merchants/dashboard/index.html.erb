@@ -2,3 +2,11 @@
 <p>Name: <%=@merchant.name%></p>
 <%=link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
 <%=link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
+<div id="items_and_invoices">
+<h3>Items Ready to Ship</h3>
+  <%@ready_merchant_items.each do |arr| %>
+   <p>Item: <%=arr[0]%></p>
+    <%= link_to "#{arr[1]}", merchant_invoices_path(@merchant.id)%>
+    <br>
+  <% end %>
+  </div>
