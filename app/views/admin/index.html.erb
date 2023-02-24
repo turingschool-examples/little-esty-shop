@@ -7,3 +7,10 @@
 <% @top_five_customers.each do |customer| %>
 <%= "#{customer.first_name} #{customer.last_name} -- Transactions: #{customer.trans_count}" %> <br><br>
 <% end %>
+
+<div id="incomplete_invoices">
+  <h3> Incomplete Invoices </h3>
+  <%@incomplete_invoices.each do |incomplete_invoice|%>
+    <%= link_to "#{incomplete_invoice.id}", admin_invoice_path(incomplete_invoice.id) %>
+  <%end%>
+</div>
