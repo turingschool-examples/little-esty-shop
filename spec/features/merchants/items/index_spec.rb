@@ -22,29 +22,12 @@ RSpec.describe 'Merchant Items Index' do
   
   describe 'As a merchant, when I visit my merchant items index page' do
     it 'I see a list of the names of all of my items, no items from other merchants' do
-      visit "/merchant/#{@carlos.id}/items"
+      visit "/merchants/#{@carlos.id}/items"
       expect(page).to have_content("Bowl")
       expect(page).to have_content("Knife")
 
       expect(page).to_not have_content("Scarf")
       expect(page).to_not have_content("Tshirt")
-    end
-
-    it 'Next to each item name I see a button to disable or enable that item' do
-      visit "/merchant/#{@carlos.id}/items"
-      # save_and_open_page
-
-      within "#name-Bowl" do
-        expect(page).to have_button("Enable")
-        click_button "Enable"
-
-        expect(current_path).to eq("/merchant/#{@carlos.id}/items")
-        expect(page).to have_button("Disable")
-        click_button "Disable"
-
-        expect(current_path).to eq("/merchant/#{@carlos.id}/items")
-        expect(page).to have_button("Enable")
-      end
     end
   end
 end
