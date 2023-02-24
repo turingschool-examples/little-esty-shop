@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchant show dashboard index page', type: :feature do
+RSpec.describe 'merchant show dashboard page', type: :feature do
   describe "as a merchant visiting '/merchants/merchant_id/dashboard'" do
     let!(:merchant1) { create(:merchant)}
 
@@ -29,11 +29,7 @@ RSpec.describe 'merchant show dashboard index page', type: :feature do
     let!(:item3) {create(:item, merchant: merchant1)}
     let!(:item4) {create(:item, merchant: merchant1)}
     let!(:item5) {create(:item, merchant: merchant1)}
-    
-    
-
-
-    # let!(:transaction1) {create(:transaction, invoice_id:) }
+   
     let!(:transaction1) {create(:transaction, invoice: invoice1) }
     let!(:transaction1) {create(:transaction, invoice: invoice2) }
     let!(:transaction1) {create(:transaction, invoice: invoice3) }
@@ -47,7 +43,6 @@ RSpec.describe 'merchant show dashboard index page', type: :feature do
     let!(:transaction1) {create(:transaction, invoice: invoice10) }
     let!(:transaction1) {create(:transaction, invoice: invoice10) }
     let!(:transaction1) {create(:transaction, invoice: invoice11) }
-    
     
     before do
       create(:invoice_item, invoice: invoice1)
@@ -106,21 +101,16 @@ RSpec.describe 'merchant show dashboard index page', type: :feature do
       expect(current_path).to eq("/merchants/#{merchant1.id}/invoices")
     end 
 
-    it 'shows the names of the top 5 customers(largest number of successful transactions with merchant)' do
+    it 'shows the names of the top 5 customers(largest number of successful transactions with merchant) and the number of transactions conducted with merchant' do
       visit "/merchants/#{merchant1.id}/dashboard"
 
       expect(page).to have_content("Top 5 customers with largest transactions")
-      expect(page).to have_content("Britney Spears")
-      expect(page).to have_content("Bob Smith")
-      expect(page).to have_content("Bill Johnson")
-      expect(page).to have_content("Barbara Hilton")
-      expect(page).to have_content("Bella Thomas")
-      expect(page).to_not have_content("Boris Nelson")
-    end
-
-    xit 'next to the top five customers, I see the number of successful transactions they have conducted with merchant' do
-      visit "/merchants/#{merchant1.id}/dashboard"
-
+      expect(page).to have_content("#{customer1.name}- number of transactions: 2")
+      expect(page).to have_content("#{customer2.name}- number of transactions: 2")
+      expect(page).to have_content("#{customer3.name}- number of transactions: 2")
+      expect(page).to have_content("#{customer5.name}- number of transactions: 2")
+      expect(page).to have_content("#{customer6.name}- number of transactions: 2")
+      expect(page).to_not have_content("#{customer4.name}")
     end
   end
 end
