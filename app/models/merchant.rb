@@ -8,6 +8,7 @@ class Merchant < ApplicationRecord
   end
 
   def items_not_yet_shipped
-    invoice_items.where(status: ["pending", "packaged"]).pluck([:name, :invoice_id])
+    invoices.order(created_at: :asc)
+    invoice_items.where.not(status: "shipped")
   end
 end

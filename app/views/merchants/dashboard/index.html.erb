@@ -4,9 +4,10 @@
 <%=link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
 <div id="items_and_invoices">
 <h3>Items Ready to Ship</h3>
-  <%@ready_merchant_items.each do |arr| %>
-   <p>Item: <%=arr[0]%></p>
-    <%= link_to "#{arr[1]}", merchant_invoices_path(@merchant.id)%>
+  <%@ready_merchant_items.each do |object| %>
+   <p>Item: <%=object.item.name%>
+    <%= link_to "#{object.invoice_id}", merchant_invoices_path(@merchant.id)%>,
+    <%= object.invoice.created_at.strftime("%A, %B %d, %Y")%></p>
     <br>
   <% end %>
   </div>

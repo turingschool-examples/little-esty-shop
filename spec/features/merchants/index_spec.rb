@@ -4,7 +4,7 @@ RSpec.describe Merchant, type: :feature do
   describe 'Merchant Dashboard' do
     let!(:louise) { Customer.create!(first_name: "Louise", last_name: "Belcher") }
 
-    let!(:invoice1) { Invoice.create!(customer_id: louise.id) } 
+    let!(:invoice1) { Invoice.create!(customer_id: louise.id, created_at: Date.yesterday) } 
     let!(:invoice2) { Invoice.create!(customer_id: louise.id) } 
     let!(:invoice3) { Invoice.create!(customer_id: louise.id) } 
     
@@ -42,7 +42,7 @@ RSpec.describe Merchant, type: :feature do
       context 'in the section for Items Ready to Ship' do 
  #user 4
         it 'displays a list of names of all items that have been ordered but not shipped' do
-    
+          
           expect(page).to have_content("Items Ready to Ship")
           within "#items_and_invoices" do 
             expect(page).to have_content("Coochie Copi Night Light")
@@ -71,11 +71,18 @@ RSpec.describe Merchant, type: :feature do
             expect(current_path).to eq(merchant_invoices_path(bob.id))
           end
         end
-        
+
         it 'displays invoice ids as a link to my merchants invoice show page next to each item' do 
           within "#items_and_invoices" do 
             click_on "#{invoice2.id}"
             expect(current_path).to eq(merchant_invoices_path(bob.id))
+          end
+        end
+
+        it 'displays the date that the invoice was created ordered by oldest to newest' do 
+          within "#items_and_invoices" do 
+            expect(coochie_copi.name).to appear_before(napkin_holder.name)
+            expect(page).to_not have_content(window_planter.name)
           end
         end
       end
