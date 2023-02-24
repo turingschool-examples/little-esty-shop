@@ -2,4 +2,8 @@
 <%= link_to 'Merchant Items', "/merchants/#{@merchant.id}/items" %>
 <%= link_to 'Merchant Invoices', "/merchants/#{@merchant.id}/invoices" %>
 
-<%@merchant.top_five_customers%>
+<h3><%="Top 5 customers with largest transactions" %></h3>
+<h4><%@merchant.top_five_customers.each do |customer|%></h4>
+<p><%=customer.first_name%> <%=customer.last_name%>- number of transactions: <%=@merchant.customer_successful_transactions(customer.id)%></p>
+<%end%>
+ 

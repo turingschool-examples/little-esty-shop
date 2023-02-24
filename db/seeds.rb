@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-merchant1 =Merchant.create!(uuid: 101, name: "Brian's Beads")
+merchant1 = Merchant.create!(uuid: 101, name: "Brian's Beads")
 
 customer1 = Customer.create!(uuid: 1, first_name: "Britney", last_name: "Spears")
 customer2 = Customer.create!(uuid: 2, first_name: "Bob", last_name: "Smith")

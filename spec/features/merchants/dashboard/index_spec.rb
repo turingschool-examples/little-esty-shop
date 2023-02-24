@@ -105,21 +105,16 @@ RSpec.describe 'merchant show dashboard index page', type: :feature do
       expect(current_path).to eq("/merchants/#{merchant1.id}/invoices")
     end 
 
-    it 'shows the names of the top 5 customers(largest number of successful transactions with merchant)' do
+    it 'shows the names of the top 5 customers(largest number of successful transactions with merchant) and the number of transactions conducted with merchant' do
       visit "/merchants/#{merchant1.id}/dashboard"
 
       expect(page).to have_content("Top 5 customers with largest transactions")
-      expect(page).to have_content("Britney Spears")
-      expect(page).to have_content("Bob Smith")
-      expect(page).to have_content("Bill Johnson")
-      expect(page).to have_content("Barbara Hilton")
-      expect(page).to have_content("Bella Thomas")
+      expect(page).to have_content("Britney Spears- number of transactions: 2")
+      expect(page).to have_content("Bob Smith- number of transactions: 2")
+      expect(page).to have_content("Bill Johnson- number of transactions: 2")
+      expect(page).to have_content("Barbara Hilton- number of transactions: 2")
+      expect(page).to have_content("Bella Thomas- number of transactions: 2")
       expect(page).to_not have_content("Boris Nelson")
-    end
-
-    xit 'next to the top five customers, I see the number of successful transactions they have conducted with merchant' do
-      visit "/merchants/#{merchant1.id}/dashboard"
-
     end
   end
 end
