@@ -58,10 +58,9 @@ RSpec.describe 'When I visit the merchant show page of an item' do
 			fill_in('Name', with: 'Blue bowl')
   		fill_in('Description', with: "it's a blue bowl")
   		fill_in('Unit price', with: '400')
-			save_and_open_page
 
 			click_button("Update Item")
-			save_and_open_page
+			
 			expect(current_path).to eq("/merchants/#{@carlos.id}/items/#{@bowl.id}")		
 			expect(page).to have_content("Item updated successfully")
 			expect(page).to have_content("Name: Blue bowl")
