@@ -12,15 +12,15 @@ class Merchant < ApplicationRecord
     .select("customers.*, count(DISTINCT transactions.id) as transaction_count")
     .group("customers.id").order("transaction_count desc").limit(5)
   end
-
-    # def self.top_5_by_revenue
-  #   Merchant.joins(:items, :invoice_items, :invoices, :transactions)
-  #   .where("transactions.result = 'success'")
-  #   .group("merchants.id")
-  #   .select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue")
-  #   .order("revenue desc")
-  #   .limit(5)
-  # end
+  
+ #  def self.top_5_by_revenue
+ #   Merchant.joins(:transactions)
+ #   .where("transactions.result = 'success'")
+ #   .group("merchants.id")
+ #   .select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue")
+ #  .order("revenue desc")
+ #   .limit(5)
+ # end
 
   def self.top_5_by_revenue
     Merchant.find_by_sql("

@@ -10,7 +10,6 @@ describe 'Admin Merchants index page' do
       let!(:invoice_item_1) {create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 10, invoice_id: invoice_1.id ) }
       let!(:invoice_item_2)  {create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 10, invoice_id: invoice_1.id ) }
       let!(:transaction_1) {create(:transaction, invoice_id: invoice_1.id, result: 'success') }
-      let!(:transaction_6) {create(:transaction, invoice_id: invoice_1.id, result: 'failure') }
 
       let!(:customer_2) {create(:customer) }
       let!(:merchant_2) {create(:merchant) }
