@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 		member do 
 			get 'dashboard'
 		end
-
     resources :invoices, only: [:show]
 	end
 
