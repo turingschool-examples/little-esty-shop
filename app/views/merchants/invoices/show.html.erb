@@ -4,11 +4,11 @@
   <p>Created at: <%= @invoice.created_at %></p>
   <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
   <br>
-<% @invoice.items.each do |item| %>
-  <h3><%= item.name %></h3>
-  <p>Quantity: <%= @invoice_item.quantity %></p>
-  <p>Sold for: <%= item.unit_price * @invoice_item.quantity %></p>
-  <p>Status: <%= @invoice_item.status %></p>
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <h3><%= invoice_item.item.name %></h3>
+  <p>Quantity: <%= invoice_item.quantity %></p>
+  <p>Sold for: <%= invoice_item.unit_price * invoice_item.quantity %></p>
+  <p>Status: <%= invoice_item.status %></p>
 <% end %>
 
 <p><%= @invoice.total_revenue %></p>
