@@ -38,7 +38,6 @@ end
 # Need to work on test for this. 
         expect(page).to have_content("medicine- 3467typeadvil")
       end
-
     end
   end 
 end 
