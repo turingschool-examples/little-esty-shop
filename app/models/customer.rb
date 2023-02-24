@@ -6,6 +6,6 @@ class Customer < ApplicationRecord
   has_many :merchants, through: :invoices
 
   def self.top_five_customers
-    joins(:transactions).select("customers.*, count(result) as result_count").where(transactions: {result: 'success'}).group(:id).order("count(result) desc").limit(5)
+    joins(:transactions).select("customers.*, count(result) as result_count").where(transactions: {result: 'success'}).group(:id).order(result_count: :desc).limit(5)
   end
 end
