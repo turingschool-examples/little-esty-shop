@@ -10,7 +10,10 @@
   <ul>
     <% @incomplete_item_invoices.each do |item_invoice| %>
       <div id= "incomplete_invoice_item-<%=item_invoice.id%>">
-        <p>Invoice #<%= link_to "#{item_invoice.invoice_id}", "/admin/invoice/#{item_invoice.invoice_id}"%></p>
+        <p>
+          Invoice #<%= link_to "#{item_invoice.invoice_id}", "/admin/invoice/#{item_invoice.invoice_id}"%>
+          - <%= item_invoice.invoice.created_at.strftime("%A, %B %d, %Y") %>
+        </p>
       </div>
     <% end %>
   </ul>
