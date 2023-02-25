@@ -10,8 +10,8 @@ describe "As an admin" do
   let!(:customer5) { Customer.create!(first_name: "Barbara", last_name: "Hilton")}
   let!(:customer6) { Customer.create!(first_name: "Bella", last_name: "Thomas")}
 
-  let!(:invoice1) { customer1.invoices.create!(status: 2) }
-  let!(:invoice2) { customer1.invoices.create!(status: 2) }
+  let!(:invoice1) { customer1.invoices.create!(status: 2, created_at: Date.new(2014, 3, 1)) }
+  let!(:invoice2) { customer1.invoices.create!(status: 2, created_at: Date.new(2012, 2, 2)) }
 
   let!(:invoice3) { customer2.invoices.create!(status: 2) }
   let!(:invoice4) { customer2.invoices.create!(status: 2) }
@@ -111,11 +111,11 @@ describe "As an admin" do
       visit "/admin"
 
       within "#top_five_customers" do
-        expect(page).to have_content("Name: #{customer1.first_name} #{customer1.last_name}, Successful Transactions: 5") 
-        expect(page).to have_content("Name: #{customer3.first_name} #{customer3.last_name}, Successful Transactions: 4")
-        expect(page).to have_content("Name: #{customer5.first_name} #{customer5.last_name}, Successful Transactions: 3")
-        expect(page).to have_content("Name: #{customer6.first_name} #{customer6.last_name}, Successful Transactions: 2")
-        expect(page).to have_content("Name: #{customer2.first_name} #{customer2.last_name}, Successful Transactions: 1")
+        expect(page).to have_content("#{customer1.first_name} #{customer1.last_name} - 5 purchases") 
+        expect(page).to have_content("#{customer3.first_name} #{customer3.last_name} - 4 purchases")
+        expect(page).to have_content("#{customer5.first_name} #{customer5.last_name} - 3 purchases")
+        expect(page).to have_content("#{customer6.first_name} #{customer6.last_name} - 2 purchases")
+        expect(page).to have_content("#{customer2.first_name} #{customer2.last_name} - 1 purchases")
         expect(page).to_not have_content("#{customer4.first_name} #{customer4.last_name}")
       end
     end
@@ -124,14 +124,17 @@ describe "As an admin" do
       visit "/admin"
 
       within "#incomplete_invoices" do
-        expect(page).to have_link(invoice1.id, href: admin_invoice_path(invoice1.id))
-        expect(page).to have_link(invoice2.id, href: admin_invoice_path(invoice2.id))
-        expect(page).to have_link(invoice4.id, href: admin_invoice_path(invoice4.id))
-        expect(page).to have_link(invoice5.id, href: admin_invoice_path(invoice5.id))
-        expect(page).to have_link(invoice7.id, href: admin_invoice_path(invoice7.id))
-        expect(page).to have_link(invoice8.id, href: admin_invoice_path(invoice8.id))
-        expect(page).to have_link(invoice10.id, href: admin_invoice_path(invoice10.id))
-        expect(page).to have_link(invoice11.id, href: admin_invoice_path(invoice11.id))
+        expect(page).to have_link("#{invoice1.id}", href: admin_invoice_path(invoice1.id))
+        expect(page).to have_link("#{invoice2.id}", href: admin_invoice_path(invoice2.id))
+        expect(page).to have_link("#{invoice4.id}", href: admin_invoice_path(invoice4.id))
+        expect(page).to have_link("#{invoice5.id}", href: admin_invoice_path(invoice5.id))
+        expect(page).to have_link("#{invoice7.id}", href: admin_invoice_path(invoice7.id))
+        expect(page).to have_link("#{invoice8.id}", href: admin_invoice_path(invoice8.id))
+        expect(page).to have_link("#{invoice10.id}", href: admin_invoice_path(invoice10.id))
+        expect(page).to have_link("#{invoice11.id}", href: admin_invoice_path(invoice11.id))
+        expect(page).to_not have_content("#{invoice3.id}")
+        expect(page).to_not have_content("#{invoice6.id}")
+        expect(page).to_not have_content("#{invoice9.id}")
       end
     end
 
@@ -139,8 +142,38 @@ describe "As an admin" do
       visit "/admin"
 
       within "#incomplete_invoices" do
-        click_link invoice1.id
+        click_link "#{invoice1.id}"
+        
         expect(current_path).to eq("/admin/invoices/#{invoice1.id}")
+      end
+    end
+
+    it "next to each invoice id I see the date that the invoice was created" do
+      visit "/admin"
+
+      within "#incomplete_invoices" do
+        expect(page).to have_content("Invoice ##{invoice1.id} - #{invoice1.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Invoice ##{invoice2.id} - #{invoice2.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Invoice ##{invoice4.id} - #{invoice4.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Invoice ##{invoice5.id} - #{invoice5.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Invoice ##{invoice7.id} - #{invoice7.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Invoice ##{invoice8.id} - #{invoice8.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Invoice ##{invoice10.id} - #{invoice10.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Invoice ##{invoice11.id} - #{invoice11.created_at.strftime("%A, %B %d, %Y")}")
+      end
+    end
+
+    it "shows the invoice id and date ordered from oldest to newest" do
+      visit "/admin"
+
+      within "#incomplete_invoices" do
+        expect("#{invoice2.id}").to appear_before("#{invoice1.id}")
+        expect("#{invoice1.id}").to appear_before("#{invoice4.id}")
+        expect("#{invoice4.id}").to appear_before("#{invoice5.id}")
+        expect("#{invoice5.id}").to appear_before("#{invoice7.id}")
+        expect("#{invoice7.id}").to appear_before("#{invoice8.id}")
+        expect("#{invoice8.id}").to appear_before("#{invoice10.id}")
+        expect("#{invoice10.id}").to appear_before("#{invoice11.id}")
       end
     end
   end
