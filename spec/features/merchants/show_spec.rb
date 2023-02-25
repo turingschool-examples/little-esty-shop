@@ -117,7 +117,7 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
       create(:packaged_invoice_items, item: item1, invoice: invoice1)
       create(:packaged_invoice_items, item: item1, invoice: invoice1)
       create(:shipped_invoice_items, item: item1, invoice: invoice1)
-      save_and_open_page
+    
       expect(page).to have_content("Items Ready to Ship")
       expect(page).to have_content(item1.name, count: 6)
       expect(page).to have_content(item2.name, count: 4)
@@ -127,8 +127,10 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
     end
 
     it 'will have a link that named the invoice id for that item next to each item' do 
+      visit "/merchants/#{merchant1.id}/dashboard"
+      save_and_open_page
       expect(page).to have_content("#{item1.name} - invoice # #{invoice1.id}")
-      expect(page).to have_content("#{item1.name} - invoice # #{invoice3.id}")
+      expect(page).to have_content("#{item1.name} - invoice # #{invoice2.id}")
       expect(page).to have_content("#{item2.name} - invoice # #{invoice5.id}")
       expect(page).to have_content("#{item2.name} - invoice # #{invoice1.id}")
       expect(page).to have_content("#{item3.name} - invoice # #{invoice3.id}")

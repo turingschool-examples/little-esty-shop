@@ -102,6 +102,8 @@ RSpec.describe Merchant, type: :model do
 			expect(merchant1.ordered_items_not_yet_shipped).to eq([item1, item2, item1, item4, item4, item3, item1, item4, item1, item2, item2, item3, item5, item1, item3, item2, item3, item3, item4, item1, item4])
 			expect(merchant1.ordered_items_not_yet_shipped).to_not include(item6)
 		end
+
+		it '#'
   end
 
 	describe 'class methods' do
