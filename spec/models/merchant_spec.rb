@@ -4,8 +4,34 @@ RSpec.describe Merchant, type: :model do
   describe 'Validations' do
     it { should validate_presence_of :name }
   end
-  
+
   describe '::Class Methods' do
+    describe "::enabled_merchants" do
+      it 'returns all merchants grouped by status type' do
+        merchant_1 = create(:merchant)
+        merchant_2 = create(:merchant, status: 1)
+        merchant_3 = create(:merchant)
+        merchant_4 = create(:merchant, status: 1)
+        merchant_5 = create(:merchant)
+
+        expect(Merchant.enabled_merchants).to eq([merchant_1, merchant_3, merchant_5])
+      end
+    end
+
+    describe "::disabled_merchants" do
+      it 'returns all merchants grouped by status type' do
+        merchant_1 = create(:merchant)
+        merchant_2 = create(:merchant, status: 1)
+        merchant_3 = create(:merchant)
+        merchant_4 = create(:merchant, status: 1)
+        merchant_5 = create(:merchant)
+
+        expect(Merchant.disabled_merchants).to eq([merchant_2, merchant_4])
+      end
+    end
+  end
+  
+  describe '#Instance Methods' do
     before(:each) do
       @merchant = create(:merchant, name: "Trader Bob's")
 
@@ -44,13 +70,13 @@ RSpec.describe Merchant, type: :model do
       3.times { create(:transaction, invoice_id: @invoice_7.id, result: 1) }
     end
 
-    describe '::top_five_merchant_customers' do
+    describe '#top_five_merchant_customers' do
       it 'returns the top five customers, ordered by successful transactions' do
         expect(@merchant.top_five_merchant_customers).to eq([@customer_5, @customer_4, @customer_3, @customer_2, @customer_1])
       end
     end
 
-    describe "::items_ready_to_ship" do
+    describe "#items_ready_to_ship" do
       it "returns all ordered items that have not been shiped from oldest to newest" do
         expect(@merchant.invoice_items_ready_to_ship).to eq([@invoice_item_1, @invoice_item_2, @invoice_item_3, @invoice_item_4, @invoice_item_5, @invoice_item_6])
       end
