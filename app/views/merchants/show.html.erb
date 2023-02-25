@@ -6,3 +6,10 @@
 <h4><%@merchant.top_five_customers.each do |customer|%></h4>
 <p><%=customer.first_name%> <%=customer.last_name%>- number of transactions: <%=@merchant.customer_successful_transactions(customer.id)%></p>
 <%end%>
+
+<h3><%="Items Ready to Ship"%></h3>
+<% @merchant.ordered_items_not_yet_shipped.each do |item| %>  
+  <ul>
+    <li><%= item.name %></li>
+  </ul>
+<% end %>
