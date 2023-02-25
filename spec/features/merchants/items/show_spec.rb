@@ -19,5 +19,19 @@ RSpec.describe 'merchant items show page', type: :feature do
       expect(page).to have_content("Description: #{item1.description}")
       expect(page).to have_content("Price: #{item1.unit_price}")
     end
+
+    describe 'from the merchant show page of an item, I see a link to update the item information' do
+      it "when I click the link, I'm taken to a page to edit this edit" do
+        visit "/merchants/#{merchant1.id}/items"
+              
+        click_on "#{item1.name}"
+
+        expect(page).to have_link("Update Item")
+        
+        click_on "Update Item"
+
+        expect(current_path).to eq(edit_merchant_item_path(merchant1, item1))
+      end
+    end
   end
 end
