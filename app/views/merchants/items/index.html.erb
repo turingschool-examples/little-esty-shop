@@ -1,3 +1,5 @@
+<h1><%="Index Page for #{@merchant.name}"%></h1>
+
 <%= link_to "Add Item", "/merchants/#{@merchant.id}/items/new" %>
 
 
@@ -31,5 +33,12 @@
         <%= form.submit "Enable/Disable Item #{item.name}" %>
       <% end %>
     </div>
+  <%end%>
+</div>
+
+<div id= "5_most_popular_items">
+  <h2>List of most popular items</h2>
+  <%@five_popular_items.each do |item|%>
+    <p><%=item.name%></p>
   <%end%>
 </div>

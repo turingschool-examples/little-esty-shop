@@ -46,7 +46,9 @@ group :development, :test do
   gem 'simplecov'
   gem 'shoulda-matchers'
   gem 'net-http'
-  gem 'factory_bot'
+  gem 'factory_bot_rails'
+  gem 'faker'
+
 end
 
 group :development do
