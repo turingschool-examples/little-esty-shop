@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/environment.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -10,7 +10,7 @@
           1
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/application.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/application.rb": {
         "lines": [
           1,
           null,
@@ -33,7 +33,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/boot.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -41,7 +41,7 @@
           1
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/environments/test.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -91,7 +91,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/initializers/application_controller_renderer.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/initializers/application_controller_renderer.rb": {
         "lines": [
           null,
           null,
@@ -103,7 +103,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/initializers/assets.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
@@ -121,7 +121,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/initializers/backtrace_silencers.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/initializers/backtrace_silencers.rb": {
         "lines": [
           null,
           null,
@@ -132,7 +132,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/initializers/content_security_policy.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/initializers/content_security_policy.rb": {
         "lines": [
           null,
           null,
@@ -161,7 +161,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/initializers/cookies_serializer.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/initializers/cookies_serializer.rb": {
         "lines": [
           null,
           null,
@@ -170,7 +170,7 @@
           1
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/initializers/filter_parameter_logging.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -178,7 +178,7 @@
           1
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/initializers/inflections.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -198,7 +198,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/initializers/mime_types.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/initializers/mime_types.rb": {
         "lines": [
           null,
           null,
@@ -206,7 +206,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/initializers/new_framework_defaults_5_2.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/initializers/new_framework_defaults_5_2.rb": {
         "lines": [
           null,
           null,
@@ -248,7 +248,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/initializers/wrap_parameters.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/initializers/wrap_parameters.rb": {
         "lines": [
           null,
           null,
@@ -266,7 +266,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/factories/customers.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/factories/customers.rb": {
         "lines": [
           1,
           1,
@@ -276,7 +276,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/factories/invoice_items.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/factories/invoice_items.rb": {
         "lines": [
           1,
           1,
@@ -298,7 +298,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/factories/invoices.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/factories/invoices.rb": {
         "lines": [
           1,
           1,
@@ -319,28 +319,28 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/factories/items.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/factories/items.rb": {
         "lines": [
           1,
           1,
-          21,
-          21,
-          21,
+          26,
+          26,
+          26,
           1,
           null,
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/factories/merchants.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/factories/merchants.rb": {
         "lines": [
           1,
           1,
-          5,
+          7,
           null,
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/factories/transactions.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/factories/transactions.rb": {
         "lines": [
           1,
           1,
@@ -352,7 +352,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/config/routes.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/config/routes.rb": {
         "lines": [
           1,
           null,
@@ -367,25 +367,26 @@
           1,
           1,
           1,
+          null,
           1,
           null,
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/helpers/application_helper.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/support/factory_bot.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/support/factory_bot.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/features/admin/merchants/edit_spec.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/features/admin/merchants/edit_spec.rb": {
         "lines": [
           1,
           null,
@@ -425,7 +426,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/features/admin/merchants/index_spec.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/features/admin/merchants/index_spec.rb": {
         "lines": [
           1,
           null,
@@ -526,7 +527,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/features/admin/merchants/show_spec.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/features/admin/merchants/show_spec.rb": {
         "lines": [
           1,
           null,
@@ -554,7 +555,36 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/features/merchants/show_spec.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/features/merchants/items/index_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/features/merchants/show_spec.rb": {
         "lines": [
           1,
           null,
@@ -661,6 +691,8 @@
           1,
           null,
           1,
+          null,
+          1,
           1,
           1,
           1,
@@ -672,7 +704,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/models/customer_spec.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/models/customer_spec.rb": {
         "lines": [
           1,
           null,
@@ -755,7 +787,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/models/customer.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/models/customer.rb": {
         "lines": [
           1,
           1,
@@ -770,144 +802,14 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/models/application_record.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/models/invoice_item_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          2,
-          null,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          null,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          null,
-          2,
-          2,
-          2,
-          2,
-          2,
-          null,
-          2,
-          2,
-          null,
-          2,
-          2,
-          null,
-          2,
-          2,
-          null,
-          2,
-          2,
-          null,
-          2,
-          2,
-          null,
-          2,
-          2,
-          2,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/models/invoice_item.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          8,
-          null,
-          null
-        ]
-      },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/models/invoice_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/models/invoice.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/models/item_spec.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/models/invoice_item_spec.rb": {
         "lines": [
           1,
           null,
@@ -917,10 +819,140 @@
           2,
           2,
           null,
+          null,
+          1,
+          2,
+          null,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          2,
+          2,
+          null,
+          2,
+          2,
+          null,
+          2,
+          2,
+          null,
+          2,
+          2,
+          null,
+          2,
+          2,
+          null,
+          2,
+          2,
+          2,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/models/item.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/models/invoice_item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          8,
+          null,
+          null
+        ]
+      },
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/models/invoice_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/models/item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/models/item.rb": {
         "lines": [
           1,
           1,
@@ -931,7 +963,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/models/merchant_spec.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/models/merchant_spec.rb": {
         "lines": [
           1,
           null,
@@ -1052,7 +1084,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/models/merchant.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
           1,
@@ -1080,7 +1112,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/spec/models/transaction_spec.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/models/transaction_spec.rb": {
         "lines": [
           1,
           null,
@@ -1091,7 +1123,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/models/transaction.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/models/transaction.rb": {
         "lines": [
           1,
           1,
@@ -1100,7 +1132,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/controllers/admin_controller.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/controllers/admin_controller.rb": {
         "lines": [
           1,
           1,
@@ -1110,7 +1142,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/controllers/application_controller.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/controllers/application_controller.rb": {
         "lines": [
           1,
           null,
@@ -1122,7 +1154,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/controllers/admin/merchants_controller.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/controllers/admin/merchants_controller.rb": {
         "lines": [
           1,
           1,
@@ -1155,7 +1187,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/controllers/admin/invoices_controller.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/controllers/admin/invoices_controller.rb": {
         "lines": [
           1,
           1,
@@ -1166,7 +1198,17 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/controllers/merchants_controller.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/controllers/concerns/merchant_items_controller.rb": {
+        "lines": [
+          1,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/controllers/merchants_controller.rb": {
         "lines": [
           1,
           1,
@@ -1175,17 +1217,7 @@
           null
         ]
       },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/controllers/items_controller.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/BrianHayes/2mod/projects/little-esty-shop/app/controllers/invoices_controller.rb": {
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/app/controllers/invoices_controller.rb": {
         "lines": [
           1,
           null,
@@ -1196,6 +1228,6 @@
         ]
       }
     },
-    "timestamp": 1677280614
+    "timestamp": 1677285485
   }
 }

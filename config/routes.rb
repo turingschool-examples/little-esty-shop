@@ -9,8 +9,9 @@ Rails.application.routes.draw do
 		resources :invoices, only: [:index, :show]
   end
   get '/merchants/:id/dashboard', to: "merchants#show"
-  get '/merchants/:id/items', to: "items#index"
+  get '/merchants/:id/items', to: "merchant_items#index"
   get '/merchants/:id/invoices', to: "invoices#index"
+
   resources :admin, only: :index
 
 end
