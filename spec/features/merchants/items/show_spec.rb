@@ -22,12 +22,15 @@ RSpec.describe "Merchant_Items", type: :feature do
     create(:transaction, invoice_id: @invoice_2.id, result: 0)
     create(:transaction, invoice_id: @invoice_3.id, result: 0)
 
-    visit "/merchants/#{@merchant.id}/items/#{@item.id}"
+    visit "/merchants/#{@merchant.id}/items/#{@item_1.id}"
   end
 
-  xdescribe "User Story 7" do
-    it "" do
-      
+  describe "User Story 7" do
+    it "shows the name, description, and current selling price" do
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content("Description: #{@item_1.description}")
+      expect(page).to have_content("Current Price: #{@item_1.unit_price}")
+      save_and_open_page
     end
   end
 end
