@@ -1,7 +1,7 @@
-<h1> Invoice id: <%= @invoice.id %> Show Page </h1>
+<h1> Invoice ID: <%= @invoice.id %> </h1>
 
-<p><%= 'id: ' + @invoice.id.to_s %></p>
-<p><%= 'customer_id: ' + @invoice.customer_id.to_s %></p>
-<p><%= 'status: ' + @invoice.status %></p>
-<p><%= 'created_at: ' + @invoice.created_at.to_s %></p>
-<p><%= 'updated_at: ' + @invoice.updated_at.to_s %></p>
+<p><%= 'ID: ' + @invoice.id.to_s %></p>
+<p><%= 'Status: ' + @invoice.status %></p>
+<p><%= 'Created_at: ' + @invoice.created_at.strftime("%A, %B %e, %Y")%></p>
+<p><%= 'Customer First Name: ' + @invoice.customer.first_name %></p>
+<p><%= 'Customer Last Name: ' + @invoice.customer.last_name %></p>
