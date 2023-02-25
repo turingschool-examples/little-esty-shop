@@ -26,4 +26,11 @@ class Merchant < ApplicationRecord
     .order(created_at: :asc)
   end
 
+  def self.enabled_merchants
+    self.where(status: "Enabled")
+  end
+  
+  def self.disabled_merchants
+    self.where(status: "Disabled")
+  end
 end
