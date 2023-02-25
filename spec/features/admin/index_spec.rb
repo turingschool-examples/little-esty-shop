@@ -124,14 +124,14 @@ describe "As an admin" do
       visit "/admin"
 
       within "#incomplete_invoices" do
-        expect(page).to have_link(invoice1.id, href: admin_invoice_path(invoice1.id))
-        expect(page).to have_link(invoice2.id, href: admin_invoice_path(invoice2.id))
-        expect(page).to have_link(invoice4.id, href: admin_invoice_path(invoice4.id))
-        expect(page).to have_link(invoice5.id, href: admin_invoice_path(invoice5.id))
-        expect(page).to have_link(invoice7.id, href: admin_invoice_path(invoice7.id))
-        expect(page).to have_link(invoice8.id, href: admin_invoice_path(invoice8.id))
-        expect(page).to have_link(invoice10.id, href: admin_invoice_path(invoice10.id))
-        expect(page).to have_link(invoice11.id, href: admin_invoice_path(invoice11.id))
+        expect(page).to have_link("#{invoice1.id}", href: admin_invoice_path(invoice1.id))
+        expect(page).to have_link("#{invoice2.id}", href: admin_invoice_path(invoice2.id))
+        expect(page).to have_link("#{invoice4.id}", href: admin_invoice_path(invoice4.id))
+        expect(page).to have_link("#{invoice5.id}", href: admin_invoice_path(invoice5.id))
+        expect(page).to have_link("#{invoice7.id}", href: admin_invoice_path(invoice7.id))
+        expect(page).to have_link("#{invoice8.id}", href: admin_invoice_path(invoice8.id))
+        expect(page).to have_link("#{invoice10.id}", href: admin_invoice_path(invoice10.id))
+        expect(page).to have_link("#{invoice11.id}", href: admin_invoice_path(invoice11.id))
       end
     end
 
@@ -139,7 +139,7 @@ describe "As an admin" do
       visit "/admin"
 
       within "#incomplete_invoices" do
-        click_link invoice1.id
+				click_link "#{invoice1.id}"
         expect(current_path).to eq("/admin/invoices/#{invoice1.id}")
       end
     end
