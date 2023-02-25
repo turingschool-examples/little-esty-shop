@@ -9,7 +9,9 @@ class Invoice < ApplicationRecord
 
   def self.incomplete
     joins(:invoice_items)
-    .where("invoice_items.status != ?", 2) 
+    .where("invoice_items.status != ?", 2)
+    .order(:created_at)
     # question mark is a placeholder for 2
   end
+
 end
