@@ -21,6 +21,7 @@ RSpec.describe "Admin Invoices Show", type: :feature do
         InvoiceItem.create!(invoice: invoice1, item: item1, quantity: 30, unit_price: 336, status: 0)
         InvoiceItem.create!(invoice: invoice1, item: item2, quantity: 6, unit_price: 34571, status: 0)
         InvoiceItem.create!(invoice: invoice1, item: item3, quantity: 12, unit_price: 1599, status: 2)
+        InvoiceItem.create!(invoice: invoice3, item: item1, quantity: 30, unit_price: 336, status: 0)
         InvoiceItem.create!(invoice: invoice3, item: item4, quantity: 500, unit_price: 66666, status: 1)
         
         visit admin_invoice_path(invoice1)
