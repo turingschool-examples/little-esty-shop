@@ -3,5 +3,5 @@
 <p><%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 <% @invoice.items.each do |item| %>
-  <p>Name: <%= item.name %> Quantity: <%= Invoice.find_invoiceitem_quantity(@invoice, item) %> Price sold for: <%= number_to_currency(Invoice.find_invoiceitem_unitprice(@invoice, item)/100.0) %> Invoice Item Status: <%= Invoice.find_invoiceitem_status(@invoice, item) %></p>
+  <p>Name: <%= item.name %> Quantity: <%= @invoice.find_invoiceitem_quantity(item) %> Price sold for: <%= number_to_currency(@invoice.find_invoiceitem_unitprice(item)/100.0) %> Invoice Item Status: <%= @invoice.find_invoiceitem_status(item) %></p>
 <% end %>
