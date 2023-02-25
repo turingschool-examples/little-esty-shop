@@ -5,3 +5,14 @@
 <p><%= 'Created_at: ' + @invoice.created_at.strftime("%A, %B %e, %Y")%></p>
 <p><%= 'Customer First Name: ' + @invoice.customer.first_name %></p>
 <p><%= 'Customer Last Name: ' + @invoice.customer.last_name %></p>
+
+<h1> Items on this invoice: </h1>
+<% @invoice_items_and_attributes.each do |item| %>
+<p><%= item.name %></p>
+<ul>
+<li><p>Quantity: <%= item.quantity %></p></li>
+<li><p>Price: <%= item.unit_price%></p></li>
+<li><p>Status: <%= item.status %></p></li>
+</ul>
+<%end %>
+
