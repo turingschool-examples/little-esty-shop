@@ -19,5 +19,9 @@ RSpec.describe Item, type: :model do
     it "#item_invoice_id" do
       expect(item1.item_invoice_id).to eq(invoice1.id)
     end
+
+    it "#item_invoice_id" do
+      expect(item1.item_invoice_id).to eq(invoice1.id)
+    end
   end
 end
