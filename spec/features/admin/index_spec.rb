@@ -142,8 +142,7 @@ describe "As an admin" do
       visit "/admin"
 
       within "#incomplete_invoices" do
-        click_link "#{invoice1.id}"
-        
+				click_link "#{invoice1.id}"
         expect(current_path).to eq("/admin/invoices/#{invoice1.id}")
       end
     end
