@@ -1,1 +1,7 @@
-<h1><%= @merchant.name %></h1>
+<header>
+  <h1><%= @merchant.name %></h1>
+</header>
+<section id="merchant_edit">
+  <%= link_to "Edit #{@merchant.name}'s Merchant Information", edit_admin_merchant_path(@merchant) %>
+</section>
+
