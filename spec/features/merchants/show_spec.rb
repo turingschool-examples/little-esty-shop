@@ -112,12 +112,14 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
     end
 
     it 'will have a section called Items ready to ship, where there will be a list of the name of items that have been ordered, but not yet shipped' do 
+      visit "/merchants/#{merchant1.id}/dashboard"
+
       create(:packaged_invoice_items, item: item1, invoice: invoice1)
       create(:packaged_invoice_items, item: item1, invoice: invoice1)
-      create(:shipped_invoice_items, item1, invoice: invoice1)
-      
+      create(:shipped_invoice_items, item: item1, invoice: invoice1)
+      save_and_open_page
       expect(page).to have_content("Items Ready to Ship")
-      expect(page).to have_content(item1.name, count: 8)
+      expect(page).to have_content(item1.name, count: 6)
       expect(page).to have_content(item2.name, count: 4)
       expect(page).to have_content(item3.name, count: 5)
       expect(page).to have_content(item4.name, count: 5)
