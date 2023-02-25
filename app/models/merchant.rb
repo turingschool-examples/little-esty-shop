@@ -39,8 +39,9 @@ class Merchant < ApplicationRecord
     end
 
     def items_ready_to_ship
-      Item.joins(:invoice_items)
-      .where("invoice_items.status != ?", 2)
+      Item.joins(:invoice_items, :invoices)
+      .where("invoice_items.status = ?", 0)
+      .order(created_at: :desc)
       # list of items != :shipped
     end
 end

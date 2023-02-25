@@ -103,6 +103,19 @@ RSpec.describe "Merchant Dashboard Index" do
 
         expect(page).to_not have_content(("#{item3.name}: #{item3.item_invoice_id}"))
         expect(page).to_not have_link(item3.item_invoice_id)
+
+
+      end
+
+      # 5. Merchant Dashboard Invoices sorted by least recent
+
+      # Next to each Item name I see the date that the invoice was created
+      # And I see the date formatted like "Monday, July 18, 2019"
+      # And I see that the list is ordered from oldest to newest
+
+      it "In Items Ready to Ship, I see the date the invoice was created, oldest to newest" do 
+        expect(page).to have_content(item2.created_at)
+        expect(item2).to appear_before(item1)
       end
     end
   end
