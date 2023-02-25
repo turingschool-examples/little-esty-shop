@@ -12,9 +12,9 @@
 
 <p>Incomplete Invoices</p>
 
-<% @invoice_ids_not_shipped.each do |invoice_id| %>
-  <div id = "invoice_info-<%= invoice_id %>">
-    <p>ID number: <%= link_to invoice_id, "/invoices/#{invoice_id}" %></p>
+<% @invoices_not_shipped.each do |invoice| %>
+  <div id = "invoice_info-<%= invoice.id %>">
+    <p>ID number: <%= link_to invoice.id, "/invoices/#{invoice.id}" %> <%=Created: invoice.created_at.strftime("%A, %B %e, %Y") %> </p>
     <br>
   </div>
 <% end %>

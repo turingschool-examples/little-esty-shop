@@ -45,4 +45,56 @@ RSpec.describe Invoice, type: :model do
       end
     end
   end
+
+  describe "class method" do
+    before(:each) do
+      @merchant1 = Merchant.create!(name: "Mel's Travels")
+      @merchant2 = Merchant.create!(name: "Hady's Beach Shack")
+
+      @item1 = Item.create!(name: "Salt", description: "it is salty", unit_price: 1200, merchant: @merchant1)
+      @item2 = Item.create!(name: "Pepper", description: "it is peppery", unit_price: 1150, merchant: @merchant1)
+      @item3 = Item.create!(name: "Spices", description: "it is spicy", unit_price: 1325, merchant: @merchant1)
+
+      @item4 = Item.create!(name: "Sand", description: "its all over the place", unit_price: 1425, merchant: @merchant2)
+      @item5 = Item.create!(name: "Water", description: "see item 1, merchant 1", unit_price: 1500, merchant: @merchant2)
+
+      @deniz = Customer.create!(first_name: "Deniz", last_name: "Ocean")
+      @invoice3 = Invoice.create!(customer: @deniz, created_at: 1.days.ago, updated_at: 1.days.ago, status: 0) #in progress
+      @invoice4 = Invoice.create!(customer: @deniz, created_at: 1.days.ago, updated_at: 1.days.ago, status: 0) #in progress
+      @invoice5 = Invoice.create!(customer: @deniz, created_at: 4.days.ago, updated_at: 4.days.ago, status: 0) #in progress
+      @ii1 = InvoiceItem.create!(item: @item1, invoice: @invoice3, quantity: 1, unit_price: 1950, status: 0) #pending
+      @ii2 = InvoiceItem.create!(item: @item2, invoice: @invoice4, quantity: 1, unit_price: 2850, status: 2) #shipped (Expect NOT to see on page)
+      @ii3 = InvoiceItem.create!(item: @item3, invoice: @invoice5, quantity: 1, unit_price: 1650, status: 1) #packaged
+      @invoice3.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
+      @invoice4.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
+      @invoice5.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
+
+      @emre = Customer.create!(first_name: "Emre", last_name: "Bond")
+      @invoice6  = Invoice.create!(customer: @emre, created_at: 3.days.ago, updated_at: 3.days.ago, status: 0) #in progress
+      @ii4 = InvoiceItem.create!(item: @item4, invoice: @invoice6, quantity: 1, unit_price: 9950, status: 1) #packaged
+      @ii5 = InvoiceItem.create!(item: @item5, invoice: @invoice6, quantity: 1, unit_price: 1000, status: 2) #shipped
+      @invoice6.transactions.create!(credit_card_number: "4654405418249638", credit_card_expiration_date: "08/29", result: 0) #success
+
+      @serap = Customer.create!(first_name: "Serap", last_name: "Yilmaz")
+      @invoice7  = Invoice.create!(customer: @serap, created_at: 2.days.ago, updated_at: 2.days.ago, status: 0) #in progress
+      @ii6 = InvoiceItem.create!(item: @item4, invoice: @invoice7, quantity: 1, unit_price: 9950, status: 1) #packaged
+      @ii7 = InvoiceItem.create!(item: @item5, invoice: @invoice7, quantity: 1, unit_price: 1000, status: 1) #packaged
+      @invoice6.transactions.create!(credit_card_number: "4654405418249638", credit_card_expiration_date: "08/29", result: 0) #success
+
+    end
+
+    describe "#incomplete_invoices" do
+      let(:unshipped_invoices) { Invoice.incomplete_invoices }
+
+      it "returns an array of unshipped invoices" do
+        expect(unshipped_invoices.first.invoice_items.first.status).to eq("packaged")
+        expect(unshipped_invoices.second.invoice_items.first.status).to eq("packaged")
+        expect(unshipped_invoices.last.invoice_items.first.status).to eq("pending")
+      end
+
+      it "ordered from oldest to newest" do
+        expect(unshipped_invoices.to_a).to eq([@invoice5, @invoice6, @invoice7, @invoice3])
+      end
+    end
+  end
 end
