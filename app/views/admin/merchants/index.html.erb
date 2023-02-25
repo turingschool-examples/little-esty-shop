@@ -1,4 +1,14 @@
 <h1> Merchants </h1>
 <% @merchants.each do |merchant| %>
+
+<div id="merchant_name-<%= merchant.id %>"> 
+  <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}", local: true  %>
+  <div id= "change_status">
+  <p>Status: <%= merchant.status %></p>
+  <%= button_to "Disable/Enable", "/admin/merchants/#{merchant.id}", method: :patch, params: {swap: "true", status: merchant.status},local: true %>
+  </div>
+</div>
+
 <%= link_to "#{merchant.name}", "/admin/merchants//#{merchant.id}"  %>
+
 <% end %>

@@ -1,17 +1,25 @@
 require 'csv'
 
 namespace :csv_load do
+  desc "imports merchants from csv file"
+  task :merchants => :environment do
+    CSV.foreach('db/data/merchants.csv', headers: true) do |row|
+    status_value = case row['status']
+    when 'enabled'
+      0 
+    when 'disabled'
+      1 
+    else 
+      nil 
+    end
+      Merchant.create!(name: row['name'], created_at: row['created_at'], updated_at: row['updated_at'], uuid: row['id'])
+    end
+  end
+  
   desc "imports customers from csv file"
   task :customers => :environment do
     CSV.foreach('db/data/customers.csv', headers: true) do |row|
       Customer.create!(first_name: row['first_name'], last_name: row['last_name'], created_at: row['created_at'], updated_at: row['updated_at'], uuid: row['id'])
-    end
-  end
-  
-  desc "imports merchants from csv file"
-  task :merchants => :environment do
-    CSV.foreach('db/data/merchants.csv', headers: true) do |row|
-      Merchant.create!(name: row['name'], created_at: row['created_at'], updated_at: row['updated_at'], uuid: row['id'])
     end
   end
 
@@ -28,7 +36,6 @@ namespace :csv_load do
       else 
         nil 
       end 
-
       Invoice.create!(status: status_value, created_at: row['created_at'], updated_at: row['updated_at'], uuid: row['id'], customer_id: row['customer_id'])
     end
   end
@@ -51,6 +58,14 @@ namespace :csv_load do
   desc "imports items from csv file"
   task :items => :environment do
     CSV.foreach('db/data/items.csv', headers: true) do |row|
+      status_value = case row['status']
+      when 'disabled'
+        0 
+      when 'enabled'
+        1 
+      else 
+        nil 
+      end
       Item.create!(name: row['name'], description: row['description'], unit_price: row['unit_price'], merchant_id: row['merchant_id'], created_at: row['created_at'], updated_at: row['updated_at'], uuid: row['id'])
     end
   end
