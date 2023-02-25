@@ -83,20 +83,21 @@ RSpec.describe '/admin', type: :feature do
       @invoice14.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
       @invoice15.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
       @invoice16.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
-
-      visit '/admin'
     end
 
     it 'I see a header indicating that I am on the admin dashboard' do
+      visit '/admin'
       expect(page).to have_content("Admin Dashboard Page")
     end
 
     it "I see a link to the admin merchants index & admin invoices index pages" do
+      visit '/admin'
       expect(page).to have_link("Admin Merchants Page", :href=>"/admin/merchants")
       expect(page).to have_link("Admin Invoices Page", :href=>"/admin/invoices")
     end
 
     it 'I see names of top 5 customers with largest number of successful transactions' do
+      visit '/admin'
       expect(page).to have_content("Top 5 Customers with Highest Successful Transactions")
       expect(page).to have_content("#{@Steve.first_name} #{@Steve.last_name}")
       expect(page).to have_content("#{@Carmen.first_name} #{@Carmen.last_name}")
@@ -108,6 +109,7 @@ RSpec.describe '/admin', type: :feature do
     end 
 
     it 'next to customer names, I see total count of their successful transactions' do
+      visit '/admin'
       within "#top_customers-#{@Steve.id}" do
         expect(page).to have_content("Steve Stevinson has 4 successful transactions!")
       end
@@ -138,6 +140,7 @@ RSpec.describe '/admin', type: :feature do
       end
 
       it "I see 'incomplete invoices' & a list of invoice ids with unshipped items (invoice_items status = pending or packaged)" do
+        visit '/admin'
         expect(page).to have_content("Incomplete Invoices")
         expect(page).to have_content("ID number: #{@invoice17.id}")
         expect(page).to have_content("ID number: #{@invoice19.id}")
@@ -147,8 +150,17 @@ RSpec.describe '/admin', type: :feature do
       end
 
       it "each invoice id is a link to that invoice's admin show page" do
+        visit '/admin'
         within "#invoice_info-#{@invoice17.id}" do
           expect(page).to have_link("#{@invoice17.id}", :href=>"/invoices/#{@invoice17.id}")
+        end
+
+        within "#invoice_info-#{@invoice19.id}" do
+          expect(page).to have_link("#{@invoice19.id}", :href=>"/invoices/#{@invoice19.id}")
+        end
+
+        within "#invoice_info-#{@invoice20.id}" do
+          expect(page).to have_link("#{@invoice20.id}", :href=>"/invoices/#{@invoice20.id}")
         end
 
         #should i test this: 

@@ -10,4 +10,3 @@ class Invoice < ApplicationRecord
     invoice_items.sum("unit_price * quantity")
   end
 end
-
