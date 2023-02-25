@@ -12,4 +12,5 @@ class Invoice < ApplicationRecord
     .where("invoice_items.status != ?", 2) 
     # question mark is a placeholder for 2
   end
+
 end
