@@ -29,7 +29,7 @@ RSpec.describe 'merchant items show page', type: :feature do
         expect(page).to have_link("Update Item")
         
         click_on "Update Item"
-
+				
         expect(current_path).to eq(edit_merchant_item_path(merchant1, item1))
       end
     end

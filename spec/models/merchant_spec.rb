@@ -39,6 +39,7 @@ RSpec.describe Merchant, type: :model do
 	let!(:item3) { merchant1.items.create!(name: "lamp", description: "12 inch desk lamp", unit_price: 16) }    
 	let!(:item4) { merchant1.items.create!(name: "wireless mouse", description: "wireless computer mouse for mac", unit_price: 40) }    
 	let!(:item5) { merchant1.items.create!(name: "chapstick", description: "coconut flavor chapstick", unit_price: 2) }    
+	let!(:item6) {create(:item, merchant: merchant1)}
 
 	let!(:transaction1) { invoice1.transactions.create!(credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
 	let!(:transaction2) { invoice2.transactions.create!(credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
@@ -84,6 +85,7 @@ RSpec.describe Merchant, type: :model do
 		InvoiceItem.create!(item: item4, invoice: invoice10)
 		InvoiceItem.create!(item: item1, invoice: invoice11)
 		InvoiceItem.create!(item: item4, invoice: invoice11)
+	
 	end
 
   describe '#instance methods' do
@@ -95,6 +97,11 @@ RSpec.describe Merchant, type: :model do
       expect(merchant1.customer_successful_transactions(customer1.id)).to eq(2)
       expect(merchant1.customer_successful_transactions(customer4.id)).to eq(1)
     end
+
+		it '#ordered_items_not_yet_shipped' do 
+			expect(merchant1.ordered_items_not_yet_shipped).to eq([item1, item2, item3, item4, item5])
+			expect(merchant1.ordered_items_not_yet_shipped).to_not include(item6)
+		end
   end
 
 	describe 'class methods' do

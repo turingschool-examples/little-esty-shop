@@ -47,5 +47,58 @@ RSpec.describe 'merchant items index page', type: :feature do
         expect(page).to have_button("Disable")
       end
     end
+		
+		describe 'enable/disabled sections on page' do
+			it 'seperate enabled section' do
+				visit merchant_items_path(merchant1)
+
+				within "#enabled_items" do
+					expect(page).to have_content(item2.name)
+					expect(page).to_not have_content(item1.name)
+					expect(page).to_not have_content(item3.name)
+					expect(page).to_not have_content(item4.name)
+					expect(page).to_not have_content(item5.name)
+					
+					within "##{item2.id}" do 
+						click_button
+					end
+					
+					expect(page).to_not have_content(item2.name)
+				end
+			end
+
+			it 'seperate disabled section' do
+				visit merchant_items_path(merchant1)
+				
+				within "#disabled_items" do
+					expect(page).to_not have_content(item2.name)
+					expect(page).to have_content(item1.name)
+					expect(page).to have_content(item3.name)
+					expect(page).to have_content(item4.name)
+					
+					within "##{item3.id}" do 
+						click_button
+					end
+
+					expect(page).to_not have_content(item3.name)
+				end
+			end
+		end
+
+		describe 'create new item' do
+			it 'has a link to create a new item for merchant' do
+				visit merchant_items_path(merchant1)
+
+				expect(page).to have_link("New Item")
+			end
+
+			it 'when new item link is clicked it takes us to new item page' do
+				visit merchant_items_path(merchant1)
+
+				click_link 'New Item'
+				
+				expect(current_path).to eq(new_merchant_item_path(merchant1))
+			end
+		end
   end
 end
