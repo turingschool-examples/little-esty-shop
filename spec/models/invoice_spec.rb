@@ -27,6 +27,7 @@ RSpec.describe Invoice, type: :model do
       @invoice_item4 = create(:invoice_item, invoice_id: @invoice4.id, item_id: @item.id, status: 0)
       @invoice_item5 = create(:invoice_item, invoice_id: @invoice5.id, item_id: @item.id, status: 1)
     end
+
     it 'returns an array of incomplete invoices' do
       expect(Invoice.incomplete).to contain_exactly(@invoice2, @invoice4, @invoice5)
     end
@@ -40,6 +41,21 @@ RSpec.describe Invoice, type: :model do
       expect(@invoice1.items_with_invoice_attributes.first.quantity).to eq(@invoice_item1.quantity)
       expect(@invoice1.items_with_invoice_attributes.first.unit_price).to eq(@invoice_item1.unit_price)
       expect(@invoice1.items_with_invoice_attributes.first.status).to eq(@invoice_item1.status)
+    end
+
+    it 'lists total revenue for an invoice' do
+      merchant10 = create(:merchant)
+      item10 = create(:item, merchant_id: merchant10.id)
+      customer10 = create(:customer)
+      invoice10 = create(:invoice, customer_id: customer10.id)
+      invoice_item1 = create(:invoice_item, invoice_id: invoice10.id, item_id: item10.id, quantity: 10, unit_price: 2)
+      invoice_item2 = create(:invoice_item, invoice_id: invoice10.id, item_id: item10.id, quantity: 10, unit_price: 5)
+      
+      expect(invoice10.calc_total_revenue.first).to eq(70)
+
+      invoice_item3 = create(:invoice_item, invoice_id: invoice10.id, item_id: item10.id, quantity: 10, unit_price: 3)
+
+      expect(invoice10.calc_total_revenue.first).to eq(100)
     end
   end
 end
