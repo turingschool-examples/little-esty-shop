@@ -9,7 +9,7 @@ class Merchant < ApplicationRecord
   def toggle_status
     self.status == "enabled" ? self.disabled! : self.enabled!
   end
-
+  
   def mech_top_5_successful_customers
     invoices.joins(:customer, :transactions)
     .select("customers.*, COUNT(transactions.id) AS transaction_count")
@@ -17,5 +17,9 @@ class Merchant < ApplicationRecord
     .group("customers.id")
     .order("transaction_count DESC")
     .limit(5)
+  end
+
+  def self.group_by_status(status)
+    where(status: status)
   end
 end
