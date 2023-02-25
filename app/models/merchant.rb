@@ -1,6 +1,9 @@
 class Merchant < ApplicationRecord
+  validates :name, presence: true
+  
+  enum status: ["Enabled", "Disabled"]
+  
   has_many :items
-
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   has_many :customers, through: :invoices
@@ -22,4 +25,5 @@ class Merchant < ApplicationRecord
     .where(status: "packaged")
     .order(created_at: :asc)
   end
+
 end
