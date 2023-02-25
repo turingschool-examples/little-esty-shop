@@ -20,4 +20,8 @@ class Admin::MerchantsController < ApplicationController
   def merchant_params
     params.permit(:name)
   end
+
+  def edit
+    
+  end
 end
