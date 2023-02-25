@@ -44,7 +44,6 @@ RSpec.describe "Merchant Items Index" do
         expect(page).to_not have_content(item3.name)
         expect(page).to_not have_content(item3.description)
         expect(page).to_not have_content(item3.unit_price)
-        # save_and_open_page
       end
     end
   end
