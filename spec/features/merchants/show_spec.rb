@@ -114,6 +114,7 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
     it 'will have a section called Items ready to ship, where there will be a list of the name of items that have been ordered, but not yet shipped' do 
       create(:packaged_invoice_items, item: item1, invoice: invoice1)
       create(:packaged_invoice_items, item: item1, invoice: invoice1)
+      create(:shipped_invoice_items, item1, invoice: invoice1)
       
       expect(page).to have_content("Items Ready to Ship")
       expect(page).to have_content(item1.name, count: 8)
