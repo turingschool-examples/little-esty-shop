@@ -23,6 +23,8 @@ RSpec.describe "Merchant_Items", type: :feature do
     @item_1 = create(:item, merchant: @merchant)
     @item_2 = create(:item, merchant: @merchant)
     @item_3 = create(:item, merchant: @merchant_2)
+    @item_4 = create(:item, merchant: @merchant, status: "Disabled")
+    @item_5 = create(:item, merchant: @merchant, status: "Disabled")
 
     @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, quantity: 1, status: "packaged", created_at: Date.new(2023,1,1))
     @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2, quantity: 1, status: "packaged", created_at: Date.new(2023,1,2))
@@ -85,21 +87,18 @@ RSpec.describe "Merchant_Items", type: :feature do
   describe "User Story 10" do
     it "I see two sections, one for 'Enabled Items' and one for 'Disabled Items' 
       And I see that each Item is listed in the appropriate section" do
-      
-      within("#merchant_item-#{@item_1.id}")  {
-        click_button "Disable"
-      }
-
       expect(page).to have_content("Enabled Items")
       
       within("#enabled")  {
-        expect(page).to have_content("#{@item_1.name}")        
+        expect(page).to have_content("#{@item_1.name}")
+        expect(page).to have_content("#{@item_2.name}")
       }
-
+      
       expect(page).to have_content("Disabled Items")
 
       within("#disabled")  {
-        expect(page).to have_content("#{@item_1.name}")
+        expect(page).to have_content("#{@item_4.name}")
+        expect(page).to have_content("#{@item_5.name}")
       }
     end
   end

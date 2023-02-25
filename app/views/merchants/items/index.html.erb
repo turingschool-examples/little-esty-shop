@@ -14,7 +14,15 @@
   </ul>
 </div>
 <h3>Enabled Items</h3>
-
-
+<div id="enabled">
+  <% @enabled_items.each do |enabled| %>
+    <%= enabled.name %>
+  <% end %>
+</div>
 
 <h3>Disabled Items</h3>
+<div id="disabled">
+  <% @disabled_items.each do |disabled| %>
+    <%= disabled.name %>
+  <% end %>
+</div>
