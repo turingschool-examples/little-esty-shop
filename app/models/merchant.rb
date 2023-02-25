@@ -39,9 +39,14 @@ class Merchant < ApplicationRecord
     end
 
     def items_ready_to_ship
-      Item.joins(:invoice_items, :invoices)
+      # Item.joins(:invoice_items, :invoices)
+      # .where("invoice_items.status = ?", 0)
+      # .order(created_at: :desc)
+      # .pluck("items.name, invoices.created_at").flatten
+
+      Item.joins(:invoices)
       .where("invoice_items.status = ?", 0)
-      .order(created_at: :desc)
-      # list of items != :shipped
+      .order("invoices.created_at asc")
+      .select("items.*, invoices.created_at as inv_time")
     end
 end
