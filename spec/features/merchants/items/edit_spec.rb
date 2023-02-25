@@ -48,16 +48,18 @@ RSpec.describe 'Merchant Items', type: :feature do
           end
         end
 
-        # xit 'when leave a form field blank, I get an error message and am returned to that Items edit page' do
-        #   visit edit_merchant_item_path(sam.id, football.id)
+        it 'when leave a form field blank, I get an error message and am returned to that Items edit page' do
+          visit edit_merchant_item_path(sam.id, football.id)
           
-        #   fill_in 'Name', with: 'Nerf Football'
-        #   fill_in 'Description', with: ''
-        #   fill_in 'Unit price', with: ''
-        #   click_button 'Submit'
-        #   save_and_open_page
-        #   expect(current_path).to eq(merchant_item_path(sam.id, football.id))
-        # end
+          fill_in 'Name', with: 'Nerf Football'
+          fill_in 'Description', with: ''
+          fill_in 'Unit price', with: ''
+          click_button 'Submit'
+          
+          expect(current_path).to eq(edit_merchant_item_path(sam.id, football.id))
+          expect(page).to have_content("Unit price can't be blank")
+          expect(page).to have_content("Description can't be blank")
+        end
       end
     end
   end
