@@ -20,6 +20,17 @@ describe 'Admin Invoices show page' do
         expect(page).to have_content("#{invoice_2.customer.first_name}")
         expect(page).to have_content("#{invoice_2.customer.last_name}")
       end
+
+      it "I see all the items on the invoice including: item name, item quantity, price item sold for and invoice item status" do
+        visit admin_invoice_path(invoice_2)
+        
+        within(".items") do
+          expect(page).to have_content("#{invoice_2.items.first.name}")
+          expect(page).to have_content("#{invoice_item_3.quantity}")
+          expect(page).to have_content("#{invoice_item_3.status}")
+          expect(page).to have_content("#{invoice_item_3.unit_price}")
+        end
+      end
     end
   end
 end
