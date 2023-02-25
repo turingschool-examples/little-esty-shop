@@ -6,3 +6,5 @@
   <p>Description: <%= @item.description %></p>
   <p>Current Selling Price: <%= number_to_currency(@item.unit_price / 100) %></p>
 </div>
+
+<%= link_to "Update Item", edit_merchant_item_path(@merchant.id, @item.id) %>
