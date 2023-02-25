@@ -1,20 +1,5 @@
 <h1>Items</h1>
 
-<!-- Skipped Test ln 33
-<% @merchant.items.each do |item| %>
-  <div id="id-<%= item.id %>">
-  <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %><br><br>   
-  
-    <% if item.status == "enabled" %>
-        <%= button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true, params: {status: item.status} %>
-    <% elsif item.status == "disabled" %>
-        <%= button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true, params: {status: item.status} %>
-				<br>
-    <% end %>
-  </div>
-<% end %>
--->
-
 <div id="disabled-items">
 <h2>Disabled Items:</h2>
 <% @merchant.items.each do |item| %>

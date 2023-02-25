@@ -67,8 +67,3 @@ RSpec.describe 'Merchant Items Index' do
     end
   end
 end
-
-          # first(:button, "Enable")
-
-          # expect(page).to_not have_content("Bowl")
-          # expect(page).to_not have_content("Bowl")
