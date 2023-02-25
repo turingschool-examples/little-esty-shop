@@ -44,6 +44,16 @@ RSpec.describe Invoice, type: :model do
       expect(invoice2.find_invoiceitem_status(item4)).to eq("packaged")
     end
   
+    it "#find_invoiceitem_status" do
+      expect(invoice1.find_invoiceitem_status(item1)).to eq("pending")
+      expect(invoice1.find_invoiceitem_status(item2)).to eq("shipped")
+      expect(invoice2.find_invoiceitem_status(item4)).to eq("packaged")
+    end
+
+    it "#get_total_revenue" do
+      expect(invoice1.get_total_revenue.to eq(34907))
+      expect(invoice2.get_total_revenue.to eq(66666))
+    end
   end
   
   describe "Class methods" do
