@@ -1,4 +1,4 @@
-class MerchantDashboardsController < ApplicationController
+class Merchants::DashboardsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @top_five_merchant_customers = @merchant.top_five_merchant_customers
