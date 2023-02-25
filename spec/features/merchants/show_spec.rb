@@ -142,14 +142,13 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
 
     it 'will have the invoices sorted by oldest to newest, with dates next to each invoice' do
       visit "/merchants/#{merchant1.id}/dashboard"
-      save_and_open_page
-      expect(invoice2.id).to appear_before(invoice1.id)
-      expect(invoice1.id).to appear_before(invoice3.id)
-      # expect(invoice3.id).to appear_before(invoice4.id)
-      # expect(invoice4.id).to appear_before(invoice5.id)
-      # expect(invoice5.id).to appear_before(invoice6.id)
-      # expect(invoice6.id).to appear_before(invoice7.id)
-      
+   
+      expect("#{invoice2.id}").to appear_before("#{invoice1.id}")
+      expect("#{invoice1.id}").to appear_before("#{invoice3.id}")
+      expect("#{invoice3.id}").to appear_before("#{invoice4.id}")
+      expect("#{invoice4.id}").to appear_before("#{invoice5.id}")
+      expect("#{invoice5.id}").to appear_before("#{invoice6.id}")
+      expect("#{invoice6.id}").to appear_before("#{invoice7.id}")
     end
   end
 end
