@@ -23,6 +23,7 @@ class Merchant < ApplicationRecord
 	end
 
   def ordered_items_not_yet_shipped
+    require 'pry'; binding.pry
     items.joins(:invoice_items).where.not(invoice_items: {status: "shipped"}).distinct
   end
 end

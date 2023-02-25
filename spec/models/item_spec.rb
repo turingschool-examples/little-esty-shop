@@ -6,16 +6,28 @@ RSpec.describe Item, type: :model do
     it { should have_many(:invoices).through(:invoice_items) }
     it { should belong_to :merchant }
   end
+  let!(:merchant1) { create(:merchant)}
+  let!(:merchant2) { create(:merchant)}
 
+  let!(:customer1) { Customer.create!(first_name: "Britney", last_name: "Spears") }
+	let!(:customer2) { Customer.create!(first_name: "Bob", last_name: "Smith") }
+
+	let!(:invoice1) { customer1.invoices.create!(status: 2) }
+  let!(:invoice2) { customer1.invoices.create!(status: 2) }
+	let!(:invoice3) { customer2.invoices.create!(status: 2) }
+
+  let!(:item1) {create(:item, merchant: merchant1)}  
+  let!(:item2) {create(:item, merchant: merchant1, status: 'enabled')}
+  let!(:item3) {create(:item, merchant: merchant1)}
+  let!(:item4) {create(:item, merchant: merchant1)}
+  let!(:item5) {create(:item, merchant: merchant2)}
+
+  before do
+  InvoiceItem.create!(item: item1, invoice: invoice1)
+  InvoiceItem.create!(item: item3, invoice: invoice3)
+  
+  end 
   describe "::class methods" do
-    let!(:merchant1) { create(:merchant)}
-    let!(:merchant2) { create(:merchant)}
-
-    let!(:item1) {create(:item, merchant: merchant1)}  
-    let!(:item2) {create(:item, merchant: merchant1, status: 'enabled')}
-    let!(:item3) {create(:item, merchant: merchant1)}
-    let!(:item4) {create(:item, merchant: merchant1)}
-    let!(:item5) {create(:item, merchant: merchant2)}
 
     it "::enabled_items" do
       expect(merchant1.items.enabled_items).to eq([item2])
