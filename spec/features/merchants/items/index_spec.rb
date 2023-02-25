@@ -102,4 +102,13 @@ RSpec.describe "Merchant_Items", type: :feature do
       }
     end
   end
+
+  describe "User Story 11" do
+    it "I see a link to create a new item, when I click on the link,
+      I am taken to a form that allows me to add item information." do
+      
+      click_link("Create New Item")
+      expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}/new")
+    end
+  end
 end
