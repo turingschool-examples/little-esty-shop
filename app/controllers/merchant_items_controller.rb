@@ -1,23 +1,23 @@
 class MerchantItemsController < ApplicationController
   def index
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
     @enabled_items = @merchant.items.enabled_items
     @disabled_items = @merchant.items.disabled_items
   end
 
   def show
-    @merchant = Merchant.find(params[:id])
-    @item = Item.find(params[:item_id])
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.find(params[:id])
   end
 
   def edit
-    @merchant = Merchant.find(params[:id])
-    @item = Item.find(params[:item_id])
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.find(params[:id])
   end
 
   def update
-    merchant = Merchant.find(params[:id])
-    item = Item.find(params[:item_id])
+    merchant = Merchant.find(params[:merchant_id])
+    item = Item.find(params[:id])
     if params[:status].present?
       item.update(status: params[:status].to_i)
       redirect_to "/merchants/#{merchant.id}/items"
