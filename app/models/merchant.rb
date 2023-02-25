@@ -7,7 +7,7 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def top_five_customers
-  customers.joins(:transactions).where(transactions: {result: 'success'}).select("customers.*, count(DISTINCT transactions.id) as transactions_count").group("customers.id").order("transactions_count desc").limit(5)
+    customers.joins(:transactions).where(transactions: {result: 'success'}).select("customers.*, count(DISTINCT transactions.id) as transactions_count").group("customers.id").order("transactions_count desc").limit(5)
   end
 
   def customer_successful_transactions(customer_id)
@@ -21,4 +21,8 @@ class Merchant < ApplicationRecord
 	def self.disabled_merchants
 		Merchant.where(status: 1)
 	end
+
+  def ordered_items_not_yet_shipped
+    items.joins(:invoice_items).where.not(invoice_items: {status: "shipped"})
+  end
 end

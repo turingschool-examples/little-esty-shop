@@ -85,8 +85,7 @@ RSpec.describe Merchant, type: :model do
 		InvoiceItem.create!(item: item4, invoice: invoice10)
 		InvoiceItem.create!(item: item1, invoice: invoice11)
 		InvoiceItem.create!(item: item4, invoice: invoice11)
-		create(:shipped_invoice_items, item: item6, invoice: invoice1)
-
+	
 	end
 
   describe '#instance methods' do
