@@ -1,31 +1,50 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant/Items Index Page' do
-before(:each) do 
-
-  @merchant1 = Merchant.create!(name: "Hady", uuid: 1) 
-  @merchant2 = Merchant.create!(name: "Malena", uuid: 2) 
-
-
-  @item_1 = @merchant1.items.create(name: "Salt", description: "it is salty", unit_price: 12, uuid: 1)
-  @item_2 = @merchant1.items.create(name: "Pepper", description: "it is peppery", unit_price: 11, uuid: 2)
-  @item_3 = @merchant2.items.create(name: "Spices", description: "it is spicy", unit_price: 13, uuid: 3)
-  @item_4 = @merchant2.items.create(name: "Sand", description: "its all over the place", unit_price: 14, uuid: 4)
-  @item_5 = @merchant1.items.create(name: "Water", description: "nice and liquidy", unit_price: 15, status: 1, uuid: 5)
-
-  @customer_1 = Customer.create(first_name: "Diego", last_name: "Flores")
-  @customer_2 = Customer.create(first_name: "Sebastian", last_name: "Beltran")
-
-  @invoice_1 = @customer_1.invoices.create(status: 0)
-  @invoice_2 = @customer_1.invoices.create(status: 0)
-  @invoice_3 = @customer_1.invoices.create(status: 0)
-  @invoice_4 = @customer_2.invoices.create(status: 1)
-  @invoice_50 = @customer_1.invoices.create(status: 1)
-
-  InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_50.id, quantity: 2, unit_price: 75000, status: 2, uuid: 17)
-end 
-
   describe "as a merchant" do 
+    describe "when merchant visit 'merchants/merchant_id/items'" do
+      let!(:schroeder_jerde) { Merchant.create!(name: 'Schroeder-Jerde')}
+      let!(:qui) {Item.create!(merchant: schroeder_jerde, name: 'Qui Esse', unit_price: 75107) }
+      let!(:autem) {Item.create!(merchant: schroeder_jerde, name: 'Autem Minima', unit_price: 67076) }
+      let!(:ea) {Item.create!(merchant: schroeder_jerde, name: 'Ea Voluptatum', unit_price: 32301) }
+
+      it "should see a list of all that merchant items and not other merchan" do
+        visit "/merchants/#{schroeder_jerde.id}/items"
+        expect(page).to have_content(qui.name)
+        expect(page).to have_content(autem.name)
+        expect(page).to have_content(ea.name)
+      end
+
+      it 'should see a the name as a link that will direct to item show page where the item attribute is display' do
+        visit "/merchants/#{schroeder_jerde.id}/items"
+        expect(page).to have_link("#{qui.name}", href: "/merchants/#{schroeder_jerde.id}/items/#{qui.id}")
+      end
+    end 
+  
+  describe "before each do block" do 
+    before(:each) do 
+
+      @merchant1 = Merchant.create!(name: "Hady", uuid: 1) 
+      @merchant2 = Merchant.create!(name: "Malena", uuid: 2) 
+  
+  
+      @item_1 = @merchant1.items.create(name: "Salt", description: "it is salty", unit_price: 12, uuid: 1)
+      @item_2 = @merchant1.items.create(name: "Pepper", description: "it is peppery", unit_price: 11, uuid: 2)
+      @item_3 = @merchant2.items.create(name: "Spices", description: "it is spicy", unit_price: 13, uuid: 3)
+      @item_4 = @merchant2.items.create(name: "Sand", description: "its all over the place", unit_price: 14, uuid: 4)
+      @item_5 = @merchant1.items.create(name: "Water", description: "nice and liquidy", unit_price: 15, status: 1, uuid: 5)
+  
+      @customer_1 = Customer.create(first_name: "Diego", last_name: "Flores")
+      @customer_2 = Customer.create(first_name: "Sebastian", last_name: "Beltran")
+  
+      @invoice_1 = @customer_1.invoices.create(status: 0)
+      @invoice_2 = @customer_1.invoices.create(status: 0)
+      @invoice_3 = @customer_1.invoices.create(status: 0)
+      @invoice_4 = @customer_2.invoices.create(status: 1)
+      @invoice_50 = @customer_1.invoices.create(status: 1)
+  
+      InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_50.id, quantity: 2, unit_price: 75000, status: 2, uuid: 17)
+    end 
     describe "visit merchant items index page" do 
       it "see link to create new item" do 
 
@@ -79,6 +98,7 @@ end
         within("div#item_number_#{@item_5.id}") do 
           expect(page).to have_content("Status disabled")
         end 
+
       end
 
       it "see sections for disabled and enabled items and items are sorted accordingly to their respective statuses" do 
@@ -96,91 +116,180 @@ end
           expect(page).to have_content(@item_2.name)
         end 
       end
+    end 
+  end #before each do block 
 
-      it "I see the names of the top 5 most popular items ranked by total revenue generated" do 
+  it "I see the names of the top 5 most popular items ranked by total revenue generated" do #handrolled tests data 
 
-        merchant3 = Merchant.create!(name: "Diego", uuid: 3) 
+    merchant3 = Merchant.create!(name: "Diego", uuid: 3) 
 
-        item_6 = merchant3.items.create(name: "Juice", description: "it is salty", unit_price: 12, uuid: 1)
-        item_7 = merchant3.items.create(name: "Broccoli", description: "it is peppery", unit_price: 11, uuid: 2)
-        item_8 = merchant3.items.create(name: "Computer", description: "it is spicy", unit_price: 13, uuid: 3)
-        item_9 = merchant3.items.create(name: "Lighter", description: "its all over the place", unit_price: 14, uuid: 4)
-        item_10 = merchant3.items.create(name: "Earplugs", description: "nice and liquidy", unit_price: 15, status: 1, uuid: 5)
-        item_11 = merchant3.items.create(name: "Mouse", description: "it is salty", unit_price: 12, uuid: 1)
-        item_12 = merchant3.items.create(name: "Dog", description: "it is peppery", unit_price: 11, uuid: 2)
-        item_13 = merchant3.items.create(name: "Cat", description: "it is spicy", unit_price: 13, uuid: 3)
-        item_14 = merchant3.items.create(name: "Hamster", description: "its all over the place", unit_price: 14, uuid: 4)
-        item_15 = merchant3.items.create(name: "pens", description: "nice and liquidy", unit_price: 15, status: 1, uuid: 5)
+    item_6 = merchant3.items.create(name: "Juice", description: "it is salty", unit_price: 12, uuid: 1)
+    item_7 = merchant3.items.create(name: "Broccoli", description: "it is peppery", unit_price: 11, uuid: 2)
+    item_8 = merchant3.items.create(name: "Computer", description: "it is spicy", unit_price: 13, uuid: 3)
+    item_9 = merchant3.items.create(name: "Lighter", description: "its all over the place", unit_price: 14, uuid: 4)
+    item_10 = merchant3.items.create(name: "Earplugs", description: "nice and liquidy", unit_price: 15, status: 1, uuid: 5)
+    item_11 = merchant3.items.create(name: "Mouse", description: "it is salty", unit_price: 12, uuid: 1)
+    item_12 = merchant3.items.create(name: "Dog", description: "it is peppery", unit_price: 11, uuid: 2)
+    item_13 = merchant3.items.create(name: "Cat", description: "it is spicy", unit_price: 13, uuid: 3)
+    item_14 = merchant3.items.create(name: "Hamster", description: "its all over the place", unit_price: 14, uuid: 4)
+    item_15 = merchant3.items.create(name: "pens", description: "nice and liquidy", unit_price: 15, status: 1, uuid: 5)
 
-        customer_1 = Customer.create(first_name: "Diego", last_name: "Flores")
-        customer_2 = Customer.create(first_name: "Sebastian", last_name: "Beltran")
+    customer_1 = Customer.create(first_name: "Diego", last_name: "Flores")
+    customer_2 = Customer.create(first_name: "Sebastian", last_name: "Beltran")
 
-        invoice_4 = customer_2.invoices.create(status: 1)
-        invoice_5 = customer_1.invoices.create(status: 1) 
-        invoice_6 = customer_1.invoices.create(status: 1) 
-        
-        transaction_1 = invoice_4.transactions.create!(credit_card_number: "524234", credit_card_expiration_date: nil, result: 0, uuid: 1)
-        transaction_3 = invoice_5.transactions.create!(credit_card_number: "524234", credit_card_expiration_date: nil, result: 0, uuid: 1)
-        transaction_2 = invoice_6.transactions.create!(credit_card_number: "524234", credit_card_expiration_date: nil, result: 1, uuid: 1)
+    invoice_4 = customer_2.invoices.create(status: 1)
+    invoice_5 = customer_1.invoices.create(status: 1) 
+    invoice_6 = customer_1.invoices.create(status: 1) 
+    
+    transaction_1 = invoice_4.transactions.create!(credit_card_number: "524234", credit_card_expiration_date: nil, result: 0, uuid: 1)
+    transaction_2 = invoice_6.transactions.create!(credit_card_number: "524234", credit_card_expiration_date: nil, result: 1, uuid: 1)
+    transaction_3 = invoice_5.transactions.create!(credit_card_number: "524234", credit_card_expiration_date: nil, result: 0, uuid: 1)
+  
+    InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_4.id, quantity: 1, unit_price: 1, status: 2, uuid: 6)
+    InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_4.id, quantity: 1, unit_price: 2, status: 2, uuid: 7)
+    InvoiceItem.create!(item_id: item_8.id, invoice_id: invoice_4.id, quantity: 1, unit_price: 3, status: 2, uuid: 8)
+    InvoiceItem.create!(item_id: item_9.id, invoice_id: invoice_4.id, quantity: 1, unit_price: 4, status: 2, uuid: 8)
+    InvoiceItem.create!(item_id: item_10.id, invoice_id: invoice_5.id, quantity: 1, unit_price: 5, status: 2, uuid: 9)
+    InvoiceItem.create!(item_id: item_11.id, invoice_id: invoice_5.id, quantity: 1, unit_price: 6, status: 2, uuid: 10)
+    InvoiceItem.create!(item_id: item_12.id, invoice_id: invoice_5.id, quantity: 1, unit_price: 7, status: 2, uuid: 11)
+    InvoiceItem.create!(item_id: item_13.id, invoice_id: invoice_5.id, quantity: 1, unit_price: 5, status: 2, uuid: 12)
+    InvoiceItem.create!(item_id: item_13.id, invoice_id: invoice_5.id, quantity: 1, unit_price: 5, status: 2, uuid: 12)
 
-        
-      
-        InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_4.id, quantity: 2, unit_price: 75000, status: 2, uuid: 6)
-        InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_4.id, quantity: 2, unit_price: 85000, status: 2, uuid: 7)
-        InvoiceItem.create!(item_id: item_9.id, invoice_id: invoice_4.id, quantity: 2, unit_price: 95000, status: 2, uuid: 8)
-        InvoiceItem.create!(item_id: item_10.id, invoice_id: invoice_5.id, quantity: 2, unit_price: 800000, status: 2, uuid: 9)
-        InvoiceItem.create!(item_id: item_11.id, invoice_id: invoice_5.id, quantity: 2, unit_price: 850000, status: 2, uuid: 10)
-        InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_5.id, quantity: 2, unit_price: 15000, status: 2, uuid: 11)
-        InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_5.id, quantity: 2, unit_price: 15000, status: 2, uuid: 12)
-        InvoiceItem.create!(item_id: item_8.id, invoice_id: invoice_4.id, quantity: 2, unit_price: 200, status: 2, uuid: 13)
-        InvoiceItem.create!(item_id: item_11.id, invoice_id: invoice_5.id, quantity: 2, unit_price: 200, status: 2, uuid: 14)
-        InvoiceItem.create!(item_id: item_12.id, invoice_id: invoice_4.id, quantity: 2, unit_price: 10, status: 2, uuid: 15)
-        InvoiceItem.create!(item_id: item_15.id, invoice_id: invoice_4.id, quantity: 2, unit_price: 15, status: 2, uuid: 16)
-        InvoiceItem.create!(item_id: item_15.id, invoice_id: invoice_6.id, quantity: 2, unit_price: 15, status: 2, uuid: 17)
-        InvoiceItem.create!(item_id: item_15.id, invoice_id: invoice_4.id, quantity: 2, unit_price: 15, status: 1, uuid: 18)
+    InvoiceItem.create!(item_id: item_14.id, invoice_id: invoice_6.id, quantity: 1, unit_price: 10000, status: 2, uuid: 13)
+    InvoiceItem.create!(item_id: item_15.id, invoice_id: invoice_6.id, quantity: 1, unit_price: 5000, status: 2, uuid: 14)
 
-        
+    visit "/merchants/#{merchant3.id}/items"
 
-        visit "/merchants/#{merchant3.id}/items"
-        save_and_open_page
-        
-        within("div#5_most_popular_items") do 
-          expect(page).to have_content("#{item_6.name}")
-          expect(page).to have_content("#{item_7.name}")
-          expect(page).to have_content("#{item_9.name}")
-          expect(page).to have_content("#{item_10.name}")
-          expect(page).to have_content("#{item_11.name}")
-        end
+    save_and_open_page
+      within("div#5_most_popular_items") do 
+        expect(page).to_not have_content("#{item_14.name}")
+        expect(page).to_not have_content("#{item_15.name}")
+
+        expect(page).to have_content("#{item_13.name}")
+          expect(item_13.name).to appear_before(item_12.name)
+
+        expect(page).to have_content("#{item_12.name}")
+          expect(item_12.name).to appear_before(item_11.name)
+
+        expect(page).to have_content("#{item_11.name}")
+          expect(item_11.name).to appear_before(item_10.name)
+
+        expect(page).to have_content("#{item_10.name}")
+          expect(item_10.name).to appear_before(item_9.name)
+
+        expect(page).to have_content("#{item_9.name}")
+      end
+    end 
 
 
+    it "Next to each of the most popular items, see the invoice created at date with the most sales for each item" do #factory bot data- US 13
+
+      @merchant= FactoryBot.create(:merchant)
+      @customer = FactoryBot.create(:customer)
+      @item = FactoryBot.create_list(:item, 10, merchant: @merchant)
+
+      @invoices1 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2023, 1, 1, 0, 0, 0))
+      @invoices2 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2015, 10, 1, 0, 0, 0))
+      @invoices3 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2022, 7, 1, 0, 0, 0))
+      @invoices4 = FactoryBot.create(:invoice, customer: @customer, status: 1, created_at: Time.new(2016, 2, 24, 12, 0, 0))
+      @invoices5 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2017, 4, 1, 0, 0, 0)) 
+
+      @invoices6 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2023, 1, 1, 0, 0, 0))
+      @invoices7 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2015, 10, 1, 0, 0, 0))
+      @invoices8 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2016, 7, 1, 0, 0, 0))
+      @invoices9 = FactoryBot.create(:invoice, customer: @customer, status: 1, created_at: Time.new(2017, 2, 24, 12, 0, 0))
+      @invoices10 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2018, 4, 1, 0, 0, 0)) 
+
+      @invoices11 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2019, 1, 1, 0, 0, 0))
+      @invoices12 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2020, 10, 1, 0, 0, 0))
+      @invoices13 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2021, 7, 1, 0, 0, 0))
+      @invoices14 = FactoryBot.create(:invoice, customer: @customer, status: 1, created_at: Time.new(2023, 2, 24, 12, 0, 0))
+      @invoices15 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2022, 4, 1, 0, 0, 0)) 
+
+      @invoices16 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2023, 1, 1, 0, 0, 0))
+      @invoices17 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2022, 10, 1, 0, 0, 0))
+      @invoices18 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2019, 7, 1, 0, 0, 0))
+      @invoices19 = FactoryBot.create(:invoice, customer: @customer, status: 1, created_at: Time.new(2016, 2, 24, 12, 0, 0))
+      @invoices20 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2015, 4, 1, 0, 0, 0)) 
+
+      @invoices21 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2015, 1, 1, 0, 0, 0))
+      @invoices22 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2022, 10, 1, 0, 0, 0))
+      @invoices23 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2018, 7, 1, 0, 0, 0))
+      @invoices24 = FactoryBot.create(:invoice, customer: @customer, status: 1, created_at: Time.new(2023, 2, 24, 12, 0, 0))
+      @invoices25 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2009, 4, 1, 0, 0, 0)) 
+
+      Invoice.all.each do |invoice|
+        FactoryBot.create(:transaction, invoice: invoice, result: 0)
       end
 
+      n = 1000
+      Invoice.all[0..4].each do |invoice|
+        n = n + 50
+        FactoryBot.create(:invoice_item, invoice: invoice, item: @item[0], unit_price: n, quantity: 1)
+      end
 
+      n = 800
+      Invoice.all[5..9].each do |invoice|
+        n = n + 50
+        FactoryBot.create(:invoice_item, invoice: invoice, item: @item[1], unit_price: n, quantity: 1)
+      end
 
+      n = 600
+      Invoice.all[10..14].each do |invoice|
+        n = n + 50
+        FactoryBot.create(:invoice_item, invoice: invoice, item: @item[2], unit_price: n, quantity: 1)
+      end
+
+      n = 400
+      Invoice.all[15..19].each do |invoice|
+        n = n + 50
+        FactoryBot.create(:invoice_item, invoice: invoice, item: @item[6], unit_price: n, quantity: 1)
+      end
+
+      n = 200
+      Invoice.all[20..24].each do |invoice|
+        n = n + 50
+        FactoryBot.create(:invoice_item, invoice: invoice, item: @item[8], unit_price: n, quantity: 1)
+      end
+
+      visit "/merchants/#{@merchant.id}/items"
+save_and_open_page
+      within("div#5_most_popular_items") do 
+        expect(page).to have_content("#{@item[0].name}") 
+          expect(page).to have_content("Top selling date for #{@item[0].name} was #{@invoices5.created_at.strftime("%B %d, %Y")}")
+        expect(page).to have_content("#{@item[1].name}")
+          expect(page).to have_content("Top selling date for #{@item[1].name} was #{@invoices10.created_at.strftime("%B %d, %Y")}")
+        expect(page).to have_content("#{@item[2].name}") 
+          expect(page).to have_content("Top selling date for #{@item[2].name} was #{@invoices15.created_at.strftime("%B %d, %Y")}")
+        expect(page).to have_content("#{@item[6].name}") 
+          expect(page).to have_content("Top selling date for #{@item[6].name} was #{@invoices20.created_at.strftime("%B %d, %Y")}")
+        expect(page).to have_content("#{@item[8].name}") 
+          expect(page).to have_content("Top selling date for #{@item[8].name} was #{@invoices25.created_at.strftime("%B %d, %Y")}")
+      end
+    end
+
+    it "next to each of the 5 most popular items I see the date with the most sales for each item" do 
+
+      @merchant= FactoryBot.create(:merchant)
+      @customer = FactoryBot.create(:customer)
+      @item = FactoryBot.create_list(:item, 2, merchant: @merchant)
+
+      @invoices1 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2023, 1, 1, 0, 0, 0))
+      @invoices2 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2015, 10, 1, 0, 0, 0))
+      @invoices3 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2022, 7, 1, 0, 0, 0))
+
+      @transactions1 = FactoryBot.create(:transaction, invoice: @invoices1, result: 0)
+      @transactions2 = FactoryBot.create(:transaction, invoice: @invoices2, result: 0)
+      @transactions3 = FactoryBot.create(:transaction, invoice: @invoices2, result: 0)
+      @transactions4 = FactoryBot.create(:transaction, invoice: @invoices3, result: 0)
+
+      @invoiceitems1 = FactoryBot.create(:invoice_item, invoice: @invoices1, item: @item[1], unit_price: 1, quantity: 1)
+      @invoiceitems1 = FactoryBot.create(:invoice_item, invoice: @invoices2, item: @item[1], unit_price: 1, quantity: 1)
+      @invoiceitems1 = FactoryBot.create(:invoice_item, invoice: @invoices3, item: @item[1], unit_price: 1, quantity: 1)
+
+      expect()
 
     end
-  end 
+
+  end #as a merchant
 end 
-
-# HUY'S TESTS BELOW; HADYS ABOVE. NEED TO FIX THESE AT SOME POINT 
-
-RSpec.describe 'index', type: :feature do
-  describe "when merchant visit 'merchants/merchant_id/items'" do
-    let!(:schroeder_jerde) { Merchant.create!(name: 'Schroeder-Jerde')}
-    let!(:qui) {Item.create!(merchant: schroeder_jerde, name: 'Qui Esse', unit_price: 75107) }
-    let!(:autem) {Item.create!(merchant: schroeder_jerde, name: 'Autem Minima', unit_price: 67076) }
-    let!(:ea) {Item.create!(merchant: schroeder_jerde, name: 'Ea Voluptatum', unit_price: 32301) }
-
-    it "should see a list of all that merchant items and not other merchan" do
-      visit "/merchants/#{schroeder_jerde.id}/items"
-      expect(page).to have_content(qui.name)
-      expect(page).to have_content(autem.name)
-      expect(page).to have_content(ea.name)
-    end
-
-    it 'should see a the name as a link that will direct to item show page where the item attribute is display' do
-      visit "/merchants/#{schroeder_jerde.id}/items"
-      expect(page).to have_link("#{qui.name}", href: "/merchants/#{schroeder_jerde.id}/items/#{qui.id}")
-    end
-  end
-end

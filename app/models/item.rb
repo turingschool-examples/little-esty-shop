@@ -16,7 +16,6 @@ class Item < ApplicationRecord
   end
 
   def self.five_popular_items(merchant_id)
-
     select('items.*, SUM(invoice_items.unit_price* invoice_items.quantity) as revenue_generated')
       .joins(:merchant)
       .where(merchants: {id: merchant_id})
