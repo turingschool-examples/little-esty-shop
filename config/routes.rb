@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   end
 
   get '/merchants/:merchant_id/dashboards', to: 'merchants#dashboards'
+
+  get 'merchants/:merchant_id/items', to: 'merchants#items'
 end
