@@ -9,13 +9,13 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe '.incomplete' do
-    it 'returns an array of incomplete invoices' do
+    before do
       @customer = create(:customer)
       @invoice1 = create(:invoice, customer_id: @customer.id)
-      @invoice2 = create(:invoice, customer_id: @customer.id)
+      @invoice2 = create(:invoice, customer_id: @customer.id, created_at: Time.new(1999))
       @invoice3 = create(:invoice, customer_id: @customer.id)
-      @invoice4 = create(:invoice, customer_id: @customer.id)
-      @invoice5 = create(:invoice, customer_id: @customer.id)
+      @invoice4 = create(:invoice, customer_id: @customer.id, created_at: Time.new(2022))
+      @invoice5 = create(:invoice, customer_id: @customer.id, created_at: Time.new(2002))
       @merchant = create(:merchant)
       @item = create(:item, merchant_id: @merchant.id)
       #StatusKey: 0 => packaged, 1 => pending, 2 => shipped
@@ -24,7 +24,13 @@ RSpec.describe Invoice, type: :model do
       @invoice_item3 = create(:invoice_item, invoice_id: @invoice3.id, item_id: @item.id, status: 2)
       @invoice_item4 = create(:invoice_item, invoice_id: @invoice4.id, item_id: @item.id, status: 0)
       @invoice_item5 = create(:invoice_item, invoice_id: @invoice5.id, item_id: @item.id, status: 1)
-      expect(Invoice.incomplete.sort).to eq([@invoice2, @invoice4, @invoice5]) 
+    end
+    it 'returns an array of incomplete invoices' do
+      expect(Invoice.incomplete).to contain_exactly(@invoice2, @invoice4, @invoice5) 
+    end
+
+    it 'is ordered by date created at' do
+      expect(Invoice.incomplete).to eq([@invoice2, @invoice5, @invoice4]) 
     end
   end
 end
