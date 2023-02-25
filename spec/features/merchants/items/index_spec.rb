@@ -95,7 +95,7 @@ RSpec.describe "Merchant_Items", type: :feature do
       }
       
       expect(page).to have_content("Disabled Items")
-
+      
       within("#disabled")  {
         expect(page).to have_content("#{@item_4.name}")
         expect(page).to have_content("#{@item_5.name}")
