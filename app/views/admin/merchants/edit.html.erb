@@ -1,0 +1,9 @@
+<h1> Edit Merchant <%= @merchant.id %> </h1>
+
+
+<%= form_with url:admin_merchant_path(@merchant.id), model: @merchant, local: true do |form|  %>
+  <%= form.label :name  %>
+  <%= form.text_field :name %>
+  <%= form.submit :submit %>
+<% end %>
+

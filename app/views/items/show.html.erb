@@ -1,0 +1,7 @@
+<h1>Merchant's Items Show Page</h1>
+
+<% @items.each do |item| %>
+  <h3><%= item.name %></h3>
+  <p><%= item.description %></p>
+  <p>$<%= item.unit_price %>.00</p>
+<% end %>

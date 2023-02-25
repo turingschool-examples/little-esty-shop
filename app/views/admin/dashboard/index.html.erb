@@ -3,8 +3,8 @@
 </header>
 
 <div id="body">
- <p> <%= link_to "Admin Merchants", '/admin/merchants' %> </p>
- <p> <%= link_to "Admin Invoices", '/admin/invoices' %> </p>
+ <p> <%= link_to "Admin Merchants", admin_merchants_path %> </p>
+ <p> <%= link_to "Admin Invoices", admin_invoices_path %> </p>
 
  <h3> Top 5 Customers:</h3>
   <%@top_5.each do |customer|%>
@@ -15,7 +15,7 @@
 <div id='incomplete_invoices'>
   <h3> Incomplete Invoices:</h3>
   <% @incomplete.each do |invoice| %>
-    <p>id: <%= link_to "#{invoice.id}", "admin/invoices/#{invoice.id}" %> 
+    <p>id: <%= link_to "#{invoice.id}", admin_invoice_path(invoice.id)%> 
      Created at: <%=invoice.created_at.strftime('%A, %B %d, %Y')  %></p>
   <% end %>
 </div>
