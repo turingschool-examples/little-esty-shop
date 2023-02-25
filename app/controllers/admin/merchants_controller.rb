@@ -14,10 +14,13 @@ class Admin::MerchantsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:id])
     @merchant.update(merchant_params)
-    
     if @merchant.save
       flash[:notice] = "#{@merchant.name} Information has been Updated"
-      redirect_to admin_merchant_path(@merchant)
+      if params[:merchant][:status]
+        redirect_to admin_merchants_path
+      else
+        redirect_to admin_merchant_path(@merchant)
+      end
     else
       flash[:notice] = "Unable to Update - Missing Information"
       redirect_to edit_admin_merchant_path(@merchant)
@@ -27,6 +30,6 @@ class Admin::MerchantsController < ApplicationController
 
   private
   def merchant_params
-    params.require(:merchant).permit(:name)
+    params.require(:merchant).permit(:name, :status)
   end
 end
