@@ -4,6 +4,6 @@
 
 <ul>
   <% @merchant.items.each do |item| %>
-    <li><p><%= item.name %></p></li>
+    <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p></li>
   <% end %>
 </ul>

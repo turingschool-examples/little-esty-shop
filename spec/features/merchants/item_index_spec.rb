@@ -26,5 +26,26 @@ RSpec.describe "Merchant Items Index" do
         expect(page).to_not have_content(item4.name)
       end
     end
+
+
+    # 7. Merchant Items Show Page
+    describe "When I click on the name of an item, Then I am taken to that merchant's item's show page" do
+      it "I should see all of the item's attributes" do
+        expect(page).to have_link("#{item1.name}")
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+
+        click_link("#{item1.name}")
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}")
+
+        expect(page).to have_content(item1.name)
+        expect(page).to have_content(item1.description)
+        expect(page).to have_content(item1.unit_price)
+
+        expect(page).to_not have_content(item3.name)
+        expect(page).to_not have_content(item3.description)
+        expect(page).to_not have_content(item3.unit_price)
+        # save_and_open_page
+      end
+    end
   end
 end
