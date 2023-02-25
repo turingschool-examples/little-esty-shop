@@ -51,6 +51,10 @@ describe 'edit admin merchant page' do
         it 'should not have the old merchant information' do
           expect(page).to_not have_content(@merchant_original_name)
         end
+
+        it 'should have a flash message' do
+          expect(page).to have_content('Merchant successfully updated!')
+        end
       end
     end
   end
