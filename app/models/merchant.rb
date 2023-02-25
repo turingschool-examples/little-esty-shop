@@ -20,5 +20,6 @@ class Merchant < ApplicationRecord
     self.invoice_items
     .joins(:invoice)
     .where(status: "packaged")
+    .order(created_at: :asc)
   end
 end

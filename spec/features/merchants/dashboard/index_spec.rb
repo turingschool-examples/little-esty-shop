@@ -23,13 +23,13 @@ RSpec.describe "Dashboard", type: :feature do
     @item_2 = create(:item, merchant: @merchant)
     @item_3 = create(:item, merchant: @merchant)
 
-    @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, quantity: 1, status: "packaged")
-    @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2, quantity: 1, status: "packaged")
-    @invoice_item_3 = create(:invoice_item, item: @item_1, invoice: @invoice_3, quantity: 1, status: "packaged")
-    @invoice_item_4 = create(:invoice_item, item: @item_1, invoice: @invoice_4, quantity: 1, status: "packaged")
-    @invoice_item_5 = create(:invoice_item, item: @item_1, invoice: @invoice_5, quantity: 1, status: "packaged")
-    @invoice_item_6 = create(:invoice_item, item: @item_2, invoice: @invoice_6, quantity: 1, status: "packaged")
-    @invoice_item_7 = create(:invoice_item, item: @item_3, invoice: @invoice_7, quantity: 1, status: "shipped")
+    @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, quantity: 1, status: "packaged", created_at: Date.new(2023,1,1))
+    @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2, quantity: 1, status: "packaged", created_at: Date.new(2023,1,2))
+    @invoice_item_3 = create(:invoice_item, item: @item_1, invoice: @invoice_3, quantity: 1, status: "packaged", created_at: Date.new(2023,1,3))
+    @invoice_item_4 = create(:invoice_item, item: @item_1, invoice: @invoice_4, quantity: 1, status: "packaged", created_at: Date.new(2023,1,4))
+    @invoice_item_5 = create(:invoice_item, item: @item_1, invoice: @invoice_5, quantity: 1, status: "packaged", created_at: Date.new(2023,1,5))
+    @invoice_item_6 = create(:invoice_item, item: @item_2, invoice: @invoice_6, quantity: 1, status: "packaged", created_at: Date.new(2023,1,6))
+    @invoice_item_7 = create(:invoice_item, item: @item_3, invoice: @invoice_7, quantity: 1, status: "shipped", created_at: Date.new(2023,1,7))
 
     create(:transaction, invoice_id: @invoice_1.id, result: 0)
     2.times { create(:transaction, invoice_id: @invoice_2.id, result: 0) }
@@ -94,11 +94,23 @@ RSpec.describe "Dashboard", type: :feature do
       end
 
       it "each invoice id is a link to my merchant's invoice show page" do
-        save_and_open_page
         expect(page).to have_link("Invoice ##{@invoice_1.id}",
         href: "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
-        save_and_open_page
       end
+    end
+  end
+
+  describe "User Story 5" do
+    it "displays the date that the invoice was created and is formatted WeekDay, Month Day, Year" do
+      within("#items_ready_to_ship") {
+        save_and_open_page
+        expect("Sunday, January 1, 2023").to appear_before("Monday, January 2, 2023")
+        expect("Monday, January 2, 2023").to appear_before("Tuesday, January 3, 2023")
+        expect("Tuesday, January 3, 2023").to appear_before("Wednesday, January 4, 2023")
+        expect("Wednesday, January 4, 2023").to appear_before("Thursday, January 5, 2023")
+        expect("Thursday, January 5, 2023").to appear_before("Friday, January 6, 2023")
+        expect(page).to_not have_content("Saturday, January 7, 2023")
+      }
     end
   end
 end

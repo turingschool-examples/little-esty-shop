@@ -12,9 +12,10 @@
     <% end %>
 </div>
 
+<h1>Items Ready to Ship</h1>
 <div id="items_ready_to_ship">
   <ol>
     <% @invoice_items_ready_to_ship.each do |invoice_item| %>
-      <li><%= "#{invoice_item.item.name}" %> - <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %></li>
+      <li><%= "#{invoice_item.item.name}" %> - <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %> - <%= invoice_item.created_at.strftime("%A, %B %-d, %Y") %></li>
     <% end %>
 </div>
