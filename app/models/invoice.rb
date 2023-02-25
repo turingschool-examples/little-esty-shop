@@ -6,15 +6,15 @@ class Invoice < ApplicationRecord
   
   enum status: ["in progress", "cancelled", "completed"]
 
-  def self.find_invoiceitem_quantity(invoice, item)
-    joins(:invoice_items).group(:id).where(id: invoice.id).first.invoice_items.where(item_id: item.id).first.quantity
+  def find_invoiceitem_quantity(item)
+    self.invoice_items.find_by(item_id: item.id).quantity
   end
 
-  def self.find_invoiceitem_unitprice(invoice, item)
-    joins(:invoice_items).group(:id).where(id: invoice.id).first.invoice_items.where(item_id: item.id).first.unit_price
+  def find_invoiceitem_unitprice(item)
+    self.invoice_items.find_by(item_id: item.id).unit_price
   end
 
-  def self.find_invoiceitem_status(invoice, item)
-    joins(:invoice_items).group(:id).where(id: invoice.id).first.invoice_items.where(item_id: item.id).first.status
+  def find_invoiceitem_status(item)
+    self.invoice_items.find_by(item_id: item.id).status
   end
 end
