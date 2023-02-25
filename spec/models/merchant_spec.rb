@@ -77,9 +77,30 @@ RSpec.describe Merchant, type: :model do
       expect(merchant1.top_five_customers).to eq([customer2, customer3, customer1, customer5, customer4])
       expect(merchant1.top_five_customers).to_not eq([customer6])
     end
+  end
 
+  describe "gdhgfd" do
     it "should have items ready to be shipped" do
-      expect(merchant1.items_ready_to_ship).to eq([item1, item2, item4, item5, item6, item9, item10])
+      merchant21 = create(:merchant) 
+      customer21 = create(:customer) 
+      customer22 = create(:customer)
+      customer24 = create(:customer)
+      customer25 = create(:customer)
+      invoice21 = create(:invoice, customer_id: customer21.id, created_at: Time.now - 1.hour) 
+      invoice24 = create(:invoice, customer_id: customer22.id, created_at: Time.now - 4.hour)
+      invoice29 = create(:invoice, customer_id: customer24.id, created_at: Time.now - 9.hour)
+      invoice20 = create(:invoice, customer_id: customer25.id, created_at: Time.now - 10.hour)
+      item21 = create(:item, merchant_id: merchant21.id)
+      item24 = create(:item, merchant_id: merchant21.id)
+      item29 = create(:item, merchant_id: merchant21.id)
+      item20 = create(:item, merchant_id: merchant21.id)
+
+      InvoiceItem.create!(item_id: item21.id, invoice_id: invoice21.id, status: "packaged")
+      InvoiceItem.create!(item_id: item24.id, invoice_id: invoice24.id, status: "packaged")
+      InvoiceItem.create!(item_id: item29.id, invoice_id: invoice29.id, status: "packaged")
+      InvoiceItem.create!(item_id: item20.id, invoice_id: invoice20.id, status: "packaged")
+
+      expect(merchant21.items_ready_to_ship).to eq([item20, item29, item24, item21])
     end
   end
 
