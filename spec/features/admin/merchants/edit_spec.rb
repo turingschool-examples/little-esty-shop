@@ -7,7 +7,7 @@ describe 'edit admin merchant page' do
       visit edit_admin_merchant_path(@merchant.id)
     end
     it 'should have a title' do
-      save_and_open
+      save_and_open_page
       expect(page).to have_content "Edit Merchant #{@merchant.id}"
     end
     it 'should be prefilled with the merchant information'

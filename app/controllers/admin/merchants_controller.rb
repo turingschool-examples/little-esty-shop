@@ -8,9 +8,6 @@ class Admin::MerchantsController < ApplicationController
     @top_merchants = Merchant.top_5_by_revenue
   end
 
-  def new
-  end
-
   def create 
     merchant = Merchant.new(merchant_params)
     merchant.save
@@ -22,7 +19,7 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def edit
-    
+    @merchant = Merchant.find(params[:id])
   end
   
   def new
