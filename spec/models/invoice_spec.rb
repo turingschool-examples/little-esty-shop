@@ -35,11 +35,11 @@ RSpec.describe Invoice, type: :model do
       expect(Invoice.incomplete).to eq([@invoice2, @invoice5, @invoice4])
     end
 
-    it 'lists its items with relational atrributes' do
-      expect(@invoice1.items_with_invoice_attributes.first.name). to eq(@item.name)
-      expect(@invoice1.items_with_invoice_attributes.first.quantity). to eq(@invoice_item1.quantity)
-      expect(@invoice1.items_with_invoice_attributes.first.unit_price). to eq(@invoice_item1.unit_price)
-      expect(@invoice1.items_with_invoice_attributes.first.status). to eq(@invoice_item1.status)
+    it 'lists its items with their relational invoice atrributes' do
+      expect(@invoice1.items_with_invoice_attributes.first.name).to eq(@item.name)
+      expect(@invoice1.items_with_invoice_attributes.first.quantity).to eq(@invoice_item1.quantity)
+      expect(@invoice1.items_with_invoice_attributes.first.unit_price).to eq(@invoice_item1.unit_price)
+      expect(@invoice1.items_with_invoice_attributes.first.status).to eq(@invoice_item1.status)
     end
   end
 end
