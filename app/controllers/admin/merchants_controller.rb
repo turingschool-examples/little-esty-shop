@@ -5,16 +5,28 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def show
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = Merchant.find(params[:id])
   end
 
-  def edit
-    @merchant = Merchant.find(params[:merchant_id])
-    if @merchant.status == "enabled"
-      @merchant.update! status: 1
+  def update
+    @merchant = Merchant.find(params[:id])
+    if merchant_params[:status].present?
+      @merchant.toggle_status
+      redirect_to "/admin/merchants"
     else
-      @merchant.update! status: 0
+      @merchant.update(merchant_params)
+      flash[:notice] = "Successfully updated"
+      redirect_to "/admin/merchants/#{@merchant.id}"
     end
-    redirect_to "/admin/merchants"
+  end
+  
+  def edit
+    @merchant = Merchant.find(params[:id])
+  end
+
+  private
+
+  def merchant_params
+    params.permit(:name, :status)
   end
 end

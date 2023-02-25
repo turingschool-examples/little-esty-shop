@@ -5,4 +5,8 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
   enum status: [ "enabled", "disabled" ]
+
+  def toggle_status
+    self.status == "enabled" ? self.disabled! : self.enabled!
+  end
 end
