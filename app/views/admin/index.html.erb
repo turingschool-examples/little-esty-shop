@@ -9,3 +9,14 @@
     <p> <%= customer.first_name %> <%= customer.last_name %> has <%= customer.transaction_count %> successful transactions!</p>
   </div>
 <% end %>
+
+<p>Incomplete Invoices</p>
+
+<% @invoice_ids_not_shipped.each do |invoice_id| %>
+  <div id = "invoice_info-<%= invoice_id %>">
+    <p>ID number: <%= link_to invoice_id, "/invoices/#{invoice_id}" %></p>
+    <br>
+  </div>
+<% end %>
+
+

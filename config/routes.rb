@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   #customers
   #invoices
 namespace :admin do 
+
   get '/merchants', to: "merchants#index"
   get '/merchants/:id', to: 'merchants#show'
   get '/merchants/:id/edit', to: "merchants#edit"
@@ -20,6 +21,12 @@ namespace :admin do
   # post '/merchants/:merchant_id', to: 'merchants#edit'
   # get '/merchants/:merchant_id/edit', to: 'merchants#update'
   # resources :merchants, except: [:destroy]
+
+  get "/invoices", to: "invoices#index"
+  get "/invoices/:invoice_id", to: "invoices#show"
+  
+  get '/merchants', to: "merchants#index"
+  get '/merchants/:merchant_id', to: 'merchants#show'
 end 
   #transactions
   #items

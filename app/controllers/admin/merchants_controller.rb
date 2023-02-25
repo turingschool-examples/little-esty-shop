@@ -24,10 +24,9 @@ class Admin::MerchantsController < ApplicationController
     end
   end
   
-
   private
 
   def merchant_params
-    params.permit(:name, :status)
+    params.permit(:name, :status
   end
 end
