@@ -8,13 +8,15 @@
 <br>
 <div id="top_five_customers">
 <h3>Top Five Customers</h3>
+<ol>
 <% @customers.each do |customer| %>
-  <p>Name: <%= customer.first_name %> <%= customer.last_name %>, Successful Transactions: <%= customer.result_count %></p>
+  <h4><li><%= customer.first_name %> <%= customer.last_name %> - <%= customer.result_count %> purchases</li></h4>
 <% end %>
+</ol>
 </div>
 <br>
 <div id="incomplete_invoices">
 <h3>Incomplete Invoices:</h3>
 <% @incomplete_invoices.each do |invoice| %>
-  <%= link_to invoice, admin_invoice_path(invoice) %><br>
+  <p>Invoice #<%= link_to invoice.id, admin_invoice_path(invoice) %> - <%= invoice.created_at.strftime("%A, %B %d, %Y") %></p><br>
 <% end %>
