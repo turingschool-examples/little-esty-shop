@@ -56,4 +56,18 @@ RSpec.describe "The Admin Merchants Index" do
       }
     end
   end
+
+  describe "User Story 28" do
+    it "shows two sections for Enabled and Disabled merchants with each merchant appropriately listed in the sections" do
+      within("#Enabled_Merchants") {
+        expect(page).to have_content(@merchant_1.name)
+        expect(page).to have_content(@merchant_3.name)
+        expect(page).to have_content(@merchant_4.name)
+      }
+
+      within("#Disabled_Merchants") {
+        expect(page).to have_content(@merchant_2.name)
+      }
+    end
+  end
 end
