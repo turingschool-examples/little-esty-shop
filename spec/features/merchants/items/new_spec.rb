@@ -35,7 +35,6 @@ RSpec.describe 'merchant items new page', type: :feature do
 				end
 
 				it 'creates a new item and we can see the new item in the list' do
-					save_and_open_page
 					within '#disabled_items' do
 						expect(page).to have_content('Box')
 					end

@@ -150,5 +150,16 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
       expect("#{invoice5.id}").to appear_before("#{invoice6.id}")
       expect("#{invoice6.id}").to appear_before("#{invoice7.id}")
     end
+
+		it 'shows the date the invoice was created' do
+      visit "/merchants/#{merchant1.id}/dashboard"
+   
+      expect(page).to have_content(invoice1.created_at.strftime"%A, %B %d, %Y")
+      expect(page).to have_content(invoice2.created_at.strftime"%A, %B %d, %Y")
+      expect(page).to have_content(invoice3.created_at.strftime"%A, %B %d, %Y")
+      expect(page).to have_content(invoice4.created_at.strftime"%A, %B %d, %Y")
+      expect(page).to have_content(invoice5.created_at.strftime"%A, %B %d, %Y")
+      expect(page).to have_content(invoice6.created_at.strftime"%A, %B %d, %Y")
+    end
   end
 end
