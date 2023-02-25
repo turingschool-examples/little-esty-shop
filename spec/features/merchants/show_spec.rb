@@ -125,5 +125,17 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
       expect(page).to have_content(item4.name, count: 5)
       expect(page).to have_content(item5.name, count: 1)
     end
+
+    it 'will have a link that named the invoice id for that item next to each item' do 
+      expect(page).to have_content("#{item1.name} - invoice # #{invoice1.id}")
+      expect(page).to have_content("#{item1.name} - invoice # #{invoice3.id}")
+      expect(page).to have_content("#{item2.name} - invoice # #{invoice5.id}")
+      expect(page).to have_content("#{item2.name} - invoice # #{invoice1.id}")
+      expect(page).to have_content("#{item3.name} - invoice # #{invoice3.id}")
+      expect(page).to have_content("#{item3.name} - invoice # #{invoice6.id}")
+      expect(page).to have_content("#{item4.name} - invoice # #{invoice3.id}")
+      expect(page).to have_content("#{item4.name} - invoice # #{invoice4.id}")
+      expect(page).to have_content("#{item5.name} - invoice # #{invoice7.id}")
+    end
   end
 end
