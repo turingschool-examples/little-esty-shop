@@ -101,7 +101,7 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
 
     it 'shows the names of the top 5 customers(largest number of successful transactions with merchant) and the number of transactions conducted with merchant' do
       visit "/merchants/#{merchant1.id}/dashboard"
-      
+
       expect(page).to have_content("Top 5 customers with largest transactions")
       expect(page).to have_content("#{customer1.first_name} #{customer1.last_name}- number of transactions: #{merchant1.customer_successful_transactions(customer1.id)}")
       expect(page).to have_content("#{customer2.first_name} #{customer2.last_name}- number of transactions: #{merchant1.customer_successful_transactions(customer2.id)}")
@@ -109,6 +109,18 @@ RSpec.describe 'merchant show dashboard page', type: :feature do
       expect(page).to have_content("#{customer5.first_name} #{customer5.last_name}- number of transactions: #{merchant1.customer_successful_transactions(customer5.id)}")
       expect(page).to have_content("#{customer6.first_name} #{customer6.last_name}- number of transactions: #{merchant1.customer_successful_transactions(customer6.id)}")
       expect(page).to_not have_content("#{customer4.first_name} #{customer4.last_name}")
+    end
+
+    it 'will have a section called Items ready to ship, where there will be a list of the name of items that have been ordered, but not yet shipped' do 
+      create(:packaged_invoice_items, item: item1, invoice: invoice1)
+      create(:packaged_invoice_items, item: item1, invoice: invoice1)
+      
+      expect(page).to have_content("Items Ready to Ship")
+      expect(page).to have_content(item1.name, count: 8)
+      expect(page).to have_content(item2.name, count: 4)
+      expect(page).to have_content(item3.name, count: 5)
+      expect(page).to have_content(item4.name, count: 5)
+      expect(page).to have_content(item5.name, count: 1)
     end
   end
 end
