@@ -119,7 +119,7 @@ RSpec.describe 'Merchant/Items Index Page' do
     end 
   end #before each do block 
 
-  it "I see the names of the top 5 most popular items ranked by total revenue generated" do #handrolled tests data 
+  it "I see the names of the top 5 most popular items ranked by total revenue generated along with a link to that item show page and the total revenue generated" do #handrolled tests data 
 
     merchant3 = Merchant.create!(name: "Diego", uuid: 3) 
 
@@ -153,7 +153,9 @@ RSpec.describe 'Merchant/Items Index Page' do
     InvoiceItem.create!(item_id: item_11.id, invoice_id: invoice_5.id, quantity: 1, unit_price: 6, status: 2, uuid: 10)
     InvoiceItem.create!(item_id: item_12.id, invoice_id: invoice_5.id, quantity: 1, unit_price: 7, status: 2, uuid: 11)
     InvoiceItem.create!(item_id: item_13.id, invoice_id: invoice_5.id, quantity: 1, unit_price: 5, status: 2, uuid: 12)
-    InvoiceItem.create!(item_id: item_13.id, invoice_id: invoice_5.id, quantity: 1, unit_price: 5, status: 2, uuid: 12)
+    InvoiceItem.create!(item_id: item_13.id, invoice_id: invoice_5.id, quantity: 1, unit_price: 5, status: 2, uuid: 15)
+    InvoiceItem.create!(item_id: item_13.id, invoice_id: invoice_6.id, quantity: 1, unit_price: 5, status: 2, uuid: 15)
+
 
     InvoiceItem.create!(item_id: item_14.id, invoice_id: invoice_6.id, quantity: 1, unit_price: 10000, status: 2, uuid: 13)
     InvoiceItem.create!(item_id: item_15.id, invoice_id: invoice_6.id, quantity: 1, unit_price: 5000, status: 2, uuid: 14)
@@ -167,23 +169,36 @@ RSpec.describe 'Merchant/Items Index Page' do
 
         expect(page).to have_content("#{item_13.name}")
           expect(item_13.name).to appear_before(item_12.name)
+          expect(page).to have_link("#{item_13.name}", href: "/items/#{item_13.id}")
+          expect(page).to have_content("Total revenue generated for #{item_13.name}: 10")
 
         expect(page).to have_content("#{item_12.name}")
           expect(item_12.name).to appear_before(item_11.name)
+          expect(page).to have_link("#{item_12.name}", href: "/items/#{item_12.id}")
+          expect(page).to have_content("Total revenue generated for #{item_12.name}: 7")
+
 
         expect(page).to have_content("#{item_11.name}")
           expect(item_11.name).to appear_before(item_10.name)
+          expect(page).to have_link("#{item_11.name}", href: "/items/#{item_11.id}")
+          expect(page).to have_content("Total revenue generated for #{item_11.name}: 6")
+
 
         expect(page).to have_content("#{item_10.name}")
           expect(item_10.name).to appear_before(item_9.name)
+          expect(page).to have_link("#{item_10.name}", href: "/items/#{item_10.id}")
+          expect(page).to have_content("Total revenue generated for #{item_10.name}: 5")
+
 
         expect(page).to have_content("#{item_9.name}")
+        expect(page).to have_link("#{item_9.name}", href: "/items/#{item_9.id}")
+        expect(page).to have_content("Total revenue generated for #{item_9.name}: 4")
+
       end
     end 
 
     it "next to each of the 5 most popular items I see the date with the most sales for each item" do 
       
-      require 'pry'; binding.pry
       @merchant= FactoryBot.create(:merchant)
       @item = FactoryBot.create_list(:item, 10, merchant: @merchant)
       @customer = FactoryBot.create(:customer)

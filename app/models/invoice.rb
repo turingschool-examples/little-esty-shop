@@ -21,7 +21,6 @@ class Invoice < ApplicationRecord
   # end
 
   def self.most_transactions_date(item_id)
-    require 'pry'; binding.pry
     joins(:items)
     .where(items: {id: item_id})
     .joins(:transactions)

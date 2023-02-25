@@ -36,6 +36,10 @@
 <div id= "5_most_popular_items">
   <h2>List of most popular items</h2>
     <%@five_popular_items_hash.each do |key, value|%>
-    <p><%="Top selling date for #{key} was #{value.strftime("%B %d, %Y")}"%></p>
+    <p><%="Top selling date for #{key.name} was #{value[0].strftime("%B %d, %Y")}"%></p>
+      <p>Link: <%= link_to "#{key.name}", "/items/#{key.id}"%></p>
+      <p><%="Total revenue generated for #{key.name}: #{value[1]}"%>
+    <br>
+    <br>
     <%end%>
 </div>
