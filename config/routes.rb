@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   end
   get '/merchants/:id/dashboard', to: "merchants#show"
   get '/merchants/:id/items', to: "merchant_items#index"
+  get '/merchants/:id/items/:item_id', to: "merchant_items#show"
+
   get '/merchants/:id/invoices', to: "invoices#index"
 
   resources :admin, only: :index

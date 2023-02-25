@@ -323,9 +323,9 @@
         "lines": [
           1,
           1,
-          26,
-          26,
-          26,
+          30,
+          30,
+          30,
           1,
           null,
           null
@@ -335,7 +335,7 @@
         "lines": [
           1,
           1,
-          7,
+          8,
           null,
           null
         ]
@@ -366,6 +366,8 @@
           null,
           1,
           1,
+          1,
+          null,
           1,
           null,
           1,
@@ -584,6 +586,33 @@
           null
         ]
       },
+      "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/features/merchants/items/show_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          2,
+          2,
+          2,
+          2,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/meredithtrevino/turing_work/2mod/projects/little-esty-shop/spec/features/merchants/show_spec.rb": {
         "lines": [
           1,
@@ -688,8 +717,6 @@
           null,
           null,
           1,
-          1,
-          null,
           1,
           null,
           1,
@@ -1202,8 +1229,12 @@
         "lines": [
           1,
           1,
-          2,
-          2,
+          3,
+          3,
+          null,
+          null,
+          1,
+          1,
           null,
           null
         ]
@@ -1228,6 +1259,6 @@
         ]
       }
     },
-    "timestamp": 1677285485
+    "timestamp": 1677289049
   }
 }
