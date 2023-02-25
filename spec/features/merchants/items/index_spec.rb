@@ -58,4 +58,27 @@ RSpec.describe "Merchant_Items", type: :feature do
       expect(page).to_not have_content(@item_2.name)
     end
   end
+
+  describe "User Story 9" do
+    it "Next to each item name I see a button to disable or enable that item. When I click this button 
+      then I am redirected back to the items index and I see that the items status has changed" do
+      
+      within("#merchant_item-#{@item_1.id}")  {
+        expect(page).to_not have_button("Enable")
+        expect(page).to have_button("Disable")
+        click_button "Disable"
+      }
+ 
+      within("#merchant_item-#{@item_1.id}")  {
+        expect(page).to have_button("Enable")
+        expect(page).to_not have_button("Disable")
+        click_button "Enable"
+      }
+      
+      within("#merchant_item-#{@item_1.id}")  {
+        expect(page).to have_button("Disable")
+      }
+      expect(current_path).to eq("/merchants/#{@merchant.id}/items")
+    end
+  end
 end

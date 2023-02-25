@@ -20,10 +20,10 @@ RSpec.describe "Merchant_Items#Edit", type: :feature do
 
   describe "User Story 8" do
     it "shows a form filled in with the existing attribute information" do
-      save_and_open_page
+      # save_and_open_page
       expect(page).to have_field("Name", with: @item_1.name)
       expect(page).to have_field("Description", with: @item_1.description)
-      expect(page).to have_field("Unit Price", with: @item_1.unit_price)
+      expect(page).to have_field("Unit price", with: @item_1.unit_price)
     end
 
     xit "allows me to update the item info and submit the form" do
