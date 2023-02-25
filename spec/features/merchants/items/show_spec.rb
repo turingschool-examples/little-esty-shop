@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Merchant_Items", type: :feature do
+RSpec.describe "Merchant_Items#Show", type: :feature do
   before(:each) do
     @merchant = create(:merchant, name: "Trader Bob's")
 
@@ -31,6 +31,14 @@ RSpec.describe "Merchant_Items", type: :feature do
       expect(page).to have_content("Description: #{@item_1.description}")
       expect(page).to have_content("Current Price: #{@item_1.unit_price}")
       save_and_open_page
+    end
+  end
+
+  describe "User Story 8" do
+    it "has a link to update the item that takes me to an edit page" do
+      expect(page).to have_link("Edit Item", href: "/merchants/#{@merchant.id}/items/#{@item_1.id}/edit")
+      click_link "Edit Item"
+      expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}/edit")
     end
   end
 end
