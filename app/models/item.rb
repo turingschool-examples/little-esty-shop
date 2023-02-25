@@ -13,8 +13,4 @@ class Item < ApplicationRecord
   def self.disabled_items
     where(status: 1)
   end
-
-  def find_item_invoice_by_merchant_id(merchant_id)
-    # require 'pry'; binding.pry
-  end
 end

@@ -8,8 +8,8 @@
 <%end%>
 
 <h3><%="Items Ready to Ship"%></h3>
-<% @merchant.ordered_items_not_yet_shipped.each do |item| %>  
-    <% item.invoices.each do |invoice| %>
+<% @invoices.invoice_items_not_shipped.each do |invoice| %>  
+    <% invoice.items.each do |item| %>
   <ul>
     <li><%= item.name %> - invoice # <%=link_to "#{invoice.id}", merchant_invoice_path(@merchant, invoice.id) %> - <%= invoice.created_at.strftime("%A, %B %d, %Y") %> </li>
   </ul>
