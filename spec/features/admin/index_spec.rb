@@ -56,12 +56,14 @@ RSpec.describe 'Admin Dashboard:', type: :feature do
       end
 
       it "And each invoice id links to that invoice's admin show page." do
-       click_link "#{@invoice1.id}"
-       expect(current_path).to be("/admin/invoices/#{@invoice1.id}")
+        save_and_open_page
+
+        click_link "#{@invoice1.id}"
+        expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
        
-       visit '/admin'
-       click_link "#{@invoice2.id}"
-       expect(current_path).to be("/admin/invoices/#{@invoice2.id}")
+        visit '/admin'
+        click_link "#{@invoice2.id}"
+        expect(current_path).to eq("/admin/invoices/#{@invoice2.id}")
       end
     end
   end

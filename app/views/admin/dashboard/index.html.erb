@@ -9,7 +9,7 @@
   <h3>Incomplete Invoices</h3>
   <% @unshipped.each do |invoice_item| %>
     <ul id="<%= invoice_item.invoice_id %>">
-      <li> Invoice #<%= link_to "#{invoice_item.invoice_id}", "/admin/#{invoice_item.invoice_id}" %></li>
+      <li> Invoice #<%= link_to "#{invoice_item.invoice_id}", "/admin/invoices/#{invoice_item.invoice_id}" %></li>
     </ul>
   <% end %>
 </section>
