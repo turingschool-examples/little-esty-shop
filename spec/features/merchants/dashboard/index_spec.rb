@@ -17,22 +17,26 @@ RSpec.describe "Dashboard", type: :feature do
     @invoice_4 = create(:invoice, customer_id: @customer_4.id)
     @invoice_5 = create(:invoice, customer_id: @customer_5.id)
     @invoice_6 = create(:invoice, customer_id: @customer_6.id)
+    @invoice_7 = create(:invoice, customer_id: @customer_6.id)
 
     @item_1 = create(:item, merchant: @merchant)
     @item_2 = create(:item, merchant: @merchant)
-    
-    InvoiceItem.create(item: @item_1, invoice: @invoice_1)
-    InvoiceItem.create(item: @item_1, invoice: @invoice_2)
-    InvoiceItem.create(item: @item_1, invoice: @invoice_3)
-    InvoiceItem.create(item: @item_1, invoice: @invoice_4)
-    InvoiceItem.create(item: @item_1, invoice: @invoice_5)
-    InvoiceItem.create(item: @item_2, invoice: @invoice_6)
+    @item_3 = create(:item, merchant: @merchant)
+
+    @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, quantity: 1, status: "packaged")
+    @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2, quantity: 1, status: "packaged")
+    @invoice_item_3 = create(:invoice_item, item: @item_1, invoice: @invoice_3, quantity: 1, status: "packaged")
+    @invoice_item_4 = create(:invoice_item, item: @item_1, invoice: @invoice_4, quantity: 1, status: "packaged")
+    @invoice_item_5 = create(:invoice_item, item: @item_1, invoice: @invoice_5, quantity: 1, status: "packaged")
+    @invoice_item_6 = create(:invoice_item, item: @item_2, invoice: @invoice_6, quantity: 1, status: "packaged")
+    @invoice_item_7 = create(:invoice_item, item: @item_3, invoice: @invoice_7, quantity: 1, status: "shipped")
 
     create(:transaction, invoice_id: @invoice_1.id, result: 0)
     2.times { create(:transaction, invoice_id: @invoice_2.id, result: 0) }
     3.times { create(:transaction, invoice_id: @invoice_3.id, result: 0) }
     4.times { create(:transaction, invoice_id: @invoice_4.id, result: 0) }
     5.times { create(:transaction, invoice_id: @invoice_5.id, result: 0) }
+    3.times { create(:transaction, invoice_id: @invoice_7.id, result: 1) }
     
     visit "/merchants/#{@merchant.id}/dashboard"
   end
@@ -79,19 +83,21 @@ RSpec.describe "Dashboard", type: :feature do
 
   describe "User Story 4" do
     describe "Items Ready to Ship" do
-      xit "shows a list of items that have been ordered yet have not been shipped" do
+      it "shows a list of items that have been ordered yet have not been shipped" do
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content(@item_2.name)
       end
 
-      xit "shows the id of the invoice that ordered the item" do
+      it "shows the id of the invoice that ordered the item" do
         expect(page).to have_content("Invoice ##{@invoice_1.id}")
         expect(page).to have_content("Invoice ##{@invoice_2.id}")
       end
 
-      xit "each invoice id is a link to my merchant's invoice show page" do
+      it "each invoice id is a link to my merchant's invoice show page" do
+        save_and_open_page
         expect(page).to have_link("Invoice ##{@invoice_1.id}",
         href: "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
+        save_and_open_page
       end
     end
   end

@@ -11,3 +11,10 @@
       <li><%= "#{customer.first_name} #{customer.last_name} - #{customer.total_purchases} purchases" %></li>
     <% end %>
 </div>
+
+<div id="items_ready_to_ship">
+  <ol>
+    <% @invoice_items_ready_to_ship.each do |invoice_item| %>
+      <li><%= "#{invoice_item.item.name}" %> - <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %></li>
+    <% end %>
+</div>
