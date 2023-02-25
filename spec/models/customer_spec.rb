@@ -26,11 +26,11 @@ RSpec.describe Customer, type: :model do
     @item10 = Item.create!(name: "Imaginary", description: "it is whatever you think it is", unit_price: 9450, merchant: @merchant3)
     
     ###### Customers, Invoices, Invoice_Items, & Transactions ######
-    @customer1 = Customer.create!(first_name: "Steve", last_name: "Stevinson")
-    @invoice1 = Invoice.create!(customer: @customer1, status: 1) #completed
-    @invoice2 = Invoice.create!(customer: @customer1, status: 1) #completed
-    @invoice3 = Invoice.create!(customer: @customer1, status: 1) #completed
-    @invoice4 = Invoice.create!(customer: @customer1, status: 1) #completed
+    @Steve = Customer.create!(first_name: "Steve", last_name: "Stevinson")
+    @invoice1 = Invoice.create!(customer: @Steve, status: 1) #completed
+    @invoice2 = Invoice.create!(customer: @Steve, status: 1) #completed
+    @invoice3 = Invoice.create!(customer: @Steve, status: 1) #completed
+    @invoice4 = Invoice.create!(customer: @Steve, status: 1) #completed
     InvoiceItem.create!(item: @item1, invoice: @invoice1, quantity: 1, unit_price: 1300)
     InvoiceItem.create!(item: @item2, invoice: @invoice2, quantity: 1, unit_price: 1450)
     InvoiceItem.create!(item: @item3, invoice: @invoice3, quantity: 1, unit_price: 1500)
@@ -41,10 +41,10 @@ RSpec.describe Customer, type: :model do
     @invoice4.transactions.create!(credit_card_number: "4654405418249631", credit_card_expiration_date: "01/29", result: 0) #success
 
     #This customer has LOWEST successful transactions:
-    @customer2 = Customer.create!(first_name: "Joe", last_name: "Shmow")
-    @invoice5 = Invoice.create!(customer: @customer2, status: 1) #completed
-    @invoice6 = Invoice.create!(customer: @customer2, status: 1) #completed
-    @invoice7 = Invoice.create!(customer: @customer2, status: 1) #completed
+    @Joe = Customer.create!(first_name: "Joe", last_name: "Shmow")
+    @invoice5 = Invoice.create!(customer: @Joe, status: 1) #completed
+    @invoice6 = Invoice.create!(customer: @Joe, status: 1) #completed
+    @invoice7 = Invoice.create!(customer: @Joe, status: 1) #completed
     InvoiceItem.create!(item: @item5, invoice: @invoice5, quantity: 1, unit_price: 1800)
     InvoiceItem.create!(item: @item6, invoice: @invoice6, quantity: 1, unit_price: 4075)
     InvoiceItem.create!(item: @item7, invoice: @invoice7, quantity: 1, unit_price: 3100)
@@ -52,35 +52,35 @@ RSpec.describe Customer, type: :model do
     @invoice6.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: "02/29", result: 1) #failure
     @invoice7.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: "02/29", result: 0) #success
 
-    @customer3 = Customer.create!(first_name: "Carmen", last_name: "SanDiego")
-    @invoice8 = Invoice.create!(customer: @customer3, status: 1) #completed
-    @invoice9 = Invoice.create!(customer: @customer3, status: 1) #completed
+    @Carmen = Customer.create!(first_name: "Carmen", last_name: "SanDiego")
+    @invoice8 = Invoice.create!(customer: @Carmen, status: 1) #completed
+    @invoice9 = Invoice.create!(customer: @Carmen, status: 1) #completed
     InvoiceItem.create!(item: @item8, invoice: @invoice8, quantity: 1, unit_price: 3300)
     InvoiceItem.create!(item: @item9, invoice: @invoice9, quantity: 1, unit_price: 2525)
     @invoice8.transactions.create!(credit_card_number: "4654405418249633", credit_card_expiration_date: "03/29", result: 1) #failure
     @invoice8.transactions.create!(credit_card_number: "4654405418249633", credit_card_expiration_date: "03/29", result: 0) #success
     @invoice9.transactions.create!(credit_card_number: "4654405418249633", credit_card_expiration_date: "03/29", result: 0) #success
 
-    @customer4 = Customer.create!(first_name: "Sally", last_name: "SeaShells")
-    @invoice10 = Invoice.create!(customer: @customer4, status: 1) #completed
-    @invoice11 = Invoice.create!(customer: @customer4, status: 1) #completed
+    @Sally = Customer.create!(first_name: "Sally", last_name: "SeaShells")
+    @invoice10 = Invoice.create!(customer: @Sally, status: 1) #completed
+    @invoice11 = Invoice.create!(customer: @Sally, status: 1) #completed
     InvoiceItem.create!(item: @item10, invoice: @invoice10, quantity: 1, unit_price: 10001)
     InvoiceItem.create!(item: @item1, invoice: @invoice11, quantity: 1, unit_price: 1400)
     @invoice10.transactions.create!(credit_card_number: "4654405418249634", credit_card_expiration_date: "04/29", result: 0) #success
     @invoice11.transactions.create!(credit_card_number: "4654405418249634", credit_card_expiration_date: "04/29", result: 0) #success
 
-    @customer5 = Customer.create!(first_name: "Ludwig", last_name: "van Beethoven")
-    @invoice12 = Invoice.create!(customer: @customer5, status: 1) #completed
-    @invoice13 = Invoice.create!(customer: @customer5, status: 1) #completed
+    @Ludwig = Customer.create!(first_name: "Ludwig", last_name: "van Beethoven")
+    @invoice12 = Invoice.create!(customer: @Ludwig, status: 1) #completed
+    @invoice13 = Invoice.create!(customer: @Ludwig, status: 1) #completed
     InvoiceItem.create!(item: @item2, invoice: @invoice12, quantity: 1, unit_price: 1750)
     InvoiceItem.create!(item: @item3, invoice: @invoice13, quantity: 1, unit_price: 1525)
     @invoice12.transactions.create!(credit_card_number: "4654405418249635", credit_card_expiration_date: "05/29", result: 0) #success
     @invoice13.transactions.create!(credit_card_number: "4654405418249635", credit_card_expiration_date: "05/29", result: 0) #success
 
-    @customer6 = Customer.create!(first_name: "Yukon", last_name: "Dooheet")
-    @invoice14 = Invoice.create!(customer: @customer6, status: 1) #completed
-    @invoice15 = Invoice.create!(customer: @customer6, status: 1) #completed
-    @invoice16 = Invoice.create!(customer: @customer6, status: 1) #completed
+    @Yukon = Customer.create!(first_name: "Yukon", last_name: "Dooheet")
+    @invoice14 = Invoice.create!(customer: @Yukon, status: 1) #completed
+    @invoice15 = Invoice.create!(customer: @Yukon, status: 1) #completed
+    @invoice16 = Invoice.create!(customer: @Yukon, status: 1) #completed
     InvoiceItem.create!(item: @item4, invoice: @invoice14, quantity: 1, unit_price: 1500)
     InvoiceItem.create!(item: @item5, invoice: @invoice15, quantity: 1, unit_price: 1750)
     InvoiceItem.create!(item: @item6, invoice: @invoice16, quantity: 1, unit_price: 4350)
@@ -91,7 +91,7 @@ RSpec.describe Customer, type: :model do
 
   describe "class methods" do
     it "::top_5_successful_customers" do
-      expect(Customer.top_5_successful_customers.to_a).to eq([@customer1, @customer6, @customer3, @customer4, @customer5])
+      expect(Customer.top_5_successful_customers.to_a).to eq([@Steve, @Yukon, @Carmen, @Sally, @Ludwig])
     end
   end
 end

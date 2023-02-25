@@ -1,17 +1,17 @@
 require 'csv'
 
 namespace :csv_load do
-  desc "imports merchants from csv file"
-  task :merchants => :environment do
-    CSV.foreach('db/data/merchants.csv', headers: true) do |row|
-      Merchant.create!(name: row['name'], created_at: row['created_at'], updated_at: row['updated_at'], uuid: row['id'])
-    end
-  end
-
   desc "imports customers from csv file"
   task :customers => :environment do
     CSV.foreach('db/data/customers.csv', headers: true) do |row|
       Customer.create!(first_name: row['first_name'], last_name: row['last_name'], created_at: row['created_at'], updated_at: row['updated_at'], uuid: row['id'])
+    end
+  end
+  
+  desc "imports merchants from csv file"
+  task :merchants => :environment do
+    CSV.foreach('db/data/merchants.csv', headers: true) do |row|
+      Merchant.create!(name: row['name'], created_at: row['created_at'], updated_at: row['updated_at'], uuid: row['id'])
     end
   end
 
@@ -74,12 +74,12 @@ namespace :csv_load do
 
   desc 'all csv files'
   task :all => :environment do
-    ActiveRecord::Base.connection.reset_pk_sequence!('all')
-    Rake::Task["csv_load:merchants"].execute
     Rake::Task["csv_load:customers"].execute
+    Rake::Task["csv_load:merchants"].execute
     Rake::Task["csv_load:invoices"].execute
     Rake::Task["csv_load:transactions"].execute
     Rake::Task["csv_load:items"].execute
     Rake::Task["csv_load:invoice_items"].execute
+    ActiveRecord::Base.connection.reset_pk_sequence!('all')
   end
 end
