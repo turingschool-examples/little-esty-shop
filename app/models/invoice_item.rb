@@ -4,5 +4,5 @@ class InvoiceItem < ApplicationRecord
   
   enum status: ["pending", "packaged", "shipped"]
   
-  scope :not_shipped, -> { where.not(status: 2).select(:invoice_id).distinct.order(:invoice_id)}
+  scope :not_shipped, -> { where.not(status: 2).distinct.order(:invoice_id)}
 end
