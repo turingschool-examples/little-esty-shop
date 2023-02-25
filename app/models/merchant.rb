@@ -22,7 +22,7 @@ class Merchant < ApplicationRecord
 		Merchant.where(status: 1)
 	end
 
-  def ordered_items_not_yet_shipped
-    items.joins(:invoice_items).where.not(invoice_items: {status: "shipped"}).distinct
-  end
+  # def ordered_items_not_yet_shipped
+  #   items.joins(:invoice_items).where.not(invoice_items: {status: "shipped"}).distinct
+  # end
 end
