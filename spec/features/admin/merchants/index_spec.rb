@@ -66,13 +66,13 @@ RSpec.describe 'admin merchants index page' do
 
 		it 'changes status of merchant to disabled when disable button is clicked' do
 			visit admin_merchants_path
-
+			
 			expect(page).to have_content("John Doe\nStatus: active")
 
 			within "##{merchant_1.id}" do
 				click_button 'Disable'
 			end
-
+			
 			expect(current_path).to eq(admin_merchants_path)
 			expect(page).to have_content("John Doe\nStatus: disabled")
 		end
@@ -81,9 +81,11 @@ RSpec.describe 'admin merchants index page' do
 			visit admin_merchants_path
 
 			within "##{merchant_1.id}" do
+				expect(page).to have_button('Disable')
 				click_button 'Disable'
+				expect(page).to have_button('Enable')
 			end
-
+			
 			expect(page).to have_content("John Doe\nStatus: disabled")
 
 			within "##{merchant_1.id}" do
