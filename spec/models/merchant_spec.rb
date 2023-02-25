@@ -104,7 +104,7 @@ RSpec.describe Merchant, type: :model do
 
     describe "class methods" do
       it "::mech_top_5_successful_customers" do
-        expect(Merchant.mech_top_5_successful_customers.to_a).to eq([@customer1, @customer6, @customer3, @customer4, @customer5])
+        expect(Merchant.mech_top_5_successful_customers.to_a).to eq([@customer1, @customer6, @customer5, @customer3, @customer4])
       end
     end
   end

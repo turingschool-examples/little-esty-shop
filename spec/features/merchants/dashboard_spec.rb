@@ -123,13 +123,18 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
         visit "/merchants/#{@merchant1.id}/dashboard" 
 
         expect(page).to have_content("Top 5 Customers with Highest Successful Transactions for this Merchant")
-        expect(page).to have_content(@customer1.name)
-        expect(page).to have_content(@customer3.name)
-        expect(page).to have_content(@customer4.name)
-        expect(page).to have_content(@customer5.name)
-        expect(page).to have_content(@customer6.name)
-        expect(page).to_not have_content(@customer2.name)
-        expect(page).to_not have_content(@customer7.name)
+        expect(page).to have_content(@customer1.first_name)
+        expect(page).to have_content(@customer1.last_name)
+        expect(page).to have_content(@customer3.first_name)
+        expect(page).to have_content(@customer3.last_name)
+        expect(page).to have_content(@customer4.first_name)
+        expect(page).to have_content(@customer4.last_name)
+        expect(page).to have_content(@customer5.first_name)
+        expect(page).to have_content(@customer5.last_name)
+        expect(page).to have_content(@customer6.first_name)
+        expect(page).to have_content(@customer6.last_name)
+        expect(page).to_not have_content(@customer2.first_name)
+        expect(page).to_not have_content(@customer7.first_name)
       end
 
       it 'see the total number of successful transactions for each customer' do

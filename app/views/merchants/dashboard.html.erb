@@ -8,6 +8,6 @@
 
 <% @mech_top_5_customers.each do |customer| %>
   <div id = "top_customers-<%= customer.id %>">
-    <p> <%= customer.first_name %> <%= customer.last_name %> has <%= customer.mech_transaction_count %> successful transactions!</p>
+    <p> <%= customer.first_name %> <%= customer.last_name %> has <%= customer.transaction_count %> successful transactions!</p>
   </div>
 <% end %>
