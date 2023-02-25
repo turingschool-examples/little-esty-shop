@@ -52,7 +52,7 @@ RSpec.describe 'Admin Dashboard' do
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id, status: 2)
     InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id, status: 2)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv5.id, status: 2)
-    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id, status: 0)
+    @invit6 = InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id, status: 0)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv7.id, status: 0)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv8.id, status: 1)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv9.id, status: 1)
@@ -88,32 +88,71 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to have_content "Bob Fiel -- Transactions: 2"
       expect(page).to have_content "Laura Fiel -- Transactions: 2"
     end
+    
+    describe 'incomplete invoices section' do
 
-    it 'I see a section for "Incomplete Invoices"' do 
-      within "#incomplete_invoices" do
-        expect(page).to have_content "Incomplete Invoices"
+      it 'I see a section for "Incomplete Invoices"' do 
+        within "#incomplete_invoices" do
+          expect(page).to have_content "Incomplete Invoices"
+        end
       end
-    end
 
-    it 'In that section I see a list of the ids of all invoices that have items that have not yet been shipped' do
-      within '#incomplete_invoices' do
-        expect(page).to have_content(@inv6.id)
-        expect(page).to have_content(@inv7.id)
-        expect(page).to have_content(@inv8.id)
-        expect(page).to have_content(@inv9.id)
+      it 'In that section I see a list of the ids of all invoices that have items that have not yet been shipped' do
+        within '#incomplete_invoices' do
+          expect(page).to have_content(@inv6.id)
+          expect(page).to have_content(@inv7.id)
+          expect(page).to have_content(@inv8.id)
+          expect(page).to have_content(@inv9.id)
+        end
       end
-    end
 
-    it "And each invoice id links to that invoice's admin show page" do
-      within '#incomplete_invoices' do
-        expect(page).to have_link("#{@inv6.id}")
-        expect(page).to have_link("#{@inv7.id}")
-        expect(page).to have_link("#{@inv8.id}")
-        expect(page).to have_link("#{@inv9.id}")
+      it "And each invoice id links to that invoice's admin show page" do
+        within '#incomplete_invoices' do
+          expect(page).to have_link("#{@inv6.id}")
+          expect(page).to have_link("#{@inv7.id}")
+          expect(page).to have_link("#{@inv8.id}")
+          expect(page).to have_link("#{@inv9.id}")
 
-        click_on "#{@inv6.id}"
+          click_on "#{@inv6.id}"
 
-        expect(page.current_path).to eq(admin_invoice_path(@inv6.id))
+          expect(page.current_path).to eq(admin_invoice_path(@inv6.id))
+        end
+      end
+
+      #NEED TO ASK ABOUT STUBBING HERE FOR A MORE ACCURATE TEST!
+      it 'Next to each invoice id I see the date that the invoice was created formatted like "Monday, July 18, 2019"' do
+        within '#incomplete_invoices' do
+          # w = Date.new(2019, 7, 18)
+          # x = Date.new(2020, 8, 17)
+          # y = Date.new(2020, 10, 9)
+          # z = Date.new(2016, 8, 3)
+          
+          # Invoice.update(@inv6.id, :created_at => w)
+          # Invoice.update(@inv7.id, :created_at => x)
+          # Invoice.update(@inv8.id, :created_at => y)
+          # Invoice.update(@inv9.id, :created_at => z)
+          # InvoiceItem.update(@invit6.id, :created_at => w)
+          # Item.update(@bowl.id, :created_at => z)
+
+          # allow(@inv6).to receive(:created_at).and_return(Date.new(2019, 7, 18))
+          # allow(@inv7).to receive(:created_at).and_return(Date.new(2020, 8, 17))
+          # allow(@inv8).to receive(:created_at).and_return(Date.new(2020, 10, 9))
+          # allow(@inv9).to receive(:created_at).and_return(Date.new(2016, 8, 3))
+
+          # expect(page).to have_content("Monday, July 18, 2019")
+          # expect(page).to have_content("Monday, August 17, 2020")
+          # expect(page).to have_content("Friday, October 19, 2020")
+          # expect(page).to have_content("Wednesday, August 3, 2016")
+          expect(page).to have_content("Saturday, February 25, 2023", count: 4)
+        end
+      end
+     
+      it 'the list is ordered from oldest to newest' do
+        within '#incomplete_invoices' do
+          save_and_open_page
+         
+          expect(page).to have_content("Invoice From Saturday, February 25, 2023: #{@inv6.id}\nInvoice From Saturday, February 25, 2023: #{@inv7.id}\nInvoice From Saturday, February 25, 2023: #{@inv8.id}\nInvoice From Saturday, February 25, 2023: #{@inv9.id}")
+        end
       end
     end
   end

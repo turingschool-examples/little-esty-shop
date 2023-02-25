@@ -18,9 +18,9 @@ RSpec.describe Invoice, type: :model do
     @inv4 = @cust4.invoices.create!(status: 1)
     @inv5 = @cust6.invoices.create!(status: 1)
     @inv6 = @cust5.invoices.create!(status: 0)
-    @inv7 = @cust6.invoices.create!(status: 0)
     @inv8 = @cust6.invoices.create!(status: 0)
-    @inv9 = @cust4.invoices.create!(status: 0)
+    @inv9 = @cust6.invoices.create!(status: 0)
+    @inv7 = @cust4.invoices.create!(status: 0)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id, status: 2)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv2.id, status: 2)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id, status: 2)
@@ -43,7 +43,7 @@ RSpec.describe Invoice, type: :model do
 
   describe 'instance methods' do
     it 'can determine incomplete invoice' do
-      expect(Invoice.incomplete_invoices).to eq([@inv6 , @inv7, @inv8, @inv9])
+      expect(Invoice.incomplete_invoices).to eq([@inv6 , @inv8, @inv9, @inv7])
     end
   end
   
