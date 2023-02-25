@@ -9,8 +9,8 @@ RSpec.describe Merchant, type: :model do
   end
 
   let!(:this_gai_ovah_hea) { Customer.create!(first_name: "Dis", last_name: "Gai") }
-  let!(:invoice1) { Invoice.create!(customer_id: this_gai_ovah_hea.id) } 
-  let!(:invoice2) { Invoice.create!(customer_id: this_gai_ovah_hea.id) } 
+  let!(:invoice1) { Invoice.create!(customer_id: this_gai_ovah_hea.id, created_at: Date.yesterday) } 
+  let!(:invoice2) { Invoice.create!(customer_id: this_gai_ovah_hea.id,  created_at: Date.tomorrow) } 
   let!(:invoice3) { Invoice.create!(customer_id: this_gai_ovah_hea.id) } 
 
   let!(:sam) { Merchant.create!(name: "Sam's Sports") }
@@ -19,9 +19,9 @@ RSpec.describe Merchant, type: :model do
   let!(:glove) { sam.items.create!(name: "Baseball Glove", description: "This a baseball glove", unit_price: 4000) }
 
   before (:each) do
-    InvoiceItem.create!(invoice_id: invoice1.id, item_id: football.id, status: 0)
-    InvoiceItem.create!(invoice_id: invoice1.id, item_id: baseball.id, status: 1)
-    InvoiceItem.create!(invoice_id: invoice2.id, item_id: glove.id, status: 2)
+    @football_inv = InvoiceItem.create!(invoice_id: invoice1.id, item_id: football.id, status: 0)
+    @baseball_inv = InvoiceItem.create!(invoice_id: invoice1.id, item_id: baseball.id, status: 1)
+    @glove_inv = InvoiceItem.create!(invoice_id: invoice2.id, item_id: glove.id, status: 2)
   end
 
   describe 'instance methods' do
@@ -36,7 +36,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     it '#items_not_yet_shipped' do 
-      expect(sam.items_not_yet_shipped).to eq([["Football", invoice1.id] , ["Baseball", invoice1.id]])
+      expect(sam.items_not_yet_shipped).to eq([@football_inv, @baseball_inv])
     end
   end
 end

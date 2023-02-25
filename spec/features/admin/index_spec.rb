@@ -32,7 +32,7 @@ RSpec.describe 'Admin Dashboard:', type: :feature do
       end
 
       it 'I see a link to the admin merchants index (/admin/merchants), and a link to the admin invoices index (/admin/invoices)' do
-
+        
         within('#admin_nav') do
           expect(page).to have_link('Merchants')
           expect(page).to have_link('Invoices')
@@ -56,7 +56,6 @@ RSpec.describe 'Admin Dashboard:', type: :feature do
       end
 
       it "And each invoice id links to that invoice's admin show page." do
-        save_and_open_page
 
         click_link "#{@invoice1.id}"
         expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
