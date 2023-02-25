@@ -181,115 +181,81 @@ RSpec.describe 'Merchant/Items Index Page' do
       end
     end 
 
-
-    it "Next to each of the most popular items, see the invoice created at date with the most sales for each item" do #factory bot data- US 13
-
+    it "next to each of the 5 most popular items I see the date with the most sales for each item" do 
+      
+      require 'pry'; binding.pry
       @merchant= FactoryBot.create(:merchant)
-      @customer = FactoryBot.create(:customer)
       @item = FactoryBot.create_list(:item, 10, merchant: @merchant)
+      @customer = FactoryBot.create(:customer)
 
-      @invoices1 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2023, 1, 1, 0, 0, 0))
-      @invoices2 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2015, 10, 1, 0, 0, 0))
-      @invoices3 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2022, 7, 1, 0, 0, 0))
-      @invoices4 = FactoryBot.create(:invoice, customer: @customer, status: 1, created_at: Time.new(2016, 2, 24, 12, 0, 0))
-      @invoices5 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2017, 4, 1, 0, 0, 0)) 
+      @invoice1= FactoryBot.create(:invoice, status: 0, customer: @customer, created_at: Time.new(2023, 1, 1, 0, 0, 0))
+      @invoice2= FactoryBot.create(:invoice, status: 0, customer: @customer, created_at: Time.new(2015, 1, 1, 0, 0, 0))
+      @invoice3= FactoryBot.create(:invoice, status: 0, customer: @customer, created_at: Time.new(2017, 1, 1, 0, 0, 0))
+      @invoice4= FactoryBot.create(:invoice, status: 0, customer: @customer, created_at: Time.new(2012, 1, 1, 0, 0, 0))
+      @invoice5= FactoryBot.create(:invoice, status: 0, customer: @customer, created_at: Time.new(2003, 1, 1, 0, 0, 0))
+      @invoice8= FactoryBot.create(:invoice, status: 0, customer: @customer, created_at: Time.new(2009, 1, 1, 0, 0, 0))
 
-      @invoices6 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2023, 1, 1, 0, 0, 0))
-      @invoices7 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2015, 10, 1, 0, 0, 0))
-      @invoices8 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2016, 7, 1, 0, 0, 0))
-      @invoices9 = FactoryBot.create(:invoice, customer: @customer, status: 1, created_at: Time.new(2017, 2, 24, 12, 0, 0))
-      @invoices10 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2018, 4, 1, 0, 0, 0)) 
+      @transactions1 = FactoryBot.create(:transaction, invoice: @invoice1, result: 0)
+      @transactions2 = FactoryBot.create(:transaction, invoice: @invoice2, result: 0)
+      @transactions3 = FactoryBot.create(:transaction, invoice: @invoice3, result: 0)
+      @transactions4 = FactoryBot.create(:transaction, invoice: @invoice2, result: 0)
+      @transactions20 = FactoryBot.create(:transaction, invoice: @invoice3, result: 1)
+      @transactions21 = FactoryBot.create(:transaction, invoice: @invoice3, result: 1)
+      @transactions22 = FactoryBot.create(:transaction, invoice: @invoice3, result: 1)
+      @transactions23 = FactoryBot.create(:transaction, invoice: @invoice3, result: 1)
+      @transactions24 = FactoryBot.create(:transaction, invoice: @invoice3, result: 1)
+      @transactions5 = FactoryBot.create(:transaction, invoice: @invoice4, result: 0)
+      @transactions6 = FactoryBot.create(:transaction, invoice: @invoice4, result: 0)
+      @transactions7 = FactoryBot.create(:transaction, invoice: @invoice4, result: 0)
+      @transactions8 = FactoryBot.create(:transaction, invoice: @invoice5, result: 0)
+      @transactions9 = FactoryBot.create(:transaction, invoice: @invoice5, result: 0)
+      @transactions10 = FactoryBot.create(:transaction, invoice: @invoice5, result: 0)
+      @transactions11 = FactoryBot.create(:transaction, invoice: @invoice5, result: 0)
+      @transactions12 = FactoryBot.create(:transaction, invoice: @invoice8, result: 0)
+      @transactions13 = FactoryBot.create(:transaction, invoice: @invoice8, result: 0)
+      @transactions14 = FactoryBot.create(:transaction, invoice: @invoice8, result: 0)
+      @transactions15 = FactoryBot.create(:transaction, invoice: @invoice8, result: 0)
 
-      @invoices11 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2019, 1, 1, 0, 0, 0))
-      @invoices12 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2020, 10, 1, 0, 0, 0))
-      @invoices13 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2021, 7, 1, 0, 0, 0))
-      @invoices14 = FactoryBot.create(:invoice, customer: @customer, status: 1, created_at: Time.new(2023, 2, 24, 12, 0, 0))
-      @invoices15 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2022, 4, 1, 0, 0, 0)) 
+      @invoiceitems1 = FactoryBot.create(:invoice_item, invoice: @invoice1, item: @item[0], unit_price: 1, quantity: 1)
+      @invoiceitems2 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item[0], unit_price: 1, quantity: 1)
+      @invoiceitems3 = FactoryBot.create(:invoice_item, invoice: @invoice3, item: @item[0], unit_price: 1, quantity: 1)
 
-      @invoices16 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2023, 1, 1, 0, 0, 0))
-      @invoices17 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2022, 10, 1, 0, 0, 0))
-      @invoices18 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2019, 7, 1, 0, 0, 0))
-      @invoices19 = FactoryBot.create(:invoice, customer: @customer, status: 1, created_at: Time.new(2016, 2, 24, 12, 0, 0))
-      @invoices20 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2015, 4, 1, 0, 0, 0)) 
+      @invoiceitems4 = FactoryBot.create(:invoice_item, invoice: @invoice1, item: @item[1], unit_price: 1, quantity: 1)
+      @invoiceitems5 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item[1], unit_price: 1, quantity: 1)
+      @invoiceitems6 = FactoryBot.create(:invoice_item, invoice: @invoice3, item: @item[1], unit_price: 1, quantity: 1)
+      @invoiceitems7 = FactoryBot.create(:invoice_item, invoice: @invoice4, item: @item[1], unit_price: 1, quantity: 1)
 
-      @invoices21 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2015, 1, 1, 0, 0, 0))
-      @invoices22 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2022, 10, 1, 0, 0, 0))
-      @invoices23 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2018, 7, 1, 0, 0, 0))
-      @invoices24 = FactoryBot.create(:invoice, customer: @customer, status: 1, created_at: Time.new(2023, 2, 24, 12, 0, 0))
-      @invoices25 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2009, 4, 1, 0, 0, 0)) 
+      @invoiceitems8 = FactoryBot.create(:invoice_item, invoice: @invoice1, item: @item[3], unit_price: 1, quantity: 1)
+      @invoiceitems9 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item[3], unit_price: 1, quantity: 1)
+      @invoiceitems10 = FactoryBot.create(:invoice_item, invoice: @invoice3, item: @item[3], unit_price: 1, quantity: 1)
+      @invoiceitems11 = FactoryBot.create(:invoice_item, invoice: @invoice5, item: @item[3], unit_price: 1, quantity: 1)
 
-      Invoice.all.each do |invoice|
-        FactoryBot.create(:transaction, invoice: invoice, result: 0)
-      end
+      @invoiceitems10 = FactoryBot.create(:invoice_item, invoice: @invoice3, item: @item[7], unit_price: 1, quantity: 1)
+      @invoiceitems11 = FactoryBot.create(:invoice_item, invoice: @invoice8, item: @item[7], unit_price: 1, quantity: 1)
 
-      n = 1000
-      Invoice.all[0..4].each do |invoice|
-        n = n + 50
-        FactoryBot.create(:invoice_item, invoice: invoice, item: @item[0], unit_price: n, quantity: 1)
-      end
+      @invoiceitems10 = FactoryBot.create(:invoice_item, invoice: @invoice3, item: @item[8], unit_price: 1, quantity: 1)
+      @invoiceitems11 = FactoryBot.create(:invoice_item, invoice: @invoice8, item: @item[8], unit_price: 1, quantity: 1)
 
-      n = 800
-      Invoice.all[5..9].each do |invoice|
-        n = n + 50
-        FactoryBot.create(:invoice_item, invoice: invoice, item: @item[1], unit_price: n, quantity: 1)
-      end
-
-      n = 600
-      Invoice.all[10..14].each do |invoice|
-        n = n + 50
-        FactoryBot.create(:invoice_item, invoice: invoice, item: @item[2], unit_price: n, quantity: 1)
-      end
-
-      n = 400
-      Invoice.all[15..19].each do |invoice|
-        n = n + 50
-        FactoryBot.create(:invoice_item, invoice: invoice, item: @item[6], unit_price: n, quantity: 1)
-      end
-
-      n = 200
-      Invoice.all[20..24].each do |invoice|
-        n = n + 50
-        FactoryBot.create(:invoice_item, invoice: invoice, item: @item[8], unit_price: n, quantity: 1)
-      end
+require 'pry'; binding.pry
 
       visit "/merchants/#{@merchant.id}/items"
-save_and_open_page
-      within("div#5_most_popular_items") do 
-        expect(page).to have_content("#{@item[0].name}") 
-          expect(page).to have_content("Top selling date for #{@item[0].name} was #{@invoices5.created_at.strftime("%B %d, %Y")}")
-        expect(page).to have_content("#{@item[1].name}")
-          expect(page).to have_content("Top selling date for #{@item[1].name} was #{@invoices10.created_at.strftime("%B %d, %Y")}")
-        expect(page).to have_content("#{@item[2].name}") 
-          expect(page).to have_content("Top selling date for #{@item[2].name} was #{@invoices15.created_at.strftime("%B %d, %Y")}")
-        expect(page).to have_content("#{@item[6].name}") 
-          expect(page).to have_content("Top selling date for #{@item[6].name} was #{@invoices20.created_at.strftime("%B %d, %Y")}")
-        expect(page).to have_content("#{@item[8].name}") 
-          expect(page).to have_content("Top selling date for #{@item[8].name} was #{@invoices25.created_at.strftime("%B %d, %Y")}")
+        within("div#5_most_popular_items") do 
+          expect(page).to have_content("#{@item[0].name}") 
+          expect(page).to have_content("Top selling date for #{@item[0].name} was #{@invoice2.created_at.strftime("%B %d, %Y")}")
+
+          expect(page).to have_content("#{@item[1].name}") 
+          expect(page).to have_content("Top selling date for #{@item[1].name} was #{@invoice4.created_at.strftime("%B %d, %Y")}")
+
+          expect(page).to have_content("#{@item[3].name}") 
+          expect(page).to have_content("Top selling date for #{@item[3].name} was #{@invoice5.created_at.strftime("%B %d, %Y")}")
+
+          expect(page).to have_content("#{@item[7].name}") 
+          expect(page).to have_content("Top selling date for #{@item[7].name} was #{@invoice8.created_at.strftime("%B %d, %Y")}")
+
+          expect(page).to have_content("#{@item[8].name}") 
+          expect(page).to have_content("Top selling date for #{@item[8].name} was #{@invoice8.created_at.strftime("%B %d, %Y")}")
+        end
       end
-    end
-
-    it "next to each of the 5 most popular items I see the date with the most sales for each item" do 
-
-      @merchant= FactoryBot.create(:merchant)
-      @customer = FactoryBot.create(:customer)
-      @item = FactoryBot.create_list(:item, 2, merchant: @merchant)
-
-      @invoices1 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2023, 1, 1, 0, 0, 0))
-      @invoices2 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2015, 10, 1, 0, 0, 0))
-      @invoices3 = FactoryBot.create(:invoice, customer: @customer, status: 0, created_at: Time.new(2022, 7, 1, 0, 0, 0))
-
-      @transactions1 = FactoryBot.create(:transaction, invoice: @invoices1, result: 0)
-      @transactions2 = FactoryBot.create(:transaction, invoice: @invoices2, result: 0)
-      @transactions3 = FactoryBot.create(:transaction, invoice: @invoices2, result: 0)
-      @transactions4 = FactoryBot.create(:transaction, invoice: @invoices3, result: 0)
-
-      @invoiceitems1 = FactoryBot.create(:invoice_item, invoice: @invoices1, item: @item[1], unit_price: 1, quantity: 1)
-      @invoiceitems1 = FactoryBot.create(:invoice_item, invoice: @invoices2, item: @item[1], unit_price: 1, quantity: 1)
-      @invoiceitems1 = FactoryBot.create(:invoice_item, invoice: @invoices3, item: @item[1], unit_price: 1, quantity: 1)
-
-      expect()
-
-    end
 
   end #as a merchant
 end 

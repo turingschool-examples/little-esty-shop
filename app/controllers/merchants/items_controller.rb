@@ -6,13 +6,15 @@ class Merchants::ItemsController < ApplicationController
     @items_with_disabled_status = Item.all.disabled_status_items(params)
     @items_with_enabled_status = Item.all.enabled_status_items(params)
 
-    @five_popular_items_variable = Item.five_popular_items(params[:merchant_id])
-    require 'pry'; binding.pry
-    # @five_popular_items_hash = Hash.new
-    # five_popular_items_variable.each do |item| 
-    #   date = Invoice.best_date_sales(item.id)
-    #   @five_popular_items_hash[item.name] = date.first.created_at
-    # end
+    five_popular_items_variable = Item.five_popular_items(params[:merchant_id])
+    
+
+    @five_popular_items_hash = Hash.new
+
+    five_popular_items_variable.each do |item| 
+      date = Invoice.most_transactions_date(item.id)
+      @five_popular_items_hash[item.name] = date.first.created_at
+    end
   end
 
   def show
