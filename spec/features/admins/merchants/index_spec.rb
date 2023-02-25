@@ -70,4 +70,14 @@ RSpec.describe "The Admin Merchants Index" do
       }
     end
   end
+
+  describe "User Story 29" do
+    it "When and Admin visits the admin merchants index, they see a link to create a new merchant and when they click on the link, they are taken to the new admin merchant page" do
+      expect(page).to have_link("New Merchant", href: new_admin_merchant_path)
+
+      click_link "New Merchant"
+
+      expect(current_path).to eq(new_admin_merchant_path)
+    end
+  end
 end
