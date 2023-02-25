@@ -14,7 +14,7 @@ RSpec.describe "Admin Invoices Index", type: :feature do
         visit admin_invoices_path
       end
 
-      it "Sees a list of all iInvoice ids in the system" do
+      it "Sees a list of all Invoice ids in the system" do
         expect(page).to have_content("#{invoice1.id}")
 
         expect(page).to have_content("#{invoice2.id}")
