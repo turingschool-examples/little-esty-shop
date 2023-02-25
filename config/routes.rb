@@ -13,12 +13,11 @@ Rails.application.routes.draw do
 	patch '/merchants/:merchant_id/items/:id', to: "merchant_items#update"
 
 
-  get '/merchants/:id/invoices', to: "invoices#index"
-
   resources :admin, only: :index
 
 	resources :merchants, only: :show do
 		resources :items, except: :update, controller: 'merchant_items'
+    resources :invoices, only: [:index, :show]
 	end
 
 end
