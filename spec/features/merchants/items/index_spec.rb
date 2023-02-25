@@ -81,4 +81,26 @@ RSpec.describe "Merchant_Items", type: :feature do
       expect(current_path).to eq("/merchants/#{@merchant.id}/items")
     end
   end
+
+  describe "User Story 10" do
+    it "I see two sections, one for 'Enabled Items' and one for 'Disabled Items' 
+      And I see that each Item is listed in the appropriate section" do
+      
+      within("#merchant_item-#{@item_1.id}")  {
+        click_button "Disable"
+      }
+
+      expect(page).to have_content("Enabled Items")
+      
+      within("#enabled")  {
+        expect(page).to have_content("#{@item_1.name}")        
+      }
+
+      expect(page).to have_content("Disabled Items")
+
+      within("#disabled")  {
+        expect(page).to have_content("#{@item_1.name}")
+      }
+    end
+  end
 end
