@@ -47,7 +47,15 @@ RSpec.describe "Merchant_Items", type: :feature do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@item_2.name)
       expect(page).to_not have_content(@item_3.name)
-      save_and_open_page
+    end
+  end
+
+  describe "User Story 7" do
+    it "the item names are links to the appropriate show page" do
+      click_link("#{@item_1.name}")
+      expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}")
+      expect(page).to have_content(@item_1.name)
+      expect(page).to_not have_content(@item_2.name)
     end
   end
 end
