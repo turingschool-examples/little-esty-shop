@@ -17,4 +17,8 @@ class Invoice < ApplicationRecord
   def find_invoiceitem_status(item)
     self.invoice_items.find_by(item_id: item.id).status
   end
+
+  def get_total_revenue
+    self.invoice_items.sum("unit_price")
+  end
 end
