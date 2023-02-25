@@ -1,32 +1,44 @@
+<h1><%="Index Page for #{@merchant.name}"%></h1>
+
 <%= link_to "Add Item", "/merchants/#{@merchant.id}/items/new" %>
 
 
 
 <h1> List of all Items</h1>
 
-<div id= "disabled_items"%>
-<h3>List of Disabled Items</h3>
-<%@items_with_disabled_status.each do |item|%>
-  <div id= "item_number_<%="#{item.id}"%>">
-  <h5><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></h5>
-    <p>Status <%=item.status%> 
+<% @items_for_specific_merchant.each do |item|%>
+  <div id= "disabled_items"%>
+    <h3>List of Disabled Items</h3>
+    <%@items_with_disabled_status.each do |item|%>
+      <div id= "item_number_<%="#{item.id}"%>">
+        <h5><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></h5>
+        <p>Status <%=item.status%> 
         <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |form| %>
           <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %>
-        <%= form.submit "Enable/Disable Item #{item.name}" %>
+          <%= form.submit "Enable/Disable Item #{item.name}" %>
         <% end %>
+      </div>
+    <%end%>
+  </div>
+<% end %>
+
+<div id= "enabled_items"%>
+  <h3>List of Enabled Items</h3>
+  <%@items_with_enabled_status.each do |item|%>
+    <div id= "item_number_<%="#{item.id}"%>">
+      <h5><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></h5>
+      <p>Status <%=item.status%></p>
+      <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |form| %>
+        <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %>
+        <%= form.submit "Enable/Disable Item #{item.name}" %>
+      <% end %>
     </div>
   <%end%>
 </div>
 
-<div id= "enabled_items"%>
-<h3>List of Enabled Items</h3>
-<%@items_with_enabled_status.each do |item|%>
-  <div id= "item_number_<%="#{item.id}"%>">
-  <h5><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></h5>
-    <p>Status <%=item.status%> 
-        <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |form| %>
-          <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %>
-        <%= form.submit "Enable/Disable Item #{item.name}" %>
-        <% end %>
+<div id= "5_most_popular_items">
+  <h2>List of most popular items</h2>
+  <%@five_popular_items.each do |item|%>
+    <p><%=item.name%></p>
   <%end%>
 </div>

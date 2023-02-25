@@ -3,3 +3,11 @@
 <%=link_to "#{@merchant.name}'s Items", "/merchants/#{@merchant.id}/items"%>
 
 <%=link_to "#{@merchant.name}'s Invoices", "/merchants/#{@merchant.id}/invoices"%>
+
+<p> Top 5 Customers with Highest Successful Transactions for this Merchant </p>
+
+<% @mech_top_5_customers.each do |customer| %>
+  <div id = "top_customers-<%= customer.id %>">
+    <p> <%= customer.first_name %> <%= customer.last_name %> has <%= customer.transaction_count %> successful transactions!</p>
+  </div>
+<% end %>

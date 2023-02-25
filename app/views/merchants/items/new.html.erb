@@ -1,4 +1,3 @@
-
   <h3>Add Item to Merchant's List of Items</h3>
   <%= form_with url: "/merchants/#{@merchant.id}/items", method: :post, local: true do |form| %>
     <%= form.label :name%>
