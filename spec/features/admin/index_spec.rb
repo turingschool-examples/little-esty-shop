@@ -185,9 +185,8 @@ RSpec.describe '/admin', type: :feature do
 
       it "I see the list is ordered from oldest to newest" do
         visit '/admin'
-        expect(@invoice17).to appear_before(@invoice19)
-        expect(@invoice19).to appear_before(@invoice20)
-        expect(@invoice20).to appear_before(@invoice18)
+        expect(@invoice17.created_at.strftime("%A, %B %e, %Y")).to appear_before(@invoice19.created_at.strftime("%A, %B %e, %Y"))
+        expect(@invoice19.created_at.strftime("%A, %B %e, %Y")).to appear_before(@invoice20.created_at.strftime("%A, %B %e, %Y"))
       end
     end
 

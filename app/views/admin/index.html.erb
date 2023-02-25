@@ -14,7 +14,7 @@
 
 <% @invoices_not_shipped.each do |invoice| %>
   <div id = "invoice_info-<%= invoice.id %>">
-    <p>ID number: <%= link_to invoice.id, "/invoices/#{invoice.id}" %> <%=Created: invoice.created_at.strftime("%A, %B %e, %Y") %> </p>
+    <p>ID number: <%= link_to invoice.id, "/invoices/#{invoice.id}" %> Created: <%= invoice.created_at.strftime("%A, %B %e, %Y") %> </p>
     <br>
   </div>
 <% end %>
