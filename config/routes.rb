@@ -7,12 +7,9 @@ Rails.application.routes.draw do
     resources :invoices, only: [:index, :show], controller: "merchants/invoices"
   end
 
-  resource :admin, only: :index do
-    resources :merchants, only: [:index, :show], controller: "admin/merchants"
-    resources :invoices, only: [:index, :show], controller: "admin/invoices"
-  end
-    
   namespace :admin do
     get '/', to: 'dashboard#index'
+    resources :merchants, only: [:index, :show]
+    resources :invoices, only: [:index, :show]
   end
 end
