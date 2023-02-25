@@ -33,7 +33,7 @@ RSpec.describe 'Merchant Items Index' do
     it 'Next to each item name I see a button to disable or enable that item' do
       visit "/merchants/#{@carlos.id}/items"
 
-      within "#name-Bowl" do
+      within "#id-#{@bowl.id}" do
         expect(page).to have_button("Enable")
         click_button "Enable"
 
@@ -45,5 +45,30 @@ RSpec.describe 'Merchant Items Index' do
         expect(page).to have_button("Enable")
       end
     end
+
+    describe 'I see two sections, one for "Enabled Items" and one for "Disabled Items' do
+      it 'I see that each Item is listed in the appropriate section' do
+        visit "/merchants/#{@carlos.id}/items"
+        within "#disabled-items" do
+          expect(page).to have_content("Disabled Items")
+          expect(page).to have_content("Bowl")
+          expect(page).to have_content("Knife")
+          
+          expect(page).to have_button("Enable")
+          expect(page).to_not have_button("Disable")
+        end
+        
+        within "#enabled-items" do
+          expect(page).to have_content("Enabled Items")
+          expect(page).to_not have_content("Bowl")
+          expect(page).to_not have_content("Knife")
+        end
+      end
+    end
   end
 end
+
+          # first(:button, "Enable")
+
+          # expect(page).to_not have_content("Bowl")
+          # expect(page).to_not have_content("Bowl")
