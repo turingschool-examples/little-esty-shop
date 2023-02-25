@@ -51,8 +51,8 @@ RSpec.describe Invoice, type: :model do
     end
 
     it "#get_total_revenue" do
-      expect(invoice1.get_total_revenue.to eq(34907))
-      expect(invoice2.get_total_revenue.to eq(66666))
+      expect(invoice1.get_total_revenue).to eq(34907)
+      expect(invoice2.get_total_revenue).to eq(66666)
     end
   end
   
