@@ -18,5 +18,4 @@ class Merchant < ApplicationRecord
     .order("transaction_count DESC")
     .limit(5)
   end
-
 end
