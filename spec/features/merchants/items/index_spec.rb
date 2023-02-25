@@ -29,5 +29,21 @@ RSpec.describe 'Merchant Items Index' do
       expect(page).to_not have_content("Scarf")
       expect(page).to_not have_content("Tshirt")
     end
+
+    it 'Next to each item name I see a button to disable or enable that item' do
+      visit "/merchants/#{@carlos.id}/items"
+
+      within "#name-Bowl" do
+        expect(page).to have_button("Enable")
+        click_button "Enable"
+
+        expect(current_path).to eq("/merchants/#{@carlos.id}/items")
+        expect(page).to have_button("Disable")
+        click_button "Disable"
+
+        expect(current_path).to eq("/merchants/#{@carlos.id}/items")
+        expect(page).to have_button("Enable")
+      end
+    end
   end
 end

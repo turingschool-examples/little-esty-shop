@@ -25,6 +25,18 @@ class MerchantItemsController < ApplicationController
   	end
 	end
 
+  def update
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.find(params[:item_id])
+    if params[:status] == "disabled"
+      @item.update(status: 1)
+      redirect_to "/merchants/#{@merchant.id}/items"
+    else
+      @item.update(status: 0)
+      redirect_to "/merchants/#{@merchant.id}/items"
+    end
+  end
+
   private
 
   def item_params
