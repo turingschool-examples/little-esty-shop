@@ -54,9 +54,9 @@ describe 'dashboard' do
       @transaction6 = create(:transaction, invoice_id: @invoice6.id)
       @transaction7 = create(:transaction, invoice_id: @invoice7.id)
       @transaction8 = create(:transaction, invoice_id: @invoice8.id)
+      visit '/admin'
     end
     it 'should have a list of the top 5 customers' do
-      visit '/admin'
       expect(page).to have_content('Top 5 Customers')
       expect(page).to have_content("#{@customer1.first_name + " " + @customer1.last_name}: 3 transactions")
       expect(page).to have_content("#{@customer2.first_name + " " + @customer2.last_name}: 2 transactions")
@@ -66,7 +66,7 @@ describe 'dashboard' do
     end
   end
 
-  describe 'user story 22' do
+  describe 'incomplete invoices section' do
 
     before do
       @customer = create(:customer)
@@ -83,9 +83,9 @@ describe 'dashboard' do
       @invoice_item3 = create(:invoice_item, invoice_id: @invoice3.id, item_id: @item.id, status: 2)
       @invoice_item4 = create(:invoice_item, invoice_id: @invoice4.id, item_id: @item.id, status: 0)
       @invoice_item5 = create(:invoice_item, invoice_id: @invoice5.id, item_id: @item.id, status: 1)
+      visit '/admin'
     end
     it 'should have a list of invoices that have unshipped items' do
-      visit '/admin'
       within ('div#incomplete_invoices') do
         expect(page).to have_content("Incomplete Invoices")
         expect(page).to have_content("id: #{@invoice2.id}")
@@ -95,13 +95,33 @@ describe 'dashboard' do
     end
 
     it 'should have links to invoices admin show page' do
-      visit '/admin'
       within ('div#incomplete_invoices') do
         click_on "#{@invoice2.id}"
       end
       expect(current_path).to eq("/admin/invoices/#{@invoice2.id}")
     end
-  end
-  
 
+    before do 
+      Invoice.find(@invoice2.id).update_attributes(created_at: Time.new(2002))
+      Invoice.find(@invoice4.id).update_attributes(created_at: Time.new(2010, 10, 31))
+      Invoice.find(@invoice5.id).update_attributes(created_at: Time.new(2022))
+      visit '/admin'
+    end
+    
+    it 'list is ordered from oldest to newest' do
+      within ('div#incomplete_invoices') do
+        expect(@invoice2.id.to_s).to appear_before(@invoice4.id.to_s)
+        expect(@invoice4.id.to_s).to appear_before(@invoice5.id.to_s)
+      end
+    end
+
+    it 'has the date next to each invoice' do
+      within ('div#incomplete_invoices') do
+        expect(page).to have_content("id: #{@invoice2.id} Created at: Tuesday, January 01, 2002")
+        expect(page).to have_content("id: #{@invoice4.id} Created at: Sunday, October 31, 2010")
+        expect(page).to have_content("id: #{@invoice5.id} Created at: Saturday, January 01, 2022")
+      end
+    end
+    
+  end
 end
