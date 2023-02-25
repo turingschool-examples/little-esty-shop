@@ -24,4 +24,8 @@ class Admin::MerchantsController < ApplicationController
   def edit
     
   end
+  
+  def new
+    @merchant = Merchant.new
+  end
 end
