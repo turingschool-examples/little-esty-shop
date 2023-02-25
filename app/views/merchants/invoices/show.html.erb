@@ -1,10 +1,22 @@
 <h3><%= @merchant.name %></h3>
 
-<h4>Invoice #<%= @invoice.id %></h4><br>
+<section id="inv_info">
+  <h4>Invoice #<%= @invoice.id %></h4><br>
+  <p>Status: <%= @invoice.status %></p><br>
+  <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p><br>
+</section>
 
-<p>Status: <%= @invoice.status %></p><br>
-<p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p><br>
+<section id="cust_info">
+  <h4>Customer:</h4>
+  <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %><p>
+</section>
 
-<h4>Customer:</h4>
-
-<p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %><p>
+<section>
+  <h4>Items on this Invoice:</h4>
+    <% @invoice.items.each do |item| %>
+      <p>Item Name <%= item.name %> </p>
+      <p>Quantity <%= item.name %> </p>
+      <p>Unit Price <%= item.name %> </p>
+      <p>Status <%= item.name %> </p>
+    <% end %>
+</section>
