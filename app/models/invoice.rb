@@ -14,4 +14,8 @@ class Invoice < ApplicationRecord
     # question mark is a placeholder for 2
   end
 
+  def items_with_invoice_attributes
+    invoice_items.joins(:item).select(:quantity, :unit_price, :status, "items.name")
+  end
+
 end
