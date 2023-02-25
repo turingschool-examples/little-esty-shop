@@ -83,7 +83,6 @@ RSpec.describe "The Admin Index" do
     describe "User Story 22" do
       it "When I visit the admin dashboard, I see a section for 'Incomplete Invoices', In that section I see a list of the ids of all invoices 
         that have items that have not yet been shipped, and each invoice id links to that invoice's admin show page" do
-        save_and_open_page
         within("#incomplete_invoices") {
           within("#incomplete_invoice_item-#{@invoice_item_1.id}")  {
             expect(page).to have_content("Invoice ##{@invoice_1.id}")
