@@ -103,6 +103,40 @@ RSpec.describe "Merchant Dashboard Index" do
 
         expect(page).to_not have_content(("#{item3.name}: #{item3.item_invoice_id}"))
         expect(page).to_not have_link(item3.item_invoice_id)
+
+
+      end
+    end
+
+    describe "things that" do
+      # 5. Merchant Dashboard Invoices sorted by least recent
+
+      # Next to each Item name I see the date that the invoice was created
+      # And I see the date formatted like "Monday, July 18, 2019"
+      # And I see that the list is ordered from oldest to newest
+
+      it "In Items Ready to Ship, I see the date the invoice was created, oldest to newest" do 
+
+        merchant21 = create(:merchant) 
+        customer21 = create(:customer) 
+        customer22 = create(:customer)
+        customer24 = create(:customer)
+        customer25 = create(:customer)
+        invoice21 = create(:invoice, customer_id: customer21.id) 
+        invoice24 = create(:invoice, customer_id: customer22.id)
+        invoice29 = create(:invoice, customer_id: customer24.id)
+        invoice20 = create(:invoice, customer_id: customer25.id)
+        item21 = create(:item, merchant_id: merchant21.id)
+        item24 = create(:item, merchant_id: merchant21.id)
+        item29 = create(:item, merchant_id: merchant21.id)
+        item20 = create(:item, merchant_id: merchant21.id)
+  
+        InvoiceItem.create!(item_id: item21.id, invoice_id: invoice21.id, status: "packaged")
+        InvoiceItem.create!(item_id: item24.id, invoice_id: invoice24.id, status: "packaged")
+        InvoiceItem.create!(item_id: item29.id, invoice_id: invoice29.id, status: "packaged")
+        InvoiceItem.create!(item_id: item20.id, invoice_id: invoice20.id, status: "packaged")
+
+        expect(page).to have_content(invoice21.created_at.strftime("%A, %B %e, %Y"))
       end
     end
   end

@@ -13,12 +13,8 @@ class Admin::MerchantsController < ApplicationController
 
   def create 
     merchant = Merchant.new(merchant_params)
-    if merchant.save
-      redirect_to admin_merchants_path
-    else 
-      redirect_to new_admin_merchant_path
-      flash[:alert] = "Error: #{error_message(merchant.errors)}"
-    end
+    merchant.save
+    redirect_to admin_merchants_path
   end
 
   def merchant_params
