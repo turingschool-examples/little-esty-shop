@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/merchants/:merchant_id/dashboards', to: 'merchants#dashboards'
 
   get 'merchants/:merchant_id/items', to: 'merchants#items'
-
   get 'merchants/:merchant_id/items/:item_id', to: 'items#show'
+  get 'merchants/:merchant_id/items/:item_id/edit', to: 'items#edit'
+  patch 'merchants/:merchant_id/items/:item_id', to: 'items#update'
 end
