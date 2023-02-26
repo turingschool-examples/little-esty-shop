@@ -23,8 +23,8 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
     @item_1 = create(:item, merchant: @merchant)
     @item_2 = create(:item, merchant: @merchant)
     @item_3 = create(:item, merchant: @merchant_2)
-    @item_4 = create(:item, merchant: @merchant, status: "Disabled")
-    @item_5 = create(:item, merchant: @merchant, status: "Disabled")
+    @item_4 = create(:item, merchant: @merchant, status: "Enabled")
+    @item_5 = create(:item, merchant: @merchant, status: "Enabled")
 
     @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, quantity: 1, status: "packaged", created_at: Date.new(2023,1,1))
     @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2, quantity: 1, status: "packaged", created_at: Date.new(2023,1,2))
@@ -66,19 +66,19 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
       then I am redirected back to the items index and I see that the items status has changed" do
       
       within("#merchant_item-#{@item_1.id}")  {
-        expect(page).to_not have_button("Enable")
-        expect(page).to have_button("Disable")
-        click_button "Disable"
-      }
- 
-      within("#merchant_item-#{@item_1.id}")  {
         expect(page).to have_button("Enable")
         expect(page).to_not have_button("Disable")
         click_button "Enable"
       }
+ 
+      within("#merchant_item-#{@item_1.id}")  {
+        expect(page).to_not have_button("Enable")
+        expect(page).to have_button("Disable")
+        click_button "Disable"
+      }
       
       within("#merchant_item-#{@item_1.id}")  {
-        expect(page).to have_button("Disable")
+        expect(page).to have_button("Enable")
       }
       expect(current_path).to eq("/merchants/#{@merchant.id}/items")
     end
@@ -89,14 +89,14 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
       And I see that each Item is listed in the appropriate section" do
       expect(page).to have_content("Enabled Items")
       
-      within("#enabled")  {
+      within("#disabled")  {
         expect(page).to have_content("#{@item_1.name}")
         expect(page).to have_content("#{@item_2.name}")
       }
       
       expect(page).to have_content("Disabled Items")
       
-      within("#disabled")  {
+      within("#enabled")  {
         expect(page).to have_content("#{@item_4.name}")
         expect(page).to have_content("#{@item_5.name}")
       }
@@ -111,11 +111,16 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
       expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
     end
 
-    xit "I see the item I just created displayed in the list of items.
+    it "I see the item I just created displayed in the list of items.
       And I see my item was created with a default status of disabled." do
-      expect(page).to have_content(@item_1.name)
-      expect(page).to have_content(@item_2.name)
-      expect(page).to_not have_content(@item_3.name)
+
+      click_link("Create New Item")
+      fill_in "Name", with: "Corn"
+      fill_in "Description", with: "It's the most beautiful thing!"
+      fill_in "Unit price", with: 5
+      click_button "Create Item"
+      
+      expect(page).to have_content("Corn")
     end
   end
 end
