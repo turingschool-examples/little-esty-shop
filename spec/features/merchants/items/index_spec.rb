@@ -5,11 +5,78 @@ RSpec.describe 'merchant items index page', type: :feature do
     let!(:merchant1) { create(:merchant)}
     let!(:merchant2) { create(:merchant)}
 
-    let!(:item1) {create(:item, merchant: merchant1)}  
-    let!(:item2) {create(:item, merchant: merchant1, status: 'enabled')}
-    let!(:item3) {create(:item, merchant: merchant1)}
-    let!(:item4) {create(:item, merchant: merchant1)}
-    let!(:item5) {create(:item, merchant: merchant2)}
+    let!(:item1) {create(:item, merchant: merchant1, name: 'item 1')}
+    let!(:item2) {create(:item, merchant: merchant1, name: 'item 2', status: 'enabled')}
+    let!(:item3) {create(:item, merchant: merchant1, name: 'item 3')}
+    let!(:item4) {create(:item, merchant: merchant1, name: 'item 4')}
+    let!(:item5) {create(:item, merchant: merchant1, name: 'item 5')}
+    let!(:item6) {create(:item, merchant: merchant2, name: 'item 6')}
+    let!(:item7) {create(:item, merchant: merchant1, name: 'item 7')}
+
+    let!(:customer1) { create(:customer)}
+    let!(:customer2) { create(:customer)}
+    let!(:customer3) { create(:customer)}
+    let!(:customer4) { create(:customer)}
+    let!(:customer5) { create(:customer)}
+    let!(:customer6) { create(:customer)}
+  
+
+    let!(:invoice1) { create(:completed_invoice, customer: customer1, created_at: Date.new(2014, 3, 1))}
+    let!(:invoice2) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 1))}
+    let!(:invoice3) { create(:completed_invoice, customer: customer2)} 
+    let!(:invoice4) { create(:completed_invoice, customer: customer2)}
+    let!(:invoice5) { create(:completed_invoice, customer: customer3)}
+    let!(:invoice6) { create(:completed_invoice, customer: customer3)}
+    let!(:invoice7) { create(:completed_invoice, customer: customer4)}
+    let!(:invoice8) { create(:completed_invoice, customer: customer5)}
+    let!(:invoice9) { create(:completed_invoice, customer: customer5)}
+    let!(:invoice10) { create(:completed_invoice, customer: customer6)}
+    let!(:invoice11) { create(:completed_invoice, customer: customer6)}
+   
+		let!(:transaction1) {create(:transaction, invoice: invoice1) }
+		let!(:transaction2) {create(:transaction, invoice: invoice2) }
+		let!(:transaction3) {create(:transaction, invoice: invoice3) }
+		let!(:transaction4) {create(:transaction, invoice: invoice4) }
+		let!(:transaction5) {create(:transaction, invoice: invoice5) }
+		let!(:transaction6) {create(:transaction, invoice: invoice6) }
+		let!(:transaction7) {create(:transaction, invoice: invoice8) }
+		let!(:transaction8) {create(:transaction, invoice: invoice9) }
+		let!(:transaction9) {create(:failed_transaction, invoice: invoice10) }
+		# let!(:transaction10) {create(:transaction, invoice: invoice10) }
+		let!(:transaction11) {create(:transaction, invoice: invoice11) }
+		let!(:transaction14) {create(:failed_transaction, invoice: invoice7) }
+		let!(:transaction15) {create(:transaction, invoice: invoice7) }
+    
+    before do
+			create(:invoice_item, item: item1, invoice: invoice2, quantity: 1, unit_price: 1)
+			create(:invoice_item, item: item1, invoice: invoice1, quantity: 1, unit_price: 1)
+			create(:invoice_item, item: item1, invoice: invoice4, quantity: 1, unit_price: 1)
+			create(:invoice_item, item: item1, invoice: invoice5, quantity: 1, unit_price: 1)
+			create(:invoice_item, item: item1, invoice: invoice8, quantity: 1, unit_price: 1)
+			create(:invoice_item, item: item1, invoice: invoice11, quantity: 1, unit_price: 1) # => revenue: 6
+	
+			create(:invoice_item, item: item2, invoice: invoice1, quantity: 2, unit_price: 1)
+			create(:invoice_item, item: item2, invoice: invoice5, quantity: 2, unit_price: 1)
+			create(:invoice_item, item: item2, invoice: invoice9, quantity: 2, unit_price: 1)
+			create(:invoice_item, item: item2, invoice: invoice6, quantity: 1, unit_price: 1) # => revenue: 7
+	
+			create(:invoice_item, item: item3, invoice: invoice8, quantity: 1, unit_price: 6)
+			create(:invoice_item, item: item3, invoice: invoice9, quantity: 1, unit_price: 6)
+			create(:invoice_item, item: item3, invoice: invoice10, quantity: 1, unit_price: 6) ### => failed transaction
+			create(:invoice_item, item: item3, invoice: invoice3, quantity: 1, unit_price: 6)
+			create(:invoice_item, item: item3, invoice: invoice6, quantity: 2, unit_price: 6) # => revenue: 30
+	
+			create(:invoice_item, item: item4, invoice: invoice10, quantity: 1, unit_price: 6) ### => failed transaction
+			create(:invoice_item, item: item4, invoice: invoice11, quantity: 1, unit_price: 6)
+			create(:invoice_item, item: item4, invoice: invoice2, quantity: 1, unit_price: 6)
+			create(:invoice_item, item: item4, invoice: invoice3, quantity: 1, unit_price: 6)
+			create(:invoice_item, item: item4, invoice: invoice4, quantity: 1, unit_price: 6) # => revenue: 24
+	
+			create(:invoice_item, item: item5, invoice: invoice7, quantity: 3, unit_price: 6)
+			create(:invoice_item, item: item5, invoice: invoice3, quantity: 1, unit_price: 1) # => revenue: 19
+
+			create(:invoice_item, item: item6, invoice: invoice3, quantity: 2, unit_price: 1)
+    end
 
     it "I see a list of the names of all the items and do not see other merchant items" do
       visit "/merchants/#{merchant1.id}/items"
@@ -18,8 +85,9 @@ RSpec.describe 'merchant items index page', type: :feature do
       expect(page).to have_content(item2.name)
       expect(page).to have_content(item3.name)
       expect(page).to have_content(item4.name)
+      expect(page).to have_content(item5.name)
 
-      expect(page).to_not have_content(item5.name)
+      expect(page).to_not have_content(item6.name)
     end
 
     it 'has a buttom next to each item to disable or enable that item' do
@@ -98,6 +166,44 @@ RSpec.describe 'merchant items index page', type: :feature do
 				click_link 'New Item'
 				
 				expect(current_path).to eq(new_merchant_item_path(merchant1))
+			end
+		end
+
+		describe 'Top 5 Most Popular Items' do
+			it 'has a section that shows the 5 most popular items' do
+				visit merchant_items_path(merchant1)
+				
+				within '#top_5_most_popular_items' do
+					expect(item3.name).to appear_before(item4.name)
+					expect(item4.name).to appear_before(item5.name)
+					expect(item5.name).to appear_before(item2.name)
+					expect(item2.name).to appear_before(item1.name)
+					expect(page).to_not have_content(item6.name)
+				end
+			end
+
+			it 'has links to merchant item show page for each item' do
+				visit merchant_items_path(merchant1)
+
+				within '#top_5_most_popular_items' do
+					expect(page).to have_link(item3.name)
+					expect(page).to have_link(item4.name)
+					expect(page).to have_link(item5.name)
+					expect(page).to have_link(item2.name)
+					expect(page).to have_link(item1.name)
+				end
+			end
+
+			it 'has total revenue shown next to the item' do
+				visit merchant_items_path(merchant1)
+				save_and_open_page
+				within '#top_5_most_popular_items' do
+					expect(page).to have_content("#{item3.name} - Total Revenue: $30")
+					expect(page).to have_content("#{item4.name} - Total Revenue: $24")
+					expect(page).to have_content("#{item5.name} - Total Revenue: $19")
+					expect(page).to have_content("#{item2.name} - Total Revenue: $7")
+					expect(page).to have_content("#{item1.name} - Total Revenue: $6")
+				end
 			end
 		end
   end
