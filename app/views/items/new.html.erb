@@ -1,0 +1,14 @@
+<h1>Create a New Item</h1>
+
+<%= form_with model: @items, url: "/items", method: :post, local: true do |f| %>
+  <%= f.hidden_field :merchant_id, value: "#{@merchant.id}"%>
+  <%= f.label :name, "Name:" %>
+  <%= f.text_field :name%>
+  <br>
+  <%= f.label :description, "Description:" %>
+  <%= f.text_field :description %>
+  <br>
+  <%= f.label :unit_price, "Unit Price:" %>
+  <%= f.text_field :unit_price %>
+  <%= f.submit "Submit" %>
+<% end %>
