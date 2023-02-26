@@ -48,6 +48,12 @@ RSpec.describe '#index' do
         expect(page).to have_button("Disable")
       end
     end
+
+    it 'I see a section for "enabled merchants" and "disabled merchants"' do
+      expect(page).to have_content("Enabled Merchants")
+      expect(page).to have_content("Disabled Merchants")
+      save_and_open_page
+    end
   end
   
 end
