@@ -37,7 +37,7 @@ end
         @invoice_item2 = FactoryBot.create(:invoice_item, quantity: 2, invoice_id: @invoice_1.id, unit_price: 15, item_id: @item_1.id)
 
         visit "/admin/invoices/#{@invoice_1.id}"
-
+save_and_open_page
         expect(page).to have_content("Total Revenue Generated from this Invoice: 35")
 
       end
