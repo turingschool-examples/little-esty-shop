@@ -8,6 +8,12 @@ RSpec.describe 'Admin Dashboard' do
     Item.destroy_all
     Transaction.destroy_all
     InvoiceItem.destroy_all
+    w = Date.new(2019, 7, 18)
+    x = Date.new(2020, 8, 17)
+    y = Date.new(2020, 10, 9)
+    z = Date.new(2016, 8, 3)
+
+
     @merchant = Merchant.create!(name: "Carlos Jenkins") 
     @cust1 = Customer.create!(first_name: "Laura", last_name: "Fiel")
     @cust2 = Customer.create!(first_name: "Bob", last_name: "Fiel")
@@ -20,10 +26,10 @@ RSpec.describe 'Admin Dashboard' do
     @inv3 = @cust3.invoices.create!(status: 1)
     @inv4 = @cust4.invoices.create!(status: 1)
     @inv5 = @cust6.invoices.create!(status: 1)
-    @inv6 = @cust5.invoices.create!(status: 0)
-    @inv7 = @cust6.invoices.create!(status: 0)
-    @inv8 = @cust6.invoices.create!(status: 0)
-    @inv9 = @cust4.invoices.create!(status: 0)
+    @inv6 = @cust5.invoices.create!(status: 0, created_at: w)
+    @inv7 = @cust6.invoices.create!(status: 0, created_at: x)
+    @inv8 = @cust6.invoices.create!(status: 0, created_at: y)
+    @inv9 = @cust4.invoices.create!(status: 0, created_at: z)
 
     
     
@@ -122,28 +128,10 @@ RSpec.describe 'Admin Dashboard' do
       #NEED TO ASK ABOUT STUBBING HERE FOR A MORE ACCURATE TEST!
       it 'Next to each invoice id I see the date that the invoice was created formatted like "Monday, July 18, 2019"' do
         within '#incomplete_invoices' do
-          # w = Date.new(2019, 7, 18)
-          # x = Date.new(2020, 8, 17)
-          # y = Date.new(2020, 10, 9)
-          # z = Date.new(2016, 8, 3)
-          
-          # Invoice.update(@inv6.id, :created_at => w)
-          # Invoice.update(@inv7.id, :created_at => x)
-          # Invoice.update(@inv8.id, :created_at => y)
-          # Invoice.update(@inv9.id, :created_at => z)
-          # InvoiceItem.update(@invit6.id, :created_at => w)
-          # Item.update(@bowl.id, :created_at => z)
-
-          # allow(@inv6).to receive(:created_at).and_return(Date.new(2019, 7, 18))
-          # allow(@inv7).to receive(:created_at).and_return(Date.new(2020, 8, 17))
-          # allow(@inv8).to receive(:created_at).and_return(Date.new(2020, 10, 9))
-          # allow(@inv9).to receive(:created_at).and_return(Date.new(2016, 8, 3))
-
-          # expect(page).to have_content("Monday, July 18, 2019")
-          # expect(page).to have_content("Monday, August 17, 2020")
-          # expect(page).to have_content("Friday, October 19, 2020")
-          # expect(page).to have_content("Wednesday, August 3, 2016")
-          expect(page).to have_content("Saturday, February 25, 2023", count: 4)
+          expect(page).to have_content("Thursday, July 18, 2019")
+          expect(page).to have_content("Monday, August 17, 2020")
+          expect(page).to have_content("Friday, October 9, 2020")
+          expect(page).to have_content("Wednesday, August 3, 2016")
         end
       end
      
@@ -151,7 +139,10 @@ RSpec.describe 'Admin Dashboard' do
         within '#incomplete_invoices' do
           save_and_open_page
          
-          expect(page).to have_content("Invoice From Saturday, February 25, 2023: #{@inv6.id}\nInvoice From Saturday, February 25, 2023: #{@inv7.id}\nInvoice From Saturday, February 25, 2023: #{@inv8.id}\nInvoice From Saturday, February 25, 2023: #{@inv9.id}")
+          expect("Wednesday, August 3, 2016").to appear_before("Thursday, July 18, 2019")
+          expect("Thursday, July 18, 2019").to appear_before("Monday, August 17, 2020")
+          expect("Monday, August 17, 2020").to appear_before("Friday, October 9, 2020")
+
         end
       end
     end
