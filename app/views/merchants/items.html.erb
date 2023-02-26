@@ -5,7 +5,10 @@
 <ul>
 
   <% @merchant.items.each do |item| %>
-    <div id= "merchant_item-<&= item.id &>">
-     <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p></li>
-    </div>
+    <div id= "item-<%= item.id %>">
+        <li><p><%= link_to item.name, "/merchants/#{item.merchant_id}/items/#{item.id}" %> </p></li>
+      <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |f| %>
+        <li><p>Status: <%= item.status %> Change Status: <%= f.button "Disable", type: "submit", name: "status", value: "disabled" %> <%= f.button "Enable", type: "submit", name: "status", value: "enabled" %></p></li>
+      <% end %>
+    </div> %>
   <% end %>
