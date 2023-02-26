@@ -3,6 +3,7 @@
 <h2>Created On: <%= render partial: 'admin/formatted_created_at', locals: {x: @invoice} %> </h2>
 <h2>Customer Name: <%= @invoice.customer.first_name%> <%=@invoice.customer.last_name%></h2>
 <div id="invoice_items">
+<h2>Total Revenue: $<%= sprintf("%.2f", (@invoice.total_revenue/100.00))%>
 <h2>Invoice Items:</h2>
   <% @invoice.invoice_items.each do |invoice_item| %>
     <div id="<%=invoice_item.id%>">
