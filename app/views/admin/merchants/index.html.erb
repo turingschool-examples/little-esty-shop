@@ -23,3 +23,17 @@
     </div>
   <% end %>
 </div>
+
+<div id="top_merchants">
+  <h3>Top Merchants</h3>
+  <ol>
+    <% @top_merchants_by_revenue.each do |merchant| %>
+      <div id="top_merchant-<%= merchant.id %>">
+        <li>
+          <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
+          <%= "- #{number_to_currency((merchant.revenue.to_f/100).truncate, precision: 0)} in sales" %>
+        </li>
+      </div>
+    <% end %>
+  </ol>
+</div>
