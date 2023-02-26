@@ -10,9 +10,11 @@ class Merchant < ApplicationRecord
   enum status: [:disabled, :enabled]
 
   def top_five_customers
-    customers.joins(:transactions).where(transactions: {result: 'success'})
+    customers.joins(:transactions)
+    .where(transactions: {result: 'success'})
     .select("customers.*, count(DISTINCT transactions.id) as transaction_count")
-    .group("customers.id").order("transaction_count desc").limit(5)
+    .group("customers.id")
+    .order("transaction_count desc").limit(5)
   end
   
  #  def self.top_5_by_revenue
