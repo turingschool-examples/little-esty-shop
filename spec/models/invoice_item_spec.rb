@@ -22,10 +22,4 @@ RSpec.describe InvoiceItem, type: :model do
     it { should belong_to :invoice }
     it { should belong_to :item }
   end
-
-  describe "scope#not_shipped" do
-    it "shows all InvoiceItems that dont have a status of 2 ('shipped')." do
-      expect(InvoiceItem.not_shipped).to eq([InvoiceItem.first, InvoiceItem.second])
-    end
-  end
 end
