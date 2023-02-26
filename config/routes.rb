@@ -13,6 +13,7 @@ namespace :admin do
   get '/merchants/:id', to: 'merchants#show'
   get '/merchants/:id/edit', to: "merchants#edit"
   patch '/merchants/:id', to: "merchants#update"
+  patch '/invoices/:invoice_id', to: "invoices#update"
   # get "/invoices", to: "invoices#index"
   # get "/invoices/:invoice_id", to: "invoices#show"
   # resources :invoices, only: [:index, :show, :update]
