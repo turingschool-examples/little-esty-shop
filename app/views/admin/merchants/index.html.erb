@@ -7,7 +7,7 @@
           <div id=<%=merchant.id %>>
             <li>
               <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> Status: <%= merchant.status %>
-              <%= form_with url:admin_merchant_path(merchant.id), model: @merchant, method: :patch, local: true do |form|  %> 
+              <%= form_with url:admin_merchant_path(merchant.id), model: merchant, method: :patch, local: true do |form|  %> 
                 <%= form.hidden_field :status, value: :disabled %>
                 <%= form.hidden_field :to_index %>
                 <%= form.submit 'Disable' %>
@@ -27,7 +27,7 @@
         <div id=<%=merchant.id %>>
           <li>
             <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> Status: <%= merchant.status %>
-            <%= form_with url:admin_merchant_path(merchant.id), model: @merchant, method: :patch, local: true do |form|  %> 
+            <%= form_with url:admin_merchant_path(merchant.id), model: merchant, method: :patch, local: true do |form|  %> 
               <%= form.hidden_field :status, value: :enabled %>
               <%= form.hidden_field :to_index %>
               <%= form.submit 'Enable' %>
