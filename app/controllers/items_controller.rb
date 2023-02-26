@@ -9,8 +9,11 @@ class ItemsController < ApplicationController
   end
 
   def create
-    require 'pry'; binding.pry
+    merchant = Merchant.find(params[:merchant_id])
+    Item.create!(item_params)
+    redirect_to "/merchants/#{merchant.id}/items"
   end
+  
   def edit
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:item_id])
