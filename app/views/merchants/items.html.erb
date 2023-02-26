@@ -4,7 +4,6 @@
 <p><%= link_to "Create a New Item", "/merchants/#{@merchant.id}/items/new" %></p>
 
 <ul>
-
   <% @merchant.items.each do |item| %>
     <div id= "item-<%= item.id %>">
         <li><p><%= link_to item.name, "/merchants/#{item.merchant_id}/items/#{item.id}" %> </p></li>
@@ -13,3 +12,4 @@
       <% end %>
     </div> %>
   <% end %>
+</ul>
