@@ -123,8 +123,53 @@ describe 'Admin Merchants index page' do
         end
       end
 
-      it 'should change merchant status' do
+      it 'should change merchant status, which is reflected on page (enable)' do
+        within("div##{@merchant1.id}") do
+          expect(page).to have_content("#{@merchant1.name} Status: disabled")
+          click_button('Enable')
+          expect(page).to_not have_content("#{@merchant1.name} Status: disabled")
+          expect(page).to have_content("#{@merchant1.name} Status: enabled")
+        end
+      end
 
+      it 'should change merchant status, which is reflected on page (disable)' do
+        within("div##{@merchant3.id}") do
+          expect(page).to have_content("#{@merchant3.name} Status: enabled")
+          click_button('Disable')
+          expect(page).to_not have_content("#{@merchant3.name} Status: enabled")
+          expect(page).to have_content("#{@merchant3.name} Status: disabled")
+        end
+      end
+
+      describe 'admin merchants are grouped by status' do
+        describe 'enabled group' do
+          it 'should have a header' do
+            within("div#enabled") do
+              expect(page).to have_content('Enabled Merchants:')
+            end
+          end
+
+          it 'should have each enabled merchant' do
+            within("div#enabled") do
+              expect(page).to have_content("#{@merchant3.name} Status: enabled")
+              expect(page).to have_content("#{@merchant4.name} Status: enabled")
+            end
+          end
+        end
+        describe 'disabled group' do
+          it 'should have a header' do
+            within("div#disabled") do
+              expect(page).to have_content('Disabled Merchants:')
+            end
+          end
+
+          it 'should have each enabled merchant' do
+            within("div#disabled") do
+              expect(page).to have_content("#{@merchant1.name} Status: disabled")
+              expect(page).to have_content("#{@merchant2.name} Status: disabled")
+            end
+          end
+        end
       end
 
     end
