@@ -22,7 +22,6 @@ class MerchantItemsController < ApplicationController
     @item = Item.new(item_params)
     
     if @item.save
-      @merchant.items.create!(item_params)
       redirect_to "/merchants/#{@merchant.id}/items"
     else
       flash[:notice] = "Item not created: Required information missing"
