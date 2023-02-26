@@ -127,7 +127,7 @@ GEM
     orderly (0.1.1)
       capybara (>= 1.1)
       rspec (>= 2.14)
-    pg (1.4.5)
+    pg (1.4.6)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
