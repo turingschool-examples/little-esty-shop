@@ -76,5 +76,42 @@ RSpec.describe 'Merchant Items Index' do
         end
       end
     end
+
+    describe 'I see a link to create a new item' do
+      it "When I click on the link, I am taken to a form to add item information" do
+        visit "/merchants/#{@carlos.id}/items"
+        expect(page).to have_link("Create New Item")
+
+        click_link "Create New Item"
+        expect(current_path).to eq("/merchants/#{@carlos.id}/items/new")
+      end
+
+      describe 'After a new item form is submitted' do
+        it 'I see the item I just created in the items list with disabled status' do
+          visit "/merchants/#{@carlos.id}/items/new"
+
+          fill_in :name, with: "Teacup"
+          fill_in :description, with: "Here's a Teacup"
+          fill_in :unit_price, with: 300
+  
+          click_button "Create Item"
+          
+          expect(page).to have_content("Teacup")
+          expect(current_path).to eq("/merchants/#{@carlos.id}/items")
+        end
+
+        it "If the information is not valid or missing, item is not created" do
+          visit "/merchants/#{@carlos.id}/items/new"
+
+          fill_in :name, with: ""
+          fill_in :description, with: "Here's a Teacup"
+          fill_in :unit_price, with: 300
+
+          click_button "Create Item"
+          expect(current_path).to eq("/merchants/#{@carlos.id}/items/new")
+          expect(page).to have_content("Item not created: Required information missing")
+        end
+      end
+    end
   end
 end
