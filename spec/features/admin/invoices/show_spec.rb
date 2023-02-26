@@ -27,7 +27,6 @@ describe "Admin Invoice Show Page" do
 
           expect(page).to have_content("Thursday, July 18, 2019")
 
-          save_and_open_page
         end
 
         it "Customer first and last name" do
