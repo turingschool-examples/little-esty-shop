@@ -34,7 +34,7 @@ describe 'Admin Invoices show page' do
 
       it "I see the total revenue that will be generated from this invoice" do
         visit admin_invoice_path(invoice_2)
-
+        
         expect(page).to have_content("Total revenue to be generated: 180")
       end
     end
