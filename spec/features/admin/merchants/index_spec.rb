@@ -30,6 +30,23 @@ RSpec.describe '#index' do
 
       expect(current_path).to eq "/admin/merchants/#{@merchant1.id}"
     end
+
+    it 'I see a button to enable or disable merchants next to their name' do
+      
+      within "#id-#{@merchant1.id}" do
+        expect(page).to have_button("Disable")
+        click_button "Disable"
+        expect(current_path).to eq admin_merchants_path
+        expect(page).to have_button("Enable")
+      end
+
+      within "##{@merchant2.id}" do
+      expect(page).to have_button("Disable")
+      click_button "Disable"
+      expect(current_path).to eq admin_merchants_path
+      expect(page).to have_button("Enable")
+      end
+    end
   end
   
 end
