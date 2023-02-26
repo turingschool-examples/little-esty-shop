@@ -15,19 +15,6 @@ class Item < ApplicationRecord
     where(merchant_id: params[:merchant_id]).where(status: "enabled")
   end
 
-  # def self.five_popular_items(merchant_id)
-  #   select('items.*, SUM(invoice_items.unit_price* invoice_items.quantity) as revenue_generated')
-  #     .joins(:merchant)
-  #     .where(merchants: {id: merchant_id})
-  #     .joins(:transactions)
-  #     .where(transactions: {result: "success"})
-  #     .joins(:invoice_items)
-  #     .group(:id)
-  #     .order('revenue_generated DESC')
-  #     .limit(5)
-
-  # end
-
   def self.five_popular_items
     select('items.*, SUM(invoice_items.unit_price* invoice_items.quantity) as revenue_generated')
       .joins(:transactions)

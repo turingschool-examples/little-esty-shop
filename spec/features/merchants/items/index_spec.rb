@@ -251,8 +251,6 @@ RSpec.describe 'Merchant/Items Index Page' do
       @invoiceitems10 = FactoryBot.create(:invoice_item, invoice: @invoice3, item: @item[8], unit_price: 1, quantity: 1)
       @invoiceitems11 = FactoryBot.create(:invoice_item, invoice: @invoice8, item: @item[8], unit_price: 1, quantity: 1)
 
-require 'pry'; binding.pry
-
       visit "/merchants/#{@merchant.id}/items"
         within("div#5_most_popular_items") do 
           expect(page).to have_content("#{@item[0].name}") 
@@ -271,6 +269,45 @@ require 'pry'; binding.pry
           expect(page).to have_content("Top selling date for #{@item[8].name} was #{@invoice8.created_at.strftime("%B %d, %Y")}")
         end
       end
+
+      it "next to each of the 5 most popular items I see the date with the most sales for each item-edge case: if there are two dates with the same number of transactions, then show the most recent date" do 
+      
+        @merchant= FactoryBot.create(:merchant)
+        @item = FactoryBot.create_list(:item, 10, merchant: @merchant)
+        @customer = FactoryBot.create(:customer)
+  
+        @invoice1= FactoryBot.create(:invoice, status: 0, customer: @customer, created_at: Time.new(2023, 1, 1, 0, 0, 0))
+        @invoice2= FactoryBot.create(:invoice, status: 0, customer: @customer, created_at: Time.new(2015, 1, 1, 0, 0, 0))
+        @invoice3= FactoryBot.create(:invoice, status: 0, customer: @customer, created_at: Time.new(2017, 1, 1, 0, 0, 0))
+
+
+
+        @transactions20 = FactoryBot.create(:transaction, invoice: @invoice3, result: 0)
+        # @transactions1 = FactoryBot.create(:transaction, invoice: @invoice1, result: 0)
+        @transactions2 = FactoryBot.create(:transaction, invoice: @invoice2, result: 0)
+        @transactions3 = FactoryBot.create(:transaction, invoice: @invoice3, result: 0)
+        @transactions4 = FactoryBot.create(:transaction, invoice: @invoice2, result: 0)
+        
+
+        @invoiceitems1 = FactoryBot.create(:invoice_item, invoice: @invoice1, item: @item[0], unit_price: 1, quantity: 1)
+        @invoiceitems3 = FactoryBot.create(:invoice_item, invoice: @invoice3, item: @item[0], unit_price: 1, quantity: 1)
+        @invoiceitems2 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item[0], unit_price: 1, quantity: 1)
+
+        @invoiceitems1 = FactoryBot.create(:invoice_item, invoice: @invoice1, item: @item[1], unit_price: 1, quantity: 1)
+        @invoiceitems3 = FactoryBot.create(:invoice_item, invoice: @invoice3, item: @item[1], unit_price: 1, quantity: 1)
+        @invoiceitems2 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item[1], unit_price: 1, quantity: 1)
+  
+        visit "/merchants/#{@merchant.id}/items"
+        save_and_open_page
+          within("div#5_most_popular_items") do 
+            expect(page).to have_content("#{@item[0].name}") 
+            expect(page).to have_content("Top selling date for #{@item[0].name} was #{@invoice3.created_at.strftime("%B %d, %Y")}")
+
+            expect(page).to have_content("#{@item[1].name}") 
+            expect(page).to have_content("Top selling date for #{@item[1].name} was #{@invoice3.created_at.strftime("%B %d, %Y")}")
+
+          end
+        end
 
   end #as a merchant
 end 

@@ -10,23 +10,11 @@ class Invoice < ApplicationRecord
     invoice_items.sum("unit_price * quantity")
   end
 
-  # def self.best_date_sales(item_id) #US 13 Iteration 1
-  #   require 'pry'; binding.pry
-  #   select('invoices.*, SUM(invoice_items.unit_price* invoice_items.quantity) as revenue_generated')
-  #     .joins(:invoice_items)
-  #     .where(invoice_items: {item_id: item_id})
-  #     .group(:id)
-  #     .order('revenue_generated DESC')
-  #     .limit(1)
-  # end
-
-  def self.most_transactions_date(item_id)
-    joins(:items)
-    .where(items: {id: item_id})
-    .joins(:transactions)
+  def self.most_transactions_date
+    joins(:transactions)
     .where(transactions: {result: "success"})
     .group(:id)
-    .order('COUNT(transactions.id)DESC')
+    .order('COUNT(transactions.id)DESC, created_at DESC')
     .limit(1)
   end
 end

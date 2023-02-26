@@ -11,8 +11,7 @@ class Merchants::ItemsController < ApplicationController
     @five_popular_items_hash = Hash.new
 
     five_popular_items_variable.each do |item| 
-      # require 'pry'; binding.pry
-      date = Invoice.most_transactions_date(item.id)
+      date = item.invoices.most_transactions_date
       @five_popular_items_hash[item] = [date.first.created_at, item.revenue_generated]
     end
   end

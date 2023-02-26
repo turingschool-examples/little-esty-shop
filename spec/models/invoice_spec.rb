@@ -36,9 +36,35 @@ RSpec.describe Invoice, type: :model do
       @invoiceitems3 = FactoryBot.create(:invoice_item, invoice: @invoice3, item: @item[1], unit_price: 1, quantity: 1)
 
       
-      expect(Invoice.most_transactions_date(@item[1].id)).to eq([@invoice2])
+      expect(@item[1].invoices.most_transactions_date).to eq([@invoice2])
 
       end 
+
+      it "when provided with an item belonging to a specific merchant, can calculate the invoice date on which the item has the most successful transactions" do 
+      
+        @merchant= FactoryBot.create(:merchant)
+        @item = FactoryBot.create_list(:item, 2, merchant: @merchant)
+        @customer = FactoryBot.create(:customer)
+  
+        @invoice1= FactoryBot.create(:invoice, status: 0, customer: @customer, created_at: Time.new(2023, 1, 1, 0, 0, 0))
+        @invoice2= FactoryBot.create(:invoice, status: 0, customer: @customer, created_at: Time.new(2015, 1, 1, 0, 0, 0))
+        @invoice3= FactoryBot.create(:invoice, status: 0, customer: @customer, created_at: Time.new(2017, 1, 1, 0, 0, 0))
+  
+        @transactions1 = FactoryBot.create(:transaction, invoice: @invoice1, result: 0)
+        
+        @transactions2 = FactoryBot.create(:transaction, invoice: @invoice2, result: 0)
+        @transactions3 = FactoryBot.create(:transaction, invoice: @invoice3, result: 0)
+        @transactions4 = FactoryBot.create(:transaction, invoice: @invoice2, result: 0)
+        @transactions5 = FactoryBot.create(:transaction, invoice: @invoice3, result: 0)
+
+        @invoiceitems1 = FactoryBot.create(:invoice_item, invoice: @invoice1, item: @item[1], unit_price: 1, quantity: 1)
+        @invoiceitems2 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item[1], unit_price: 1, quantity: 1)
+        @invoiceitems3 = FactoryBot.create(:invoice_item, invoice: @invoice3, item: @item[1], unit_price: 1, quantity: 1)
+  
+        
+        expect(@item[1].invoices.most_transactions_date).to eq([@invoice3])
+  
+        end 
     end
 
     describe 'instance methods' do
