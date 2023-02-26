@@ -65,28 +65,28 @@ RSpec.describe Merchant, type: :model do
         create(:transaction, invoice: invoice_12, result: 0)
 
 
-        #merchant 3 - 19 revenue
+        #merchant 3 - 1900000 revenue
         invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice_1, unit_price: 3, quantity: 300000)
         invoice_item_2 = create(:invoice_item, item: item_1, invoice: invoice_2, unit_price: 2, quantity: 500000)
         invoice_item_3 = create(:invoice_item, item: item_1, invoice: invoice_3, unit_price: 1, quantity: 5000000)
 
-        #merchant 1 - 50 revenue
+        #merchant 1 - 5000000 revenue
         invoice_item_4 = create(:invoice_item, item: item_2, invoice: invoice_4, unit_price: 2, quantity: 2000000)
         invoice_item_5 = create(:invoice_item, item: item_2, invoice: invoice_5, unit_price: 2, quantity: 500000)
         invoice_item_6 = create(:invoice_item, item: item_2, invoice: invoice_6, unit_price: 2, quantity: 50000000)
 
-        #merchant 5 - 100 revenue
+        #merchant 5 - 10000000 revenue
         invoice_item_7 = create(:invoice_item, item: item_3, invoice: invoice_7, unit_price: 3, quantity: 2500000)
         invoice_item_8 = create(:invoice_item, item: item_3, invoice: invoice_8, unit_price: 5, quantity: 500000)
         invoice_item_9 = create(:invoice_item, item: item_3, invoice: invoice_9, unit_price: 2, quantity: 500000000)
 
-        #merchant 2 - 10 revenue
+        #merchant 2 - 1000000 revenue
         invoice_item_10 = create(:invoice_item, item: item_4, invoice: invoice_10, unit_price: 1, quantity: 1000000)
 
-        #merchant 4 - 15 revenue 
+        #merchant 4 - 1500000 revenue 
         invoice_item_11 = create(:invoice_item, item: item_5, invoice: invoice_11, unit_price: 1, quantity: 1500000)
 
-        #merchant 6 - 5 revenue
+        #merchant 6 - 500000 revenue
         invoice_item_12 = create(:invoice_item, item: item_6, invoice: invoice_12, unit_price: 1, quantity: 500000)
 
         expect(Merchant.top_five_merchants_by_revenue).to eq([@merchant_5, @merchant_1, @merchant_3, @merchant_4, @merchant_2])
