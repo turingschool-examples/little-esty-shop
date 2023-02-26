@@ -21,17 +21,17 @@ RSpec.describe 'merchant items index page', type: :feature do
     let!(:customer6) { create(:customer)}
   
 
-    let!(:invoice1) { create(:completed_invoice, customer: customer1, created_at: Date.new(2014, 3, 1))}
-    let!(:invoice2) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 1))}
-    let!(:invoice3) { create(:completed_invoice, customer: customer2)} 
-    let!(:invoice4) { create(:completed_invoice, customer: customer2)}
-    let!(:invoice5) { create(:completed_invoice, customer: customer3)}
-    let!(:invoice6) { create(:completed_invoice, customer: customer3)}
-    let!(:invoice7) { create(:completed_invoice, customer: customer4)}
-    let!(:invoice8) { create(:completed_invoice, customer: customer5)}
-    let!(:invoice9) { create(:completed_invoice, customer: customer5)}
-    let!(:invoice10) { create(:completed_invoice, customer: customer6)}
-    let!(:invoice11) { create(:completed_invoice, customer: customer6)}
+    let!(:invoice1) { create(:completed_invoice, customer: customer1, created_at: Date.new(2014, 4, 1))}
+    let!(:invoice2) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 2))}
+    let!(:invoice3) { create(:completed_invoice, customer: customer2,  created_at: Date.new(2012, 3, 2))} 
+    let!(:invoice4) { create(:completed_invoice, customer: customer2,  created_at: Date.new(2012, 3, 2))}
+    let!(:invoice5) { create(:completed_invoice, customer: customer3,  created_at: Date.new(2012, 3, 3))}
+    let!(:invoice6) { create(:completed_invoice, customer: customer3,  created_at: Date.new(2012, 3, 4))}
+    let!(:invoice7) { create(:completed_invoice, customer: customer4,  created_at: Date.new(2012, 3, 3))}
+    let!(:invoice8) { create(:completed_invoice, customer: customer5,  created_at: Date.new(2012, 3, 1))}
+    let!(:invoice9) { create(:completed_invoice, customer: customer5,  created_at: Date.new(2012, 3, 1))}
+    let!(:invoice10) { create(:completed_invoice, customer: customer6,  created_at: Date.new(2012, 3, 2))}
+    let!(:invoice11) { create(:completed_invoice, customer: customer6,  created_at: Date.new(2012, 3, 2))}
    
 		let!(:transaction1) {create(:transaction, invoice: invoice1) }
 		let!(:transaction2) {create(:transaction, invoice: invoice2) }
@@ -42,7 +42,6 @@ RSpec.describe 'merchant items index page', type: :feature do
 		let!(:transaction7) {create(:transaction, invoice: invoice8) }
 		let!(:transaction8) {create(:transaction, invoice: invoice9) }
 		let!(:transaction9) {create(:failed_transaction, invoice: invoice10) }
-		# let!(:transaction10) {create(:transaction, invoice: invoice10) }
 		let!(:transaction11) {create(:transaction, invoice: invoice11) }
 		let!(:transaction14) {create(:failed_transaction, invoice: invoice7) }
 		let!(:transaction15) {create(:transaction, invoice: invoice7) }
@@ -53,27 +52,27 @@ RSpec.describe 'merchant items index page', type: :feature do
 			create(:invoice_item, item: item1, invoice: invoice4, quantity: 1, unit_price: 1)
 			create(:invoice_item, item: item1, invoice: invoice5, quantity: 1, unit_price: 1)
 			create(:invoice_item, item: item1, invoice: invoice8, quantity: 1, unit_price: 1)
-			create(:invoice_item, item: item1, invoice: invoice11, quantity: 1, unit_price: 1) # => revenue: 6
+			create(:invoice_item, item: item1, invoice: invoice11, quantity: 1, unit_price: 1)
 	
 			create(:invoice_item, item: item2, invoice: invoice1, quantity: 2, unit_price: 1)
 			create(:invoice_item, item: item2, invoice: invoice5, quantity: 2, unit_price: 1)
 			create(:invoice_item, item: item2, invoice: invoice9, quantity: 2, unit_price: 1)
-			create(:invoice_item, item: item2, invoice: invoice6, quantity: 1, unit_price: 1) # => revenue: 7
+			create(:invoice_item, item: item2, invoice: invoice6, quantity: 1, unit_price: 1)
 	
 			create(:invoice_item, item: item3, invoice: invoice8, quantity: 1, unit_price: 6)
 			create(:invoice_item, item: item3, invoice: invoice9, quantity: 1, unit_price: 6)
-			create(:invoice_item, item: item3, invoice: invoice10, quantity: 1, unit_price: 6) ### => failed transaction
+			create(:invoice_item, item: item3, invoice: invoice10, quantity: 1, unit_price: 6)
 			create(:invoice_item, item: item3, invoice: invoice3, quantity: 1, unit_price: 6)
-			create(:invoice_item, item: item3, invoice: invoice6, quantity: 2, unit_price: 6) # => revenue: 30
+			create(:invoice_item, item: item3, invoice: invoice6, quantity: 2, unit_price: 6)
 	
-			create(:invoice_item, item: item4, invoice: invoice10, quantity: 1, unit_price: 6) ### => failed transaction
+			create(:invoice_item, item: item4, invoice: invoice10, quantity: 1, unit_price: 6)
 			create(:invoice_item, item: item4, invoice: invoice11, quantity: 1, unit_price: 6)
 			create(:invoice_item, item: item4, invoice: invoice2, quantity: 1, unit_price: 6)
 			create(:invoice_item, item: item4, invoice: invoice3, quantity: 1, unit_price: 6)
-			create(:invoice_item, item: item4, invoice: invoice4, quantity: 1, unit_price: 6) # => revenue: 24
+			create(:invoice_item, item: item4, invoice: invoice4, quantity: 1, unit_price: 6)
 	
 			create(:invoice_item, item: item5, invoice: invoice7, quantity: 3, unit_price: 6)
-			create(:invoice_item, item: item5, invoice: invoice3, quantity: 1, unit_price: 1) # => revenue: 19
+			create(:invoice_item, item: item5, invoice: invoice3, quantity: 1, unit_price: 1)
 
 			create(:invoice_item, item: item6, invoice: invoice3, quantity: 2, unit_price: 1)
     end
@@ -196,13 +195,45 @@ RSpec.describe 'merchant items index page', type: :feature do
 
 			it 'has total revenue shown next to the item' do
 				visit merchant_items_path(merchant1)
+				
+				within "#top_5_most_popular_items" do
+					within "##{item3.id}_popular_item" do
+						expect(page).to have_content("$30 in sales")
+					end
+					within "##{item4.id}_popular_item" do
+						expect(page).to have_content("$24 in sales")
+					end
+					within "##{item5.id}_popular_item" do
+						expect(page).to have_content("$19 in sales")
+					end
+					within "##{item2.id}_popular_item" do
+						expect(page).to have_content("$7 in sales")
+					end
+					within "##{item1.id}_popular_item" do
+						expect(page).to have_content("$6 in sales")
+					end
+				end
+			end
+
+			it 'has date with most sales shown next to the item' do
+				visit merchant_items_path(merchant1)
 				save_and_open_page
-				within '#top_5_most_popular_items' do
-					expect(page).to have_content("#{item3.name} - Total Revenue: $30")
-					expect(page).to have_content("#{item4.name} - Total Revenue: $24")
-					expect(page).to have_content("#{item5.name} - Total Revenue: $19")
-					expect(page).to have_content("#{item2.name} - Total Revenue: $7")
-					expect(page).to have_content("#{item1.name} - Total Revenue: $6")
+				within "#top_5_most_popular_items" do
+					within "##{item3.id}_popular_item" do
+						expect(page).to have_content("Top day for #{item3.name} was 03/01/2012")
+					end
+					within "##{item4.id}_popular_item" do
+						expect(page).to have_content("Top day for #{item4.name} was 03/02/2012")
+					end
+					within "##{item5.id}_popular_item" do
+						expect(page).to have_content("Top day for #{item5.name} was 03/03/2012")
+					end
+					within "##{item2.id}_popular_item" do
+						expect(page).to have_content("Top day for #{item2.name} was 04/01/2014")
+					end
+					within "##{item1.id}_popular_item" do
+						expect(page).to have_content("Top day for #{item1.name} was 03/02/2012")
+					end
 				end
 			end
 		end

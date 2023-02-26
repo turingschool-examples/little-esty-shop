@@ -12,17 +12,17 @@ RSpec.describe Item, type: :model do
   let!(:customer1) { Customer.create!(first_name: "Britney", last_name: "Spears") }
 	let!(:customer2) { Customer.create!(first_name: "Bob", last_name: "Smith") }
 
-	let!(:invoice1) { create(:completed_invoice, customer: customer1, created_at: Date.new(2014, 3, 1))}
-	let!(:invoice2) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 1))}
-	let!(:invoice3) { create(:completed_invoice, customer: customer2)} 
-	let!(:invoice4) { create(:completed_invoice, customer: customer1)}
-	let!(:invoice5) { create(:completed_invoice, customer: customer1)}
-	let!(:invoice6) { create(:completed_invoice, customer: customer2)}
-	let!(:invoice7) { create(:completed_invoice, customer: customer2)}
-	let!(:invoice8) { create(:completed_invoice, customer: customer1)}
-	let!(:invoice9) { create(:completed_invoice, customer: customer1)}
-	let!(:invoice10) { create(:completed_invoice, customer: customer1)}
-	let!(:invoice11) { create(:completed_invoice, customer: customer1)}
+	let!(:invoice1) { create(:completed_invoice, customer: customer1, created_at: Date.new(2014, 4, 1))} ##
+	let!(:invoice2) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 2))}
+	let!(:invoice3) { create(:completed_invoice, customer: customer2,  created_at: Date.new(2012, 3, 2))} ##
+	let!(:invoice4) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 2))}
+	let!(:invoice5) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 3))}
+	let!(:invoice6) { create(:completed_invoice, customer: customer2,  created_at: Date.new(2012, 3, 4))}
+	let!(:invoice7) { create(:completed_invoice, customer: customer2,  created_at: Date.new(2012, 3, 3))}
+	let!(:invoice8) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 1))} ##
+	let!(:invoice9) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 3))} ##
+	let!(:invoice10) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 2))} ##
+	let!(:invoice11) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 2))}
 
   let!(:item1) {create(:item, merchant: merchant1, name: 'item1')}  
   let!(:item2) {create(:item, merchant: merchant1, name: 'item2', status: 'enabled')}
@@ -60,11 +60,11 @@ RSpec.describe Item, type: :model do
 
 		InvoiceItem.create!(item: item3, invoice: invoice8, quantity: 412, unit_price: 1)
 		InvoiceItem.create!(item: item3, invoice: invoice9, quantity: 4322, unit_price: 1)
-		InvoiceItem.create!(item: item3, invoice: invoice10, quantity: 54, unit_price: 1) # => failed transaction
+		InvoiceItem.create!(item: item3, invoice: invoice10, quantity: 54, unit_price: 1)
 		InvoiceItem.create!(item: item3, invoice: invoice3, quantity: 453, unit_price: 1)
 		InvoiceItem.create!(item: item3, invoice: invoice1, quantity: 43, unit_price: 1)
 
-		InvoiceItem.create!(item: item4, invoice: invoice10, quantity: 1, unit_price: 1) # => failed transaction
+		InvoiceItem.create!(item: item4, invoice: invoice10, quantity: 1, unit_price: 1)
 		InvoiceItem.create!(item: item4, invoice: invoice11, quantity: 1, unit_price: 1)
 		InvoiceItem.create!(item: item4, invoice: invoice2, quantity: 1, unit_price: 1)
 		InvoiceItem.create!(item: item4, invoice: invoice3, quantity: 1, unit_price: 1)
@@ -96,6 +96,26 @@ RSpec.describe Item, type: :model do
 
 		it '::top_five_most_popular_items' do
 			expect(merchant1.items.top_five_most_popular_items).to eq([item3, item1, item2, item4, item6])
+		end
+
+		describe '#instance methods' do
+			describe '#best_day' do
+				it 'returns the best selling day for an item' do
+					expect(item1.best_day).to eq('03/02/2012')
+					expect(item2.best_day).to eq('04/01/2014')
+					expect(item3.best_day).to eq('03/02/2012')
+					expect(item4.best_day).to eq('03/02/2012')
+					expect(item5.best_day).to eq('03/03/2012')
+				end
+
+				it 'returns the most recent day if there are 2 best selling days' do
+					InvoiceItem.create!(item: item3, invoice: invoice9, quantity: 1, unit_price: 1)
+					# Adding this invoice to this item makes both 03/03 and 03/02 be the best selling day
+					# for the item. This means it returns 03/03 instead of 03/02
+					
+					expect(item3.best_day).to eq('03/03/2012')
+				end
+			end
 		end
   end
 end

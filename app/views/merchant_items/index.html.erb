@@ -1,29 +1,56 @@
+<style type="text/css">
+	.left{
+	width: 45%;
+	float: left;
+	}
 
-<%= link_to 'Create New Item', new_merchant_item_path(@merchant) %>
+	.right{
+	width: 45%;
+	float: right;
+	}
 
-<div id='top_5_most_popular_items'>
-	<h2>Top 5 Most Popular Items</h2>
-	<% @popular_items.each do |item| %>
-		<p><%= link_to item.name, merchant_item_path(@merchant, item) %> - Total Revenue: $<%= item.revenue %></p>
-	<% end %>
+	.my_items {
+		background-color: lightblue;
+		overflow: hidden;
+		text-align: center;
+	}
+</style>
+
+<div class='my_items'>
+	<h2 class='title'>My Items</h2>
 </div>
 
-<div id='disabled_items'>
-	<h2>Disabled Items</h2>
-	<%@disabled_items.each do |item|%>
-		<div id= "<%=item.id%>" >
-			<%=link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}"%> 
-			<%=button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", params:{status: 0}, method: :patch %>
-		</div>
-	<%end%>
+<div class="right">
+	<div id='top_5_most_popular_items'>
+		<h2>Top 5 Most Popular Items</h2>
+		<% @popular_items.each do |item| %>
+			<ol id="<%= item.id %>_popular_item">
+				<li><%= link_to item.name, merchant_item_path(@merchant, item) %> - <%= number_to_currency(item.revenue, precision: 0) %> in sales</li>
+				<p>Top day for <%= item.name %> was <%= item.best_day %></p> 
+			</ol>
+		<% end %>
+	</div>
 </div>
 
-<div id='enabled_items'>
-	<h2>Enabled Items</h2>
-	<%@enabled_items.each do |item|%>
-		<div id= "<%=item.id%>" > 
-			<%=link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}"%> 
-			<%=button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}", params:{status: 1}, method: :patch %>
-		</div>
-	<%end%>
+<div class="left">
+	<%= link_to 'New Item', new_merchant_item_path(@merchant) %>
+	<div id='enabled_items'>
+		<h2>Enabled Items</h2>
+		<%@enabled_items.each do |item|%>
+			<div id= "<%=item.id%>" > 
+				<%=link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}"%> 
+				<%=button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}", params:{status: 1}, method: :patch %>
+			</div>
+		<%end%>
+	</div>
+	<div id='disabled_items'>
+		<h2>Disabled Items</h2>
+		<%@disabled_items.each do |item|%>
+			<div id= "<%=item.id%>" >
+				<%=link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}"%> 
+				<%=button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", params:{status: 0}, method: :patch %>
+				<br>
+			</div>
+		<%end%>
+	</div>
 </div>
