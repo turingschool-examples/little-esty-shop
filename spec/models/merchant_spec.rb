@@ -61,12 +61,13 @@ RSpec.describe Merchant, type: :model do
 
     describe "::top_five_merchant_items" do
       it "returns the top 5 merchant items ranked by total revenue generated" do
+        # require 'pry'; binding.pry
         invoice_item_8 = create(:invoice_item, item: @item_1, invoice: @invoice_1, unit_price: 9000000, quantity: 3)
         invoice_item_9 = create(:invoice_item, item: @item_2, invoice: @invoice_2, unit_price: 8000000, quantity: 3)
         invoice_item_10 = create(:invoice_item, item: @item_3, invoice: @invoice_3, unit_price: 7000000, quantity: 3)
-        invoice_item_11 = create(:invoice_item, item: @item_4, invoice: @invoice_3, unit_price: 6000000, quantity: 3)
-        invoice_item_12 = create(:invoice_item, item: @item_5, invoice: @invoice_3, unit_price: 5000000, quantity: 3)
-        invoice_item_13 = create(:invoice_item, item: @item_6, invoice: @invoice_3, unit_price: 4000000, quantity: 3)
+        invoice_item_11 = create(:invoice_item, item: @item_4, invoice: @invoice_4, unit_price: 6000000, quantity: 3)
+        invoice_item_12 = create(:invoice_item, item: @item_5, invoice: @invoice_5, unit_price: 5000000, quantity: 3)
+        invoice_item_13 = create(:invoice_item, item: @item_6, invoice: @invoice_6, unit_price: 4000000, quantity: 3)
         expect(@merchant.top_five_merchant_items).to eq([@item_1, @item_2, @item_3, @item_4, @item_5])
       end
     end
