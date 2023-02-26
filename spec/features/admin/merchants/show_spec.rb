@@ -18,11 +18,12 @@ RSpec.describe '#show' do
       expect(current_path).to eq(edit_merchant_path(@merchant1))
 
       expect(page).to have_content("Carlos Jenkins")
-      save_and_open_page
       fill_in "Name", with: "Updated Merchant Name"
       click_button "Update Merchant"
-
+      
+      save_and_open_page
       expect(current_path).to eq(admin_merchant_path(@merchant1))
+      expect(page).to have_content("Merchant was successfully updated.")
       expect(page).to have_content("Updated Merchant Name")
     end
 
