@@ -4,6 +4,13 @@ class ItemsController < ApplicationController
     @items = Item.where(merchant_id: params[:merchant_id])
   end
 
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def create
+    require 'pry'; binding.pry
+  end
   def edit
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:item_id])
