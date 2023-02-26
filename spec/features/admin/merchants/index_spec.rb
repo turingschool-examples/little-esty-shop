@@ -93,21 +93,38 @@ describe 'Admin Merchants index page' do
 
     describe 'enable/disable button for each merchant' do
       before do 
-        @merchant1 = create(:merchant)
-        @merchant2 = create(:merchant)
-        @merchant3 = create(:merchant)
+        @merchant1 = create(:merchant, status: :disabled)
+        @merchant2 = create(:merchant, status: :disabled)
+        @merchant3 = create(:merchant, status: :enabled)
+        @merchant4 = create(:merchant, status: :enabled)
+        visit admin_merchants_path
       end
 
       it 'should be next to each merchant' do
-        
+        within("div##{@merchant1.id}") do
+          expect(page).to have_button('Enable')
+        end
+        within("div##{@merchant3.id}") do
+          expect(page).to have_button('Disable')
+        end
       end
 
-      it 'should redirect back to admin merchant index' do
-        
+      it 'should redirect back to admin merchant index (enable)' do
+        within("div##{@merchant1.id}") do
+          click_button('Enable')
+          expect(current_path).to eq(admin_merchants_path)
+        end
+      end
+
+      it 'should redirect back to admin merchant index (disable)' do
+        within("div##{@merchant3.id}") do
+          click_button('Disable')
+          expect(current_path).to eq(admin_merchants_path)
+        end
       end
 
       it 'should change merchant status' do
-        
+
       end
 
     end
