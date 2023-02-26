@@ -1,4 +1,4 @@
-<h3><%= @merchant.name %></h3>
+<h2><%= @merchant.name %></h2>
 
 <section id="inv_info">
   <h4>Invoice #<%= @invoice.id %></h4><br>
@@ -7,16 +7,17 @@
 </section>
 
 <section id="cust_info">
-  <h4>Customer:</h4>
+  <h3>Customer:</h3>
   <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %><p>
-</section>
+</section><br>
 
-<section>
-  <h4>Items on this Invoice:</h4>
+<section id="item_info">
+  <h3>Items on this Invoice:</h3>
     <% @invoice.items.each do |item| %>
-      <p>Item Name <%= item.name %> </p>
-      <p>Quantity <%= item.name %> </p>
-      <p>Unit Price <%= item.name %> </p>
-      <p>Status <%= item.name %> </p>
+      <p><strong>Item Name </strong><%= item.name %></p>
+      <p><strong>Quantity </strong><%= @invoice.find_invoiceitem_quantity(item) %></p>
+      <p><strong>Unit Price </strong><%= number_to_currency(@invoice.find_invoiceitem_unitprice(item) / 100) %></p>
+      <p><strong>Status </strong><%= @invoice.find_invoiceitem_status(item) %></p>
+      <br>
     <% end %>
 </section>
