@@ -5,4 +5,5 @@ class Merchant < ApplicationRecord
   has_many :customers, -> { distinct }, through: :invoices  
   has_many :transactions, -> { distinct }, through: :invoices
 
+  enum status: ["disabled", "enabled"]
 end
