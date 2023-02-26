@@ -14,15 +14,21 @@ RSpec.describe 'Items/new' do
       expect(page).to have_field(:unit_price)
       expect(page).to have_button("Submit")
     end
+  end
 
-    it 'I fill out info and click submit and I am taken back to the items index page' do
+  context 'I fill out info and click submit and I am taken back to the items index page' do
+    it 'the merchant/item index page shows the new information' do
       fill_in "Name:", with: "Doo-dad"
       fill_in "Description:", with: "Doo-dad things"
       fill_in "Unit Price:", with: "100"
 
       click_on "Submit"
 
-      expect(current_path).to eq("merchants/#{merchant1.id}/items")
+      expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+
+      expect(page).to have_content("Doo-dad")
+      expect(Item.first.status).to eq("disabled")
+      expect(page).to have_content("Status: disabled")
     end
   end
 end
