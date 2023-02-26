@@ -33,4 +33,13 @@ class Merchant < ApplicationRecord
   def self.disabled_merchants
     self.where(status: "Disabled")
   end
+
+  def self.top_five_merchants_by_revenue
+    self.joins(:transactions)
+      .select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+      .where(transactions: {result: 0})
+      .group(:id)
+      .order(revenue: :desc)
+      .limit(5)
+  end
 end
