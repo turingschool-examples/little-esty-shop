@@ -27,7 +27,6 @@ RSpec.describe "Merchant Items Index" do
       end
     end
 
-
     # 7. Merchant Items Show Page
     describe "When I click on the name of an item, Then I am taken to that merchant's item's show page" do
       it "I should see all of the item's attributes" do
@@ -44,6 +43,49 @@ RSpec.describe "Merchant Items Index" do
         expect(page).to_not have_content(item3.name)
         expect(page).to_not have_content(item3.description)
         expect(page).to_not have_content(item3.unit_price)
+      end
+    end
+
+    # 9. Merchant Item Disable/Enable
+    describe 'When I visit my items index page' do
+      it 'Next to each item name I see a button to disable or enable that item.' do
+
+        expect(page).to have_button("Disable")
+        expect(page).to have_button("Enable")
+      
+      end
+
+      it "When I click this button. Then I am redirected back to the items index, and I see that the items status has changed" do
+
+        within "#item-#{item1.id}" do
+          click_button('Enable')
+        end
+
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+
+        within "#item-#{item1.id}" do
+          expect(page).to have_content("Status: enabled")
+          click_button("disable")
+        end
+
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+        
+        within "#item-#{item1.id}" do
+          expect(page).to have_content("Status: disabled")
+        end
+      end
+    end
+
+    # 11. Merchant Item Create - cont'd in 'spec/features/items/new_spec.rb
+    describe 'When I visit my items index page' do
+      it 'I see a link to create a new item.' do
+        expect(page).to have_link("Create a New Item")
+      end
+
+      it 'When I click the link "Create New Item" button I am redirected to a new page create a new Item' do
+        click_on("Create a New Item")
+
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items/new")
       end
     end
   end

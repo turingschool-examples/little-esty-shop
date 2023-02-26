@@ -89,5 +89,89 @@ describe 'Admin Merchants index page' do
         end
       end
     end
+
+
+    describe 'enable/disable button for each merchant' do
+      before do 
+        @merchant1 = create(:merchant, status: :disabled)
+        @merchant2 = create(:merchant, status: :disabled)
+        @merchant3 = create(:merchant, status: :enabled)
+        @merchant4 = create(:merchant, status: :enabled)
+        visit admin_merchants_path
+      end
+
+      it 'should be next to each merchant' do
+        within("div##{@merchant1.id}") do
+          expect(page).to have_button('Enable')
+        end
+        within("div##{@merchant3.id}") do
+          expect(page).to have_button('Disable')
+        end
+      end
+
+      it 'should redirect back to admin merchant index (enable)' do
+        within("div##{@merchant1.id}") do
+          click_button('Enable')
+          expect(current_path).to eq(admin_merchants_path)
+        end
+      end
+
+      it 'should redirect back to admin merchant index (disable)' do
+        within("div##{@merchant3.id}") do
+          click_button('Disable')
+          expect(current_path).to eq(admin_merchants_path)
+        end
+      end
+
+      it 'should change merchant status, which is reflected on page (enable)' do
+        within("div##{@merchant1.id}") do
+          expect(page).to have_content("#{@merchant1.name} Status: disabled")
+          click_button('Enable')
+          expect(page).to_not have_content("#{@merchant1.name} Status: disabled")
+          expect(page).to have_content("#{@merchant1.name} Status: enabled")
+        end
+      end
+
+      it 'should change merchant status, which is reflected on page (disable)' do
+        within("div##{@merchant3.id}") do
+          expect(page).to have_content("#{@merchant3.name} Status: enabled")
+          click_button('Disable')
+          expect(page).to_not have_content("#{@merchant3.name} Status: enabled")
+          expect(page).to have_content("#{@merchant3.name} Status: disabled")
+        end
+      end
+
+      describe 'admin merchants are grouped by status' do
+        describe 'enabled group' do
+          it 'should have a header' do
+            within("div#enabled") do
+              expect(page).to have_content('Enabled Merchants:')
+            end
+          end
+
+          it 'should have each enabled merchant' do
+            within("div#enabled") do
+              expect(page).to have_content("#{@merchant3.name} Status: enabled")
+              expect(page).to have_content("#{@merchant4.name} Status: enabled")
+            end
+          end
+        end
+        describe 'disabled group' do
+          it 'should have a header' do
+            within("div#disabled") do
+              expect(page).to have_content('Disabled Merchants:')
+            end
+          end
+
+          it 'should have each enabled merchant' do
+            within("div#disabled") do
+              expect(page).to have_content("#{@merchant1.name} Status: disabled")
+              expect(page).to have_content("#{@merchant2.name} Status: disabled")
+            end
+          end
+        end
+      end
+
+    end
   end
 end

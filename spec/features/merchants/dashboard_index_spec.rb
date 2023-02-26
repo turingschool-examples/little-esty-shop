@@ -135,7 +135,8 @@ RSpec.describe "Merchant Dashboard Index" do
         InvoiceItem.create!(item_id: item24.id, invoice_id: invoice24.id, status: "packaged")
         InvoiceItem.create!(item_id: item29.id, invoice_id: invoice29.id, status: "packaged")
         InvoiceItem.create!(item_id: item20.id, invoice_id: invoice20.id, status: "packaged")
-
+        # require 'pry'; binding.pry
+      
         expect(page).to have_content(invoice21.created_at.strftime("%A, %B %e, %Y"))
       end
     end
