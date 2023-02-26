@@ -45,5 +45,35 @@ RSpec.describe "Merchant Items Index" do
         expect(page).to_not have_content(item3.unit_price)
       end
     end
+
+    # 9. Merchant Item Disable/Enable
+    describe 'When I visit my items index page' do
+      it 'Next to each item name I see a button to disable or enable that item.' do
+
+        expect(page).to have_button("Disable")
+        expect(page).to have_button("Enable")
+      
+      end
+
+      it "When I click this button. Then I am redirected back to the items index, and I see that the items status has changed" do
+
+        within "#item-#{item1.id}" do
+          click_button('Enable')
+        end
+
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+
+        within "#item-#{item1.id}" do
+          expect(page).to have_content("Status: enabled")
+          click_button("disable")
+        end
+
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+        
+        within "#item-#{item1.id}" do
+          expect(page).to have_content("Status: disabled")
+        end
+      end
+    end
   end
 end
