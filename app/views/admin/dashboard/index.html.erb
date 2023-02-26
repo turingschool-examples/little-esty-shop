@@ -17,9 +17,9 @@
 
 <section id="incomplete_invoices">
   <h3>Incomplete Invoices</h3>
-  <% @unshipped.each do |invoice_item| %>
-    <ul id="<%= invoice_item.invoice_id %>">
-      <li> Invoice #<%= link_to "#{invoice_item.invoice_id}", "/admin/invoices/#{invoice_item.invoice_id}" %></li>
+  <% @incompleted_invoices.each do |invoice| %>
+    <ul id="<%= invoice.id %>">
+      <li> Invoice #<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> <%= invoice.created_at.strftime("%A, %B %d, %Y") %></li>
     </ul>
   <% end %>
 </section>
