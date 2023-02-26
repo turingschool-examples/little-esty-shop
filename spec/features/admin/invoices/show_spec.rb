@@ -31,21 +31,30 @@ RSpec.describe 'Admin Invoice Show Page' do
   end 
 
   describe "as an admin" do 
+    # User Story 33
     it "I see the invoice id, invoice status, created at, and customer first and last name" do 
-
       visit "/admin/invoices/#{@invoice1.id}"
-      save_and_open_page
-      expect(page).to have_content("Invoice ID: #{@invoice1.id}, Invoice Status: #{@invoice1.status}, Invoice Created date: #{@invoice1.created_at.strftime("%A, %B %e, %Y")}, Customer Name: #{@invoice1.customer.first_name} #{@invoice1.customer.last_name}")
+      expect(page).to have_content("Invoice #{@invoice1.id} Page")
+      expect(page).to have_content("Invoice Status: #{@invoice1.status}, Invoice Created date: #{@invoice1.created_at.strftime("%A, %B %e, %Y")}, Customer Name: #{@invoice1.customer.first_name} #{@invoice1.customer.last_name}")
     end
 
-    xit "I see the name of all the items on that invoice" do
-      visit "/admin/invoices/#{@invoice1.id}"
+    # User Story 34
+    it "I see the name of all the items on that invoice" do
+      visit "/admin/invoices/#{@invoice4.id}"
+      expect(page).to have_content("Items on Invoice")
 
+      expect(page).to have_content(@item1.name)
+      expect(page).to have_content(@item2.name)
+      expect(page).to have_content(@item4.name)
+      expect(page).to have_content(@item5.name)
     end
 
+    # User Story 34
     xit "I also see the quantity of each item ordered, price sold for, & the invoice item status " do
-      visit "/admin/invoices/#{@invoice1.id}"
-
+      visit "/admin/invoices/#{@invoice4.id}"
+      within "#item_info-#{@item1.id}" do
+        expect(page).to have_content(@item1.name)
+      end
     end
   end
 end
