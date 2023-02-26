@@ -22,4 +22,6 @@ class Invoice < ApplicationRecord
   def get_total_revenue
     self.invoice_items.sum("unit_price")
   end
+
+  scope :invoice_items_not_shipped, -> { joins(:invoice_items).where.not(invoice_items: {status: 2}).distinct.order(:created_at) }
 end
