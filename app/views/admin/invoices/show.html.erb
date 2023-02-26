@@ -3,5 +3,7 @@
 
 <h4>Items on Invoice</h4>
 <% @invoice_items.each do |item| %>
-  <p><%= item.name %></p>
+  <div id = "item-<% item.id %>">
+    <p><%= item.name %></p>
+  </div>
 <% end %>
