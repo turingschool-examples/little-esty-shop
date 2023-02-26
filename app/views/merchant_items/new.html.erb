@@ -1,0 +1,14 @@
+<%= form_with url: "/merchants/#{@merchant.id}/items", method: :post, local: true do |form| %>
+  <p><%= form.label :name, "Item Name: " %></p>
+  <p><%= form.text_field :name, required: true %></p>
+  <br>
+  <p><%= form.label :description, "Description: "  %></p>
+  <p><%= form.text_field :description, required: true  %></p>
+  <br>
+  <p><%= form.label :unit_price, "Unit Price: "  %></p>
+  <p><%= form.text_field :unit_price, required: true  %></p>
+  <br> 
+  <p><%= form.submit 'Create Item' %></p>
+
+  
+<% end %>

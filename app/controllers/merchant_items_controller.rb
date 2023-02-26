@@ -8,10 +8,33 @@ class MerchantItemsController < ApplicationController
 		@item = @merchant.items.find(params[:item_id])
 	end
 
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
 	def edit
 		@merchant = Merchant.find(params[:merchant_id])
 		@item = @merchant.items.find(params[:item_id])
 	end
+
+  def create
+		@merchant = Merchant.find(params[:merchant_id])
+    @item = Item.new(item_params)
+    
+    if @item.save
+      @merchant.items.create!(item_params)
+      redirect_to "/merchants/#{@merchant.id}/items"
+    else
+      flash[:notice] = "Item not created: Required information missing"
+      redirect_to "/merchants/#{@merchant.id}/items/new"
+    end
+  end
+
+  # def create
+  #   @merchant = Merchant.find(params[:merchant_id])
+  #   @merchant.items.create!(item_params)
+  #   redirect_to "/merchants/#{@merchant.id}/items"
+  # end
 
 	def update
     @merchant = Merchant.find(params[:merchant_id])
@@ -34,6 +57,6 @@ class MerchantItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :unit_price)
+    params.permit(:name, :description, :unit_price, :merchant_id)
   end
 end

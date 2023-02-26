@@ -1,5 +1,7 @@
 <h1>Items</h1>
 
+<%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new" %>
+
 <div id="disabled-items">
 <h2>Disabled Items:</h2>
 <% @merchant.items.each do |item| %>
