@@ -24,10 +24,10 @@ RSpec.describe 'Admin Invoice Show Page' do
     InvoiceItem.create!(item: @item3, invoice: @invoice3, quantity: 1, unit_price: 1500)
 
     @invoice4 = Invoice.create!(customer: @customer_1, status: 1) #completed
-    InvoiceItem.create!(item: @item1, invoice: @invoice4, quantity: 2, unit_price: 1000)
-    InvoiceItem.create!(item: @item2, invoice: @invoice4, quantity: 1, unit_price: 1500)
-    InvoiceItem.create!(item: @item5, invoice: @invoice4, quantity: 4, unit_price: 2000)
-    InvoiceItem.create!(item: @item6, invoice: @invoice4, quantity: 5, unit_price: 5000)
+    @ii1 = InvoiceItem.create!(item: @item1, invoice: @invoice4, quantity: 2, unit_price: 1000, status: 1) #packaged
+    @ii2 = InvoiceItem.create!(item: @item2, invoice: @invoice4, quantity: 1, unit_price: 1500, status: 0) #pending
+    @ii5 = InvoiceItem.create!(item: @item5, invoice: @invoice4, quantity: 4, unit_price: 2000, status: 1) #packaged
+    @ii6 = InvoiceItem.create!(item: @item6, invoice: @invoice4, quantity: 5, unit_price: 5000, status: 2) #shipped 
   end 
 
   describe "as an admin" do 
@@ -52,9 +52,11 @@ RSpec.describe 'Admin Invoice Show Page' do
     # User Story 34
     it "I also see the quantity of each item ordered, price sold for, & the invoice item status " do
       visit "/admin/invoices/#{@invoice4.id}"
-      
-      within "#item-#{@item6.id}" do
-        expect(page).to have_content(@item6.name)
+
+      within "#item-#{@ii6.id}" do
+        expect(page).to have_content("Quantity: 5")
+        expect(page).to have_content("Unit Price Sold for: 5000")
+        expect(page).to have_content("Invoice Item Status: shipped")
       end
     end
   end
