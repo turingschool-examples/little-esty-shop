@@ -12,12 +12,11 @@ RSpec.describe 'Merchant Items Index' do
 		@carlos = Merchant.create!(name: "Carlos Jenkins")
 		@pete = Merchant.create!(name: "Pete Smith") 
 
-    @bowl = @carlos.items.create!(name: "Bowl", description: "it's a bowl", unit_price: 350) 
-		@knife = @carlos.items.create!(name: "Knife", description: "it's a knife", unit_price: 250)
-
     @scarf = @pete.items.create!(name: "Scarf", description: "scarf, knitted", unit_price: 350) 
 		@tshirt = @pete.items.create!(name: "Tshirt", description: "tshirt, screenprinted", unit_price: 250)
 
+    @bowl = @carlos.items.create!(name: "Bowl", description: "it's a bowl", unit_price: 350) 
+		@knife = @carlos.items.create!(name: "Knife", description: "it's a knife", unit_price: 250)
   end
   
   describe 'As a merchant, when I visit my merchant items index page' do
@@ -110,6 +109,29 @@ RSpec.describe 'Merchant Items Index' do
           click_button "Create Item"
           expect(current_path).to eq("/merchants/#{@carlos.id}/items/new")
           expect(page).to have_content("Item not created: Required information missing")
+        end
+      end
+    end
+
+    describe '5 Most Popular Items' do
+      before do
+        @merchant1 = Merchant.create(name: "Handmades")
+        @merchant2 = Merchant.create(name: "Candles")
+
+        @customer1 = FactoryBot.create(:customer)
+        @customer2 = FactoryBot.create(:customer)
+        @customer3 = FactoryBot.create(:customer)
+
+        # @inv1 = @customer1.invoices.create!()
+        
+      end
+
+      it 'I see the names of the top 5 most popular items ranked by total revenue generated' do
+
+        visit "/merchants/#{@carlos.id}/items"
+
+        within "#top-items" do
+          expect(page).to have_content("Top Items")
         end
       end
     end

@@ -20,6 +20,7 @@ class MerchantItemsController < ApplicationController
   def create
 		@merchant = Merchant.find(params[:merchant_id])
     @item = Item.new(item_params)
+    # @merchant_item = @merchant.items.find(params[:item_id])
     
     if @item.save
       redirect_to "/merchants/#{@merchant.id}/items"
@@ -50,6 +51,7 @@ class MerchantItemsController < ApplicationController
   private
 
   def item_params
+    # params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
     params.permit(:name, :description, :unit_price, :merchant_id)
   end
 end
