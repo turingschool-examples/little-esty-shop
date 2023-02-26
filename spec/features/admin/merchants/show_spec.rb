@@ -71,7 +71,12 @@ RSpec.describe "Admin Merchants Show", type: :feature do
       end
 
       it "I see a form filled in with the existing merchant attribute information" do
-
+        visit edit_admin_merchant_path(bob)
+        
+        save_and_open_page
+        within("form#merchant_edit_form") do
+          expect(page).to have_field('Merchant Name:', with: "#{bob.name}")
+        end
       end
       
       xit "I update the information in the form, I click ‘submit’ and I am redirected back to the merchant's admin show page" do
