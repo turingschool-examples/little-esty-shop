@@ -6,27 +6,90 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe '::Class Methods' do
+    before(:each) do
+      @merchant_1 = create(:merchant)
+      @merchant_2 = create(:merchant, status: 1)
+      @merchant_3 = create(:merchant)
+      @merchant_4 = create(:merchant, status: 1)
+      @merchant_5 = create(:merchant)
+      @merchant_6 = create(:merchant)
+    end
+
     describe "::enabled_merchants" do
       it 'returns all merchants grouped by status type' do
-        merchant_1 = create(:merchant)
-        merchant_2 = create(:merchant, status: 1)
-        merchant_3 = create(:merchant)
-        merchant_4 = create(:merchant, status: 1)
-        merchant_5 = create(:merchant)
-
-        expect(Merchant.enabled_merchants).to eq([merchant_1, merchant_3, merchant_5])
+        expect(Merchant.enabled_merchants).to eq([@merchant_1, @merchant_3, @merchant_5, @merchant_6])
       end
     end
 
     describe "::disabled_merchants" do
       it 'returns all merchants grouped by status type' do
-        merchant_1 = create(:merchant)
-        merchant_2 = create(:merchant, status: 1)
-        merchant_3 = create(:merchant)
-        merchant_4 = create(:merchant, status: 1)
-        merchant_5 = create(:merchant)
+        expect(Merchant.disabled_merchants).to eq([@merchant_2, @merchant_4])
+      end
+    end
 
-        expect(Merchant.disabled_merchants).to eq([merchant_2, merchant_4])
+    describe '#top_five_merchants_by_revenue' do
+      it 'returns the top five merchants by revenue' do
+        spendy_customer = create(:customer)
+
+        item_1 = create(:item, merchant: @merchant_3)
+        item_2 = create(:item, merchant: @merchant_1)
+        item_3 = create(:item, merchant: @merchant_5)
+        item_4 = create(:item, merchant: @merchant_2)
+        item_5 = create(:item, merchant: @merchant_4)
+        item_6 = create(:item, merchant: @merchant_6)
+
+        invoice_1 = create(:invoice, customer: spendy_customer)
+        invoice_2 = create(:invoice, customer: spendy_customer)
+        invoice_3 = create(:invoice, customer: spendy_customer)
+        invoice_4 = create(:invoice, customer: spendy_customer)
+        invoice_5 = create(:invoice, customer: spendy_customer)
+        invoice_6 = create(:invoice, customer: spendy_customer)
+        invoice_7 = create(:invoice, customer: spendy_customer)
+        invoice_8 = create(:invoice, customer: spendy_customer)
+        invoice_9 = create(:invoice, customer: spendy_customer)
+        invoice_10 = create(:invoice, customer: spendy_customer)
+        invoice_11 = create(:invoice, customer: spendy_customer)
+        invoice_12 = create(:invoice, customer: spendy_customer)
+        
+        create(:transaction, invoice: invoice_1, result: 0)
+        create(:transaction, invoice: invoice_2, result: 0)
+        create(:transaction, invoice: invoice_3, result: 1)
+        create(:transaction, invoice: invoice_4, result: 0)
+        create(:transaction, invoice: invoice_5, result: 0)
+        create(:transaction, invoice: invoice_6, result: 1)
+        create(:transaction, invoice: invoice_7, result: 0)
+        create(:transaction, invoice: invoice_8, result: 0)
+        create(:transaction, invoice: invoice_9, result: 1)
+        create(:transaction, invoice: invoice_10, result: 0)
+        create(:transaction, invoice: invoice_11, result: 0)
+        create(:transaction, invoice: invoice_12, result: 0)
+
+
+        #merchant 3 - 19 revenue
+        invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice_1, unit_price: 3, quantity: 300000)
+        invoice_item_2 = create(:invoice_item, item: item_1, invoice: invoice_2, unit_price: 2, quantity: 500000)
+        invoice_item_3 = create(:invoice_item, item: item_1, invoice: invoice_3, unit_price: 1, quantity: 5000000)
+
+        #merchant 1 - 50 revenue
+        invoice_item_4 = create(:invoice_item, item: item_2, invoice: invoice_4, unit_price: 2, quantity: 2000000)
+        invoice_item_5 = create(:invoice_item, item: item_2, invoice: invoice_5, unit_price: 2, quantity: 500000)
+        invoice_item_6 = create(:invoice_item, item: item_2, invoice: invoice_6, unit_price: 2, quantity: 50000000)
+
+        #merchant 5 - 100 revenue
+        invoice_item_7 = create(:invoice_item, item: item_3, invoice: invoice_7, unit_price: 3, quantity: 2500000)
+        invoice_item_8 = create(:invoice_item, item: item_3, invoice: invoice_8, unit_price: 5, quantity: 500000)
+        invoice_item_9 = create(:invoice_item, item: item_3, invoice: invoice_9, unit_price: 2, quantity: 500000000)
+
+        #merchant 2 - 10 revenue
+        invoice_item_10 = create(:invoice_item, item: item_4, invoice: invoice_10, unit_price: 1, quantity: 1000000)
+
+        #merchant 4 - 15 revenue 
+        invoice_item_11 = create(:invoice_item, item: item_5, invoice: invoice_11, unit_price: 1, quantity: 1500000)
+
+        #merchant 6 - 5 revenue
+        invoice_item_12 = create(:invoice_item, item: item_6, invoice: invoice_12, unit_price: 1, quantity: 500000)
+
+        expect(Merchant.top_five_merchants_by_revenue).to eq([@merchant_5, @merchant_1, @merchant_3, @merchant_4, @merchant_2])
       end
     end
   end
