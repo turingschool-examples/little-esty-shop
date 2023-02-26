@@ -5,7 +5,10 @@ class Admin::InvoicesController < ApplicationController
   end
 
   def show
-    @invoice = Invoice.find(params[:id])
+    @invoice = Invoice.find(params[:invoice_id])
+    require 'pry'; binding.pry
+    @total_revenue = @invoice.invoice_items.invoice_total_revenue
+
   end
 end
  

@@ -17,7 +17,7 @@ before(:each) do
   @invoice_1 = @customer_1.invoices.create(status: 0)
   @invoice_2 = @customer_1.invoices.create(status: 0)
   @invoice_3 = @customer_1.invoices.create(status: 0)
-  # InvoiceItem.create(item: @item_1, invoice: @invoice_1, quantity: 1, unit_price: @item_1.unit_price)
+  
 
 end 
 
@@ -28,9 +28,20 @@ end
         visit "/admin/invoices/#{@invoice_1.id}"
 
         expect(page).to have_content("Invoice ID: #{@invoice_1.id}, Invoice Status: #{@invoice_1.status}, Invoice Created date: #{@invoice_1.created_at}, Customer Name: #{@invoice_1.customer.first_name} #{@invoice_1.customer.last_name}")
+      end
 
+      it "see the total revenue that will be generated from this invoice" do 
+
+        @invoice_item1 = FactoryBot.create(:invoice_item, quantity: 1, invoice_id: @invoice_1.id, unit_price: 5, item_id: @item_1.id)
+
+        @invoice_item2 = FactoryBot.create(:invoice_item, quantity: 2, invoice_id: @invoice_1.id, unit_price: 15, item_id: @item_1.id)
+
+        visit "/admin/invoices/#{@invoice_1.id}"
+
+        expect(page).to have_content("Total Revenue Generated from this Invoice: 35")
 
       end
+
     end
   end
 end
