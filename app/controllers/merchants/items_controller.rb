@@ -31,7 +31,17 @@ class Merchants::ItemsController < ApplicationController
   end
 
   def new 
-    
+    @item = Item.new
+  end
+
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to "/merchants/#{@merchant.id}/items"
+      flash[:notice] = "#{@item.name} Information has been Updated"
+    else
+      flash[:notice] = "#{@item.name} Cannot be Created"
+    end
   end
 
   private
