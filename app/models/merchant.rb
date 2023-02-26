@@ -7,6 +7,8 @@ class Merchant < ApplicationRecord
   
   validates :name, presence: true
 
+  enum status: [:disabled, :enabled]
+
   def top_five_customers
     customers.joins(:transactions).where(transactions: {result: 'success'})
     .select("customers.*, count(DISTINCT transactions.id) as transaction_count")
