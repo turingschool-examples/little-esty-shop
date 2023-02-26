@@ -88,33 +88,29 @@ RSpec.describe "Admin Invoices Show", type: :feature do
       end
 
       it "I see the invoice status and that its current status is selected" do
-        save_and_open_page
         expect(page).to have_select("invoice_status", selected: "in progress")
 
         visit admin_invoice_path(invoice3)
         expect(page).to have_select("invoice_status", selected: "in progress")
       end
 
-      xit "When I click this select field, I can select a new status" do
-        select "completed", from: "status"
+      it "When I click this select field, I can select a new status" do
+        select "completed", from: "invoice_status"
       end
 
-      xit "I see a button 'Update Invoice Status' and when I click button, I am taken to admin invoice show page" do
-        select "completed", from: "status"
+      it "I see a button 'Update Invoice Status' and when I click button, I am taken to admin invoice show page" do
+        select "completed", from: "invoice_status"
         click_button('Update Invoice Status')
-
-        expect(page).to have_current_path(admin_invoices_path)
+        expect(page).to have_current_path(admin_invoice_path(invoice1))
       end
 
-      xit "Invoice status is updated to new value" do
-        visit(admin_invoices_path)
-        expect(page).to_not have_content("completed")
-        visit admin_invoice_path(invoice1)
+      it "Invoice status is updated to new value" do
+        expect(page).to_not have_content("Status: completed")
 
-        select "completed", from: "status"
+        select "completed", from: "invoice_status"
         click_button('Update Invoice Status')
 
-        expect(page).to have_content("completed")
+        expect(page).to have_content("Status: completed")
       end
     end
   end
