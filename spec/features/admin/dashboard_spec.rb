@@ -58,14 +58,12 @@ RSpec.describe 'Admin Dashboard' do
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id, status: 2)
     InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id, status: 2)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv5.id, status: 2)
-    @invit6 = InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id, status: 0)
+    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id, status: 0)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv7.id, status: 0)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv8.id, status: 1)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv9.id, status: 1)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv9.id, status: 2)
 
-
-    
     visit "/admin"
   end
 
@@ -125,7 +123,6 @@ RSpec.describe 'Admin Dashboard' do
         end
       end
 
-      #NEED TO ASK ABOUT STUBBING HERE FOR A MORE ACCURATE TEST!
       it 'Next to each invoice id I see the date that the invoice was created formatted like "Monday, July 18, 2019"' do
         within '#incomplete_invoices' do
           expect(page).to have_content("Thursday, July 18, 2019")
@@ -137,7 +134,6 @@ RSpec.describe 'Admin Dashboard' do
      
       it 'the list is ordered from oldest to newest' do
         within '#incomplete_invoices' do
-          save_and_open_page
          
           expect("Wednesday, August 3, 2016").to appear_before("Thursday, July 18, 2019")
           expect("Thursday, July 18, 2019").to appear_before("Monday, August 17, 2020")
