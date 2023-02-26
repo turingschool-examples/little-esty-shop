@@ -55,26 +55,23 @@ RSpec.describe "Merchant Items Index" do
       
       end
 
-      it "When I click this button. Then I am redirected back to the items index" do
+      it "When I click this button. Then I am redirected back to the items index, and I see that the items status has changed" do
 
-        within "#merchant_item-#{item1.id}" do
+        within "#item-#{item1.id}" do
           click_button('Enable')
         end
 
-        expect(current_path).to be("/merchants/#{merchant1.id}/items")
-      end
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items")
 
-      it 'And I see that the items status has changed' do
-
-        within "#merchant_item-#{item1.id}" do
-          expect(page).to have_content("Status: Enabled")
-          click_button("Disable")
+        within "#item-#{item1.id}" do
+          expect(page).to have_content("Status: enabled")
+          click_button("disable")
         end
 
-        expect(current_path).to be("/merchants/#{merchant1.id}/items")
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items")
         
-        within "#merchant_item-#{item1.id}" do
-          expect(page).to have_content("Status: Disabled")
+        within "#item-#{item1.id}" do
+          expect(page).to have_content("Status: disabled")
         end
       end
     end
