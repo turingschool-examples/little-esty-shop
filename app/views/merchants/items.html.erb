@@ -3,7 +3,10 @@
 <h3><%= @merchant.name %></h3>
 
 <ul>
+
   <% @merchant.items.each do |item| %>
-    <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p></li>
+    <div id= "merchant_item-<&= item.id &>">
+     <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> Status: <%= item.button "Disable", type: "submit", name: "status", value: "Disabled" %><%= item.button "Enable", type: "submit", name: "status", value: "Enabled" %></p></li>
+    </div>
   <% end %>
 </ul>
