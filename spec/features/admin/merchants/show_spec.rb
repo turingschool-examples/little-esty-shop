@@ -73,18 +73,34 @@ RSpec.describe "Admin Merchants Show", type: :feature do
       it "I see a form filled in with the existing merchant attribute information" do
         visit edit_admin_merchant_path(bob)
         
-        save_and_open_page
         within("form#merchant_edit_form") do
           expect(page).to have_field('Merchant Name:', with: "#{bob.name}")
         end
       end
+
+      describe "I update the information in the form, I click ‘submit’," do
+        before(:each) do
+          visit edit_admin_merchant_path(bob)
+
+          @edited_name = "Bob's Beauteez"
+
+          fill_in 'Merchant Name:', with: "#{@edited_name}"
+          click_button "Save Changes"
+        end
       
-      xit "I update the information in the form, I click ‘submit’ and I am redirected back to the merchant's admin show page" do
 
-      end
-         
-      xit "I see the updated information, and I see a flash message stating that the information has been successfully updated." do
+        it "and I am redirected back to the merchant's admin show page." do
+          expect(current_path).to eq(admin_merchant_path(bob))
+        end
+      
+        it "I see the updated information, and I see a flash message stating that the information has been successfully updated." do
+          save_and_open_page
+          within("header#merchant_name") do
+            expect(page).to have_content("#{@edited_name}")
+          end
 
+          expect(page).to have_content("Your changes have been successfully updated")
+        end
       end
     end
   end
