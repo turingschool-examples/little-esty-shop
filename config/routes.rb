@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get "/admin", to: 'admin#index'
 
-	resources :merchants, only: [] do
+	resources :merchants, only: [:edit, :update] do
 		member do 
 			get 'dashboard'
 		end
