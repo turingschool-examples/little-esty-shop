@@ -88,10 +88,11 @@ RSpec.describe "Admin Invoices Show", type: :feature do
       end
 
       it "I see the invoice status and that its current status is selected" do
-        expect(page).to have_select("status", selected: "in progress")
+        save_and_open_page
+        expect(page).to have_select("invoice_status", selected: "in progress")
 
         visit admin_invoice_path(invoice3)
-        expect(page).to have_select("status", selected: "in progress")
+        expect(page).to have_select("invoice_status", selected: "in progress")
       end
 
       xit "When I click this select field, I can select a new status" do

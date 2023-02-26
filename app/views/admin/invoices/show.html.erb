@@ -6,3 +6,9 @@
   <p>Name: <%= item.name %> Quantity: <%= @invoice.find_invoiceitem_quantity(item) %> Price sold for: <%= number_to_currency(@invoice.find_invoiceitem_unitprice(item)/100.0) %> Invoice Item Status: <%= @invoice.find_invoiceitem_status(item) %></p>
 <% end %>
 <p>Total Revenue: <%= number_to_currency(@invoice.get_total_revenue/100.0)  %></p>
+<%= form_with model: @invoice, url: admin_invoice_path(@invoice), local: true do |form| %>
+  <%= form.label :status %>
+  <%= form.select :status, options_for_select(Invoice.statuses.keys{|status| [status, status]}, @invoice.status) %>
+
+  <%= form.submit "Update Invoice Status" %>
+<% end %>
