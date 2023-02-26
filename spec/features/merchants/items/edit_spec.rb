@@ -4,6 +4,7 @@ RSpec.describe "Merchant_Items#Edit", type: :feature do
   before(:each) do
     @merchant = create(:merchant, name: "Trader Bob's")
 
+    @customer_1 = create(:customer)
     @invoice_1 = create(:invoice, customer_id: @customer_1.id)
 
     @item_1 = create(:item, merchant: @merchant)
@@ -27,7 +28,6 @@ RSpec.describe "Merchant_Items#Edit", type: :feature do
       fill_in :item_name, with: "Updated Name"
       fill_in :item_description, with: "Updated Description"
       fill_in :item_unit_price, with: "3"
-      save_and_open_page
       click_button "Update #{@item_1.name}"
 
       expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}")

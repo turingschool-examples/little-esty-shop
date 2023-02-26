@@ -17,15 +17,16 @@ class Merchants::ItemsController < ApplicationController
   end
 
   def update
-    @merchant = Merchant.find(params[:merchant_id])
-    @item = @merchant.items.find(params[:id])
+    # require 'pry'; binding.pry
+    @item = Item.find(params[:id])
+    @merchant = @item.merchant
     @item.update(item_params)
     if @item.save
       flash[:notice] = "#{@item.name} Information has been Updated"
       if params[:item][:status]
         redirect_to "/merchants/#{@merchant.id}/items"
       else
-        redirect_to "/merchants/#{@merchant.id}/items/#{item.id}"
+        redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}"
       end
     end
   end
