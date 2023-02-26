@@ -11,14 +11,3 @@
     <p> <%= customer.first_name %> <%= customer.last_name %> has <%= customer.transaction_count %> successful transactions!</p>
   </div>
 <% end %>
-
-<p>Items Ready to Ship</p>
-
-<% @items_not_shipped.each do |item| %>
-  <div id = "item_info-<%= item.name %>">
-    <p>Item name: <%= item.name %>, Invoice ID: <%= ???invoice.id??? %></p>
-    <br>
-  </div>
-<% end %>
-
-<%# Created: <%= invoice.created_at.strftime("%A, %B %e, %Y") %> 
