@@ -83,16 +83,6 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
     @invoice15.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
     @invoice16.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
 
-    @customer7 = Customer.create!(first_name: "Deniz", last_name: "Ocean")
-    @invoice17 = Invoice.create!(customer: @customer7, status: 1) #completed
-    @invoice18 = Invoice.create!(customer: @customer7, status: 1) #completed
-    @invoice19 = Invoice.create!(customer: @customer7, status: 1) #completed
-    InvoiceItem.create!(item: @item4, invoice: @invoice17, quantity: 1, unit_price: 1950) 
-    InvoiceItem.create!(item: @item5, invoice: @invoice18, quantity: 1, unit_price: 2850) 
-    InvoiceItem.create!(item: @item6, invoice: @invoice19, quantity: 1, unit_price: 1650)
-    @invoice17.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
-    @invoice18.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
-    @invoice19.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
   end 
 
   describe "as a visitor" do #user story 1 
@@ -134,7 +124,6 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
         expect(page).to have_content(@customer6.first_name)
         expect(page).to have_content(@customer6.last_name)
         expect(page).to_not have_content(@customer2.first_name)
-        expect(page).to_not have_content(@customer7.first_name)
       end
 
       it 'see the total number of successful transactions for each customer' do
@@ -150,12 +139,49 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
       end
     end
   end
-  # As a merchant,
+
+  # User story 4
+  describe 'Merchants Unshipped Invoices' do
+    before do
+      @deniz = Customer.create!(first_name: "deniz", last_name: "Ocean")
+      @invoice17 = Invoice.create!(customer: @deniz, created_at: 5.days.ago, updated_at: 5.days.ago, status: 0) #in progress
+      @invoice18 = Invoice.create!(customer: @deniz, created_at: 2.days.ago, updated_at: 2.days.ago, status: 0) #in progress
+      @invoice19 = Invoice.create!(customer: @deniz, created_at: 4.days.ago, updated_at: 4.days.ago, status: 0) #in progress
+      InvoiceItem.create!(item: @item4, invoice: @invoice17, quantity: 1, unit_price: 1950, status: 0) #pending
+      InvoiceItem.create!(item: @item5, invoice: @invoice18, quantity: 1, unit_price: 2850, status: 2) #shipped (Expect NOT to see on page)
+      InvoiceItem.create!(item: @item6, invoice: @invoice19, quantity: 1, unit_price: 1650, status: 1) #packaged
+      @invoice17.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
+      @invoice18.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
+      @invoice19.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
+
+      @emre = Customer.create!(first_name: "emre", last_name: "Bond")
+      @invoice20 = Invoice.create!(customer: @emre, created_at: 3.days.ago, updated_at: 3.days.ago, status: 0) #in progress
+      InvoiceItem.create!(item: @item4, invoice: @invoice20, quantity: 1, unit_price: 9950, status: 1) #packaged
+      InvoiceItem.create!(item: @item6, invoice: @invoice20, quantity: 1, unit_price: 1000, status: 2) #shipped
+      @invoice20.transactions.create!(credit_card_number: "4654405418249638", credit_card_expiration_date: "08/29", result: 0) #success
+    end
+
+    it "I see 'Items Ready to Ship' & a list of item names that are unshipped with it invoice id" do
+      visit "/merchants/#{@merchant1.id}/dashboard" 
+      expect(page).to have_content("Items Ready to Ship")
+      expect(page).to have_content("Item name: #{@item4.name}, Invoice ID: #{@invoice17.id}")
+      expect(page).to have_content("Item name: #{@item6.name}, Invoice ID: #{@invoice19.id}")
+      expect(page).to have_content("Item name: #{@item4.name}, Invoice ID: #{@invoice20.id}")
+
+      expect(page).to_not have_content("Item name: #{@item6.name}, Invoice ID: #{@invoice20.id}")
+      expect(page).to_not have_content("Item name: #{@item5.name}, Invoice ID: #{@invoice18.id}")
+    end
+  end
+
+
+
+  # As a merchant
   # When I visit my merchant dashboard
-  # Then I see the names of the top 5 customers
-  # who have conducted the largest number of successful transactions with my merchant
-  # And next to each customer name I see the number of successful transactions they have
-  # conducted with my merchant
+  # Then I see a section for "Items Ready to Ship"
+  # In that section I see a list of the names of all of my items that
+  # have been ordered and have not yet been shipped,
+  # And next to each Item I see the id of the invoice that ordered my item
+  # And each invoice id is a link to my merchant's invoice show page
  
 
 
