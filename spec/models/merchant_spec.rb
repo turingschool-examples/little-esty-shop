@@ -24,11 +24,12 @@ RSpec.describe Merchant, type: :model do
 
       expect(@merchant_1.status).to eq("enabled")
      end
+  end
 
     before(:each) do
       ###### Merchants & Items ######
       @merchant1 = Merchant.create!(name: "Mel's Travels")
-      @merchant2 = Merchant.create!(name: "Hady's Beach Shack")
+      @merchant2 = Merchant.create!(name: "Hady's Beach Shack", status: 1)
       # @merchant3 = Merchant.create!(name: "Huy's Cheese")
   
       @item1 = Item.create!(name: "Salt", description: "it is salty", unit_price: 1200, merchant: @merchant1)
@@ -122,6 +123,10 @@ RSpec.describe Merchant, type: :model do
     describe "class methods" do
       it "::mech_top_5_successful_customers" do
         expect(Merchant.mech_top_5_successful_customers.to_a).to eq([@customer1, @customer6, @customer5, @customer3, @customer4])
+      end
+
+      it 'groups merchants by status' do
+        expect(Merchant.group_by_status("disabled")).to eq([@merchant2])
       end
     end
 end

@@ -4,7 +4,7 @@ RSpec.describe "admin merchants index" do
 
   before(:each) do
     @merchant_1 = Merchant.create!(name: "Mel's Travels")
-    @merchant_2 = Merchant.create!(name: "Hady's Beach Shack")
+    @merchant_2 = Merchant.create!(name: "Hady's Beach Shack", status: 1)
     @merchant_3 = Merchant.create!(name: "Huy's Cheese")
   end
 
@@ -38,11 +38,16 @@ RSpec.describe "admin merchants index" do
       expect(page).to have_content("Status: disabled")
     end
 
-  it 'displays the name of each merchant in the system' do
-    visit '/admin/merchants'
+    it 'displays the names of merchants based on their status' do
+      visit '/admin/merchants'
 
-    expect(page).to have_content("#{@merchant_1.name}")
-    expect(page).to have_content("#{@merchant_2.name}")
-    expect(page).to have_content("#{@merchant_3.name}")
+      within "#merchants_status-enabled" do
+        expect(page).to have_content("#{@merchant_1.status}")
+      end
+
+      within "#merchants_status-disabled" do
+        expect(page).to have_content("#{@merchant_2.status}")
+      end
+    end
   end
 end

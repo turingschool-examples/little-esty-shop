@@ -1,14 +1,36 @@
 <h1> Merchants </h1>
-<% @merchants.each do |merchant| %>
 
-<div id="merchant_name-<%= merchant.id %>"> 
-  <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}", local: true  %>
-  <div id= "change_status">
-  <p>Status: <%= merchant.status %></p>
-  <%= button_to "Disable/Enable", "/admin/merchants/#{merchant.id}", method: :patch, params: {swap: "true", status: merchant.status},local: true %>
+<% if @merchants.any? %>
+  <div class="split left">
+    <div class="centered">
+      <div id="merchants_status-enabled">
+        <h2>Enabled</h2>
+        <% @enabled.each do |merchant| %>
+          <div id="merchant_name-<%= merchant.id %>"> 
+          <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}", local: true  %>
+          <div id= "change_status">
+          <p>Status: <%= merchant.status %></p>
+          <%= button_to "Disable/Enable", "/admin/merchants/#{merchant.id}", method: :patch, params: {swap: "true", status: merchant.status},local: true %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>  
+  <div class="split right">
+    <div class="centered">  
+      <div id="merchants_status-disabled">
+        <h2>Disabled</h2>
+        <% @disabled.each do |merchant| %>
+          <div id="merchant_name-<%= merchant.id %>"> 
+          <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}", local: true  %>
+          <div id= "change_status">
+          <p>Status: <%= merchant.status %></p>
+          <%= button_to "Disable/Enable", "/admin/merchants/#{merchant.id}", method: :patch, params: {swap: "true", status: merchant.status},local: true %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
-
-<%= link_to "#{merchant.name}", "/admin/merchants//#{merchant.id}"  %>
-
-<% end %>
+  <% end %>
