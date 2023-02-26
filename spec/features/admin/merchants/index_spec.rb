@@ -89,5 +89,27 @@ describe 'Admin Merchants index page' do
         end
       end
     end
+
+
+    describe 'enable/disable button for each merchant' do
+      before do 
+        @merchant1 = create(:merchant)
+        @merchant2 = create(:merchant)
+        @merchant3 = create(:merchant)
+      end
+
+      it 'should be next to each merchant' do
+        
+      end
+
+      it 'should redirect back to admin merchant index' do
+        
+      end
+
+      it 'should change merchant status' do
+        
+      end
+
+    end
   end
 end
