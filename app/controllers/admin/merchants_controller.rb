@@ -9,13 +9,9 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create 
-    merchant = Merchant.new(merchant_create_params)
+    merchant = Merchant.new(merchant_params)
     merchant.save
     redirect_to admin_merchants_path
-  end
-#  New private merchant params method duplicate of merchant params, broke create method as previously method used 'merchant_params' and now seems to need a reference to an existing merchant to create a merchant. Changed the name of mechant params to merchant create params below and referenced it in create. Prob temp fix as we only need one params method?
-  def merchant_create_params
-    params.permit(:name)
   end
 
   def edit
@@ -29,11 +25,15 @@ class Admin::MerchantsController < ApplicationController
   def update
     merchant = Merchant.find(params[:id])
     merchant.update(merchant_params)
-    redirect_to admin_merchant_path(merchant.id), notice: "Merchant successfully updated!"
+    if params[:merchant].keys.include?('to_index')
+      redirect_to admin_merchants_path
+    else
+      redirect_to admin_merchant_path(merchant.id), notice: "Merchant successfully updated!"
+    end
   end
 
   private
     def merchant_params
-      params.require(:merchant).permit(:name)
+      params.require(:merchant).permit(:name, :status)
     end
 end
