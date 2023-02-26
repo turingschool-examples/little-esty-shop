@@ -27,7 +27,6 @@ RSpec.describe "Merchant Items Index" do
       end
     end
 
-
     # 7. Merchant Items Show Page
     describe "When I click on the name of an item, Then I am taken to that merchant's item's show page" do
       it "I should see all of the item's attributes" do
