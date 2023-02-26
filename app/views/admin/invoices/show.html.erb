@@ -1,4 +1,16 @@
 <h1>Invoice <%=@invoice.id%></h1>
-<p>Invoice Status: <%=@invoice.status%></p>
-<p>Created On: <%= render partial: 'admin/formatted_created_at', locals: {x: @invoice} %> </p>
-<p>Customer Name: <%= @invoice.customer.first_name%> <%=@invoice.customer.last_name%></p>
+<h2>Invoice Status: <%=@invoice.status%></h2>
+<h2>Created On: <%= render partial: 'admin/formatted_created_at', locals: {x: @invoice} %> </h2>
+<h2>Customer Name: <%= @invoice.customer.first_name%> <%=@invoice.customer.last_name%></h2>
+<div id="invoice_items">
+<h2>Invoice Items:</h2>
+  <% @invoice.invoice_items.each do |invoice_item| %>
+    <div id="<%=invoice_item.id%>">
+    <h4>Invoice Item: <%= invoice_item.item.name%></h4>
+    <p>Quantity Ordered: <%= invoice_item.quantity%></p>
+    <p>Purchase Price: $<%= sprintf("%.2f", (invoice_item.unit_price/100.00))%></p>
+    <p>Item Status: <%= invoice_item.status%></p>
+    <br>
+    </div>
+  <%end%>
+</div>
