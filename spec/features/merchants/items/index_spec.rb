@@ -48,7 +48,7 @@ end
 
         visit "/merchants/#{@merchant1.id}/items"
 
-        within("div#item_number_#{@item_1.id}") do 
+        within "#item_number_#{@item_1.id}" do 
           expect(page).to have_button("Enable/Disable Item #{@item_1.name}")
         end 
 
