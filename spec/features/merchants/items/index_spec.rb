@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Merchant_Items", type: :feature do
+RSpec.describe "Merchant_Items#Index", type: :feature do
   before(:each) do
     @merchant = create(:merchant, name: "Trader Bob's")
     @merchant_2 = create(:merchant, name: "Trader Bob's deux")
@@ -109,6 +109,13 @@ RSpec.describe "Merchant_Items", type: :feature do
       
       click_link("Create New Item")
       expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
+    end
+
+    xit "I see the item I just created displayed in the list of items.
+      And I see my item was created with a default status of disabled." do
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content(@item_2.name)
+      expect(page).to_not have_content(@item_3.name)
     end
   end
 end
