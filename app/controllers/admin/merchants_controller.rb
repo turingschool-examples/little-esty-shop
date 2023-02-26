@@ -5,7 +5,6 @@ class Admin::MerchantsController < ApplicationController
 
   def show
     @merchant = Merchant.find(params[:id])
-    # flash.now[:success] if flash[:success]
   end
 
 end
