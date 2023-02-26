@@ -75,5 +75,18 @@ RSpec.describe "Merchant Items Index" do
         end
       end
     end
+
+    # 11. Merchant Item Create - cont'd in 'spec/features/items/new_spec.rb
+    describe 'When I visit my items index page' do
+      it 'I see a link to create a new item.' do
+        expect(page).to have_link("Create a New Item")
+      end
+
+      it 'When I click the link "Create New Item" button I am redirected to a new page create a new Item' do
+        click_on("Create a New Item")
+
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items/new")
+      end
+    end
   end
 end
