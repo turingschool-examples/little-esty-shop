@@ -108,7 +108,7 @@ RSpec.describe "Merchant_Items", type: :feature do
       I am taken to a form that allows me to add item information." do
       
       click_link("Create New Item")
-      expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}/new")
+      expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
     end
   end
 end
