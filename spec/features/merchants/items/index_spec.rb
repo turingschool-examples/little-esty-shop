@@ -123,4 +123,18 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
       expect(page).to have_content("Corn")
     end
   end
+
+  describe "User Story 12" do
+    it "lists the names of the top 5 most popular items ranked by total revenue generated" do
+      
+    end
+
+    xit "each item name links to my merchant item show page for that item" do
+
+    end
+
+    xit "And I see the total revenue generated next to each item name" do
+
+    end
+  end
 end
