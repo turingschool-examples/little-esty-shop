@@ -1,21 +1,29 @@
 require 'rails_helper'
 
-RSpec.describe '#index' do
+RSpec.describe '#show' do
   before :each do
     @merchant1 = Merchant.create!(name: "Carlos Jenkins") 
-    @merchant2 = Merchant.create!(name: "Leroy Jenkins") 
     visit "/admin/merchants/#{@merchant1.id}"
   end
 
   describe 'as an admin when I visit the admin merchants show page' do
-    it 'I see the names of that merchant' do
+    it 'I see the name of that merchant' do
 
       expect(page).to have_content("Carlos Jenkins")
 
-      visit "/admin/merchants/#{@merchant2.id}"
-      expect(page).to have_content("Leroy Jenkins")
+    end
 
+    it 'I see a link ot update the merchant' do
+      click_link "Update Merchant"
+      expect(current_path).to eq(edit_merchant_path(@merchant1))
 
+      expect(page).to have_content("Carlos Jenkins")
+      save_and_open_page
+      fill_in "Name", with: "Updated Merchant Name"
+      click_button "Update Merchant"
+
+      expect(current_path).to eq(admin_merchant_path(@merchant1))
+      expect(page).to have_content("Updated Merchant Name")
     end
 
   end
