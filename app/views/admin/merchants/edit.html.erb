@@ -1,0 +1,10 @@
+<header>
+  <h2>Edit <%= @merchant.name %></h2>
+</header>
+<section id="merchant_edit">
+  <%=  form_with model: [:admin, @merchant], id: "merchant_edit_form", local: true do |f| %>
+    <%=  f.label :merchant_name, "Merchant Name:" %>
+    <%=  f.text_field :merchant_name, required: true, value: @merchant.name %>
+    <%=  f.submit "Save Changes"%>
+  <% end %>
+</section>
