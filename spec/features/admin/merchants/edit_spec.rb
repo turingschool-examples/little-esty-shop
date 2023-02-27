@@ -33,7 +33,7 @@ describe 'edit admin merchant page' do
 
       describe 'when submit button is clicked' do
         before do
-          click_button('submit')
+          click_button('Submit')
         end
 
         it 'should take the user to the merchant show page' do
