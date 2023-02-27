@@ -25,6 +25,8 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
     @item_3 = create(:item, merchant: @merchant_2)
     @item_4 = create(:item, merchant: @merchant, status: "Enabled")
     @item_5 = create(:item, merchant: @merchant, status: "Enabled")
+    @item_6 = create(:item, merchant: @merchant)
+    @item_7 = create(:item, merchant: @merchant)
 
     @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, quantity: 1, status: "packaged", created_at: Date.new(2023,1,1))
     @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2, quantity: 1, status: "packaged", created_at: Date.new(2023,1,2))
@@ -54,8 +56,10 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
 
   describe "User Story 7" do
     it "the item names are links to the appropriate show page" do
-      click_link("#{@item_1.name}")
-      expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}")
+      within("#merchant_item-#{@item_1.id}") do
+        click_link("#{@item_1.name}")
+        expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}")
+      end
       expect(page).to have_content(@item_1.name)
       expect(page).to_not have_content(@item_2.name)
     end
@@ -125,16 +129,49 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
   end
 
   describe "User Story 12" do
-    it "lists the names of the top 5 most popular items ranked by total revenue generated" do
+    before(:each) do
+      invoice_item_8 = create(:invoice_item, item: @item_1, invoice: @invoice_1, unit_price: 9000000, quantity: 3)
+      invoice_item_9 = create(:invoice_item, item: @item_2, invoice: @invoice_2, unit_price: 8000000, quantity: 3)
+      invoice_item_10 = create(:invoice_item, item: @item_4, invoice: @invoice_3, unit_price: 7000000, quantity: 3)
+      invoice_item_11 = create(:invoice_item, item: @item_5, invoice: @invoice_4, unit_price: 6000000, quantity: 3)
+      invoice_item_12 = create(:invoice_item, item: @item_6, invoice: @invoice_5, unit_price: 5000000, quantity: 3)
+      invoice_item_13 = create(:invoice_item, item: @item_7, invoice: @invoice_6, unit_price: 4000000, quantity: 3)
       
+      visit "/merchants/#{@merchant.id}/items"
+    end
+    
+    it "lists the names of the top 5 most popular items ranked by total revenue generated" do
+      within("#5_most_popular_items") do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_content(@item_4.name)
+        expect(page).to have_content(@item_5.name)
+        expect(page).to have_content(@item_6.name)
+        
+        expect(@item_1.name).to appear_before(@item_2.name)
+        expect(@item_2.name).to appear_before(@item_4.name)
+        expect(@item_4.name).to appear_before(@item_5.name)
+        expect(@item_5.name).to appear_before(@item_6.name)
+      end
     end
 
-    xit "each item name links to my merchant item show page for that item" do
-
+    it "each item name links to my merchant item show page for that item" do
+      within("#5_most_popular_items") do
+        expect(page).to have_link(@item_1.name, :href => "/merchants/#{@merchant.id}/items/#{@item_1.id}")
+        expect(page).to have_link(@item_2.name, :href => "/merchants/#{@merchant.id}/items/#{@item_2.id}")
+        expect(page).to have_link(@item_4.name, :href => "/merchants/#{@merchant.id}/items/#{@item_4.id}")
+        expect(page).to have_link(@item_5.name, :href => "/merchants/#{@merchant.id}/items/#{@item_5.id}")
+        expect(page).to have_link(@item_6.name, :href => "/merchants/#{@merchant.id}/items/#{@item_6.id}")
+      end
     end
 
-    xit "And I see the total revenue generated next to each item name" do
-
+    it "And I see the total revenue generated next to each item name" do
+      within("#5_most_popular_items") do
+        expect(page).to have_content("#{@item_2.name} - 24000000")
+        expect(page).to have_content("#{@item_4.name} - 21000000")
+        expect(page).to have_content("#{@item_5.name} - 18000000")
+        expect(page).to have_content("#{@item_6.name} - 15000000")
+      end
     end
   end
 end

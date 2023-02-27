@@ -4,6 +4,7 @@ class Merchants::ItemsController < ApplicationController
     @items = @merchant.items.all
     @enabled_items = @merchant.items.enabled
     @disabled_items = @merchant.items.disabled
+    @top_5_items = @merchant.top_five_merchant_items
   end
 
   def show
@@ -17,7 +18,6 @@ class Merchants::ItemsController < ApplicationController
   end
 
   def update
-    # require 'pry'; binding.pry
     @item = Item.find(params[:id])
     @merchant = @item.merchant
     @item.update(item_params)
