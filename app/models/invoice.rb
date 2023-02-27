@@ -6,7 +6,6 @@ class Invoice < ApplicationRecord
   
   enum status: [ :in_progress, :completed, :cancelled ]
 
-
   def self.incomplete
     joins(:invoice_items)
     .where("invoice_items.status != ?", 2)
@@ -19,7 +18,8 @@ class Invoice < ApplicationRecord
   end
 
   def calc_total_revenue
-    self.invoice_items.joins(:item).pluck(Arel.sql("sum(invoice_items.quantity * invoice_items.unit_price) as revenue"))
+    self.invoice_items
+    .joins(:item)
+    .pluck(Arel.sql("sum(invoice_items.quantity * invoice_items.unit_price) as revenue"))
   end
-
 end
