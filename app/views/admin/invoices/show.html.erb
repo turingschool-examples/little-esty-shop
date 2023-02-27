@@ -11,7 +11,7 @@
 <p><%= item.name %></p>
 <ul>
 <li><p>Quantity: <%= item.quantity %></p></li>
-<li><p>Price: <%= item.unit_price%></p></li>
+<li><p>Price: <%= format_price(item.unit_price)%></p></li>
 <li><p>Status: <%= item.status %></p></li>
 </ul>
 <%end %>

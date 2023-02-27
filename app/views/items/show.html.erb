@@ -5,5 +5,5 @@
   <p><%= link_to "Update #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}/edit" %></p>
 
   <p><%= item.description %></p>
-  <p>$<%= item.unit_price %>.00</p>
+  <p><%= format_price(item.unit_price) %></p>
 <% end %>
