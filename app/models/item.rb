@@ -14,6 +14,11 @@ class Item < ApplicationRecord
   end
 
   def item_best_day
-    binding.pry
+    self.invoices.joins(:transactions)
+    .where(transactions: {result: 'success'})
+    .select("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as item_revenue")
+    .order(item_revenue: :desc, created_at: :desc)
+    .group("invoices.created_at")
+    .first
   end
 end

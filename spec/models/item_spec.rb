@@ -46,10 +46,10 @@ RSpec.describe Item, type: :model do
       @item_6 = create(:item, merchant: @merchant)
 
       @invoice_1 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,1,1))
-      @invoice_2 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,1,1))
-      @invoice_3 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,1,1))
+      @invoice_2 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,1,2))
+      @invoice_3 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,1,3))
       @invoice_4 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,2,1))
-      @invoice_5 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,2,1))
+      @invoice_5 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,2,2))
       @invoice_6 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,3,1))
       @invoice_7 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,4,1))
       @invoice_8 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,5,1))
@@ -87,7 +87,12 @@ RSpec.describe Item, type: :model do
 
     describe '::item_best_day' do
       it 'returns the date with the most sales for the item' do
-        expect(@item_1.item_best_day).to_eq('2023-01-01 00:00:00 UTC')
+        expect(@item_1.item_best_day.created_at).to eq('2023-01-01 00:00:00 UTC')
+        expect(@item_2.item_best_day.created_at).to eq('2023-01-02 00:00:00 UTC')
+        expect(@item_3.item_best_day.created_at).to eq('2023-01-03 00:00:00 UTC')
+        expect(@item_4.item_best_day.created_at).to eq('2023-02-01 00:00:00 UTC')
+        expect(@item_5.item_best_day.created_at).to eq('2023-02-02 00:00:00 UTC')
+        expect(@item_6.item_best_day.created_at).to eq('2023-03-01 00:00:00 UTC')
       end
     end
   end

@@ -190,11 +190,11 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
     it "next to each of the 5 most popular items I see the date with the most sales 
       for each item and I see a label “Top selling date for was " do
         within("#5_most_popular_items") do
-          expect(page).to have_content("Top selling date for was #{@item_1.name} was #{@item_1.item_best_day}")
-          expect(page).to have_content("Top selling date for was #{@item_2.name} was #{@item_2.item_best_day}")
-          expect(page).to have_content("Top selling date for was #{@item_4.name} was #{@item_4.item_best_day}")
-          expect(page).to have_content("Top selling date for was #{@item_5.name} was #{@item_5.item_best_day}")
-          expect(page).to have_content("Top selling date for was #{@item_6.name} was #{@item_6.item_best_day}")
+          expect(page).to have_content("Top selling date for #{@item_1.name} was #{@item_1.item_best_day}")
+          expect(page).to have_content("Top selling date for #{@item_2.name} was #{@item_2.item_best_day}")
+          expect(page).to have_content("Top selling date for #{@item_4.name} was #{@item_4.item_best_day}")
+          expect(page).to have_content("Top selling date for #{@item_5.name} was #{@item_5.item_best_day}")
+          expect(page).to have_content("Top selling date for #{@item_6.name} was #{@item_6.item_best_day}")
       end
     end
   end
