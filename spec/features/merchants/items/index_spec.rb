@@ -11,12 +11,12 @@ RSpec.describe 'Merchant Items', type: :feature do
     let!(:baseball) { sam.items.create!(name: "Baseball", description: "This a baseball", unit_price: 2500) }
     let!(:glove) { sam.items.create!(name: "Baseball Glove", description: "This a baseball glove", unit_price: 4000, status: 1) }
 
-    before (:each) do 
-      visit merchant_items_path(sam.id)
-    end
-
     describe 'As a merchant' do 
       context 'When I visit my merchant items index page' do
+        before (:each) do 
+          visit merchant_items_path(sam.id)
+        end
+
         it 'I see a list of the names of all my items' do
           expect(page).to have_content("#{sam.name}")
           expect(page).to have_content("New Item")
@@ -90,6 +90,60 @@ RSpec.describe 'Merchant Items', type: :feature do
             glove.reload
             expect(glove.status).to eq('disabled')
             expect(current_path).to eq(merchant_items_path(sam))
+          end
+        end
+
+        it "I see a link to create a new item." do
+          within('section#my_items') do
+            expect(page).to have_link("New Item")
+          end
+        end
+      end
+
+      context 'When I visit my merchant items edit page' do
+        before (:each) do 
+          visit merchant_items_path(sam.id)
+        end
+
+        it "When I click on the link, I am taken to a form that allows me to add item information." do
+          click_link "Create New Item"
+
+          expect(current_path).to eq(new_merchant_item_path(sam.id))
+
+          within ("section#new_item") do
+            expect(page).to have_field("Name")
+            expect(page).to have_field("Description")
+            expect(page).to have_field("Unit Price")
+          end
+        end
+
+        context "When I visit the Merchant Item Edit Form" do
+          before (:each) do 
+            visit new_merchant_item_path(sam.id)
+          end
+
+          it "When I fill out the form I click ‘Submit’ Then I am taken back to the items index page" do
+            within("section#new_item") do
+              fill_in "Name:", with: "Marijuana Tapestry"
+              fill_in "Description", with: "Crushed velvet, 51.2 x 59.1 inches"
+              fill_in "Unit Price", with: "7110"
+              
+              click_button "Submit"
+            end
+            
+            expect(current_path).to eq(merchant_items_path(sam.id))
+          end
+
+          it 'when leave a form field blank, I get an error message and am returned to that Items edit page' do
+            
+            fill_in 'Name', with: 'Marijuana Tapestry'
+            fill_in 'Description', with: ''
+            fill_in 'Unit Price', with: ''
+            click_button 'Submit'
+
+            expect(current_path).to eq(new_merchant_item_path(sam.id))
+            expect(page).to have_content("Description can't be blank")
+            expect(page).to have_content("Unit price can't be blank")
           end
         end
       end

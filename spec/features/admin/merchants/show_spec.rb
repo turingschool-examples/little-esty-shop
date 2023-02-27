@@ -94,7 +94,6 @@ RSpec.describe "Admin Merchants Show", type: :feature do
         end
       
         it "I see the updated information, and I see a flash message stating that the information has been successfully updated." do
-          save_and_open_page
           within("header#merchant_name") do
             expect(page).to have_content("#{@edited_name}")
           end

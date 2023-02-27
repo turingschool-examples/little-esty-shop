@@ -40,7 +40,7 @@ RSpec.describe 'Merchant Items', type: :feature do
 
           expect(current_path).to eq(merchant_item_path(sam.id, football.id))
           expect(page).to have_content("Nerf Football")
-          expect(page).to have_content("Item Successfully Updated!")
+          expect(page).to have_content("Item Successfully Updated")
           
           within 'div#item_attributes' do
             expect(page).to have_content("Description: Nerf or nothin'")
@@ -55,7 +55,7 @@ RSpec.describe 'Merchant Items', type: :feature do
           fill_in 'Description', with: ''
           fill_in 'Unit price', with: ''
           click_button 'Submit'
-          save_and_open_page
+          
           expect(current_path).to eq(edit_merchant_item_path(sam.id, football.id))
           expect(page).to have_content("Unit price can't be blank")
           expect(page).to have_content("Description can't be blank")
