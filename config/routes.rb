@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   patch '/admin/invoices/:id', to: "admin/invoices#update"
 
 	resources :merchants, only: :show do
-		resources :items, except: :update, controller: 'merchant_items'
+		resources :items, except: :update, controller: 'merchant/items'
     resources :invoices, only: [:index, :show]
 	end
 
   get '/merchants/:id/dashboard', to: "merchants#show"
-	patch '/merchants/:merchant_id/items/:id', to: "merchant_items#update"
+	patch '/merchants/:merchant_id/items/:id', to: "merchant/items#update"
 end
