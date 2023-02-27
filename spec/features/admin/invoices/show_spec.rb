@@ -16,6 +16,10 @@ RSpec.describe 'Admin Invoice Show Page' do
     @customer_1 = Customer.create!(first_name: "Steve", last_name: "Stevinson")
     @customer_2 = Customer.create!(first_name: "Joe", last_name: "Shmow")
 
+    @invoice_1 = @customer_1.invoices.create(status: 0)
+    @invoice_2 = @customer_1.invoices.create(status: 0)
+    @invoice_3 = @customer_1.invoices.create(status: 0)
+  
     @invoice1 = Invoice.create!(customer: @customer_1, status: 0) # in progress
     @invoice2 = Invoice.create!(customer: @customer_1, status: 2) # cancelled
     @invoice3 = Invoice.create!(customer: @customer_1, status: 1) # completed
@@ -66,11 +70,20 @@ RSpec.describe 'Admin Invoice Show Page' do
 
       it "shows the invoice status is a select field (drop down) with the various enum statuses as the options" do   
         visit "/admin/invoices/#{@invoice_1.id}"
-
         expect(page).to have_selector("select[name='invoice_status']")
         expect(page).to have_select('invoice_status', with_options: [Invoice.statuses.keys[0], Invoice.statuses.keys[1], Invoice.statuses.keys[2]])
-      
       end 
+
+      it "see the total revenue that will be generated from this invoice" do 
+
+        @invoice_item1 = FactoryBot.create(:invoice_item, quantity: 1, invoice_id: @invoice_1.id, unit_price: 5, item_id: @item_1.id)
+
+        @invoice_item2 = FactoryBot.create(:invoice_item, quantity: 2, invoice_id: @invoice_1.id, unit_price: 15, item_id: @item_1.id)
+
+        visit "/admin/invoices/#{@invoice_1.id}"
+
+        expect(page).to have_content("Total Revenue Generated from this Invoice: 35")
+      end
 
       it "the select field starts out filled out to the current status of the invoice" do
 
@@ -109,6 +122,5 @@ RSpec.describe 'Admin Invoice Show Page' do
         expect(page).to have_content("Invoice Created date: #{@invoice_1.created_at}") 
         expect(page).to have_content("Customer Name: #{@invoice_1.customer.first_name} #{@invoice_1.customer.last_name}")
       end
-
-  end
+    end
 end
