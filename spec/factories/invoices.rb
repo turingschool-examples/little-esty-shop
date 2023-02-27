@@ -7,5 +7,6 @@ FactoryBot.define do
     updated_at {Time.zone.now}
 
     association :customer
+    
   end
 end 
