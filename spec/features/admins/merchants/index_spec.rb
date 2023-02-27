@@ -93,29 +93,37 @@ RSpec.describe "The Admin Merchants Index" do
       item_4 = create(:item, merchant: @merchant_2)
       item_5 = create(:item, merchant: @merchant_4)
       item_6 = create(:item, merchant: @merchant_6)
-
-      invoice_1 = create(:invoice, customer: spendy_customer)
-      invoice_2 = create(:invoice, customer: spendy_customer)
+      #merchant 3
+      invoice_1 = create(:invoice, customer: spendy_customer, created_at: Date.new(2023,1,1))
+      invoice_2 = create(:invoice, customer: spendy_customer, created_at: Date.new(2023,1,1))
       invoice_3 = create(:invoice, customer: spendy_customer)
-      invoice_4 = create(:invoice, customer: spendy_customer)
-      invoice_5 = create(:invoice, customer: spendy_customer)
+      #merchant 1
+      invoice_4 = create(:invoice, customer: spendy_customer, created_at: Date.new(2023,1,2))
+      invoice_5 = create(:invoice, customer: spendy_customer, created_at: Date.new(2023,1,3))
       invoice_6 = create(:invoice, customer: spendy_customer)
-      invoice_7 = create(:invoice, customer: spendy_customer)
-      invoice_8 = create(:invoice, customer: spendy_customer)
+      #merchant 5
+      invoice_7 = create(:invoice, customer: spendy_customer, created_at: Date.new(2023,1,4))
+      invoice_8 = create(:invoice, customer: spendy_customer, created_at: Date.new(2023,1,4))
       invoice_9 = create(:invoice, customer: spendy_customer)
-      invoice_10 = create(:invoice, customer: spendy_customer)
-      invoice_11 = create(:invoice, customer: spendy_customer)
-      invoice_12 = create(:invoice, customer: spendy_customer)
+      #merchant 2
+      invoice_10 = create(:invoice, customer: spendy_customer, created_at: Date.new(2023,1,5))
+      #merchant 4
+      invoice_11 = create(:invoice, customer: spendy_customer, created_at: Date.new(2023,1,6))
+      #merchant 6
+      invoice_12 = create(:invoice, customer: spendy_customer, created_at: Date.new(2023,1,7))
       
       create(:transaction, invoice: invoice_1, result: 0)
       create(:transaction, invoice: invoice_2, result: 0)
       create(:transaction, invoice: invoice_3, result: 1)
+
       create(:transaction, invoice: invoice_4, result: 0)
       create(:transaction, invoice: invoice_5, result: 0)
       create(:transaction, invoice: invoice_6, result: 1)
+
       create(:transaction, invoice: invoice_7, result: 0)
       create(:transaction, invoice: invoice_8, result: 0)
       create(:transaction, invoice: invoice_9, result: 1)
+
       create(:transaction, invoice: invoice_10, result: 0)
       create(:transaction, invoice: invoice_11, result: 0)
       create(:transaction, invoice: invoice_12, result: 0)
@@ -182,6 +190,31 @@ RSpec.describe "The Admin Merchants Index" do
           expect(@merchant_1.name).to appear_before(@merchant_3.name)
           expect(@merchant_3.name).to appear_before(@merchant_4.name)
           expect(@merchant_4.name).to appear_before(@merchant_2.name)
+        }
+      end
+    end
+
+    describe "User Story 31" do
+      it "When I visit the admin merchants index, next to each of the top merchnats, I see the date with the most revenue for each merchant. I see a label “Top selling date for <merchant name> was <date with most sales>" do
+
+        within("#top_merchant-#{@merchant_5.id}") { 
+          expect(page).to have_content("Top day for #{@merchant_5.name} was 1/4/23") 
+        }
+        
+        within("#top_merchant-#{@merchant_1.id}") { 
+          expect(page).to have_content("Top day for #{@merchant_1.name} was 1/2/23")     
+        }
+        
+        within("#top_merchant-#{@merchant_3.id}") { 
+          expect(page).to have_content("Top day for #{@merchant_3.name} was 1/1/23") 
+        }
+
+        within("#top_merchant-#{@merchant_4.id}") { 
+          expect(page).to have_content("Top day for #{@merchant_4.name} was 1/6/23") 
+        }
+
+        within("#top_merchant-#{@merchant_2.id}") { 
+          expect(page).to have_content("Top day for #{@merchant_2.name} was 1/5/23") 
         }
       end
     end
