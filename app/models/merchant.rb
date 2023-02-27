@@ -60,5 +60,4 @@ class Merchant < ApplicationRecord
       .order(daily_revenue: :desc, created_at: :desc)
       .first
   end
-
 end

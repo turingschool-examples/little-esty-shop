@@ -51,7 +51,6 @@ RSpec.describe "Merchant_Invoices#Index", type: :feature do
     context "As a merchant, when I visit my merchant's invoices index" do
       it "I see all of the invoices that include at least one of my merchant's items and 
         for each invoice I see its id and each id links to the merchant invoice show page" do
-        
         within("#merchant_invoices") do
           expect(page).to have_content(@invoice_1.id)
           expect(page).to have_content(@invoice_2.id)

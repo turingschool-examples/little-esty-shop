@@ -185,5 +185,7 @@ RSpec.describe Merchant, type: :model do
         expect(@merchant.top_day_by_revenue.created_at).to eq("Sun, 01 Jan 2023 00:00:00 UTC +00:00")
       end
     end
+
+    # describe "#"
   end
 end
