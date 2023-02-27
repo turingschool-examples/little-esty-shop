@@ -1,0 +1,29 @@
+<div class="nav_bar">
+  <div class="nav_elements">
+    <div class="page_title"><%= "Admin Dashboard" %></div>
+  </div>
+
+  <div class="nav_elements">
+    <p>
+      <div class="link"><%= link_to "Dashboard", admin_index_path %></div>
+      &nbsp;
+      <div class="link"><%= link_to "Merchants", admin_merchants_path %></div>
+      &nbsp;
+      <div class="highlighted_link"><%= link_to "Invoices", admin_invoices_path %></div>
+    </p>
+  </div>
+</div>
+
+<div class="body_container">
+  <div class="sub_container">
+    <div class="sub_header">Invoices</div>
+    <% @invoices.each do |invoice| %>
+      <div id="invoice-<%= invoice.id %>">
+        <p>
+          <%= "Invoice -"%>
+          <%= link_to "##{invoice.id}", admin_invoice_path(invoice) %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
