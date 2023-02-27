@@ -87,12 +87,12 @@ RSpec.describe Item, type: :model do
 
     describe '::item_best_day' do
       it 'returns the date with the most sales for the item' do
-        expect(@item_1.item_best_day.created_at).to eq('2023-01-01 00:00:00 UTC')
-        expect(@item_2.item_best_day.created_at).to eq('2023-01-02 00:00:00 UTC')
-        expect(@item_3.item_best_day.created_at).to eq('2023-01-03 00:00:00 UTC')
-        expect(@item_4.item_best_day.created_at).to eq('2023-02-01 00:00:00 UTC')
-        expect(@item_5.item_best_day.created_at).to eq('2023-02-02 00:00:00 UTC')
-        expect(@item_6.item_best_day.created_at).to eq('2023-03-01 00:00:00 UTC')
+        expect(@item_1.item_best_day).to eq('2023-01-01 00:00:00 UTC')
+        expect(@item_2.item_best_day).to eq('2023-01-02 00:00:00 UTC')
+        expect(@item_3.item_best_day).to eq('2023-01-03 00:00:00 UTC')
+        expect(@item_4.item_best_day).to eq('2023-02-01 00:00:00 UTC')
+        expect(@item_5.item_best_day).to eq('2023-02-02 00:00:00 UTC')
+        expect(@item_6.item_best_day).to eq('2023-03-01 00:00:00 UTC')
       end
     end
   end
