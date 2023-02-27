@@ -79,7 +79,7 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  describe "gdhgfd" do
+  describe "#items_ready_to_ship" do
     it "should have items ready to be shipped" do
       merchant21 = create(:merchant) 
       customer21 = create(:customer) 

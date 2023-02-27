@@ -15,7 +15,11 @@ class Invoice < ApplicationRecord
   end
 
   def items_with_invoice_attributes
-    invoice_items.joins(:item).select(:quantity, :unit_price, :status, "items.name")
+    self.invoice_items.joins(:item).select(:quantity, :unit_price, :status, "items.name")
+  end
+
+  def calc_total_revenue
+    self.invoice_items.joins(:item).pluck(Arel.sql("sum(invoice_items.quantity * invoice_items.unit_price) as revenue"))
   end
 
 end

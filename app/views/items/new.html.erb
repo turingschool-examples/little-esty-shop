@@ -1,0 +1,6 @@
+<h1>Create a New Item</h1>
+
+<%= form_with model: @items, url: "/items", method: :post, local: true do |f| %>
+  <%= render 'item_form', f: f %>
+  <%= f.submit "Submit" %>
+<% end %>
