@@ -16,8 +16,8 @@ RSpec.describe 'Merchant Invoices', type: :feature do
     let!(:tomato) { bob.items.create!(name: "Tomato", description: "This a few Tomatos", unit_price: 700) }
 
     before (:each) do
-      @inv_item1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: football.id, quantity: 10, unit_price: 1200, status: 1)
-      @inv_item2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: baseball.id, quantity: 3, unit_price: 2400, status: 0)
+      @inv_item1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: football.id, quantity: 10, unit_price: 2655, status: 1)
+      @inv_item2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: baseball.id, quantity: 3, unit_price: 2210, status: 0)
       @inv_item3 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: arugula.id, quantity: 15, unit_price: 650, status: 2)
       @inv_item4 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: tomato.id, quantity: 20, unit_price: 550, status: 2)
     end
@@ -66,6 +66,16 @@ RSpec.describe 'Merchant Invoices', type: :feature do
             expect(page).to_not have_content("Quantity #{@inv_item4.quantity}")
             expect(page).to_not have_content("Unit Price $#{@inv_item4.unit_price / 100}")
             expect(page).to_not have_content("Status #{@inv_item4.status}")
+          end
+        end
+
+        it 'I see the total revenue that will be generated from all of my items on the invoice' do
+          visit merchant_invoice_path(sam.id, invoice1.id)
+          
+          within'section#inv_info' do
+            expect(page).to have_content("Total Revenue: $331.80")
+            expect(page).to_not have_content("Total Revenue: $55.00")
+            expect(page).to_not have_content("Total Revenue: $48.00")
           end
         end
       end
