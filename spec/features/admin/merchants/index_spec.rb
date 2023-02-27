@@ -95,5 +95,14 @@ RSpec.describe 'admin merchants index page' do
 			expect(current_path).to eq(admin_merchants_path)
 			expect(page).to have_content("John Doe\nStatus: active")
 		end
+
+		it 'will have a link to create a new merchant' do 
+			visit admin_merchants_path
+
+			expect(page).to have_link("Create New Merchant")
+			click_on "Create New Merchant"
+
+			expect(page).to have_current_path('/admin/merchants/new')
+		end
 	end
 end
