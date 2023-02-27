@@ -6,7 +6,7 @@
 <h2>Top 5 Most Popular Items (By Revenue)</h2>
 <div id="top_5_items">
   <% @top_5_items.each do |i| %>
-    <li><%= link_to i.name, "/merchants/#{i.merchant_id}/items/#{i.id}" %>: <%= i.revenue %></li>
+    <li><%= link_to i.name, "/merchants/#{i.merchant_id}/items/#{i.id}" %>: <%= number_to_currency(i.revenue) %></li>
   <% end %>
 </div>
 <h2>Items:</h2>
