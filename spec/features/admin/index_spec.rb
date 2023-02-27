@@ -73,7 +73,7 @@ RSpec.describe '/admin', type: :feature do
       @invoice12.transactions.create!(credit_card_number: "4654405418249635", credit_card_expiration_date: "05/29", result: 0) #success
       @invoice13.transactions.create!(credit_card_number: "4654405418249635", credit_card_expiration_date: "05/29", result: 0) #success
 
-      @yukon = Customer.create!(first_name: "yukon", last_name: "Dooheet")
+      @yukon = Customer.create!(first_name: "Yukon", last_name: "Dooheet")
       @invoice14 = Invoice.create!(customer: @yukon, status: 1) #completed
       @invoice15 = Invoice.create!(customer: @yukon, status: 1) #completed
       @invoice16 = Invoice.create!(customer: @yukon, status: 1) #completed
@@ -111,11 +111,11 @@ RSpec.describe '/admin', type: :feature do
     it 'next to customer names, I see total count of their successful transactions' do
       visit '/admin'
       within "#top_customers-#{@steve.id}" do
-        expect(page).to have_content("steve Stevinson has 4 successful transactions!")
+        expect(page).to have_content("Steve Stevinson has 4 successful transactions!")
       end
 
       within "#top_customers-#{@yukon.id}" do
-        expect(page).to have_content("yukon Dooheet has 3 successful transactions!")
+        expect(page).to have_content("Yukon Dooheet has 3 successful transactions!")
       end
     end 
 

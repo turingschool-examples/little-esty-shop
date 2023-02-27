@@ -36,7 +36,7 @@ RSpec.describe 'Admin Invoice Show Page' do
 
   describe "as an admin" do 
   
-  # User Story 33
+   # User Story 33
     it "I see the invoice id, invoice status, created at, and customer first and last name" do 
       visit "/admin/invoices/#{@invoice1.id}"
       expect(page).to have_content("Invoice #{@invoice1.id} Page")
@@ -76,9 +76,9 @@ RSpec.describe 'Admin Invoice Show Page' do
 
       it "see the total revenue that will be generated from this invoice" do 
 
-        @invoice_item1 = FactoryBot.create(:invoice_item, quantity: 1, invoice_id: @invoice_1.id, unit_price: 5, item_id: @item_1.id)
+        @invoice_item1 = FactoryBot.create(:invoice_item, quantity: 1, invoice_id: @invoice_1.id, unit_price: 5, item_id: @item1.id)
 
-        @invoice_item2 = FactoryBot.create(:invoice_item, quantity: 2, invoice_id: @invoice_1.id, unit_price: 15, item_id: @item_1.id)
+        @invoice_item2 = FactoryBot.create(:invoice_item, quantity: 2, invoice_id: @invoice_1.id, unit_price: 15, item_id: @item1.id)
 
         visit "/admin/invoices/#{@invoice_1.id}"
 
@@ -108,7 +108,7 @@ RSpec.describe 'Admin Invoice Show Page' do
         select Invoice.statuses.keys[2], from: "invoice_status"
 
         click_button("Update Invoice Status")
-        save_and_open_page
+
         expect(page).to have_select('invoice_status', selected: 'cancelled')
 
         expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
@@ -123,4 +123,5 @@ RSpec.describe 'Admin Invoice Show Page' do
         expect(page).to have_content("Customer Name: #{@invoice_1.customer.first_name} #{@invoice_1.customer.last_name}")
       end
     end
+  end
 end

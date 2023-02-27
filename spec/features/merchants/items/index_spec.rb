@@ -162,7 +162,6 @@ RSpec.describe 'Merchant/Items Index Page' do
 
     visit "/merchants/#{merchant3.id}/items"
 
-    save_and_open_page
       within("div#5_most_popular_items") do 
         expect(page).to_not have_content("#{item_14.name}")
         expect(page).to_not have_content("#{item_15.name}")
@@ -298,7 +297,7 @@ RSpec.describe 'Merchant/Items Index Page' do
         @invoiceitems2 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item[1], unit_price: 1, quantity: 1)
   
         visit "/merchants/#{@merchant.id}/items"
-        save_and_open_page
+        
           within("div#5_most_popular_items") do 
             expect(page).to have_content("#{@item[0].name}") 
             expect(page).to have_content("Top selling date for #{@item[0].name} was #{@invoice3.created_at.strftime("%B %d, %Y")}")
