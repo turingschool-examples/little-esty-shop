@@ -1,5 +1,9 @@
 require 'rails_helper'
 
+RSpec.configure do |config|
+  config.include ActiveSupport::Testing::TimeHelpers
+end
+
 RSpec.describe Merchant, type: :model do
   describe 'relationships' do
     it { should have_many :items }
@@ -101,6 +105,29 @@ RSpec.describe Merchant, type: :model do
       InvoiceItem.create!(item_id: item20.id, invoice_id: invoice20.id, status: "packaged")
 
       expect(merchant21.items_ready_to_ship).to eq([item20, item29, item24, item21])
+    end
+  end
+
+  describe "#best revenue day" do
+    it "should calculate the day for a merchants highest revenue" do
+      customer1 = create(:customer)
+      merchant1 = create(:merchant) 
+      item1 = create(:item, merchant: merchant1) 
+      invoice1 = create(:invoice, customer: customer1, created_at: Time.new('2021'))
+      invoice2 = create(:invoice, customer: customer1, created_at: Time.new('2023'))        
+      invoice3 = create(:invoice, customer: customer1, created_at: Time.new('2025'))
+      invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id, quantity: 10, unit_price: 1)
+      invoice_item2 = create(:invoice_item, item_id: item1.id, invoice_id: invoice2.id, quantity: 10, unit_price: 5)
+      invoice_item3 = create(:invoice_item, item_id: item1.id, invoice_id: invoice3.id, quantity: 10, unit_price: 10)
+      transaction1 = create(:transaction, invoice_id: invoice1.id, result: 'success')
+      transaction2 = create(:transaction, invoice_id: invoice2.id, result: 'success')
+      transaction3 = create(:transaction, invoice_id: invoice3.id, result: 'success')
+    
+      expect(merchant1.best_revenue_day.created_at).to eq(invoice3.created_at)
+
+      invoice_item4 = create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id, quantity: 10, unit_price: 100)
+
+      expect(merchant1.best_revenue_day.created_at).to eq(invoice1.created_at)
     end
   end
 
