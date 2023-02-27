@@ -6,9 +6,12 @@
   <%= f.submit "Update Invoice Status" %>
 <% end %>
 <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<div id="total_revenue">
+  <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue.to_f/100, precision:2) %></p>
+</div>
 <div id="customers">
-<h3>Customer:</h3>
-<p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
+  <h3>Customer:</h3>
+  <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 </div>
 <h3>Items on this Invoice:</h3>
 <table>
@@ -18,14 +21,14 @@
     <th>Unit Price</th>
     <th>Status</th>
   </tr>
-<% @invoice.invoice_items.each do |invoice_item| %>
-  <div id=<%= invoice_item.item.name %>>
-  <tr>
-    <td><%= invoice_item.item.name %></td>
-    <td><%= invoice_item.quantity %></td>
-    <td>$<%= (invoice_item.unit_price.to_f/100) %></td>
-    <td>Status: <%= invoice_item.status %></td>
-  </tr>
-  </div>  
-<% end %>
+  <% @invoice.invoice_items.each do |invoice_item| %>
+    <div id=<%= invoice_item.item.name %>>
+      <tr>
+        <td><%= invoice_item.item.name %></td>
+        <td><%= invoice_item.quantity %></td>
+        <td><%= number_to_currency(invoice_item.unit_price.to_f/100, precision:2) %></td>
+        <td>Status: <%= invoice_item.status %></td>
+      </tr>
+    </div>  
+  <% end %>
 </table>

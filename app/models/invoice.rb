@@ -10,4 +10,8 @@ class Invoice < ApplicationRecord
   def self.invoice_items_not_shipped
     joins(:invoice_items).where.not(invoice_items: {status: 2}).distinct.order(:created_at)
   end
+
+  def total_revenue
+    self.invoice_items.sum('invoice_items.unit_price * invoice_items.quantity')
+  end
 end

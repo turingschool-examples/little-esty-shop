@@ -75,6 +75,16 @@ describe 'As a merchant', type: :feature do
       end
     end
 
+    it "I see the total revenue that will be generated from this invoice" do
+      total_revenue = (invoice_item1.unit_price * invoice_item1.quantity) + (invoice_item3.unit_price * invoice_item3.quantity) + (invoice_item4.unit_price * invoice_item4.quantity) + (invoice_item5.unit_price * invoice_item5.quantity)
+      
+      visit "/admin/invoices/#{invoice1.id}"
+
+      within "#total_revenue" do
+        expect(page).to have_content("$#{total_revenue.to_f/100}")
+      end
+    end
+
     it "I see the invoice status is a select field and next to the select field I see a button to 'Update Invoice Status'" do
       visit "/admin/invoices/#{invoice1.id}"
 
