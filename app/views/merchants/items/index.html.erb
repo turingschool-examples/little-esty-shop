@@ -8,9 +8,15 @@
   <h3>My Items</h3>
   <%= link_to "Create New Item", new_merchant_item_path(@merchant) %>
 
-  <ul id="items_list">
-    <% @items.each do |item| %>
+<ul>
+  <% @items.each do |item| %>
+    <div id="items-<%=item.id%>">
       <li><%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %></li>
-    <% end %>
-  </ul>
-<section>
+      <% if item.enabled? %>
+        <%= button_to "Disable", merchant_item_path(@merchant.id, id: item.id), method: :patch, params: {status: :disabled } %>
+      <% else %>
+        <%= button_to "Enable", merchant_item_path(@merchant.id, id: item.id), method: :patch, params: {status: :enabled } %>
+      <% end %>
+    </div>
+  <% end %>
+</ul>
