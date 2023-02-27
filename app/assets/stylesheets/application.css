@@ -29,6 +29,8 @@ h1 span {
 }
 
 .sub_header {
+  width: 475px;
+  border-top: solid;
   text-align: center;
   background-color: rgb(175, 182, 195);
   font-weight: bold;
@@ -59,8 +61,6 @@ h1 span {
 }
 
 .sub_container {
-  width: 475px;
-  border-top: solid;
   display: inline-block;
   margin: 10px;
 }
@@ -84,4 +84,19 @@ h1 span {
 
 .sub_font {
   padding: 2px;
+}
+
+.new_merchant {
+  padding: 10px;
+  padding-left: 50px;
+}
+
+.merchants_container {
+
+}
+
+.merchant_container {
+  padding-left: 60px;
+  padding-bottom: 8px;
+  display: flex;
 }
