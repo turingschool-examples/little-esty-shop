@@ -78,6 +78,10 @@ RSpec.describe 'Merchant Invoices', type: :feature do
             expect(page).to_not have_content("Total Revenue: $48.00")
           end
         end
+
+        xit 'I see that each invoice item status is a select field, with the current status selected' do
+          
+        end
       end
     end
   end
