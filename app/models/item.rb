@@ -13,4 +13,21 @@ class Item < ApplicationRecord
   def self.disabled_items
     where(status: 1)
   end
+
+	def self.top_five_most_popular_items
+		joins(:transactions)
+		.where(transactions: {result: 0})
+		.select("items.*, SUM(invoice_items.unit_price*invoice_items.quantity) as revenue")
+		.group(:id)
+		.order("revenue DESC")
+	end
+
+	def best_day
+		Item.joins(:transactions)
+		.select("invoices.created_at as invoice_date, COUNT(invoices.created_at) as invoice_count")
+		.where(id: self.id, transactions: {result: 0})
+		.group("invoices.created_at")
+		.order(invoice_count: :desc, invoice_date: :desc)
+		.first.invoice_date.strftime("%m/%d/%Y")
+	end
 end
