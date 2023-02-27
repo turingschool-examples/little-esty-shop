@@ -100,10 +100,9 @@ RSpec.describe 'admin merchants index page' do
 			visit admin_merchants_path
 
 			expect(page).to have_link("Create New Merchant")
-
 			click_on "Create New Merchant"
 
-			expect(page).to have_current_path('admin/merchants/new')
+			expect(page).to have_current_path('/admin/merchants/new')
 		end
 	end
 end

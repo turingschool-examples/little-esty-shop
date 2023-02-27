@@ -25,4 +25,8 @@ class Admin::MerchantsController < ApplicationController
 			flash[:alert] = error_message(merchant.errors)
 		end
 	end
+
+	def new
+		
+	end
 end
