@@ -174,4 +174,28 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
       end
     end
   end
+
+  describe "User Story 13" do
+    before(:each) do
+      invoice_item_8 = create(:invoice_item, item: @item_1, invoice: @invoice_1, unit_price: 9000000, quantity: 3)
+      invoice_item_9 = create(:invoice_item, item: @item_2, invoice: @invoice_2, unit_price: 8000000, quantity: 3)
+      invoice_item_10 = create(:invoice_item, item: @item_4, invoice: @invoice_3, unit_price: 7000000, quantity: 3)
+      invoice_item_11 = create(:invoice_item, item: @item_5, invoice: @invoice_4, unit_price: 6000000, quantity: 3)
+      invoice_item_12 = create(:invoice_item, item: @item_6, invoice: @invoice_5, unit_price: 5000000, quantity: 3)
+      invoice_item_13 = create(:invoice_item, item: @item_7, invoice: @invoice_6, unit_price: 4000000, quantity: 3)
+      
+      visit "/merchants/#{@merchant.id}/items"
+    end
+
+    it "next to each of the 5 most popular items I see the date with the most sales 
+      for each item and I see a label “Top selling date for was " do
+        within("#5_most_popular_items") do
+          expect(page).to have_content("Top selling date for was #{@item_1.name} was #{@item_1.item_best_day}")
+          expect(page).to have_content("Top selling date for was #{@item_2.name} was #{@item_2.item_best_day}")
+          expect(page).to have_content("Top selling date for was #{@item_4.name} was #{@item_4.item_best_day}")
+          expect(page).to have_content("Top selling date for was #{@item_5.name} was #{@item_5.item_best_day}")
+          expect(page).to have_content("Top selling date for was #{@item_6.name} was #{@item_6.item_best_day}")
+      end
+    end
+  end
 end

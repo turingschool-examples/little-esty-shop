@@ -12,4 +12,8 @@ class Item < ApplicationRecord
   def self.disabled
     where(status: "Disabled")
   end
+
+  def item_best_day
+    binding.pry
+  end
 end
