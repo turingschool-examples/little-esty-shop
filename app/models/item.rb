@@ -12,4 +12,14 @@ class Item < ApplicationRecord
   def item_invoice_id
     invoice_items.first.invoice_id
   end
+
+  def self.top_5_by_revenue
+    # require 'pry'; binding.pry
+    Item.joins(:transactions)
+   .where("transactions.result = 'success'")
+   .group("items.id")
+   .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue")
+   .order("revenue desc")
+   .limit(5)
+  end
 end
