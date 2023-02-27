@@ -1,0 +1,7 @@
+<h1> Create a Merchant </h1>
+
+<%= form_with model: @merchant do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.submit %>
+<% end %>

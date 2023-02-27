@@ -6,6 +6,15 @@ class MerchantsController < ApplicationController
     @items_to_ship = @merchant.invoice_items.unshipped_items
   end
 
+  def new
+    @merchant = Merchant.new
+  end
+
+  def create
+    @merchant = Merchant.create!(merchant_params)
+    redirect_to admin_merchants_path
+  end
+
   def edit
     @merchant = Merchant.find(params[:id])
   end
@@ -23,7 +32,6 @@ class MerchantsController < ApplicationController
       flash[:success] = "Merchant was successfully updated."
       redirect_to admin_merchant_path(@merchant)
     end
-
   end
 
   private

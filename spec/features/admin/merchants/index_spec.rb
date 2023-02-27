@@ -53,5 +53,19 @@ RSpec.describe '#index' do
       expect(page).to have_content("Disabled Merchants")
     end
   end
+
+  it 'I see a link to create a new merchant' do
+    expect(page).to have_link "Create New Merchant"
+    expect(page).to_not have_content("Newest Merchant")
+
+    click_link "Create New Merchant"
+    expect(current_path).to eq '/merchants/new'
+
+    fill_in "Name", with: "Newest Merchant"
+    click_button "Create Merchant"
+
+    expect(current_path).to eq admin_merchants_path
+    expect(page).to have_content("Newest Merchant")
+  end
   
 end
