@@ -1,10 +1,27 @@
 class Admin::MerchantsController < ApplicationController
   def index
-    @merchants = Merchant.all
+    @enabled_merchants = Merchant.enabled_merchants
+    @disabled_merchants = Merchant.disabled_merchants
+    @top_merchants_by_revenue = Merchant.top_five_merchants_by_revenue
   end
 
   def show
     @merchant = Merchant.find(params[:id])
+  end
+
+  def new
+    @merchant = Merchant.new
+  end
+
+  def create
+    @merchant = Merchant.new(merchant_params)
+    if @merchant.save
+      flash[:notice] = "#{@merchant.name} has been Created"
+      redirect_to admin_merchants_path
+    else
+      flash[:notice] = "Unable to Create - Missing Information"
+      redirect_to new_admin_merchant_path
+    end
   end
 
   def edit

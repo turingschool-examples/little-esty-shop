@@ -35,4 +35,30 @@ class Merchant < ApplicationRecord
     .order('revenue DESC')
     .limit(5)
   end
+  def self.enabled_merchants
+    self.where(status: "Enabled")
+  end
+  
+  def self.disabled_merchants
+    self.where(status: "Disabled")
+  end
+
+  def self.top_five_merchants_by_revenue
+    self.joins(:transactions)
+      .select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+      .where(transactions: {result: 0})
+      .group(:id)
+      .order(revenue: :desc)
+      .limit(5)
+  end
+
+  def top_day_by_revenue
+    self.invoices.joins(:transactions)
+      .select("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as daily_revenue")
+      .where(transactions: {result: 0})
+      .group("invoices.created_at")
+      .order(daily_revenue: :desc, created_at: :desc)
+      .first
+  end
+
 end
