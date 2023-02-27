@@ -1,5 +1,31 @@
 <h1> Admin Merchants</h1>
 
-<% @merchants.each do |merchant| %>
-<%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"%>
-<% end %>
+
+<div id="enabled-merchants">
+  <h2>Enabled Merchants:</h2>
+  <% @merchants.each do |merchant| %>
+    <% if merchant.status == "enabled" %>
+      <div id="id-<%= merchant.id %>">
+        <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"%> 
+        <%= form_for merchant, url: merchant_path(merchant), method: :patch do |f| %>
+          <%= f.submit "Disable", name: 'merchant[status]', value: 'Disable' %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<div id="disabled-merchants"> 
+  <h2>Disabled Merchants:</h2>
+  <% @merchants.each do |merchant| %>
+    <% if merchant.status == "disabled" %>
+      <div id="id-<%= merchant.id %>">
+        <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"%> 
+        <%= form_for merchant, url: merchant_path(merchant), method: :patch do |f| %>
+          <%= f.submit "Enable", name: 'merchant[status]', value: 'Enable' %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+

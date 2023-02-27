@@ -58,7 +58,7 @@ RSpec.describe 'Admin Dashboard' do
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id, status: 2)
     InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id, status: 2)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv5.id, status: 2)
-    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id, status: 0)
+    InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv6.id, status: 0, unit_price: 4533)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv7.id, status: 0)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv8.id, status: 1)
     InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv9.id, status: 1)
