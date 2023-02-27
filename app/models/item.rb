@@ -20,6 +20,7 @@ class Item < ApplicationRecord
 		.select("items.*, SUM(invoice_items.unit_price*invoice_items.quantity) as revenue")
 		.group(:id)
 		.order("revenue DESC")
+		.limit(5)
 	end
 
 	def best_day
