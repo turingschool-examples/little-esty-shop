@@ -166,7 +166,6 @@ RSpec.describe 'Merchant Items Index' do
 
         within "div#top-items" do
           expect(page).to have_content("Top Items")
-          save_and_open_page
           expect("Spoon").to appear_before("Bowl")
           expect("Bowl").to appear_before("Knife")
           expect("Knife").to appear_before("Plate")
