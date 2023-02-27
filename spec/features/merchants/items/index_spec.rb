@@ -51,6 +51,12 @@ RSpec.describe 'Merchant Items', type: :feature do
             expect(current_path).to eq(merchant_item_path(sam.id, glove.id))
           end
         end
+
+        it "I see a link to create a new item." do
+          within('section#my_items') do
+            expect(page).to have_link("New Item")
+          end
+        end
       end
     end
   end
