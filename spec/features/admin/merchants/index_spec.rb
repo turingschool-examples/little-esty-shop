@@ -34,18 +34,32 @@ RSpec.describe 'admin merchants index page' do
 	let!(:invoice10) { create(:completed_invoice, customer: customer6,  created_at: Date.new(2012, 3, 2))}
 	let!(:invoice11) { create(:completed_invoice, customer: customer6,  created_at: Date.new(2012, 3, 2))}
 
+	let!(:transaction1) {create(:transaction, invoice: invoice1) }
+	let!(:transaction2) {create(:transaction, invoice: invoice2) }
+	let!(:transaction3) {create(:transaction, invoice: invoice3) }
+	let!(:transaction4) {create(:transaction, invoice: invoice4) }
+	let!(:transaction5) {create(:transaction, invoice: invoice5) }
+	let!(:transaction6) {create(:transaction, invoice: invoice6) }
+	let!(:transaction7) {create(:transaction, invoice: invoice8) }
+	let!(:transaction8) {create(:transaction, invoice: invoice9) }
+	let!(:transaction9) {create(:failed_transaction, invoice: invoice10) }
+	let!(:transaction10) {create(:transaction, invoice: invoice10) }
+	let!(:transaction11) {create(:transaction, invoice: invoice11) }
+	let!(:transaction14) {create(:failed_transaction, invoice: invoice7) }
+	let!(:transaction15) {create(:transaction, invoice: invoice7) }
+
 	before do
 		create(:invoice_item, item: item1, invoice: invoice1, quantity: 5, unit_price: 6)
 		create(:invoice_item, item: item1, invoice: invoice1, quantity: 5, unit_price: 6)
-		create(:invoice_item, item: item2, invoice: invoice1, quantity: 4, unit_price: 6)
-		create(:invoice_item, item: item2, invoice: invoice1, quantity: 4, unit_price: 6)
-		create(:invoice_item, item: item3, invoice: invoice1, quantity: 3, unit_price: 6)
-		create(:invoice_item, item: item3, invoice: invoice1, quantity: 3, unit_price: 6)
-		create(:invoice_item, item: item4, invoice: invoice1, quantity: 2, unit_price: 6)
-		create(:invoice_item, item: item4, invoice: invoice1, quantity: 2, unit_price: 6)
-		create(:invoice_item, item: item5, invoice: invoice1, quantity: 1, unit_price: 6)
-		create(:invoice_item, item: item5, invoice: invoice1, quantity: 1, unit_price: 6)
-		create(:invoice_item, item: item6, invoice: invoice1, quantity: 1, unit_price: 6)
+		create(:invoice_item, item: item2, invoice: invoice2, quantity: 4, unit_price: 6)
+		create(:invoice_item, item: item2, invoice: invoice2, quantity: 4, unit_price: 6)
+		create(:invoice_item, item: item3, invoice: invoice3, quantity: 3, unit_price: 6)
+		create(:invoice_item, item: item3, invoice: invoice3, quantity: 3, unit_price: 6)
+		create(:invoice_item, item: item4, invoice: invoice4, quantity: 2, unit_price: 6)
+		create(:invoice_item, item: item4, invoice: invoice4, quantity: 2, unit_price: 6)
+		create(:invoice_item, item: item5, invoice: invoice5, quantity: 1, unit_price: 6)
+		create(:invoice_item, item: item5, invoice: invoice5, quantity: 1, unit_price: 6)
+		create(:invoice_item, item: item6, invoice: invoice6, quantity: 1, unit_price: 6)
 	end
 	
 
@@ -85,8 +99,10 @@ RSpec.describe 'admin merchants index page' do
 
 		it 'takes me to admin/merchant show page and I see the merchant name' do
 			visit admin_merchants_path
-
-			click_link "#{merchant1.name}"
+			
+			within "#merchant-list" do
+				click_link "#{merchant1.name}"
+			end 
 
 			expect(current_path).to eq(admin_merchant_path(merchant1))
 			expect(page).to have_content("#{merchant1.name}")
@@ -150,13 +166,38 @@ RSpec.describe 'admin merchants index page' do
 
 		it 'will have the names of the top 5 merchants by total revenue generated' do 
 			visit admin_merchants_path
-			# require 'pry'; binding.pry
-			within "#top_five_merchants_by_rev"
-			expect(merchant1.name).to appear_before(merchant2.name)
-			expect(merchant2.name).to appear_before(merchant3.name)
-			expect(merchant3.name).to appear_before(merchant4.name)
-			expect(merchant4.name).to appear_before(merchant5.name)
-			expect(page).to_not have_content(merchant6.name)
+		
+			within "#top_five_merchants_by_rev" do 
+				expect(merchant1.name).to appear_before(merchant2.name)
+				expect(merchant2.name).to appear_before(merchant3.name)
+				expect(merchant3.name).to appear_before(merchant4.name)
+				expect(merchant4.name).to appear_before(merchant5.name)
+				expect(page).to_not have_content(merchant6.name)
+			end 
+		end
+
+		it 'will have a link to each merchants admin index page' do 
+			visit admin_merchants_path
+
+			within "#top_five_merchants_by_rev" do 
+				expect(page).to have_link("#{merchant1.name}")
+				expect(page).to have_link("#{merchant2.name}")
+				expect(page).to have_link("#{merchant3.name}")
+				expect(page).to have_link("#{merchant4.name}")
+				expect(page).to have_link("#{merchant5.name}")
+			end
+		end
+
+		it 'will have the revenues displayed next to each merchants name' do 
+			visit admin_merchants_path
+
+			within "#top_five_merchants_by_rev" do 
+				expect(page).to have_content("#{merchant1.name} Revenue - $60")
+				expect(page).to have_content("#{merchant2.name} Revenue - $48")
+				expect(page).to have_content("#{merchant3.name} Revenue - $36")
+				expect(page).to have_content("#{merchant4.name} Revenue - $24")
+				expect(page).to have_content("#{merchant5.name} Revenue - $12")
+			end
 		end
 	end
 end
