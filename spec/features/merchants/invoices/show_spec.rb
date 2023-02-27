@@ -12,7 +12,7 @@ RSpec.describe 'Merchant Invoices Index' do
 		@cust1 = Customer.create!(first_name: "Laura", last_name: "Fiel")
 		@cust2 = Customer.create!(first_name: "Bob", last_name: "Fiel")
 		
-		@inv1 = @cust1.invoices.create!(status: 1)
+		@inv1 = @cust1.invoices.create!(status: 1, created_at: "2023-02-26 09:54:09")
 		@inv2 = @cust1.invoices.create!(status: 1)
 		
 		@bowl = @merchant.items.create!(name: "bowl", description: "it's a bowl", unit_price: 350) 
@@ -32,8 +32,6 @@ RSpec.describe 'Merchant Invoices Index' do
 	describe 'As a merchant, when I visit my merchant invoices show page' do
 		it 'Then I see information related to that invoice' do
 			visit "/merchants/#{@merchant.id}/invoices/#{@inv1.id}"
-			# binding.pry
-			save_and_open_page
 			
 			expect(page).to have_content("Invoice ID: #{@inv1.id}")
 			expect(page).to_not have_content("Invoice ID: #{@inv2.id}")
