@@ -47,31 +47,31 @@ describe 'As a merchant', type: :feature do
       expect(page).to_not have_content(item2.name)
 
       within "##{item1.name}" do
-        expect(page).to have_content("Item Name: #{item1.name}")
-        expect(page).to have_content("Quantity: #{invoice_item1.quantity}")
-        expect(page).to have_content("Unit Price: $#{invoice_item1.unit_price.to_f/100}")
-        expect(page).to have_content("Status: #{invoice_item1.status}")
+        expect(page).to have_content(item1.name)
+        expect(page).to have_content(invoice_item1.quantity)
+        expect(page).to have_content("$#{invoice_item1.unit_price.to_f/100}")
+        expect(page).to have_content(invoice_item1.status)
       end
 
       within "##{item3.name}" do
-        expect(page).to have_content("Item Name: #{item3.name}")
-        expect(page).to have_content("Quantity: #{invoice_item3.quantity}")
-        expect(page).to have_content("Unit Price: $#{invoice_item3.unit_price.to_f/100}")
-        expect(page).to have_content("Status: #{invoice_item3.status}")
+        expect(page).to have_content(item3.name)
+        expect(page).to have_content(invoice_item3.quantity)
+        expect(page).to have_content("$#{invoice_item3.unit_price.to_f/100}")
+        expect(page).to have_content(invoice_item3.status)
       end
 
       within "##{item4.name}" do
-        expect(page).to have_content("Item Name: #{item4.name}")
-        expect(page).to have_content("Quantity: #{invoice_item4.quantity}")
-        expect(page).to have_content("Unit Price: $#{invoice_item4.unit_price.to_f/100}")
-        expect(page).to have_content("Status: #{invoice_item4.status}")
+        expect(page).to have_content(item4.name)
+        expect(page).to have_content(invoice_item4.quantity)
+        expect(page).to have_content("$#{invoice_item4.unit_price.to_f/100}")
+        expect(page).to have_content(invoice_item4.status)
       end
 
       within "##{item5.name}" do
-        expect(page).to have_content("Item Name: #{item5.name}")
-        expect(page).to have_content("Quantity: #{invoice_item5.quantity}")
-        expect(page).to have_content("Unit Price: $#{invoice_item5.unit_price.to_f/100}")
-        expect(page).to have_content("Status: #{invoice_item5.status}")
+        expect(page).to have_content(item5.name)
+        expect(page).to have_content(invoice_item5.quantity)
+        expect(page).to have_content("$#{invoice_item5.unit_price.to_f/100}")
+        expect(page).to have_content(invoice_item5.status)
       end
     end
 

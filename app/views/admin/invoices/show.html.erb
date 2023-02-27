@@ -11,11 +11,21 @@
 <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 </div>
 <h3>Items on this Invoice:</h3>
+<table>
+  <tr>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Status</th>
+  </tr>
 <% @invoice.invoice_items.each do |invoice_item| %>
   <div id=<%= invoice_item.item.name %>>
-    <p><b>Item Name: <%= invoice_item.item.name %></b></p>
-    <p>Quantity: <%= invoice_item.quantity %></p>
-    <p>Unit Price: $<%= (invoice_item.unit_price.to_f/100) %></p>
-    <p>Status: <%= invoice_item.status %>
+  <tr>
+    <td><%= invoice_item.item.name %></td>
+    <td><%= invoice_item.quantity %></td>
+    <td>$<%= (invoice_item.unit_price.to_f/100) %></td>
+    <td>Status: <%= invoice_item.status %></td>
+  </tr>
   </div>  
 <% end %>
+</table>
