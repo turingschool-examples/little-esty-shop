@@ -44,6 +44,7 @@ class MerchantItemsController < ApplicationController
 			flash[:success] = "Item updated successfully"
     	redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}"
 		else
+			flash[:fail] = "Item unable to be updated"
     	redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}/edit"
   	end
 	end

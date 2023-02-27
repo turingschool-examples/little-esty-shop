@@ -66,6 +66,19 @@ RSpec.describe 'When I visit the merchant show page of an item' do
 			expect(page).to have_content("Name: Blue bowl")
 			expect(page).to have_content("Description: it's a blue bowl")
 			expect(page).to have_content("Current Selling Price: 400")
+			
+			visit "/merchants/#{@carlos.id}/items"
+			click_link "Blue bowl"
+			click_link("Update Blue bowl")
+			
+			fill_in('Name', with: '')
+  		fill_in('Description', with: "it's a blue bowl")
+  		fill_in('Unit price', with: '')
+			
+			click_button("Update Item")
+			save_and_open_page
+			expect(current_path).to eq("/merchants/#{@carlos.id}/items/#{@bowl.id}/edit")	
+			expect(page).to have_content("Item unable to be updated")
 		end
   end
 end
