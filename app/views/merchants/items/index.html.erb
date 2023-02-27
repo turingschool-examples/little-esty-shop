@@ -36,7 +36,13 @@
 <div id="5_most_popular_items">
   <ol>
     <% @top_5_items.each do |item| %>
-      <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - <%= item.revenue %></li>
+      <li>
+        <p>
+          <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+          <%= "- #{number_to_currency((item.revenue.to_f/100).truncate, precision: 0)} in sales" %>
+        </p>
+        <p><%= "Top day for #{item.name} was #{item.item_best_day.strftime("%-m/%-d/%y")}"%></p>
+      </li>
     <% end %>
   </ol>
 </div>

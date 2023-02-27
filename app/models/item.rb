@@ -20,5 +20,6 @@ class Item < ApplicationRecord
     .order(item_revenue: :desc, created_at: :desc)
     .group("invoices.created_at")
     .first
+    .created_at
   end
 end

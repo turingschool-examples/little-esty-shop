@@ -12,13 +12,13 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
     @customer_5 = create(:customer)
     @customer_6 = create(:customer)
 
-    @invoice_1 = create(:invoice, customer_id: @customer_1.id)
-    @invoice_2 = create(:invoice, customer_id: @customer_2.id)
-    @invoice_3 = create(:invoice, customer_id: @customer_3.id)
-    @invoice_4 = create(:invoice, customer_id: @customer_4.id)
-    @invoice_5 = create(:invoice, customer_id: @customer_5.id)
-    @invoice_6 = create(:invoice, customer_id: @customer_6.id)
-    @invoice_7 = create(:invoice, customer_id: @customer_6.id)
+    @invoice_1 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,1,1))
+    @invoice_2 = create(:invoice, customer_id: @customer_2.id, created_at: Date.new(2022,1,1))
+    @invoice_3 = create(:invoice, customer_id: @customer_3.id, created_at: Date.new(2021,1,1))
+    @invoice_4 = create(:invoice, customer_id: @customer_4.id, created_at: Date.new(2020,1,1))
+    @invoice_5 = create(:invoice, customer_id: @customer_5.id, created_at: Date.new(2019,1,1))
+    @invoice_6 = create(:invoice, customer_id: @customer_6.id, created_at: Date.new(2018,1,1))
+    @invoice_7 = create(:invoice, customer_id: @customer_6.id, created_at: Date.new(2017,1,1))
 
     @item_1 = create(:item, merchant: @merchant)
     @item_2 = create(:item, merchant: @merchant)
@@ -165,12 +165,13 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
       end
     end
 
-    it "And I see the total revenue generated next to each item name" do
-      within("#5_most_popular_items") do
-        expect(page).to have_content("#{@item_2.name} - 24000000")
-        expect(page).to have_content("#{@item_4.name} - 21000000")
-        expect(page).to have_content("#{@item_5.name} - 18000000")
-        expect(page).to have_content("#{@item_6.name} - 15000000")
+    it "And I see the total revenue generated next to each item name" do  
+      within("#5_most_popular_items") do 
+        
+        expect(page).to have_content("#{@item_2.name} - $240,000 in sales")
+        expect(page).to have_content("#{@item_4.name} - $210,000 in sales")
+        expect(page).to have_content("#{@item_5.name} - $180,000 in sales")
+        expect(page).to have_content("#{@item_6.name} - $150,000 in sales")
       end
     end
   end
@@ -190,11 +191,13 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
     it "next to each of the 5 most popular items I see the date with the most sales 
       for each item and I see a label “Top selling date for was " do
         within("#5_most_popular_items") do
-          expect(page).to have_content("Top selling date for #{@item_1.name} was #{@item_1.item_best_day}")
-          expect(page).to have_content("Top selling date for #{@item_2.name} was #{@item_2.item_best_day}")
-          expect(page).to have_content("Top selling date for #{@item_4.name} was #{@item_4.item_best_day}")
-          expect(page).to have_content("Top selling date for #{@item_5.name} was #{@item_5.item_best_day}")
-          expect(page).to have_content("Top selling date for #{@item_6.name} was #{@item_6.item_best_day}")
+
+          save_and_open_page      
+          expect(page).to have_content("Top day for #{@item_1.name} was 1/1/23")
+          expect(page).to have_content("Top day for #{@item_2.name} was 1/1/22")
+          expect(page).to have_content("Top day for #{@item_4.name} was 1/1/21")
+          expect(page).to have_content("Top day for #{@item_5.name} was 1/1/20")
+          expect(page).to have_content("Top day for #{@item_6.name} was 1/1/19")
       end
     end
   end
