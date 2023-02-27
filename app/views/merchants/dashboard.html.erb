@@ -13,7 +13,7 @@
 <% end %>
 
 <p>Items Ready to Ship</p>
-<% @mech_items.each do |item|%>
-  <p>Item name: <%= item.name %>, Item Invoice Id: <%= link_to invoice_id??, "/merchants/#{@merchant.id}/invoices/#{invoice.id}"%>
+<% @mech_unshipped_invoice_items.each do |invoice_item|%>
+  <p>Item name: <%= invoice_item.item_name %>, Item Invoice Id: <%= link_to invoice_item.invoice_id, "/merchants/#{@merchant.id}/invoices/#{invoice.id}"%>
   <br>
 <%end%>

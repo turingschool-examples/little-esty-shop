@@ -18,9 +18,11 @@ class Merchant < ApplicationRecord
     .order("transaction_count DESC")
     .limit(5)
   end
-
+  
   def unshipped_items
     # binding.pry
+    invoice_items.select("invoice_items.*, items.name AS item_name").where("invoice_items.status != 2")
+    # joins(:invoice_items).select("items.*, invoice_items.invoice_id").where("invoice_items.status != 2")
   end
 
 end
