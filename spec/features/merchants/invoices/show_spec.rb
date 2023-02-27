@@ -79,7 +79,6 @@ RSpec.describe 'merchant invoice show' do
 
     it 'has a select field to update the status of an item' do
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
-      save_and_open_page
 
       within "#item-" do 
         expect(page).to have_select("status", selected: "pending")

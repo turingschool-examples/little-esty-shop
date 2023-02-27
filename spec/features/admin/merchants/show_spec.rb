@@ -50,5 +50,4 @@ RSpec.describe "admin merchants show" do
     expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
     expect(page).to have_content("#{@merchant_1.name}")
   end
-end
 end 
