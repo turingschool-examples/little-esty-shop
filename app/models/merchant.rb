@@ -5,9 +5,12 @@ class Merchant < ApplicationRecord
   has_many :customers, -> { distinct }, through: :invoices  
   has_many :transactions, -> { distinct }, through: :invoices
 
-  def rank_by_revenue
-    # items.joins(:invoices, :transactions).where(transactions: {result: "success"}).select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue").group(:id)
-    x = Item.joins(invoices: :transactions).where(invoices: {status: 1}, transactions: {result: 0}).select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue").group(:id).order(revenue: :desc)
-    require 'pry'; binding.pry
+  def top_five_items_by_revenue
+        Item.joins(invoice_items: [invoice: :transactions])
+          .where('invoices.status = 1 AND transactions.result = 0')
+          .group('items.id')
+          .select('items.*, SUM(DISTINCT invoice_items.quantity * invoice_items.unit_price) as revenue')
+          .order('revenue DESC')
+          .limit(5)
   end
 end

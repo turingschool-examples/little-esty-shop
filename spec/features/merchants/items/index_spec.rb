@@ -145,48 +145,38 @@ RSpec.describe 'Merchant Items Index' do
         @trans15 = @inv5.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
         @trans16 = @inv6.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
 
-        @bowl = @merchant.items.create!(name: "bowl", description: "it's a bowl", unit_price: 350) 
-        @knife = @merchant.items.create!(name: "knife", description: "it's a knife", unit_price: 300) 
-        @spoon = @merchant.items.create!(name: "spoon", description: "it's a spoon", unit_price: 275) 
-        @plate = @merchant.items.create!(name: "plate", description: "it's a plate", unit_price: 250) 
-        @fork = @merchant.items.create!(name: "fork", description: "it's a fork", unit_price: 100) 
-        @pan = @merchant.items.create!(name: "pan", description: "it's a pan", unit_price: 250) 
+        @bowl = @merchant.items.create!(name: "Bowl", description: "it's a bowl", unit_price: 350) 
+        @knife = @merchant.items.create!(name: "Knife", description: "it's a knife", unit_price: 300) 
+        @spoon = @merchant.items.create!(name: "Spoon", description: "it's a spoon", unit_price: 275) 
+        @plate = @merchant.items.create!(name: "Plate", description: "it's a plate", unit_price: 250) 
+        @fork = @merchant.items.create!(name: "Fork", description: "it's a fork", unit_price: 100) 
+        @pan = @merchant.items.create!(name: "Pan", description: "it's a pan", unit_price: 250) 
           
-        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id)
-        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv2.id)
-        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id)
-        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv4.id)
-        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv5.id)
-
-        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv1.id)
-        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv2.id)
-        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv3.id)
-        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id)
-
-        InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv1.id)
-        InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv2.id)
-        InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv3.id)
-
-        InvoiceItem.create!(item_id: @spoon.id, invoice_id: @inv1.id)
-        InvoiceItem.create!(item_id: @spoon.id, invoice_id: @inv2.id)
-
-        InvoiceItem.create!(item_id: @fork.id, invoice_id: @inv5.id)
-        InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv6.id)
-        
+        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id, quantity: 10, unit_price: 350, status: 1)
+        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv1.id, quantity: 9, unit_price: 300, status: 1)
+        InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv1.id, quantity: 10, unit_price: 201, status: 1)
+        InvoiceItem.create!(item_id: @spoon.id, invoice_id: @inv1.id, quantity: 8, unit_price: 2500, status: 1)
+        InvoiceItem.create!(item_id: @fork.id, invoice_id: @inv5.id, quantity: 1, unit_price: 14, status: 1)
+        InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv6.id, quantity: 6, unit_price: 15, status: 1)
       end
 
       it 'I see the names of the top 5 most popular items ranked by total revenue generated' do
 
         visit "/merchants/#{@carlos.id}/items"
 
-        within "#top-items" do
+        within "div#top-items" do
           expect(page).to have_content("Top Items")
+          save_and_open_page
+          expect("Spoon").to appear_before("Bowl")
+          expect("Bowl").to appear_before("Knife")
+          expect("Knife").to appear_before("Plate")
+          expect("Plate").to appear_before("Pan")
 
-          expect(page).to have_content("Bowl")
-          expect(page).to have_content("Knife")
-          expect(page).to have_content("Plate")
-          expect(page).to have_content("Spoon")
-          expect(page).to have_content("Pan")
+          expect("Revenue: 20000").to appear_before("Revenue: 3500")
+          expect("Revenue: 3500").to appear_before("Revenue: 2700")
+          expect("Revenue: 2700").to appear_before("Revenue: 2010")
+          expect("Revenue: 2010").to appear_before("Revenue: 90")
+
         end
       end
     end

@@ -49,32 +49,17 @@ RSpec.describe Merchant, type: :model do
         @fork = @merchant.items.create!(name: "fork", description: "it's a fork", unit_price: 100) 
         @pan = @merchant.items.create!(name: "pan", description: "it's a pan", unit_price: 250) 
           
-        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id)
-        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv2.id)
-        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id)
-        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv4.id)
-        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv5.id)
-
-        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv1.id)
-        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv2.id)
-        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv3.id)
-        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id)
-
-        InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv1.id)
-        InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv2.id)
-        InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv3.id)
-
-        InvoiceItem.create!(item_id: @spoon.id, invoice_id: @inv1.id)
-        InvoiceItem.create!(item_id: @spoon.id, invoice_id: @inv2.id)
-
-        InvoiceItem.create!(item_id: @fork.id, invoice_id: @inv5.id)
-        InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv6.id)
-        InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv3.id)
+        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id, quantity: 10, unit_price: 350, status: 1)
+        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv1.id, quantity: 9, unit_price: 300, status: 1)
+        InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv1.id, quantity: 10, unit_price: 200, status: 1)
+        InvoiceItem.create!(item_id: @spoon.id, invoice_id: @inv1.id, quantity: 8, unit_price: 2500, status: 1)
+        InvoiceItem.create!(item_id: @fork.id, invoice_id: @inv5.id, quantity: 1, unit_price: 14, status: 1)
+        InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv6.id, quantity: 6, unit_price: 15, status: 1)
 
       end
 
       it 'top 5 most popular items ranked by total revenue generated' do
-        expect(@merchant.rank_by_revenue).to eq([@bowl, @knife, @spoon, @plate, @pan])
+        expect(@merchant.top_five_items_by_revenue).to eq([@spoon, @bowl, @knife, @plate, @pan])
       end
     end
   end
