@@ -1,6 +1,10 @@
 <h1>Admin Dashboard</h1>
 <h3>Invoice #<%= @invoice.id %></h3>
-<p>Status: <%= @invoice.status %></p>
+<%= form_with url: admin_invoice_path(@invoice), method: 'patch', local: true do |f| %>
+  <%= f.label :invoice_status, "Status" %>
+  <%= f.select :invoice_status, ["cancelled", "in progress", "completed"], selected: @invoice.status %>
+  <%= f.submit "Update Invoice Status" %>
+<% end %>
 <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 <div id="customers">
 <h3>Customer:</h3>
@@ -8,10 +12,10 @@
 </div>
 <h3>Items on this Invoice:</h3>
 <% @invoice.invoice_items.each do |invoice_item| %>
-<div id=<%= invoice_item.item.name %>>
-  <p><b>Item Name: <%= invoice_item.item.name %></b></p>
-  <p>Quantity: <%= invoice_item.quantity %></p>
-  <p>Unit Price: $<%= (invoice_item.unit_price.to_f/100) %></p>
-  <p>Status: <%= invoice_item.status %></p>
-</div>
+  <div id=<%= invoice_item.item.name %>>
+    <p><b>Item Name: <%= invoice_item.item.name %></b></p>
+    <p>Quantity: <%= invoice_item.quantity %></p>
+    <p>Unit Price: $<%= (invoice_item.unit_price.to_f/100) %></p>
+    <p>Status: <%= invoice_item.status %>
+  </div>  
 <% end %>

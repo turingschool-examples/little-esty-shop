@@ -28,7 +28,7 @@ describe 'As a merchant', type: :feature do
 
       expect(page).to have_content("Invoice ##{invoice1.id}")
       expect(page).to_not have_content(invoice2.id)
-      expect(page).to have_content("Status: #{invoice1.status}")
+      expect(page).to have_select('Status', :selected=> "#{invoice1.status}")
       expect(page).to have_content("Created on: #{invoice1.created_at.strftime("%A, %B %d, %Y")}")
     end
 
@@ -73,6 +73,31 @@ describe 'As a merchant', type: :feature do
         expect(page).to have_content("Unit Price: $#{invoice_item5.unit_price.to_f/100}")
         expect(page).to have_content("Status: #{invoice_item5.status}")
       end
+    end
+
+    it "I see the invoice status is a select field and next to the select field I see a button to 'Update Invoice Status'" do
+      visit "/admin/invoices/#{invoice1.id}"
+
+      expect(page).to have_select('Status', :selected=> "#{invoice1.status}")
+      expect(page).to have_button("Update Invoice Status")
+    end
+
+    it "When I select a new status for the Invoice and click the button, I am taken back to the admin invoice show page" do
+      visit "/admin/invoices/#{invoice1.id}"
+
+      select 'cancelled', from: :invoice_status
+      click_button 'Update Invoice Status'
+
+      expect(current_path).to eq(admin_invoice_path(invoice1))
+    end
+
+    it "When I select a new status and click the button, I see that my invoice's status has now been updated" do
+      visit "/admin/invoices/#{invoice1.id}"
+
+      select 'cancelled', from: :invoice_status
+      click_button 'Update Invoice Status'
+
+      expect(page).to have_select('Status', :selected=> "cancelled")
     end
   end
 end
