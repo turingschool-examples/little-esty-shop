@@ -44,7 +44,6 @@ describe 'As a merchant', type: :feature do
 
     it "I see all of my items on the invoice including: item name, quantity of item ordered, the price sold for, the invoice item status" do
       visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
-
       expect(page).to have_content("Items on this invoice")
       expect(page).to have_content("Item Name")
       expect(page).to have_content("Quantity")
@@ -60,6 +59,16 @@ describe 'As a merchant', type: :feature do
       expect(page).to have_content(@invoice_item2.quantity)
       expect(page).to have_content(@invoice_item2.unit_price)
       expect(page).to have_content(@invoice_item2.status)
+
+      expect(page).to have_content(item3.name)
+      expect(page).to have_content(@invoice_item3.quantity)
+      expect(page).to have_content(@invoice_item3.unit_price)
+      expect(page).to have_content(@invoice_item3.status)
+
+      expect(page).to have_content(item4.name)
+      expect(page).to have_content(@invoice_item4.quantity)
+      expect(page).to have_content(@invoice_item4.unit_price)
+      expect(page).to have_content(@invoice_item4.status)
 
       expect(page).to_not have_content(item5.name)
     end

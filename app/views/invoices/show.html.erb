@@ -19,7 +19,7 @@
     <%@invoice.invoice_items.each do |invoice_item|%>
     <td><%=invoice_item.item.name%></td>
     <td><%=invoice_item.quantity%></td>
-    <td>$<%=invoice_item.unit_price%></td>
+    <td>$<%=(invoice_item.unit_price.to_f/100)%></td>
     <td><%=invoice_item.status%></td>
   </tr>
     <%end%>
