@@ -5,10 +5,10 @@ FactoryBot.define do
     result { "success"}
     association :invoice
 
-		trait :unsuccesful do
-			result { 1 }
-		end
+    trait :failed do 
+      result {"failed"}
+    end
 
-		factory :failed_transaction, traits: [:unsuccesful]
+    factory :failed_transaction, traits: [:failed]
   end
 end

@@ -15,13 +15,12 @@ describe 'As a merchant', type: :feature do
   let!(:invoice1) {create(:invoice, created_at: Date.new(2020, 1, 2), customer: customer1)}
   let!(:invoice2) {create(:invoice, created_at: Date.new(2019, 3, 9), customer: customer2)}
 
-  before(:each) do
-    create(:invoice_item, invoice: invoice1, item: item1)
-    create(:invoice_item, invoice: invoice1, item: item2)
-    create(:invoice_item, invoice: invoice1, item: item3)
-    create(:invoice_item, invoice: invoice1, item: item4)
-    create(:invoice_item, invoice: invoice2, item: item5)
-  end
+  let!(:invoice_item1) { create(:invoice_item, invoice: invoice1, item: item1) }
+  let!(:invoice_item2) { create(:invoice_item, invoice: invoice2, item: item2) }
+  let!(:invoice_item3) { create(:invoice_item, invoice: invoice1, item: item3) }
+  let!(:invoice_item4) { create(:invoice_item, invoice: invoice1, item: item4) }
+  let!(:invoice_item5) { create(:invoice_item, invoice: invoice1, item: item5) }
+
   
   describe "When I visit an admin invoice show page" do
     it 'I see the invoice ID, status, and created_at date with formatting' do
@@ -39,6 +38,40 @@ describe 'As a merchant', type: :feature do
       within "#customers" do
         expect(page).to have_content(customer1.first_name)
         expect(page).to have_content(customer1.last_name)
+      end
+    end
+
+    it "I see all of the items on the invoice, including their name, quantity, price, and status" do
+      visit "/admin/invoices/#{invoice1.id}"
+
+      expect(page).to_not have_content(item2.name)
+
+      within "##{item1.name}" do
+        expect(page).to have_content("Item Name: #{item1.name}")
+        expect(page).to have_content("Quantity: #{invoice_item1.quantity}")
+        expect(page).to have_content("Unit Price: $#{invoice_item1.unit_price.to_f/100}")
+        expect(page).to have_content("Status: #{invoice_item1.status}")
+      end
+
+      within "##{item3.name}" do
+        expect(page).to have_content("Item Name: #{item3.name}")
+        expect(page).to have_content("Quantity: #{invoice_item3.quantity}")
+        expect(page).to have_content("Unit Price: $#{invoice_item3.unit_price.to_f/100}")
+        expect(page).to have_content("Status: #{invoice_item3.status}")
+      end
+
+      within "##{item4.name}" do
+        expect(page).to have_content("Item Name: #{item4.name}")
+        expect(page).to have_content("Quantity: #{invoice_item4.quantity}")
+        expect(page).to have_content("Unit Price: $#{invoice_item4.unit_price.to_f/100}")
+        expect(page).to have_content("Status: #{invoice_item4.status}")
+      end
+
+      within "##{item5.name}" do
+        expect(page).to have_content("Item Name: #{item5.name}")
+        expect(page).to have_content("Quantity: #{invoice_item5.quantity}")
+        expect(page).to have_content("Unit Price: $#{invoice_item5.unit_price.to_f/100}")
+        expect(page).to have_content("Status: #{invoice_item5.status}")
       end
     end
   end
