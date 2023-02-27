@@ -376,6 +376,10 @@ RSpec.describe Merchant, type: :model do
         expected = [@merchant1, @merchant2, @merchant4, @merchant3, @merchant5]
         expect(Merchant.top_five_revenue).to eq(expected)
       end
+
+      it 'shows the total revenue' do
+        expect(@merchant1.total_revenue).to eq(2400)
+      end
     end
   end
 end
