@@ -38,13 +38,13 @@ class Merchants::ItemsController < ApplicationController
 
   def create
     @new_item = Item.create_new_item(item_params)
-    
+
     if @new_item.save
       redirect_to merchant_items_path(item_params[:merchant_id])
-      flash[:info] = "Item added successfully"
+      flash[:success] = "Item Successfully Updated"
     else
       redirect_to new_merchant_item_path(item_params[:merchant_id])
-      flash[:error] = "Error Creating Item: Please check your fields and try again"
+      flash[:notice] = error_message(@new_item.errors)
     end
   end
 
