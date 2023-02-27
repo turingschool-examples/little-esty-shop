@@ -31,6 +31,7 @@ class Merchant < ApplicationRecord
     .order('total_revenue desc')
     .limit(5)
   end
+  
   def total_revenue
     self.invoices
     .joins(:invoice_items, :transactions)
