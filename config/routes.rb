@@ -13,6 +13,7 @@ namespace :admin do
   get '/merchants/:id', to: 'merchants#show'
   get '/merchants/:id/edit', to: "merchants#edit"
   patch '/merchants/:id', to: "merchants#update"
+  patch '/invoices/:invoice_id', to: "invoices#update"
   # get "/invoices", to: "invoices#index"
   # get "/invoices/:invoice_id", to: "invoices#show"
   # resources :invoices, only: [:index, :show, :update]
@@ -23,7 +24,7 @@ namespace :admin do
   # resources :merchants, except: [:destroy]
 
   get "/invoices", to: "invoices#index"
-  get "/invoices/:invoice_id", to: "invoices#show"
+  get "/invoices/:id", to: "invoices#show"
   
   get '/merchants', to: "merchants#index"
   get '/merchants/:merchant_id', to: 'merchants#show'
@@ -38,7 +39,7 @@ end
 
 #  end
 
-  get "merchants/:merchant_id/dashboard", to: "merchants#dashboard"
+  get "/merchants/:merchant_id/dashboard", to: "merchants#dashboard"
  
   #customers
   #invoices
@@ -72,7 +73,7 @@ end
  get '/merchants/:merchant_id/items', to: 'merchants/items#index'
  get '/merchants/:merchant_id/items/new', to: 'items#new'
  post '/merchants/:merchant_id/items', to: 'items#create'
- patch 'items/:item_id', to: 'items#update'
+ patch '/items/:item_id', to: 'items#update'
 
 
  #invoice_items
