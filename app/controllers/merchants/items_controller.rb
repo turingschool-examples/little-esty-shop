@@ -32,8 +32,15 @@ class Merchants::ItemsController < ApplicationController
   end
 
   def create
-    require 'pry'; binding.pry
     @new_item = Item.create_new_item(item_params)
+    
+    if @new_item.save
+      redirect_to merchant_items_path(item_params[:merchant_id])
+      flash[:info] = "Item added successfully"
+    else
+      redirect_to new_merchant_item_path(item_params[:merchant_id])
+      flash[:error] = "Error Creating Item: Please check your fields and try again"
+    end
   end
 
   private
@@ -43,8 +50,6 @@ class Merchants::ItemsController < ApplicationController
       :description, 
       :unit_price, 
       :merchant_id,
-      :item_name,
-      :item_description,
       :unit_price
     )
   end

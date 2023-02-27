@@ -63,7 +63,7 @@ RSpec.describe 'Merchant Items', type: :feature do
 
           expect(current_path).to eq(new_merchant_item_path(sam.id))
 
-          within ("form#new_merchant_item") do
+          within ("section#new_item") do
             expect(page).to have_field("Name")
             expect(page).to have_field("Description")
             expect(page).to have_field("Unit Price")
@@ -77,12 +77,14 @@ RSpec.describe 'Merchant Items', type: :feature do
 
           it "When I fill out the form I click ‘Submit’ Then I am taken back to the items index page" do
             within("section#new_item") do
-              fill_in "Item Name", with: "Marijuana Tapestry"
+              fill_in "Name:", with: "Marijuana Tapestry"
               fill_in "Item Description", with: "Crushed velvet, 51.2 x 59.1 inches"
               fill_in "Unit Price", with: "7110"
               
               click_button "Submit"
             end
+            
+            expect(current_path).to eq(merchant_items_path(sam.id))
           end
         end
       end

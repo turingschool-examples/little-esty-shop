@@ -3,10 +3,10 @@
 </header>
 <section id="new_item">
   <%=  form_with url: merchant_items_path(@merchant.id), local: true do |f| %>
-    <%=  f.label :item_name, "Item Name:" %>
-    <%=  f.text_field :item_name, required: true %><br>
-    <%=  f.label :item_description, "Item Description:" %>
-    <%=  f.text_field :item_description, required: true %><br>
+    <%=  f.label :name, "Item Name:" %>
+    <%=  f.text_field :name, required: true %><br>
+    <%=  f.label :description, "Item Description:" %>
+    <%=  f.text_field :description, required: true %><br>
     <%=  f.label :unit_price, "Unit Price:" %>
     <%=  f.text_field :unit_price, required: true %><br>
     <%=  f.submit "Submit" %>
