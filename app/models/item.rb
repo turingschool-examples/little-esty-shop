@@ -8,8 +8,6 @@ class Item < ApplicationRecord
 
   enum status: [:disabled, :enabled]
 
-	attribute :quantity, :integer, default: 1
-
   validates :name, :description, :unit_price, presence: :true
 
 end
