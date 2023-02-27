@@ -11,7 +11,7 @@ class Merchant < ApplicationRecord
   end
 
   def mech_top_5_successful_customers
-    customers.joins(:transactions)
+    invoices.joins(:customer, :transactions)
     .select("customers.*, COUNT(transactions.id) AS transaction_count")
     .where(transactions: {result: 0})
     .group("customers.id")
@@ -19,6 +19,16 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
+  def self.group_by_status(status)
+    where(status: status)
+  end
 
-  
+  def self.top_five_revenue
+    joins(:invoice_items, :transactions)
+    .where('result = 0')
+    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
+    .group(:id)
+    .order('total_revenue desc')
+    .limit(5)
+  end
 end
