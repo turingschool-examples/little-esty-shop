@@ -17,4 +17,12 @@ class Merchant < ApplicationRecord
   def merchant_top_5_customers
     self.customers.joins(:transactions).where(transactions: {result: 0}).group("customers.id").select("CONCAT(customers.first_name,' ', customers.last_name) AS full_name, COUNT(DISTINCT transactions.id) AS successful_order").order(successful_order: :desc, full_name: :asc).limit(5)
   end
+
+  def enabled_items
+    items.where(status: 0)
+  end
+
+  def disabled_items
+    items.where(status: 1)
+  end
 end
