@@ -2,7 +2,8 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
   enum status: [ "active", "disabled" ]
   has_many :items
-  has_many :invoices, through: :items
+	has_many :invoice_items, through: :items
+  has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
@@ -21,8 +22,4 @@ class Merchant < ApplicationRecord
 	def self.disabled_merchants
 		Merchant.where(status: 1)
 	end
-
-  # def ordered_items_not_yet_shipped
-  #   items.joins(:invoice_items).where.not(invoice_items: {status: "shipped"}).distinct
-  # end
 end

@@ -10,82 +10,78 @@ RSpec.describe Merchant, type: :model do
 		it { should define_enum_for(:status).with_values(["active", "disabled"])}
   end
 
-	let!(:merchant1) { Merchant.create!(name: "Brian's Beads") }
-	let!(:merchant_2) { Merchant.create!(name: 'John Doe') }
-	let!(:merchant_3) { Merchant.create!(name: 'Keys Keys') }
-	let!(:merchant_4) { Merchant.create!(name: 'Soras Chains', status: 'disabled') }
+  let!(:merchant1) { create(:merchant)}
+  let!(:merchant_2) { create(:merchant)}
+  let!(:merchant_3) { create(:merchant)}
+  let!(:merchant_4) { create(:merchant, status: 'disabled')}
 
-	let!(:customer1) { Customer.create!(first_name: "Britney", last_name: "Spears") }
-	let!(:customer2) { Customer.create!(first_name: "Bob", last_name: "Smith") }
-	let!(:customer3) { Customer.create!(first_name: "Bill", last_name: "Johnson") }
-	let!(:customer4) { Customer.create!(first_name: "Boris", last_name: "Nelson") }
-	let!(:customer5) { Customer.create!(first_name: "Barbara", last_name: "Hilton") }
-	let!(:customer6) { Customer.create!(first_name: "Bella", last_name: "Thomas") }
+	let!(:customer1) { create(:customer)}
+	let!(:customer2) { create(:customer)}
+	let!(:customer3) { create(:customer)}
+	let!(:customer4) { create(:customer)}
+	let!(:customer5) { create(:customer)}
+	let!(:customer6) { create(:customer)}
 
-	let!(:invoice1) { customer1.invoices.create!(status: 2) }
-	let!(:invoice2) { customer1.invoices.create!(status: 2) }
-	let!(:invoice3) { customer2.invoices.create!(status: 2) }
-	let!(:invoice4) { customer2.invoices.create!(status: 2) }
-	let!(:invoice5) { customer3.invoices.create!(status: 2) }
-	let!(:invoice6) { customer3.invoices.create!(status: 2) }
-	let!(:invoice7) { customer4.invoices.create!(status: 2) }
-	let!(:invoice8) { customer5.invoices.create!(status: 2) }
-	let!(:invoice9) { customer5.invoices.create!(status: 2) }
-	let!(:invoice10) { customer6.invoices.create!(status: 2) }
-	let!(:invoice11) { customer6.invoices.create!(status: 2) }
+	let!(:invoice1) { create(:completed_invoice, customer: customer1, created_at: Date.new(2014, 3, 1))}
+	let!(:invoice2) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 1))}
+	let!(:invoice3) { create(:completed_invoice, customer: customer2)} 
+	let!(:invoice4) { create(:completed_invoice, customer: customer2)}
+	let!(:invoice5) { create(:completed_invoice, customer: customer3)}
+	let!(:invoice6) { create(:completed_invoice, customer: customer3)}
+	let!(:invoice7) { create(:completed_invoice, customer: customer4)}
+	let!(:invoice8) { create(:completed_invoice, customer: customer5)}
+	let!(:invoice9) { create(:completed_invoice, customer: customer5)}
+	let!(:invoice10) { create(:completed_invoice, customer: customer6)}
+	let!(:invoice11) { create(:completed_invoice, customer: customer6)}
 
-	let!(:item1) { merchant1.items.create!(name: "water bottle", description: "24oz metal container for water", unit_price: 8) }    
-	let!(:item2) { merchant1.items.create!(name: "rubber duck", description: "toy for bath", unit_price: 1) }    
-	let!(:item3) { merchant1.items.create!(name: "lamp", description: "12 inch desk lamp", unit_price: 16) }    
-	let!(:item4) { merchant1.items.create!(name: "wireless mouse", description: "wireless computer mouse for mac", unit_price: 40) }    
-	let!(:item5) { merchant1.items.create!(name: "chapstick", description: "coconut flavor chapstick", unit_price: 2) }    
-	let!(:item6) {create(:item, merchant: merchant1)}
+	let!(:item1) {create(:item, merchant: merchant1, name: 'item1')}
+	let!(:item2) {create(:item, merchant: merchant1, name: 'item2')}
+	let!(:item3) {create(:item, merchant: merchant1, name: 'item3')}
+	let!(:item4) {create(:item, merchant: merchant1, name: 'item4')}
+	let!(:item5) {create(:item, merchant: merchant1, name: 'item5')}
+	let!(:item6) {create(:item, merchant: merchant1, name: 'item6')}
 
-	let!(:transaction1) { invoice1.transactions.create!(credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-	let!(:transaction2) { invoice2.transactions.create!(credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-	
-	let!(:transaction3) { invoice3.transactions.create!(credit_card_number: 4140149827486249, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-	let!(:transaction4) { invoice4.transactions.create!(credit_card_number: 4140149827486249, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
- 
-	let!(:transaction5) { invoice5.transactions.create!(credit_card_number: 4763141973880496, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-	let!(:transaction6) { invoice6.transactions.create!(credit_card_number: 4763141973880496, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
- 
-	let!(:transaction14) { invoice7.transactions.create!(credit_card_number: 4504301557459341, credit_card_expiration_date: Date.new(2024, 1, 3), result: "failed") }
-	let!(:transaction15) { invoice7.transactions.create!(credit_card_number: 4504301557459341, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-	
-	let!(:transaction7) { invoice8.transactions.create!(credit_card_number: 4173081602435789, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-	let!(:transaction8) { invoice9.transactions.create!(credit_card_number: 4173081602435789, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-	
-	let!(:transaction9) { invoice10.transactions.create!(credit_card_number: 4972246905754900, credit_card_expiration_date: Date.new(2024, 1, 3), result: "failed") }
-	let!(:transaction10) { invoice10.transactions.create!(credit_card_number: 4972246905754900, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-	let!(:transaction11) { invoice11.transactions.create!(credit_card_number: 4972246905754900, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") }
-	
+	let!(:transaction1) {create(:transaction, invoice: invoice1) }
+	let!(:transaction2) {create(:transaction, invoice: invoice2) }
+	let!(:transaction3) {create(:transaction, invoice: invoice3) }
+	let!(:transaction4) {create(:transaction, invoice: invoice4) }
+	let!(:transaction5) {create(:transaction, invoice: invoice5) }
+	let!(:transaction6) {create(:transaction, invoice: invoice6) }
+	let!(:transaction7) {create(:transaction, invoice: invoice8) }
+	let!(:transaction8) {create(:transaction, invoice: invoice9) }
+	let!(:transaction9) {create(:failed_transaction, invoice: invoice10) }
+	let!(:transaction10) {create(:transaction, invoice: invoice10) }
+	let!(:transaction11) {create(:transaction, invoice: invoice11) }
+	let!(:transaction14) {create(:failed_transaction, invoice: invoice7) }
+	let!(:transaction15) {create(:transaction, invoice: invoice7) }
 	
 	before do
-		InvoiceItem.create!(item: item1, invoice: invoice1)
-		InvoiceItem.create!(item: item2, invoice: invoice1)
-		InvoiceItem.create!(item: item1, invoice: invoice2)
-		InvoiceItem.create!(item: item4, invoice: invoice2)
-		InvoiceItem.create!(item: item4, invoice: invoice3)
-		InvoiceItem.create!(item: item3, invoice: invoice3)
-		InvoiceItem.create!(item: item1, invoice: invoice4)
-		InvoiceItem.create!(item: item4, invoice: invoice4)
-		InvoiceItem.create!(item: item1, invoice: invoice5)
-		InvoiceItem.create!(item: item2, invoice: invoice5)
-		InvoiceItem.create!(item: item2, invoice: invoice6)
-		InvoiceItem.create!(item: item3, invoice: invoice6)
+		create(:invoice_item, item: item1, invoice: invoice2, quantity: 1, unit_price: 6)
+		create(:invoice_item, item: item1, invoice: invoice1, quantity: 3, unit_price: 6)
+		create(:invoice_item, item: item1, invoice: invoice4, quantity: 1, unit_price: 6)
+		create(:invoice_item, item: item1, invoice: invoice5, quantity: 1, unit_price: 6)
+		create(:invoice_item, item: item1, invoice: invoice8, quantity: 1, unit_price: 6)
+		create(:invoice_item, item: item1, invoice: invoice11, quantity: 1, unit_price: 6) # => 48
 
-		InvoiceItem.create!(item: item5, invoice: invoice7)
+		create(:invoice_item, item: item2, invoice: invoice1, quantity: 2, unit_price: 6)
+		create(:invoice_item, item: item2, invoice: invoice5, quantity: 2, unit_price: 6)
+		create(:invoice_item, item: item2, invoice: invoice9, quantity: 2, unit_price: 6)
+		create(:invoice_item, item: item2, invoice: invoice6, quantity: 1, unit_price: 6) # => 42
 
-		InvoiceItem.create!(item: item1, invoice: invoice8)
-		InvoiceItem.create!(item: item3, invoice: invoice8)
-		InvoiceItem.create!(item: item2, invoice: invoice9)
-		InvoiceItem.create!(item: item3, invoice: invoice9)
-		InvoiceItem.create!(item: item3, invoice: invoice10)
-		InvoiceItem.create!(item: item4, invoice: invoice10)
-		InvoiceItem.create!(item: item1, invoice: invoice11)
-		InvoiceItem.create!(item: item4, invoice: invoice11)
-	
+		create(:invoice_item, item: item3, invoice: invoice8, quantity: 412, unit_price: 6)
+		create(:invoice_item, item: item3, invoice: invoice9, quantity: 4322, unit_price: 6)
+		create(:invoice_item, item: item3, invoice: invoice10, quantity: 54, unit_price: 6) ###
+		create(:invoice_item, item: item3, invoice: invoice3, quantity: 453, unit_price: 6)
+		create(:invoice_item, item: item3, invoice: invoice6, quantity: 43, unit_price: 6)
+
+		create(:invoice_item, item: item4, invoice: invoice10, quantity: 1, unit_price: 6) ###
+		create(:invoice_item, item: item4, invoice: invoice11, quantity: 1, unit_price: 6)
+		create(:invoice_item, item: item4, invoice: invoice2, quantity: 1, unit_price: 6)
+		create(:invoice_item, item: item4, invoice: invoice3, quantity: 1, unit_price: 6)
+		create(:invoice_item, item: item4, invoice: invoice4, quantity: 1, unit_price: 6) 
+
+		create(:invoice_item, item: item5, invoice: invoice7, quantity: 3, unit_price: 6)###
+		create(:invoice_item, item: item5, invoice: invoice3, quantity: 2, unit_price: 6)
 	end
 
   describe '#instance methods' do
@@ -97,11 +93,6 @@ RSpec.describe Merchant, type: :model do
       expect(merchant1.customer_successful_transactions(customer1.id)).to eq(2)
       expect(merchant1.customer_successful_transactions(customer4.id)).to eq(1)
     end
-
-		# it '#ordered_items_not_yet_shipped' do 
-		# 	expect(merchant1.ordered_items_not_yet_shipped).to eq([item1, item2, item3, item4, item5])
-		# 	expect(merchant1.ordered_items_not_yet_shipped).to_not include(item6)
-		# end
   end
 
 	describe 'class methods' do

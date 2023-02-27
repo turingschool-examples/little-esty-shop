@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+
+.left {
+width: 45%;
+float: left;
+}
+
+.right {
+width: 45%;
+float: right;
+}
+
+.my_items {
+	background-color: lightblue;
+	overflow: hidden;
+	text-align: center;
+}
