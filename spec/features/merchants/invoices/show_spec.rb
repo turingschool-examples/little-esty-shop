@@ -43,12 +43,12 @@ RSpec.describe "Merchant_Invoices#Show", type: :feature do
   describe "User Story 15" do
     context "As a merchant, when I visit my merchant's invoices show" do
       it "I see the attribute information related to that invoice" do
-        
+        expect(page).to have_content(@invoice_1.id)
+        expect(page).to_not have_content(@invoice_2.id)
+
         within("#merchant_invoice_information") do
-          expect(page).to have_content(@invoice_1.id)
           expect(page).to have_content(@invoice_1.status)
           expect(page).to have_content(@invoice_1.created_at.strftime("%A, %B %-d, %Y"))
-          expect(page).to_not have_content(@invoice_2.id)
           expect(page).to_not have_content(@invoice_2.status)
           expect(page).to_not have_content(@invoice_2.created_at.strftime("%A, %B %-d, %Y"))
         end
