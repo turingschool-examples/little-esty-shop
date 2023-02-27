@@ -9,6 +9,7 @@ RSpec.describe Item, type: :model do
   let!(:merchant1) { create(:merchant) }
   let!(:customer1) { create(:customer) }
   let!(:item1) { create(:item, merchant_id: merchant1.id)}
+  let!(:item2) { create(:item, merchant_id: merchant1.id)}
   let!(:invoice1) { create(:invoice, customer_id: customer1.id) }
 
   before do
@@ -22,6 +23,16 @@ RSpec.describe Item, type: :model do
 
     it "#item_invoice_id" do
       expect(item1.item_invoice_id).to eq(invoice1.id)
+    end
+  end
+
+  describe "#class methods" do
+    it "disabled-buttons" do
+      expect(item1)
+    end
+
+    it "enabled-buttons" do
+      expect()
     end
   end
 end

@@ -2,6 +2,9 @@ class ItemsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:merchant_id])
     @items = Item.where(merchant_id: params[:merchant_id])
+    require 'pry'; binding.pry
+    @enabled_items = @items.enabled
+    @disabled_items = @items.disabled
   end
 
   def edit
@@ -13,7 +16,6 @@ class ItemsController < ApplicationController
     merchant = Merchant.find(params[:merchant_id])
     item = Item.find(params[:item_id])
     item.update(item_params)
-    # require 'pry'; binding.pry
     redirect_to "/merchants/#{merchant.id}/items/#{item.id}"
   end
 

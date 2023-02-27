@@ -3,7 +3,17 @@
 <h3><%= @merchant.name %></h3>
 
 <ul>
-  <% @merchant.items.each do |item| %>
-    <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p></li>
-  <% end %>
+  <div class="disabled-buttons">
+    <% @enabled_items.each do |item| %>
+      <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p></li>
+      <p><%= button_to "Disable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %></p>
+    <% end %>
+  </div>
+
+  <div class="enabled-buttons">
+    <% @disabled_items.each do |item| %>
+      <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p></li>
+      <p><%= button_to "Enable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %></p>
+    <% end %>
+  </div>
 </ul>

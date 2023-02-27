@@ -5,6 +5,8 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.string :description
       t.integer :unit_price
       t.integer :merchant_id
+      t.string :status, default: "disabled"
+
       t.timestamps
     end
   end

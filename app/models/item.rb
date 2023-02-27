@@ -7,4 +7,12 @@ class Item < ApplicationRecord
   def item_invoice_id
     invoice_items.first.invoice_id
   end
+
+  def self.enabled
+    where(status: "enabled")
+  end
+
+  def self.disabled
+    where(status: "disabled")
+  end
 end

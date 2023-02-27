@@ -5,10 +5,10 @@ RSpec.describe "Merchant Items Index" do
 
     let!(:merchant1) { create(:merchant) }
     let!(:merchant2) { create(:merchant) }
-    let!(:item1) { create(:item, merchant_id: merchant1.id) }
-    let!(:item2) { create(:item, merchant_id: merchant1.id) }
-    let!(:item3) { create(:item, merchant_id: merchant2.id) }
-    let!(:item4) { create(:item, merchant_id: merchant2.id) }
+    let!(:item1) { create(:item, merchant_id: merchant1.id, status: "enabled") }
+    let!(:item2) { create(:item, merchant_id: merchant1.id, status: "disabled") }
+    let!(:item3) { create(:item, merchant_id: merchant2.id, status: "enabled") }
+    let!(:item4) { create(:item, merchant_id: merchant2.id, status: "disabled") }
 
     before do
       visit "/merchants/#{merchant1.id}/items"
@@ -43,6 +43,17 @@ RSpec.describe "Merchant Items Index" do
         expect(page).to_not have_content(item3.name)
         expect(page).to_not have_content(item3.description)
         expect(page).to_not have_content(item3.unit_price)
+      end
+    end
+
+    # 10. Merchant Items Grouped by Status
+    describe "Then I see two sections, one for Enabled Items and one for Disabled Items" do
+      it "I see that each Item is listed in the appropriate section" do
+        expect(page).to have_button("Disable #{item1.name}")
+        click_button "Disable #{item1.name}"
+
+        expect(page).to have_button("Enable #{item1.name}")
+        click_button "Enable #{item1.name}"
       end
     end
   end
