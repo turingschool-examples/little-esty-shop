@@ -57,6 +57,20 @@ RSpec.describe 'Merchant Items', type: :feature do
             expect(page).to have_link("New Item")
           end
         end
+
+        it "When I click on the link, I am taken to a form that allows me to add item information." do
+          click_link "Create New Item"
+
+          expect(current_path).to eq(new_merchant_item_path(sam.id))
+
+          save_and_open_page
+
+          within ("form#new_merchant_item") do
+            expect(page).to have_field("Name")
+            expect(page).to have_field("Description")
+            expect(page).to have_field("Unit Price")
+          end
+        end
       end
     end
   end

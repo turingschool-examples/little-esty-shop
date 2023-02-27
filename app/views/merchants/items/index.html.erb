@@ -4,9 +4,9 @@
 <nav>
 
 <nav>
-<section>
+<section id="my_items">
   <h3>My Items</h3>
-  
+  <%= link_to "Create New Item", new_merchant_item_path(@merchant) %>
 
   <ul id="items_list">
     <% @items.each do |item| %>

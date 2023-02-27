@@ -19,14 +19,18 @@ class Merchants::ItemsController < ApplicationController
     item = merchant.items.find(params[:id])
     
     if item.update(item_params)
-      flash[:success] = "Item Successfully Updated!"
+      flash[:success] = "Item Successfully Updated"
       redirect_to merchant_item_path(merchant.id, item.id)
     else
       flash[:notice] = error_message(item.errors)
       redirect_to edit_merchant_item_path(merchant.id, item.id)
     end
   end
-
+  
+  def new
+    require 'pry'; binding.pry
+    @merchant_items
+  end
   private
   def item_params
     params.permit(:name, :description, :unit_price, :merchant_id)
