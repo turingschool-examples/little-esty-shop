@@ -1,10 +1,48 @@
 <h1>My Items</h1>
 <div id="merchant_items">
-  <ol>
+  <ul>
   <% @items.each do |item| %>
-    <div id="merchant_item_<%= item.id %>"> 
-      <li><%= item.name %></li>
+    <div id = "merchant_item-<%=item.id%>"> 
+      <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></li>
+      <% if item.status == "Enabled" %>
+        <%=button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {item:{ status: "Disabled"} } %>
+      <% else %>
+        <%=button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {item:{ status: "Enabled"} } %>
+      <% end %>
     </div>
   <% end %>
+  </ul>
+</div>
+<h3>Enabled Items</h3>
+<div id="enabled">
+  <ul>
+    <% @enabled_items.each do |enabled| %>
+      <li><%= enabled.name %></li>
+    <% end %>
+  </ul>  
+</div>
+
+<h3>Disabled Items</h3>
+<div id="disabled">
+  <ul>
+    <% @disabled_items.each do |disabled| %>
+      <li><%= disabled.name %></li>
+    <% end %>
+  </ul>
+</div>
+<p><%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new" %></p>
+
+<h3>Top Items</h3>
+<div id="5_most_popular_items">
+  <ol>
+    <% @top_5_items.each do |item| %>
+      <li>
+        <p>
+          <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+          <%= "- #{number_to_currency((item.revenue.to_f/100).truncate, precision: 0)} in sales" %>
+        </p>
+        <p><%= "Top day for #{item.name} was #{item.item_best_day.strftime("%-m/%-d/%y")}"%></p>
+      </li>
+    <% end %>
   </ol>
 </div>
