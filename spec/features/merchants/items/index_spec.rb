@@ -20,64 +20,54 @@ RSpec.describe 'Merchant Items', type: :feature do
         it 'I see a list of the names of all my items' do
           expect(page).to have_content("#{sam.name}")
           expect(page).to have_content("New Item")
-
-          # within 'ul#items_list' do
             
             expect(page).to have_content("#{football.name}")
             expect(page).to have_content("#{baseball.name}")
             expect(page).to have_content("#{glove.name}")
-          # end
           
           expect(page).to_not have_content("#{arugula.name}")
           expect(page).to_not have_content("#{tomato.name}")
         end
 
         it "each item name is a link to that merchant's item's show page " do
-          # within 'ul#items_list' do
-            click_link football.name
-            expect(current_path).to eq(merchant_item_path(sam.id, football.id))
-          # end
+          click_link football.name
+          expect(current_path).to eq(merchant_item_path(sam.id, football.id))
         end
 
         it "each item name is a link to that merchant's item's show page " do
-          # within 'ul#items_list' do
-            click_link baseball.name
-            expect(current_path).to eq(merchant_item_path(sam.id, baseball.id))
-          # end
+          click_link baseball.name
+          expect(current_path).to eq(merchant_item_path(sam.id, baseball.id))
         end
 
         it "each item name is a link to that merchant's item's show page " do
-          # within 'ul#items_list' do
-            click_link glove.name
-            expect(current_path).to eq(merchant_item_path(sam.id, glove.id))
-          # end
+          click_link glove.name
+          expect(current_path).to eq(merchant_item_path(sam.id, glove.id))
         end
 
         it 'next to each item I see a button to disable or enable that item' do 
-          within "div#items-#{football.id}" do
+          within "div#enabled_items-#{football.id}" do
             expect(page).to have_button('Disable')
           end
 
-          within "div#items-#{baseball.id}" do
+          within "div#enabled_items-#{baseball.id}" do
             expect(page).to have_button('Disable')
           end
 
-          within "div#items-#{glove.id}" do
+          within "div#disabled_items-#{glove.id}" do
             expect(page).to have_button('Enable')
           end
         end
 
         it 'changes the status of the item after the button click' do
      
-          within "div#items-#{football.id}" do
-
+          within "div#enabled_items-#{football.id}" do
             click_button 'Disable'
             football.reload
             expect(football.status).to eq('disabled')
             expect(current_path).to eq(merchant_items_path(sam))
           end
           
-          within "div#items-#{baseball.id}" do
+          within "div#enabled_items-#{baseball.id}" do
             click_button 'Disable'
             baseball.reload
             expect(baseball.status).to eq('disabled')
@@ -85,11 +75,41 @@ RSpec.describe 'Merchant Items', type: :feature do
 
           end
 
-          within "div#items-#{football.id}" do
+          within "div#disabled_items-#{football.id}" do
             click_button 'Enable'
             glove.reload
             expect(glove.status).to eq('disabled')
             expect(current_path).to eq(merchant_items_path(sam))
+          end
+        end
+
+        it 'displays enabled items in the enabled items section' do
+         
+          within "div#enabled_items-#{football.id}" do
+            expect(page).to have_content(football.name)
+          end
+
+          within "div#enabled_items-#{baseball.id}" do
+            expect(page).to have_content(baseball.name)
+          end
+        end
+
+        it 'displays the disabled items in the disabled items section' do
+          within "div#disabled_items-#{glove.id}" do
+            expect(page).to have_content(glove.name)
+          end
+        end
+
+        it 'displays items in correct sections after button click' do 
+          within "div#enabled_items-#{football.id}" do
+            expect(page).to have_content(football.name)
+            click_on 'Disable'
+          end
+
+          football.reload
+          
+          within "div#disabled_items-#{football.id}" do
+            expect(page).to have_content(football.name)
           end
         end
       end
