@@ -8,28 +8,10 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:transactions).through(:invoices) }
     it { should have_many(:customers).through(:invoices)}
 
-    it { should define_enum_for(:status).with_values(["enabled", "disabled"]) }
-  end
-
-  describe '#toggle_status' do
-    it 'changes merchant status to disabled if currently enabled and the inverse' do
-      @merchant_1 = Merchant.create!(name: "Merchy")
-      expect(@merchant_1.status).to eq("enabled")
-
-      @merchant_1.toggle_status
-
-      expect(@merchant_1.status).to eq("disabled")
-
-      @merchant_1.toggle_status
-
-      expect(@merchant_1.status).to eq("enabled")
-     end
-  end
-
     before(:each) do
       ###### Merchants & Items ######
       @merchant1 = Merchant.create!(name: "Mel's Travels")
-      @merchant2 = Merchant.create!(name: "Hady's Beach Shack", status: 1)
+      @merchant2 = Merchant.create!(name: "Hady's Beach Shack")
       # @merchant3 = Merchant.create!(name: "Huy's Cheese")
   
       @item1 = Item.create!(name: "Salt", description: "it is salty", unit_price: 1200, merchant: @merchant1)
@@ -119,14 +101,11 @@ RSpec.describe Merchant, type: :model do
       @invoice18.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
       @invoice19.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
     end 
-
-    describe "class methods" do
-      it "::mech_top_5_successful_customers" do
-        expect(Merchant.mech_top_5_successful_customers.to_a).to eq([@customer1, @customer6, @customer5, @customer3, @customer4])
-      end
-
-      it 'groups merchants by status' do
-        expect(Merchant.group_by_status("disabled")).to eq([@merchant2])
+    describe "instance methods" do
+      it "#mech_top_5_successful_customers" do
+        expect(@merchant1.mech_top_5_successful_customers.to_a).to eq([@customer1, @customer6, @customer3, @customer4, @customer5])
       end
     end
+
+  end
 end
