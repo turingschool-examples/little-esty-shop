@@ -12,7 +12,7 @@ RSpec.describe 'Merchant Invoices Index' do
 		@cust1 = Customer.create!(first_name: "Laura", last_name: "Fiel")
 		@cust2 = Customer.create!(first_name: "Bob", last_name: "Fiel")
 		
-		@inv1 = @cust1.invoices.create!(status: 1)
+		@inv1 = @cust1.invoices.create!(status: 1, created_at: "2023-02-26 09:54:09")
 		@inv2 = @cust1.invoices.create!(status: 1)
 		
 		@bowl = @merchant.items.create!(name: "bowl", description: "it's a bowl", unit_price: 350) 
