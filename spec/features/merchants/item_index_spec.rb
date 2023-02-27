@@ -5,7 +5,7 @@ RSpec.describe "Merchant Items Index" do
 
     let!(:merchant1) { create(:merchant) }
     let!(:merchant2) { create(:merchant) }
-    let!(:item1) { create(:item, merchant_id: merchant1.id) }
+    let!(:item1) { create(:item, merchant_id: merchant1.id, unit_price: 100000) }
     let!(:item2) { create(:item, merchant_id: merchant1.id) }
     let!(:item3) { create(:item, merchant_id: merchant2.id) }
     let!(:item4) { create(:item, merchant_id: merchant2.id) }
@@ -39,7 +39,7 @@ RSpec.describe "Merchant Items Index" do
 
           expect(page).to have_content(item1.name)
           expect(page).to have_content(item1.description)
-          expect(page).to have_content(item1.unit_price)
+          expect(page).to have_content('$1,000.00')
 
           expect(page).to_not have_content(item3.name)
           expect(page).to_not have_content(item3.description)
