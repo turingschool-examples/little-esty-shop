@@ -18,7 +18,6 @@ describe 'edit admin merchant page' do
   describe 'update merchant form' do
     describe 'initial state' do
       it 'should be prefilled with the merchant information' do
-        save_and_open_page
         expect(page).to have_field('merchant[name]', with: @merchant.name)
       end
     end
