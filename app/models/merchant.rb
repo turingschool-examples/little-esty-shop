@@ -31,11 +31,22 @@ class Merchant < ApplicationRecord
     .order('total_revenue desc')
     .limit(5)
   end
-  
+
   def total_revenue
     self.invoices
     .joins(:invoice_items, :transactions)
     .where('transactions.result = 0')
     .sum('invoice_items.quantity * invoice_items.unit_price')
+  end
+
+  def top_selling_date
+    self.invoices
+    .where("invoices.status = 1")
+    .joins(:invoice_items)
+    .select('invoices.id, invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
+    .group("invoices.id, invoices.created_at")
+    .order("total_revenue desc", "invoices.created_at desc")
+    .limit(1)
+    .first
   end
 end

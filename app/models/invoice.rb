@@ -24,4 +24,8 @@ class Invoice < ApplicationRecord
     .group(:id)
     .order(:created_at)
   end
+
+  def format_date
+    created_at.strftime("%F")
+  end
 end

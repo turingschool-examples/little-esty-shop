@@ -12,9 +12,9 @@ RSpec.describe "admin merchants index" do
 
     @customer1 = Customer.create!(first_name: "Steve", last_name: "Stevinson")
 
-    @invoice1 = Invoice.create!(customer: @customer1, status: 1) #completed
-    @invoice2 = Invoice.create!(customer: @customer1, status: 1) #completed
-    @invoice3 = Invoice.create!(customer: @customer1, status: 1) #completed
+    @invoice1 = Invoice.create!(customer: @customer1, status: 1, created_at: "01/01/2023".to_date) #completed
+    @invoice2 = Invoice.create!(customer: @customer1, status: 1, created_at: "02/02/2023".to_date) #completed
+    @invoice3 = Invoice.create!(customer: @customer1, status: 1, created_at: "10/02/2022".to_date) #completed
     @invoice4 = Invoice.create!(customer: @customer1, status: 1) #completed
     @invoice5 = Invoice.create!(customer: @customer1, status: 1) #completed
     @invoice6 = Invoice.create!(customer: @customer1, status: 1) #completed
@@ -119,5 +119,18 @@ RSpec.describe "admin merchants index" do
         expect(page).to have_content("#{@merchant5.total_revenue / 100}")
       end
     end
+
+    it 'displays the best day the merchant had in sales' do
+      visit '/admin/merchants'
+
+      within "#top_5_merchants" do
+        expect(page).to have_content("Top selling date for #{@merchant1.name}: #{@merchant1.top_selling_date.format_date}")
+        expect(page).to have_content("Top selling date for #{@merchant2.name}: #{@merchant2.top_selling_date.format_date}")
+        expect(page).to have_content("Top selling date for #{@merchant3.name}: #{@merchant3.top_selling_date.format_date}")
+        expect(page).to have_content("Top selling date for #{@merchant4.name}: #{@merchant4.top_selling_date.format_date}")
+        expect(page).to have_content("Top selling date for #{@merchant5.name}: #{@merchant5.top_selling_date.format_date}")
+      end
+    end
   end
+
 end

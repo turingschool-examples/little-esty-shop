@@ -101,6 +101,13 @@ RSpec.describe Invoice, type: :model do
         expect(@invoice_1.total_revenue).to eq(67)
       end
     end
+
+    describe '#format_date' do
+      it 'returns the date of the invoice in yyyy/mm/dd format' do
+        @invoice_1.created_at = "Mon, 27 Feb 2023 22:51:42 UTC +00:00"
+        expect(@invoice_1.format_date).to eq("2023-02-27")
+      end
+    end
   end
 
   describe "class method" do

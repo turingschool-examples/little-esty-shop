@@ -149,9 +149,9 @@ RSpec.describe Merchant, type: :model do
 
         @customer1 = Customer.create!(first_name: "Steve", last_name: "Stevinson")
 
-        @invoice1 = Invoice.create!(customer: @customer1, status: 1) #completed
-        @invoice2 = Invoice.create!(customer: @customer1, status: 1) #completed
-        @invoice3 = Invoice.create!(customer: @customer1, status: 1) #completed
+        @invoice1 = Invoice.create!(customer: @customer1, status: 1, created_at: "01/01/2023".to_date) #completed
+        @invoice2 = Invoice.create!(customer: @customer1, status: 1, created_at: "02/02/2023".to_date) #completed
+        @invoice3 = Invoice.create!(customer: @customer1, status: 1, created_at: "10/02/2022".to_date) #completed
         @invoice4 = Invoice.create!(customer: @customer1, status: 1) #completed
         @invoice5 = Invoice.create!(customer: @customer1, status: 1) #completed
         @invoice6 = Invoice.create!(customer: @customer1, status: 1) #completed
@@ -190,6 +190,12 @@ RSpec.describe Merchant, type: :model do
 
       it 'shows the total revenue' do
         expect(@merchant1.total_revenue).to eq(2400)
+      end
+
+      it 'shows the top selling date for each merchant' do
+        expect(@merchant1.top_invoice).to eq(@invoice1)
+        expect(@merchant1.top_invoice.format_date).to eq("2023-01-01")
+
       end
     end
   end
