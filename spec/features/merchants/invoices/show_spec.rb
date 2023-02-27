@@ -20,25 +20,47 @@ RSpec.describe 'Merchant Invoices Index' do
 		@plate = @merchant.items.create!(name: "plate", description: "it's a plate", unit_price: 250) 
 		
 		@trans1 = @inv1.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+		@trans2 = @inv2.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
 		
-		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id)
-		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id)
-		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id)
-		InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv1.id)
-		InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv1.id)
-		InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv1.id)
+		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id, quantity: 10, unit_price: 350, status: 1)
+		InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv1.id, quantity: 5, unit_price: 300, status: 1)
+		InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv1.id, quantity: 3, unit_price: 200, status: 1)
+
+		InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv2.id, quantity: 20, unit_price: 350, status: 1)
+		InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv2.id, quantity: 10, unit_price: 300, status: 1)
+		InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv2.id, quantity: 6, unit_price: 200, status: 1)
 	end
 
 	describe 'As a merchant, when I visit my merchant invoices show page' do
 		it 'Then I see information related to that invoice' do
 			visit "/merchants/#{@merchant.id}/invoices/#{@inv1.id}"
-			
+
 			expect(page).to have_content("Invoice ID: #{@inv1.id}")
 			expect(page).to_not have_content("Invoice ID: #{@inv2.id}")
 			expect(page).to have_content("Invoice Status: #{@inv1.status}")
-			expect(page).to have_content("Invoice Created at: Sunday, February 26, 2023")
+			expect(page).to have_content("Invoice Created at: Monday, February 27, 2023")
 			expect(page).to have_content("Customer: Laura Fiel")
 			expect(page).to_not have_content("Customer: Bob Fiel")
+		end
+
+		it 'Then I see all of my items on the invoice' do
+			visit "/merchants/#{@merchant.id}/invoices/#{@inv1.id}"
+			
+			within "div#invoice_item-#{@bowl.id}" do
+				expect(page).to have_content("Item: bowl")
+				expect(page).to have_content("Quantity: 10")
+				expect(page).to have_content("Price: $3.50")
+				expect(page).to have_content("Item Status: packaged")
+			end
+		end
+
+		it 'I see the total revenue that will be generated from all of my items on the invoice' do
+			visit "/merchants/#{@merchant.id}/invoices/#{@inv1.id}"
+				expect(page).to have_content("Total Revenue: $56.00")	
+
+			visit "/merchants/#{@merchant.id}/invoices/#{@inv2.id}"
+			save_and_open_page
+				expect(page).to have_content("Total Revenue: $112.00")				
 		end
 	end
 end
