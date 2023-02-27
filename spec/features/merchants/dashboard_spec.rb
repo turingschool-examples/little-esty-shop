@@ -136,9 +136,9 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
     describe 'merchant unshipped items' do
       before(:each) do
         @deniz = Customer.create!(first_name: "Deniz", last_name: "Ocean")
-        @invoice17 = Invoice.create!(customer: @deniz, status: 0) #in progress
-        @invoice18 = Invoice.create!(customer: @deniz, status: 0) #in progress
-        @invoice19 = Invoice.create!(customer: @deniz, status: 0) #in progress
+        @invoice17 = Invoice.create!(customer: @deniz, created_at: 5.days.ago, status: 0) #in progress
+        @invoice18 = Invoice.create!(customer: @deniz, created_at: 2.days.ago, status: 0) #in progress
+        @invoice19 = Invoice.create!(customer: @deniz, created_at: 4.days.ago, status: 0) #in progress
         InvoiceItem.create!(item: @item4, invoice: @invoice17, quantity: 1, unit_price: 1950, status: 0) #pending
         InvoiceItem.create!(item: @item5, invoice: @invoice18, quantity: 1, unit_price: 2850, status: 2) #shipped (Expect NOT to see on page)
         InvoiceItem.create!(item: @item6, invoice: @invoice19, quantity: 1, unit_price: 1650, status: 1) #packaged
@@ -147,7 +147,7 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
         @invoice19.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
 
         @emre = Customer.create!(first_name: "Emre", last_name: "Bond")
-        @invoice20 = Invoice.create!(customer: @emre, status: 0) #in progress
+        @invoice20 = Invoice.create!(customer: @emre, created_at: 3.days.ago, status: 0) #in progress
         InvoiceItem.create!(item: @item4, invoice: @invoice20, quantity: 1, unit_price: 9950, status: 1) #packaged
         InvoiceItem.create!(item: @item6, invoice: @invoice20, quantity: 1, unit_price: 1000, status: 2) #shipped
         @invoice17.transactions.create!(credit_card_number: "4654405418249638", credit_card_expiration_date: "08/29", result: 0) #success
@@ -167,19 +167,28 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
       it 'each items invoice ID is a link my merchant invoice show page' do
         visit "/merchants/#{@merchant2.id}/dashboard" 
         
-        #maybe need within block
         expect(page).to have_link("#{@invoice17.id}", :href=>"/merchants/#{@merchant2.id}/invoices/#{@invoice17.id}")
         expect(page).to have_link("#{@invoice19.id}", :href=>"/merchants/#{@merchant2.id}/invoices/#{@invoice19.id}")
         expect(page).to have_link("#{@invoice20.id}", :href=>"/merchants/#{@merchant2.id}/invoices/#{@invoice20.id}")
       end
+
+      it "next to each id I see the date that invoice was created (ex: 'Monday, July 18, 2019')" do
+        visit "/merchants/#{@merchant2.id}/dashboard" 
+        
+        within "#invoice_items_info-#{@invoice17.id}" do
+          expect(page).to have_content("Created: #{@invoice17.created_at.strftime("%A, %B %e, %Y")}")
+        end
+
+        within "#invoice_items_info-#{@invoice20.id}" do
+          expect(page).to have_content("Created: #{@invoice20.created_at.strftime("%A, %B %e, %Y")}")
+        end
+      end
+
+      it "I see the list is ordered from oldest to newest" do
+        visit "/merchants/#{@merchant2.id}/dashboard" 
+        expect(@invoice17.created_at.strftime("%A, %B %e, %Y")).to appear_before(@invoice19.created_at.strftime("%A, %B %e, %Y"))
+        expect(@invoice19.created_at.strftime("%A, %B %e, %Y")).to appear_before(@invoice20.created_at.strftime("%A, %B %e, %Y"))
+      end
     end
   end
-  
-  # As a merchant
-  # When I visit my merchant dashboard
-  # Then I see a section for "Items Ready to Ship"
-  # In that section I see a list of the names of all of my items that
-  # have been ordered and have not yet been shipped,
-  # And next to each Item I see the id of the invoice that ordered my item
-  # And each invoice id is a link to my merchant's invoice show page
 end 

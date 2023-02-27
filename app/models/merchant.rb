@@ -20,9 +20,11 @@ class Merchant < ApplicationRecord
   end
   
   def unshipped_items
-    # binding.pry
-    invoice_items.select("invoice_items.*, items.name AS item_name").where("invoice_items.status != 2")
-    # joins(:invoice_items).select("items.*, invoice_items.invoice_id").where("invoice_items.status != 2")
+    # invoice_items.select("invoice_items.*, items.name AS item_name")
+    # .where("invoice_items.status != 2")
+    # .order("invoice_items.invoice_created_at")
+    invoices.select("invoice_items.status, invoices.*, items.name AS item_name")
+    .where("invoice_items.status != 2")
+    .order(:created_at)
   end
-
 end

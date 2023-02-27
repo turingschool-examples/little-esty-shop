@@ -119,15 +119,20 @@ RSpec.describe Merchant, type: :model do
 
       describe "#unshipped items" do
         let(:items_not_shipped) { @merchant2.unshipped_items }
-        xit "returns an array of unshipped items" do
-          # expect(unshipped_invoices.first.invoice_items.first.status).to eq("packaged")
-          # expect(unshipped_invoices.second.invoice_items.first.status).to eq("packaged")
-          # expect(unshipped_invoices.last.invoice_items.first.status).to eq("pending")
-          # need to update to fit US 4
-        end
 
+        #user story 4
+        it "returns an array of unshipped items" do
+          # expect(items_not_shipped.first.status).to eq("packaged")
+          # expect(items_not_shipped.second.status).to eq("packaged")
+          # expect(items_not_shipped.last.status).to eq("pending")
+          expect(items_not_shipped.first.invoice_items.first.status).to eq("packaged")
+          expect(items_not_shipped.second.invoice_items.first.status).to eq("packaged")
+          expect(items_not_shipped.last.invoice_items.first.status).to eq("pending")
+        end
+        
+        #user story 5
         it "ordered from oldest to newest" do
-          expect(items_not_shipped.to_a).to eq([@ii1, @ii3, @ii4, @ii6, @ii7])
+          expect(items_not_shipped.to_a).to eq([@invoice19, @invoice20, @invoice21, @invoice21, @invoice17])
         end
       end
     end
