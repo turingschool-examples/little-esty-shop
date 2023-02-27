@@ -11,12 +11,12 @@ RSpec.describe 'Merchant Items', type: :feature do
     let!(:baseball) { sam.items.create!(name: "Baseball", description: "This a baseball", unit_price: 2500) }
     let!(:glove) { sam.items.create!(name: "Baseball Glove", description: "This a baseball glove", unit_price: 4000) }
 
-    before (:each) do 
-      visit merchant_items_path(sam.id)
-    end
-
     describe 'As a merchant' do 
       context 'When I visit my merchant items index page' do
+        before (:each) do 
+          visit merchant_items_path(sam.id)
+        end
+
         it 'I see a list of the names of all my items' do
           expect(page).to have_content("#{sam.name}")
           expect(page).to have_content("New Item")
@@ -63,12 +63,26 @@ RSpec.describe 'Merchant Items', type: :feature do
 
           expect(current_path).to eq(new_merchant_item_path(sam.id))
 
-          save_and_open_page
-
           within ("form#new_merchant_item") do
             expect(page).to have_field("Name")
             expect(page).to have_field("Description")
             expect(page).to have_field("Unit Price")
+          end
+        end
+
+        context "When I visit the Merchant Item Edit Form" do
+          before (:each) do 
+            visit new_merchant_item_path(sam.id)
+          end
+
+          it "When I fill out the form I click ‘Submit’ Then I am taken back to the items index page" do
+            within("section#new_item") do
+              fill_in "Item Name", with: "Marijuana Tapestry"
+              fill_in "Item Description", with: "Crushed velvet, 51.2 x 59.1 inches"
+              fill_in "Unit Price", with: "7110"
+              
+              click_button "Submit"
+            end
           end
         end
       end

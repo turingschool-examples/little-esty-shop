@@ -1,13 +1,13 @@
 <header>
   <h2>New Item Submission</h2>
 </header>
-<section>
-  <%=  form_with model: @merchant_items, id: "new_merchant_item", local: true do |f| %>
+<section id="new_item">
+  <%=  form_with url: merchant_items_path(@merchant.id), local: true do |f| %>
     <%=  f.label :item_name, "Item Name:" %>
     <%=  f.text_field :item_name, required: true %><br>
-    <%=  f.label :item_name, "Item Description:" %>
+    <%=  f.label :item_description, "Item Description:" %>
     <%=  f.text_field :item_description, required: true %><br>
-    <%=  f.label :item_name, "Unit Price:" %>
+    <%=  f.label :unit_price, "Unit Price:" %>
     <%=  f.text_field :unit_price, required: true %><br>
     <%=  f.submit "Submit" %>
   <% end %>
