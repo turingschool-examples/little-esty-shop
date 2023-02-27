@@ -149,7 +149,6 @@ RSpec.describe 'Admin Dashboard:', type: :feature do
         end
 
         it 'next to each invoice id I see the date that invoice was created ordered oldest to newest' do
-          save_and_open_page
           expect("#{@invoice2.id}").to appear_before("#{@invoice1.id}")
         end
       end
