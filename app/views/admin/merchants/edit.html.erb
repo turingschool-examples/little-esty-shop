@@ -2,8 +2,6 @@
 
 
 <%= form_with url:admin_merchant_path(@merchant.id), model: @merchant, local: true do |form|  %>
-  <%= form.label :name  %>
-  <%= form.text_field :name %>
-  <%= form.submit :submit %>
+   <%= render 'merchant_form', form: form %>
 <% end %>
 

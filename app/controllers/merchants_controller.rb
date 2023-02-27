@@ -5,5 +5,7 @@ class MerchantsController < ApplicationController
 
   def items
     @merchant = Merchant.find(params[:merchant_id])
+    @items = @merchant.items
+    @top_5_items = @items.top_5_by_revenue
   end
 end
