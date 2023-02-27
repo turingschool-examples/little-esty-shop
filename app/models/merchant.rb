@@ -13,4 +13,12 @@ class Merchant < ApplicationRecord
     invoices.order(created_at: :asc)
     invoice_items.where.not(status: "shipped")
   end
+
+  def enabled_items
+    items.where(status: 0)
+  end
+
+  def disabled_items
+    items.where(status: 1)
+  end
 end

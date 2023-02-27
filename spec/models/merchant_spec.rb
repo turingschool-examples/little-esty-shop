@@ -13,9 +13,9 @@ RSpec.describe Merchant, type: :model do
   let!(:invoice3) { Invoice.create!(customer_id: this_gai_ovah_hea.id) } 
 
   let!(:sam) { Merchant.create!(name: "Sam's Sports") }
-  let!(:football) { sam.items.create!(name: "Football", description: "This a football", unit_price: 3000) }
-  let!(:baseball) { sam.items.create!(name: "Baseball", description: "This a baseball", unit_price: 2500) }
-  let!(:glove) { sam.items.create!(name: "Baseball Glove", description: "This a baseball glove", unit_price: 4000) }
+  let!(:football) { sam.items.create!(name: "Football", description: "This a football", unit_price: 3000, status: 0) }
+  let!(:baseball) { sam.items.create!(name: "Baseball", description: "This a baseball", unit_price: 2500, status: 0) }
+  let!(:glove) { sam.items.create!(name: "Baseball Glove", description: "This a baseball glove", unit_price: 4000, status: 1) }
 
   before (:each) do
     @football_inv = InvoiceItem.create!(invoice_id: invoice1.id, item_id: football.id, status: 0)
@@ -36,6 +36,14 @@ RSpec.describe Merchant, type: :model do
 
     it '#items_not_yet_shipped' do 
       expect(sam.items_not_yet_shipped).to eq([@football_inv, @baseball_inv])
+    end
+
+    it '#enabled_items' do
+      expect(sam.enabled_items).to eq([football, baseball])
+    end
+
+    it '#disabled_items' do 
+      expect(sam.disabled_items).to eq([glove])
     end
   end
 end
