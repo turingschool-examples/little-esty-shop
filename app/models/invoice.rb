@@ -17,5 +17,11 @@ class Invoice < ApplicationRecord
     .order('COUNT(transactions.id)DESC, created_at DESC')
     .limit(1)
   end
-end
 
+  def self.incomplete_invoices
+    joins(:invoice_items)
+    .where("invoice_items.status != 2")
+    .group(:id)
+    .order(:created_at)
+  end
+end

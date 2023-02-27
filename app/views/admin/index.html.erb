@@ -1,3 +1,22 @@
 <h1>Admin Dashboard Page</h1>
 <%= link_to "Admin Merchants Page", "/admin/merchants" %>     
 <%= link_to "Admin Invoices Page", "/admin/invoices" %>     
+
+<p>Top 5 Customers with Highest Successful Transactions</p>
+
+<% @top_5_customers.each do |customer| %>
+  <div id = "top_customers-<%= customer.id %>">
+    <p> <%= customer.first_name %> <%= customer.last_name %> has <%= customer.transaction_count %> successful transactions!</p>
+  </div>
+<% end %>
+
+<p>Incomplete Invoices</p>
+
+<% @invoices_not_shipped.each do |invoice| %>
+  <div id = "invoice_info-<%= invoice.id %>">
+    <p>ID number: <%= link_to invoice.id, "/invoices/#{invoice.id}" %> Created: <%= invoice.created_at.strftime("%A, %B %e, %Y") %> </p>
+    <br>
+  </div>
+<% end %>
+
+
