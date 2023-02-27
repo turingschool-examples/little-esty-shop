@@ -1,11 +1,19 @@
-<p><%= @invoice.id %></p>
-<p><%= @invoice.status %></p>
-<p><%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
-<p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
+<p>ID: <%= @invoice.id %></p>
+<p>Status: <%= @invoice.status %></p>
+<p>Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 <% @invoice.items.each do |item| %>
   <p>Name: <%= item.name %> Quantity: <%= @invoice.find_invoiceitem_quantity(item) %> Price sold for: <%= number_to_currency(@invoice.find_invoiceitem_unitprice(item)/100.0) %> Invoice Item Status: <%= @invoice.find_invoiceitem_status(item) %></p>
 <% end %>
+
 <% total_revenue = @invoice.items.sum do |item| %>
   <% (@invoice.find_invoiceitem_unitprice(item))*(@invoice.find_invoiceitem_quantity(item)) %>
 <% end %>
 <p>Total Revenue: <%= number_to_currency(total_revenue/100.0)  %></p>
+
+<%= form_with model: @invoice, url: admin_invoice_path(@invoice), local: true do |form| %>
+  <%= form.label :status %>
+  <%= form.select :status, options_for_select(Invoice.statuses.keys{|status| status}, @invoice.status) %>
+
+  <%= form.submit "Update Invoice Status" %>
+<% end %>
