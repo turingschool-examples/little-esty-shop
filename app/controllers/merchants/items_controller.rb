@@ -55,7 +55,8 @@ class Merchants::ItemsController < ApplicationController
       :description, 
       :unit_price, 
       :merchant_id,
-      :unit_price
+      :unit_price,
+      :status
     )
   end
 end
