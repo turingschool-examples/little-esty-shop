@@ -19,4 +19,8 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
+  def unshipped_items
+    # binding.pry
+  end
+
 end
