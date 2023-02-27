@@ -1,5 +1,8 @@
 <h1>Invoice <%=@invoice.id%></h1>
-<h2>Invoice Status: <%=@invoice.status%></h2>
+<%= form_with model: @invoice, url: admin_invoice_path(@invoice), method: :patch  do |f|%>
+<h2>Invoice Status: <%= f.select(:status, Invoice.statuses.keys, selected: "#{@invoice.status}") %>
+<%= f.submit 'Update Invoice Status'%>
+<%end%> </h2>
 <h2>Created On: <%= render partial: 'admin/formatted_created_at', locals: {x: @invoice} %> </h2>
 <h2>Customer Name: <%= @invoice.customer.first_name%> <%=@invoice.customer.last_name%></h2>
 <div id="invoice_items">

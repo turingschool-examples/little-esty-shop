@@ -109,6 +109,44 @@ describe "Admin Invoice Show Page" do
       it 'I see the total revenue that will be generated from this invoice' do
         expect(page).to have_content("Total Revenue: $853.68")
       end
+
+      describe "I see the invoice status is a select field and I see that the invoice's current status is selected" do
+        it 'has a select field' do
+          expect(page).to have_select("invoice[status]")
+        end
+      end
+
+      describe 'when i click this select field' do
+        it "I can select a new status for the Invoice" do
+          select 'cancelled', from: "invoice[status]"
+
+          expect(page).to have_select("invoice[status]", selected: "cancelled")
+        end
+
+        it "next to the select field I see a button to 'Update Invoice Status'" do
+          select 'cancelled', from: "invoice[status]"
+
+          expect(page).to have_button('Update Invoice Status')
+        end
+
+      end
+
+      describe 'when i click the update button' do
+        it 'I am taken back to the admin invoice show page' do
+          select 'cancelled', from: "invoice[status]"
+          click_button 'Update Invoice Status'
+
+          expect(page.current_path).to eq("/admin/invoices/#{@inv1.id}")
+        end
+
+        it "I see that my Invoice's status has now been updated" do
+          select 'cancelled', from: "invoice[status]"
+          click_button 'Update Invoice Status'
+
+          expect(page).to have_select("invoice[status]", selected: "cancelled")
+          expect(page).to have_content('Invoice Status has been updated successfully')
+        end
+      end
     end
   end
 end
