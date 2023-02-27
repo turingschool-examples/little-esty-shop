@@ -12,8 +12,8 @@ RSpec.describe 'Merchant Invoices Index' do
 		@cust1 = Customer.create!(first_name: "Laura", last_name: "Fiel")
 		@cust2 = Customer.create!(first_name: "Bob", last_name: "Fiel")
 		
-		@inv1 = @cust1.invoices.create!(status: 1, created_at: "2023-02-26 09:54:09")
-		@inv2 = @cust1.invoices.create!(status: 1)
+		@inv1 = @cust1.invoices.create!(status: 1, created_at: "2023-02-27 09:54:09")
+		@inv2 = @cust1.invoices.create!(status: 1, created_at: "2023-02-27 09:54:09")
 		
 		@bowl = @merchant.items.create!(name: "bowl", description: "it's a bowl", unit_price: 350) 
 		@knife = @merchant.items.create!(name: "knife", description: "it's a knife", unit_price: 250) 
@@ -59,7 +59,6 @@ RSpec.describe 'Merchant Invoices Index' do
 				expect(page).to have_content("Total Revenue: $56.00")	
 
 			visit "/merchants/#{@merchant.id}/invoices/#{@inv2.id}"
-			save_and_open_page
 				expect(page).to have_content("Total Revenue: $112.00")				
 		end
 	end
