@@ -4,7 +4,11 @@ class Merchant < ApplicationRecord
   has_many :invoice_items, through: :items
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
+  enum status: {enabled: 0, disabled: 1}
 
+  scope :enabled_merchants, -> { where("status = 0")}
+
+  scope :disabled_merchants, -> { where("status = 1")}
   def merchant_invoices
     invoices.distinct.order(:id)
   end
