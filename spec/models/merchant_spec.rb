@@ -13,6 +13,7 @@ RSpec.describe Merchant, type: :model do
   let!(:invoice3) { Invoice.create!(customer_id: this_gai_ovah_hea.id) } 
 
   let!(:sam) { Merchant.create!(name: "Sam's Sports") }
+  let!(:bob) { Merchant.create!(name: "Bob's Beauties", status: 1) }
   let!(:football) { sam.items.create!(name: "Football", description: "This a football", unit_price: 3000, status: 0) }
   let!(:baseball) { sam.items.create!(name: "Baseball", description: "This a baseball", unit_price: 2500, status: 0) }
   let!(:glove) { sam.items.create!(name: "Baseball Glove", description: "This a baseball glove", unit_price: 4000, status: 1) }
@@ -44,6 +45,16 @@ RSpec.describe Merchant, type: :model do
 
     it '#disabled_items' do 
       expect(sam.disabled_items).to eq([glove])
+    end
+  end
+
+  describe '.scope' do 
+    it '.disabled_merchants' do 
+      expect(Merchant.disabled_merchants).to eq([bob])
+    end
+
+    it '.enabled_merchants' do 
+      expect(Merchant.enabled_merchants).to eq([sam])
     end
   end
 end
