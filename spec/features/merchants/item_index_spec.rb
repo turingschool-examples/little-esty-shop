@@ -130,7 +130,7 @@ RSpec.describe "Merchant Items Index" do
         visit "/merchants/#{merchant_1.id}/items"
 
         expect(page).to have_content("Top 5 Most Popular Items (By Revenue)")
-        save_and_open_page
+        
         within "#top_5_items" do
           expect(page).to have_content("#{item_1.name}")
           expect(page).to have_content("#{item_2.name}")
