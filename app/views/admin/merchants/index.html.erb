@@ -1,9 +1,15 @@
 <h1>Merchants List</h1>
 
 <div id="top_five_merchants_by_rev">
-
+	<h3> Top 5 Merchants by Revenue </h3>
+	<% @top_5_merchants.each do |merchant| %>
+		<%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> Revenue - $<%= "#{merchant.revenue}"%>
+		<br>
+	<% end %>
 </div>
-
+<br>
+<br>
+<h2>All Merchants</h2>
 <div id="merchant-list">
 	<% @active_merchants.each do |merchant| %>
 		<div id='<%= merchant.id %>'>
