@@ -18,6 +18,7 @@ describe 'edit admin merchant page' do
   describe 'update merchant form' do
     describe 'initial state' do
       it 'should be prefilled with the merchant information' do
+        save_and_open_page
         expect(page).to have_field('merchant[name]', with: @merchant.name)
       end
     end
@@ -33,7 +34,7 @@ describe 'edit admin merchant page' do
 
       describe 'when submit button is clicked' do
         before do
-          click_button('submit')
+          click_button('Submit')
         end
 
         it 'should take the user to the merchant show page' do
