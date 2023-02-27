@@ -3,16 +3,19 @@ Rails.application.routes.draw do
   root 'welcome#index'
  #admins
  get '/admin', to: "admin#index"
-
+ post '/merchants', to: "merchants#create"
   #merchants
   #customers
   #invoices
 namespace :admin do 
 
+
   get '/merchants', to: "merchants#index"
+  get '/merchants/new', to: "merchants#new"
   get '/merchants/:id', to: 'merchants#show'
   get '/merchants/:id/edit', to: "merchants#edit"
   patch '/merchants/:id', to: "merchants#update"
+
   # get "/invoices", to: "invoices#index"
   # get "/invoices/:invoice_id", to: "invoices#show"
   # resources :invoices, only: [:index, :show, :update]

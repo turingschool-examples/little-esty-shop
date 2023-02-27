@@ -50,3 +50,4 @@ RSpec.describe "admin merchants show" do
     expect(page).to have_content("#{@merchant_1.name}")
   end
 end
+end 

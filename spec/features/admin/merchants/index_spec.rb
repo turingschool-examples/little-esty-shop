@@ -49,5 +49,21 @@ RSpec.describe "admin merchants index" do
         expect(page).to have_content("#{@merchant_2.status}")
       end
     end
+
+    it "displays a link to create a new merchant" do 
+      visit '/admin/merchants'
+
+      expect(page).to have_link("Add Merchant", href: "/admin/merchants/new")
+
+    end
+
+    it "displays a link to create a new merchant" do 
+      visit '/admin/merchants'
+
+      click_link("Add Merchant")
+
+      expect(current_path).to eq("/admin/merchants/new")
+
+    end
   end
 end

@@ -25,6 +25,12 @@ class Admin::MerchantsController < ApplicationController
       redirect_to "/admin/merchants/#{@merchant.id}"
     end
   end
+
+
+
+  def new
+    @merchant = Merchant.new
+  end
   
   private
 
