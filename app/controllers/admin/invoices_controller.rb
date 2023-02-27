@@ -6,6 +6,7 @@ class Admin::InvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find(params[:invoice_id])
+    @invoice_items = @invoice.invoice_items.all 
   end
 
   def update 

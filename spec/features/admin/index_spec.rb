@@ -22,11 +22,11 @@ RSpec.describe '/admin', type: :feature do
       @item10 = Item.create!(name: "Imaginary", description: "it is whatever you think it is", unit_price: 9450, merchant: @merchant3)
       
       ###### Customers, Invoices, Invoice_Items, & Transactions ######
-      @Steve = Customer.create!(first_name: "Steve", last_name: "Stevinson")
-      @invoice1 = Invoice.create!(customer: @Steve, status: 1) #completed
-      @invoice2 = Invoice.create!(customer: @Steve, status: 1) #completed
-      @invoice3 = Invoice.create!(customer: @Steve, status: 1) #completed
-      @invoice4 = Invoice.create!(customer: @Steve, status: 1) #completed
+      @steve = Customer.create!(first_name: "Steve", last_name: "Stevinson")
+      @invoice1 = Invoice.create!(customer: @steve, status: 1) #completed
+      @invoice2 = Invoice.create!(customer: @steve, status: 1) #completed
+      @invoice3 = Invoice.create!(customer: @steve, status: 1) #completed
+      @invoice4 = Invoice.create!(customer: @steve, status: 1) #completed
       InvoiceItem.create!(item: @item1, invoice: @invoice1, quantity: 1, unit_price: 1300)
       InvoiceItem.create!(item: @item2, invoice: @invoice2, quantity: 1, unit_price: 1450)
       InvoiceItem.create!(item: @item3, invoice: @invoice3, quantity: 1, unit_price: 1500)
@@ -37,10 +37,10 @@ RSpec.describe '/admin', type: :feature do
       @invoice4.transactions.create!(credit_card_number: "4654405418249631", credit_card_expiration_date: "01/29", result: 0) #success
 
       #This customer has LOWEST successful transactions:
-      @Joe = Customer.create!(first_name: "Joe", last_name: "Shmow")
-      @invoice5 = Invoice.create!(customer: @Joe, status: 1) #completed
-      @invoice6 = Invoice.create!(customer: @Joe, status: 1) #completed
-      @invoice7 = Invoice.create!(customer: @Joe, status: 1) #completed
+      @joe = Customer.create!(first_name: "joe", last_name: "Shmow")
+      @invoice5 = Invoice.create!(customer: @joe, status: 1) #completed
+      @invoice6 = Invoice.create!(customer: @joe, status: 1) #completed
+      @invoice7 = Invoice.create!(customer: @joe, status: 1) #completed
       InvoiceItem.create!(item: @item5, invoice: @invoice5, quantity: 1, unit_price: 1800)
       InvoiceItem.create!(item: @item6, invoice: @invoice6, quantity: 1, unit_price: 4075)
       InvoiceItem.create!(item: @item7, invoice: @invoice7, quantity: 1, unit_price: 3100)
@@ -48,35 +48,35 @@ RSpec.describe '/admin', type: :feature do
       @invoice6.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: "02/29", result: 1) #failure
       @invoice7.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: "02/29", result: 0) #success
 
-      @Carmen = Customer.create!(first_name: "Carmen", last_name: "SanDiego")
-      @invoice8 = Invoice.create!(customer: @Carmen, status: 1) #completed
-      @invoice9 = Invoice.create!(customer: @Carmen, status: 1) #completed
+      @carmen = Customer.create!(first_name: "carmen", last_name: "SanDiego")
+      @invoice8 = Invoice.create!(customer: @carmen, status: 1) #completed
+      @invoice9 = Invoice.create!(customer: @carmen, status: 1) #completed
       InvoiceItem.create!(item: @item8, invoice: @invoice8, quantity: 1, unit_price: 3300)
       InvoiceItem.create!(item: @item9, invoice: @invoice9, quantity: 1, unit_price: 2525)
       @invoice8.transactions.create!(credit_card_number: "4654405418249633", credit_card_expiration_date: "03/29", result: 1) #failure
       @invoice8.transactions.create!(credit_card_number: "4654405418249633", credit_card_expiration_date: "03/29", result: 0) #success
       @invoice9.transactions.create!(credit_card_number: "4654405418249633", credit_card_expiration_date: "03/29", result: 0) #success
 
-      @Sally = Customer.create!(first_name: "Sally", last_name: "SeaShells")
-      @invoice10 = Invoice.create!(customer: @Sally, status: 1) #completed
-      @invoice11 = Invoice.create!(customer: @Sally, status: 1) #completed
+      @sally = Customer.create!(first_name: "sally", last_name: "SeaShells")
+      @invoice10 = Invoice.create!(customer: @sally, status: 1) #completed
+      @invoice11 = Invoice.create!(customer: @sally, status: 1) #completed
       InvoiceItem.create!(item: @item10, invoice: @invoice10, quantity: 1, unit_price: 10001)
       InvoiceItem.create!(item: @item1, invoice: @invoice11, quantity: 1, unit_price: 1400)
       @invoice10.transactions.create!(credit_card_number: "4654405418249634", credit_card_expiration_date: "04/29", result: 0) #success
       @invoice11.transactions.create!(credit_card_number: "4654405418249634", credit_card_expiration_date: "04/29", result: 0) #success
 
-      @Ludwig = Customer.create!(first_name: "Ludwig", last_name: "van Beethoven")
-      @invoice12 = Invoice.create!(customer: @Ludwig, status: 1) #completed
-      @invoice13 = Invoice.create!(customer: @Ludwig, status: 1) #completed
+      @ludwig = Customer.create!(first_name: "ludwig", last_name: "van Beethoven")
+      @invoice12 = Invoice.create!(customer: @ludwig, status: 1) #completed
+      @invoice13 = Invoice.create!(customer: @ludwig, status: 1) #completed
       InvoiceItem.create!(item: @item2, invoice: @invoice12, quantity: 1, unit_price: 1750)
       InvoiceItem.create!(item: @item3, invoice: @invoice13, quantity: 1, unit_price: 1525)
       @invoice12.transactions.create!(credit_card_number: "4654405418249635", credit_card_expiration_date: "05/29", result: 0) #success
       @invoice13.transactions.create!(credit_card_number: "4654405418249635", credit_card_expiration_date: "05/29", result: 0) #success
 
-      @Yukon = Customer.create!(first_name: "Yukon", last_name: "Dooheet")
-      @invoice14 = Invoice.create!(customer: @Yukon, status: 1) #completed
-      @invoice15 = Invoice.create!(customer: @Yukon, status: 1) #completed
-      @invoice16 = Invoice.create!(customer: @Yukon, status: 1) #completed
+      @yukon = Customer.create!(first_name: "yukon", last_name: "Dooheet")
+      @invoice14 = Invoice.create!(customer: @yukon, status: 1) #completed
+      @invoice15 = Invoice.create!(customer: @yukon, status: 1) #completed
+      @invoice16 = Invoice.create!(customer: @yukon, status: 1) #completed
       InvoiceItem.create!(item: @item4, invoice: @invoice14, quantity: 1, unit_price: 1500)
       InvoiceItem.create!(item: @item5, invoice: @invoice15, quantity: 1, unit_price: 1750)
       InvoiceItem.create!(item: @item6, invoice: @invoice16, quantity: 1, unit_price: 4350)
@@ -99,23 +99,23 @@ RSpec.describe '/admin', type: :feature do
     it 'I see names of top 5 customers with largest number of successful transactions' do
       visit '/admin'
       expect(page).to have_content("Top 5 Customers with Highest Successful Transactions")
-      expect(page).to have_content("#{@Steve.first_name} #{@Steve.last_name}")
-      expect(page).to have_content("#{@Carmen.first_name} #{@Carmen.last_name}")
-      expect(page).to have_content("#{@Sally.first_name} #{@Sally.last_name}")
-      expect(page).to have_content("#{@Ludwig.first_name} #{@Ludwig.last_name}")
-      expect(page).to have_content("#{@Yukon.first_name} #{@Yukon.last_name}")
+      expect(page).to have_content("#{@steve.first_name} #{@steve.last_name}")
+      expect(page).to have_content("#{@carmen.first_name} #{@carmen.last_name}")
+      expect(page).to have_content("#{@sally.first_name} #{@sally.last_name}")
+      expect(page).to have_content("#{@ludwig.first_name} #{@ludwig.last_name}")
+      expect(page).to have_content("#{@yukon.first_name} #{@yukon.last_name}")
 
-      expect(page).to_not have_content("#{@Joe.first_name} #{@Joe.last_name}")
+      expect(page).to_not have_content("#{@joe.first_name} #{@joe.last_name}")
     end 
 
     it 'next to customer names, I see total count of their successful transactions' do
       visit '/admin'
-      within "#top_customers-#{@Steve.id}" do
-        expect(page).to have_content("Steve Stevinson has 4 successful transactions!")
+      within "#top_customers-#{@steve.id}" do
+        expect(page).to have_content("steve Stevinson has 4 successful transactions!")
       end
 
-      within "#top_customers-#{@Yukon.id}" do
-        expect(page).to have_content("Yukon Dooheet has 3 successful transactions!")
+      within "#top_customers-#{@yukon.id}" do
+        expect(page).to have_content("yukon Dooheet has 3 successful transactions!")
       end
     end 
 
