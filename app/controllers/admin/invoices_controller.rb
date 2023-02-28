@@ -3,7 +3,7 @@ class Admin::InvoicesController < ApplicationController
   def show
     @invoice = Invoice.find(params[:id])
     @invoice_items_and_attributes = @invoice.items_with_invoice_attributes
-    @total_revenue = @invoice.calc_total_revenue.first
+    @total_revenue = @invoice.calc_total_revenue
     @statuses = ["cancelled", "in_progress", "completed"]
   end
 
