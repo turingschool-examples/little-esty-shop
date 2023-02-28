@@ -199,5 +199,14 @@ RSpec.describe 'admin merchants index page' do
 				expect(page).to have_content("#{merchant5.name} Revenue - $12")
 			end
 		end
+
+		it 'will have a date with the most revenue next to each merchant' do 
+			within "#top_five_merchants_by_rev" do 
+				expect(page).to have_content("#{merchant1.name} Revenue - $60 - Date With Most Revenue - ")
+				expect(page).to have_content("#{merchant2.name} Revenue - $48 - Date With Most Revenue - ")
+				expect(page).to have_content("#{merchant3.name} Revenue - $36 - Date With Most Revenue - ")
+				expect(page).to have_content("#{merchant4.name} Revenue - $24 - Date With Most Revenue - ")
+				expect(page).to have_content("#{merchant5.name} Revenue - $12 - Date With Most Revenue - ")
+		end
 	end
 end
