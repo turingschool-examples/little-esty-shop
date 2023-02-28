@@ -3,8 +3,9 @@
 <div id="top_five_merchants_by_rev">
 	<h3> Top 5 Merchants by Revenue </h3>
 	<% @top_5_merchants.each do |merchant| %>
-		<%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> Revenue - $<%= "#{merchant.revenue}"%>
-		<br>
+		<%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> - $<%= "#{merchant.revenue}"%> in sales <br>
+		<%= "Top selling date for #{merchant.name} was #{merchant.date_with_most_revenue}" %>
+		<br><br>
 	<% end %>
 </div>
 <br>
