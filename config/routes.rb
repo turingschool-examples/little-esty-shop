@@ -9,16 +9,20 @@ Rails.application.routes.draw do
 
   get '/merchants/:merchant_id/dashboard', to: 'merchants#dashboard'
 
-  get 'merchants/:merchant_id/items', to: 'merchants#items'
-  get 'merchants/:merchant_id/items/new', to: 'items#new'
-  get 'merchants/:merchant_id/items/:item_id', to: 'items#show'
-  post 'merchants/:merchant_id/items/:item_id', to: 'items#create'
-  get 'merchants/:merchant_id/items/:item_id/edit', to: 'items#edit'
-  patch 'merchants/:merchant_id/items/:item_id', to: 'items#update'
-
+  # get 'merchants/:merchant_id/items', to: 'merchants#items'
+  # get 'merchants/:merchant_id/items/new', to: 'items#new'
+  # get 'merchants/:merchant_id/items/:item_id', to: 'items#show'
+  # post 'merchants/:merchant_id/items/:item_id', to: 'items#create'
+  # get 'merchants/:merchant_id/items/:item_id/edit', to: 'items#edit'
+  # patch 'merchants/:merchant_id/items/:item_id', to: 'items#update'
+  resources :merchants, only: [:show] do
+    resources :items
+  end
 
   post '/items', to: 'items#create'
   patch '/items/:item_id', to: 'items#status_update'
   
+
   
+
 end
