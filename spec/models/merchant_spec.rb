@@ -73,7 +73,7 @@ RSpec.describe Merchant, type: :model do
       end
 
       it 'date with the most revenue generated' do
-        expect(@merchant.best_day).to eq(@inv1.created_at)
+        expect(@merchant.best_day.created_at).to eq(@inv1.created_at)
       end
     end
 
