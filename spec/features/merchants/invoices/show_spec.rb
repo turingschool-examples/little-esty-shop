@@ -52,25 +52,45 @@ describe 'As a merchant', type: :feature do
 
       expect(page).to have_content(item1.name)
       expect(page).to have_content(@invoice_item1.quantity)
-      expect(page).to have_content(@invoice_item1.unit_price)
+      expect(page).to have_content(@invoice_item1.unit_price.to_f/100)
       expect(page).to have_content(@invoice_item1.status)
 
       expect(page).to have_content(item2.name)
       expect(page).to have_content(@invoice_item2.quantity)
-      expect(page).to have_content(@invoice_item2.unit_price)
+      expect(page).to have_content(@invoice_item2.unit_price.to_f/100)
       expect(page).to have_content(@invoice_item2.status)
 
       expect(page).to have_content(item3.name)
       expect(page).to have_content(@invoice_item3.quantity)
-      expect(page).to have_content(@invoice_item3.unit_price)
+      expect(page).to have_content(@invoice_item3.unit_price.to_f/100)
       expect(page).to have_content(@invoice_item3.status)
 
       expect(page).to have_content(item4.name)
       expect(page).to have_content(@invoice_item4.quantity)
-      expect(page).to have_content(@invoice_item4.unit_price)
+      expect(page).to have_content(@invoice_item4.unit_price.to_f/100)
       expect(page).to have_content(@invoice_item4.status)
 
       expect(page).to_not have_content(item5.name)
+    end
+
+    describe "shows each invoice item status is a select field, the invoice item's current status is selected" do
+      it 'when click select field, then I can select a new status for the item, next to field is a button to update item status' do
+        visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
+        
+        expect(page).to have_content(@invoice_item1.status)
+        expect(page).to have_button("Update Item Status")
+
+        within "##{@invoice_item1.id}" do
+          expect(@invoice_item1.status).to eq("pending")
+
+          select "shipped", from: :status
+          click_button 'Update Item Status'
+          expect(page).to have_select(selected: "shipped")
+          expect(page).to_not have_select(selected: "pending")
+        end
+        
+        expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice1.id}")
+      end
     end
   end
 end
