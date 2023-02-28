@@ -3,6 +3,23 @@
 </header>
 <nav>
 
+
+<h4>New Item</h4>
+
+<ul id="items_list">
+  <% @items.each do |item| %>
+    <li><%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %></li>
+  <% end %>
+</ul>
+
+<h4>Top Items</h4>
+
+<ul id="top_list">
+  <% @top_items.each do |item| %>
+    <li><%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %> <%= number_to_currency(item.total_revenue/100.0) %></li>
+  <% end %>
+</ul>
+
 </nav>
 <section id="my_items">
   <h3>My Items</h3>
@@ -26,3 +43,4 @@
     <% end %>
   </ul>
 </section>
+

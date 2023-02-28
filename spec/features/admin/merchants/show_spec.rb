@@ -30,7 +30,8 @@ RSpec.describe "Admin Merchants Show", type: :feature do
       end
 
       it "When I click on the name of a merchant" do
-        within "#merchant-#{bob.id}" do
+        save_and_open_page
+        within "#enabled_merchant-#{bob.id}" do
           click_link "Bob's Beauties"
 
           expect(page).to have_current_path(admin_merchant_path(bob))
@@ -38,7 +39,7 @@ RSpec.describe "Admin Merchants Show", type: :feature do
 
         visit admin_merchants_path
 
-        within "#merchant-#{dob.id}" do
+        within "#enabled_merchant-#{dob.id}" do
           click_link "Dob's Dineries"
 
           expect(page).to have_current_path(admin_merchant_path(dob))
