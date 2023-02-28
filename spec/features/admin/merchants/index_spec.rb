@@ -190,23 +190,26 @@ RSpec.describe 'admin merchants index page' do
 
 		it 'will have the revenues displayed next to each merchants name' do 
 			visit admin_merchants_path
-
+			save_and_open_page
 			within "#top_five_merchants_by_rev" do 
-				expect(page).to have_content("#{merchant1.name} Revenue - $60")
-				expect(page).to have_content("#{merchant2.name} Revenue - $48")
-				expect(page).to have_content("#{merchant3.name} Revenue - $36")
-				expect(page).to have_content("#{merchant4.name} Revenue - $24")
-				expect(page).to have_content("#{merchant5.name} Revenue - $12")
+				expect(page).to have_content("#{merchant1.name} - $60 in sales")
+				expect(page).to have_content("#{merchant2.name} - $48 in sales")
+				expect(page).to have_content("#{merchant3.name} - $36 in sales")
+				expect(page).to have_content("#{merchant4.name} - $24 in sales")
+				expect(page).to have_content("#{merchant5.name} - $12 in sales")
 			end
 		end
 
 		it 'will have a date with the most revenue next to each merchant' do 
+			visit admin_merchants_path
+			
 			within "#top_five_merchants_by_rev" do 
-				expect(page).to have_content("#{merchant1.name} Revenue - $60 - Date With Most Revenue - ")
-				expect(page).to have_content("#{merchant2.name} Revenue - $48 - Date With Most Revenue - ")
-				expect(page).to have_content("#{merchant3.name} Revenue - $36 - Date With Most Revenue - ")
-				expect(page).to have_content("#{merchant4.name} Revenue - $24 - Date With Most Revenue - ")
-				expect(page).to have_content("#{merchant5.name} Revenue - $12 - Date With Most Revenue - ")
+				expect(page).to have_content("#{merchant1.date_with_most_revenue}")
+				expect(page).to have_content("#{merchant2.date_with_most_revenue}")
+				expect(page).to have_content("#{merchant3.date_with_most_revenue}")
+				expect(page).to have_content("#{merchant4.date_with_most_revenue}")
+				expect(page).to have_content("#{merchant5.date_with_most_revenue}")
+			end
 		end
 	end
 end
