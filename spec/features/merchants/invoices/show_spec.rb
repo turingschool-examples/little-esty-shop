@@ -50,7 +50,6 @@ RSpec.describe 'Merchant Invoices Index' do
 				expect(page).to have_content("Item: bowl")
 				expect(page).to have_content("Quantity: 10")
 				expect(page).to have_content("Price: $3.50")
-				expect(page).to have_content("Item Status: packaged")
 			end
 		end
 
@@ -61,5 +60,57 @@ RSpec.describe 'Merchant Invoices Index' do
 			visit "/merchants/#{@merchant.id}/invoices/#{@inv2.id}"
 				expect(page).to have_content("Total Revenue: $112.00")				
 		end
+
+		############################US18####################################
+		describe 'user_story_18' do
+			before :each do
+				visit merchant_invoice_path(@merchant.id, @inv1.id)
+			end
+
+			it 'see that each invoice item status is a select field' do
+
+				expect(page).to have_select(:invoice_item_status)    
+			end
+
+			describe 'when i click this select field' do
+				it "I can select a new status for the Item" do
+					within "#invoice_item-#{@bowl.id}" do
+						select 'shipped', from: :invoice_item_status
+		
+						expect(page).to have_select(:invoice_item_status, selected: "shipped")
+					end
+				end
+	
+				it "next to the select field I see a button to 'Update Item Status'" do
+					within "#invoice_item-#{@bowl.id}" do
+						select 'shipped', from: :invoice_item_status
+		
+						expect(page).to have_button('Update Item Status')
+					end
+				end
+			end
+	
+			describe 'when i click the update button' do
+				it 'I am taken back to the invoice show page' do
+				  within "#invoice_item-#{@bowl.id}" do
+						select 'shipped', from: :invoice_item_status
+						click_button 'Update Item Status'
+						expect(page.current_path).to eq(merchant_invoice_path(@merchant.id, @inv1.id))
+					end
+				end
+	
+				it "I see that my Items's status has now been updated" do
+					within "#invoice_item-#{@bowl.id}" do
+						select 'shipped', from: :invoice_item_status
+						click_button 'Update Item Status'
+
+						expect(page).to have_select(:invoice_item_status, selected: "shipped")
+					end
+
+					expect(page).to have_content('Item Status has been updated successfully')
+				end
+			end
+		end
+
 	end
 end
