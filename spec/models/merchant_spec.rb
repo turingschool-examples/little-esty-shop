@@ -16,13 +16,18 @@ RSpec.describe Merchant, type: :model do
 
         @cust1 = FactoryBot.create(:customer)
         @cust2 = FactoryBot.create(:customer)
+        w = Date.new(2019, 7, 18)
+        x = Date.new(2020, 8, 17)
+        y = Date.new(2020, 10, 9)
+        z = Date.new(2016, 8, 3)
 
-        @inv1 = @cust1.invoices.create!(status: 1)
-        @inv2 = @cust1.invoices.create!(status: 1)
-        @inv3 = @cust1.invoices.create!(status: 1)
-        @inv4 = @cust2.invoices.create!(status: 1)
-        @inv5 = @cust2.invoices.create!(status: 1)
-        @inv6 = @cust2.invoices.create!(status: 1)
+
+        @inv1 = @cust1.invoices.create!(status: 1, created_at: w)
+        @inv2 = @cust1.invoices.create!(status: 1, created_at: w)
+        @inv3 = @cust1.invoices.create!(status: 1, created_at: x)
+        @inv4 = @cust2.invoices.create!(status: 1, created_at: y)
+        @inv5 = @cust2.invoices.create!(status: 1, created_at: z)
+        @inv6 = @cust2.invoices.create!(status: 1, created_at: z)
 
         @trans1 = @inv1.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
         @trans1_5 = @inv1.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
@@ -55,11 +60,20 @@ RSpec.describe Merchant, type: :model do
         InvoiceItem.create!(item_id: @spoon.id, invoice_id: @inv1.id, quantity: 8, unit_price: 2500, status: 1)
         InvoiceItem.create!(item_id: @fork.id, invoice_id: @inv5.id, quantity: 1, unit_price: 14, status: 1)
         InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv6.id, quantity: 6, unit_price: 15, status: 1)
+        InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv2.id, quantity: 6, unit_price: 15, status: 1)
+        InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv3.id, quantity: 6, unit_price: 15, status: 1)
+        InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv4.id, quantity: 6, unit_price: 15, status: 1)
+
+
 
       end
 
       it 'top 5 most popular items ranked by total revenue generated' do
         expect(@merchant.top_five_items_by_revenue).to eq([@spoon, @bowl, @knife, @plate, @pan])
+      end
+
+      it 'date with the most revenue generated' do
+        expect(@merchant.best_day).to eq(@inv1.created_at)
       end
     end
   end
