@@ -1,10 +1,10 @@
 require 'rails_helper'
 RSpec.describe "Admin Merchants Show", type: :feature do 
-  let!(:bob) { Merchant.create!(name: "Bob's Beauties") } 
-  let!(:rob) { Merchant.create!(name: "Rob's Rarities") } 
-  let!(:hob) { Merchant.create!(name: "Hob's Hoootenanies") } 
-  let!(:dob) { Merchant.create!(name: "Dob's Dineries") } 
-  let!(:zob) { Merchant.create!(name: "7-11") } 
+  let!(:bob) { Merchant.create!(name: "Bob's Beauties", status: 0) } 
+  let!(:rob) { Merchant.create!(name: "Rob's Rarities", status: 0) } 
+  let!(:hob) { Merchant.create!(name: "Hob's Hoootenanies", status: 0) } 
+  let!(:dob) { Merchant.create!(name: "Dob's Dineries", status: 0) } 
+  let!(:zob) { Merchant.create!(name: "7-11", status: 0) } 
 
   describe "As an admin" do
     context "When I visit the admin merchants index (/admin/merchants)" do
@@ -30,7 +30,7 @@ RSpec.describe "Admin Merchants Show", type: :feature do
       end
 
       it "When I click on the name of a merchant" do
-        save_and_open_page
+    
         within "#enabled_merchant-#{bob.id}" do
           click_link "Bob's Beauties"
 
