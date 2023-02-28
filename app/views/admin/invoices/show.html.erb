@@ -1,7 +1,12 @@
 <h1> Invoice ID: <%= @invoice.id %> </h1>
 
 <p><%= 'ID: ' + @invoice.id.to_s %></p>
-<p><%= 'Status: ' + @invoice.status %></p>
+
+<%= form_with url: admin_invoice_path(@invoice), method: :put, remote: true do |form|  %>
+<p> Status: <%= form.select :status, display_and_order(@statuses, @invoice.status) %>
+<%= form.submit "Update Invoice Status" %>
+<% end %>
+
 <p><%= 'Created_at: ' + @invoice.created_at.strftime("%A, %B %e, %Y")%></p>
 <p><%= 'Customer First Name: ' + @invoice.customer.first_name %></p>
 <p><%= 'Customer Last Name: ' + @invoice.customer.last_name %></p>
