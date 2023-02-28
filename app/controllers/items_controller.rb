@@ -1,4 +1,13 @@
 class ItemsController < ApplicationController
+
+  def index
+    @merchant = Merchant.find(params[:merchant_id])
+    @items = @merchant.items
+    @top_5_items = @items.top_5_by_revenue
+    @enabled_items = @items.enabled
+    @disabled_items = @items.disabled
+  end
+
   def show
     @merchant = Merchant.find(params[:merchant_id])
     @items = @merchant.items
@@ -22,11 +31,11 @@ class ItemsController < ApplicationController
   
   def edit
     @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
   end
 
   def update
-    item = Item.find(params[:item_id])
+    item = Item.find(params[:id])
     if item.update(item_params)
       redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
     else
