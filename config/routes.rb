@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :merchants, only: [:index, :show, :new, :create, :edit, :update]
   end
 
-  get '/merchants/:merchant_id/dashboards', to: 'merchants#dashboards'
+  get '/merchants/:merchant_id/dashboard', to: 'merchants#dashboard'
 
   get 'merchants/:merchant_id/items', to: 'merchants#items'
   get 'merchants/:merchant_id/items/new', to: 'items#new'

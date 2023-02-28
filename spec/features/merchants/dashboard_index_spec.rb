@@ -64,7 +64,7 @@ RSpec.describe "Merchant Dashboard Index" do
       InvoiceItem.create!(item_id: item10.id, invoice_id: invoice10.id, status: "packaged") 
       InvoiceItem.create!(item_id: item11.id, invoice_id: invoice11.id, status: "shipped")
 
-      visit "/merchants/#{merchant1.id}/dashboards"
+      visit "/merchants/#{merchant1.id}/dashboard"
     end
   
     # 1. Merchant Dashboard
