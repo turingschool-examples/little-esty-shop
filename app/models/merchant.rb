@@ -21,7 +21,7 @@ class Merchant < ApplicationRecord
     .select('invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity) as revenue')
     .group("invoices.created_at")
     .order("revenue desc", "invoices.created_at desc")
-    .first.created_at    
+    .first  
   end
 
   def self.top_five_merchants_by_revenue

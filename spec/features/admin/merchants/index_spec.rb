@@ -70,6 +70,15 @@ RSpec.describe '#index' do
 
 
     it 'I see the date with the most revenue for each merchant' do
+      load_test_data
+      visit "/admin/merchants"
+      
+      within '#top-5-merchants' do
+        within "#id-#{@merchant1.id}" do
+          save_and_open_page
+          expect(page).to have_content("Top selling date for #{@merchant1.name} was Tuesday, February 28, 2023")
+        end
+      end
     end
 
   
@@ -80,7 +89,7 @@ RSpec.describe '#index' do
       within "#top-5-merchants" do
       
         expect(page).to have_content("Top 5 Merchants by Revenue")
-        expect(page).to have_content "Melissa Jenkins -- Total Revenue: 66414"
+        expect(page).to have_content "Melissa Jenkins -- Total Revenue: $66414"
         expect("Melissa Jenkins").to appear_before("Mickey Mantle")
         expect("Mickey Mantle").to appear_before("Human who sells stuff")
         expect("Human who sells stuff").to appear_before("Carlos Jenkins")
