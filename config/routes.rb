@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 	end
 
   namespace :admin do
-    resources :invoices, only: [:index, :show]
+    resources :invoices, only: [:index, :show, :update]
     resources :merchants, only: [:index, :show]
   end
 
