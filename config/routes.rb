@@ -8,14 +8,25 @@ Rails.application.routes.draw do
 		resources :invoices, only: [:index, :show]
   end
 
+
+  get '/merchants/:id/dashboard', to: "merchants#show"
+	patch '/merchants/:merchant_id/items/:id', to: "merchant/items#update"
+
+  resources :admin, only: :index
+
   patch '/admin/merchants/:id', to: "admin/merchants#update"
   patch '/admin/invoices/:id', to: "admin/invoices#update"
+
 
 	resources :merchants, only: :show do
 		resources :items, except: :update, controller: 'merchant/items'
     resources :invoices, only: [:index, :show]
 	end
 
+
+  patch '/merchants/:merchant_id/invoices/:id', to: 'invoice_items#update'
+
   get '/merchants/:id/dashboard', to: "merchants#show"
 	patch '/merchants/:merchant_id/items/:id', to: "merchant/items#update"
+
 end

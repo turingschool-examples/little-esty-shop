@@ -28,15 +28,15 @@ RSpec.describe Merchant, type: :model do
 
 	let!(:invoice1) { create(:completed_invoice, customer: customer1, created_at: Date.new(2014, 3, 1))}
 	let!(:invoice2) { create(:completed_invoice, customer: customer1,  created_at: Date.new(2012, 3, 1))}
-	let!(:invoice3) { create(:completed_invoice, customer: customer2)} 
-	let!(:invoice4) { create(:completed_invoice, customer: customer2)}
-	let!(:invoice5) { create(:completed_invoice, customer: customer3)}
-	let!(:invoice6) { create(:completed_invoice, customer: customer3)}
-	let!(:invoice7) { create(:completed_invoice, customer: customer4)}
-	let!(:invoice8) { create(:completed_invoice, customer: customer5)}
-	let!(:invoice9) { create(:completed_invoice, customer: customer5)}
-	let!(:invoice10) { create(:completed_invoice, customer: customer6)}
-	let!(:invoice11) { create(:completed_invoice, customer: customer6)}
+	let!(:invoice3) { create(:completed_invoice, customer: customer2, created_at: Date.new(2013, 3, 1))} 
+	let!(:invoice4) { create(:completed_invoice, customer: customer2, created_at: Date.new(2014, 3, 1))}
+	let!(:invoice5) { create(:completed_invoice, customer: customer3, created_at: Date.new(2010, 3, 1))}
+	let!(:invoice6) { create(:completed_invoice, customer: customer3, created_at: Date.new(2016, 3, 1))}
+	let!(:invoice7) { create(:completed_invoice, customer: customer4, created_at: Date.new(2018, 3, 1))}
+	let!(:invoice8) { create(:completed_invoice, customer: customer5, created_at: Date.new(2017, 3, 1))}
+	let!(:invoice9) { create(:completed_invoice, customer: customer5, created_at: Date.new(2019, 3, 1))}
+	let!(:invoice10) { create(:completed_invoice, customer: customer6, created_at: Date.new(2020, 3, 1))}
+	let!(:invoice11) { create(:completed_invoice, customer: customer6, created_at: Date.new(2021, 3, 1))}
 
 	let!(:item1) {create(:item, merchant: merchant1, name: 'item1')}
 	let!(:item2) {create(:item, merchant: merchant1, name: 'item2')}
@@ -97,6 +97,10 @@ RSpec.describe Merchant, type: :model do
       expect(merchant1.customer_successful_transactions(customer1.id)).to eq(2)
       expect(merchant1.customer_successful_transactions(customer4.id)).to eq(1)
     end
+
+		it '#date_with_most_revenue' do 
+			expect(merchant1.date_with_most_revenue).to eq("03/01/2019")
+		end
   end
 
 	describe 'class methods' do
@@ -114,6 +118,58 @@ RSpec.describe Merchant, type: :model do
 			merchant_2.update status: 0
 
 			expect(Merchant.disabled_merchants.sort).to eq([merchant_4, merchant_2].sort)
+		end
+
+		it '::top_five_merchants_by_rev' do 
+			merchant_5 = create(:merchant)
+			merchant_6 = create(:merchant)
+			item7 = create(:item, merchant: merchant_5)
+			item8 = create(:item, merchant: merchant_5)
+			item9 = create(:item, merchant: merchant_4)
+			item10 = create(:item, merchant: merchant_4)
+			item11 = create(:item, merchant: merchant_3)
+			item12 = create(:item, merchant: merchant_3)
+			item13 = create(:item, merchant: merchant_2)
+			item14 = create(:item, merchant: merchant_2)
+			item15 = create(:item, merchant: merchant_6)
+	
+			invoice12 = create(:completed_invoice, customer: customer6)
+			invoice13 = create(:completed_invoice, customer: customer5)
+			invoice14 = create(:completed_invoice, customer: customer4)
+			invoice15 = create(:completed_invoice, customer: customer3)
+			invoice16 = create(:completed_invoice, customer: customer2)
+			invoice17 = create(:completed_invoice, customer: customer1)
+			invoice18 = create(:completed_invoice, customer: customer1)
+			invoice19 = create(:completed_invoice, customer: customer1)
+			invoice20 = create(:completed_invoice, customer: customer1)
+
+
+			create(:invoice_item, item: item7, invoice: invoice12, quantity: 1, unit_price: 6)
+			create(:invoice_item, item: item8, invoice: invoice13, quantity: 1, unit_price: 6)
+
+			create(:invoice_item, item: item9, invoice: invoice14, quantity: 1, unit_price: 6)
+			create(:invoice_item, item: item10, invoice: invoice15, quantity: 1, unit_price: 6)
+
+			create(:invoice_item, item: item11, invoice: invoice16, quantity: 1, unit_price: 6)
+			create(:invoice_item, item: item12, invoice: invoice17, quantity: 1, unit_price: 6)
+
+			create(:invoice_item, item: item13, invoice: invoice18, quantity: 1, unit_price: 6)
+			create(:invoice_item, item: item14, invoice: invoice19, quantity: 1, unit_price: 6)
+
+			create(:invoice_item, item: item15, invoice: invoice20, quantity: 1, unit_price: 6)
+
+			transaction16 = create(:transaction, invoice: invoice12) 
+			transaction17 = create(:transaction, invoice: invoice13) 
+			transaction18 = create(:transaction, invoice: invoice14) 
+			transaction19 = create(:transaction, invoice: invoice15) 
+			transaction20 = create(:transaction, invoice: invoice16) 
+			transaction21 = create(:transaction, invoice: invoice17) 
+			transaction22 = create(:transaction, invoice: invoice18) 
+			transaction23 = create(:transaction, invoice: invoice19) 
+			transaction24 = create(:transaction, invoice: invoice20) 
+
+			expect(Merchant.top_five_merchant_by_rev).to eq([merchant1, merchant_2, merchant_3, merchant_4, merchant_5])
+			expect(Merchant.top_five_merchant_by_rev).to_not include(merchant_6)
 		end
 	end
 end

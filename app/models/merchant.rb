@@ -22,4 +22,25 @@ class Merchant < ApplicationRecord
 	def self.disabled_merchants
 		Merchant.where(status: 0)
 	end
+
+  def self.top_five_merchant_by_rev
+    joins(:transactions)
+		.where(transactions: {result: 0})
+		.select("merchants.*, SUM(invoice_items.unit_price*invoice_items.quantity) as revenue")
+		.group(:id)
+		.order("revenue DESC")
+		.limit(5)
+  end
+
+  def date_with_most_revenue
+    # require 'pry'; binding.pry
+    invoices
+    .where(status: "completed")
+    .select("invoices.created_at, SUM(invoice_items.unit_price * invoice_items.quantity) as revenue")
+    .group("invoices.created_at")
+    .order(revenue: :desc)
+    .limit(1)
+    .first.created_at.strftime("%m/%d/%Y")
+    
+  end
 end
