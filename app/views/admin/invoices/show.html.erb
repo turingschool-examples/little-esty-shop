@@ -5,10 +5,12 @@
     <div class="sub_header"><%= "Invoice ##{@invoice.id}" %></div>
     <p><%= "Status: #{@invoice.status}" %></p>
     <p><%= "Created on: #{@invoice.created_at.strftime("%A, %B %-d, %Y")}" %></p>
+    <h4> Total Revenue: <%= number_to_currency(@invoice.total_revenue.to_f / 100) %> </h4>
     <h4>Customer:</h4>
     <p><%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
   </div>
 </div>
+
 
 <h4> Items on this invoice: </h4>
 <table> 

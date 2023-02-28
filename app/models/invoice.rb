@@ -11,4 +11,9 @@ class Invoice < ApplicationRecord
     invoice_items.joins(:item)
     .select("invoice_items.*, items.name")
   end
+
+  def total_revenue
+    invoice_items.sum("quantity * unit_price")
+  end
+
 end
