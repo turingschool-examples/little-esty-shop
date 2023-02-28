@@ -193,7 +193,7 @@ RSpec.describe 'Merchant Items Index' do
         InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv6.id, quantity: 6, unit_price: 15, status: 1)
       end
 
-      xit 'I see the names of the top 5 most popular items ranked by total revenue generated' do
+      it 'I see the names of the top 5 most popular items ranked by total revenue generated' do
 
         visit "/merchants/#{@carlos.id}/items"
 
@@ -204,11 +204,10 @@ RSpec.describe 'Merchant Items Index' do
           expect("Knife").to appear_before("Plate")
           expect("Plate").to appear_before("Pan")
 
-          expect("Revenue: 20000").to appear_before("Revenue: 3500")
-          expect("Revenue: 3500").to appear_before("Revenue: 2700")
-          expect("Revenue: 2700").to appear_before("Revenue: 2010")
-          expect("Revenue: 2010").to appear_before("Revenue: 90")
-
+          expect("Revenue: 77500").to appear_before("Revenue: 35000")
+          expect("Revenue: 35000").to appear_before("Revenue: 30300")
+          expect("Revenue: 30300").to appear_before("Revenue: 6030")
+          expect("Revenue: 6030").to appear_before("Revenue: 120")
         end
       end
 
