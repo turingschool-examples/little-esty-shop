@@ -21,7 +21,15 @@
       <p><strong>Item Name </strong><%= item.name %></p>
       <p><strong>Quantity </strong><%= @invoice.find_invoiceitem_quantity(item) %></p>
       <p><strong>Unit Price </strong><%= number_to_currency(@invoice.find_invoiceitem_unitprice(item) / 100) %></p>
-      <p><strong>Status </strong><%= @invoice.find_invoiceitem_status(item) %></p>
+      
+      <div id="inv_item_status_update-<%= item.id %>">
+        <%= form_with url: merchant_invoice_path(@merchant.id, @invoice.id), method: :patch, local: true do |form| %>
+          <%= form.hidden_field :item_id, value: item.id %>
+          <strong><%= form.label :status %></strong>
+          <%= form.select :status, ["pending", "packaged", "shipped"], selected: @invoice.find_invoiceitem_status(item) %>
+          <%= form.submit "Update Item Status" %>
+        <% end %>
+      </div>
       <br>
     <% end %>
 </section>
