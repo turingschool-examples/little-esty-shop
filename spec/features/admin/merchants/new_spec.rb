@@ -15,15 +15,7 @@ RSpec.describe "admin merchants new" do
         visit admin_merchants_new_path
 
         expect(page).to have_selector('form')
-        expect(page).to have_field(:name)
-        expect(page).to have_button("Create Merchant")
-      end 
-
-      it "there is a form that allows me to add merchant information" do 
-        visit admin_merchants_new_path
-
-        expect(page).to have_selector('form')
-        expect(page).to have_field(:name)
+        expect(page).to have_field("merchant[name]")
         expect(page).to have_button("Create Merchant")
       end 
 
