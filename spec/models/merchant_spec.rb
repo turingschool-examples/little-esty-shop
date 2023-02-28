@@ -20,9 +20,9 @@ RSpec.describe Merchant, type: :model do
   let!(:invoice_lunchbox) {Invoice.create!(customer_id: phil.id, status: "cancelled") }
   let!(:invoice_macguffin_muffins) {Invoice.create!(customer_id: phil.id, status: "completed") }
 
-  let!(:sam) { Merchant.create!(name: "Sam's Sports") }
-  let!(:bob) { Merchant.create!(name: "Bob's Beauties", status: 1) }
-  let!(:rob) { Merchant.create!(name: "Rob's Rarities", status: 1) } 
+  let!(:sam) { Merchant.create!(name: "Sam's Sports", status: 0) }
+  let!(:bob) { Merchant.create!(name: "Bob's Beauties") }
+  let!(:rob) { Merchant.create!(name: "Rob's Rarities") } 
   
   let!(:football) { sam.items.create!(name: "Football", description: "This a football", unit_price: 3000, status: 0) }
   let!(:baseball) { sam.items.create!(name: "Baseball", description: "This a baseball", unit_price: 2500, status: 0) }
