@@ -11,3 +11,12 @@
     <p> <%= customer.first_name %> <%= customer.last_name %> has <%= customer.transaction_count %> successful transactions!</p>
   </div>
 <% end %>
+
+<p>Items Ready to Ship</p>
+<% @mech_unshipped_invoice_items.each do |invoice_item|%>
+<div id= "invoice_items_info-<%= invoice_item.id %>">
+  <p>Item name: <%= invoice_item.item_name %>, Item Invoice Id: <%= link_to invoice_item.id, "/merchants/#{@merchant.id}/invoices/#{invoice_item.id}"%>
+  <p>Created: <%= invoice_item.created_at.strftime("%A, %B %e, %Y") %></p>
+  <br>
+</div>
+<%end%>

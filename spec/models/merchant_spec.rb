@@ -113,6 +113,49 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
+    describe "user stories 4 and 5" do
+      before do
+        @deniz = Customer.create!(first_name: "Deniz", last_name: "Ocean")
+        @invoice17 = Invoice.create!(customer: @deniz, created_at: 1.days.ago, updated_at: 1.days.ago, status: 0) #in progress
+        @invoice18 = Invoice.create!(customer: @deniz, created_at: 1.days.ago, updated_at: 1.days.ago, status: 0) #in progress
+        @invoice19 = Invoice.create!(customer: @deniz, created_at: 4.days.ago, updated_at: 4.days.ago, status: 0) #in progress
+        @ii1 = InvoiceItem.create!(item: @item4, invoice: @invoice17, quantity: 1, unit_price: 1950, status: 0) #pending
+        @ii2 = InvoiceItem.create!(item: @item5, invoice: @invoice18, quantity: 1, unit_price: 2850, status: 2) #shipped (Expect NOT to see on page)
+        @ii3 = InvoiceItem.create!(item: @item6, invoice: @invoice19, quantity: 1, unit_price: 1650, status: 1) #packaged
+        @invoice3.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
+        @invoice4.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
+        @invoice5.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
+
+        @emre = Customer.create!(first_name: "Emre", last_name: "Bond")
+        @invoice20  = Invoice.create!(customer: @emre, created_at: 3.days.ago, updated_at: 3.days.ago, status: 0) #in progress
+        @ii4 = InvoiceItem.create!(item: @item4, invoice: @invoice20, quantity: 1, unit_price: 9950, status: 1) #packaged
+        @ii5 = InvoiceItem.create!(item: @item5, invoice: @invoice20, quantity: 1, unit_price: 1000, status: 2) #shipped
+        @invoice6.transactions.create!(credit_card_number: "4654405418249638", credit_card_expiration_date: "08/29", result: 0) #success
+
+        @serap = Customer.create!(first_name: "Serap", last_name: "Yilmaz")
+        @invoice21  = Invoice.create!(customer: @serap, created_at: 2.days.ago, updated_at: 2.days.ago, status: 0) #in progress
+        @ii6 = InvoiceItem.create!(item: @item4, invoice: @invoice21, quantity: 1, unit_price: 9950, status: 1) #packaged
+        @ii7 = InvoiceItem.create!(item: @item5, invoice: @invoice21, quantity: 1, unit_price: 1000, status: 1) #packaged
+        @invoice6.transactions.create!(credit_card_number: "4654405418249638", credit_card_expiration_date: "08/29", result: 0) #success
+      end
+
+      describe "#unshipped items" do
+        let(:items_not_shipped) { @merchant2.unshipped_items }
+
+        #user story 4
+        it "returns an array of unshipped items" do
+          expect(items_not_shipped.first.invoice_items.first.status).to eq("packaged")
+          expect(items_not_shipped.second.invoice_items.first.status).to eq("packaged")
+          expect(items_not_shipped.last.invoice_items.first.status).to eq("pending")
+        end
+        
+        #user story 5
+        it "ordered from oldest to newest" do
+          expect(items_not_shipped.to_a).to eq([@invoice19, @invoice20, @invoice21, @invoice21, @invoice17])
+        end
+      end
+    end
+
     describe '#top_five merchants based on total revenue' do
       before(:each) do
         Transaction.delete_all

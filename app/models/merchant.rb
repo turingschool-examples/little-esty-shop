@@ -19,6 +19,13 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
   
+
+  def unshipped_items
+    invoices.select("invoice_items.status, invoices.*, items.name AS item_name")
+    .where("invoice_items.status != 2")
+    .order(:created_at)
+  end
+
   def self.group_by_status(status)
     where(status: status)
   end
@@ -50,4 +57,3 @@ class Merchant < ApplicationRecord
     .first
   end
 end
-
