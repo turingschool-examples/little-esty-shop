@@ -178,6 +178,18 @@ RSpec.describe 'Merchant Items Index' do
 
         end
       end
+
+      it 'next to each top5 item, I see the date with most sales for each item' do
+        visit "/merchants/#{@carlos.id}/items"
+
+        within "#top-items" do
+          expect(page).to have_content("Top selling date for #{@spoon.name} was #{@inv1.created_at.strftime('%m/%d/%Y')}")
+          expect(page).to have_content("Top selling date for #{@bowl.name} was #{@inv1.created_at.strftime('%m/%d/%Y')}")
+          expect(page).to have_content("Top selling date for #{@knife.name} was #{@inv1.created_at.strftime('%m/%d/%Y')}")
+          expect(page).to have_content("Top selling date for #{@plate.name} was #{@inv1.created_at.strftime('%m/%d/%Y')}")
+          expect(page).to have_content("Top selling date for #{@pan.name} was #{@inv6.created_at.strftime('%m/%d/%Y')}")
+        end
+      end
     end
   end
 end
