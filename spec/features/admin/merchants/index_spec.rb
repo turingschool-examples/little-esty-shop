@@ -68,6 +68,11 @@ RSpec.describe '#index' do
       expect(page).to have_content("Newest Merchant")
     end
 
+
+    it 'I see the date with the most revenue for each merchant'
+  end
+
+  
     it 'I see a section listing the top 5 merchants by revenue and their total revenue' do
       load_test_data
       visit "/admin/merchants"
