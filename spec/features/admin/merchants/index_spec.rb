@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'admin merchants index page' do
-	let!(:merchant_1) { Merchant.create!(name: 'John Doe') }
-	let!(:merchant_2) { Merchant.create!(name: 'Brians Beads') }
-	let!(:merchant_3) { Merchant.create!(name: 'Soras Chains') }
+	let!(:merchant_1) { create(:active_merchant) }
+	let!(:merchant_2) { create(:active_merchant) }
+	let!(:merchant_3) { create(:active_merchant) }
 
 
 	describe 'shows all merchants' do
@@ -14,15 +14,15 @@ RSpec.describe 'admin merchants index page' do
 			
 			within "#merchant-list" do
 				within "##{merchant_1.id}" do
-					expect(page).to have_content('John Doe')
+					expect(page).to have_content(merchant_1.name)
 					expect(page).to have_content('Status: active')
 				end
 				within "##{merchant_2.id}" do
-					expect(page).to have_content('Brians Beads')
+					expect(page).to have_content(merchant_2.name)
 					expect(page).to have_content('Status: active')
 				end
 				within "##{merchant_3.id}" do
-					expect(page).to have_content('Soras Chains')
+					expect(page).to have_content(merchant_3.name)
 					expect(page).to have_content('Status: active')
 				end
 			end
@@ -34,9 +34,9 @@ RSpec.describe 'admin merchants index page' do
 			visit "/admin/merchants"
 
 			within "#merchant-list" do
-				expect(page).to have_link('John Doe', href: admin_merchant_path(merchant_1))
-				expect(page).to have_link('Brians Beads', href: admin_merchant_path(merchant_2))
-				expect(page).to have_link('Soras Chains', href: admin_merchant_path(merchant_3))
+				expect(page).to have_link("#{merchant_1.name}", href: admin_merchant_path(merchant_1))
+				expect(page).to have_link("#{merchant_2.name}", href: admin_merchant_path(merchant_2))
+				expect(page).to have_link("#{merchant_3.name}", href: admin_merchant_path(merchant_3))
 			end
 		end
 
@@ -46,8 +46,8 @@ RSpec.describe 'admin merchants index page' do
 			click_link "#{merchant_1.name}"
 
 			expect(current_path).to eq(admin_merchant_path(merchant_1))
-			expect(page).to have_content('John Doe')
-			expect(page).to_not have_content('Brians Beads')
+			expect(page).to have_content("#{merchant_1.name}")
+			expect(page).to_not have_content("#{merchant_2.name}")
 		end
 	end
 
@@ -67,14 +67,14 @@ RSpec.describe 'admin merchants index page' do
 		it 'changes status of merchant to disabled when disable button is clicked' do
 			visit admin_merchants_path
 			
-			expect(page).to have_content("John Doe\nStatus: active")
+			expect(page).to have_content("#{merchant_1.name}\nStatus: active")
 
 			within "##{merchant_1.id}" do
 				click_button 'Disable'
 			end
 			
 			expect(current_path).to eq(admin_merchants_path)
-			expect(page).to have_content("John Doe\nStatus: disabled")
+			expect(page).to have_content("#{merchant_1.name}\nStatus: disabled")
 		end
 
 		it 'changes status of merchant to enabled when enable button is clicked' do
@@ -86,14 +86,14 @@ RSpec.describe 'admin merchants index page' do
 				expect(page).to have_button('Enable')
 			end
 			
-			expect(page).to have_content("John Doe\nStatus: disabled")
+			expect(page).to have_content("#{merchant_1.name}\nStatus: disabled")
 
 			within "##{merchant_1.id}" do
 				click_button 'Enable'
 			end
 
 			expect(current_path).to eq(admin_merchants_path)
-			expect(page).to have_content("John Doe\nStatus: active")
+			expect(page).to have_content("#{merchant_1.name}\nStatus: active")
 		end
 
 		it 'will have a link to create a new merchant' do 
