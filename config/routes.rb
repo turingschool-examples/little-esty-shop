@@ -20,11 +20,11 @@ Rails.application.routes.draw do
 
 	resources :merchants, only: :show do
 		resources :items, except: :update, controller: 'merchant/items'
-    resources :invoices, only: [:index, :show]
+    resources :invoices, only: [:index, :show], controller: 'merchant/invoices'
 	end
 
 
-  patch '/merchants/:merchant_id/invoices/:id', to: 'invoice_items#update'
+  patch '/merchants/:merchant_id/invoices/:id', to: 'merchant/invoice_items#update'
 
   get '/merchants/:id/dashboard', to: "merchants#show"
 	patch '/merchants/:merchant_id/items/:id', to: "merchant/items#update"
