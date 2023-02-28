@@ -17,7 +17,7 @@ class Merchant < ApplicationRecord
   end
 
   def self.top_five_merchants_by_revenue
-    x = joins(invoice_items: [invoice: :transactions])
+    joins(invoice_items: [invoice: :transactions])
     .where('transactions.result = 0')
     .select('merchants.*, SUM(DISTINCT invoice_items.quantity * invoice_items.unit_price) as revenue')
     .group('id')
