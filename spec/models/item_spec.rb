@@ -80,12 +80,12 @@ RSpec.describe Item, type: :model do
     end
 
     it 'shows the day of most revenue for item' do
-      expect(@bowl.best_day).to eq(@inv1.created_at)
-      expect(@knife.best_day).to eq(@inv1.created_at)
-      expect(@plate.best_day).to eq(@inv4.created_at)
-      expect(@spoon.best_day).to eq(@inv1.created_at)
-      expect(@fork.best_day).to eq(@inv4.created_at)
-      expect(@pan.best_day).to eq(@inv6.created_at)
+      expect(@bowl.item_best_day).to eq(@inv1.created_at)
+      expect(@knife.item_best_day).to eq(@inv1.created_at)
+      expect(@plate.item_best_day).to eq(@inv4.created_at)
+      expect(@spoon.item_best_day).to eq(@inv1.created_at)
+      expect(@fork.item_best_day).to eq(@inv4.created_at)
+      expect(@pan.item_best_day).to eq(@inv6.created_at)
     end
   end
 end

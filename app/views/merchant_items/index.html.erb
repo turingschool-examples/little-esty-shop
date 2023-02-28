@@ -32,6 +32,6 @@
   <% @top_items.each do |item| %>
     <%= link_to "#{item.name}", "/merchants/#{item.merchant_id}/items/#{item.id}" %> <br>
     <%= "Revenue: #{item.revenue}" %>
-    <p>Top selling date for <%= item.name%> was <%= item.best_day.strftime('%m/%d/%Y') %></p><br><br>
+    <p>Top selling date for <%= item.name%> was <%= item.item_best_day.strftime('%m/%d/%Y') %></p><br><br>
   <% end %>
 </div>
