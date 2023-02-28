@@ -46,11 +46,14 @@ RSpec.describe 'Merchant Invoices', type: :feature do
             expect(page).to have_content("Item Name #{football.name}")
             expect(page).to have_content("Quantity #{@inv_item1.quantity}")
             expect(page).to have_content("Unit Price $#{@inv_item1.unit_price / 100}")
-            expect(page).to have_content("Status #{@inv_item1.status}")
+            expect(page).to have_field('Status', with: 'packaged')
+            # expect(page).to have_content("Status #{@inv_item1.status}")
+
             expect(page).to have_content("Item Name #{baseball.name}")
             expect(page).to have_content("Quantity #{@inv_item2.quantity}")
             expect(page).to have_content("Unit Price $#{@inv_item2.unit_price / 100}")
-            expect(page).to have_content("Status #{@inv_item2.status}")
+            expect(page).to have_field('Status', with: 'pending')
+            # expect(page).to have_content("Status #{@inv_item2.status}")
           end
         end
 
@@ -79,8 +82,37 @@ RSpec.describe 'Merchant Invoices', type: :feature do
           end
         end
 
-        xit 'I see that each invoice item status is a select field, with the current status selected' do
-          
+        it 'I see that each invoice item status is a select field, with the current status selected' do
+          visit merchant_invoice_path(sam.id, invoice1.id)
+          # save_and_open_page
+          within "div#inv_item_status_update-#{football.id}" do
+            expect(page).to have_field('Status', with: 'packaged')
+            
+            select 'pending', from: 'Status'
+            expect(page).to have_field('Status', with: 'pending')
+
+            select 'shipped', from: 'Status'
+            expect(page).to have_field('Status', with: 'shipped')
+            expect(page).to have_button "Update Item Status"
+          end
+
+          within "div#inv_item_status_update-#{baseball.id}" do
+            expect(page).to have_field('Status', with: 'pending')
+            expect(page).to have_button "Update Item Status"
+          end
+        end
+
+        context "when I select a new status and click the 'Update Item Status' button" do
+          it "I'm returned to the merchant invoice show page, where the item's status has been changed" do
+            visit merchant_invoice_path(sam.id, invoice1.id)
+
+            within "div#inv_item_status_update-#{baseball.id}" do
+              select 'pending', from: 'Status'
+              click_button "Update Item Status"
+
+              expect(current_path).to eq(merchant_invoice_path(sam.id, invoice1.id))
+            end
+          end
         end
       end
     end
