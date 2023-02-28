@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :merchant do
     name {Faker::Name.name}
-    status { 1 }
+    status { 0 }
 
     trait :active do
-      status { 0 }
+      status { 1 }
     end
 
     factory :active_merchant, traits: [:active]

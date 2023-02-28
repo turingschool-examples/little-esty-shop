@@ -1,6 +1,6 @@
 class Merchant < ApplicationRecord
   validates :name, presence: true
-  enum status: [ "active", "disabled" ]
+  enum status: [ "disabled", "active" ]
   has_many :items
 	has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
@@ -16,10 +16,10 @@ class Merchant < ApplicationRecord
   end
 
 	def self.active_merchants
-		Merchant.where(status: 0)
+		Merchant.where(status: 1)
 	end
 
 	def self.disabled_merchants
-		Merchant.where(status: 1)
+		Merchant.where(status: 0)
 	end
 end

@@ -11,13 +11,13 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:transactions).through(:invoices) }
     it { should have_many(:customers).through(:invoices) }
-		it { should define_enum_for(:status).with_values(["active", "disabled"])}
+		it { should define_enum_for(:status).with_values(["disabled", "active"])}
   end
 
-  let!(:merchant1) { create(:merchant)}
-  let!(:merchant_2) { create(:merchant)}
-  let!(:merchant_3) { create(:merchant)}
-  let!(:merchant_4) { create(:merchant, status: 'disabled')}
+  let!(:merchant1) { create(:active_merchant)}
+  let!(:merchant_2) { create(:active_merchant)}
+  let!(:merchant_3) { create(:active_merchant)}
+  let!(:merchant_4) { create(:merchant)}
 
 	let!(:customer1) { create(:customer)}
 	let!(:customer2) { create(:customer)}
@@ -103,7 +103,7 @@ RSpec.describe Merchant, type: :model do
 		it '::active_merchants' do
 			expect(Merchant.active_merchants).to eq([merchant1, merchant_2, merchant_3])
 
-			merchant_4.update status: 0
+			merchant_4.update status: 1
 
 			expect(Merchant.active_merchants).to include(merchant1, merchant_2, merchant_3, merchant_4)
 		end
@@ -111,7 +111,7 @@ RSpec.describe Merchant, type: :model do
 		it '::disabled_merchants' do
 			expect(Merchant.disabled_merchants).to eq([merchant_4])
 
-			merchant_2.update status: 1
+			merchant_2.update status: 0
 
 			expect(Merchant.disabled_merchants).to eq([merchant_4, merchant_2])
 		end
