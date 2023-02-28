@@ -75,7 +75,6 @@ RSpec.describe '#index' do
       
       within '#top-5-merchants' do
         within "#id-#{@merchant1.id}" do
-          save_and_open_page
           expect(page).to have_content("Top selling date for #{@merchant1.name} was Tuesday, February 28, 2023")
         end
       end

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 			get 'dashboard'
 		end
 
-    resources :invoices, only: [:show]
+    resources :invoices, only: [:show, :update]
 	end
 
   namespace :admin do
@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   end
 
   get "/merchants/:id/items", to: "merchant_items#index"
-	get "/merchants/:merchant_id/invoices/:id", to: "merchant_invoices#show"
 	get "/merchants/:id/invoices", to: "merchant_invoices#index"
 
   get "/merchants/:merchant_id/items/new", to: "merchant_items#new"
