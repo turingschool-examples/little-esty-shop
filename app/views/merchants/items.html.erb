@@ -3,19 +3,34 @@
 <h3><%= @merchant.name %></h3>
 <p><%= link_to "Create a New Item", "/merchants/#{@merchant.id}/items/new" %></p>
 <br>
+
 <h2>Top 5 Most Popular Items (By Revenue)</h2>
 <div id="top_5_items">
-  <% @top_5_items.each do |i| %>
-    <li><%= link_to i.name, "/merchants/#{i.merchant_id}/items/#{i.id}" %>: <%= number_to_currency(i.revenue) %></li>
+  <% @top_5_items.each do |item| %>
+    <li><%= link_to item.name, "/merchants/#{item.merchant_id}/items/#{item.id}" %>: <%= number_to_currency(item.revenue) %></li>
+    <li>Top selling date for <%= item.name %> was <%= item.top_item_day.created_at.strftime("%B %e, %Y") %></li>
   <% end %>
 </div>
-<h2>Items:</h2>
+
+<h2>Enabled Items:</h2>
 <ul>
-  <% @items.each do |item| %>
-    <div id= "item-<%= item.id %>">
-        <li><p><%= link_to item.name, "/merchants/#{item.merchant_id}/items/#{item.id}" %> </p></li>
+  <% @enabled_items.each do |item| %>
+    <div id="enabled-item-<%= item.id %>"> 
       <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |f| %>
-        <li><p>Status: <%= item.status %> Change Status: <%= f.button "Disable", type: "submit", name: "status", value: "disabled" %> <%= f.button "Enable", type: "submit", name: "status", value: "enabled" %></p></li>
+        <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p></li>
+        <p><%= f.button "Disable #{item.name}", type: "submit", name: "status", value: "disabled" %></p>
+      <% end %>
+    </div>
+  <% end %>
+</ul>
+<ul>
+<h2>Disabled Items:</h2>
+<ul>
+  <% @disabled_items.each do |item| %>
+    <div id="disabled-item-<%= item.id %>">
+      <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |f| %>
+        <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p></li>
+        <p><%= f.button "Enable #{item.name}", type: "submit", name: "status", value: "enabled" %></p>
       <% end %>
     </div>
   <% end %>

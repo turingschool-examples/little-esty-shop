@@ -44,6 +44,7 @@
 <div class = 'top'> 
   <h3>Top 5 merchants by total revenue generated:<h3>
     <% @top_merchants.each do |top_merchant| %>
-      <li> <%= link_to "#{top_merchant.name}:" , admin_merchant_path(top_merchant) %> <%= format_price(top_merchant.revenue) %> </li>
+      <li> <%= link_to "#{top_merchant.name}:" , admin_merchant_path(top_merchant) %> <%= "#{format_price(top_merchant.revenue)}" %> </li>
+      <p><%= "Top selling date for #{top_merchant.name} was #{top_merchant.best_revenue_day.created_at.strftime("%A, %B %e, %Y")}"%></p>
       <% end %>
 </div>

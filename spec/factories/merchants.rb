@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :merchant do
-    name {Faker::Company.name}
+    name {Faker::Lorem.words(number: 3)}
   end
 end
