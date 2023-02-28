@@ -40,7 +40,11 @@
             <td><%= item.item.name %></td>
             <td><%= item.quantity %></td>
             <td><%= number_to_currency(item.unit_price.to_f/100) %></td>
-            <td><%= item.status %></td>
+            <td><%= form_with url: "/merchants/#{@merchant.id}/invoice_items/#{item.id}", method: :patch, local: true do |f| %>
+                <%= f.select :status, ["shipped", "pending", "packaged"], :prompt => item.status %>
+                <%= f.submit "Update Item Status" %>
+            <% end %>
+            </td>
           </tr>
         </div>
       <% end %>

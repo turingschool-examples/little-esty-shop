@@ -77,7 +77,7 @@ RSpec.describe "Merchant_Invoices#Show", type: :feature do
           expect(page).to_not have_content(@item_6.name)
           expect(page).to_not have_content(@invoice_item_6.quantity)
           expect(page).to_not have_content((@invoice_item_6.unit_price).to_f/100)
-          expect(page).to_not have_content(@invoice_item_6.status)
+          # expect(page).to_not have_content(@invoice_item_6.status)
         end
       end
     end
@@ -87,12 +87,29 @@ RSpec.describe "Merchant_Invoices#Show", type: :feature do
     context "As a merchant, when I visit my merchant's invoices show" do
       it "shows the total revenue that will be generated from all items on the invoice" do
         within("#merchant_invoice_information") do
-        save_and_open_page
           expect(page).to have_content((@invoice_1.total_revenue).to_f/100)
+          # Will fail if the total is more than 3 digits
         end
+      end
+    end
+  end
+
+  describe "User Story 18" do
+    context "As a merchant, when I visit my merchant's invoices show" do
+      it "a drop down menu for the status and an 'update item status' button" do
+        within("#invoice_item_#{@invoice_item_1.id}") do
+          select "shipped", from: :status
+          click_button "Update Item Status"
+          expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
+        end
+
+        visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
+        within("#invoice_item_#{@invoice_item_1.id}") do
+        save_and_open_page
+        expect(page).to have_field(:status, with: "shipped shipped pending packaged")
+      end
       end
     end
   end
 end
 
-#{number_to_currency((@invoice.total_revenue.to_f/100).truncate, precision: 0)}
