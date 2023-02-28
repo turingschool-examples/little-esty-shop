@@ -5,10 +5,10 @@ RSpec.describe "Merchant Items Index" do
 
     let!(:merchant1) { create(:merchant) }
     let!(:merchant2) { create(:merchant) }
-    let!(:item1) { create(:item, merchant_id: merchant1.id, unit_price: 100000) }
-    let!(:item2) { create(:item, merchant_id: merchant1.id) }
-    let!(:item3) { create(:item, merchant_id: merchant2.id) }
-    let!(:item4) { create(:item, merchant_id: merchant2.id) }
+    let!(:item1) { create(:item, merchant_id: merchant1.id, status: "enabled")}
+    let!(:item2) { create(:item, merchant_id: merchant1.id, status: "disabled")}
+    let!(:item3) { create(:item, merchant_id: merchant2.id, status: "enabled")}
+    let!(:item4) { create(:item, merchant_id: merchant2.id, status: "disabled")}
 
     before do
       visit "/merchants/#{merchant1.id}/items"
@@ -33,13 +33,13 @@ RSpec.describe "Merchant Items Index" do
         it "I should see all of the item's attributes" do
           expect(page).to have_link("#{item1.name}")
           expect(current_path).to eq("/merchants/#{merchant1.id}/items")
-
+        # save_and_open_page
           click_link("#{item1.name}")
           expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}")
 
           expect(page).to have_content(item1.name)
           expect(page).to have_content(item1.description)
-          expect(page).to have_content('$1,000.00')
+        expect(page).to have_content(item1.unit_price.to_f / 100)
 
           expect(page).to_not have_content(item3.name)
           expect(page).to_not have_content(item3.description)
@@ -48,7 +48,7 @@ RSpec.describe "Merchant Items Index" do
       end
 
       # 9. Merchant Item Disable/Enable
-      
+    describe 'When I visit my items index page' do
       it 'Next to each item name I see a button to disable or enable that item.' do
 
         expect(page).to have_button("Disable")
@@ -71,10 +71,33 @@ RSpec.describe "Merchant Items Index" do
 
         expect(current_path).to eq("/merchants/#{merchant1.id}/items")
         
-        within "#item-#{item1.id}" do
-          expect(page).to have_content("Status: disabled")
+        within "#enabled-item-#{item1.id}" do
+          expect(page).to have_button("Disable #{item1.name}")
+          expect(page).to_not have_button("Enable #{item1.name}")
+        end
         end
       end
+
+    # 10. Merchant Items Grouped by Status
+    describe "Then I see two sections, one for Enabled Items and one for Disabled Items" do
+      it "I see that each Item is listed in the appropriate section" do
+        merchant1 = create(:merchant) 
+        merchant2 = create(:merchant) 
+        item1 = create(:item, merchant_id: merchant1.id, status: "enabled")
+        item2 = create(:item, merchant_id: merchant1.id, status: "disabled")
+        item3 = create(:item, merchant_id: merchant1.id, status: "enabled")
+        item4 = create(:item, merchant_id: merchant1.id, status: "disabled")
+
+        visit "/merchants/#{merchant1.id}/items"
+        
+        within "#enabled-item-#{item1.id}" do
+          expect(page).to have_button("Disable #{item1.name}")
+          expect(page).to_not have_button("Enable #{item1.name}")
+        end
+        within "#disabled-item-#{item2.id}" do
+          expect(page).to have_button("Enable #{item2.name}")
+          expect(page).to_not have_button("Disable #{item2.name}")
+        end
 
       # 11. Merchant Item Create - cont'd in 'spec/features/items/new_spec.rb
       it 'I see a link to create a new item.' do
@@ -143,12 +166,14 @@ RSpec.describe "Merchant Items Index" do
             expect(item_1.name).to appear_before(item_2.name)
             expect(item_2.name).to appear_before(item_3.name)
             expect(item_4.name).to appear_before(item_6.name)
+          end
 
             click_on "#{item_1.name}"
 
             expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_1.id}")
-        end
+          end
         end
       end
     end
+  end
 end

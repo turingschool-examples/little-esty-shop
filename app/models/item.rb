@@ -13,8 +13,15 @@ class Item < ApplicationRecord
     invoice_items.first.invoice_id
   end
 
+  def self.enabled
+    where(status: "enabled")
+  end
+
+  def self.disabled
+    where(status: "disabled")
+  end
+
   def self.top_5_by_revenue
-    # require 'pry'; binding.pry
     Item.joins(:transactions)
    .where("transactions.result = 'success'")
    .group("items.id")

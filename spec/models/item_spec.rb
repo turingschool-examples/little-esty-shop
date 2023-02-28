@@ -8,6 +8,7 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of :status }
     it { should validate_numericality_of :merchant_id }
   end
+
   describe 'relationships' do
     it { should belong_to :merchant }
     it { should have_many :invoice_items }
@@ -17,7 +18,10 @@ RSpec.describe Item, type: :model do
 
   let!(:merchant1) { create(:merchant) }
   let!(:customer1) { create(:customer) }
-  let!(:item1) { create(:item, merchant_id: merchant1.id)}
+  let!(:item1) { create(:item, merchant_id: merchant1.id, status: "enabled")}
+  let!(:item2) { create(:item, merchant_id: merchant1.id, status: "disabled")}
+  let!(:item3) { create(:item, merchant_id: merchant1.id, status: "enabled")}
+  let!(:item4) { create(:item, merchant_id: merchant1.id, status: "disabled")}
   let!(:invoice1) { create(:invoice, customer_id: customer1.id) }
 
   before do
@@ -34,6 +38,16 @@ RSpec.describe Item, type: :model do
     end
   end
 
+  describe "#class methods" do
+    it "disabled-buttons" do
+      expect(Item.disabled.sort).to eq([item2, item4].sort)
+    end
+
+    it "enabled-buttons" do
+      expect(Item.enabled.sort).to eq([item1, item3].sort)
+    end
+  end
+  
   describe 'class methods' do
     it ' returns top 5 items by revenue' do
       merchant1 = create(:merchant)
@@ -66,7 +80,6 @@ RSpec.describe Item, type: :model do
       expect(Item.top_5_by_revenue).to eq([item_1, item_3, item_2, item_4, item_6])
       expect(Item.top_5_by_revenue).to_not eq([item_1, item_2, item_3, item_4, item_5, item_6])
       expect(Item.top_5_by_revenue).to_not eq([item_6, item_4, item_3, item_2, item_1])
-
     end
   end
 end
