@@ -92,6 +92,7 @@ RSpec.describe "Merchant Items Index", type: :feature do
           expect(page).to have_button("Disable #{item10.name}")
           expect(page).to_not have_button("Enable #{item10.name}")
         end
+
         within "#disabled-item-#{item20.id}" do
           expect(page).to have_button("Enable #{item20.name}")
           expect(page).to_not have_button("Disable #{item20.name}")
@@ -165,55 +166,56 @@ RSpec.describe "Merchant Items Index", type: :feature do
             expect(item_1.name).to appear_before(item_2.name)
             expect(item_2.name).to appear_before(item_3.name)
             expect(item_4.name).to appear_before(item_6.name)
-            click_on "#{item_1.name}"
           end
 
-            expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_1.id}")
+          click_on "#{item_1.name}"
+          
+          expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_1.id}")
         end
       end
 
-      describe 'next to each of the 5 most popular items I see the date with the most sales for each item.' do
-        it "And I see a label 'Top selling date for <item name> was <date with most sales>'" do
-          merchant_1 = create(:merchant)
-          customer_1 = create(:customer)
-          item_1 = create(:item, merchant_id: merchant_1.id)
-          item_2 = create(:item, merchant_id: merchant_1.id)
-          item_3 = create(:item, merchant_id: merchant_1.id)
-          item_4 = create(:item, merchant_id: merchant_1.id)
-          item_5 = create(:item, merchant_id: merchant_1.id)
-          item_6 = create(:item, merchant_id: merchant_1.id)
-          item_7 = create(:item, merchant_id: merchant_1.id)
-          item_8 = create(:item, merchant_id: merchant_1.id)
-          invoice_1 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "January 28, 2019")
-          invoice_2 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "March 27, 2019")
-          invoice_3 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "April 20, 2019")
-          invoice_4 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "June 3, 2019")
-          invoice_5 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "October 20, 2019")
-          invoice_6 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "February 10, 2019")
-          invoice_7 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "May 10, 2018")
-          invoice_8 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "July 7, 2018")
-          invoice_item_1 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 10, invoice_id: invoice_1.id )
-          invoice_item_2 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 8, invoice_id: invoice_2.id )
-          invoice_item_3 = create(:invoice_item, item_id: item_3.id, quantity: 10, unit_price: 6, invoice_id: invoice_3.id )
-          invoice_item_4 = create(:invoice_item, item_id: item_4.id, quantity: 10, unit_price: 4, invoice_id: invoice_4.id )
-          invoice_item_5 = create(:invoice_item, item_id: item_5.id, quantity: 10, unit_price: 2, invoice_id: invoice_5.id )
-          invoice_item_6 = create(:invoice_item, item_id: item_6.id, quantity: 10, unit_price: 1, invoice_id: invoice_6.id )
-          invoice_item_7 = create(:invoice_item, item_id: item_7.id, quantity: 5, unit_price: 1, invoice_id: invoice_7.id )
-          invoice_item_8 = create(:invoice_item, item_id: item_8.id, quantity: 2, unit_price: 1, invoice_id: invoice_8.id )
-          transaction_1 = create(:transaction, invoice_id: invoice_1.id, result: 'success')
-          transaction_2 = create(:transaction, invoice_id: invoice_2.id, result: 'success')
-          transaction_3 = create(:transaction, invoice_id: invoice_3.id, result: 'success')
-          transaction_4 = create(:transaction, invoice_id: invoice_4.id, result: 'success')
-          transaction_5 = create(:transaction, invoice_id: invoice_5.id, result: 'failure')
-          transaction_6 = create(:transaction, invoice_id: invoice_6.id, result: 'success')
-          transaction_7 = create(:transaction, invoice_id: invoice_7.id, result: 'success')
-          transaction_8 = create(:transaction, invoice_id: invoice_8.id, result: 'success')
-          # require 'pry'; binding.pry
-          visit "/merchants/#{merchant_1.id}/items"
-    
-          within "#top_5_items" do
-            expect(page).to have_content("Top selling date for #{item_1.name} was January 28, 2019")
-          end
+    describe 'next to each of the 5 most popular items I see the date with the most sales for each item.' do
+      it "And I see a label 'Top selling date for <item name> was <date with most sales>'" do
+        merchant_1 = create(:merchant)
+        customer_1 = create(:customer)
+        item_1 = create(:item, merchant_id: merchant_1.id)
+        item_2 = create(:item, merchant_id: merchant_1.id)
+        item_3 = create(:item, merchant_id: merchant_1.id)
+        item_4 = create(:item, merchant_id: merchant_1.id)
+        item_5 = create(:item, merchant_id: merchant_1.id)
+        item_6 = create(:item, merchant_id: merchant_1.id)
+        item_7 = create(:item, merchant_id: merchant_1.id)
+        item_8 = create(:item, merchant_id: merchant_1.id)
+        invoice_1 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "January 28, 2019")
+        invoice_2 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "March 27, 2019")
+        invoice_3 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "April 20, 2019")
+        invoice_4 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "June 3, 2019")
+        invoice_5 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "October 20, 2019")
+        invoice_6 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "February 10, 2019")
+        invoice_7 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "May 10, 2018")
+        invoice_8 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "July 7, 2018")
+        invoice_item_1 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 10, invoice_id: invoice_1.id )
+        invoice_item_2 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 8, invoice_id: invoice_2.id )
+        invoice_item_3 = create(:invoice_item, item_id: item_3.id, quantity: 10, unit_price: 6, invoice_id: invoice_3.id )
+        invoice_item_4 = create(:invoice_item, item_id: item_4.id, quantity: 10, unit_price: 4, invoice_id: invoice_4.id )
+        invoice_item_5 = create(:invoice_item, item_id: item_5.id, quantity: 10, unit_price: 2, invoice_id: invoice_5.id )
+        invoice_item_6 = create(:invoice_item, item_id: item_6.id, quantity: 10, unit_price: 1, invoice_id: invoice_6.id )
+        invoice_item_7 = create(:invoice_item, item_id: item_7.id, quantity: 5, unit_price: 1, invoice_id: invoice_7.id )
+        invoice_item_8 = create(:invoice_item, item_id: item_8.id, quantity: 2, unit_price: 1, invoice_id: invoice_8.id )
+        transaction_1 = create(:transaction, invoice_id: invoice_1.id, result: 'success')
+        transaction_2 = create(:transaction, invoice_id: invoice_2.id, result: 'success')
+        transaction_3 = create(:transaction, invoice_id: invoice_3.id, result: 'success')
+        transaction_4 = create(:transaction, invoice_id: invoice_4.id, result: 'success')
+        transaction_5 = create(:transaction, invoice_id: invoice_5.id, result: 'failure')
+        transaction_6 = create(:transaction, invoice_id: invoice_6.id, result: 'success')
+        transaction_7 = create(:transaction, invoice_id: invoice_7.id, result: 'success')
+        transaction_8 = create(:transaction, invoice_id: invoice_8.id, result: 'success')
+        # require 'pry'; binding.pry
+        visit "/merchants/#{merchant_1.id}/items"
+  
+        within "#top_5_items" do
+          save_and_open_page
+          expect(page).to have_content("Top selling date for #{item_1.name} was January 28, 2019")
         end
       end
     
