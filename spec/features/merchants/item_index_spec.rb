@@ -97,6 +97,8 @@ RSpec.describe "Merchant Items Index" do
           expect(page).to_not have_button("Disable #{item20.name}")
         end
       end
+    end
+
       # 11. Merchant Item Create - cont'd in 'spec/features/items/new_spec.rb
       it 'I see a link to create a new item.' do
         expect(page).to have_link("Create a New Item")
@@ -164,6 +166,7 @@ RSpec.describe "Merchant Items Index" do
             expect(item_1.name).to appear_before(item_2.name)
             expect(item_2.name).to appear_before(item_3.name)
             expect(item_4.name).to appear_before(item_6.name)
+          end
 
             click_on "#{item_1.name}"
 

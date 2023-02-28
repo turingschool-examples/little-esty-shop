@@ -21,5 +21,6 @@ class Invoice < ApplicationRecord
     self.invoice_items
     .joins(:item)
     .pluck(Arel.sql("sum(invoice_items.quantity * invoice_items.unit_price) as revenue"))
+    .first
   end
 end

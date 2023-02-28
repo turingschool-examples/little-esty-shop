@@ -21,4 +21,13 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(format_price(1_000_000_000_00)).to eq('$1,000,000,000.00')
     end
   end
+
+  describe 'display_and_order(statuses, default_status)' do
+    
+    it 'returns a list of all statuses with the default status argument listed first' do
+      statuses = ["cancelled", "in_progress", "completed"]
+      expect(display_and_order(statuses, "completed")).to eq(["completed", "cancelled", "in_progress"])
+      expect(display_and_order(statuses, "in_progress")).to eq(["in_progress", "cancelled", "completed"])
+    end
+  end
 end
