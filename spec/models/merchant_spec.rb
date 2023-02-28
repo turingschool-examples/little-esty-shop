@@ -113,7 +113,7 @@ RSpec.describe Merchant, type: :model do
 
 			merchant_2.update status: 0
 
-			expect(Merchant.disabled_merchants).to eq([merchant_4, merchant_2])
+			expect(Merchant.disabled_merchants.sort).to eq([merchant_4, merchant_2].sort)
 		end
 	end
 end
