@@ -20,10 +20,10 @@
 <div class="body_container">
   <div class="sub_container">
     <div class="merchants_container">
-      <div id="enabled">
+      <div id="enabled_items">
         <h3>Enabled Items</h3>
         <% @enabled_items.each do |item| %>
-          <div class="merchant_container", id = "merchant_item-<%=item.id%>">
+          <div class="merchant_container", id = "merchant_item_enabled-<%=item.id%>">
             <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
             &emsp;
             <%=button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {item:{ status: "Disabled"} } %>
@@ -33,10 +33,10 @@
     </div>
 
     <div class="merchants_container">
-      <div id="disabled">
+      <div id="disabled_items">
         <h3>Disabled Items</h3>
         <% @disabled_items.each do |item| %>
-          <div class="merchant_container", id = "merchant_item-<%=item.id%>">
+          <div class="merchant_container", id = "merchant_item_disabled-<%=item.id%>">
             <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
             &emsp;
             <%=button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {item:{ status: "Enabled"} } %>
