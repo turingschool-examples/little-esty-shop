@@ -7,6 +7,8 @@
     <%= link_to merchant.name, "/admin/merchants/#{merchant.id}", local: true  %>
     <%= "Revenue Earned: $#{merchant.total_revenue / 100}" %>
     <br>
+    <%= "Top selling date for #{merchant.name}: #{merchant.top_selling_date.format_date}" %>
+    <br>
   <% end %>
 </div>
   
