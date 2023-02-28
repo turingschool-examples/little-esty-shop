@@ -20,10 +20,10 @@ class Merchant < ApplicationRecord
   end
 
   def invoice_items_ready_to_ship
-    self.invoice_items
-    .joins(:invoice)
+    invoice_items.joins(:invoice)
     .where(status: "packaged")
     .order(created_at: :asc)
+    .distinct
   end
 
   def top_five_merchant_items

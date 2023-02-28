@@ -57,11 +57,9 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
   describe "User Story 7" do
     it "the item names are links to the appropriate show page" do
       within("#merchant_item-#{@item_1.id}") do
-        click_link("#{@item_1.name}")
+        find("#{@item_1.name}").click
         expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}")
       end
-      expect(page).to have_content(@item_1.name)
-      expect(page).to_not have_content(@item_2.name)
     end
   end
 

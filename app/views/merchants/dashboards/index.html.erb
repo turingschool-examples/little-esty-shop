@@ -20,11 +20,11 @@
     <div id="items_ready_to_ship">
       <ol>
         <% @invoice_items_ready_to_ship.each do |invoice_item| %>
-          <li>
+          <p>
             <div class="sub_font">
             <%= "#{invoice_item.item.name}" %> - <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %> - <%= invoice_item.created_at.strftime("%A, %B %-d, %Y") %>
             </div>
-          </li>
+          </p>
         <% end %>
     </div>
   </div>

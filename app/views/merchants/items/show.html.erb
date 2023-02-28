@@ -1,5 +1,19 @@
-<h1><%= @item.name %></h1>
-<p>Description: <%= @item.description %></p>
-<p>Current Price: <%= @item.unit_price %></p>
+<div class="nav_bar">
+  <div class="nav_elements">
+    <div class="page_title"><%= @merchant.name %></div>
+  </div>
 
-<p><%= link_to "Edit Item", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></p>
+  <div class="nav_elements">
+    <p>
+      <div class="highlighted_link"><%= link_to "Dashboard", merchant_dashboard_index_path(@merchant.id) %></div>
+      &nbsp;
+      <div class="link"><%= link_to "Items", "/merchants/#{@merchant.id}/items" %></div>
+      &nbsp;
+      <div class="link"><%= link_to "Invoices", "/merchants/#{@merchant.id}/invoices" %></div>
+    </p>
+  </div>
+</div>
+<h3><%= @item.name %></h3>
+  <p>Description: <%= @item.description %></p>
+  <p>Current Price: <%= @item.unit_price %></p>
+<p><%= link_to "Update Item", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></p>
