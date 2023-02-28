@@ -5,12 +5,12 @@ describe 'Admin Invoices show page' do
     describe 'When I visit the admin invoice show page' do
       let!(:customer_2) {create(:customer) }
       let!(:merchant_2) {create(:merchant) }
-      let!(:invoice_2) {create(:invoice, customer_id: customer_2.id) }
+      let!(:invoice_2) {create(:invoice, customer_id: customer_2.id, status:'completed') }
       let!(:item_2) {create(:item, merchant_id: merchant_2.id) }
       let!(:invoice_item_3) {create(:invoice_item, item_id: item_2.id, quantity: 10, unit_price: 9, invoice_id: invoice_2.id ) }
       let!(:invoice_item_4) {create(:invoice_item, item_id: item_2.id, quantity: 10, unit_price: 9, invoice_id: invoice_2.id ) }
       let!(:transaction_2) {create(:transaction, invoice_id: invoice_2.id, result: 'success') }
-
+  
       it "I see information related to that invoice including: - Invoice id - Invoice status - Invoice created_at date in the format 'Monday, July 18, 2019' - Customer first and last name" do
         visit admin_invoice_path(invoice_2)
       
@@ -36,6 +36,22 @@ describe 'Admin Invoices show page' do
         visit admin_invoice_path(invoice_2)
         
         expect(page).to have_content("Total revenue to be generated: $1.80")
+      end
+
+      it "I see the invoice status is a select field and I see that the invoice's current status is selected when I click this select field. Then I can select a new status for the Invoice, and next to the select field I see a button to 'Update Invoice Status'. When I click this button I am taken back to the admin invoice show page and I see that my Invoice's status has now been updated" do
+        visit admin_invoice_path(invoice_2)
+
+        select("in_progress", :from => 'status').click
+        click_button('Update Invoice Status')
+       
+        expect(current_path).to eq(admin_invoice_path(invoice_2))
+        expect(page).to have_content("in_progress")
+
+        select("cancelled", :from => 'status').click
+        click_button('Update Invoice Status')
+
+        expect(current_path).to eq(admin_invoice_path(invoice_2))
+        expect(page).to have_content("cancelled")
       end
     end
   end
