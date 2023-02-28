@@ -4,6 +4,7 @@ class Admin::MerchantsController < ApplicationController
     @merchants = Merchant.all
     @enabled = Merchant.group_by_status("enabled")
     @disabled = Merchant.group_by_status("disabled")
+    @top_5 = Merchant.top_five_revenue
   end
 
   def show

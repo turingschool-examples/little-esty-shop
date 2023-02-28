@@ -7,11 +7,16 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:transactions).through(:invoices) }
     it { should have_many(:customers).through(:invoices)}
+    it { should define_enum_for(:status).with_values(["enabled", "disabled"]) }
 
     before(:each) do
       ###### Merchants & Items ######
       @merchant1 = Merchant.create!(name: "Mel's Travels")
-      @merchant2 = Merchant.create!(name: "Hady's Beach Shack")
+      @merchant2 = Merchant.create!(name: "Hady's Beach Shack", status: 1)
+      @merchant3 = Merchant.create!(name: "Huy's Cheese")
+      @merchant4 = Merchant.create!(name: "Beep")
+      @merchant5 = Merchant.create!(name: "Ham")
+      @merchant6 = Merchant.create!(name: "Mel's Beach Shack")
   
       @item1 = Item.create!(name: "Salt", description: "it is salty", unit_price: 1200, merchant: @merchant1)
       @item2 = Item.create!(name: "Pepper", description: "it is peppery", unit_price: 1150, merchant: @merchant1)
@@ -83,22 +88,89 @@ RSpec.describe Merchant, type: :model do
       @invoice14.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
       @invoice15.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
       @invoice16.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
-  
-      @customer7 = Customer.create!(first_name: "Deniz", last_name: "Ocean")
-      @invoice17 = Invoice.create!(customer: @customer7, status: 1) #completed
-      @invoice18 = Invoice.create!(customer: @customer7, status: 1) #completed
-      @invoice19 = Invoice.create!(customer: @customer7, status: 1) #completed
-      InvoiceItem.create!(item: @item4, invoice: @invoice17, quantity: 1, unit_price: 1950) 
-      InvoiceItem.create!(item: @item5, invoice: @invoice18, quantity: 1, unit_price: 2850) 
-      InvoiceItem.create!(item: @item6, invoice: @invoice19, quantity: 1, unit_price: 1650)
-      @invoice17.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
-      @invoice18.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
-      @invoice19.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
     end 
 
     describe "instance methods" do
       it "#mech_top_5_successful_customers" do
         expect(@merchant1.mech_top_5_successful_customers.to_a).to eq([@customer1, @customer6, @customer3, @customer4, @customer5])
+      end
+      
+      describe '#toggle_status' do
+        it 'changes merchant status to disabled if currently enabled and the inverse' do
+          @merchant_1 = Merchant.create!(name: "Merchy")
+          expect(@merchant_1.status).to eq("enabled")
+          @merchant_1.toggle_status
+          expect(@merchant_1.status).to eq("disabled")
+          @merchant_1.toggle_status
+          expect(@merchant_1.status).to eq("enabled")
+        end
+      end
+    end
+
+    describe 'class methods' do
+      it '::group_by_status' do
+        expect(Merchant.group_by_status("disabled")).to eq([@merchant2])
+      end
+    end
+
+    describe '#top_five merchants based on total revenue' do
+      before(:each) do
+        Transaction.delete_all
+        InvoiceItem.delete_all
+        Invoice.delete_all
+        Item.delete_all
+        Customer.delete_all
+        Merchant.delete_all
+
+        @merchant1 = Merchant.create!(name: "Mel's Travels")
+        @merchant2 = Merchant.create!(name: "Hady's Beach Shack", status: 1)
+        @merchant3 = Merchant.create!(name: "Huy's Cheese")
+        @merchant4 = Merchant.create!(name: "Beep")
+        @merchant5 = Merchant.create!(name: "Ham")
+        @merchant6 = Merchant.create!(name: "Mel's Beach Shack")
+
+        @customer1 = Customer.create!(first_name: "Steve", last_name: "Stevinson")
+
+        @invoice1 = Invoice.create!(customer: @customer1, status: 1) #completed
+        @invoice2 = Invoice.create!(customer: @customer1, status: 1) #completed
+        @invoice3 = Invoice.create!(customer: @customer1, status: 1) #completed
+        @invoice4 = Invoice.create!(customer: @customer1, status: 1) #completed
+        @invoice5 = Invoice.create!(customer: @customer1, status: 1) #completed
+        @invoice6 = Invoice.create!(customer: @customer1, status: 1) #completed
+        @invoice7 = Invoice.create!(customer: @customer1, status: 1) #completed
+
+        @item1 = Item.create!(name: "Pepper", description: "it is peppery", unit_price: 1150, merchant: @merchant1)
+        @item2 = Item.create!(name: "Salt", description: "it is salty", unit_price: 1200, merchant: @merchant2)
+        @item3 = Item.create!(name: "Spices", description: "it is spicy", unit_price: 1325, merchant: @merchant3)
+    
+        @item4 = Item.create!(name: "Sand", description: "its all over the place", unit_price: 1425, merchant: @merchant4)
+        @item5 = Item.create!(name: "Water", description: "see item 1, merchant 1", unit_price: 1500, merchant: @merchant5)
+        @item6 = Item.create!(name: "Rum", description: "good for your health", unit_price: 3350, merchant: @merchant6)
+
+        @ii1 = InvoiceItem.create!(item: @item1, invoice: @invoice1, quantity: 1, unit_price: 1200) 
+        @ii2 = InvoiceItem.create!(item: @item2, invoice: @invoice2, quantity: 1, unit_price: 1000) 
+        @ii1 = InvoiceItem.create!(item: @item3, invoice: @invoice3, quantity: 1, unit_price: 102) 
+        @ii1 = InvoiceItem.create!(item: @item4, invoice: @invoice4, quantity: 1, unit_price: 103) 
+        @ii1 = InvoiceItem.create!(item: @item5, invoice: @invoice5, quantity: 1, unit_price: 101) 
+        @ii1 = InvoiceItem.create!(item: @item6, invoice: @invoice6, quantity: 1, unit_price: 10) 
+        @ii1 = InvoiceItem.create!(item: @item1, invoice: @invoice7, quantity: 1, unit_price: 10)
+
+        @transaction1 = @invoice1.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
+        @transaction2 = @invoice1.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
+        @transaction3 = @invoice2.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
+        @transaction4 = @invoice2.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
+        @transaction5 = @invoice3.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
+        @transaction6 = @invoice4.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
+        @transaction7 = @invoice5.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
+      end
+
+      it 'returns the top five merchants based on total revenue' do
+        expected = [@merchant1, @merchant2, @merchant4, @merchant3, @merchant5]
+        expect(Merchant.top_five_revenue).to eq(expected)
+      end
+
+      it 'shows the total revenue' do
+        expect(@merchant1.total_revenue).to eq(2400)
       end
     end
   end

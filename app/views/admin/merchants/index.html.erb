@@ -1,6 +1,15 @@
 <h1> Merchants </h1>
 <%=link_to "Add Merchant", "/admin/merchants/new" %>
 
+<h2> Top 5 Merchants</h2>
+<div id="top_5_merchants">
+  <% @top_5.each do |merchant| %>
+    <%= link_to merchant.name, "/admin/merchants/#{merchant.id}", local: true  %>
+    <%= "Revenue Earned: $#{merchant.total_revenue / 100}" %>
+    <br>
+  <% end %>
+</div>
+  
 <% if @merchants.any? %>
   <div class="split left">
     <div class="centered">
