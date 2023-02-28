@@ -23,3 +23,25 @@
   <div id="merchant_invoice_customer_info">
     <p><%= "#{@customer.first_name} #{@customer.last_name}" %></p>
   </div>
+
+<h2>Items on this Invoice:</h2>
+<div id="merchant_invoice_item_info">
+  <table>
+    <tr>
+      <th>Item Name</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Status</th>
+    </tr>
+      <% @invoice_items.each do |item| %>
+        <div id="invoice_item_<%=item.id%>">
+          <tr>
+            <td><%= item.item.name %></td>
+            <td><%= item.quantity %></td>
+            <td><%= item.unit_price %></td>
+            <td><%= item.status %></td>
+          </tr>
+        </div>
+      <% end %>
+  </table>
+</div>
