@@ -152,24 +152,24 @@ RSpec.describe "Merchant Items Index", type: :feature do
           transaction_8 = create(:transaction, invoice_id: invoice_8.id, result: 'success')
 
           visit "/merchants/#{merchant_1.id}/items"
+   
           expect(page).to have_content("Top 5 Most Popular Items (By Revenue)")
           
-          within "#top_5_items" do
-            expect(page).to have_content("#{item_1.name}")
-            expect(page).to have_content("#{item_2.name}")
-            expect(page).to have_content("#{item_3.name}")
-            expect(page).to have_content("#{item_4.name}")
-            expect(page).to have_content("#{item_6.name}")
+          within("#top_5_items") do
+            expect(page).to have_link("#{item_1.name}")
+            expect(page).to have_link("#{item_2.name}")
+            expect(page).to have_link("#{item_3.name}")
+            expect(page).to have_link("#{item_4.name}")
+            expect(page).to have_link("#{item_6.name}")
             expect(page).to_not have_content("#{item_5.name}")
             expect(page).to_not have_content("#{item_7.name}")
             expect(page).to_not have_content("#{item_8.name}")
             expect(item_1.name).to appear_before(item_2.name)
             expect(item_2.name).to appear_before(item_3.name)
             expect(item_4.name).to appear_before(item_6.name)
+            click_on "#{item_1.name}"
           end
 
-          click_on "#{item_1.name}"
-          
           expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_1.id}")
         end
       end
@@ -214,10 +214,10 @@ RSpec.describe "Merchant Items Index", type: :feature do
         visit "/merchants/#{merchant_1.id}/items"
   
         within "#top_5_items" do
-          save_and_open_page
+         
           expect(page).to have_content("Top selling date for #{item_1.name} was January 28, 2019")
         end
       end
-    
+    end
   end
 end
