@@ -120,30 +120,41 @@ RSpec.describe 'Merchant Items Index' do
         @cust1 = FactoryBot.create(:customer)
         @cust2 = FactoryBot.create(:customer)
 
-        @inv1 = @cust1.invoices.create!(status: 1)
-        @inv2 = @cust1.invoices.create!(status: 1)
-        @inv3 = @cust1.invoices.create!(status: 1)
-        @inv4 = @cust2.invoices.create!(status: 1)
-        @inv5 = @cust2.invoices.create!(status: 1)
-        @inv6 = @cust2.invoices.create!(status: 1)
-
+        @inv1 = @cust1.invoices.create!(status: 1, created_at: Date.new(2023,2,28)) # today
         @trans1 = @inv1.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
         @trans1_5 = @inv1.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
-        @trans2 = @inv2.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
-        @trans3 = @inv2.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
-        @trans4 = @inv3.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
-        @trans5 = @inv3.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
-        @trans6 = @inv3.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+        
+        @inv7 = @cust2.invoices.create!(status: 1, created_at: Date.new(2023,2,28)) # today
+        @trans17 = @inv7.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+        
+        @inv4 = @cust2.invoices.create!(status: 1, created_at: Date.new(2023,2,26)) # 2 days ago
         @trans7 = @inv4.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
         @trans8 = @inv4.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
         @trans9 = @inv4.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
         @trans10 = @inv4.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+
+        @inv5 = @cust2.invoices.create!(status: 1, created_at: Date.new(2023,2,25)) # 3 days ago
         @trans11 = @inv5.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
         @trans12 = @inv5.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
         @trans13 = @inv5.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
         @trans14 = @inv5.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
         @trans15 = @inv5.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+
+        @inv6 = @cust2.invoices.create!(status: 1, created_at: Date.new(2023,2,23)) # 5 days ago
         @trans16 = @inv6.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+
+        @inv3 = @cust1.invoices.create!(status: 1, created_at: Date.new(2023,2,22)) # 6 days ago
+        @trans4 = @inv3.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+        @trans5 = @inv3.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+        @trans6 = @inv3.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+
+        @inv2 = @cust1.invoices.create!(status: 1, created_at: Date.new(2023,2,21)) # 7 days ago
+        @trans2 = @inv2.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+        @trans3 = @inv2.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+
+        @inv8 = @cust1.invoices.create!(status: 1, created_at: Date.new(2023,2,21)) # 7 days ago
+        @trans17 = @inv8.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+        @trans18 = @inv8.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
 
         @bowl = @merchant.items.create!(name: "Bowl", description: "it's a bowl", unit_price: 350) 
         @knife = @merchant.items.create!(name: "Knife", description: "it's a knife", unit_price: 300) 
@@ -151,12 +162,34 @@ RSpec.describe 'Merchant Items Index' do
         @plate = @merchant.items.create!(name: "Plate", description: "it's a plate", unit_price: 250) 
         @fork = @merchant.items.create!(name: "Fork", description: "it's a fork", unit_price: 100) 
         @pan = @merchant.items.create!(name: "Pan", description: "it's a pan", unit_price: 250) 
-          
-        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id, quantity: 10, unit_price: 350, status: 1)
-        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv1.id, quantity: 9, unit_price: 300, status: 1)
-        InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv1.id, quantity: 10, unit_price: 201, status: 1)
+        
+        @invoice_item = InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv1.id, quantity: 10, unit_price: 350, status: 1)
+                        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv7.id, quantity: 40, unit_price: 350, status: 1)
+                        #inv1 and inv7 on the same day - total quantity 50 - newest date
+                        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv2.id, quantity: 50, unit_price: 350, status: 1)
+                        # inv2 - 50 items (tied) on older date
+                        InvoiceItem.create!(item_id: @bowl.id, invoice_id: @inv3.id, quantity: 10, unit_price: 350, status: 1)
+
+
+        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv3.id, quantity: 9, unit_price: 300, status: 1)
+        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv4.id, quantity: 2, unit_price: 300, status: 1)
+        InvoiceItem.create!(item_id: @knife.id, invoice_id: @inv1.id, quantity: 90, unit_price: 300, status: 1)
+
+        InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv2.id, quantity: 10, unit_price: 201, status: 1)
+        InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv4.id, quantity: 20, unit_price: 201, status: 1)
+        InvoiceItem.create!(item_id: @plate.id, invoice_id: @inv8.id, quantity: 10, unit_price: 201, status: 1)
+        #inv 4 total quantity 20 - earlier date
+        #inv 2 and inv 8 on the same day - total quantity 20 - older date
+
         InvoiceItem.create!(item_id: @spoon.id, invoice_id: @inv1.id, quantity: 8, unit_price: 2500, status: 1)
+        InvoiceItem.create!(item_id: @spoon.id, invoice_id: @inv4.id, quantity: 3, unit_price: 2500, status: 1)
+        InvoiceItem.create!(item_id: @spoon.id, invoice_id: @inv7.id, quantity: 20, unit_price: 2500, status: 1)
+
+
         InvoiceItem.create!(item_id: @fork.id, invoice_id: @inv5.id, quantity: 1, unit_price: 14, status: 1)
+        InvoiceItem.create!(item_id: @fork.id, invoice_id: @inv4.id, quantity: 2, unit_price: 14, status: 1)
+        
+        InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv2.id, quantity: 2, unit_price: 15, status: 1)
         InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv6.id, quantity: 6, unit_price: 15, status: 1)
       end
 
@@ -171,11 +204,10 @@ RSpec.describe 'Merchant Items Index' do
           expect("Knife").to appear_before("Plate")
           expect("Plate").to appear_before("Pan")
 
-          expect("Revenue: 20000").to appear_before("Revenue: 3500")
-          expect("Revenue: 3500").to appear_before("Revenue: 2700")
-          expect("Revenue: 2700").to appear_before("Revenue: 2010")
-          expect("Revenue: 2010").to appear_before("Revenue: 90")
-
+          expect("Revenue: 77500").to appear_before("Revenue: 35000")
+          expect("Revenue: 35000").to appear_before("Revenue: 30300")
+          expect("Revenue: 30300").to appear_before("Revenue: 6030")
+          expect("Revenue: 6030").to appear_before("Revenue: 120")
         end
       end
 
@@ -183,11 +215,11 @@ RSpec.describe 'Merchant Items Index' do
         visit "/merchants/#{@carlos.id}/items"
 
         within "#top-items" do
-          expect(page).to have_content("Top selling date for #{@spoon.name} was #{@inv1.created_at.strftime('%m/%d/%Y')}")
-          expect(page).to have_content("Top selling date for #{@bowl.name} was #{@inv1.created_at.strftime('%m/%d/%Y')}")
-          expect(page).to have_content("Top selling date for #{@knife.name} was #{@inv1.created_at.strftime('%m/%d/%Y')}")
-          expect(page).to have_content("Top selling date for #{@plate.name} was #{@inv1.created_at.strftime('%m/%d/%Y')}")
-          expect(page).to have_content("Top selling date for #{@pan.name} was #{@inv6.created_at.strftime('%m/%d/%Y')}")
+          expect(page).to have_content("Top selling date for Spoon was 02/28/2023")
+          expect(page).to have_content("Top selling date for Bowl was 02/28/2023")
+          expect(page).to have_content("Top selling date for Knife was 02/28/2023")
+          expect(page).to have_content("Top selling date for Plate was 02/26/2023")
+          expect(page).to have_content("Top selling date for Pan was 02/23/2023")
         end
       end
     end
