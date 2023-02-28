@@ -107,6 +107,7 @@ RSpec.describe 'Merchant Invoices', type: :feature do
             visit merchant_invoice_path(sam.id, invoice1.id)
 
             expect(@inv_item2.status).to eq('pending')
+            expect(@inv_item1.status).to eq('packaged')
 
             within "div#inv_item_status_update-#{baseball.id}" do
               select 'packaged', from: 'Status'
@@ -116,6 +117,15 @@ RSpec.describe 'Merchant Invoices', type: :feature do
             
             expect(current_path).to eq(merchant_invoice_path(sam.id, invoice1.id))
             expect(@inv_item2.status).to eq('packaged')
+
+            within "div#inv_item_status_update-#{football.id}" do
+              select 'shipped', from: 'Status'
+              click_button "Update Item Status"
+              @inv_item1.reload
+            end
+            
+            expect(current_path).to eq(merchant_invoice_path(sam.id, invoice1.id))
+            expect(@inv_item1.status).to eq('shipped')
           end
         end
       end
