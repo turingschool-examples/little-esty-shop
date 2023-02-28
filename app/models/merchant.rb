@@ -9,6 +9,7 @@ class Merchant < ApplicationRecord
   scope :enabled_merchants, -> { where("status = 0")}
 
   scope :disabled_merchants, -> { where("status = 1")}
+  
   def merchant_invoices
     invoices.distinct.order(:id)
   end
