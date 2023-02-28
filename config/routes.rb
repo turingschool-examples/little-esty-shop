@@ -7,20 +7,14 @@ Rails.application.routes.draw do
     resources :merchants, only: [:index, :show, :new, :create, :edit, :update]
   end
 
-  get '/merchants/:merchant_id/dashboard', to: 'merchants#dashboard'
 
-  # get 'merchants/:merchant_id/items', to: 'merchants#items'
-  # get 'merchants/:merchant_id/items/new', to: 'items#new'
-  # get 'merchants/:merchant_id/items/:item_id', to: 'items#show'
-  # post 'merchants/:merchant_id/items/:item_id', to: 'items#create'
-  # get 'merchants/:merchant_id/items/:item_id/edit', to: 'items#edit'
-  # patch 'merchants/:merchant_id/items/:item_id', to: 'items#update'
   resources :merchants, only: [:show] do
-    resources :items
+    get '/dashboard', to: 'merchants#dashboard'
+    resources :items, only: [:index, :show, :new, :create, :edit, :update]
   end
 
-  post '/items', to: 'items#create'
-  patch '/items/:item_id', to: 'items#status_update'
+  resources :items, only: [:create]
+  patch '/items/:item_id', to: 'items#status_update' #This needs to be fixed--there should not be more than one update path
   
 
   
