@@ -29,11 +29,15 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     merchant = Merchant.find(params[:id])
-    merchant.update(merchant_params)
-    if params[:merchant].keys.include?('to_index')
-      redirect_to admin_merchants_path
+    if merchant.update(merchant_params)
+      if params[:merchant].keys.include?('to_index')
+        redirect_to admin_merchants_path
+      else
+        redirect_to admin_merchant_path(merchant.id), notice: "Merchant successfully updated!"
+      end
     else
-      redirect_to admin_merchant_path(merchant.id), notice: "Merchant successfully updated!"
+      flash[:notice] = "Field cannot be blank"
+      redirect_to edit_admin_merchant_path(merchant.id)
     end
   end
 

@@ -57,5 +57,16 @@ describe 'edit admin merchant page' do
         end
       end
     end
+
+    describe 'form sad path' do
+      it 'flashes a message for a blank input field' do
+        visit edit_admin_merchant_path(@merchant.id)
+        fill_in('merchant[name]', with: '')
+        click_button('Submit')
+        expect(current_path).to eq(edit_admin_merchant_path(@merchant.id))
+        expect(page).to have_content('Field cannot be blank')
+      end
+    
+    end
   end
 end
