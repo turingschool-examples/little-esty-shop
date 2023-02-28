@@ -24,7 +24,7 @@
       
       <div id="inv_item_status_update-<%= item.id %>">
         <%= form_with url: merchant_invoice_path(@merchant.id, @invoice.id), method: :patch, local: true do |form| %>
-          <% form.hidden_field :item_id, value: item.id %>
+          <%= form.hidden_field :item_id, value: item.id %>
           <strong><%= form.label :status %></strong>
           <%= form.select :status, ["pending", "packaged", "shipped"], selected: @invoice.find_invoiceitem_status(item) %>
           <%= form.submit "Update Item Status" %>
