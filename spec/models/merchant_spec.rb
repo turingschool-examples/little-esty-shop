@@ -68,12 +68,11 @@ RSpec.describe Merchant, type: :model do
     end
 
     it '#top_5_items_by_revenue' do
-      require 'pry'; binding.pry
       expect(sam.top_5_items_by_revenue).to eq([vinyl, baseball, macguffin_muffins, glove, football])
     end
 
     it '#enabled_items' do
-      expect(sam.enabled_items).to eq([football, baseball])
+      expect(sam.enabled_items).to eq([football, baseball, owl, sponge, vinyl, lunchbox, macguffin_muffins])
     end
 
     it '#disabled_items' do 

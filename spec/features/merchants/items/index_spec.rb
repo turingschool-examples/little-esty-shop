@@ -78,18 +78,24 @@ RSpec.describe 'Merchant Items', type: :feature do
         end
 
         it "each item name is a link to that merchant's item's show page " do
-          click_link football.name
-          expect(current_path).to eq(merchant_item_path(sam.id, football.id))
+          within 'ul#items_list' do
+            click_link football.name
+            expect(current_path).to eq(merchant_item_path(sam.id, football.id))
+          end
         end
 
         it "each item name is a link to that merchant's item's show page " do
-          click_link baseball.name
-          expect(current_path).to eq(merchant_item_path(sam.id, baseball.id))
+          within 'ul#items_list' do
+            click_link baseball.name
+            expect(current_path).to eq(merchant_item_path(sam.id, baseball.id))
+          end
         end
 
         it "each item name is a link to that merchant's item's show page " do
-          click_link glove.name
-          expect(current_path).to eq(merchant_item_path(sam.id, glove.id))
+          within 'ul#items_list' do
+            click_link glove.name
+            expect(current_path).to eq(merchant_item_path(sam.id, glove.id))
+          end
         end
 
         it 'next to each item I see a button to disable or enable that item' do 
@@ -261,7 +267,6 @@ RSpec.describe 'Merchant Items', type: :feature do
         end
 
         it "I see total revenue generate next to each item name" do
-          save_and_open_page
           expect(page).to have_content("$299,999.97")
           expect(page).to have_content("$9,673.20")
           expect(page).to have_content("$6,999.93")
