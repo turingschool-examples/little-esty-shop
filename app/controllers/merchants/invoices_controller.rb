@@ -8,6 +8,7 @@ class Merchants::InvoicesController < ApplicationController
   def show
     @invoice = Invoice.find(params[:invoice_id])
     @merchant = Merchant.find(params[:merchant_id])
+    # @commits = CommitSearch.new.commit_information
   end
 
   def update
