@@ -11,8 +11,8 @@
   <% end %>
 </div>
 
-<ul>
   <h2>Enabled Items:</h2>
+<ul>
   <% @enabled_items.each do |item| %>
     <div id="enabled-item-<%= item.id %>"> 
       <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |f| %>
@@ -21,8 +21,10 @@
       <% end %>
     </div>
   <% end %>
-
-  <h2>Disabled Items:</h2>
+</ul>
+<ul>
+<h2>Disabled Items:</h2>
+<ul>
   <% @disabled_items.each do |item| %>
     <div id="disabled-item-<%= item.id %>">
       <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |f| %>
@@ -31,7 +33,7 @@
       <% end %>
     </div>
   <% end %>
-
+</ul>
   <%# <% @items.each do |item| %> 
     <%# <div id= "item-<%= item.id %>
         <%# <li><p><%= link_to item.name, "/merchants/#{item.merchant_id}/items/#{item.id}" %> 
@@ -42,4 +44,3 @@
       <%# <% end %> 
     <%# </div> %>
   <%# <% end %> 
-</ul>
