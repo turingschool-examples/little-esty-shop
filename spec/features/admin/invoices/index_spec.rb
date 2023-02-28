@@ -29,7 +29,7 @@ describe 'Admin Invoices index page' do
 
       it "I see a list of all invoice ids in the system and each ID linkes to the admin invoice show page" do
         visit admin_invoices_path
-      
+ 
         expect(page).to have_link("#{invoice_2.id}")
         expect(page).to have_link("#{invoice_3.id}")
         expect(page).to have_link("#{invoice_4.id}")
