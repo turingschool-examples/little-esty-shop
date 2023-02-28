@@ -6,4 +6,9 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   enum status: ["in progress", "cancelled", "completed"]
+
+  def invoice_items_and_names
+    invoice_items.joins(:item)
+    .select("invoice_items.*, items.name")
+  end
 end
