@@ -69,19 +69,30 @@ RSpec.describe "Merchant_Invoices#Show", type: :feature do
   describe "User Story 16" do
     context "As a merchant, when I visit my merchant's invoices show" do
       it " I see all of my items on the invoice" do
-        
-        save_and_open_page
         within("#invoice_item_#{@invoice_item_1.id}") do
           expect(page).to have_content(@item_1.name)
           expect(page).to have_content(@invoice_item_1.quantity)
-          expect(page).to have_content(@invoice_item_1.unit_price)
+          expect(page).to have_content((@invoice_item_1.unit_price).to_f/100)
           expect(page).to have_content(@invoice_item_1.status)
           expect(page).to_not have_content(@item_6.name)
           expect(page).to_not have_content(@invoice_item_6.quantity)
-          expect(page).to_not have_content(@invoice_item_6.unit_price)
+          expect(page).to_not have_content((@invoice_item_6.unit_price).to_f/100)
           expect(page).to_not have_content(@invoice_item_6.status)
         end
       end
     end
   end
+
+  describe "User Story 17" do
+    context "As a merchant, when I visit my merchant's invoices show" do
+      it "shows the total revenue that will be generated from all items on the invoice" do
+        within("#merchant_invoice_information") do
+        save_and_open_page
+          expect(page).to have_content((@invoice_1.total_revenue).to_f/100)
+        end
+      end
+    end
+  end
 end
+
+#{number_to_currency((@invoice.total_revenue.to_f/100).truncate, precision: 0)}

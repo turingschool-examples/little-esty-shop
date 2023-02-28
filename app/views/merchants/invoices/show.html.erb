@@ -17,6 +17,7 @@
   <div id="merchant_invoice_information">
     <p>Status: <%= @invoice.status %></p>
     <p>Created on: <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %></p>
+    <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue.to_f/100) %></p>
   </div>
 
 <h2>Customer:</h2>
@@ -38,7 +39,7 @@
           <tr>
             <td><%= item.item.name %></td>
             <td><%= item.quantity %></td>
-            <td><%= item.unit_price %></td>
+            <td><%= number_to_currency(item.unit_price.to_f/100) %></td>
             <td><%= item.status %></td>
           </tr>
         </div>
