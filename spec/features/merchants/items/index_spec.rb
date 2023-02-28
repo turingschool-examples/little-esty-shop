@@ -33,11 +33,22 @@ RSpec.describe 'Merchant Items', type: :feature do
     let!(:invoice_lunchbox) {Invoice.create!(customer_id: phil.id, status: "cancelled") }
     let!(:invoice_macguffin_muffins) {Invoice.create!(customer_id: phil.id, status: "completed") }
 
+    let!(:transaction_arugula1) { invoice_arugula.transactions.create!(result: 1) }
+    let!(:transaction_tomato1) { invoice_tomato.transactions.create!(result: 0) }
+    let!(:transaction_football1) { invoice_football.transactions.create!(result: 1) }
+    let!(:transaction_baseball1) { invoice_baseball.transactions.create!(result: 0) }
+    let!(:transaction_baseball2) { invoice_baseball.transactions.create!(result: 1) }
+    let!(:transaction_glove1) { invoice_glove.transactions.create!(result: 0) }
+    let!(:transaction_owl1) { invoice_owl.transactions.create!(result: 1) }
+    let!(:transaction_sponge1) { invoice_sponge.transactions.create!(result: 0) }
+    let!(:transaction_vinyl1) { invoice_vinyl.transactions.create!(result: 0) }
+    let!(:transaction_lunchbox1) { invoice_lunchbox.transactions.create!(result: 1) }
+    let!(:transaction_macguffin_muffins1) { invoice_macguffin_muffins.transactions.create!(result: 0) }
+
     before (:each) do 
-      visit merchant_items_path(sam.id)
       InvoiceItem.create!(invoice: invoice_arugula, item: arugula, quantity: 100, unit_price: 590, status: 0)             #no
       InvoiceItem.create!(invoice: invoice_tomato, item: tomato, quantity: 6, unit_price: 679, status: 2)                #yes  4074
-      InvoiceItem.create!(invoice: invoice_football, item: football, quantity: 13, unit_price: 3140, status: 1)         #no?
+      InvoiceItem.create!(invoice: invoice_football, item: football, quantity: 13, unit_price: 3140, status: 1)         #no
       InvoiceItem.create!(invoice: invoice_baseball, item: baseball, quantity: 27, unit_price: 2675, status: 0)         #yes   72225
       InvoiceItem.create!(invoice: invoice_glove, item: glove, quantity: 2, unit_price: 4199, status: 2)                #yes    8398
       InvoiceItem.create!(invoice: invoice_owl, item: owl, quantity: 50000, unit_price: 51832, status: 1)                #no
@@ -45,6 +56,7 @@ RSpec.describe 'Merchant Items', type: :feature do
       InvoiceItem.create!(invoice: invoice_vinyl, item: vinyl, quantity: 3, unit_price: 9999999, status: 2)             #yes    29999997
       InvoiceItem.create!(invoice: invoice_lunchbox, item: lunchbox, quantity: 500, unit_price: 66666, status: 1)       #no
       InvoiceItem.create!(invoice: invoice_macguffin_muffins, item: macguffin_muffins, quantity: 7, unit_price: 99999, status: 0)   #yes  699993
+      visit merchant_items_path(sam.id)
     end
 
     describe 'As a merchant' do 
@@ -85,36 +97,57 @@ RSpec.describe 'Merchant Items', type: :feature do
         end
 
         it "I see the top 5 most popular items ranked by total revenue generated" do
-          expect(page).to have_content("#{vinyl.name}")
-          expect(page).to have_content("#{sponge.name}")
-          expect(page).to have_content("#{macguffin_muffins.name}")
-          expect(page).to have_content("#{baseball.name}")
-          expect(page).to have_content("#{glove.name}")
+          within 'ul#top_list' do
+            expect("#{vinyl.name}").to appear_before("#{sponge.name}")
+            expect("#{sponge.name}").to appear_before("#{macguffin_muffins.name}")
+            expect("#{macguffin_muffins.name}").to appear_before("#{baseball.name}")
+            expect("#{baseball.name}").to appear_before("#{glove.name}")
+            expect("#{glove.name}").to_not appear_before("#{baseball.name}")
+          end
         end
 
         it "I see that each item name links to my merchant show page for said item" do
-          click_link vinyl.name
-          expect(current_path).to eq(merchant_item_path(sam.id, vinyl.id))
+          within 'ul#top_list' do
+            click_link vinyl.name
+            expect(current_path).to eq(merchant_item_path(sam.id, vinyl.id))
+          end
 
-          click_link sponge.name
-          expect(current_path).to eq(merchant_item_path(sam.id, sponge.id))
+          visit merchant_items_path(sam.id)
+          
+          within 'ul#top_list' do
+            click_link sponge.name
+            expect(current_path).to eq(merchant_item_path(sam.id, sponge.id))
+          end
 
-          click_link macguffin_muffins.name
-          expect(current_path).to eq(merchant_item_path(sam.id, macguffin_muffins.id))
+          visit merchant_items_path(sam.id)
 
-          click_link baseball.name
-          expect(current_path).to eq(merchant_item_path(sam.id, baseball.id))
+          within 'ul#top_list' do
+            click_link macguffin_muffins.name
+            expect(current_path).to eq(merchant_item_path(sam.id, macguffin_muffins.id))
+          end
 
-          click_link glove.name
-          expect(current_path).to eq(merchant_item_path(sam.id, glove.id))
+          visit merchant_items_path(sam.id)
+
+          within 'ul#top_list' do
+            click_link baseball.name
+            expect(current_path).to eq(merchant_item_path(sam.id, baseball.id))
+          end
+
+          visit merchant_items_path(sam.id)
+
+          within 'ul#top_list' do
+            click_link glove.name
+            expect(current_path).to eq(merchant_item_path(sam.id, glove.id))
+          end
         end
 
         it "I see total revenue generate next to each item name" do
-          expect(page).to have_content("#{vinyl.name} $299999.97")
-          expect(page).to have_content("#{sponge.name} $9673.20")
-          expect(page).to have_content("#{macguffin_muffins.name} $6999.93")
-          expect(page).to have_content("#{baseball.name} $722.25")
-          expect(page).to have_content("#{glove.name} $83.98")
+          save_and_open_page
+          expect(page).to have_content("$299,999.97")
+          expect(page).to have_content("$9,673.20")
+          expect(page).to have_content("$6,999.93")
+          expect(page).to have_content("$722.25")
+          expect(page).to have_content("$83.98")
         end
       end
     end
