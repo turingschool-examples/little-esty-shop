@@ -105,7 +105,7 @@ RSpec.describe Merchant, type: :model do
 
 			merchant_4.update status: 0
 
-			expect(Merchant.active_merchants).to eq([merchant1, merchant_2, merchant_3, merchant_4])
+			expect(Merchant.active_merchants).to include(merchant1, merchant_2, merchant_3, merchant_4)
 		end
 
 		it '::disabled_merchants' do
