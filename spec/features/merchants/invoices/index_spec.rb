@@ -19,21 +19,13 @@ RSpec.describe "merchant's invoices index  page", type: :feature do
     let!(:item2) {create(:item, merchant: merchant1)}
     let!(:item3) {create(:item, merchant: merchant1)}
     let!(:item4) {create(:item, merchant: merchant2)}
-
-    # let!(:transaction1) {create(:transaction, invoice: invoice1) }
-    # let!(:transaction2) {create(:transaction, invoice: invoice2) }
-    # let!(:transaction3) {create(:transaction, invoice: invoice3) }
-    # let!(:transaction4) {create(:transaction, invoice: invoice4) }
-    # let!(:transaction5) {create(:transaction, invoice: invoice5) }
     
-    before do
+    before (:each) do
       create(:invoice_item, item: item1, invoice: invoice1)
       create(:invoice_item, item: item2, invoice: invoice2)
       create(:invoice_item, item: item3, invoice: invoice3)
       create(:invoice_item, item: item3, invoice: invoice4)
       create(:invoice_item, item: item4, invoice: invoice5)
-
-
     end
   
     

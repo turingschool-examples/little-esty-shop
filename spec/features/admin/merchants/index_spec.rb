@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'admin merchants index page' do
-	let!(:merchant1) { create(:merchant)}
-	let!(:merchant2) { create(:merchant)}
-	let!(:merchant3) { create(:merchant)}
-	let!(:merchant4) { create(:merchant)}
-	let!(:merchant5) { create(:merchant)}
-	let!(:merchant6) { create(:merchant)}
+
+	let!(:merchant1) { create(:active_merchant)}
+	let!(:merchant2) { create(:active_merchant)}
+	let!(:merchant3) { create(:active_merchant)}
+	let!(:merchant4) { create(:active_merchant)}
+	let!(:merchant5) { create(:active_merchant)}
+	let!(:merchant6) { create(:active_merchant)}
 
 	let!(:item1) {create(:item, merchant: merchant1, name: 'item 1')}
 	let!(:item2) {create(:item, merchant: merchant2, name: 'item 2', status: 'enabled')}
@@ -61,7 +62,6 @@ RSpec.describe 'admin merchants index page' do
 		create(:invoice_item, item: item5, invoice: invoice5, quantity: 1, unit_price: 6)
 		create(:invoice_item, item: item6, invoice: invoice6, quantity: 1, unit_price: 6)
 	end
-	
 
 	describe 'shows all merchants' do
 		it 'shows all merchants' do
@@ -70,6 +70,7 @@ RSpec.describe 'admin merchants index page' do
 			expect(page).to have_content('Merchants List')
 			
 			within "#merchant-list" do
+
 				within "##{merchant1.id}" do
 					expect(page).to have_content("#{merchant1.name}")
 					expect(page).to have_content('Status: active')

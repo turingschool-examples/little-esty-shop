@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe 'admin merchant edit page' do
-	let!(:merchant_1) { Merchant.create!(name: 'John Doe') }
-	let!(:merchant_2) { Merchant.create!(name: 'Brians Beads') }
-	let!(:merchant_3) { Merchant.create!(name: 'Soras Chains') }
+	let!(:merchant_1) { create(:merchant) }
+	let!(:merchant_2) { create(:merchant) }
+	let!(:merchant_3) { create(:merchant) }
 
 
 	describe 'update merchant' do
 		it 'form has a default value in name when visiting edit page' do
 			visit edit_admin_merchant_path(merchant_1)
 
-			expect(page).to have_content('John Doe')
+			expect(page).to have_content("#{merchant_1.name}")
 		end
 
 		it 'i can update merchant name and get redirected to merchant admin page' do
@@ -20,7 +20,7 @@ RSpec.describe 'admin merchant edit page' do
 			click_button 'Edit Name'
 			
 			expect(current_path).to eq(admin_merchants_path)
-			expect(page).to_not have_content('John Doe')
+			expect(page).to_not have_content("#{merchant_1.name}")
 			expect(page).to have_content('John Favreau')
 		end
 

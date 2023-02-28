@@ -4,7 +4,9 @@ RSpec.describe Item, type: :model do
   describe 'relationships' do
     it { should have_many :invoice_items }
     it { should have_many(:invoices).through(:invoice_items) }
+    it { should have_many(:transactions).through(:invoices)}
     it { should belong_to :merchant }
+    it {should define_enum_for(:status).with_values(["enabled", "disabled"])}
   end
   let!(:merchant1) { create(:merchant)}
   let!(:merchant2) { create(:merchant)}

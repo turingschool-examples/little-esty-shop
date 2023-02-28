@@ -14,12 +14,9 @@ RSpec.describe 'Admin merchant new page' do
 
       fill_in :name, with: "Larry's Lamps"
       click_button 'Create Merchant'
-      
+
       expect(page).to have_current_path(admin_merchants_path)
-      expect(page).to have_content("Larry's Lamps")
-      
-      
-  
+      expect(page).to have_content("Larry's Lamps\nStatus: disabled")
     end
   end
 end
