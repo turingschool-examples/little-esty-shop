@@ -190,7 +190,7 @@ RSpec.describe 'admin merchants index page' do
 
 		it 'will have the revenues displayed next to each merchants name' do 
 			visit admin_merchants_path
-			save_and_open_page
+		
 			within "#top_five_merchants_by_rev" do 
 				expect(page).to have_content("#{merchant1.name} - $60 in sales")
 				expect(page).to have_content("#{merchant2.name} - $48 in sales")
