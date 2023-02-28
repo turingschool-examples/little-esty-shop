@@ -4,7 +4,7 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
-  enum status: [ "enabled", "disabled" ]
+  enum status: ["enabled", "disabled"]
 
   def toggle_status
     self.status == "enabled" ? self.disabled! : self.enabled!
@@ -12,19 +12,48 @@ class Merchant < ApplicationRecord
 
   def mech_top_5_successful_customers
     customers.joins(:transactions)
-    .select("customers.*, COUNT(transactions.id) AS transaction_count")
+    .select("customers.*, COUNT(DISTINCT transactions.id) AS transaction_count")
     .where(transactions: {result: 0})
     .group("customers.id")
     .order("transaction_count DESC")
     .limit(5)
   end
   
+
   def unshipped_items
-    # invoice_items.select("invoice_items.*, items.name AS item_name")
-    # .where("invoice_items.status != 2")
-    # .order("invoice_items.invoice_created_at")
     invoices.select("invoice_items.status, invoices.*, items.name AS item_name")
     .where("invoice_items.status != 2")
     .order(:created_at)
+  end
+
+  def self.group_by_status(status)
+    where(status: status)
+  end
+
+  def self.top_five_revenue
+    joins(:invoice_items, :transactions)
+    .where('result = 0')
+    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
+    .group(:id)
+    .order('total_revenue desc')
+    .limit(5)
+  end
+
+  def total_revenue
+    self.invoices
+    .joins(:invoice_items, :transactions)
+    .where('transactions.result = 0')
+    .sum('invoice_items.quantity * invoice_items.unit_price')
+  end
+
+  def top_selling_date
+    self.invoices
+    .where("invoices.status = 1")
+    .joins(:invoice_items)
+    .select('invoices.id, invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
+    .group("invoices.id, invoices.created_at")
+    .order("total_revenue desc", "invoices.created_at desc")
+    .limit(1)
+    .first
   end
 end

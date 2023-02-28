@@ -78,30 +78,26 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
     @invoice16.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
   end 
 
-  describe "as a visitor" do #user story 1 
+  describe "as a visitor" do 
     describe "visit merchant dashboard" do 
+      #user story 1
       it "the visitor will see the name of the merchant" do 
-
         visit "/merchants/#{@merchant1.id}/dashboard"
-
         expect(page).to have_content("Merchant Name: #{@merchant1.name}")
 
         visit "/merchants/#{@merchant2.id}/dashboard"
-
         expect(page).to have_content("Merchant Name: #{@merchant2.name}")
-
       end
 
-      it "see the link to merchant items index" do 
-        
+      #user story 2
+      it "see the link to merchant items index" do        
         visit "/merchants/#{@merchant1.id}/dashboard" 
 
         expect(page).to have_link("#{@merchant1.name}'s Items", href: "/merchants/#{@merchant1.id}/items")
-
         expect(page).to have_link("#{@merchant1.name}'s Invoices", href: "/merchants/#{@merchant1.id}/invoices")
-
       end
 
+      #user story 3
       it 'see the names of the 5 customers with successfull transactions for the merchant' do
         visit "/merchants/#{@merchant1.id}/dashboard" 
 
@@ -119,7 +115,8 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
         expect(page).to_not have_content(@customer2.first_name)
       end
 
-      xit 'see the total number of successful transactions for each customer' do
+      #user story 3
+      it 'see the total number of successful transactions for each customer' do
         visit "/merchants/#{@merchant1.id}/dashboard" 
         
         within "#top_customers-#{@customer1.id}" do
