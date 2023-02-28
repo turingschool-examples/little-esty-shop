@@ -2,6 +2,7 @@
 
 <%= form_with model: @merchant, method: :post, local: true do |form| %>
   <%= form.hidden_field :status, value: "disabled" %>
+  <%= form.label :name %>
   <%= form.text_field :name %>
   <%= form.submit "Create Merchant" %>
 <%end %>

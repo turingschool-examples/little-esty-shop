@@ -217,8 +217,8 @@ RSpec.describe Merchant, type: :model do
       end
 
       it 'shows the top selling date for each merchant' do
-        expect(@merchant1.top_invoice).to eq(@invoice1)
-        expect(@merchant1.top_invoice.format_date).to eq("2023-01-01")
+        expect(@merchant1.top_selling_date).to eq(@invoice1)
+        expect(@merchant1.top_selling_date.format_date).to eq("2023-01-01")
 
       end
     end

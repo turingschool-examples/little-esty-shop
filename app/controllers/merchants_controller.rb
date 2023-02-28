@@ -12,8 +12,6 @@ class MerchantsController < ApplicationController
 
     if merchant.save 
        redirect_to admin_merchants_path
-    else 
-      render admin_merchants_new_path
     end 
   end
 

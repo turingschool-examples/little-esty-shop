@@ -21,7 +21,6 @@ RSpec.describe 'merchant invoice index' do
     @customer_2 = Customer.create(first_name: "Steve", last_name: "Stevinson")
     
     @invoice_1 = Invoice.create(customer: @customer_1)
-    # @invoice_1.items << @item_1
     @invoice_2 = Invoice.create(customer: @customer_2, status: 0)
 
 

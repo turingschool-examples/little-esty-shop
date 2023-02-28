@@ -66,7 +66,6 @@ RSpec.describe 'Merchant/Items Index Page' do
       it "next to each item i see a button to disable or enable that item" do 
 
         visit "/merchants/#{@merchant1.id}/items"
-
         within "#item_number_#{@item_1.id}" do 
           expect(page).to have_button("Enable/Disable Item #{@item_1.name}")
         end 
