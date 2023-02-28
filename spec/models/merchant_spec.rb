@@ -9,7 +9,7 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'Instance Methods' do
-    describe '#rank_by_revenue' do
+    describe '#top_five_items_by_revenue' do
       before do
         @merchant = Merchant.create(name: "Handmades")
 
@@ -74,6 +74,14 @@ RSpec.describe Merchant, type: :model do
 
       it 'date with the most revenue generated' do
         expect(@merchant.best_day).to eq(@inv1.created_at)
+      end
+    end
+
+    describe "#top_five_merchants_by_revenue" do
+      it 'returns the 5 merchants with the most revenue' do
+        load_test_data
+        expect(Merchant.top_five_merchants_by_revenue).to eq [@merchant3, @merchant5, @merchant6, @merchant1, @merchant4]
+        
       end
     end
   end
