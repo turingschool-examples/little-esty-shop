@@ -98,7 +98,6 @@ RSpec.describe Item, type: :model do
         
         InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv2.id, quantity: 2, unit_price: 15, status: 1)
         InvoiceItem.create!(item_id: @pan.id, invoice_id: @inv6.id, quantity: 6, unit_price: 15, status: 1)
-
     end
 
     it 'shows the day of most revenue for item' do
