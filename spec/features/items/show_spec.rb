@@ -32,6 +32,19 @@ RSpec.describe "Merchant Items Show" do
         expect(page).to have_content("This is a new item.")
         expect(page).to have_content(50)
       end
+
+      it 'sad path, invalid inputs' do
+        click_link("Update #{item1.name}")
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}/edit")
+
+        fill_in :name, with: "New Item"
+        fill_in :description, with: "This is a new item."
+        fill_in :unit_price, with: "Text"
+
+        click_button "Update"
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}/edit")
+        expect(page).to have_content("Invalid input")
+      end
     end
   end
 end

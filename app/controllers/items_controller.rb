@@ -27,14 +27,17 @@ class ItemsController < ApplicationController
 
   def update
     item = Item.find(params[:item_id])
-    item.update(item_params)
-    redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
+    if item.update(item_params)
+      redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
+    else
+      flash[:notice] ='Invalid input'
+      redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}/edit"
+    end
   end
 
   def status_update
     item = Item.find(params[:item_id])
     item.update!(status: params[:status])
-    item.save
     redirect_to "/merchants/#{item.merchant_id}/items"
   end
 
