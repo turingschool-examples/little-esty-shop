@@ -13,7 +13,7 @@ describe 'Admin Invoices show page' do
   
       it "I see information related to that invoice including: - Invoice id - Invoice status - Invoice created_at date in the format 'Monday, July 18, 2019' - Customer first and last name" do
         visit admin_invoice_path(invoice_2)
-      
+  
         expect(page).to have_content("#{invoice_2.id}")
         expect(page).to have_content("#{invoice_2.status}")
         expect(page).to have_content("#{invoice_2.created_at.strftime("%A, %B %e, %Y")}")

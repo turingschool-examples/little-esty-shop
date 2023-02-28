@@ -5,7 +5,7 @@
 <br>
 
 <h2>Top 5 Most Popular Items (By Revenue)</h2>
-<div id="top_5_items">
+<div id = "top_5_items">
   <% @top_5_items.each do |item| %>
     <li><%= link_to item.name, "/merchants/#{item.merchant_id}/items/#{item.id}" %>: <%= number_to_currency(item.revenue) %></li>
     <li>Top selling date for <%= item.name %> was <%= item.top_item_day.created_at.strftime("%B %e, %Y") %></li>

@@ -46,6 +46,7 @@ describe 'edit admin merchant page' do
 
         it 'should have the same merchant id' do
           expect(@merchant.id).to eq(@merchant_original_id)
+  
         end
 
         it 'should not have the old merchant information' do
