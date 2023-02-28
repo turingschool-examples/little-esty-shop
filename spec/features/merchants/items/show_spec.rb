@@ -76,7 +76,7 @@ RSpec.describe 'When I visit the merchant show page of an item' do
   		fill_in('Unit price', with: '')
 			
 			click_button("Update Item")
-			save_and_open_page
+      
 			expect(current_path).to eq("/merchants/#{@carlos.id}/items/#{@bowl.id}/edit")	
 			expect(page).to have_content("Item unable to be updated")
 		end

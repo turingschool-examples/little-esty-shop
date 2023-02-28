@@ -69,8 +69,8 @@ RSpec.describe '#index' do
     end
 
 
-    it 'I see the date with the most revenue for each merchant'
-  end
+    it 'I see the date with the most revenue for each merchant' do
+    end
 
   
     it 'I see a section listing the top 5 merchants by revenue and their total revenue' do
