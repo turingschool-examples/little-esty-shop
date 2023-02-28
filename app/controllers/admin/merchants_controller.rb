@@ -10,8 +10,13 @@ class Admin::MerchantsController < ApplicationController
 
   def create 
     merchant = Merchant.new(merchant_params)
-    merchant.save
-    redirect_to admin_merchants_path
+    if merchant.valid?
+      merchant.save
+      redirect_to admin_merchants_path
+    else
+      flash[:notice] = 'Field cannot be blank.'
+      redirect_to admin_merchants_path
+    end
   end
 
   def edit

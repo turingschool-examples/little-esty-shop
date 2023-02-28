@@ -78,6 +78,21 @@ describe 'Admin Merchants index page' do
         expect(page).to have_content('All the Shoes')
       end
 
+      it 'I see a flash message when the name is blank' do
+        visit admin_merchants_path
+        click_link('Create a new merchant')
+
+        expect(current_path).to eq(new_admin_merchant_path)
+        expect(page).to have_content("Create a New Merchant")
+        expect(page).to have_field("Name")
+
+        fill_in("Name", with: '')
+        click_button("Submit")
+       
+        expect(current_path).to eq(admin_merchants_path)
+        expect(page).to have_content('Field cannot be blank.')
+      end
+
       it "I see the names of the top 5 merchants by total revenue generated and I see that each merchant name links to the admin merchant show page for that merchant and I see the total reveneue generated next to each merchant name" do
         visit admin_merchants_path
 
