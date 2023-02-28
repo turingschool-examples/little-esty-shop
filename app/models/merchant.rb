@@ -12,13 +12,10 @@ class Merchant < ApplicationRecord
 
   def mech_top_5_successful_customers
     customers.joins(:transactions)
-    .select("customers.*, COUNT(transactions.id) AS transaction_count")
+    .select("customers.*, COUNT(DISTINCT transactions.id) AS transaction_count")
     .where(transactions: {result: 0})
     .group("customers.id")
     .order("transaction_count DESC")
     .limit(5)
   end
-
-
-  
 end
