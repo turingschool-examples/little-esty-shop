@@ -106,12 +106,16 @@ RSpec.describe 'Merchant Invoices', type: :feature do
           it "I'm returned to the merchant invoice show page, where the item's status has been changed" do
             visit merchant_invoice_path(sam.id, invoice1.id)
 
-            within "div#inv_item_status_update-#{baseball.id}" do
-              select 'pending', from: 'Status'
-              click_button "Update Item Status"
+            expect(@inv_item2.status).to eq('pending')
 
-              expect(current_path).to eq(merchant_invoice_path(sam.id, invoice1.id))
+            within "div#inv_item_status_update-#{baseball.id}" do
+              select 'packaged', from: 'Status'
+              click_button "Update Item Status"
+              @inv_item2.reload
             end
+            
+            expect(current_path).to eq(merchant_invoice_path(sam.id, invoice1.id))
+            expect(@inv_item2.status).to eq('packaged')
           end
         end
       end
