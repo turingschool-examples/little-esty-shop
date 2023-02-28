@@ -1,3 +1,4 @@
+require 'pry'; binding.pry
 require 'httpparty'
 
 class GithubService #services is what's pulling in the data 
@@ -7,7 +8,7 @@ class GithubService #services is what's pulling in the data
   end
 
   def commits 
-    get_url() #paste in the URL endpoint 
+    get_url("httpsq://api.github.com/repos/hadyematar23/little-esty-shop/commits") #paste in the URL endpoint 
   end
 
   # def pull_request
