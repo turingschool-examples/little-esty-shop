@@ -31,4 +31,16 @@ class Merchant < ApplicationRecord
 		.order("revenue DESC")
 		.limit(5)
   end
+
+  def date_with_most_revenue
+    # require 'pry'; binding.pry
+    invoices
+    .where(status: "completed")
+    .select("invoices.created_at, SUM(invoice_items.unit_price * invoice_items.quantity) as revenue")
+    .group("invoices.created_at")
+    .order(revenue: :desc)
+    .limit(1)
+    .first.created_at.strftime("%m/%d/%Y")
+    
+  end
 end
