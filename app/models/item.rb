@@ -11,6 +11,10 @@ class Item < ApplicationRecord
   validates :name, :description, :unit_price, presence: :true
 
   def item_best_day
-    invoices.order(:quantity).select('invoices.created_at, invoice_items.quantity').last.created_at
+    invoices.where('invoices.status = 1')
+      .select('invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+      .group('invoices.created_at')
+      .order("revenue desc", "invoices.created_at desc")
+      .first
   end
 end
