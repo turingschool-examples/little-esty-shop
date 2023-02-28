@@ -31,4 +31,18 @@ RSpec.describe 'Items/new' do
       expect(page).to have_content("Status: disabled")
     end
   end
+
+  context 'sad path, invalid form info' do
+    it 'the merchant/item index page displays flash message' do
+      fill_in "Name:", with: "Doo-dad"
+      fill_in "Description:", with: "Doo-dad things"
+      fill_in "Unit Price:", with: "Mike"
+
+      click_on "Submit"
+
+      expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+
+      expect(page).to have_content('Invalid input')
+    end
+  end
 end

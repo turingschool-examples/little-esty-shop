@@ -10,8 +10,14 @@ class ItemsController < ApplicationController
 
   def create
     merchant = Merchant.find(params[:merchant_id])
-    Item.create!(item_params)
-    redirect_to "/merchants/#{merchant.id}/items"
+    item = Item.new(item_params)
+    if item.valid?
+      item.save
+      redirect_to "/merchants/#{merchant.id}/items"
+    else
+      flash[:notice] = 'Invalid input'
+      redirect_to "/merchants/#{merchant.id}/items"
+    end
   end
   
   def edit
