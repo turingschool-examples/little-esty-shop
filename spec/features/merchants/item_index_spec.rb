@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Merchant Items Index" do
+RSpec.describe "Merchant Items Index", type: :feature do
   describe "As a merchant" do
 
     let!(:merchant1) { create(:merchant) }
@@ -28,24 +28,24 @@ RSpec.describe "Merchant Items Index" do
       end
     end
 
-      # 7. Merchant Items Show Page
-      context "When I click on the name of an item, Then I am taken to that merchant's item's show page" do
-        it "I should see all of the item's attributes" do
-          expect(page).to have_link("#{item1.name}")
-          expect(current_path).to eq("/merchants/#{merchant1.id}/items")
-        
-          click_link("#{item1.name}")
-          expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}")
+    # 7. Merchant Items Show Page
+    context "When I click on the name of an item, Then I am taken to that merchant's item's show page" do
+      it "I should see all of the item's attributes" do
+        expect(page).to have_link("#{item1.name}")
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+      
+        click_link("#{item1.name}")
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}")
 
-          expect(page).to have_content(item1.name)
-          expect(page).to have_content(item1.description)
-          expect(page).to have_content(item1.unit_price.to_f / 100)
+        expect(page).to have_content(item1.name)
+        expect(page).to have_content(item1.description)
+        expect(page).to have_content(item1.unit_price.to_f / 100)
 
-          expect(page).to_not have_content(item3.name)
-          expect(page).to_not have_content(item3.description)
-          expect(page).to_not have_content(item3.unit_price)
-        end
+        expect(page).to_not have_content(item3.name)
+        expect(page).to_not have_content(item3.description)
+        expect(page).to_not have_content(item3.unit_price)
       end
+    end
 
       # 9. Merchant Item Disable/Enable
     describe 'When I visit my items index page' do
@@ -126,22 +126,22 @@ RSpec.describe "Merchant Items Index" do
           item_6 = create(:item, merchant_id: merchant_1.id)
           item_7 = create(:item, merchant_id: merchant_2.id)
           item_8 = create(:item, merchant_id: merchant_2.id)
-          invoice_1 = create(:invoice, customer_id: customer_1.id)
-          invoice_2 = create(:invoice, customer_id: customer_1.id)
-          invoice_3 = create(:invoice, customer_id: customer_1.id)
-          invoice_4 = create(:invoice, customer_id: customer_1.id)
-          invoice_5 = create(:invoice, customer_id: customer_1.id)
-          invoice_6 = create(:invoice, customer_id: customer_1.id)
-          invoice_7 = create(:invoice, customer_id: customer_1.id)
-          invoice_8 = create(:invoice, customer_id: customer_1.id)
-          invoice_item_1 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 10, invoice_id: invoice_1.id )
-          invoice_item_2 = create(:invoice_item, item_id: item_2.id, quantity: 10, unit_price: 8, invoice_id: invoice_2.id )
-          invoice_item_3 = create(:invoice_item, item_id: item_3.id, quantity: 10, unit_price: 6, invoice_id: invoice_3.id )
-          invoice_item_4 = create(:invoice_item, item_id: item_4.id, quantity: 10, unit_price: 4, invoice_id: invoice_4.id )
-          invoice_item_5 = create(:invoice_item, item_id: item_5.id, quantity: 10, unit_price: 2, invoice_id: invoice_5.id )
-          invoice_item_6 = create(:invoice_item, item_id: item_6.id, quantity: 10, unit_price: 1, invoice_id: invoice_6.id )
-          invoice_item_7 = create(:invoice_item, item_id: item_7.id, quantity: 10, unit_price: 100, invoice_id: invoice_7.id )
-          invoice_item_8 = create(:invoice_item, item_id: item_8.id, quantity: 10, unit_price: 100, invoice_id: invoice_8.id )
+          invoice_1 = create(:invoice, customer_id: customer_1.id, status: "completed")
+          invoice_2 = create(:invoice, customer_id: customer_1.id, status: "completed")
+          invoice_3 = create(:invoice, customer_id: customer_1.id, status: "completed")
+          invoice_4 = create(:invoice, customer_id: customer_1.id, status: "completed")
+          invoice_5 = create(:invoice, customer_id: customer_1.id, status: "completed")
+          invoice_6 = create(:invoice, customer_id: customer_1.id, status: "completed")
+          invoice_7 = create(:invoice, customer_id: customer_1.id, status: "completed")
+          invoice_8 = create(:invoice, customer_id: customer_1.id, status: "completed")
+          invoice_item_1 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 10, invoice_id: invoice_1.id, status: "shipped" )
+          invoice_item_2 = create(:invoice_item, item_id: item_2.id, quantity: 10, unit_price: 8, invoice_id: invoice_2.id, status: "shipped" )
+          invoice_item_3 = create(:invoice_item, item_id: item_3.id, quantity: 10, unit_price: 6, invoice_id: invoice_3.id, status: "shipped" )
+          invoice_item_4 = create(:invoice_item, item_id: item_4.id, quantity: 10, unit_price: 4, invoice_id: invoice_4.id, status: "shipped" )
+          invoice_item_5 = create(:invoice_item, item_id: item_5.id, quantity: 10, unit_price: 2, invoice_id: invoice_5.id, status: "pending" )
+          invoice_item_6 = create(:invoice_item, item_id: item_6.id, quantity: 10, unit_price: 1, invoice_id: invoice_6.id, status: "shipped" )
+          invoice_item_7 = create(:invoice_item, item_id: item_7.id, quantity: 10, unit_price: 100, invoice_id: invoice_7.id, status: "shipped" )
+          invoice_item_8 = create(:invoice_item, item_id: item_8.id, quantity: 10, unit_price: 100, invoice_id: invoice_8.id, status: "shipped" )
           transaction_1 = create(:transaction, invoice_id: invoice_1.id, result: 'success')
           transaction_2 = create(:transaction, invoice_id: invoice_2.id, result: 'success')
           transaction_3 = create(:transaction, invoice_id: invoice_3.id, result: 'success')
@@ -152,7 +152,6 @@ RSpec.describe "Merchant Items Index" do
           transaction_8 = create(:transaction, invoice_id: invoice_8.id, result: 'success')
 
           visit "/merchants/#{merchant_1.id}/items"
-
           expect(page).to have_content("Top 5 Most Popular Items (By Revenue)")
           
           within "#top_5_items" do
@@ -170,7 +169,7 @@ RSpec.describe "Merchant Items Index" do
           end
 
           click_on "#{item_1.name}"
-
+          
           expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_1.id}")
         end
       end
@@ -219,6 +218,6 @@ RSpec.describe "Merchant Items Index" do
           expect(page).to have_content("Top selling date for #{item_1.name} was January 28, 2019")
         end
       end
-    end
+    
   end
 end

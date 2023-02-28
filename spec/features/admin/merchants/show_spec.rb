@@ -5,12 +5,13 @@ require 'rails_helper'
 describe 'Admin Merchants show page' do
   describe 'As an admin' do
     before do
-      @merchant_1 = create(:merchant)
-      @merchant_2 = create(:merchant)
+      @merchant_1 = create(:merchant, name: "Buggy Services")
+      @merchant_2 = create(:merchant, name: "The Eraser Store")
     end
     describe 'When I click on the name of a merchant from the admin merchants index page' do
       it "I am taken to that merchant's admin show page (/admin/merchants/merchant_id) and I see the name of that merchant" do
         visit admin_merchants_path
+        
         click_link(@merchant_1.name.to_s)
 
         expect(current_path).to eq(admin_merchant_path(@merchant_1))

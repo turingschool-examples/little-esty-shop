@@ -92,8 +92,8 @@ describe 'Admin Merchants index page' do
       it "I see the date with the most revenue for each merchant with a label 'Top selling date for <merchant name> was <date with most sales>'" do
         visit admin_merchants_path
   
-        expect(page).to have_content("Top selling date for #{merchant_2.name} was #{invoice_2.created_at}")
-        expect(page).to have_content("Top selling date for #{merchant_3.name} was #{invoice_3.created_at}")
+        expect(page).to have_content("Top selling date for #{merchant_2.name} was #{invoice_2.created_at.strftime("%A, %B %e, %Y")}")
+        expect(page).to have_content("Top selling date for #{merchant_3.name} was #{invoice_3.created_at.strftime("%A, %B %e, %Y")}")
       end
     end
  
