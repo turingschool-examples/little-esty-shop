@@ -61,7 +61,7 @@ RSpec.describe "Merchant Items Index" do
         within "#item-#{item1.id}" do
           click_button('Enable')
         end
-
+        save_and_open_page
         expect(current_path).to eq("/merchants/#{merchant1.id}/items")
 
         within "#item-#{item1.id}" do
@@ -147,7 +147,7 @@ RSpec.describe "Merchant Items Index" do
             click_on "#{item_1.name}"
 
             expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_1.id}")
-        end
+          end
         end
       end
     end
