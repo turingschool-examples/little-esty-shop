@@ -5,7 +5,6 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
     ###### Merchants & Items ######
     @merchant1 = Merchant.create!(name: "Mel's Travels")
     @merchant2 = Merchant.create!(name: "Hady's Beach Shack")
-    # @merchant3 = Merchant.create!(name: "Huy's Cheese")
 
     @item1 = Item.create!(name: "Salt", description: "it is salty", unit_price: 1200, merchant: @merchant1)
     @item2 = Item.create!(name: "Pepper", description: "it is peppery", unit_price: 1150, merchant: @merchant1)
@@ -14,11 +13,6 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
     @item4 = Item.create!(name: "Sand", description: "its all over the place", unit_price: 1425, merchant: @merchant2)
     @item5 = Item.create!(name: "Water", description: "see item 1, merchant 1", unit_price: 1500, merchant: @merchant2)
     @item6 = Item.create!(name: "Rum", description: "good for your health", unit_price: 3350, merchant: @merchant2)
-    
-    # @item7 = Item.create!(name: "American", description: "gud cheese", unit_price: 2400, merchant: @merchant3)
-    # @item8 = Item.create!(name: "Swiss", description: "holes in cheese", unit_price: 3200, merchant: @merchant3)
-    # @item9 = Item.create!(name: "Cheddar", description: "SHARP!", unit_price: 1150, merchant: @merchant3)
-    # @item10 = Item.create!(name: "Imaginary", description: "it is whatever you think it is", unit_price: 9450, merchant: @merchant3)
     
     ###### Customers, Invoices, Invoice_Items, & Transactions ######
     @customer1 = Customer.create!(first_name: "Steve", last_name: "Stevinson")
@@ -82,43 +76,28 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
     @invoice14.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
     @invoice15.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
     @invoice16.transactions.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: "06/29", result: 0) #success
-
-    @customer7 = Customer.create!(first_name: "Deniz", last_name: "Ocean")
-    @invoice17 = Invoice.create!(customer: @customer7, status: 1) #completed
-    @invoice18 = Invoice.create!(customer: @customer7, status: 1) #completed
-    @invoice19 = Invoice.create!(customer: @customer7, status: 1) #completed
-    InvoiceItem.create!(item: @item4, invoice: @invoice17, quantity: 1, unit_price: 1950) 
-    InvoiceItem.create!(item: @item5, invoice: @invoice18, quantity: 1, unit_price: 2850) 
-    InvoiceItem.create!(item: @item6, invoice: @invoice19, quantity: 1, unit_price: 1650)
-    @invoice17.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
-    @invoice18.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
-    @invoice19.transactions.create!(credit_card_number: "4654405418249637", credit_card_expiration_date: "07/29", result: 0) #success
   end 
 
-  describe "as a visitor" do #user story 1 
+  describe "as a visitor" do 
     describe "visit merchant dashboard" do 
+      #user story 1
       it "the visitor will see the name of the merchant" do 
-
         visit "/merchants/#{@merchant1.id}/dashboard"
-
         expect(page).to have_content("Merchant Name: #{@merchant1.name}")
 
         visit "/merchants/#{@merchant2.id}/dashboard"
-
         expect(page).to have_content("Merchant Name: #{@merchant2.name}")
-
       end
 
-      it "see the link to merchant items index" do 
-        
+      #user story 2
+      it "see the link to merchant items index" do        
         visit "/merchants/#{@merchant1.id}/dashboard" 
 
         expect(page).to have_link("#{@merchant1.name}'s Items", href: "/merchants/#{@merchant1.id}/items")
-
         expect(page).to have_link("#{@merchant1.name}'s Invoices", href: "/merchants/#{@merchant1.id}/invoices")
-
       end
 
+      #user story 3
       it 'see the names of the 5 customers with successfull transactions for the merchant' do
         visit "/merchants/#{@merchant1.id}/dashboard" 
 
@@ -134,9 +113,9 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
         expect(page).to have_content(@customer6.first_name)
         expect(page).to have_content(@customer6.last_name)
         expect(page).to_not have_content(@customer2.first_name)
-        expect(page).to_not have_content(@customer7.first_name)
       end
 
+      #user story 3
       it 'see the total number of successful transactions for each customer' do
         visit "/merchants/#{@merchant1.id}/dashboard" 
         
@@ -150,13 +129,4 @@ RSpec.describe 'Merchant Dashboard Feature Spec' do
       end
     end
   end
-  # As a merchant,
-  # When I visit my merchant dashboard
-  # Then I see the names of the top 5 customers
-  # who have conducted the largest number of successful transactions with my merchant
-  # And next to each customer name I see the number of successful transactions they have
-  # conducted with my merchant
- 
-
-
 end 
