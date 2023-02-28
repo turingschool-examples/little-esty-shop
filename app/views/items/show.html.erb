@@ -3,7 +3,6 @@
 <% @items.each do |item| %>
   <h3><%= item.name %></h3>
   <p><%= link_to "Update #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}/edit" %></p>
-
   <p><%= item.description %></p>
   <p><%= format_price(item.unit_price) %></p>
 <% end %>
