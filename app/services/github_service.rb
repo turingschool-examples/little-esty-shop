@@ -14,7 +14,7 @@ class GithubService
   end
 
   def pull_requests
-    get_url('https://api.github.com/repos/axeldelaguardia/little-esty-shop/pulls?state=closed', headers: {"Authorization" => "GITHUB_TOKEN"})
+    get_url('https://api.github.com/repos/axeldelaguardia/little-esty-shop/pulls?state=closed', headers: {"Authorization" => "Bearer #{ENV["github_api_key"]}"})
   end
 
   def get_url(url, token)
