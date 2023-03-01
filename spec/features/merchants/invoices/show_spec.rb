@@ -73,6 +73,16 @@ describe 'As a merchant', type: :feature do
       expect(page).to_not have_content(item5.name)
     end
 
+    it 'will have a list of all usernames of contributors' do 
+      visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
+      
+      expect(page).to have_content("Collaborators")
+      expect(page).to have_content("Bphayes1200")
+      expect(page).to have_content("MATrevino")
+      expect(page).to have_content("hamouj")
+      expect(page).to have_content("axeldelaguardia")
+    end 
+
     describe "shows each invoice item status is a select field, the invoice item's current status is selected" do
       it 'when click select field, then I can select a new status for the item, next to field is a button to update item status' do
         visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
