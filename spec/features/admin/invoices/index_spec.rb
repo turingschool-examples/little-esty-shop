@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Invoices Index Page' do
+RSpec.describe 'Admin Invoices Index Page', type: :feature do
 
 before(:each) do 
   repo_call = File.read('spec/fixtures/repo_call.json')
@@ -26,7 +26,6 @@ before(:each) do
        }
   )
   .to_return(status: 200, body: contributors_call, headers: {})
-
 
   repo_call = File.read('spec/fixtures/pull_request_call.json')
   stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop/pulls?state=closed')

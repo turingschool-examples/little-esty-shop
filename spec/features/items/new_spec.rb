@@ -1,7 +1,43 @@
 require 'rails_helper'
 
-RSpec.describe 'Items New Spec Page' do
+RSpec.describe 'Items New Spec Page', type: :feature do
   before(:each) do 
+    repo_call = File.read('spec/fixtures/repo_call.json')
+    stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop')
+    .with(
+      headers: {
+        'Accept'=>'*/*',
+        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Authorization'=>"Bearer #{ENV['github_token']}",
+        'User-Agent'=>'Faraday v2.7.4'
+         }
+    )
+    .to_return(status: 200, body: repo_call, headers: {})
+    
+    contributors_call = File.read('spec/fixtures/contributors_call.json')
+    stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop/contributors')
+     .with(
+      headers: {
+        'Accept'=>'*/*',
+        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Authorization'=>"Bearer #{ENV['github_token']}",
+        'User-Agent'=>'Faraday v2.7.4'
+         }
+    )
+    .to_return(status: 200, body: contributors_call, headers: {})
+  
+    repo_call = File.read('spec/fixtures/pull_request_call.json')
+    stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop/pulls?state=closed')
+    .with(
+      headers: {
+        'Accept'=>'*/*',
+        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Authorization'=>"Bearer #{ENV['github_token']}",
+        'User-Agent'=>'Faraday v2.7.4'
+         }
+    )
+    .to_return(status: 200, body: repo_call, headers: {})
+
     @merchant1 = Merchant.create!(name: "Hady", uuid: 1) 
     @merchant2 = Merchant.create!(name: "Malena", uuid: 2) 
 
