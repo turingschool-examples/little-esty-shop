@@ -6,7 +6,6 @@ class ItemsController < ApplicationController
     @top_5_items = @items.top_5_by_revenue
     @enabled_items = @items.enabled
     @disabled_items = @items.disabled
-    # require 'pry'; binding.pry
   end
 
   def show
