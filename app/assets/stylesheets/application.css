@@ -161,3 +161,8 @@ tbody tr:nth-child(even) {
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
+footer {
+  border-top: solid;
+  background-color: rgb(175, 182, 195);
+}

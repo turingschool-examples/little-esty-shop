@@ -21,6 +21,15 @@
       <br>
 
       <%= yield %>
+      
+      <footer>        
+        <p><%= "Repository name: #{@repo_name.name}" %></p>
+        <p><%= "Number of Merged Pull Requests: #{@pull_requests.pull_request_count}" %></p>
+        <p><%= "Users:"%></p>
+        <% @contributors.each do |contributor| %>
+          <p><%= "#{contributor.user_name}'s commits: #{contributor.commits}" %></p>
+        <% end %>
+      </footer>
     </div>
   </body>
 </html>

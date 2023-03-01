@@ -1,8 +1,7 @@
 class Repo
-  attr_reader :name
+  attr_reader :name, :pull_request_count
 
-  def initialize(data)
-    require 'pry'; binding.pry
-    @name = data[:name]
+  def initialize(name)
+    @name = name
   end
 end
