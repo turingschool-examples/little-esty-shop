@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "admin merchants edit", :vcr do
+RSpec.describe "admin merchants edit" do
 
   describe 'merchant edit' do
     it 'links to a merchant edit page' do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant/Items Index Page', :vcr do
+RSpec.describe 'Merchant/Items Index Page' do
   describe "as a merchant" do 
     describe "when merchant visit 'merchants/merchant_id/items'" do
       let!(:schroeder_jerde) { Merchant.create!(name: 'Schroeder-Jerde')}
@@ -8,7 +8,7 @@ RSpec.describe 'Merchant/Items Index Page', :vcr do
       let!(:autem) {Item.create!(merchant: schroeder_jerde, name: 'Autem Minima', unit_price: 67076) }
       let!(:ea) {Item.create!(merchant: schroeder_jerde, name: 'Ea Voluptatum', unit_price: 32301) }
 
-      it "should see a list of all that merchant items and not other merchant", :vcr do
+      it "should see a list of all that merchant items and not other merchant" do
         visit "/merchants/#{schroeder_jerde.id}/items"
         expect(page).to have_content(qui.name)
         expect(page).to have_content(autem.name)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'edit', :vcr, type: :feature do
+RSpec.describe 'edit', type: :feature do
   describe "when merchant visit /merchants/merchant_id/items" do
     let!(:schroeder_jerde) { Merchant.create!(name: 'Schroeder-Jerde')}
     let!(:qui) {Item.create!(merchant: schroeder_jerde, name: 'Qui Esse', unit_price: 75107, description: "Cooling") }

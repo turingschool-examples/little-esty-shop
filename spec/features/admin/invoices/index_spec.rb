@@ -1,7 +1,20 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Invoices Index Page', :vcr do
+RSpec.describe 'Admin Invoices Index Page' do
+
 before(:each) do 
+  repo_call = File.read('spec/fixtures/repo_call.json')
+  stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop')
+  .with(
+    headers: {
+      'Accept'=>'*/*',
+      'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+      'Authorization'=>"Bearer #{ENV['github_token']}",
+      'User-Agent'=>'Faraday v2.7.4'
+       }
+  )
+  .to_return(status: 200, body: repo_call, headers: {})
+
   @merchant1 = Merchant.create!(name: "Hady", uuid: 1) 
   @merchant2 = Merchant.create!(name: "Malena", uuid: 2) 
 
@@ -18,8 +31,6 @@ before(:each) do
   @invoice_2 = @customer_1.invoices.create(status: 0)
   @invoice_3 = @customer_1.invoices.create(status: 0)
   
-  # InvoiceItem.create(item: @item_1, invoice: @invoice_1, quantity: 1, unit_price: @item_1.unit_price)
-
 end 
 
   describe "as an admin" do 
@@ -27,7 +38,7 @@ end
       it "see list of invoice IDs in the system" do 
 
         visit "/admin/invoices"
-        
+        expect(page).to have_content('little-esty-shop')
         expect(page).to have_link("Invoice Number #{@invoice_1.id}", href: "/invoices/#{@invoice_1.id}")
         expect(page).to have_link("Invoice Number #{@invoice_2.id}", href: "/invoices/#{@invoice_2.id}")
         expect(page).to have_link("Invoice Number #{@invoice_3.id}", href: "/invoices/#{@invoice_3.id}")
