@@ -210,7 +210,7 @@ RSpec.describe "Merchant Items Index", type: :feature do
         transaction_6 = create(:transaction, invoice_id: invoice_6.id, result: 'success')
         transaction_7 = create(:transaction, invoice_id: invoice_7.id, result: 'success')
         transaction_8 = create(:transaction, invoice_id: invoice_8.id, result: 'success')
-        # require 'pry'; binding.pry
+  
         visit "/merchants/#{merchant_1.id}/items"
   
         within "#top_5_items" do

@@ -35,7 +35,7 @@ describe 'Admin Invoices show page' do
       it "I see the total revenue that will be generated from this invoice" do
         visit admin_invoice_path(invoice_2)
         
-        expect(page).to have_content("Total revenue to be generated: $1.80")
+        expect(page).to have_content("Total Revenue: $1.80")
       end
 
       it "I see the invoice status is a select field and I see that the invoice's current status is selected when I click this select field. Then I can select a new status for the Invoice, and next to the select field I see a button to 'Update Invoice Status'. When I click this button I am taken back to the admin invoice show page and I see that my Invoice's status has now been updated" do
