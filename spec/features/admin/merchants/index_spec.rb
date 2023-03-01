@@ -39,6 +39,9 @@ RSpec.describe '#index' do
         click_button "Enable"
         expect(current_path).to eq admin_merchants_path
         expect(page).to have_button("Disable")
+        click_button "Disable"
+        expect(current_path).to eq admin_merchants_path
+        expect(page).to have_button("Enable")
       end
 
       within "#id-#{@merchant2.id}" do
@@ -46,6 +49,9 @@ RSpec.describe '#index' do
         click_button "Enable"
         expect(current_path).to eq admin_merchants_path
         expect(page).to have_button("Disable")
+        click_button "Disable"
+        expect(current_path).to eq admin_merchants_path
+        expect(page).to have_button("Enable")
       end
     end
 
@@ -68,6 +74,15 @@ RSpec.describe '#index' do
       expect(page).to have_content("Newest Merchant")
     end
 
+    it 'if I leave the name field blank, I see a flash message indicating that I need to fill in a name field and I am returned to the form to create a new merchant' do
+      click_link "Create New Merchant"
+      fill_in "Name", with: ""
+
+      click_button "Create Merchant"
+      expect(current_path).to eq '/merchants/new'
+      expect(page).to have_content("Merchant not created: Name can't be blank")
+    end
+
 
     it 'I see the date with the most revenue for each merchant' do
       load_test_data
@@ -88,7 +103,7 @@ RSpec.describe '#index' do
       within "#top-5-merchants" do
       
         expect(page).to have_content("Top 5 Merchants by Revenue")
-        expect(page).to have_content "Melissa Jenkins -- Total Revenue: $66414"
+        expect(page).to have_content "Melissa Jenkins -- Total Revenue: $664.14"
         expect("Melissa Jenkins").to appear_before("Mickey Mantle")
         expect("Mickey Mantle").to appear_before("Human who sells stuff")
         expect("Human who sells stuff").to appear_before("Carlos Jenkins")
