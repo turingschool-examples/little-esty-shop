@@ -100,3 +100,41 @@ h1 span {
   padding-bottom: 8px;
   display: flex;
 }
+
+.wide_container {
+  min-width: 100%;
+  display: inline-block;
+}
+
+.wide_header {
+  margin: 10px;
+  border-top: solid;
+  text-align: center;
+  background-color: rgb(175, 182, 195);
+  font-weight: bold;
+  font-size: 25px;  
+}
+table {
+  border: 1px solid;
+}
+tbody th {
+  width: 200px;
+  background-color: rgb(155, 161, 173);
+  text-align: center;
+  border: 1px solid;
+}
+
+tbody td {
+  text-align: center;
+  border: 1px solid;
+  padding: 5px; 
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgb(219, 226, 240);
+}
+
+.table_container {
+  margin-left: 40px;
+  margin-bottom: 20px;
+}
