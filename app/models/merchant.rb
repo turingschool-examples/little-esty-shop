@@ -21,9 +21,10 @@ class Merchant < ApplicationRecord
 
   def invoice_items_ready_to_ship
     invoice_items.joins(:invoice)
+    .select("invoice_items.*, items.name, invoices.created_at, invoices.id as invoice_id")
     .where(status: "packaged")
-    .order(created_at: :asc)
     .distinct
+    .order("invoices.created_at")
   end
 
   def top_five_merchant_items
