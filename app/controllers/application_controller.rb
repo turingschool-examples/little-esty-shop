@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
-  before_action :repo_name
+
+	before_action :users, :repo_name
+
+	def users
+		@users = UsersSearch.new.users_information
+	end
 
   def repo_name
     @repo_name = RepoNameSearch.new.repo_name_information

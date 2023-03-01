@@ -51,5 +51,15 @@ RSpec.describe "merchant's invoices index  page", type: :feature do
 
       expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice1.id}")
     end
+
+    it 'will have a list of all usernames of contributors' do 
+      visit "/merchants/#{merchant1.id}/invoices"
+      
+      expect(page).to have_content("Collaborators")
+      expect(page).to have_content("Bphayes1200")
+      expect(page).to have_content("MATrevino")
+      expect(page).to have_content("hamouj")
+      expect(page).to have_content("axeldelaguardia")
+    end
   end
 end
