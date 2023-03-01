@@ -27,9 +27,10 @@
     <ul>
       <% @enabled_items.each do |item| %>
         <div id="enabled-item-<%= item.id %>"> 
-          <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |f| %>
+          <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |f| %>
             <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p></li>
             <p><%= f.button "Disable #{item.name}", type: "submit", name: "status", value: "disabled" %></p>
+            <p><%= f.hidden_field :to_index %></p>
           <% end %>
         </div>
       <% end %>
@@ -41,9 +42,10 @@
     <ul>
       <% @disabled_items.each do |item| %>
         <div id="disabled-item-<%= item.id %>">
-          <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |f| %>
+          <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |f| %>
             <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p></li>
             <p><%= f.button "Enable #{item.name}", type: "submit", name: "status", value: "enabled" %></p>
+            <p><%= f.hidden_field :to_index %></p>
           <% end %>
         </div>
       <% end %>
