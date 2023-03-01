@@ -1,0 +1,15 @@
+<div class="main_container">
+  <div class="body_container">
+    <div class="sub_container">
+      <p><%= link_to "Admin Dashboard", admin_index_path %></p>
+    </div>
+    <div id="merchant_dashboards_links">
+      <div class="sub_container">
+        <p>Merchants</p>
+          <% @merchants.each do |merchant| %>
+            <p><%= link_to "#{merchant.name} Dashboard", merchant_dashboard_index_path(merchant) %></p>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

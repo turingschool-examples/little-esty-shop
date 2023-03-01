@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "welcome#index"
+  
   resources :merchants do
     resources :items, except: [:destroy], controller: "merchants/items"
     resources :invoices, only: [:index, :show], controller: "merchants/invoices"
