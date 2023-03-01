@@ -1,10 +1,4 @@
 
-<%= form_with model: [ :merchant, @item ], local: true do |f| %>
-	<%= f.label :name %>
-	<%= f.text_field :name %>
-	<%= f.label :description %>
-	<%= f.text_area :description %>
-	<%= f.label :unit_price, 'Unit Price' %>
-	<%= f.number_field :unit_price %>
-	<%= f.submit %>
-<% end %>
+<%= render partial: 'new_form', locals: {
+model: [ :merchant, @item ],
+method: :post }%>
