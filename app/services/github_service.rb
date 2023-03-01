@@ -10,7 +10,7 @@ class GithubService
   end
 
   def pulls
-    get_url("https://api.github.com/repos/torienyart/little-esty-shop/pulls?state=closed&per_page=100", headers: {"Authorization" => "Bearer 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"})
+    get_url("https://api.github.com/repos/torienyart/little-esty-shop/pulls?state=closed&per_page=100", headers: {"Authorization" => "Bearer #{ENV['github_token']}"})
 
   end
 
