@@ -256,10 +256,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   factory_bot_rails
   faker
-
-
   figaro
-
   httparty
   jbuilder (~> 2.5)
   launchy
