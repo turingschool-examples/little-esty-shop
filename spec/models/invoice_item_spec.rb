@@ -26,7 +26,6 @@ RSpec.describe InvoiceItem, type: :model do
       @invoice_3 = @customer_1.invoices.create(status: 0)
 
       @invoice_item1 = FactoryBot.create(:invoice_item, quantity: 1, invoice_id: @invoice_1.id, unit_price: 5, item_id: @item_1.id)
-
       @invoice_item2 = FactoryBot.create(:invoice_item, quantity: 2, invoice_id: @invoice_1.id, unit_price: 15, item_id: @item_1.id)
 
       expect(@invoice_1.invoice_items.invoice_total_revenue).to eq(35)

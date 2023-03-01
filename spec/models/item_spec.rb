@@ -53,7 +53,6 @@ RSpec.describe Item, type: :model do
         @invoice_items_11 = FactoryBot.create(:invoice_item, invoice: @invoices[0], item: @item[9], unit_price: 1, quantity: 7)
 
         expect(Item.five_popular_items).to eq([@item[9], @item[3], @item[10], @item[8], @item[7]])
-
       end
 
       it "generates the revenue for each item " do 
@@ -79,8 +78,6 @@ RSpec.describe Item, type: :model do
 
         expect(Item.five_popular_items.first.revenue_generated).to eq(17)
         expect(Item.five_popular_items.second.revenue_generated).to eq(14)
-
-
       end
     end
   end
