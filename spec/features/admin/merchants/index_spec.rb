@@ -39,6 +39,9 @@ RSpec.describe '#index' do
         click_button "Enable"
         expect(current_path).to eq admin_merchants_path
         expect(page).to have_button("Disable")
+        click_button "Disable"
+        expect(current_path).to eq admin_merchants_path
+        expect(page).to have_button("Enable")
       end
 
       within "#id-#{@merchant2.id}" do
@@ -46,6 +49,9 @@ RSpec.describe '#index' do
         click_button "Enable"
         expect(current_path).to eq admin_merchants_path
         expect(page).to have_button("Disable")
+        click_button "Disable"
+        expect(current_path).to eq admin_merchants_path
+        expect(page).to have_button("Enable")
       end
     end
 

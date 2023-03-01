@@ -1,5 +1,4 @@
 <%= form_with url: "/merchants/#{@merchant.id}/items", method: :post, local: true do |form| %>
-<%# <%= form_with(model: [@merchant, @item], url: "/merchants/#{@merchant.id}/items", method: :post) do |form| %> %>
   <p><%= form.label :name, "Item Name: " %></p>
   <p><%= form.text_field :name, required: true %></p>
   <br>

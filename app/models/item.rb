@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   enum status: [:disabled, :enabled]
 
   validates :name, :description, :unit_price, presence: :true
+  validates :unit_price, numericality: { only_numeric: true }
 
   def item_best_day
     invoices.where('invoices.status = 1')
