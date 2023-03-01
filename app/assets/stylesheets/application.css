@@ -13,3 +13,114 @@
  *= require_tree .
  *= require_self
  */
+
+
+ .top-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+  margin-bottom: 25px;
+ }
+
+ .links-container {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  gap: 10px;
+ }
+
+ ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  /* width: 100%; */
+  padding: 50px;
+ }
+
+.enabled-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+ }
+
+ a {
+  text-decoration: none;
+
+  align-items: center;
+  text-decoration: none;
+  padding: 5px;
+  cursor: pointer;
+  background-color: #f1f3f6;
+  color: #4a5568;
+  border: white;
+  border-radius: 6px;
+  box-shadow: 0px 2px 2px 2px rgba(216, 216, 216, 0.6);
+ }
+
+ a {
+  text-decoration: none;
+
+  align-items: center;
+  text-decoration: none;
+  padding: 5px;
+  cursor: pointer;
+  background-color: #f1f3f6;
+  color: #4a5568;
+  border: white;
+  border-radius: 6px;
+  box-shadow: 0px 2px 2px 2px rgba(216, 216, 216, 0.6);
+ }
+
+ li {
+  padding: 10px;
+ }
+
+ body {
+  font-family: Helvetica;
+  padding: 10px;
+ }
+
+.header {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+ h1 {
+  text-align: center;
+  color: white;
+  border: white;
+  background: grey;
+  width: 50%;
+  padding: 10px;
+  border-radius: 8px;
+ }
+
+ h3 {
+  text-align: center;
+ }
+
+ .main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 20px;
+ }
+
+ .left-container {
+  display: flex;
+  flex-direction: column;
+ }
+
+ .right-container {
+  display: flex;
+  flex-direction: column;
+ }
