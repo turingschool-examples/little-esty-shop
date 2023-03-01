@@ -4,9 +4,7 @@ RSpec.describe 'repo_name appears on all pages' do
 	let!(:merchant1) { create(:active_merchant)}
 	let!(:item1) {create(:item, merchant: merchant1, name: 'item 1')}
 	let!(:customer1) { create(:customer)}
-	
   let!(:invoice1) { create(:completed_invoice, customer: customer1, created_at: Date.new(2014, 4, 1))}
-  
   
   it "show repo_name of 'little-esty-shop' on admin merchant show page" do
     visit "/admin/merchants/#{merchant1.id}"
