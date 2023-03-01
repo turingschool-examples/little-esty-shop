@@ -35,8 +35,8 @@ RSpec.describe "Merchant_Items#Show", type: :feature do
 
   describe "User Story 8" do
     it "has a link to update the item that takes me to an edit page" do
-      expect(page).to have_link("Edit Item", href: "/merchants/#{@merchant.id}/items/#{@item_1.id}/edit")
-      click_link "Edit Item"
+      expect(page).to have_link("Update Item", href: "/merchants/#{@merchant.id}/items/#{@item_1.id}/edit")
+      click_link "Update Item"
       expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}/edit")
     end
   end

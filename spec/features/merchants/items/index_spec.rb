@@ -20,13 +20,13 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
     @invoice_6 = create(:invoice, customer_id: @customer_6.id, created_at: Date.new(2018,1,1))
     @invoice_7 = create(:invoice, customer_id: @customer_6.id, created_at: Date.new(2017,1,1))
 
-    @item_1 = create(:item, merchant: @merchant)
-    @item_2 = create(:item, merchant: @merchant)
+    @item_1 = create(:item, merchant: @merchant, name: "GoldenEye 007")
+    @item_2 = create(:item, merchant: @merchant, name: "Connect-Four")
     @item_3 = create(:item, merchant: @merchant_2)
-    @item_4 = create(:item, merchant: @merchant, status: "Enabled")
-    @item_5 = create(:item, merchant: @merchant, status: "Enabled")
-    @item_6 = create(:item, merchant: @merchant)
-    @item_7 = create(:item, merchant: @merchant)
+    @item_4 = create(:item, merchant: @merchant, name: "Chris Beats", status: "Enabled")
+    @item_5 = create(:item, merchant: @merchant, name: "Super Adbul World", status: "Enabled")
+    @item_6 = create(:item, merchant: @merchant, name: "BattleShip")
+    @item_7 = create(:item, merchant: @merchant, name: "Khoa-Or-Peace")
 
     @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, quantity: 1, status: "packaged", created_at: Date.new(2023,1,1))
     @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2, quantity: 1, status: "packaged", created_at: Date.new(2023,1,2))
@@ -56,12 +56,10 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
 
   describe "User Story 7" do
     it "the item names are links to the appropriate show page" do
-      within("#merchant_item-#{@item_1.id}") do
-        click_link("#{@item_1.name}")
-        expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}")
+      within("#merchant_item_disabled-#{@item_1.id}") do
+        click_link(@item_1.name, :match => :one)
       end
-      expect(page).to have_content(@item_1.name)
-      expect(page).to_not have_content(@item_2.name)
+      expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}")
     end
   end
 
@@ -69,19 +67,19 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
     it "Next to each item name I see a button to disable or enable that item. When I click this button 
       then I am redirected back to the items index and I see that the items status has changed" do
       
-      within("#merchant_item-#{@item_1.id}")  {
+      within("#merchant_item_disabled-#{@item_1.id}")  {
         expect(page).to have_button("Enable")
         expect(page).to_not have_button("Disable")
         click_button "Enable"
       }
  
-      within("#merchant_item-#{@item_1.id}")  {
+      within("#merchant_item_enabled-#{@item_1.id}")  {
         expect(page).to_not have_button("Enable")
         expect(page).to have_button("Disable")
         click_button "Disable"
       }
       
-      within("#merchant_item-#{@item_1.id}")  {
+      within("#merchant_item_disabled-#{@item_1.id}")  {
         expect(page).to have_button("Enable")
       }
       expect(current_path).to eq("/merchants/#{@merchant.id}/items")
@@ -93,14 +91,14 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
       And I see that each Item is listed in the appropriate section" do
       expect(page).to have_content("Enabled Items")
       
-      within("#disabled")  {
+      within("#disabled_items")  {
         expect(page).to have_content("#{@item_1.name}")
         expect(page).to have_content("#{@item_2.name}")
       }
       
       expect(page).to have_content("Disabled Items")
       
-      within("#enabled")  {
+      within("#enabled_items")  {
         expect(page).to have_content("#{@item_4.name}")
         expect(page).to have_content("#{@item_5.name}")
       }

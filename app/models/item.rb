@@ -1,6 +1,11 @@
 class Item < ApplicationRecord
   enum status: ["Enabled", "Disabled"]
 
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :status, presence: true
+  validates :unit_price, presence: true, numericality: true
+
   belongs_to :merchant
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
