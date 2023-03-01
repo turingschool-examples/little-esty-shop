@@ -27,10 +27,9 @@ class Admin::MerchantsController < ApplicationController
     end
   end
 
-
-
-  def new
-    @merchant = Merchant.new
+  def create
+    merchant = Merchant.create!(merchant_params)
+    redirect_to admin_merchants_path
   end
   
   private
