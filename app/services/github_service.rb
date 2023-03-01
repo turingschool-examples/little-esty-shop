@@ -6,7 +6,7 @@ class GithubService
   end
 
   def commits
-    get_url("https://api.github.com/repos/torienyart/little-esty-shop/commits?author=#{username}&per_page=100")
+    get_url("https://api.github.com/repos/torienyart/little-esty-shop/commits")
   end
 
   def prs
