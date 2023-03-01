@@ -1,4 +1,9 @@
 class ApplicationController < ActionController::Base
+  before_action :repo_name
+
+  def repo_name
+    @repo_name = RepoNameSearch.new.repo_name_information
+  end
 
 	private
 
