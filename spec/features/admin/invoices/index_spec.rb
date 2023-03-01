@@ -27,7 +27,8 @@ before(:each) do
   )
   .to_return(status: 200, body: contributors_call, headers: {})
 
-  repo_call = File.read('spec/fixtures/pull_request_call.json')
+  pr_call = File.read('spec/fixtures/pull_request_call.json')
+
   stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop/pulls?state=closed')
   .with(
     headers: {
@@ -37,7 +38,20 @@ before(:each) do
       'User-Agent'=>'Faraday v2.7.4'
        }
   )
-  .to_return(status: 200, body: repo_call, headers: {})
+  .to_return(status: 200, body: pr_call, headers: {})
+
+  commits_call = File.read('spec/fixtures/commits_call.json')
+  stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop/stats/contributors')
+  .with(
+    headers: {
+      'Accept'=>'*/*',
+      'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+      'Authorization'=>"Bearer #{ENV['github_token']}",
+      'User-Agent'=>'Faraday v2.7.4'
+       }
+  )
+  .to_return(status: 200, body: commits_call, headers: {})
+
   
 
   @merchant1 = Merchant.create!(name: "Hady", uuid: 1) 
@@ -63,8 +77,10 @@ end
       it "see list of invoice IDs in the system" do 
 
         visit "/admin/invoices"
-
-       
+        expect(page).to have_content("HuyPhan2025 has 25 number of commits")
+        expect(page).to have_content("MelTravelz has 29 number of commits")
+        expect(page).to have_content("davejm8 has 33 number of commits")
+        expect(page).to have_content("hadyematar23 has 35 number of commits")
         expect(page).to have_content("hadyematar23")
         expect("hadyematar23").to appear_before("BrianZanti")
         expect("BrianZanti").to appear_before("davejm8")
