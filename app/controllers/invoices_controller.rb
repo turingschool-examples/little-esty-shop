@@ -6,6 +6,6 @@ class InvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find(params[:id])
-    # require 'pry'; binding.pry
+    @total_revenue = @invoice.calc_total_revenue
   end
 end
