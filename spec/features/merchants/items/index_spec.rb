@@ -41,6 +41,9 @@ RSpec.describe "Merchant Items Index", type: :feature do
         expect(page).to have_content(item1.description)
         expect(page).to have_content(item1.unit_price.to_f / 100)
 
+        expect(page).to_not have_content(item2.name)
+        expect(page).to_not have_content(item2.description)
+        expect(page).to_not have_content(item2.unit_price)
         expect(page).to_not have_content(item3.name)
         expect(page).to_not have_content(item3.description)
         expect(page).to_not have_content(item3.unit_price)
