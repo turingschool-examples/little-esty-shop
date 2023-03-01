@@ -9,8 +9,8 @@ class GithubService
     get_url("https://api.github.com/repos/torienyart/little-esty-shop/commits?author=#{username}&per_page=100", headers: {"Authorization" => "Bearer #{ENV['github_token']}"})
   end
 
-  def prs
-    get_url("https://api.github.com/repos/torienyart/little-esty-shop/pulls?state=closed", headers: {"Authorization" => "Bearer #{ENV['github_token']}"})
+  def pulls
+    get_url("https://api.github.com/repos/torienyart/little-esty-shop/pulls?state=closed&per_page=100", headers: {"Authorization" => "Bearer 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"})
 
   end
 
@@ -28,4 +28,4 @@ class GithubService
   end
 end
 
-p GithubService.new.collaborators
+GithubService.new.pulls
