@@ -29,5 +29,5 @@
 #Ignore coverage folder for SimpleCov
 coverage
 
-# Ignore application configuration
+# Ignore application configuration and it works
 /config/application.yml
