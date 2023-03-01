@@ -2,8 +2,8 @@ class GithubFacade
 
   def self.info_hash
    info = {
-    repo_name: get_repo_name
-    # contributors: get_contributors 
+    repo_name: get_repo_name,
+    contributors: get_contributors 
     # commits: get_commits,
     # pr_count: get_pr_count
     }
