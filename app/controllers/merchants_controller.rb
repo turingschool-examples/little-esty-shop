@@ -11,8 +11,14 @@ class MerchantsController < ApplicationController
   end
 
   def create
-    @merchant = Merchant.create!(merchant_params)
-    redirect_to admin_merchants_path
+    @merchant = Merchant.new(merchant_params)
+    if @merchant.save
+      redirect_to admin_merchants_path
+    else
+      flash[:notice] = "Merchant not created: Name can't be blank"
+      redirect_to new_merchant_path
+    end
+
   end
 
   def edit

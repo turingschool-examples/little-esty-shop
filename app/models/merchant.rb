@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :customers, -> { distinct }, through: :invoices  
   has_many :transactions, -> { distinct }, through: :invoices
 
+  validates_presence_of :name, presence: true
+
   enum status: ["disabled", "enabled"]
 
   def top_five_items_by_revenue
