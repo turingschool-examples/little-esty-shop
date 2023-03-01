@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchant invoice index', :vcr do
+RSpec.describe 'merchant invoice index' do
   before(:each) do
     @merchant_1 = Merchant.create(name: "Mel's Travels")
     @merchant_2 = Merchant.create(name: "Hady's Beach Shack")

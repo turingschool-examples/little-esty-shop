@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Dashboard Feature Spec', :vcr do
+RSpec.describe 'Merchant Dashboard Feature Spec' do
   before(:each) do
     ###### Merchants & Items ######
     @merchant1 = Merchant.create!(name: "Mel's Travels")
