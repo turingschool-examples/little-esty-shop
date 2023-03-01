@@ -34,6 +34,30 @@ RSpec.describe 'New Merchant Item Record' do
         click_button "Create Item"
         expect(current_path).to eq("/merchants/#{carlos.id}/items/new")
         expect(page).to have_content("Item not created: Required information missing")
+
+        fill_in :name, with: "Teacup"
+        fill_in :description, with: ""
+        fill_in :unit_price, with: 300
+
+        click_button "Create Item"
+        expect(current_path).to eq("/merchants/#{carlos.id}/items/new")
+        expect(page).to have_content("Item not created: Required information missing")
+        
+        fill_in :name, with: "Teacup"
+        fill_in :description, with: "Here's a Teacup"
+        fill_in :unit_price, with: ""
+
+        click_button "Create Item"
+        expect(current_path).to eq("/merchants/#{carlos.id}/items/new")
+        expect(page).to have_content("Item not created: Required information missing")
+
+        # fill_in :name, with: "Teacup"
+        # fill_in :description, with: "Here's a Teacup"
+        # fill_in :unit_price, with: "abc"
+
+        # click_button "Create Item"
+        # expect(current_path).to eq("/merchants/#{carlos.id}/items/new")
+        # expect(page).to have_content("Item not created: Required information missing")
       end
     end
   end
