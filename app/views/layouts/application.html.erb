@@ -15,10 +15,13 @@
 				<%= msg %>
 			</div>
     <% end %>
+    
+    <h1><%= @repo_name.name %></h1>
     <h3>Collaborators</h3>
     <% @users.each do |user| %>
       <p><%= user.username %></p>
     <% end %>
+    
     <%= yield %>
   </body>
 </html>

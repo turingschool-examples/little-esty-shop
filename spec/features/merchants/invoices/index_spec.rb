@@ -32,16 +32,16 @@ RSpec.describe "merchant's invoices index  page", type: :feature do
     it "I see all of the invoices that include at least one of my merchant's items, including id and link to merchant invoice show page" do
       visit "/merchants/#{merchant1.id}/invoices"
 
-      expect(page).to have_content(invoice1.id)
+      expect(page).to have_content(invoice1.id, count: 1)
       expect(page).to have_link("#{invoice1.id}")
     
-      expect(page).to have_content(invoice2.id)
+      expect(page).to have_content(invoice2.id, count: 1)
       expect(page).to have_link("#{invoice2.id}")
 
-      expect(page).to have_content(invoice3.id)
+      expect(page).to have_content(invoice3.id, count: 1)
       expect(page).to have_link("#{invoice3.id}")
 
-      expect(page).to have_content(invoice4.id)
+      expect(page).to have_content(invoice4.id, count: 1)
       expect(page).to have_link("#{invoice4.id}")
 
       expect(page).to_not have_content(invoice5.id)

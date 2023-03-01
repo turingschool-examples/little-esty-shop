@@ -102,5 +102,16 @@ describe 'As a merchant', type: :feature do
         expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice1.id}")
       end
     end
+
+    it 'shows the total revenue that will be generated from all items on the invoice' do
+      total_revenue = (@invoice_item1.unit_price * @invoice_item1.quantity) + (@invoice_item3.unit_price * @invoice_item3.quantity) + (@invoice_item4.unit_price * @invoice_item4.quantity) + (@invoice_item2.unit_price * @invoice_item2.quantity)
+      visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
+      
+      
+      within '#total_revenue' do
+        expect(page).to have_content("$#{total_revenue.to_f/100}")
+      end
+
+    end
   end
 end
