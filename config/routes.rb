@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show, :new, :create, :edit, :update]
     resources :invoices 
   end
-
+  resources :invoice_items, only: [:update]
   resources :items, only: [:create]
   patch '/items/:item_id', to: 'items#status_update' #This needs to be fixed--there should not be more than one update path
 

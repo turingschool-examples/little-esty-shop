@@ -98,11 +98,11 @@ RSpec.describe "Merchant Dashboard Index" do
       it "I see a section for Items Ready to Ship & names of items that have not been shipped" do
         expect(page).to have_content("Items Ready to Ship")
         expect(page).to have_content(("#{item1.name}: #{item1.item_invoice_id}"))
-        expect(page).to have_link(item1.item_invoice_id)
+        expect(page).to have_link("#{item1.item_invoice_id}")
         # to merchant's invoice show page
 
         expect(page).to_not have_content(("#{item3.name}: #{item3.item_invoice_id}"))
-        expect(page).to_not have_link(item3.item_invoice_id)
+        expect(page).to_not have_link("#{item3.item_invoice_id}")
 
 
       end

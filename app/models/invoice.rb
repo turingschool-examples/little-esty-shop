@@ -23,4 +23,9 @@ class Invoice < ApplicationRecord
     .pluck(Arel.sql("sum(invoice_items.quantity * invoice_items.unit_price) as revenue"))
     .first
   end
+
+  def items_with_attributes
+    items
+    .select("invoice_items.status as stat, items.*, invoice_items.unit_price as sale_price, invoice_items.quantity as quant")
+  end
 end
