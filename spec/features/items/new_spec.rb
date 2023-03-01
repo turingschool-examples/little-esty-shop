@@ -37,7 +37,6 @@ RSpec.describe 'Items New Spec Page' do
 
 
         expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
-        # Need to work on test for this. 
         expect(page).to have_content("medicine- 3467typeadvil")
       end
     end
