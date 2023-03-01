@@ -11,12 +11,10 @@ Rails.application.routes.draw do
   resources :merchants, only: [:show] do
     get '/dashboard', to: 'merchants#dashboard'
     resources :items, only: [:index, :show, :new, :create, :edit, :update]
+    resources :invoices 
   end
 
   resources :items, only: [:create]
   patch '/items/:item_id', to: 'items#status_update' #This needs to be fixed--there should not be more than one update path
-  
-
-  
 
 end
