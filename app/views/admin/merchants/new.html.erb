@@ -1,6 +1,6 @@
 <h3> Create New Merchant</h3>
 
-<%= form_with model: @merchant, method: :post, local: true do |form| %>
+<%= form_with url: "/admin/merchants", method: :post, local: true do |form| %>
   <%= form.hidden_field :status, value: "disabled" %>
   <%= form.label :name %>
   <%= form.text_field :name %>

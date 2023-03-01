@@ -1,6 +1,44 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant/Items Index Page' do
+
+  before(:each) do
+    repo_call = File.read('spec/fixtures/repo_call.json')
+    stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop')
+    .with(
+      headers: {
+        'Accept'=>'*/*',
+        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Authorization'=>"Bearer #{ENV['github_token']}",
+        'User-Agent'=>'Faraday v2.7.4'
+        }
+    )
+    .to_return(status: 200, body: repo_call, headers: {})
+    
+    contributors_call = File.read('spec/fixtures/contributors_call.json')
+    stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop/contributors')
+    .with(
+      headers: {
+        'Accept'=>'*/*',
+        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Authorization'=>"Bearer #{ENV['github_token']}",
+        'User-Agent'=>'Faraday v2.7.4'
+        }
+    )
+    .to_return(status: 200, body: contributors_call, headers: {})
+
+    repo_call = File.read('spec/fixtures/pull_request_call.json')
+    stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop/pulls?state=closed')
+    .with(
+      headers: {
+        'Accept'=>'*/*',
+        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Authorization'=>"Bearer #{ENV['github_token']}",
+        'User-Agent'=>'Faraday v2.7.4'
+        }
+    )
+    .to_return(status: 200, body: repo_call, headers: {})
+  end
   describe "as a merchant" do 
     describe "when merchant visit 'merchants/merchant_id/items'" do
       let!(:schroeder_jerde) { Merchant.create!(name: 'Schroeder-Jerde')}
@@ -14,7 +52,6 @@ RSpec.describe 'Merchant/Items Index Page' do
         expect(page).to have_content(autem.name)
         expect(page).to have_content(ea.name)
         expect(page).to have_content("hadyematar23")
-        save_and_open_page
       end
 
       it 'should see a the name as a link that will direct to item show page where the item attribute is display' do

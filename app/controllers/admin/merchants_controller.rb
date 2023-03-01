@@ -28,13 +28,12 @@ class Admin::MerchantsController < ApplicationController
   end
 
 
-
-  def new
-    @merchant = Merchant.new
+  def create
+    merchant = Merchant.create!(merchant_params)
+    redirect_to admin_merchants_path
   end
   
   private
-
   def merchant_params
     params.permit(:name, :status)
   end
