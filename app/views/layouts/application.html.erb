@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body> 
 		<% flash.each do |type, msg| %>
 			<div>
 				<%= msg %>
@@ -21,7 +21,8 @@
     <% @users.each do |user| %>
       <p><%= user.username %></p>
     <% end %>
-    
+    <p><%= @pull_requests %> merged pull requests</p>
+
     <%= yield %>
-  </body>
+  </body> 
 </html>
