@@ -13,9 +13,4 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum('unit_price * quantity')
   end
-
-  private
-  def invoice_params
-    params.require(:invoice).permit(:status)
-  end
 end

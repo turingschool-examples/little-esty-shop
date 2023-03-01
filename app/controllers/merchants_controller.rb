@@ -11,8 +11,14 @@ class MerchantsController < ApplicationController
   end
 
   def create
-    @merchant = Merchant.create!(merchant_params)
-    redirect_to admin_merchants_path
+    @merchant = Merchant.new(merchant_params)
+    if @merchant.save
+      redirect_to admin_merchants_path
+    else
+      flash[:notice] = "Merchant not created: Name can't be blank"
+      redirect_to new_merchant_path
+    end
+
   end
 
   def edit
@@ -28,9 +34,15 @@ class MerchantsController < ApplicationController
       @merchant.update(status: 0)
       redirect_to "/admin/merchants"
     else
-      @merchant.update(merchant_params)
-      flash[:success] = "Merchant was successfully updated."
-      redirect_to admin_merchant_path(@merchant)
+      if @merchant.update(merchant_params)
+        @merchant.update(merchant_params)
+        flash[:success] = "Merchant was successfully updated."
+        redirect_to admin_merchant_path(@merchant)
+      else
+        flash[:notice] = "Merchant not updated: Name can't be blank"
+        redirect_to edit_merchant_path(@merchant)
+      end
+
     end
   end
 

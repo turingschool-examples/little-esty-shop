@@ -11,9 +11,10 @@
 	<p> Quantity: <%= ii.quantity %></p>
 	<p> Price: $<%= sprintf("%.2f", (ii.unit_price/100.00))%></p>
 <%= form_with model: ii, url: merchant_invoice_path(@merchant, @invoice), method: :patch  do |f|%>
-<h2>Item Status: <%= f.select(:status, InvoiceItem.statuses.keys, selected: "#{ii.status}") %>
+<h2>Invoice Item Status: <%= f.select(:status, InvoiceItem.statuses.keys, selected: "#{ii.status}") %>
 <%= f.hidden_field :ii_id, value: ii.id %>
-<%= f.submit 'Update Item Status'%>
+<%= f.submit 'Update Item Status'%><br>
+<%= ii.status %>
 <%end%> </h2>	
 <br>
 </div>
