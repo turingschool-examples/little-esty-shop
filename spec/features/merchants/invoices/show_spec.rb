@@ -23,12 +23,12 @@ RSpec.describe "Merchant_Invoices#Show", type: :feature do
     @item_5 = create(:item, merchant: @merchant)
     @item_6 = create(:item, merchant: @merchant_2)
 
-    @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, quantity: 1, status: "packaged", created_at: Date.new(2023,1,1))
-    @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_1, quantity: 2, status: "packaged", created_at: Date.new(2023,1,2))
-    @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_1, quantity: 3, status: "packaged", created_at: Date.new(2023,1,3))
-    @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_1, quantity: 4, status: "packaged", created_at: Date.new(2023,1,4))
-    @invoice_item_5 = create(:invoice_item, item: @item_5, invoice: @invoice_1, quantity: 5, status: "packaged", created_at: Date.new(2023,1,5))
-    @invoice_item_6 = create(:invoice_item, item: @item_6, invoice: @invoice_2, quantity: 100000, status: "shipped", created_at: Date.new(2023,1,6))
+    @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, unit_price: 1, quantity: 1, status: "packaged", created_at: Date.new(2023,1,1))
+    @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_1, unit_price: 2, quantity: 2, status: "packaged", created_at: Date.new(2023,1,2))
+    @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_1, unit_price: 3, quantity: 3, status: "shipped", created_at: Date.new(2023,1,3))
+    @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_1, unit_price: 4, quantity: 4, status: "pending", created_at: Date.new(2023,1,4))
+    @invoice_item_5 = create(:invoice_item, item: @item_5, invoice: @invoice_1, unit_price: 5, quantity: 5, status: "packaged", created_at: Date.new(2023,1,5))
+    @invoice_item_6 = create(:invoice_item, item: @item_6, invoice: @invoice_2, unit_price: 6, quantity: 100000, status: "pending", created_at: Date.new(2023,1,6))
 
     create(:transaction, invoice_id: @invoice_1.id, result: 0)
     create(:transaction, invoice_id: @invoice_1.id, result: 0)
@@ -77,7 +77,6 @@ RSpec.describe "Merchant_Invoices#Show", type: :feature do
           expect(page).to_not have_content(@item_6.name)
           expect(page).to_not have_content(@invoice_item_6.quantity)
           expect(page).to_not have_content((@invoice_item_6.unit_price).to_f/100)
-          # expect(page).to_not have_content(@invoice_item_6.status)
         end
       end
     end
@@ -88,7 +87,6 @@ RSpec.describe "Merchant_Invoices#Show", type: :feature do
       it "shows the total revenue that will be generated from all items on the invoice" do
         within("#merchant_invoice_information") do
           expect(page).to have_content((@invoice_1.total_revenue).to_f/100)
-          # Will fail if the total is more than 3 digits
         end
       end
     end
@@ -97,17 +95,21 @@ RSpec.describe "Merchant_Invoices#Show", type: :feature do
   describe "User Story 18" do
     context "As a merchant, when I visit my merchant's invoices show" do
       it "a drop down menu for the status and an 'update item status' button" do
+        
         within("#invoice_item_#{@invoice_item_1.id}") do
+          expect(page).to have_field(:status, with: "packaged")
+
           select "shipped", from: :status
           click_button "Update Item Status"
+          
           expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
         end
 
         visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
+        
         within("#invoice_item_#{@invoice_item_1.id}") do
-        save_and_open_page
-        expect(page).to have_field(:status, with: "shipped shipped pending packaged")
-      end
+          expect(page).to have_field(:status, with: "shipped")
+        end
       end
     end
   end
