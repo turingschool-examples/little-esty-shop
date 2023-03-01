@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Customer, type: :model do
+  describe 'relationships' do
+    it { should have_many :invoices }
+  end
+  
   describe '::Class Methods' do
     before(:each) do
       @customer_1 = create(:customer)
