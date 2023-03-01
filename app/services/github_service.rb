@@ -6,7 +6,7 @@ class GithubService
   end
 
   def repo_name
-    # get_url()
+    get_url('https://api.github.com/repos/axeldelaguardia/little-esty-shop', headers: {"Authorization" => "Bearer #{ENV["github_api_key"]}"})
   end
 
   def commits

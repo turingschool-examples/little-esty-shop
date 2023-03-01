@@ -32,16 +32,16 @@ RSpec.describe "merchant's invoices index  page", type: :feature do
     it "I see all of the invoices that include at least one of my merchant's items, including id and link to merchant invoice show page" do
       visit "/merchants/#{merchant1.id}/invoices"
 
-      expect(page).to have_content(invoice1.id)
+      expect(page).to have_content(invoice1.id, count: 1)
       expect(page).to have_link("#{invoice1.id}")
     
-      expect(page).to have_content(invoice2.id)
+      expect(page).to have_content(invoice2.id, count: 1)
       expect(page).to have_link("#{invoice2.id}")
 
-      expect(page).to have_content(invoice3.id)
+      expect(page).to have_content(invoice3.id, count: 1)
       expect(page).to have_link("#{invoice3.id}")
 
-      expect(page).to have_content(invoice4.id)
+      expect(page).to have_content(invoice4.id, count: 1)
       expect(page).to have_link("#{invoice4.id}")
 
       expect(page).to_not have_content(invoice5.id)
@@ -50,6 +50,16 @@ RSpec.describe "merchant's invoices index  page", type: :feature do
       click_on "#{invoice1.id}"
 
       expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice1.id}")
+    end
+
+    it 'will have a list of all usernames of contributors' do 
+      visit "/merchants/#{merchant1.id}/invoices"
+      
+      expect(page).to have_content("Collaborators")
+      expect(page).to have_content("Bphayes1200")
+      expect(page).to have_content("MATrevino")
+      expect(page).to have_content("hamouj")
+      expect(page).to have_content("axeldelaguardia")
     end
   end
 end

@@ -212,5 +212,15 @@ RSpec.describe 'admin merchants index page' do
 				expect(page).to have_content("#{merchant5.date_with_most_revenue}")
 			end
 		end
+
+		it 'will have a list of all usernames of contributors' do 
+			visit admin_merchants_path
+			
+      expect(page).to have_content("Collaborators")
+      expect(page).to have_content("Bphayes1200")
+      expect(page).to have_content("MATrevino")
+      expect(page).to have_content("hamouj")
+      expect(page).to have_content("axeldelaguardia")
+    end 
 	end
 end

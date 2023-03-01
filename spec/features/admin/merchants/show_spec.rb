@@ -20,5 +20,15 @@ RSpec.describe 'admin merchant show page' do
 			
 			expect(page).to have_field(:name)
 		end
+
+		it 'will have a list of all usernames of contributors' do 
+			visit admin_merchant_path(merchant_1)
+			
+      expect(page).to have_content("Collaborators")
+      expect(page).to have_content("Bphayes1200")
+      expect(page).to have_content("MATrevino")
+      expect(page).to have_content("hamouj")
+      expect(page).to have_content("axeldelaguardia")
+    end 
 	end
 end
