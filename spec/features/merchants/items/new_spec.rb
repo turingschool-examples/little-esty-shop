@@ -8,22 +8,35 @@ RSpec.describe "Merchant_Items#New", type: :feature do
   end
 
   describe "User Story 11" do
-    it "I see a form that allows me to add item information" do
+    context "As a merchant when I visit my items index page" do 
+      it "I see a form that allows me to add item information" do
+        
+        expect(page).to have_content("Add a New Item")
+        expect(find('form')).to have_content("Name")
+        expect(find('form')).to have_content("Description")
+        expect(find('form')).to have_content("Unit price")
+      end
+      
+      it "When I fill out the form I click Submit then I am taken back to the items index page" do
+        
+        fill_in "Name", with: "Super Mario"
+        fill_in "Description", with: "It's a video game!"
+        fill_in "Unit price", with: 40
+        click_button "Create Item"
+        
+        expect(current_path).to eq("/merchants/#{@merchant.id}/items")
+      end
 
-      expect(page).to have_content("Add a New Item")
-      expect(find('form')).to have_content("Name")
-      expect(find('form')).to have_content("Description")
-      expect(find('form')).to have_content("Unit price")
-    end
-
-    it "When I fill out the form I click Submit then I am taken back to the items index page" do
-  
-      fill_in "Name", with: "Super Mario"
-      fill_in "Description", with: "It's a video game!"
-      fill_in "Unit price", with: 40
-      click_button "Create Item"
-
-      expect(current_path).to eq("/merchants/#{@merchant.id}/items")
+      it "When I don't fill out the form I click Submit then I do not leave the create page and see an error message" do
+        
+        fill_in "Name", with: ""
+        fill_in "Description", with: ""
+        fill_in "Unit price", with: ""
+        click_button "Create Item"
+        
+        expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
+        expect(page).to have_content("Missing Information! Cannot be Created!")
+      end
     end
   end
 end
