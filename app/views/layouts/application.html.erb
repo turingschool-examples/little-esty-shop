@@ -19,7 +19,7 @@
     <h1><%= @repo_name.name %></h1>
     <h3>Collaborators</h3>
     <% @users.each do |user| %>
-      <p><%= user.username %></p>
+      <p><%= user.username %> - <%= user.commit_count %> Commits</p>
     <% end %>
     
     <%= yield %>

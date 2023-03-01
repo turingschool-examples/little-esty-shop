@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 	before_action :users, :repo_name
 
 	def users
-		@users = UsersSearch.new.users_information
+		@users = UsersSearch.new.usernames_and_commits
 	end
 
   def repo_name
