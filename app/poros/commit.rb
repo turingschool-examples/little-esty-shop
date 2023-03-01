@@ -1,4 +1,3 @@
-require_relative 'commit_search'
 class Commit
 	attr_reader :name
 
