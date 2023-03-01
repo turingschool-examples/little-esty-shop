@@ -23,6 +23,18 @@ RSpec.describe 'New Merchant Item Record' do
         click_on "Create Item"
         expect(current_path).to eq("/merchants/#{carlos.id}/items")
       end
+
+      it "If the information is not valid or missing, item is not created" do
+        visit "/merchants/#{carlos.id}/items/new"
+
+        fill_in :name, with: ""
+        fill_in :description, with: "Here's a Teacup"
+        fill_in :unit_price, with: 300
+
+        click_button "Create Item"
+        expect(current_path).to eq("/merchants/#{carlos.id}/items/new")
+        expect(page).to have_content("Item not created: Required information missing")
+      end
     end
   end
 end
