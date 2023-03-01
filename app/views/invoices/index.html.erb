@@ -1,6 +1,16 @@
-<h1>  <%= @merchant.name %>'s invoice page </h1>
+<div class="header">
+  <h1>  Merchant Invoice Page </h1>
+</div>
 
-<h2>Invoices: </h2>
-<% @merchant.invoices.each do |invoice| %>
-  <p>Id: <%=link_to invoice.id, "invoices/#{invoice.id}" %> </p>
-<% end %>
+<div class="links-container">
+  <p><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></p>
+  <p><%= link_to "Items Index", "/merchants/#{@merchant.id}/items" %></p>
+  <p><%= link_to "Invoices", "/merchants/#{@merchant.id}/invoices" %></p>
+</div>
+
+<div class="invoice-main">
+  <h2>Invoices: </h2>
+  <% @merchant.invoices.each do |invoice| %>
+    <p>Id: <%=link_to invoice.id, "invoices/#{invoice.id}" %> </p>
+  <% end %>
+</div>
