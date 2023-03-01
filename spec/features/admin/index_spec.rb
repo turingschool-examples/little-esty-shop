@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe '/admin', type: :feature do
+RSpec.describe '/admin', :vcr, type: :feature do
   describe 'when I visit the admin dashboard' do
     before(:each) do
       ###### Merchants & Items ######

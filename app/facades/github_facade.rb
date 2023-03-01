@@ -4,8 +4,8 @@ class GithubFacade
    info = {
     repo_name: get_repo_name,
     contributors: get_contributors
-    commits: get_commits,
-    pr_count: get_pr_count
+    # commits: get_commits,
+    # pr_count: get_pr_count
     }
 
    GithubInfo.new(info)

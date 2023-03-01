@@ -1,9 +1,5 @@
 <h1><%="Index Page for #{@merchant.name}"%></h1>
 
-<% @contributors.each do |contributor| %>
-      <%= contributor.name %>
-    <% end %>
-
 <%= link_to "Add Item", "/merchants/#{@merchant.id}/items/new" %>
 
 <h1> List of all Items</h1>

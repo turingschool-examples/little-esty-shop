@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "admin merchants new" do
+RSpec.describe "admin merchants new", :vcr do
 
   before(:each) do
     @merchant_1 = Merchant.create!(name: "Mel's Travels", uuid: 1)
