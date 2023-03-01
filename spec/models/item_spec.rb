@@ -56,6 +56,27 @@ RSpec.describe Item, type: :model do
       # require 'pry'; binding.pry
       expect(item_1.top_item_day.created_at).to eq("January 28, 2019")
     end
+
+    it "should return the quantity from the invoice_item" do
+
+      merchant1 = create(:merchant)
+      customer_1 = create(:customer)
+      item_1 = create(:item, merchant_id: merchant1.id)
+      invoice_1 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "January 28, 2019")
+      invoice_2 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "March 27, 2019")
+      invoice_3 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "April 20, 2019")
+      invoice_4 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "June 03, 2019")
+      invoice_5 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "October 20, 2019")
+      invoice_6 = create(:invoice, customer_id: customer_1.id, status: 'completed', created_at: "February 10, 2019")
+      invoice_item_1 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 10, invoice_id: invoice_1.id)
+      invoice_item_2 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 6, invoice_id: invoice_2.id)
+      invoice_item_3 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 8, invoice_id: invoice_3.id)
+      invoice_item_4 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 4, invoice_id: invoice_4.id)
+      invoice_item_5 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 2, invoice_id: invoice_5.id)
+      invoice_item_6 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 1, invoice_id: invoice_6.id)
+
+      expect(item_1.item_quantity).to eq(10)
+    end
   end
 
   describe ".class methods" do

@@ -10,10 +10,13 @@
 <p><%= 'Created_at: ' + @invoice.created_at.strftime("%A, %B %e, %Y")%></p>
 <p><%= 'Customer First Name: ' + @invoice.customer.first_name %></p>
 <p><%= 'Customer Last Name: ' + @invoice.customer.last_name %></p>
+
 <div class = 'items'>
 <h3> Items on this invoice: </h3>
+
 <% @invoice_items_and_attributes.each do |item| %>
 <p><%= item.name %></p>
+
 <ul>
 <li><p>Quantity: <%= item.quantity %></p></li>
 <li><p>Price: <%= format_price(item.unit_price)%></p></li>
