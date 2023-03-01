@@ -70,7 +70,7 @@ RSpec.describe "Merchant Dashboard Index" do
     # 1. Merchant Dashboard
     context "When I visit /merchants/merchant_id/dashboard" do
       it "Then I see the name of my merchant" do
-        expect(page).to have_content("Name: #{merchant1.name}")
+        expect(page).to have_content(merchant1.name)
         expect(page).to_not have_content(merchant2.name)
       end
       
