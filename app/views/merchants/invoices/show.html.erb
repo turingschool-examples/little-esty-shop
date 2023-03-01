@@ -13,6 +13,7 @@
     </p>
   </div>
 </div>
+
 <h3><%= "Invoice ##{@invoice.id}" %></h3>
   <div id="merchant_invoice_information">
     <p>Status: <%= @invoice.status %></p>
@@ -34,16 +35,17 @@
       <th>Unit Price</th>
       <th>Status</th>
     </tr>
-      <% @invoice_items.each do |item| %>
-        <div id="invoice_item_<%=item.id%>">
+      <% @invoice_items.each do |invoice_item| %>
+        <div id="invoice_item_<%=invoice_item.id%>">
           <tr>
-            <td><%= item.item.name %></td>
-            <td><%= item.quantity %></td>
-            <td><%= number_to_currency(item.unit_price.to_f/100) %></td>
-            <td><%= form_with url: "/merchants/#{@merchant.id}/invoice_items/#{item.id}", method: :patch, local: true do |f| %>
-                <%= f.select :status, ["shipped", "pending", "packaged"], :prompt => item.status %>
+            <td><%= invoice_item.item.name %></td>
+            <td><%= invoice_item.quantity %></td>
+            <td><%= number_to_currency(invoice_item.unit_price.to_f/100) %></td>
+            <td>
+              <%= form_with url: "/merchants/#{@merchant.id}/invoice_items/#{invoice_item.id}", method: :patch, local: true do |f| %>
+                <%= f.select :status, ["shipped", "pending", "packaged"], selected: invoice_item.status %>
                 <%= f.submit "Update Item Status" %>
-            <% end %>
+              <% end %>
             </td>
           </tr>
         </div>
