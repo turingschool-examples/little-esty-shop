@@ -37,6 +37,19 @@ RSpec.describe 'edit', type: :feature do
         }
     )
     .to_return(status: 200, body: repo_call, headers: {})
+
+    commits_call = File.read('spec/fixtures/commits_call.json')
+    stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop/stats/contributors')
+    .with(
+      headers: {
+        'Accept'=>'*/*',
+        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Authorization'=>"Bearer #{ENV['github_token']}",
+        'User-Agent'=>'Faraday v2.7.4'
+         }
+    )
+    .to_return(status: 200, body: commits_call, headers: {})
+  
   end
   describe "when merchant visit /merchants/merchant_id/items" do
     let!(:schroeder_jerde) { Merchant.create!(name: 'Schroeder-Jerde')}
