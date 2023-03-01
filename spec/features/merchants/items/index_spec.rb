@@ -109,14 +109,14 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
     it "I see a link to create a new item, when I click on the link,
       I am taken to a form that allows me to add item information." do
       
-      click_link("Create New Item")
+      click_link("New Item")
       expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
     end
 
     it "I see the item I just created displayed in the list of items.
       And I see my item was created with a default status of disabled." do
 
-      click_link("Create New Item")
+      click_link("New Item")
       fill_in "Name", with: "Corn"
       fill_in "Description", with: "It's the most beautiful thing!"
       fill_in "Unit price", with: 5
