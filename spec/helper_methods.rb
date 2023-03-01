@@ -1,4 +1,5 @@
 def load_test_data
+
   @merchant1 = Merchant.create!(name: "Carlos Jenkins") 
   @merchant2 = Merchant.create!(name: "Leroy Jenkins") 
   @merchant3 = Merchant.create!(name: "Melissa Jenkins") 
