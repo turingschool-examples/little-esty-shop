@@ -3,11 +3,11 @@ require 'httparty'
 class GithubService
 
   def usernames
-    get_url( "https://api.github.com/repos/torienyart/little-esty-shop/contributors", headers: {"Authorization" => "Bearer #{ENV['github_token']}"})
+    get_url( "https://api.github.com/repos/torienyart/little-esty-shop/contributors", headers: {"Authorization" => "Bearer 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"})
   end
 
-  def commits
-    get_url("https://api.github.com/repos/torienyart/little-esty-shop/commits?author=#{username}&per_page=100", headers: {"Authorization" => "Bearer #{ENV['github_token']}"})
+  def commits(username)
+    get_url("https://api.github.com/repos/torienyart/little-esty-shop/commits?author=#{username}&per_page=100", headers: {"Authorization" => "Bearer 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"})
   end
 
   def prs
@@ -15,11 +15,11 @@ class GithubService
   end
 
   def repo
-    get_url("https://api.github.com/repos/torienyart/little-esty-shop", headers: {"Authorization" => "Bearer #{ENV['github_token']}"})
+    get_url("https://api.github.com/repos/torienyart/little-esty-shop", headers: {"Authorization" => "Bearer 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"})
   end
 
   def collaborators
-    get_url("https://api.github.com/repos/torienyart/little-esty-shop/collaborators", headers: {"Authorization" => "Bearer #{ENV['github_token']}"})
+    get_url("https://api.github.com/repos/torienyart/little-esty-shop/collaborators", headers: {"Authorization" => "Bearer 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"})
   end
 
   def get_url(url, token) #Make a Get request
@@ -28,4 +28,3 @@ class GithubService
   end
 end
 
-p GithubService.new.collaborators
