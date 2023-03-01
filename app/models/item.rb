@@ -41,4 +41,8 @@ class Item < ApplicationRecord
     # .created_at
     # .strftime("%B %e, %Y")
   end
+
+  def item_quantity
+    invoice_items.first.quantity
+  end
 end
