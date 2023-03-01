@@ -1,13 +1,13 @@
-require 'httpparty'
 
-class GithubService # `service` is what's pulling in the data (located on a _search.rb page)
-  def get_url(url) #this part here is making the API request
-    response = HTTParty.get(url) #self.class
-    parsed = JSON.parse(response.body, symbolize_names: true)
+class GithubService
+  def self.fetch_contributors(arg)
+    response = connection(arg).get
+    x = JSON.parse(response.body, symbolize_names: true)
   end
 
-  def commits 
-    get_url() #paste in the URL endpoint 
+  def self.connection(arg)
+    url = "https://api.github.com/repos/hadyematar23/little-esty-shop/#{arg}"
+    Faraday.new(url: url)
   end
 
   def pull_requests
