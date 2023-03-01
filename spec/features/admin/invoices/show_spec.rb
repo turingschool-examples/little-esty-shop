@@ -44,7 +44,7 @@ RSpec.describe 'Admin Invoice Show Page' do
     end
 
     # User Story 34
-    it "I see the name of all the items on that invoice" do
+    it "I see the name of all the items on that invoice", :vcr do
       visit "/admin/invoices/#{@invoice4.id}"
 
       expect(page).to have_content("Items on Invoice")
@@ -52,6 +52,7 @@ RSpec.describe 'Admin Invoice Show Page' do
       expect(page).to have_content(@item2.name)
       expect(page).to have_content(@item5.name)
       expect(page).to have_content(@item6.name)
+      expect(page).to have_content("little-esty-shop")
     end
     
     # User Story 34
