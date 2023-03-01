@@ -40,9 +40,10 @@ class Merchants::ItemsController < ApplicationController
     @item = @merchant.items.new(item_params)
     if @item.save
       redirect_to "/merchants/#{@merchant.id}/items"
-      flash[:notice] = "#{@item.name} has been Created"
+      flash[:notice] = "#{@item.name} has been Created!"
     else
-      flash[:notice] = "#{@item.name} Cannot be Created"
+      redirect_to "/merchants/#{@merchant.id}/items/new"
+      flash[:notice] = "Missing Information! Cannot be Created!"
     end
   end
 

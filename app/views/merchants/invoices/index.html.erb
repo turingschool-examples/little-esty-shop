@@ -13,7 +13,13 @@
     </p>
   </div>
 </div>
-<h3><%= @item.name %></h3>
-  <p>Description: <%= @item.description %></p>
-  <p>Current Price: <%= @item.unit_price %></p>
-<p><%= link_to "Update Item", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></p>
+<div class="body_container">
+  <div class="sub_container">
+    <div class="sub_header">Invoices</div>
+      <div id="merchant_invoices">
+        <% @invoices.each do |invoice| %>
+          <p><%= link_to "Invoice ##{invoice.id}", merchant_invoice_path(@merchant, invoice) %></p>
+        <% end %>
+      </div>
+  </div>
+</div>
