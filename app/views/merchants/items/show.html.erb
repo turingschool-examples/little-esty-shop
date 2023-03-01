@@ -13,7 +13,14 @@
     </p>
   </div>
 </div>
-<h3><%= @item.name %></h3>
-  <p>Description: <%= @item.description %></p>
-  <p>Current Price: <%= @item.unit_price %></p>
-<p><%= link_to "Update Item", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></p>
+
+<br>
+<br>
+<div class="body_container_merchant_item">
+  <div class="sub_container_merchant_item">
+    <div class="sub_header_merchant_item"><%= @item.name %></div>
+    <p>Description: <%= @item.description %></p>
+    <p>Current Price: <%= number_to_currency(@item.unit_price.to_f/100) %></p>
+    <p><%= link_to "Update Item", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></p>
+  </div>
+</div>
