@@ -13,10 +13,10 @@
   <%= flash[:notice] %>
     <%= yield %>
     <%= @github_info.repo_name %>
-    
     <p> Contributors:</p><% @github_info.contributors.each do |contributor| %>
       <%= contributor %>
     <% end %>
-    
+    <p> pull request: <%= @github_info.pr_count %></p>
+
   </body>
 </html>

@@ -14,10 +14,10 @@ before(:each) do
        }
   )
   .to_return(status: 200, body: repo_call, headers: {})
-
+  
   contributors_call = File.read('spec/fixtures/contributors_call.json')
   stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop/contributors')
-  .with(
+   .with(
     headers: {
       'Accept'=>'*/*',
       'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
@@ -26,6 +26,20 @@ before(:each) do
        }
   )
   .to_return(status: 200, body: contributors_call, headers: {})
+
+
+  repo_call = File.read('spec/fixtures/pull_request_call.json')
+  stub_request(:get, 'https://api.github.com/repos/hadyematar23/little-esty-shop/pulls?state=closed')
+  .with(
+    headers: {
+      'Accept'=>'*/*',
+      'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+      'Authorization'=>"Bearer #{ENV['github_token']}",
+      'User-Agent'=>'Faraday v2.7.4'
+       }
+  )
+  .to_return(status: 200, body: repo_call, headers: {})
+  
 
   @merchant1 = Merchant.create!(name: "Hady", uuid: 1) 
   @merchant2 = Merchant.create!(name: "Malena", uuid: 2) 
@@ -50,7 +64,8 @@ end
       it "see list of invoice IDs in the system" do 
 
         visit "/admin/invoices"
-        
+
+       
         expect(page).to have_content("hadyematar23")
         expect("hadyematar23").to appear_before("BrianZanti")
         expect("BrianZanti").to appear_before("davejm8")
@@ -61,7 +76,7 @@ end
         expect("cjsim89").to appear_before("scottalexandra")
         expect("scottalexandra").to appear_before("jamisonordway")
         expect("jamisonordway").to appear_before("mikedao")
-    
+        expect(page).to have_content('pull request: 53')
         expect(page).to have_content('little-esty-shop')
         expect(page).to have_link("Invoice Number #{@invoice_1.id}", href: "/invoices/#{@invoice_1.id}")
         expect(page).to have_link("Invoice Number #{@invoice_2.id}", href: "/invoices/#{@invoice_2.id}")
