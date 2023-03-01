@@ -5,7 +5,7 @@ describe 'Admin Invoices show page' do
     describe 'When I visit the admin invoice show page' do
       let!(:customer_2) {create(:customer) }
       let!(:merchant_2) {create(:merchant) }
-      let!(:invoice_2) {create(:invoice, customer_id: customer_2.id, status:'completed') }
+      let!(:invoice_2) {create(:invoice, customer_id: customer_2.id, status:'completed', created_at: Time.new(2002)) }
       let!(:item_2) {create(:item, merchant_id: merchant_2.id) }
       let!(:invoice_item_3) {create(:invoice_item, item_id: item_2.id, quantity: 10, unit_price: 9, invoice_id: invoice_2.id ) }
       let!(:invoice_item_4) {create(:invoice_item, item_id: item_2.id, quantity: 10, unit_price: 9, invoice_id: invoice_2.id ) }
@@ -16,7 +16,7 @@ describe 'Admin Invoices show page' do
   
         expect(page).to have_content("#{invoice_2.id}")
         expect(page).to have_content("#{invoice_2.status}")
-        expect(page).to have_content("#{invoice_2.created_at.strftime("%A, %B %e, %Y")}")
+        expect(page).to have_content("Tuesday, January 1, 2002")
         expect(page).to have_content("#{invoice_2.customer.first_name}")
         expect(page).to have_content("#{invoice_2.customer.last_name}")
       end

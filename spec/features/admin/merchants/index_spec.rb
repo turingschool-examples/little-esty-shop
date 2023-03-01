@@ -5,7 +5,7 @@ describe 'Admin Merchants index page' do
     describe 'When I visit the admin merchants index (/admin/merchants)' do
       let!(:customer_1) { create(:customer)  }
       let!(:merchant_1) {create(:merchant) }
-      let!(:invoice_1) {create(:invoice, customer_id: customer_1.id) }
+      let!(:invoice_1) {create(:invoice, customer_id: customer_1.id, created_at: Time.new(2002)) }
       let!(:item_1) {create(:item, merchant_id: merchant_1.id) }
       let!(:invoice_item_1) {create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 10, invoice_id: invoice_1.id ) }
       let!(:invoice_item_2)  {create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 10, invoice_id: invoice_1.id ) }
@@ -13,7 +13,7 @@ describe 'Admin Merchants index page' do
 
       let!(:customer_2) {create(:customer) }
       let!(:merchant_2) {create(:merchant) }
-      let!(:invoice_2) {create(:invoice, customer_id: customer_2.id) }
+      let!(:invoice_2) {create(:invoice, customer_id: customer_2.id, created_at: Time.new(2002)) }
       let!(:item_2) {create(:item, merchant_id: merchant_2.id) }
       let!(:invoice_item_3) {create(:invoice_item, item_id: item_2.id, quantity: 10, unit_price: 9, invoice_id: invoice_2.id ) }
       let!(:invoice_item_4) {create(:invoice_item, item_id: item_2.id, quantity: 10, unit_price: 9, invoice_id: invoice_2.id ) }
@@ -21,7 +21,7 @@ describe 'Admin Merchants index page' do
 
       let!(:customer_3) {create(:customer) }
       let!(:merchant_3) {create(:merchant) }
-      let!(:invoice_3) {create(:invoice, customer_id: customer_3.id) }
+      let!(:invoice_3) {create(:invoice, customer_id: customer_3.id, created_at: Time.new(2002)) }
       let!(:item_3) {create(:item, merchant_id: merchant_3.id) }
       let!(:invoice_item_4) {create(:invoice_item, item_id: item_3.id, quantity: 10, unit_price: 8, invoice_id: invoice_3.id ) }
       let!(:invoice_item_5) {create(:invoice_item, item_id: item_3.id, quantity: 10, unit_price: 8, invoice_id: invoice_3.id ) }
@@ -29,7 +29,7 @@ describe 'Admin Merchants index page' do
 
       let!(:customer_4) {create(:customer) }
       let!(:merchant_4) {create(:merchant) }
-      let!(:invoice_4) {create(:invoice, customer_id: customer_4.id) }
+      let!(:invoice_4) {create(:invoice, customer_id: customer_4.id, created_at: Time.new(2002)) }
       let!(:item_4) {create(:item, merchant_id: merchant_4.id) }
       let!(:invoice_item_5) {create(:invoice_item, item_id: item_4.id, quantity: 10, unit_price: 7, invoice_id: invoice_4.id ) }
       let!(:invoice_item_6) {create(:invoice_item, item_id: item_4.id, quantity: 10, unit_price: 7, invoice_id: invoice_4.id ) }
@@ -37,7 +37,7 @@ describe 'Admin Merchants index page' do
 
       let!(:customer_5) {create(:customer) }
       let!(:merchant_5) {create(:merchant) }
-      let!(:invoice_5) {create(:invoice, customer_id: customer_5.id) }
+      let!(:invoice_5) {create(:invoice, customer_id: customer_5.id, created_at: Time.new(2002)) }
       let!(:item_5 ) {create(:item, merchant_id: merchant_5.id) }
       let!(:invoice_item_6) {create(:invoice_item, item_id: item_5.id, quantity: 10, unit_price: 6, invoice_id: invoice_5.id ) }
       let!(:invoice_item_7) {create(:invoice_item, item_id: item_5.id, quantity: 10, unit_price: 6, invoice_id: invoice_5.id ) }
@@ -45,7 +45,7 @@ describe 'Admin Merchants index page' do
 
       let!(:customer_6) {create(:customer) }
       let!(:merchant_6) {create(:merchant) }
-      let!(:invoice_6 ) {create(:invoice, customer_id: customer_6.id) }
+      let!(:invoice_6 ) {create(:invoice, customer_id: customer_6.id, created_at: Time.new(2002)) }
       let!(:item_6) {create(:item, merchant_id: merchant_6.id) }
       let!(:invoice_item_7) {create(:invoice_item, item_id: item_6.id, quantity: 10, unit_price: 20, invoice_id: invoice_6.id ) }
       let!(:invoice_item_8) {create(:invoice_item, item_id: item_6.id, quantity: 10, unit_price: 20, invoice_id: invoice_6.id ) }
@@ -107,8 +107,8 @@ describe 'Admin Merchants index page' do
       it "I see the date with the most revenue for each merchant with a label 'Top selling date for <merchant name> was <date with most sales>'" do
         visit admin_merchants_path
        
-        expect(page).to have_content("Top selling date for #{merchant_2.name} was #{invoice_2.created_at.strftime("%A, %B %e, %Y")}")
-        expect(page).to have_content("Top selling date for #{merchant_3.name} was #{invoice_3.created_at.strftime("%A, %B %e, %Y")}")
+        expect(page).to have_content("Top selling date for #{merchant_2.name} was Tuesday, January 1, 2002")
+        expect(page).to have_content("Top selling date for #{merchant_3.name} was Tuesday, January 1, 2002")
       end
     end
  

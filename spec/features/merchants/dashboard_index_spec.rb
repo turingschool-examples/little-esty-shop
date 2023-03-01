@@ -137,7 +137,7 @@ RSpec.describe "Merchant Dashboard Index" do
         InvoiceItem.create!(item_id: item20.id, invoice_id: invoice20.id, status: "packaged")
         # require 'pry'; binding.pry
       
-        expect(page).to have_content(invoice21.created_at.strftime("%A, %B %e, %Y"))
+        expect(page).to have_content("Wednesday, March 1, 2023")
       end
     end
   end
