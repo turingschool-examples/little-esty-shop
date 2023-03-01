@@ -16,12 +16,12 @@ class GithubFacade
     git_name[:name]
   end
 
-  def self.get_contributors
-    contributors = GithubService.fetch_api("/contributors")
-    contributors.map do |contributor|
-      contributor[:login]
-    end
-  end
+  # def self.get_contributors
+  #   contributors = GithubService.fetch_api("/contributors")
+  #   contributors.map do |contributor|
+  #     contributor[:login]
+  #   end
+  # end
 
   # def self.get_commits
   #   commits = GithubService.fetch_api("/commits")
@@ -30,11 +30,10 @@ class GithubFacade
   #   end
   # end
 
-  def self.get_pull_requests
+  def self.get_pr_count
     all_closed_prs = GithubService.fetch_api("/pulls?state=closed")
-    binding.pry
-      all_closed_prs.map do |pr|
-        pr[:number]
-      end.first
+    x = all_closed_prs.map do |pr|
+      pr[:number]
+    end.first
   end
 end
