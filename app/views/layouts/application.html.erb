@@ -13,5 +13,10 @@
   <%= flash[:notice] %>
     <%= yield %>
     <%= @github_info.repo_name %>
+    
+    <p> Contributors:</p><% @github_info.contributors.each do |contributor| %>
+      <%= contributor %>
+    <% end %>
+    
   </body>
 </html>

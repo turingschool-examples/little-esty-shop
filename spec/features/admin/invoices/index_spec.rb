@@ -50,8 +50,17 @@ end
       it "see list of invoice IDs in the system" do 
 
         visit "/admin/invoices"
+        
         expect(page).to have_content("hadyematar23")
-        expect(page).to have_content("davejm8")
+        expect("hadyematar23").to appear_before("BrianZanti")
+        expect("BrianZanti").to appear_before("davejm8")
+        expect("davejm8").to appear_before("MelTravelz")
+        expect("MelTravelz").to appear_before("HuyPhan2025")
+        expect("HuyPhan2025").to appear_before("timomitchel")
+        expect("timomitchel").to appear_before("cjsim89")
+        expect("cjsim89").to appear_before("scottalexandra")
+        expect("scottalexandra").to appear_before("jamisonordway")
+        expect("jamisonordway").to appear_before("mikedao")
     
         expect(page).to have_content('little-esty-shop')
         expect(page).to have_link("Invoice Number #{@invoice_1.id}", href: "/invoices/#{@invoice_1.id}")
