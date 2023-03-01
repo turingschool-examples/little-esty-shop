@@ -12,7 +12,6 @@ class GithubService
 
   def prs
     get_url("https://api.github.com/repos/torienyart/little-esty-shop/pulls?state=closed", headers: {"Authorization" => "Bearer #{ENV['github_token']}"})
-
   end
 
   def repo

@@ -74,5 +74,9 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_content "Bob Fiel -- Transactions: 2"
       expect(page).to have_content "Laura Fiel -- Transactions: 2"
     end
+
+		it 'shows the repo name' do
+			expect(page).to have_content("little-esty-shop")
+		end
 	end
 end
