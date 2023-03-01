@@ -1,54 +1,46 @@
-<div class="nav_bar">
-  <div class="nav_elements">
-    <div class="page_title"><%= @merchant.name %></div>
+<%= render partial: 'partials/merchants_invoice_nav_bar' %>
+
+<div class="body_container_merchant_item">
+  <div class="sub_container_merchant_item">
+    <div class="sub_header_merchant_item"><%= "Invoice ##{@invoice.id}" %></div>
+      <div id="merchant_invoice_information">
+        <p>Status: <%= @invoice.status %></p>
+        <br>
+        <p>Created on: <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %></p>
+        <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue.to_f/100) %></p>
+      </div>
+    <h2>Customer:</h2>
+      <div id="merchant_invoice_customer_info">
+        <p><%= "#{@customer.first_name} #{@customer.last_name}" %></p>
+      </div>
+      <br>
+    <h2>Items on this Invoice:</h2>
   </div>
 
-  <div class="nav_elements">
-    <p>
-      <div class="highlighted_link"><%= link_to "Dashboard", merchant_dashboard_index_path(@merchant.id) %></div>
-      &nbsp;
-      <div class="link"><%= link_to "Items", "/merchants/#{@merchant.id}/items" %></div>
-      &nbsp;
-      <div class="link"><%= link_to "Invoices", "/merchants/#{@merchant.id}/invoices" %></div>
-    </p>
-  </div>
-</div>
 
-<h3><%= "Invoice ##{@invoice.id}" %></h3>
-  <div id="merchant_invoice_information">
-    <p>Status: <%= @invoice.status %></p>
-    <p>Created on: <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %></p>
-    <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue.to_f/100) %></p>
+  <div id="merchant_invoice_item_info">
+    <table>
+      <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Status</th>
+      </tr>
+        <% @invoice_items.each do |invoice_item| %>
+          <div id="invoice_item_<%=invoice_item.id%>">
+            <tr>
+              <td><%= invoice_item.item.name %></td>
+              <td><%= invoice_item.quantity %></td>
+              <td><%= number_to_currency(invoice_item.unit_price.to_f/100) %></td>
+              <td>
+                <%= form_with url: "/merchants/#{@merchant.id}/invoice_items/#{invoice_item.id}", method: :patch, local: true do |f| %>
+                  <%= f.select :status, ["shipped", "pending", "packaged"], selected: invoice_item.status %>
+                  <%= f.submit "Update Item Status" %>
+                <% end %>
+              </td>
+            </tr>
+          </div>
+        <% end %>
+    </table>
   </div>
-
-<h2>Customer:</h2>
-  <div id="merchant_invoice_customer_info">
-    <p><%= "#{@customer.first_name} #{@customer.last_name}" %></p>
-  </div>
-
-<h2>Items on this Invoice:</h2>
-<div id="merchant_invoice_item_info">
-  <table>
-    <tr>
-      <th>Item Name</th>
-      <th>Quantity</th>
-      <th>Unit Price</th>
-      <th>Status</th>
-    </tr>
-      <% @invoice_items.each do |invoice_item| %>
-        <div id="invoice_item_<%=invoice_item.id%>">
-          <tr>
-            <td><%= invoice_item.item.name %></td>
-            <td><%= invoice_item.quantity %></td>
-            <td><%= number_to_currency(invoice_item.unit_price.to_f/100) %></td>
-            <td>
-              <%= form_with url: "/merchants/#{@merchant.id}/invoice_items/#{invoice_item.id}", method: :patch, local: true do |f| %>
-                <%= f.select :status, ["shipped", "pending", "packaged"], selected: invoice_item.status %>
-                <%= f.submit "Update Item Status" %>
-              <% end %>
-            </td>
-          </tr>
-        </div>
-      <% end %>
-  </table>
 </div>

@@ -29,7 +29,7 @@ RSpec.describe "Merchant_Items#Show", type: :feature do
     it "shows the name, description, and current selling price" do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content("Description: #{@item_1.description}")
-      expect(page).to have_content("Current Price: #{@item_1.unit_price}")
+      expect(page).to have_content("Current Price: $#{@item_1.unit_price.to_f/100}")
     end
   end
 

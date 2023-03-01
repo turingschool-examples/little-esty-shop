@@ -1,18 +1,4 @@
-<div class="nav_bar">
-  <div class="nav_elements">
-    <div class="page_title"><%= @merchant.name %></div>
-  </div>
-
-  <div class="nav_elements">
-    <p>
-      <div class="highlighted_link"><%= link_to "Dashboard", merchant_dashboard_index_path(@merchant.id) %></div>
-      &nbsp;
-      <div class="link"><%= link_to "Items", "/merchants/#{@merchant.id}/items" %></div>
-      &nbsp;
-      <div class="link"><%= link_to "Invoices", "/merchants/#{@merchant.id}/invoices" %></div>
-    </p>
-  </div>
-</div>
+<%= render partial: 'partials/merchants_dashboard_nav_bar' %>
 
 <div class="body_container">
   <div class="sub_container">

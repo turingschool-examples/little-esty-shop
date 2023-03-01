@@ -141,3 +141,23 @@ tbody tr:nth-child(even) {
   margin-left: 40px;
   margin-bottom: 20px;
 }
+
+.sub_header_merchant_item {
+  width: 1150px;
+  border-top: solid;
+  text-align: center;
+  background-color: rgb(175, 182, 195);
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.sub_container_merchant_item {
+  margin: 50px;
+}
+
+.body_container_merchant_item{
+  padding-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
