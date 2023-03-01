@@ -3,7 +3,9 @@ require 'httparty'
 class GithubService
 
   def usernames
-    get_url( "https://api.github.com/repos/torienyart/little-esty-shop/contributors", headers: {"Authorization" => "Bearer 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"})
+    get_url("https://api.github.com/repos/torienyart/little-esty-shop/collaborators", headers: {"Authorization" => "Bearer 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"})
+
+    # get_url( "https://api.github.com/repos/torienyart/little-esty-shop/contributors", headers: {"Authorization" => "Bearer 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"})
   end
 
   def commits(username)

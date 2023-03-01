@@ -11,10 +11,10 @@
 
   <body>
   <%=RepoSearch.repo_name.repo_name%>
-  <%=CommitSearch.commit_information('torienyart')%>
-  <%=CommitSearch.commit_information('brad-dunlap')%>
-  <%=CommitSearch.commit_information('c-v-l')%>
-  <%=CommitSearch.commit_information('ALHelton')%>
+  
+  <%UsernameSearch.username_information.each do |username|%>
+  <p><%= username.login %>: <%=CommitSearch.commit_information(username.login)%> commits  </p>
+  <%end%>
 
 	<% flash.each do |type, message| %>
   <div class="alert alert-<%= type %>"><%= message %></div>

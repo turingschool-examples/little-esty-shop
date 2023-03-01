@@ -12,3 +12,4 @@ class UsernameSearch
     end
   end
 end
+
