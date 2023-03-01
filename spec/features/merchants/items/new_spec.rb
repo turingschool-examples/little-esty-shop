@@ -17,7 +17,7 @@ RSpec.describe 'merchant items new page', type: :feature do
 
 				expect(page).to have_field('Name')
 				expect(page).to have_field('Description')
-				expect(page).to have_field('Unit Price')
+				expect(page).to have_field('Unit price')
 			end
 
 			describe 'creates a new item when I submit form' do
@@ -26,7 +26,7 @@ RSpec.describe 'merchant items new page', type: :feature do
 
 					fill_in 'Name', with: 'Box'
 					fill_in 'Description', with: 'Box Description'
-					fill_in 'Unit Price', with: '1.00'
+					fill_in 'Unit price', with: '1.00'
 					click_button
 				end
 
