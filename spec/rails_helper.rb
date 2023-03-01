@@ -72,7 +72,7 @@ RSpec.configure do |config|
   end
 
   require 'simplecov'
-  SimpleCov.start 'rails'
+  SimpleCov.start
 end
 
 Shoulda::Matchers.configure do |config|
