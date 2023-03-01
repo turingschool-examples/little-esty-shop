@@ -8,11 +8,13 @@ RSpec.describe 'Merchant/Items Index Page' do
       let!(:autem) {Item.create!(merchant: schroeder_jerde, name: 'Autem Minima', unit_price: 67076) }
       let!(:ea) {Item.create!(merchant: schroeder_jerde, name: 'Ea Voluptatum', unit_price: 32301) }
 
-      it "should see a list of all that merchant items and not other merchan" do
+      it "should see a list of all that merchant items and not other merchant", :vcr do
         visit "/merchants/#{schroeder_jerde.id}/items"
         expect(page).to have_content(qui.name)
         expect(page).to have_content(autem.name)
         expect(page).to have_content(ea.name)
+        expect(page).to have_content("hadyematar23")
+        save_and_open_page
       end
 
       it 'should see a the name as a link that will direct to item show page where the item attribute is display' do
