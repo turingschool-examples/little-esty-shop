@@ -36,6 +36,7 @@ class Merchant < ApplicationRecord
     .order('revenue DESC')
     .limit(5)
   end
+  
   def self.enabled_merchants
     self.where(status: "Enabled")
   end

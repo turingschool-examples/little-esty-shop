@@ -11,13 +11,13 @@ RSpec.describe "Dashboard", type: :feature do
     @customer_5 = create(:customer)
     @customer_6 = create(:customer)
 
-    @invoice_1 = create(:invoice, customer_id: @customer_1.id)
-    @invoice_2 = create(:invoice, customer_id: @customer_2.id)
-    @invoice_3 = create(:invoice, customer_id: @customer_3.id)
-    @invoice_4 = create(:invoice, customer_id: @customer_4.id)
-    @invoice_5 = create(:invoice, customer_id: @customer_5.id)
-    @invoice_6 = create(:invoice, customer_id: @customer_6.id)
-    @invoice_7 = create(:invoice, customer_id: @customer_6.id)
+    @invoice_1 = create(:invoice, customer_id: @customer_1.id, created_at: Date.new(2023,1,1))
+    @invoice_2 = create(:invoice, customer_id: @customer_2.id, created_at: Date.new(2023,1,2))
+    @invoice_3 = create(:invoice, customer_id: @customer_3.id, created_at: Date.new(2023,1,3))
+    @invoice_4 = create(:invoice, customer_id: @customer_4.id, created_at: Date.new(2023,1,4))
+    @invoice_5 = create(:invoice, customer_id: @customer_5.id, created_at: Date.new(2023,1,5))
+    @invoice_6 = create(:invoice, customer_id: @customer_6.id, created_at: Date.new(2023,1,6))
+    @invoice_7 = create(:invoice, customer_id: @customer_6.id, created_at: Date.new(2023,1,7))
 
     @item_1 = create(:item, merchant: @merchant)
     @item_2 = create(:item, merchant: @merchant)
@@ -103,6 +103,7 @@ RSpec.describe "Dashboard", type: :feature do
   describe "User Story 5" do
     it "displays the date that the invoice was created and is formatted WeekDay, Month Day, Year" do
       within("#items_ready_to_ship") {
+
         expect("Sunday, January 1, 2023").to appear_before("Monday, January 2, 2023")
         expect("Monday, January 2, 2023").to appear_before("Tuesday, January 3, 2023")
         expect("Tuesday, January 3, 2023").to appear_before("Wednesday, January 4, 2023")

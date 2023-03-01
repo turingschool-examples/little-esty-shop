@@ -1,7 +1,11 @@
-<h1>New Merchant</h1>
+<%= render partial: 'partials/admin_merchant_nav_bar' %>
 
-<%= form_with model: [:admin, @merchant], method: :post, local: true do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-  <%= form.submit "Submit" %>
-<% end %>
+<div class="sub_container">
+  <h2>New Merchant</h2>
+
+  <%= form_with model: [:admin, @merchant], method: :post, local: true do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+    <%= form.submit "Submit" %>
+  <% end %>
+</div>

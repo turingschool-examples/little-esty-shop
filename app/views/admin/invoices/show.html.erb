@@ -1,0 +1,42 @@
+<%= render partial: 'partials/admin_invoice_nav_bar' %>
+
+<div class="body_container">
+  <div class="wide_container">
+    <div class="wide_header"><%= "Invoice ##{@invoice.id}" %></div>
+    <div class="sub_container">
+      <p>
+        <%= form_with model: [:admin, @invoice], method: :patch, local: true do |form| %>
+          <%= form.label :status, "Status: " %>
+          <%= form.select :status, ["in progress", "cancelled", "completed"], value: @invoice.status %>
+          <%= form.submit "Update Invoice Status" %>
+        <% end %>
+      </p>
+      <p><%= "Created on: #{@invoice.created_at.strftime("%A, %B %-d, %Y")}" %></p>
+      <h4> Total Revenue: <%= number_to_currency(@invoice.total_revenue.to_f / 100) %> </h4>
+      <h4>Customer:</h4>
+      <p><%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
+      
+      <h4> Items on this invoice: </h4>
+      <div class="table_container">
+        <table> 
+          <tr>
+            <th> Item Name </th>
+            <th> Quantity </th>
+            <th> Unit Price </th>
+            <th> Status </th>
+          </tr>
+          <% @invoice.invoice_items_and_names.each do |item| %>
+            <div id = <%= "invoice_item-#{item.id}" %>>
+              <tr>
+                <td> <%= item.name %> </td>
+                <td> <%= item.quantity %> </td>
+                <td> <%= number_to_currency(item.unit_price.to_f / 100) %> </td>
+                <td> <%= item.status %> </td>
+              </tr>
+            <div>
+          <%end%>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
