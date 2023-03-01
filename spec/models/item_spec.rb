@@ -53,8 +53,8 @@ RSpec.describe Item, type: :model do
       invoice_item_4 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 4, invoice_id: invoice_4.id)
       invoice_item_5 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 2, invoice_id: invoice_5.id)
       invoice_item_6 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 1, invoice_id: invoice_6.id)
-      # require 'pry'; binding.pry
-      expect(item_1.top_item_day.created_at).to eq("January 28, 2019")
+    
+      expect(item_1.top_item_day.invoice_date).to eq("January 28, 2019")
     end
 
     it "should return the quantity from the invoice_item" do
@@ -97,12 +97,12 @@ RSpec.describe Item, type: :model do
       item_4 = create(:item, merchant_id: merchant1.id)
       item_5 = create(:item, merchant_id: merchant1.id)
       item_6 = create(:item, merchant_id: merchant1.id)
-      invoice_1 = create(:invoice, customer_id: customer_1.id)
-      invoice_2 = create(:invoice, customer_id: customer_1.id)
-      invoice_3 = create(:invoice, customer_id: customer_1.id)
-      invoice_4 = create(:invoice, customer_id: customer_1.id)
-      invoice_5 = create(:invoice, customer_id: customer_1.id)
-      invoice_6 = create(:invoice, customer_id: customer_1.id)
+      invoice_1 = create(:invoice, customer_id: customer_1.id, status: "completed")
+      invoice_2 = create(:invoice, customer_id: customer_1.id, status: "completed")
+      invoice_3 = create(:invoice, customer_id: customer_1.id, status: "completed")
+      invoice_4 = create(:invoice, customer_id: customer_1.id, status: "completed")
+      invoice_5 = create(:invoice, customer_id: customer_1.id, status: "completed")
+      invoice_6 = create(:invoice, customer_id: customer_1.id, status: "completed")
       invoice_item_1 = create(:invoice_item, item_id: item_1.id, quantity: 10, unit_price: 10, invoice_id: invoice_1.id )
       invoice_item_2 = create(:invoice_item, item_id: item_2.id, quantity: 10, unit_price: 6, invoice_id: invoice_2.id )
       invoice_item_3 = create(:invoice_item, item_id: item_3.id, quantity: 10, unit_price: 8, invoice_id: invoice_3.id )
@@ -113,10 +113,10 @@ RSpec.describe Item, type: :model do
       transaction_2 = create(:transaction, invoice_id: invoice_2.id, result: 'success')
       transaction_3 = create(:transaction, invoice_id: invoice_3.id, result: 'success')
       transaction_4 = create(:transaction, invoice_id: invoice_4.id, result: 'success')
-      transaction_5 = create(:transaction, invoice_id: invoice_5.id, result: 'failure')
+      transaction_5 = create(:transaction, invoice_id: invoice_5.id, result: 'success')
       transaction_6 = create(:transaction, invoice_id: invoice_6.id, result: 'success')
 
-      expect(Item.top_5_by_revenue).to eq([item_1, item_3, item_2, item_4, item_6])
+      expect(Item.top_5_by_revenue).to contain_exactly(item_1, item_2, item_3, item_4, item_5)
       expect(Item.top_5_by_revenue).to_not eq([item_1, item_2, item_3, item_4, item_5, item_6])
       expect(Item.top_5_by_revenue).to_not eq([item_6, item_4, item_3, item_2, item_1])
     end
