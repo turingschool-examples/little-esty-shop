@@ -84,22 +84,19 @@ RSpec.describe "The Admin Index" do
       it "When I visit the admin dashboard, I see a section for 'Incomplete Invoices', In that section I see a list of the ids of all invoices 
         that have items that have not yet been shipped, and each invoice id links to that invoice's admin show page" do
         within("#incomplete_invoices") {
-          within("#incomplete_invoice_item-#{@invoice_item_1.id}")  {
+          within("#incomplete_invoice-#{@invoice_1.id}")  {
             expect(page).to have_content("Invoice ##{@invoice_1.id}")
             expect(page).to have_link("#{@invoice_1.id}", href: admin_invoice_path(@invoice_1))
           }
-          within("#incomplete_invoice_item-#{@invoice_item_2.id}")  {
+          within("#incomplete_invoice-#{@invoice_2.id}")  {
             expect(page).to have_content("Invoice ##{@invoice_2.id}")
             expect(page).to have_link("#{@invoice_2.id}", href: admin_invoice_path(@invoice_2))
           }
-          within("#incomplete_invoice_item-#{@invoice_item_3.id}")  {
+          within("#incomplete_invoice-#{@invoice_3.id}")  {
             expect(page).to have_content("Invoice ##{@invoice_3.id}")
             expect(page).to have_link("#{@invoice_3.id}", href: admin_invoice_path(@invoice_3))
           }
-          within("#incomplete_invoice_item-#{@invoice_item_4.id}")  {
-            expect(page).to have_content("Invoice ##{@invoice_3.id}")
-            expect(page).to have_link("#{@invoice_3.id}", href: admin_invoice_path(@invoice_3))
-          }
+
           expect(page).to_not have_content("Invoice ##{@invoice_4.id}")
         }
       end
@@ -111,16 +108,13 @@ RSpec.describe "The Admin Index" do
           expect("Sunday, January 01, 2023").to appear_before("Monday, January 02, 2023")
           expect("Monday, January 02, 2023").to appear_before("Tuesday, January 03, 2023")
 
-          within("#incomplete_invoice_item-#{@invoice_item_1.id}")  {
+          within("#incomplete_invoice-#{@invoice_1.id}")  {
             expect(page).to have_content("Invoice ##{@invoice_1.id} - Sunday, January 01, 2023")
           }
-          within("#incomplete_invoice_item-#{@invoice_item_2.id}")  {
+          within("#incomplete_invoice-#{@invoice_2.id}")  {
             expect(page).to have_content("Invoice ##{@invoice_2.id} - Monday, January 02, 2023")
           }
-          within("#incomplete_invoice_item-#{@invoice_item_3.id}")  {
-            expect(page).to have_content("Invoice ##{@invoice_3.id} - Tuesday, January 03, 2023")
-          }
-          within("#incomplete_invoice_item-#{@invoice_item_4.id}")  {
+          within("#incomplete_invoice-#{@invoice_3.id}")  {
             expect(page).to have_content("Invoice ##{@invoice_3.id} - Tuesday, January 03, 2023")
           }
         }

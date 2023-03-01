@@ -2,14 +2,14 @@
 
 <div class="body_container">
   <div class="sub_container">
-    <div class="sub_header">Incomplete Inovices</div>
+    <div class="sub_header">Incomplete Invoices</div>
     <div id="incomplete_invoices">
       <ul>
-        <% @incomplete_item_invoices.each do |item_invoice| %>
-          <div id= "incomplete_invoice_item-<%=item_invoice.id%>">
+        <% @incomplete_invoices.each do |invoice| %>
+          <div id= "incomplete_invoice-<%=invoice.id%>">
             <p>
-              Invoice #<%= link_to "#{item_invoice.invoice_id}", admin_invoice_path(item_invoice.invoice)%>
-              - <%= item_invoice.invoice.created_at.strftime("%A, %B %d, %Y") %>
+              Invoice #<%= link_to "#{invoice.id}", admin_invoice_path(invoice)%>
+              - <%= invoice.created_at.strftime("%A, %B %d, %Y") %>
             </p>
           </div>
         <% end %>
