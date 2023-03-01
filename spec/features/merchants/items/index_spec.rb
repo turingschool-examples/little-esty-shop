@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant/Items Index Page' do
+RSpec.describe 'Merchant/Items Index Page', :vcr do
   describe "as a merchant" do 
     describe "when merchant visit 'merchants/merchant_id/items'" do
       let!(:schroeder_jerde) { Merchant.create!(name: 'Schroeder-Jerde')}

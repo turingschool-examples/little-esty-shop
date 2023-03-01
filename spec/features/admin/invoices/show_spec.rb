@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Invoice Show Page' do
+RSpec.describe 'Admin Invoice Show Page', :vcr do
   before(:each) do 
     @merchant1 = Merchant.create!(name: "Mel's Travels") 
     @merchant2 = Merchant.create!(name: "Hady's Beach Shack") 

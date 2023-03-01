@@ -4,7 +4,7 @@ class GithubInfo
   def initialize(info)
     @repo_name = info[:repo_name]
     @contributors = info[:contributors]
-    @commits = info[:commits]
-    @pr_count = info[:pr_count]
+    # @commits = info[:commits]
+    # @pr_count = info[:pr_count]
   end
 end

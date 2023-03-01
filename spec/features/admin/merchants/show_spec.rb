@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "admin merchants show" do
+RSpec.describe "admin merchants show", :vcr do
 
   before(:each) do
     @merchant_1 = Merchant.create!(name: "Mel's Travels")

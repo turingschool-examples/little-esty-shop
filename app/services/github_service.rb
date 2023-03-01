@@ -1,4 +1,3 @@
-
 class GithubService
   def self.fetch_api(arg)
     response = connection(arg).get

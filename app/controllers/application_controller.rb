@@ -4,5 +4,4 @@ class ApplicationController < ActionController::Base
   def github_info
     @github_info = GithubFacade.info_hash
   end
-
 end

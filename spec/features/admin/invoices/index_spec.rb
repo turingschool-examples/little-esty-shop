@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Invoices Index Page' do
+RSpec.describe 'Admin Invoices Index Page', :vcr do
 before(:each) do 
   @merchant1 = Merchant.create!(name: "Hady", uuid: 1) 
   @merchant2 = Merchant.create!(name: "Malena", uuid: 2) 
