@@ -140,7 +140,7 @@ RSpec.describe "Merchant_Items#Index", type: :feature do
       visit "/merchants/#{@merchant.id}/items"
     end
     
-    xit "lists the names of the top 5 most popular items ranked by total revenue generated" do
+    it "lists the names of the top 5 most popular items ranked by total revenue generated" do
       within("#5_most_popular_items") do
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content(@item_2.name)

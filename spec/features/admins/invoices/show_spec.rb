@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Admin Invoice Show Page" do
   describe "User Story 33" do 
-    xit 'When I visit an admin invoice show page, then I see information related to that invoice including: id, status, created at and customer name' do
+    it 'When I visit an admin invoice show page, then I see information related to that invoice including: id, status, created at and customer name' do
       customer = create(:customer, first_name: "Adam", last_name: "Bailey")
 
       invoice = create(:invoice, customer: customer, status: 0, created_at: Date.new(2023,1,1))
