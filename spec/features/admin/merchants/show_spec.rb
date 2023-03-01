@@ -13,7 +13,7 @@ RSpec.describe '#show' do
 
     end
 
-    it 'I see a link ot update the merchant' do
+    it 'I see a link to update the merchant' do
       click_link "Update Merchant"
       expect(current_path).to eq(edit_merchant_path(@merchant1))
 
@@ -24,6 +24,18 @@ RSpec.describe '#show' do
       expect(current_path).to eq(admin_merchant_path(@merchant1))
       expect(page).to have_content("Merchant was successfully updated.")
       expect(page).to have_content("Updated Merchant Name")
+    end
+
+    it 'If I delete the name and enter without any data I remain on the update page with a flash message' do
+      click_link "Update Merchant"
+      expect(current_path).to eq(edit_merchant_path(@merchant1))
+
+      expect(page).to have_content("Carlos Jenkins")
+      fill_in "Name", with: ""
+      click_button "Update Merchant"
+      
+      expect(current_path).to eq(edit_merchant_path(@merchant1))
+      expect(page).to have_content("Merchant not updated: Name can't be blank")
     end
 
   end
