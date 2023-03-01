@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+git_source(:github) do |erepo_nam|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
 ruby '2.7.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -48,6 +53,7 @@ group :development, :test do
   gem 'net-http'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'httparty'
 end
 
 group :development do
