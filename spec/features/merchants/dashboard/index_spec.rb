@@ -103,7 +103,7 @@ RSpec.describe "Dashboard", type: :feature do
   describe "User Story 5" do
     it "displays the date that the invoice was created and is formatted WeekDay, Month Day, Year" do
       within("#items_ready_to_ship") {
-        save_and_open_page
+
         expect("Sunday, January 1, 2023").to appear_before("Monday, January 2, 2023")
         expect("Monday, January 2, 2023").to appear_before("Tuesday, January 3, 2023")
         expect("Tuesday, January 3, 2023").to appear_before("Wednesday, January 4, 2023")
