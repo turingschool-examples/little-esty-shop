@@ -1,4 +1,9 @@
 class ApplicationController < ActionController::Base
+	before_action :users
+
+	def users
+		@users = UsersSearch.new.users_information
+	end
 
 	private
 
