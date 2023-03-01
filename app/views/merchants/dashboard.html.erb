@@ -1,36 +1,21 @@
-<div class="header">
-  <h1>Little Esty Shop</h1>
-</div>
+<h1><%= @merchant.name %>'s Dashboard Index</h1>
 
-<div class="top-container">
-  <div class="merchant-container">
-    <h2><%= @merchant.name %>'s Items</p>
-  </div>
+<p>Name: <%= @merchant.name %></p>
 
-  <div class="links-container">
-    <p><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></p>
-    <p><%= link_to "Items Index", "/merchants/#{@merchant.id}/items" %></p>
-    <p><%= link_to "Invoices", "/merchants/#{@merchant.id}/invoices" %></p>
-  </div>
-</div>
+<p><%= link_to "Items Index", "/merchants/#{@merchant.id}/items" %></p>
+<p><%= link_to "Invoices", "/merchants/#{@merchant.id}/invoices" %></p>
 
-<div class="main-container">
-  <div class="right-container">
-  <h2>Top 5 Customers:</h2>
-    <ol>
-      <% @merchant.top_five_customers.each do |customer|%>
-        <li><%= customer.first_name %> <%= customer.last_name %>: <%= customer.transaction_count %> successful transactions </li>
-      <% end %>
-    </ol>
-  </div>
+<h2>Top 5 Customers:</h2>
+<ol>
+  <% @merchant.top_five_customers.each do |customer|%>
+    <li><%= customer.first_name %> <%= customer.last_name %>: <%= customer.transaction_count %> successful transactions </li>
+  <% end %>
+</ol>
 
-  <div class="left-container">
-    <h3>Items Ready to Ship</h3>
+<h3>Items Ready to Ship</h3>
 
-    <ul>
-      <% @merchant.items_ready_to_ship.each do |item| %>
-        <li><%= item.name %>: <%= link_to item.item_invoice_id, "/merchants/#{@merchant.id}/invoices" %> - <%= item.inv_time.strftime("%A, %B %e, %Y") %></li>
-      <% end %>
-    </ul>
-  </div>
-</div>
+<ul>
+  <% @merchant.items_ready_to_ship.each do |item| %>
+    <li><%= item.name %>: <%= link_to item.item_invoice_id, "/merchants/#{@merchant.id}/invoices" %></li>, <%= item.inv_time.strftime("%A, %B %e, %Y") %>
+  <% end %>
+</ul>

@@ -1,25 +1,16 @@
-<div class="header">
-  <h1>Merchant Items Index Page</h1>
-</div> 
-
-<div class="top-container">
-  <div class="merchant-container">
-    <h3><%= @merchant.name %></h3>
-  </div> 
-
-    <div class="links-container">
-      <p><%= link_to "Create a New Item", "/merchants/#{@merchant.id}/items/new" %></p>
-    </div>
-</div> 
+<h1>Merchant Items Index Page</h1>
+<br>
+<h3><%= @merchant.name %></h3>
+<p><%= link_to "Create a New Item", "/merchants/#{@merchant.id}/items/new" %></p>
+<br>
 
 <h2>Top 5 Most Popular Items (By Revenue)</h2>
 <div id = "top_5_items">
   <% @top_5_items.each do |item| %>
     <li><%= link_to item.name, "/merchants/#{item.merchant_id}/items/#{item.id}" %>: <%= number_to_currency(item.revenue) %></li>
-    <li>Top selling date for <%= item.name %> was <%= item.top_item_day.invoice_date.strftime("%B %e, %Y") if !item.top_item_day.nil? %></li> 
+    <li>Top selling date for <%= item.name %> was <%= item.top_item_day.created_at.strftime("%B %e, %Y") %></li>
   <% end %>
 </div>
-
 
 <div class="main-container">
   <div class="left-container">
@@ -48,7 +39,8 @@
             <p><%= f.hidden_field :to_index %></p>
           <% end %>
         </div>
+
       <% end %>
-    </ul>
-  </div>
-</div>
+    </div>
+  <% end %>
+</ul>

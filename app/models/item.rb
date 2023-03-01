@@ -30,8 +30,8 @@ class Item < ApplicationRecord
   end
 
   def self.top_5_by_revenue
-    joins(:transactions)
-   .where("transactions.result = 'success' AND invoices.status = 1")
+    Item.joins(:transactions)
+   .where("transactions.result = 'success'")
    .group("items.id")
    .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue")
    .order("revenue desc")
@@ -41,11 +41,13 @@ class Item < ApplicationRecord
   def top_item_day
     Item.joins(:invoices)
     .where(id: self.id, invoices: {status: 1})
-    .select("invoices.created_at AS invoice_date, sum(invoice_items.quantity * invoice_items.unit_price) AS sales")
-    .group("invoice_date")
+    .select("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) AS sales")
+    .group("invoices.created_at")
     .order("sales desc")
     .limit(1)
     .first
+    # .created_at
+    # .strftime("%B %e, %Y")
   end
 
   def item_quantity
