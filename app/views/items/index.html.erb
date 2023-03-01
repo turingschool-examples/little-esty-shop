@@ -15,8 +15,9 @@
 <h2>Enabled Items:</h2>
 <ul>
   <% @enabled_items.each do |item| %>
-    <div id="enabled-item-<%= item.id %>"> 
-      <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |f| %>
+    <div id="enabled-item-<%= item.id %>">
+      <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |f| %>
+        <%= f.hidden_field :to_index %>
         <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p></li>
         <p><%= f.button "Disable #{item.name}", type: "submit", name: "status", value: "disabled" %></p>
       <% end %>
@@ -28,7 +29,8 @@
 <ul>
   <% @disabled_items.each do |item| %>
     <div id="disabled-item-<%= item.id %>">
-      <%= form_with url: "/items/#{item.id}", method: :patch, local: true do |f| %>
+      <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |f| %>
+        <%= f.hidden_field :to_index %>
         <li><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p></li>
         <p><%= f.button "Enable #{item.name}", type: "submit", name: "status", value: "enabled" %></p>
       <% end %>
