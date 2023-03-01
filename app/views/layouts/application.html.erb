@@ -9,12 +9,13 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body> 
 		<% flash.each do |type, msg| %>
 			<div>
 				<%= msg %>
 			</div>
-    <% end %>
+    <%  end %>
+    <p><%= @pull_requests %> merged pull requests</p>
     <%= yield %>
-  </body>
+  </body> 
 </html>
