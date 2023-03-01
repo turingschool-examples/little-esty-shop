@@ -1,7 +1,7 @@
 require 'httparty'
 
 class GithubService
-  def contributors
+  def usernames
     get_url( "https://api.github.com/repos/torienyart/little-esty-shop/contributors")
   end
 
