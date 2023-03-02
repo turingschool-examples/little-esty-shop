@@ -10,15 +10,15 @@ RSpec.describe "Merchant Dashboard Index" do
     let!(:customer4) { create(:customer) }
     let!(:customer5) { create(:customer) }
     let!(:customer6) { create(:customer) }
-    let!(:invoice1) { create(:invoice, customer_id: customer1.id) }
-    let!(:invoice2) { create(:invoice, customer_id: customer1.id) }
-    let!(:invoice3) { create(:invoice, customer_id: customer1.id) }
-    let!(:invoice4) { create(:invoice, customer_id: customer2.id) }
-    let!(:invoice5) { create(:invoice, customer_id: customer2.id) }
-    let!(:invoice6) { create(:invoice, customer_id: customer2.id) }
-    let!(:invoice7) { create(:invoice, customer_id: customer3.id) }
-    let!(:invoice8) { create(:invoice, customer_id: customer3.id) }
-    let!(:invoice9) { create(:invoice, customer_id: customer4.id) }
+    let!(:invoice1) { create(:invoice, customer_id: customer1.id, created_at: Time.new(2023, 3, 1)) }
+    let!(:invoice2) { create(:invoice, customer_id: customer1.id, created_at: Time.new(2023, 3, 1)) }
+    let!(:invoice3) { create(:invoice, customer_id: customer1.id, created_at: Time.new(2023, 3, 1)) }
+    let!(:invoice4) { create(:invoice, customer_id: customer2.id, created_at: Time.new(2023, 3, 1)) }
+    let!(:invoice5) { create(:invoice, customer_id: customer2.id, created_at: Time.new(2023, 3, 1)) }
+    let!(:invoice6) { create(:invoice, customer_id: customer2.id, created_at: Time.new(2023, 3, 1)) }
+    let!(:invoice7) { create(:invoice, customer_id: customer3.id, created_at: Time.new(2023, 3, 1)) }
+    let!(:invoice8) { create(:invoice, customer_id: customer3.id, created_at: Time.new(2023, 3, 1)) }
+    let!(:invoice9) { create(:invoice, customer_id: customer4.id, created_at: Time.new(2023, 3, 1)) }
     let!(:invoice10) { create(:invoice, customer_id: customer5.id) }
     let!(:invoice11) { create(:invoice, customer_id: customer6.id) }
     let!(:item1) { create(:item, merchant_id: merchant1.id)}
@@ -117,25 +117,23 @@ RSpec.describe "Merchant Dashboard Index" do
 
       it "In Items Ready to Ship, I see the date the invoice was created, oldest to newest" do 
 
-        merchant21 = create(:merchant) 
         customer21 = create(:customer) 
+        merchant21 = create(:merchant) 
         customer22 = create(:customer)
         customer24 = create(:customer)
         customer25 = create(:customer)
-        invoice21 = create(:invoice, customer_id: customer21.id) 
-        invoice24 = create(:invoice, customer_id: customer22.id)
-        invoice29 = create(:invoice, customer_id: customer24.id)
-        invoice20 = create(:invoice, customer_id: customer25.id)
+        invoice21 = create(:invoice, customer_id: customer21.id, created_at: Time.new(2023, 3, 1)) 
+        invoice24 = create(:invoice, customer_id: customer22.id, created_at: Time.new(2023, 3, 1))
+        invoice29 = create(:invoice, customer_id: customer24.id, created_at: Time.new(2023, 3, 1))
+        invoice20 = create(:invoice, customer_id: customer25.id, created_at: Time.new(2023, 3, 1))
         item21 = create(:item, merchant_id: merchant21.id)
         item24 = create(:item, merchant_id: merchant21.id)
         item29 = create(:item, merchant_id: merchant21.id)
         item20 = create(:item, merchant_id: merchant21.id)
-  
         InvoiceItem.create!(item_id: item21.id, invoice_id: invoice21.id, status: "packaged")
         InvoiceItem.create!(item_id: item24.id, invoice_id: invoice24.id, status: "packaged")
         InvoiceItem.create!(item_id: item29.id, invoice_id: invoice29.id, status: "packaged")
         InvoiceItem.create!(item_id: item20.id, invoice_id: invoice20.id, status: "packaged")
-        # require 'pry'; binding.pry
       
         expect(page).to have_content("Wednesday, March 1, 2023")
       end
