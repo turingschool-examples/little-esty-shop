@@ -14,6 +14,43 @@ RSpec.describe Merchant, type: :feature do
     let!(:napkin_holder) { bob.items.create!(name: "Napkin Holder", description: "Stainless Steel Napkin Holder", unit_price: 2500) }
     let!(:window_planter) { bob.items.create!(name: "Window Planter", description: "Plastic Window Planter", unit_price: 2500) }
 
+    before :each do
+      repo_call = File.read('spec/fixtures/repo_call.json')
+      collaborators_call = File.read('spec/fixtures/collaborators_call.json')
+      pulls_call = File.read('spec/fixtures/pulls_call.json')
+
+      stub_request(:get, "https://api.github.com/repos/4D-Coder/little-esty-shop").
+          with(
+            headers: {
+            'Accept'=>'*/*',
+            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+            'Authorization'=>"Bearer #{ENV["github_token"]}",
+            'User-Agent'=>'Faraday v2.7.4'
+            }).
+          to_return(status: 200, body: repo_call, headers: {})
+
+
+      stub_request(:get, "https://api.github.com/repos/4D-Coder/little-esty-shop/assignees").
+          with(
+            headers: {
+            'Accept'=>'*/*',
+            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+            'Authorization'=>"Bearer #{ENV["github_token"]}",
+            'User-Agent'=>'Faraday v2.7.4'
+            }).
+          to_return(status: 200, body: collaborators_call, headers: {})
+
+      stub_request(:get, "https://api.github.com/repos/4D-Coder/little-esty-shop/pulls?state=all&merged_at&per_page=100").
+          with(
+            headers: {
+            'Accept'=>'*/*',
+            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+            'Authorization'=>"Bearer #{ENV["github_token"]}",
+            'User-Agent'=>'Faraday v2.7.4'
+            }).
+          to_return(status: 200, body: pulls_call, headers: {})
+    end
+
     before (:each) do 
       InvoiceItem.create!(invoice_id: invoice1.id, item_id: coochie_copi.id, status: 0)
       InvoiceItem.create!(invoice_id: invoice2.id, item_id: napkin_holder.id, status: 1)
@@ -24,12 +61,12 @@ RSpec.describe Merchant, type: :feature do
 
     describe 'As a merchant' do 
       context 'When I visit merchant dashboard' do 
-# user 1
+
         it 'displays the name of my merchant' do
           expect(page).to have_content("Name: Bob's Beauties")
           expect(page).to have_content("Name: #{bob.name}")
         end
-#user 2
+
         it 'displays a link to my merchant items index' do
           expect(page).to have_link('My Items')
         end
@@ -37,10 +74,13 @@ RSpec.describe Merchant, type: :feature do
         it 'displays a link to my merchant invoices index' do
           expect(page).to have_link('My Invoices')
         end
+
+        it 'displays the repo name on every page' do
+          expect(page).to have_content("little-esty-shop")
+        end
       end
 
       context 'in the section for Items Ready to Ship' do 
- #user 4
         it 'displays a list of names of all items that have been ordered but not shipped' do
           
           expect(page).to have_content("Items Ready to Ship")

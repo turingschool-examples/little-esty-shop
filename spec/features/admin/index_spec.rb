@@ -35,6 +35,43 @@ RSpec.describe 'Admin Dashboard:', type: :feature do
 
       let!(:fishnet_tights){ roland.invoices.create!(customer_id: roland.id, status: "cancelled") }
 
+        before :each do
+          repo_call = File.read('spec/fixtures/repo_call.json')
+          collaborators_call = File.read('spec/fixtures/collaborators_call.json')
+          pulls_call = File.read('spec/fixtures/pulls_call.json')
+
+          stub_request(:get, "https://api.github.com/repos/4D-Coder/little-esty-shop").
+              with(
+                headers: {
+                'Accept'=>'*/*',
+                'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+                'Authorization'=>"Bearer #{ENV["github_token"]}",
+                'User-Agent'=>'Faraday v2.7.4'
+                }).
+              to_return(status: 200, body: repo_call, headers: {})
+
+
+          stub_request(:get, "https://api.github.com/repos/4D-Coder/little-esty-shop/assignees").
+              with(
+                headers: {
+                'Accept'=>'*/*',
+                'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+                'Authorization'=>"Bearer #{ENV["github_token"]}",
+                'User-Agent'=>'Faraday v2.7.4'
+                }).
+              to_return(status: 200, body: collaborators_call, headers: {})
+
+          stub_request(:get, "https://api.github.com/repos/4D-Coder/little-esty-shop/pulls?state=all&merged_at&per_page=100").
+              with(
+                headers: {
+                'Accept'=>'*/*',
+                'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+                'Authorization'=>"Bearer #{ENV["github_token"]}",
+                'User-Agent'=>'Faraday v2.7.4'
+                }).
+              to_return(status: 200, body: pulls_call, headers: {})
+        end
+
       before (:each) do
         Transaction.create!(invoice_id: black_dress.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "09/01/2026", result: "success")
         Transaction.create!(invoice_id: black_sunglasses.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "09/01/2026", result: "success")
@@ -100,7 +137,6 @@ RSpec.describe 'Admin Dashboard:', type: :feature do
       end
 
       describe "Incomplete Invoices" do
-      
         before(:each) do
           merchant = Merchant.create!(name: "Cabbage Merchant")
           dis_gai_ovah_hea = Customer.create!(first_name: "Dis", last_name: "Gai")

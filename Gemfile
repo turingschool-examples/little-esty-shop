@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.4'
+gem 'faraday'
+gem 'figaro'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6'
@@ -46,6 +48,8 @@ group :development, :test do
   gem 'capybara'
   gem 'orderly'
   gem 'launchy'
+  gem 'vcr'
+  gem 'webmock'
   # gem 'rspec-html', '~> 0.2.13' *inquire with group [https://github.com/bobf/rspec-html] - AKH
 end
   

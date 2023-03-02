@@ -15,6 +15,43 @@ RSpec.describe 'Merchant Invoices', type: :feature do
     let!(:arugula) { bob.items.create!(name: "Arugula", description: "This arugula", unit_price: 500) }
     let!(:tomato) { bob.items.create!(name: "Tomato", description: "This a few Tomatos", unit_price: 700) }
 
+    before :each do
+        repo_call = File.read('spec/fixtures/repo_call.json')
+        collaborators_call = File.read('spec/fixtures/collaborators_call.json')
+        pulls_call = File.read('spec/fixtures/pulls_call.json')
+
+      stub_request(:get, "https://api.github.com/repos/4D-Coder/little-esty-shop").
+          with(
+            headers: {
+            'Accept'=>'*/*',
+            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+            'Authorization'=>"Bearer #{ENV["github_token"]}",
+            'User-Agent'=>'Faraday v2.7.4'
+            }).
+          to_return(status: 200, body: repo_call, headers: {})
+
+
+      stub_request(:get, "https://api.github.com/repos/4D-Coder/little-esty-shop/assignees").
+          with(
+            headers: {
+            'Accept'=>'*/*',
+            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+            'Authorization'=>"Bearer #{ENV["github_token"]}",
+            'User-Agent'=>'Faraday v2.7.4'
+            }).
+          to_return(status: 200, body: collaborators_call, headers: {})
+
+        stub_request(:get, "https://api.github.com/repos/4D-Coder/little-esty-shop/pulls?state=all&merged_at&per_page=100").
+            with(
+              headers: {
+              'Accept'=>'*/*',
+              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'Authorization'=>"Bearer #{ENV["github_token"]}",
+              'User-Agent'=>'Faraday v2.7.4'
+              }).
+            to_return(status: 200, body: pulls_call, headers: {})
+    end
+
     before (:each) do
       @inv_item1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: football.id, quantity: 10, unit_price: 2655, status: 1)
       @inv_item2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: baseball.id, quantity: 3, unit_price: 2210, status: 0)
@@ -24,6 +61,7 @@ RSpec.describe 'Merchant Invoices', type: :feature do
 
     describe 'As a merchant' do
       context "When I visit my merchant's invoice's show page" do
+
         it 'I see information related to that invoice' do
           visit merchant_invoice_path(sam.id, invoice1.id)
           
@@ -47,13 +85,11 @@ RSpec.describe 'Merchant Invoices', type: :feature do
             expect(page).to have_content("Quantity #{@inv_item1.quantity}")
             expect(page).to have_content("Unit Price $#{@inv_item1.unit_price / 100}")
             expect(page).to have_field('Status', with: 'packaged')
-            # expect(page).to have_content("Status #{@inv_item1.status}")
 
             expect(page).to have_content("Item Name #{baseball.name}")
             expect(page).to have_content("Quantity #{@inv_item2.quantity}")
             expect(page).to have_content("Unit Price $#{@inv_item2.unit_price / 100}")
             expect(page).to have_field('Status', with: 'pending')
-            # expect(page).to have_content("Status #{@inv_item2.status}")
           end
         end
 

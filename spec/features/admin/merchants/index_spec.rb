@@ -4,7 +4,44 @@ RSpec.describe "Admin Merchants Index", type: :feature do
   let!(:rob) { Merchant.create!(name: "Rob's Rarities") } 
   let!(:hob) { Merchant.create!(name: "Hob's Hoootenanies", status: 0) } 
   let!(:dob) { Merchant.create!(name: "Dob's Dineries") } 
-  let!(:zob) { Merchant.create!(name: "7-11") } 
+  let!(:zob) { Merchant.create!(name: "7-11") }
+
+  before :each do
+    repo_call = File.read('spec/fixtures/repo_call.json')
+    collaborators_call = File.read('spec/fixtures/collaborators_call.json')
+    pulls_call = File.read('spec/fixtures/pulls_call.json')
+
+    stub_request(:get, "https://api.github.com/repos/4D-Coder/little-esty-shop").
+        with(
+          headers: {
+          'Accept'=>'*/*',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Authorization'=>"Bearer #{ENV["github_token"]}",
+          'User-Agent'=>'Faraday v2.7.4'
+          }).
+        to_return(status: 200, body: repo_call, headers: {})
+
+
+    stub_request(:get, "https://api.github.com/repos/4D-Coder/little-esty-shop/assignees").
+        with(
+          headers: {
+          'Accept'=>'*/*',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Authorization'=>"Bearer #{ENV["github_token"]}",
+          'User-Agent'=>'Faraday v2.7.4'
+          }).
+        to_return(status: 200, body: collaborators_call, headers: {})
+
+    stub_request(:get, "https://api.github.com/repos/4D-Coder/little-esty-shop/pulls?state=all&merged_at&per_page=100").
+        with(
+          headers: {
+          'Accept'=>'*/*',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Authorization'=>"Bearer #{ENV["github_token"]}",
+          'User-Agent'=>'Faraday v2.7.4'
+          }).
+        to_return(status: 200, body: pulls_call, headers: {})
+    end
 
   describe "As an admin" do
     context "When I visit the admin merchants index (/admin/merchants)" do
@@ -47,7 +84,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
         end
       end
 
-      it 'displays enabled merchantsin the enabled merchants section' do
+      it 'displays enabled merchants in the enabled merchants section' do
          
         within "div#enabled_merchant-#{bob.id}" do
           expect(page).to have_content(bob.name)
@@ -74,7 +111,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
       end
 
       it 'changes the status of the item after the button click' do
-        save_and_open_page
+        
         within "div#enabled_merchant-#{bob.id}" do
           click_button 'Disable'
           bob.reload
@@ -87,7 +124,6 @@ RSpec.describe "Admin Merchants Index", type: :feature do
           hob.reload
           expect(hob.status).to eq('disabled')
           expect(current_path).to eq(admin_merchants_path)
-
         end
 
         within "div#disabled_merchant-#{rob.id}" do
@@ -111,8 +147,6 @@ RSpec.describe "Admin Merchants Index", type: :feature do
           expect(current_path).to eq(admin_merchants_path)
         end
       end
-
-
     end
   end
 end
