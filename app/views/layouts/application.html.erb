@@ -18,6 +18,10 @@
     <%= yield %>
     <footer>
       <%= @github_info.repo_name %>
+      <% @github_info.collaborators.each do |collaborator|%>
+        <%= collaborator %>
+      <% end %>
+      <p>Pull Requests: <%= @github_info.pulls %></p>
     </footer>
   </body>
 
