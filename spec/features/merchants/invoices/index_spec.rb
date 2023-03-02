@@ -43,6 +43,20 @@ RSpec.describe "Merchant_Invoices#Index", type: :feature do
     create(:transaction, invoice_id: @invoice_5.id, result: 0)
     create(:transaction, invoice_id: @invoice_6.id, result: 0)
     create(:transaction, invoice_id: @invoice_7.id, result: 0)
+
+    contributors_json_response = File.open("./fixtures/contributors.json")
+    pulls_json_response = File.open("./fixtures/pulls.json")
+    repo_json_response = File.open("./fixtures/repo.json")
+
+    stub_request(:get, "https://api.github.com/repos/aj-bailey/little-esty-shop").
+      to_return(status: 200, body: repo_json_response)
+
+    stub_request(:get, "https://api.github.com/repos/aj-bailey/little-esty-shop/pulls?state=closed").
+      to_return(status: 200, body: pulls_json_response)
+
+    stub_request(:get, "https://api.github.com/repos/aj-bailey/little-esty-shop/contributors").
+      to_return(status: 200, body: contributors_json_response)
+
     
     visit "/merchants/#{@merchant.id}/invoices"
   end

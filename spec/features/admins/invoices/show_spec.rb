@@ -1,6 +1,21 @@
 require "rails_helper"
 
 RSpec.describe "Admin Invoice Show Page" do
+  before(:each) do
+    contributors_json_response = File.open("./fixtures/contributors.json")
+    pulls_json_response = File.open("./fixtures/pulls.json")
+    repo_json_response = File.open("./fixtures/repo.json")
+
+    stub_request(:get, "https://api.github.com/repos/aj-bailey/little-esty-shop").
+      to_return(status: 200, body: repo_json_response)
+
+    stub_request(:get, "https://api.github.com/repos/aj-bailey/little-esty-shop/pulls?state=closed").
+      to_return(status: 200, body: pulls_json_response)
+
+    stub_request(:get, "https://api.github.com/repos/aj-bailey/little-esty-shop/contributors").
+      to_return(status: 200, body: contributors_json_response)
+  end
+  
   describe "User Story 33" do 
     it 'When I visit an admin invoice show page, then I see information related to that invoice including: id, status, created at and customer name' do
       customer = create(:customer, first_name: "Adam", last_name: "Bailey")

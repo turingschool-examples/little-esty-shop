@@ -37,7 +37,20 @@ RSpec.describe "Dashboard", type: :feature do
     4.times { create(:transaction, invoice_id: @invoice_4.id, result: 0) }
     5.times { create(:transaction, invoice_id: @invoice_5.id, result: 0) }
     3.times { create(:transaction, invoice_id: @invoice_7.id, result: 1) }
-    
+
+    contributors_json_response = File.open("./fixtures/contributors.json")
+    pulls_json_response = File.open("./fixtures/pulls.json")
+    repo_json_response = File.open("./fixtures/repo.json")
+
+    stub_request(:get, "https://api.github.com/repos/aj-bailey/little-esty-shop").
+      to_return(status: 200, body: repo_json_response)
+
+    stub_request(:get, "https://api.github.com/repos/aj-bailey/little-esty-shop/pulls?state=closed").
+      to_return(status: 200, body: pulls_json_response)
+
+    stub_request(:get, "https://api.github.com/repos/aj-bailey/little-esty-shop/contributors").
+      to_return(status: 200, body: contributors_json_response)
+
     visit "/merchants/#{@merchant.id}/dashboard"
   end
 

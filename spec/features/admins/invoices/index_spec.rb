@@ -1,6 +1,21 @@
 require "rails_helper"
 
 RSpec.describe "Admin Invoices Index Page" do
+  before(:each) do
+    contributors_json_response = File.open("./fixtures/contributors.json")
+    pulls_json_response = File.open("./fixtures/pulls.json")
+    repo_json_response = File.open("./fixtures/repo.json")
+
+    stub_request(:get, "https://api.github.com/repos/aj-bailey/little-esty-shop").
+      to_return(status: 200, body: repo_json_response)
+
+    stub_request(:get, "https://api.github.com/repos/aj-bailey/little-esty-shop/pulls?state=closed").
+      to_return(status: 200, body: pulls_json_response)
+
+    stub_request(:get, "https://api.github.com/repos/aj-bailey/little-esty-shop/contributors").
+      to_return(status: 200, body: contributors_json_response)
+  end
+  
   describe 'User Story 32' do
     it 'When I visit the admin Invoices index ("/admin/invoices"), then I see a list of all Invoice ids in the system
       with id links to each invoices show page' do
