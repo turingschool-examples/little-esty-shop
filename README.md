@@ -20,7 +20,7 @@
 - [Matt Enyeart](https://github.com/menyeart/)
 
 ## Work Completed
-Work completed includes user stories 1 through 36 as well as 3 Github stories for displaying name, contributors and commits. The application has been deployed to Heroku and styled similar to the wireframes. Github story 4 is not complete due to authentication issues. Though an access token is setup for the repo it could not be correctly accsessed in calls to the API so all methods/functionality for GitHub API story 4 have been removed to prevent test failures. 
+Work completed includes user stories 1 through 36 as well as 3 Github stories for displaying name, contributors and commits. The application has been deployed to Heroku and styled similar to the wireframes. Github story 4 is not complete due to authentication issues. Though an access token is setup for the repo it could not be correctly accsessed in calls to the API so all methods/functionality for GitHub API story 4 have been removed to prevent test failures. All github stories reside in a separate branch to prevent test errors due to rate limiting. 
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Of special consideration is a refactor of the GitHub REST API user stories to better integreate functionality in terms of Rails and object oriented design. Several spec files could also be refactorted to include more robust tests and test data with more edge cases.
