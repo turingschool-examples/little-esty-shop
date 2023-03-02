@@ -1,8 +1,7 @@
-<h1>Merchant's Items Show Page</h1>
+<h1>Merchant's Item Show Page</h1>
 
-<% @items.each do |item| %>
-  <h3><%= item.name %></h3>
-  <p><%= link_to "Update #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}/edit" %></p>
-  <p><%= item.description %></p>
-  <p><%= format_price(item.unit_price) %></p>
-<% end %>
+
+  <h3><%= @item.name %></h3>
+  <p>Description: <%= @item.description %></p>
+  <p>Current Price: <%= format_price(@item.unit_price) %></p>
+  <p><%= link_to "Update #{@item.name}", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></p>
