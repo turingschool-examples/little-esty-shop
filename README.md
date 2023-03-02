@@ -4,10 +4,10 @@
 
 ### Name of Contributors & Github Links
 
-[Hady Matar](https://github.com/hadyematar23)
-[David Marino](https://github.com/davejm8)
-[Huy Phan](https://github.com/HuyPhan2025)
-[Melony Franchini](https://github.com/MelTravelz)
+[Hady Matar](https://github.com/hadyematar23)<br>
+[David Marino](https://github.com/davejm8)<br>
+[Huy Phan](https://github.com/HuyPhan2025)<br>
+[Melony Franchini](https://github.com/MelTravelz)<br>
 
 ### Descirption of Project
 This project, entitled "Little Esty Shop", was a Turing BE-Mod2, Group Project focusing on designing an e-commerce platform. It's funcitonality would allow merchants as well as admins to manage inventory & fill customers orders. 
@@ -33,7 +33,7 @@ Step 3: Heroku Setup
 Step 4: Design the Schema 
 - We then moved on to designing the database schema and determining relationships between tables. By using `dbdesigner.net` we were able to better visualize the rows and rows of data we were looking at in the CSV files. 
 
-![JazzyCoders Schema](app/assets/images/JazzyCoders Schema.png)
+![jazzycodersschema](app/assets/images/jazzycodersschema.png)
 
 Step 5: Create Tables & Associations
 - Utilizing the Driver/Navigator programming style, we were able to create all tables, set up the associations between models, and write all tests for those associations. We chose to do this together so every member had a complete understanding of the structure as well as to mitigate merge conflicts. 
@@ -50,6 +50,9 @@ Step 8: API Stories / User Stories 37 - 40
 
 Step 9: Refactor
 - In the time crunch of the last day, we began cleaning up our code: deleting extra spaces and commented out lines, ensuring consistent naming whenever possible, refactoring some advanced routine, creating a partial, and ensuring all project requirements were reached. We had hoped to add html/css to match the provided wireframes but since it was not a required part of the project, we left this till last and did not have enough time to implement those design elements.
+
+Step 10: Final Heroku Deployment
+- 
 
 ### Ideas for Potential Future Contributors
 - A refactor of all tests is necessary since some test data was written out line by line while other tests utilize `factory_bot_rails` and `faker`, plus some routes utilize namespacing and advanced routing while others were handrolled. 
