@@ -1,3 +1,3 @@
 <%@invoices.each do |invoice|%>
-  <p><%= link_to "Invoice Number #{invoice.id}", "/invoices/#{invoice.id}"%></p>
+  <p><%= link_to "Invoice Number #{invoice.id}", "/admin/invoices/#{invoice.id}"%></p>
 <%end%>
