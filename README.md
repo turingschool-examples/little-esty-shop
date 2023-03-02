@@ -28,7 +28,7 @@ Step 2: GitHub & Setup
 - Then we selected one member to fork and clone the respo so we had our own copy to begin working. They invited the rest of the team as collaborators and created a Github Projects page for time and project management. (That's when we also adopted the very snazzy name of `Team JazzyCoders` as can be seen [here](https://github.com/users/hadyematar23/projects/1).
 
 Step 3: Heroku Setup
-- Next, we set up the connection to Heroku. Here we encountered a few snags but with the documentation and notes from previous projects we were able to solve those problems.
+- Next, we set up the connection to `Heroku`. Here we encountered a few snags but with the documentation and notes from previous projects we were able to solve those problems.
 
 Step 4: Design the Schema 
 - We then moved on to designing the database schema and determining relationships between tables. By using `dbdesigner.net` we were able to better visualize the rows and rows of data we were looking at in the CSV files. 
@@ -52,11 +52,11 @@ Step 9: Refactor
 - In the time crunch of the last day, we began cleaning up our code: deleting extra spaces and commented out lines, ensuring consistent naming whenever possible, refactoring some advanced routine, creating a partial, and ensuring all project requirements were reached. We had hoped to add html/css to match the provided wireframes but since it was not a required part of the project, we left this till last and did not have enough time to implement those design elements.
 
 Step 10: Final Heroku Deployment
-- 
+- Once all tests were passing, we moved back to `Heroku` for a final push to deploy the entire app to the web.
 
 ### Ideas for Potential Future Contributors
 - A refactor of all tests is necessary since some test data was written out line by line while other tests utilize `factory_bot_rails` and `faker`, plus some routes utilize namespacing and advanced routing while others were handrolled. 
-- The Front End team would definately need to work their magic since very little html/css was added to this project. Thanks for making the world beautiful FE!
+- The Front End team would definately need to work their magic since very little html/css was added to this project. (Thanks for making the world a beautiful place FE!)
 - Additional functionality for future iterations could include: 
     - Adding security measures and a login for both merchants and admin users.
     - Adding a link on every page to be able to return to the homepage.
