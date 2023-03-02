@@ -1,8 +1,5 @@
 # Little Esty Shop
-
-## Background and Description
-
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices. This project will demonstrate 
 
 ## Learning Goals
 - Practice designing a normalized database schema and defining model relationships
@@ -10,33 +7,20 @@
 - Utilize advanced active record techniques to perform complex database queries
 - Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
 
-## Requirements
-- must use Rails 5.2.x
-- must use PostgreSQL
-- all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub PR comments, and either GitHub Projects or a project management tool of your group's choice (Trello, Notion, etc.)
-- must include a thorough README to describe the project
-   - README should include a basic description of the project, a summary of the work completed, and some ideas for a potential contributor to work on/refactor next. Also include the names and GitHub links of all student contributors on your project. 
-- must deploy completed code to Heroku
-- Continuous Integration / Continuous Deployment is not allowed
-- Use of scaffolding is not allowed
-- Any gems added to the project must be approved by an instructor
+## Built With
+- [Rails 5.2.8](https://guides.rubyonrails.org/) - Backend / Front-end
+- [Heroku](https://heroku.com/) - Deployment
+- [PostgreSQL](https://www.postgresql.org/) - Database
+- [GitHub Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/creating-projects/creating-a-project) - Project planning
 
-## Setup
+## Team Members
+- [Kassanda Leyba](https://github.com/kassandraleyba/)
+- [Weston Sandfort](https://github.com/sanfortw/)
+- [Sam Walker](https://github.com/sgwalker327/)
+- [Matt Enyeart](https://github.com/menyeart/)
 
-This project requires Ruby 2.7.4.
+## Work Completed
+Work completed includes user stories 1 through 36 as well as 3 Github stories for displaying name, contributors and commits. The application has been deployed to Heroku and styled similar to the wireframes. Github story 4 is not complete due to authentication issues. Though an access token is setup for the repo it could not be correctly accsessed in calls to the API so all methods/functionality for GitHub API story 4 have been removed to prevent test failures. All github stories reside in a separate branch to prevent test errors due to rate limiting. 
 
-* Fork this repository
-* Clone your fork
-* From the command line, install gems and set up your DB:
-    * `bundle`
-    * `rails db:create`
-* Run the test suite with `bundle exec rspec`.
-* Run your development server with `rails s` to see the app in action.
-
-## Phases
-
-1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Extensions](./doc/extensions.md)
-1. [Evaluation](./doc/evaluation.md)
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Of special consideration is a refactor of the GitHub REST API user stories to better integreate functionality in terms of Rails and object oriented design. Several spec files could also be refactorted to include more robust tests and test data with more edge cases.
