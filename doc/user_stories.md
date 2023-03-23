@@ -438,36 +438,37 @@ And I see that my Invoice's status has now been updated
 For each of these stories, you will need to hit an endpoint provided by the [Unsplash API](https://unsplash.com/developers) in order to serve the data required on your site.
 
 ```
-GitHub API: Repo Name
+Unsplash API: App Logo
 
 As a visitor or an admin user
 When I visit any page on the site
-I see the name of the Github repo somewhere on the site
+I see the logo image at the top of every page
+
+Note: You can choose which picture from Unsplash you'd like to be your app's logo. DO NOT save the image to your repo, but instead serve it up via the API.
 ```
 
 ```
-GitHub API: User Names
-
-As a visitor or an admin user
-When I visit any page on the site
-I see the Github usernames of myself and my teammates somewhere on the site
-The most up to date usernames are always displayed
-```
-
-```
-GitHub API: Commits
+Unsplash API: Item Image
 
 As a visitor or an admin user
-When I visit any page on the site
-I see the number of commits next to each Github username
-This number is updated as each member of the team contributes more commits
+When I visit the Merchant Item Show page
+I see a photo related to that item's name
 ```
 
 ```
-GitHub API: PRs
+Unsplash API: Merchant Image
 
 As a visitor or an admin user
-When I visit any page on the site
-I see the number of merged PRs across all team members
-This number is updated as each member of the team merges more PRs
+When I visit a Merchant's Dashboard
+I see a random photo near their name
+This photo should update to a new random photo each time the page is refreshed.
+```
+
+```
+Unsplash API: Merchant Image Like History
+
+As a visitor or an admin user
+When I visit a Merchant's Dashboard
+I see the number of likes the random image has had within the last 30 days. 
+This number should update if the random image gets liked/unliked by an Unsplash User
 ```
