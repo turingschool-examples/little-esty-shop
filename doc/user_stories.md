@@ -469,8 +469,7 @@ Unsplash API: Logo Image Like History
 
 As a visitor or an admin user
 When I visit any page on the site
-I see that next to the logo, is the number of likes that image has had within the last 30 days. 
-This number should update if the logo image gets liked/unliked by an Unsplash User.
+I see that next to the app logo is the number of likes that image has. 
 
 Note: Communicate with your teammate that is working on the first API story to make sure you're gathering statistics for the same image that they're displaying as the logo. 
 ```
