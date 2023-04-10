@@ -3,7 +3,8 @@ class CreateInvoice < ActiveRecord::Migration[5.2]
     create_table :invoices do |t|
       t.integer :customer_id
       t.string :status
-      t.string :timestamps
+      
+      t.timestamps
     end
   end
 end
