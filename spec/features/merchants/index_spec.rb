@@ -16,6 +16,7 @@ RSpec.describe "Index page", type: :feature do
       @item_8 = @merchant_3.items.create!(name: "Item_8", description: "Description_8", unit_price: 800)
       @item_9 = @merchant_3.items.create!(name: "Item_9", description: "Description_9", unit_price: 900)
       @item_10 = @merchant_3.items.create!(name: "Item_10", description: "Description_10", unit_price: 1000)
+      @item_11 = FactoryBot.create(:item, merchant: @merchant_1)
     end
 
     it "displays only the items for the given merchant" do
@@ -33,6 +34,20 @@ RSpec.describe "Index page", type: :feature do
       expect(page).to have_no_content("Item_8")
       expect(page).to have_no_content("Item_9")
       expect(page).to have_no_content("Item_10")
+    end
+
+    it "item names are links to item show page" do
+      visit merchant_items_path(@merchant_3)
+
+      expect(page).to have_link(@item_7.name, href: "/merchants/#{@merchant_3.id}/items/#{@item_7.id}")
+      expect(page).to have_link(@item_8.name, href: "/merchants/#{@merchant_3.id}/items/#{@item_8.id}")
+      expect(page).to have_link(@item_9.name, href: "/merchants/#{@merchant_3.id}/items/#{@item_9.id}")
+      expect(page).to have_link(@item_10.name, href: "/merchants/#{@merchant_3.id}/items/#{@item_10.id}")
+
+      click_link("Item_7")
+      expect(page).to have_content("Item_7")
+      expect(page).to have_content("Description: Description_7")
+      expect(page).to have_content("Unit price: 700")
     end
 
 
