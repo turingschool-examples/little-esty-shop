@@ -7,7 +7,7 @@ namespace :csv_load do
       Item.find_or_create_by!(id: row['id']) do |item|
         item.name = row['name']
         item.description = row['description']
-        item.unit_price = row['unit_price'].to_i/100
+        item.unit_price = row['unit_price'].to_i
         item.merchant_id = row['merchant_id']
       end
     end
