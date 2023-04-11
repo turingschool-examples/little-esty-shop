@@ -11,14 +11,14 @@ RSpec.describe 'Merchant Items Show Page' do
 
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@item_1.description)
-      expect(page).to have_content(@item_1.unit_price)
+      expect(page).to have_content(@item_1.unit_price_to_dollars)
       expect(page).to_not have_content(@item_9.name)
 
       visit merchant_item_path(@merchant_1, @item_9)
-
+save_and_open_page
       expect(page).to have_content(@item_9.name)
       expect(page).to have_content(@item_9.description)
-      expect(page).to have_content(@item_9.unit_price)
+      expect(page).to have_content(@item_9.unit_price_to_dollars)
       expect(page).to_not have_content(@item_1.name)
     end
   end
