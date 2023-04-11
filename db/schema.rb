@@ -28,28 +28,24 @@ ActiveRecord::Schema.define(version: 2023_04_10_225256) do
     t.integer "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "item_id", null: false
-    t.bigint "invoice_id", null: false
-    t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
-    t.index ["item_id"], name: "index_invoice_items_on_item_id"
+    t.integer "item_id", null: false
+    t.integer "invoice_id", null: false
   end
 
   create_table "invoices", force: :cascade do |t|
     t.integer "status", null: false
+    t.integer "customer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "customer_id", null: false
-    t.index ["customer_id"], name: "index_invoices_on_customer_id"
   end
 
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
     t.string "description", null: false
     t.integer "sell_price", null: false
+    t.integer "merchant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "merchant_id", null: false
-    t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
   create_table "merchants", force: :cascade do |t|
@@ -61,16 +57,10 @@ ActiveRecord::Schema.define(version: 2023_04_10_225256) do
   create_table "transactions", force: :cascade do |t|
     t.string "credit_card_number", null: false
     t.date "expiration_date"
+    t.integer "invoice_id", null: false
     t.boolean "success", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "invoice_id", null: false
-    t.index ["invoice_id"], name: "index_transactions_on_invoice_id"
   end
 
-  add_foreign_key "invoice_items", "invoices"
-  add_foreign_key "invoice_items", "items"
-  add_foreign_key "invoices", "customers"
-  add_foreign_key "items", "merchants"
-  add_foreign_key "transactions", "invoices"
 end
