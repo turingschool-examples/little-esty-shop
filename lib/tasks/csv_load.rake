@@ -63,4 +63,14 @@ namespace :csv_load do
       Transaction.create!(details)
     end
   end
+
+  desc "imports all of the CSVs and creates records for all six tables"
+  task all: :environment do
+    Rake::Task["csv_load:customers"].execute
+    Rake::Task["csv_load:merchants"].execute
+    Rake::Task["csv_load:items"].execute
+    Rake::Task["csv_load:invoices"].execute
+    Rake::Task["csv_load:invoice_items"].execute
+    Rake::Task["csv_load:transactions"].execute
+  end
 end
