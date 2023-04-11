@@ -34,7 +34,8 @@ RSpec.describe 'merchant dashboard' do
     expect(page).to have_current_path("/merchants/#{@merchant_1.id}/invoices")
   end
 
-  xit 'has top 5 customers' do
+  it 'has top 5 customers' do
+    expect(page).to
   end
 
   xit 'has total successful transactions with merchants' do
