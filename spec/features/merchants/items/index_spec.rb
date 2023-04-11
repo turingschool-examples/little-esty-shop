@@ -50,6 +50,5 @@ RSpec.describe "Index page", type: :feature do
       expect(page).to have_content("Unit price: 700")
     end
 
-
   end
 end
