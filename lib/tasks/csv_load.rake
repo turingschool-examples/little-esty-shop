@@ -90,8 +90,8 @@ end
 
 def convert_invoice_item_status(status)
   case status
-    when 'packaged' then 0
-    when 'pending' then 1
+    when 'pending' then 0
+    when 'packaged' then 1
     when 'shipped' then 2
   end
 end
