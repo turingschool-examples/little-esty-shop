@@ -44,6 +44,7 @@ This project requires Ruby 2.7.4.
 <summary>User Stories</summary>
 Merchants
 Merchant Dashboard
+
 1. Merchant Dashboard
 
 As a merchant,
