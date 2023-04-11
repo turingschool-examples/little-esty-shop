@@ -22,9 +22,7 @@ namespace :csv_load do
   desc "imports item data from CSV and creates Item objects"
   task items: :environment do
     file = "db/data/items.csv"
-    CSV.foreach(file, headers: ['id', 'name', 'description', 'sell_price',
-                                'merchant_id', 'created_at', 'updated_at'],
-                header_converters: :symbol) do |row|
+    CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
       details = row.to_hash
       Item.create!(details)
     end
@@ -35,7 +33,7 @@ namespace :csv_load do
     file = "db/data/invoices.csv"
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
       details = row.to_hash
-      # need to handle status column values here?
+      details[:status] = convert_invoice_status(details[:status])
       Invoice.create!(details)
     end
   end
@@ -43,11 +41,9 @@ namespace :csv_load do
   desc "imports invoice_item data from CSV and creates Invoice_Item objects"
   task invoice_items: :environment do
     file = "db/data/invoice_items.csv"
-    CSV.foreach(file, headers: ['id', 'item_id', 'invoice_id', 'quantity', 'sold_price', 'status',
-                                'created_at', 'updated_at'],
-                      header_converters: :symbol) do |row|
+    CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
       details = row.to_hash
-      # need to handle status column values here?
+      details[:status] = convert_invoice_item_status(details[:status])
       InvoiceItem.create!(details)
     end
   end
@@ -55,11 +51,9 @@ namespace :csv_load do
   desc "imports transaction data from CSV and creates Transaction objects"
   task transactions: :environment do
     file = "db/data/transactions.csv"
-    CSV.foreach(file, headers: ['id', 'invoice_id', 'credit_card_number', 'expiration_date', 'success',
-                                'created_at', 'updated_at'],
-                      header_converters: :symbol) do |row|
+    CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
       details = row.to_hash
-      # need to handle success boolean values here?
+      details[:result] = convert_transaction_result(details[:result])
       Transaction.create!(details)
     end
   end
@@ -72,5 +66,32 @@ namespace :csv_load do
     Rake::Task["csv_load:invoices"].execute
     Rake::Task["csv_load:invoice_items"].execute
     Rake::Task["csv_load:transactions"].execute
+
+    ActiveRecord::Base.connection.tables.each do |t|
+      ActiveRecord::Base.connection.reset_pk_sequence!(t)
+    end
+  end
+end
+
+def convert_transaction_result(result)
+  case result
+    when 'success' then true
+    when 'failed' then false
+  end
+end
+
+def convert_invoice_status(status)
+  case status
+    when 'in progress' then 0
+    when 'completed' then 1
+    when 'cancelled' then 2
+  end
+end
+
+def convert_invoice_item_status(status)
+  case status
+    when 'packaged' then 0
+    when 'pending' then 1
+    when 'shipped' then 2
   end
 end
