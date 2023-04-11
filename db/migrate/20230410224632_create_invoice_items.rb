@@ -3,14 +3,12 @@ class CreateInvoiceItems < ActiveRecord::Migration[5.2]
     create_table :invoice_items do |t|
 
       t.integer :quantity, null: false
-      t.integer :sold_price, null: false
+      t.integer :unit_price, null: false
       t.integer :status, null: false
       t.timestamp :created_at, null: false
       t.timestamp :updated_at, null: false
-      t.integer :item_id, null: false #created this from CSV
-      t.integer :invoice_id, null: false #created this from CSV
-      # t.references :item, foreign_key: true, null: false
-      # t.references :invoice, foreign_key: true, null: false
+      t.references :item, foreign_key: true, null: false
+      t.references :invoice, foreign_key: true, null: false
     end
   end
 end
