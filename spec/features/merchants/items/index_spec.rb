@@ -103,9 +103,9 @@ RSpec.describe "Index page", type: :feature do
       visit merchant_items_path(@merchant_1)
 
       within "#enabled-items" do
-        expect(page).to have_content("Item_1")
-        expect(page).to have_content("Item_2")
-        expect(page).to have_content("Item_3")
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_content(@item_3.name)
       end
     end
 
@@ -113,8 +113,8 @@ RSpec.describe "Index page", type: :feature do
       visit merchant_items_path(@merchant_1)
 
       within "#disabled-items" do
-        expect(page).to have_content("Item_4")
-        expect(page).to have_content("Item_5")
+        expect(page).to have_content(@item_4.name)
+        expect(page).to have_content(@item_5.name)
       end
     end
   end
