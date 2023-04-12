@@ -7,7 +7,6 @@ RSpec.describe '/admin', type: :feature do
 
   describe 'when I visit the admin dashboard page' do
     it 'I see a header indicating that I am on the admin dashboard' do
-      save_and_open_page
       expect(page).to have_content('Admin Dashboard')
     end
   end
