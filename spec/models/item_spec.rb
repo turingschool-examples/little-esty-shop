@@ -18,8 +18,6 @@ RSpec.describe Item, type: :model do
     end
 
     it "enabled_items" do
-      puts @merchant_1.items.enabled_items.inspect
-      puts @merchant_1.items.inspect
       expect(@merchant_1.items.enabled_items).to eq([@item_1, @item_2, @item_3])
     end
 
