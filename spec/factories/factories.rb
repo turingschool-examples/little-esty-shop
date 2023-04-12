@@ -5,10 +5,9 @@ FactoryBot.define do
   end
 
   factory :item do
-    name {Faker::Name.name}
-    merchant_id {1}
+    name {Faker::Commerce.product_name}
     description {Faker::Lorem.words(number: 4)}
-    unit_price{Faker::Number.number(digits: 5)}
+    unit_price{Faker::Number.within(range: 100..20000)}
   end
 
   factory :merchant do
@@ -16,20 +15,17 @@ FactoryBot.define do
   end
 
   factory :invoice do
-    # status {Faker::Number.between(from: 1, to:3)}
+    status {["In Progress", "Completed", "Cancelled"].sample}
   end
 
   factory :invoice_item do
     quantity {Faker::Number.number(digits: 3)}
-    unit_price {Faker::Number.number(digits: 4)}
-    status {Faker::Number.between(from: 1, to:3)}
+    unit_price {Faker::Number.within(range: 100..20000)}
+    status {["Pending", "Packaged", "Shipped"].sample}
   end
 
   factory :transaction do
     credit_card_number {Faker::Number.number(digits: 16)}
+    result {Faker::Boolean.boolean}
   end
-
-  # it "tests factorybot" do
-  #   @dummy = FactoryBot.create(:merchant)
-  # end
 end

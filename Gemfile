@@ -47,7 +47,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'orderly'
   gem 'faker'
-  gem 'factory_bot'
+  gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 4.0.1'
 end
 
