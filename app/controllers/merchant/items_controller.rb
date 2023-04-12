@@ -13,8 +13,9 @@ class Merchant::ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  
+
   def update
-    # require 'pry'; binding.pry
     @item = Item.find(params[:id])
     @item.update(name: params[:name], 
                  description: params[:description], 

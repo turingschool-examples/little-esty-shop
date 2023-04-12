@@ -49,6 +49,37 @@ RSpec.describe "Index page", type: :feature do
       expect(page).to have_content("Description: Description_7")
       expect(page).to have_content("Unit price: 700")
     end
+  end
 
+  describe "functionality" do
+    before do
+      @merchant_1 = FactoryBot.create(:merchant)
+      @item_1 = FactoryBot.create(:item, merchant: @merchant_1)
+      @item_2 = FactoryBot.create(:item, merchant: @merchant_1)
+      @item_3 = FactoryBot.create(:item, merchant: @merchant_1)
+      @item_4 = FactoryBot.create(:item, merchant: @merchant_1)
+      @item_5 = FactoryBot.create(:item, merchant: @merchant_1)
+    end
+
+    it "has enable/disable buttons" do
+      visit merchant_items_path(@merchant_1)
+      
+      expect(page.all(:button, "Disable").count).to eq(5)
+      expect(page).to_not have_button("Enable")
+    end
+
+    it "disable button changes item status" do
+      visit merchant_items_path(@merchant_1)
+
+      expect(@item_1.status).to eq(1)
+
+      click_button "disable_#{@item_1.id}"
+      expect(current_path).to eq(merchant_items_path)
+
+      expect(page.all(:button, "Disable").count).to eq(4)
+      expect(page).to have_button("Enable")
+
+      expect(@item_1.status).to eq(0)
+    end
   end
 end
