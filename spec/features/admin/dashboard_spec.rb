@@ -22,4 +22,15 @@ RSpec.describe "Admin Dashboard" do
 
       expect(page).to have_link("Invoices")
    end
+
+   it 'lists the top 5 customers by successful transactions' do
+      visit '/admin'
+
+      expect(page).to have_content("Top 5 Customers")
+      expect(page).to have_content("Customer 1")
+      expect(page).to have_content("Customer 2")
+      expect(page).to have_content("Customer 3")
+      expect(page).to have_content("Customer 4")
+      expect(page).to have_content("Customer 5")
+   end
   end
