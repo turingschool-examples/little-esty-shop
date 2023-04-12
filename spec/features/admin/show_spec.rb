@@ -23,5 +23,25 @@ RSpec.describe 'Admin Show Dashboard Page', type: :feature do
         expect(page).to have_link('Admin Invoices')
       end
     end
+
+    it 'I see the names of the top 5 customers with the largest number of successful transactions and their transaction count' do
+      customer1 = create(:customer, :with_transactions, transactions_count: 10, transactions_traits: [:successful])
+      customer2 = create(:customer, :with_transactions, transactions_count: 8, transactions_traits: [:successful])
+      customer3 = create(:customer, :with_transactions, transactions_count: 6, transactions_traits: [:successful])
+      customer4 = create(:customer, :with_transactions, transactions_count: 4, transactions_traits: [:successful])
+      customer5 = create(:customer, :with_transactions, transactions_count: 2, transactions_traits: [:successful])
+      customer6 = create(:customer, :with_transactions, transactions_count: 1, transactions_traits: [:successful])
+
+      visit admin_dashboard_path
+
+      within 'section#top-customers' do
+        expect(page).to have_content("#{customer1.first_name} #{customer1.last_name} - 10")
+        expect(page).to have_content("#{customer2.first_name} #{customer2.last_name} - 8")
+        expect(page).to have_content("#{customer3.first_name} #{customer3.last_name} - 6")
+        expect(page).to have_content("#{customer4.first_name} #{customer4.last_name} - 4")
+        expect(page).to have_content("#{customer5.first_name} #{customer5.last_name} - 2")
+        expect(page).not_to have_content("#{customer6.first_name} #{customer6.last_name}")
+      end
+    end
   end
 end
