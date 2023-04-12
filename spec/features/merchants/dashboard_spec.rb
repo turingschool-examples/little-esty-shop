@@ -200,5 +200,4 @@ RSpec.describe 'merchant dashboard' do
       expect(page).to have_content(@invoice_11.custom_date)
     end
   end
-
 end
