@@ -1,0 +1,6 @@
+<h3> Merchant Items: </h3>
+<% @items.each do |item| %>
+  <div id="<%item.id%>"
+  <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}"%></p>
+  </div>
+<% end %>
