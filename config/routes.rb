@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/admin', to: 'admin#dashboard', as: 'admin_dashboard'
   get 'admin/merchants', to: 'admin/merchants#index', as: 'admin_merchants'
   get 'admin/invoices', to: 'admin/invoices#index',  as: 'admin_invoices'
+  get 'merchants/:id/dashboard', to: 'merchants#dashboard', as: 'merchant_dashboard'
 
   resources :admin, only: [:index]
   resources :merchants, only: [] do
