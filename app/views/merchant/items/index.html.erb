@@ -1,14 +1,21 @@
 <h1><%= "#{@merchant.name}'s items" %></h1>
-
-<% @items.each do |item| %>
-  <p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p>
-  <%= form_with url: merchant_item_path(@merchant.id, item.id), method: :patch, local: true do |form| %>
-    <% if item.status == "disabled" %>
-      <%= form.hidden_field :status, value: "enabled" %>
-      <%= form.submit "Enable", id: "enable_#{item.id}" %>
-    <% else %>
-      <%= form.hidden_field :status, value: "disabled" %>
-      <%= form.submit "Disable", id: "disable_#{item.id}" %>
+<div id="enabled-items">
+<h2>Enabled Items</h2>
+<% @enabled_items.each do |item|%>
+<><p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p>
+<%= form_with url: merchant_item_path(@merchant.id, item.id), method: :patch, local: true do |form| %>
+    <%= form.hidden_field :status, value: "disabled" %>
+    <%= form.submit "Disable", id: "disable_#{item.id}" %>
     <% end %>
   <% end %>
+</div>
+<div id="disabled-items">
+<h2>Disabled Items</h2>
+<% @disabled_items.each do |item| %>
+  <p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p>
+  <%= form_with url: merchant_item_path(@merchant.id, item.id), method: :patch, local: true do |form| %>
+      <%= form.hidden_field :status, value: "enabled" %>
+      <%= form.submit "Enable", id: "enable_#{item.id}" %>
+  <% end %>
 <% end %>
+</div>
