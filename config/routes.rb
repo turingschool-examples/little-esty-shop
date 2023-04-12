@@ -5,6 +5,5 @@ Rails.application.routes.draw do
   get '/merchants/:id/invoices', to: 'merchants/invoices#index'
   
   resources :merchants do
-    resources :items, only: [:index]
   end
 end
