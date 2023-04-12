@@ -4,3 +4,9 @@
 <%= link_to "My Items", merchant_items_path(@merchant) %>
 <%= link_to "My Invoices", merchant_invoices_path(@merchant) %>
 </section>
+
+<ol id="top_customers">
+  <% @merchant.top_five_customers.each do |customer| %> 
+    <li><%= customer.first_name %> <%= customer.last_name %> * Number of Transactions: <%= customer.transaction_count %> </li>
+  <% end %> 
+</ol>
