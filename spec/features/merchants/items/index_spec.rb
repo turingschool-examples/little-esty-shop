@@ -83,4 +83,46 @@ RSpec.describe "Index page", type: :feature do
       expect(@item_1.status).to eq("disabled")
     end
   end
+  describe "Items grouped by status" do
+    before do 
+      @merchant_1 = FactoryBot.create(:merchant)
+      @item_1 = FactoryBot.create(:item, merchant: @merchant_1)
+      @item_2 = FactoryBot.create(:item, merchant: @merchant_1)
+      @item_3 = FactoryBot.create(:item, merchant: @merchant_1)
+      @item_4 = FactoryBot.create(:item, merchant: @merchant_1, enabled: false)
+      @item_5 = FactoryBot.create(:item, merchant: @merchant_1, enabled: false)
+    end
+    it "displays a section for 'Enabled Items' and 'Disabled Items'" do
+      visit merchant_items_path(@merchant_1)
+
+      expect(page).to have_content("Enabled Items")
+      expect(page).to have_content("Disabled Items")
+    end
+
+    it "displays all enabled items in the 'Enabled Items' section" do
+      visit merchant_items_path(@merchant_1)
+
+      within "#enabled-items" do
+        expect(page).to have_content("Item_1")
+        expect(page).to have_content("Item_2")
+        expect(page).to have_content("Item_3")
+        expect(page).to have_content("Item_4")
+        expect(page).to have_content("Item_5")
+      end
+    end
+
+    it "displays all disabled items in the 'Disabled Items' section" do
+      visit merchant_items_path(@merchant_1)
+
+      click_button("Disable Item_1")
+      click_button("Disable Item_2")
+      click_button("Disable Item_3")
+
+      within "#disabled-items" do
+        expect(page).to have_content("Item_1")
+        expect(page).to have_content("Item_2")
+        expect(page).to have_content("Item_3")
+      end
+    end
+  end
 end
