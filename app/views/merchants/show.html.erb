@@ -9,10 +9,10 @@
 
 
 <p>Items Ready to Ship</p>
-<p><% @merchant.invoices.each do |invoice| %></p>
+<p><% @invoices.each do |invoice| %></p>
   <div id="<%=invoice.id%>">
   <% invoice.items.each do |item| %>
-    <p><%= item.name %>, <%= link_to "#{invoice.id}", "/invoices/#{invoice.id}"%></p>
+    <p><%= item.name %>, Created at: <%= invoice.custom_date %>, <%= link_to "#{invoice.id}", "/invoices/#{invoice.id}"%></p>
   <% end %>
   </div>
 <% end %>
