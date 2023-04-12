@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Merchant Index Page', type: :feature do
   before(:each) do
-    visit '/merchants'
+    visit merchants_path
   end
 
   it 'has a header' do
