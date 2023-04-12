@@ -62,8 +62,8 @@ RSpec.describe 'merchant dashboard' do
 
     visit "/merchants/#{@merchant_1.id}/dashboard"
   end
+  
   it 'displays merchant name' do
-    save_and_open_page
     expect(page).to have_content(@merchant_1.name)
     expect(page).to have_no_content(@merchant_2.name)
   end
@@ -86,40 +86,71 @@ RSpec.describe 'merchant dashboard' do
     expect(page).to have_current_path("/merchants/#{@merchant_1.id}/invoices")
   end
 
-  it 'has top 5 customers' do
+  it 'has top 5 customers with number of successful transactions' do
     expect(page).to have_no_content("#{@customer_1.first_name} ")
     
     within "##{@customer_2.id}" do
-    expect(page).to have_content(@customer_2.first_name)
-    expect(page).to have_content(@customer_2.last_name)
-    expect(page).to have_content(2)
+      expect(page).to have_content(@customer_2.first_name)
+      expect(page).to have_content(@customer_2.last_name)
+      expect(page).to have_content(2)
     end 
     within "##{@customer_3.id}" do
-    expect(page).to have_content(@customer_3.first_name)
-    expect(page).to have_content(@customer_3.last_name)
-    expect(page).to have_content(2)
+      expect(page).to have_content(@customer_3.first_name)
+      expect(page).to have_content(@customer_3.last_name)
+      expect(page).to have_content(2)
     end 
     within "##{@customer_4.id}" do
-    expect(page).to have_content(@customer_4.first_name)
-    expect(page).to have_content(@customer_4.last_name)
-    expect(page).to have_content(2)
+      expect(page).to have_content(@customer_4.first_name)
+      expect(page).to have_content(@customer_4.last_name)
+      expect(page).to have_content(2)
     end 
     within "##{@customer_5.id}" do
-    expect(page).to have_content(@customer_5.first_name)
-    expect(page).to have_content(@customer_5.last_name)
-    expect(page).to have_content(2)
+      expect(page).to have_content(@customer_5.first_name)
+      expect(page).to have_content(@customer_5.last_name)
+      expect(page).to have_content(2)
     end 
     within "##{@customer_6.id}" do
-    expect(page).to have_content(@customer_6.first_name)
-    expect(page).to have_content(@customer_6.last_name)
-    expect(page).to have_content(2)
+      expect(page).to have_content(@customer_6.first_name)
+      expect(page).to have_content(@customer_6.last_name)
+      expect(page).to have_content(2)
     end 
   end
 
-  xit 'has total successful transactions with merchants' do
-  end
-
-  xit 'displays items ready to ship' do
+  it 'displays items ready to ship' do
+    expect(page).to have_content('Items Ready to Ship')
+    within all("##{@invoice_6.id}")[0] do
+      expect(page).to have_link(@invoice_6.id)
+      expect(page).to have_content(@item_3.name)
+    end
+    within all("##{@invoice_6.id}")[1] do
+      expect(page).to have_link(@invoice_6.id)
+      expect(page).to have_content(@item_3.name)
+    end
+    within "##{@invoice_1.id}" do
+      expect(page).to have_link(@invoice_1.id)
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content(@item_5.name)
+    end
+    within "##{@invoice_2.id}" do
+      expect(page).to have_link(@invoice_2.id)
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content(@item_5.name)
+    end
+    within "##{@invoice_3.id}" do
+      expect(page).to have_link(@invoice_3.id)
+      expect(page).to have_content(@item_2.name)
+      expect(page).to have_content(@item_5.name)
+    end
+    within "##{@invoice_4.id}" do
+      expect(page).to have_link(@invoice_4.id)
+      expect(page).to have_content(@item_4.name)
+      expect(page).to have_content(@item_2.name)
+    end
+    within "##{@invoice_5.id}" do
+      expect(page).to have_link(@invoice_5.id)
+      expect(page).to have_content(@item_4.name)
+      expect(page).to have_content(@item_3.name)
+    end
   end
 
   xit 'displays invoices by least recent' do

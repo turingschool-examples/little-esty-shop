@@ -6,3 +6,13 @@
   <p><%= customer.first_name %> <%= customer.last_name %>, <%= customer.transaction_count %></p>
   </div>
 <% end %>
+
+
+<p>Items Ready to Ship</p>
+<p><% @merchant.invoices.each do |invoice| %></p>
+  <div id="<%=invoice.id%>">
+  <% invoice.items.each do |item| %>
+    <p><%= item.name %>, <%= link_to "#{invoice.id}", "/invoices/#{invoice.id}"%></p>
+  <% end %>
+  </div>
+<% end %>
