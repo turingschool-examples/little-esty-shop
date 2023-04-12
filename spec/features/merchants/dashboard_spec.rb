@@ -10,5 +10,11 @@ RSpec.describe 'Merchant Dashboard Page' do
       visit merchant_dashboard_path(@merchant_1)
       expect(page).to have_content(@merchant_1.name)
     end
+
+    it 'I see Links to my merchant items index and merchant invoices index' do
+      visit merchant_dashboard_path(@merchant_1)
+      expect(page).to have_link('My Items')
+      expect(page).to have_link('My Invoices')
+    end
   end
 end
