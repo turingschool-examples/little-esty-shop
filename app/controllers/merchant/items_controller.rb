@@ -13,13 +13,26 @@ class Merchant::ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  
+  def update_status
+
+  end
+
 
   def update
-    @item = Item.find(params[:id])
-    @item.update(name: params[:name], 
-                 description: params[:description], 
-                 unit_price: params[:unit_price])
-    redirect_to merchant_item_path(@item.merchant, @item)
+    if !params[:status].nil?
+      @item = Item.find(params[:id])
+      @item.update(item_params)
+      @item.save
+      redirect_to merchant_items_path(@item.merchant)
+    else
+      @item = Item.find(params[:id])
+      @item.update(item_params)
+      redirect_to merchant_item_path(@item.merchant, @item)
+    end
+  end
+
+
+  def item_params
+    params.permit(:name, :description, :unit_price, :status)
   end
 end

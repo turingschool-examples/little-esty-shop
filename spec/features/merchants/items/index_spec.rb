@@ -71,15 +71,16 @@ RSpec.describe "Index page", type: :feature do
     it "disable button changes item status" do
       visit merchant_items_path(@merchant_1)
 
-      expect(@item_1.status).to eq(1)
+      expect(@item_1.status).to eq("enabled")
 
       click_button "disable_#{@item_1.id}"
-      expect(current_path).to eq(merchant_items_path)
-
+      expect(current_path).to eq(merchant_items_path(@merchant_1))
+      
       expect(page.all(:button, "Disable").count).to eq(4)
       expect(page).to have_button("Enable")
-
-      expect(@item_1.status).to eq(0)
+      @item_1.reload
+      
+      expect(@item_1.status).to eq("disabled")
     end
   end
 end

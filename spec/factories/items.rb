@@ -6,3 +6,4 @@ FactoryBot.define do
       merchant
     end
 end
+
