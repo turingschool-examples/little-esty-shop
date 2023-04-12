@@ -12,6 +12,14 @@ RSpec.describe Item, type: :model do
     test_data
   end
 
+  describe 'status enum' do
+    it 'has a default status of :enabled' do
+      expect(@item_1.status).to eq('enabled')
+      @item_1.disabled!
+      expect(@item_1.status).to eq('disabled')
+    end
+  end
+
   describe 'instance methods' do
     it '#unit_price_to_dollars' do
       expect(@item_1.unit_price_to_dollars).to eq('1.00')
