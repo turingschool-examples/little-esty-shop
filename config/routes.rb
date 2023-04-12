@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     resources :merchants, except: [:destroy, :create , :update]
     resources :invoices, only: [:index, :show]
   end
+  
+  get '/merchants/:id/dashboard', to: 'merchants#show'
 end
