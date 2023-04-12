@@ -1,0 +1,17 @@
+<h1>Merchant Invoice Index Page</h1>
+
+<ul>
+<h3>Merchant Invoices</h3>
+<% @merchant.invoices.each do |invoice| %>
+<div id="<%= invoice.id %>">
+  <li><p><b>Invoice Status: </b><%= invoice.status %>
+  <p><b>Invoice ID: </b><%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></li><br>
+</div>
+<% end %>
+</ul>
+<ul>
+<h3>Merchant Items</h3>
+<% @merchant.items.each do |item| %>
+  <li><p><b>Item Name: </b><%= item.name %></p></li>
+<% end %>
+</ul>
