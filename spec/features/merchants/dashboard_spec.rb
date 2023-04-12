@@ -62,6 +62,7 @@ RSpec.describe 'merchant dashboard' do
 
     visit "/merchants/#{@merchant_1.id}/dashboard"
   end
+  
   it 'displays merchant name' do
     expect(page).to have_content(@merchant_1.name)
     expect(page).to have_no_content(@merchant_2.name)
