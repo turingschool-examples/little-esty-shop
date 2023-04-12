@@ -3,8 +3,10 @@
 <ul>
 <h3>Merchant Invoices</h3>
 <% @merchant.invoices.each do |invoice| %>
+<div id="<%= invoice.id %>">
   <li><p><b>Invoice Status: </b><%= invoice.status %>
-  <p><b>Invoice ID: </b><%= invoice.id %></li><br>
+  <p><b>Invoice ID: </b><%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></li><br>
+</div>
 <% end %>
 </ul>
 <ul>

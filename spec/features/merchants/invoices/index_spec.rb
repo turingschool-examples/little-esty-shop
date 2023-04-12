@@ -65,5 +65,26 @@ RSpec.describe 'merchant invoices index', type: :feature do
       expect(page).to_not have_content(@item_4.name)
       expect(page).to_not have_content(@item_5.name)
     end
+
+    it 'creates a link to the merchant invoices show page from the invoice id' do
+      
+      within "##{@invoice_1.id}"
+        expect(page).to have_link("#{@invoice_1.id}")
+      
+      within "##{@invoice_2.id}"
+        expect(page).to have_link("#{@invoice_2.id}")
+      
+      within "##{@invoice_3.id}"
+        expect(page).to have_link("#{@invoice_3.id}")
+      
+      within "##{@invoice_4.id}"
+        expect(page).to have_link("#{@invoice_4.id}")
+      
+      within "##{@invoice_5.id}"
+        expect(page).to have_link("#{@invoice_5.id}")
+      
+      within "##{@invoice_6.id}"
+        expect(page).to have_link("#{@invoice_6.id}")
+    end
   end
 end
