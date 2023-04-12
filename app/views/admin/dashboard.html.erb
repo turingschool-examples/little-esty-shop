@@ -2,3 +2,7 @@
 
 <%= link_to "Merchants", admin_merchants_path %>
 <%= link_to "Invoices", admin_invoices_path %>
+
+Top 5 Customers: <% Customer.top_five_customers.each do |customer| %>
+  <%="#{customer.first_name} #{customer.last_name}'s Transactions: #{customer.transaction_count}" %>
+<% end %>
