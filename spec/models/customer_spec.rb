@@ -58,8 +58,11 @@ RSpec.describe Customer, type: :model do
     @transaction_25 = Transaction.create!(credit_card_number: 1234567890123456, credit_card_expiration_date: "2024-01-01", result: true, invoice: @invoice_25)
 
   end
-
-  it 'can find the top 5 customers by successful transactions' do
-    expect(Customer.top_five_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_10])
+  describe "#instance methods" do
+    describe "#top_five_customers" do
+      it 'can find the top 5 customers by successful transactions' do
+        expect(Customer.top_five_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_10])
+      end
+    end
   end
 end
