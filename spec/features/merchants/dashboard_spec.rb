@@ -48,8 +48,18 @@ RSpec.describe 'merchant dashboard' do
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_9.id) 
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_10.id) 
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_11.id) 
+    InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_11.id) 
+    InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_10.id) 
+    InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_9.id) 
+    InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_8.id) 
+    InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_7.id) 
+    InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_6.id) 
+    InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_5.id) 
+    InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_4.id) 
+    InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_3.id) 
+    InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_2.id) 
+    InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_1.id) 
 
-    #binding.pry
     visit "/merchants/#{@merchant_1.id}/dashboard"
   end
   it 'displays merchant name' do
@@ -77,12 +87,33 @@ RSpec.describe 'merchant dashboard' do
   end
 
   it 'has top 5 customers' do
-    expect(page).to have_no_content(@customer_1.first_name)
+    expect(page).to have_no_content("#{@customer_1.first_name} ")
+    
+    within "##{@customer_2.id}" do
     expect(page).to have_content(@customer_2.first_name)
+    expect(page).to have_content(@customer_2.last_name)
+    expect(page).to have_content(2)
+    end 
+    within "##{@customer_3.id}" do
     expect(page).to have_content(@customer_3.first_name)
+    expect(page).to have_content(@customer_3.last_name)
+    expect(page).to have_content(2)
+    end 
+    within "##{@customer_4.id}" do
     expect(page).to have_content(@customer_4.first_name)
+    expect(page).to have_content(@customer_4.last_name)
+    expect(page).to have_content(2)
+    end 
+    within "##{@customer_5.id}" do
     expect(page).to have_content(@customer_5.first_name)
+    expect(page).to have_content(@customer_5.last_name)
+    expect(page).to have_content(2)
+    end 
+    within "##{@customer_6.id}" do
     expect(page).to have_content(@customer_6.first_name)
+    expect(page).to have_content(@customer_6.last_name)
+    expect(page).to have_content(2)
+    end 
   end
 
   xit 'has total successful transactions with merchants' do

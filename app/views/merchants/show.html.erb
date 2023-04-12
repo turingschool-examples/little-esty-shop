@@ -2,5 +2,7 @@
 <p><%= link_to 'Merchant Items', "/merchants/#{@merchant.id}/items" %></p>
 <p><%= link_to 'Merchant Invoices', "/merchants/#{@merchant.id}/invoices" %></p>
 <p><% @merchant.top_5_customers.each do |customer| %></p>
-  <%= customer.first_name %><%= customer.last_name %>
+  <div id="<%=customer.id%>">
+  <p><%= customer.first_name %> <%= customer.last_name %>, <%= customer.transaction_count %></p>
+  </div>
 <% end %>
