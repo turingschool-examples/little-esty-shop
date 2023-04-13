@@ -5,7 +5,7 @@ RSpec.describe 'Merchant Dashboard Show Page' do
   test_data
  end
 
-  describe 'As a merchant' do
+  describe 'User Story 1' do
     it 'I can see my merchant dashboard' do
       visit dashboard_merchant_path(@merchant_1)
 
@@ -17,7 +17,7 @@ RSpec.describe 'Merchant Dashboard Show Page' do
     end
   end
 
-  describe 'As a merchant' do
+  describe 'User Story 2' do
     it 'I see a link to my merchant items index' do
       visit dashboard_merchant_path(@merchant_1)
       
@@ -47,7 +47,7 @@ RSpec.describe 'Merchant Dashboard Show Page' do
     end
   end
 
-  describe 'As a merchant' do
+  describe 'User Story 3' do
     it 'I see the names of the top 5 customers' do
       visit dashboard_merchant_path(@merchant_1)
 
@@ -92,7 +92,7 @@ RSpec.describe 'Merchant Dashboard Show Page' do
     end
   end
 
-  describe 'As a merchant' do
+  describe 'User Story 4' do
     it 'I see a section for "Items Ready to Ship"' do
       visit dashboard_merchant_path(@merchant_1)
 
@@ -128,7 +128,7 @@ RSpec.describe 'Merchant Dashboard Show Page' do
       expect(current_path).to eq(merchant_invoice_path(@invoice_1, @merchant_1 ))
     end
   end
-  describe 'As a merchant' do
+  describe 'User Story 5' do
     it 'The items are listed by the date the invoices were created' do
       @invoice_1.update(created_at: 4.day.ago)
       @invoice_2.update(created_at: 3.day.ago)
