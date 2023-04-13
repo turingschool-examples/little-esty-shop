@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Dashboard Show Page' do
+RSpec.describe 'Admin Dashboard Index Page' do
   describe 'display' do
     it "Displays a header saying 'Admin Dashboard'" do
       visit admin_dashboard_path
