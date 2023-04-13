@@ -3,4 +3,8 @@ class InvoiceItem < ApplicationRecord
   belongs_to :item
 
   enum status: ["pending", "packaged", "shipped"]
+
+  def self.not_yet_shipped
+    where.not(status: 2)
+  end
 end

@@ -90,6 +90,41 @@ RSpec.describe 'Merchant Dashboard Show Page' do
         expect("Customer Five * Number of Transactions: 4").to appear_before("Customer One * Number of Transactions: 3")
       end
     end
-    
+  end
+
+  describe 'As a merchant' do
+    it 'I see a section for "Items Ready to Ship"' do
+      visit dashboard_merchant_path(@merchant_1)
+
+      within '#not_yet_shipped' do
+        expect(page).to have_content('Items Ready to Ship')
+      end
+    end
+
+    it 'I see a list of the names of all of my items that have been ordered and have not yet been shipped' do
+      visit dashboard_merchant_path(@merchant_1)
+
+      within '#not_yet_shipped' do
+        expect(page).to have_content(@item_1.name)
+      end
+    end
+
+    it "I see the id of the invoice that ordered my item And each invoice id is a link to my merchant's invoice show page" do
+      visit dashboard_merchant_path(@merchant_1)
+
+      within '#not_yet_shipped' do
+        expect(page).to have_link(@invoice_1.id)
+        expect(page).to have_link(@invoice_2.id)
+      end
+    end
+
+    it 'Link takes me to the invoice show page' do
+      visit dashboard_merchant_path(@merchant_1)
+
+      click_on @invoice_1.id
+
+      expect(current_path).to eq(merchant_invoice_path(@invoice_1, @merchant_1 ))
+    end
   end
 end
+
