@@ -134,7 +134,7 @@ RSpec.describe 'Merchant Dashboard Show Page' do
       @invoice_2.update(created_at: 3.day.ago)
       @invoice_3.update(created_at: 2.day.ago)
       visit dashboard_merchant_path(@merchant_1)
-      save_and_open_page
+      
       within '#not_yet_shipped' do
         expect(@invoice_1.created_at.strftime("%A, %B %d, %Y")).to appear_before(@invoice_2.created_at.strftime("%A, %B %d, %Y"))
         expect(@invoice_2.created_at.strftime("%A, %B %d, %Y")).to appear_before(@invoice_3.created_at.strftime("%A, %B %d, %Y"))
