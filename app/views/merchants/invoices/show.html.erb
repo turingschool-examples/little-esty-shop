@@ -1,0 +1,16 @@
+<h1>Little Esty Shop</h1>
+<br>
+<h2><%= @merchant.name %>'s Shop</h2>
+
+<section id=items_on_invoice>
+  <h3>Items on this Invoice:</h3>
+  <% @invoice.invoice_items.each do |invoice_item| %>
+    <div id="invoice_item_<%=invoice_item.id%>">
+    <h4>Name: <%= invoice_item.item_name %></h4>
+    <p>Quantity: <%= invoice_item.quantity %></p>
+    <p>Sold For: <%= invoice_item.unit_price %></p>
+    <p>Status: <%= invoice_item.status %></p>
+    <br>
+    </div>
+  <% end %>
+</section>

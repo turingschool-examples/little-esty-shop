@@ -1,6 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe InvoiceItem, type: :model do
-  it { should belong_to(:invoice) }
-  it { should belong_to(:item) }
+  describe 'relationships' do
+    it { should belong_to(:invoice) }
+    it { should belong_to(:item) }
+  end
+
+  describe 'enums' do
+    it do
+      should define_enum_for(:status).
+     with_values(["pending", "shipped", "packaged"])
+    end
+  end
+
+  describe 'instance methods' do
+    before :each do
+      test_data
+    end
+    
+    describe 'item_name' do
+      it 'returns the name of the item
+        associated with the invoice_item' do
+        expect(@invoice_item_19.item_name).to eq("Shrooms")
+      end
+    end
+  end
 end
