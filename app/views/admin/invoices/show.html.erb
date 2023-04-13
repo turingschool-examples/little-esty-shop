@@ -6,6 +6,7 @@
 <p>Customer Name: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
 <p>Items: <% @invoice.items.each do |i| %></p>
           <ul id = "item_<%=i.id%>">
+          <li>ID:<%= i.id %></li>
           <li>Item name: <%= i.name %></li>
           <li>Quantity Ordered: <%= i.quantity_sold(@invoice) %></li>
           <li>Item sold price: <%= i.find_sold_price(@invoice) %></li>
