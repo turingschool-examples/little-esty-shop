@@ -13,5 +13,15 @@ RSpec.describe 'merchant show page' do
       expect(page).to have_content(@merch_1.name)
       expect(page).to have_no_content(@merch_2.name)
     end
+
+    it 'displays a link to merchant items index' do
+      visit "/merchants/#{@merch_1.id}/dashboard"
+       expect(page).to have_link('My Items')
+
+       click_link('My Items')
+
+       expect(current_path).to eq("/merchants/#{@merch_1.id}/items")
+    end
+
   end
 end
