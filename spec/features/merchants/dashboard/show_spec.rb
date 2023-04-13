@@ -52,10 +52,10 @@ RSpec.describe 'Merchant Dashboard Show Page' do
       visit dashboard_merchant_path(@merchant_1)
 
       within '#top_customers' do
-        expect(@customer_6.last_name).to appear_before(@customer_5.last_name)
-        expect(@customer_5.last_name).to appear_before(@customer_1.last_name)
+        expect(@customer_6.last_name).to appear_before(@customer_1.last_name)
         expect(@customer_1.last_name).to appear_before(@customer_2.last_name)
-        expect(@customer_2.last_name).to appear_before(@customer_3.last_name)
+        expect(@customer_2.last_name).to appear_before(@customer_5.last_name)
+        expect(@customer_5.last_name).to appear_before(@customer_3.last_name)
       end
 
       @invoice_21 = Invoice.create!(customer_id: @customer_5.id, status: 1)
@@ -86,8 +86,8 @@ RSpec.describe 'Merchant Dashboard Show Page' do
       visit dashboard_merchant_path(@merchant_1)
 
       within '#top_customers' do
-        expect("Customer Six * Number of Transactions: 7").to appear_before("Customer Five * Number of Transactions: 4")
-        expect("Customer Five * Number of Transactions: 4").to appear_before("Customer One * Number of Transactions: 3")
+        expect("Customer Six - Purchases: 7").to appear_before("Customer One - Purchases: 6")
+        expect("Customer One - Purchases: 6").to appear_before("Customer Two - Purchases: 4")
       end
     end
   end
@@ -120,8 +120,10 @@ RSpec.describe 'Merchant Dashboard Show Page' do
 
     it 'Link takes me to the invoice show page' do
       visit dashboard_merchant_path(@merchant_1)
-      save_and_open_page
-      click_on @invoice_1.id
+      
+      within '#not_yet_shipped' do
+        first(:link, @invoice_1.id).click
+      end
 
       expect(current_path).to eq(merchant_invoice_path(@invoice_1, @merchant_1 ))
     end
@@ -132,10 +134,10 @@ RSpec.describe 'Merchant Dashboard Show Page' do
       @invoice_2.update(created_at: 3.day.ago)
       @invoice_3.update(created_at: 2.day.ago)
       visit dashboard_merchant_path(@merchant_1)
-
+      save_and_open_page
       within '#not_yet_shipped' do
-        expect(@invoice_1.id).to appear_before(@invoice_2.id)
-        expect(@invoice_2.id).to appear_before(@invoice_3.id)
+        expect(@invoice_1.created_at.strftime("%A, %B %d, %Y")).to appear_before(@invoice_2.created_at.strftime("%A, %B %d, %Y"))
+        expect(@invoice_2.created_at.strftime("%A, %B %d, %Y")).to appear_before(@invoice_3.created_at.strftime("%A, %B %d, %Y"))
       end
     end
   end
