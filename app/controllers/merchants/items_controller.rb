@@ -20,16 +20,14 @@ class Merchants::ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])  
     if item_params[:status].present?
-      @item.update!(item_params)
-      redirect_to merchant_items_path(@merchant)
-    else 
-      if @item.update(item_params)
-        flash[:success] = 'Item Updated'
-        redirect_to merchant_item_path(@merchant, @item)
-      else
-        flash[:notice] = 'Item Update Failed'
-        redirect_to edit_merchant_item_path(@merchant, @item)
-      end
+      @item.update(item_params)
+      redirect_to merchant_items_path(@item.merchant)
+    elsif @item.update(item_params)
+      flash[:success] = 'Item Updated'
+      redirect_to merchant_item_path(@item.merchant, @item)
+    else
+      flash[:notice] = 'Item Update Failed'
+      redirect_to edit_merchant_item_path(@item.merchant, @item)
     end
   end
 
