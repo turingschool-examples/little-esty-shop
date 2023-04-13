@@ -11,8 +11,6 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
   end
 
   it 'it has invoice ids as links' do
-    # save_and_open_page
-    require 'pry'; binding.pry
     within "#invoice-#{@invoice_1.id}" do
       expect(page).to have_link("ID: #{@invoice_1.id}")
     end
