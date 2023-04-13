@@ -25,7 +25,7 @@ RSpec.describe 'Merchant Items Index Page' do
 
     it 'each item name has a button to enable or disable that item' do
       visit merchant_items_path(@merchant_1)
-require 'pry'; binding.pry
+
       within '#enabled-items-list' do
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content(@item_9.name)
