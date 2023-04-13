@@ -58,17 +58,17 @@ def test_data
   @invoice_item_18 = InvoiceItem.create!(quantity: 85, unit_price: 100000, status: "packaged", item: @item_8, invoice: @invoice_9)
   @invoice_item_19 = InvoiceItem.create!(quantity: 90, unit_price: 56465, status: "shipped", item: @item_9, invoice: @invoice_10)
   @invoice_item_20 = InvoiceItem.create!(quantity: 95, unit_price: 54134, status: "shipped", item: @item_10, invoice: @invoice_1)
-
-  @transaction_1 = Transaction.create!(credit_card_number: "1234567890145446", credit_card_expiration_date: "2024-03-06", result: true, invoice: @invoice_1)
-  @transaction_2 = Transaction.create!(credit_card_number: "1234567890123456", credit_card_expiration_date: "2025-01-01", result: true, invoice: @invoice_2)
-  @transaction_3 = Transaction.create!(credit_card_number: "1234146541543155", credit_card_expiration_date: "2025-01-11", result: false, invoice: @invoice_3)
-  @transaction_4 = Transaction.create!(credit_card_number: "1234567890123456", credit_card_expiration_date: "2025-01-01", result: false, invoice: @invoice_4)
-  @transaction_5 = Transaction.create!(credit_card_number: "1234146541543155", credit_card_expiration_date: "2025-01-11", result: false, invoice: @invoice_5)
-  @transaction_6 = Transaction.create!(credit_card_number: "1234567890123456", credit_card_expiration_date: "2025-01-01", result: false, invoice: @invoice_6)
-  @transaction_7 = Transaction.create!(credit_card_number: "1234146541543155", credit_card_expiration_date: "2025-01-11", result: true, invoice: @invoice_7)
-  @transaction_8 = Transaction.create!(credit_card_number: "1234567890123456", credit_card_expiration_date: "2025-01-01", result: true, invoice: @invoice_8)
-  @transaction_9 = Transaction.create!(credit_card_number: "1234146541543155", credit_card_expiration_date: "2025-01-11", result: false, invoice: @invoice_9)
-  @transaction_10 = Transaction.create!(credit_card_number: "1234567890123456", credit_card_expiration_date: "2025-01-01", result: true, invoice: @invoice_10)
+  
+  @transaction_1 = Transaction.create!(credit_card_number: "1234567890145446", credit_card_expiration_date: "2024-03-06", result: 1, invoice: @invoice_1)
+  @transaction_2 = Transaction.create!(credit_card_number: "1234567890123456", credit_card_expiration_date: "2025-01-01", result: 1, invoice: @invoice_2)
+  @transaction_3 = Transaction.create!(credit_card_number: "1234146541543155", credit_card_expiration_date: "2025-01-11", result: 0, invoice: @invoice_3)
+  @transaction_4 = Transaction.create!(credit_card_number: "1234567890123456", credit_card_expiration_date: "2025-01-01", result: 0, invoice: @invoice_4)
+  @transaction_5 = Transaction.create!(credit_card_number: "1234146541543155", credit_card_expiration_date: "2025-01-11", result: 0, invoice: @invoice_5)
+  @transaction_6 = Transaction.create!(credit_card_number: "1234567890123456", credit_card_expiration_date: "2025-01-01", result: 0, invoice: @invoice_6)
+  @transaction_7 = Transaction.create!(credit_card_number: "1234146541543155", credit_card_expiration_date: "2025-01-11", result: 1, invoice: @invoice_7)
+  @transaction_8 = Transaction.create!(credit_card_number: "1234567890123456", credit_card_expiration_date: "2025-01-01", result: 1, invoice: @invoice_8)
+  @transaction_9 = Transaction.create!(credit_card_number: "1234146541543155", credit_card_expiration_date: "2025-01-11", result: 0, invoice: @invoice_9)
+  @transaction_10 = Transaction.create!(credit_card_number: "1234567890123456", credit_card_expiration_date: "2025-01-01", result: 1, invoice: @invoice_10)
 end
 
 

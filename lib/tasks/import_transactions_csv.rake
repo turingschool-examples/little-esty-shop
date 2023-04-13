@@ -7,7 +7,7 @@ namespace :csv_load do
       Transaction.find_or_create_by!(id: row['id']) do |transaction|
         transaction.credit_card_number = row['credit_card_number']
         transaction.credit_card_expiration_date = row['credit_card_expiration_date']
-        transaction.result = (row['result'] == 'success')
+        transaction.result = row['result']
         transaction.invoice_id = row['invoice_id'] 
       end
     end

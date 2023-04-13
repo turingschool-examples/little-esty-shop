@@ -5,6 +5,8 @@ class Item < ApplicationRecord
 
   validates_presence_of :name, :description, :unit_price
 
+  enum status: [:enabled, :disabled]
+
   def unit_price_to_dollars
     unit_price_in_cents = self.unit_price || 0
     dollars = unit_price_in_cents / 100.0
