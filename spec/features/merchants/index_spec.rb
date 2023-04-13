@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Merchant Index Page', type: :feature do
   before(:each) do
-    # @merchant_1 = create(:merchant)
-    # @merchant_2 = create(:merchant)
+    @merchant_1 = create(:merchant)
+    @merchant_2 = create(:merchant)
     visit merchants_path
   end
 

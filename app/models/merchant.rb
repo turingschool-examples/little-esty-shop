@@ -6,4 +6,8 @@ class Merchant < ApplicationRecord
   has_many :customers, -> { distinct }, through: :invoices
 
   validates :name, presence: true
+
+  def top_five_customers
+    require 'pry'; binding.pry
+  end
 end

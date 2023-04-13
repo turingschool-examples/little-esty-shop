@@ -17,7 +17,10 @@ RSpec.describe Invoice, type: :model do
   describe "instance methods" do
     describe 'customer_name' do
       it 'returns the name of the customer' do
-        expect(@invoice_1.customer_name).to eq(@customer_1.first_name + " " + @customer_1.last_name)
+        @customer = create(:customer, first_name: "Bob", last_name: "Smith")
+        @invoice = create(:invoice, customer_id: @customer.id)
+
+        expect(@invoice.customer_name).to eq("Bob Smith")
       end
     end
   end
