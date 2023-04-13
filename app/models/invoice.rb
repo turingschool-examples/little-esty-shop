@@ -3,9 +3,10 @@ class Invoice < ApplicationRecord
   has_many :transactions, dependent: :destroy
   has_many :invoice_items, dependent: :destroy
   has_many :items, through: :invoice_items
+  has_many :merchants, -> { distinct }, through: :items
 
   validates :status, presence: true
- 
+
   enum status: ["In Progress", "Completed", "Cancelled"]
 
   def customer_name

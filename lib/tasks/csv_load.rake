@@ -9,6 +9,7 @@ namespace :csv_load do
       details = row.to_hash
       Customer.create!(details)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!(:customers)
   end
 
   desc "imports merchant data from CSV and creates Merchant objects"
@@ -19,6 +20,7 @@ namespace :csv_load do
       details = row.to_hash
       Merchant.create!(details)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!(:merchants)
   end
 
   desc "imports item data from CSV and creates Item objects"
@@ -29,6 +31,7 @@ namespace :csv_load do
       details = row.to_hash
       Item.create!(details)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!(:items)
   end
 
   desc "imports invoice data from CSV and creates Invoice objects"
@@ -40,6 +43,7 @@ namespace :csv_load do
       details[:status] = convert_invoice_status(details[:status])
       Invoice.create!(details)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!(:invoices)
   end
 
   desc "imports invoice_item data from CSV and creates Invoice_Item objects"
@@ -51,6 +55,7 @@ namespace :csv_load do
       details[:status] = convert_invoice_item_status(details[:status])
       InvoiceItem.create!(details)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!(:invoice_items)
   end
 
   desc "imports transaction data from CSV and creates Transaction objects"
@@ -62,6 +67,7 @@ namespace :csv_load do
       details[:result] = convert_transaction_result(details[:result])
       Transaction.create!(details)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!(:transactions)
   end
 
   desc "imports all of the CSVs and creates records for all six tables"
@@ -72,10 +78,6 @@ namespace :csv_load do
     Rake::Task["csv_load:invoices"].execute
     Rake::Task["csv_load:invoice_items"].execute
     Rake::Task["csv_load:transactions"].execute
-
-    ActiveRecord::Base.connection.tables.each do |t|
-      ActiveRecord::Base.connection.reset_pk_sequence!(t)
-    end
   end
 end
 
