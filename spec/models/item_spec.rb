@@ -10,11 +10,11 @@ RSpec.describe Item, type: :model do
   describe "class methods" do
     before do
       @merchant_1 = FactoryBot.create(:merchant)
-      @item_1 = FactoryBot.create(:item, merchant: @merchant_1)
-      @item_2 = FactoryBot.create(:item, merchant: @merchant_1)
-      @item_3 = FactoryBot.create(:item, merchant: @merchant_1)
-      @item_4 = FactoryBot.create(:item, merchant: @merchant_1, status: 0)
-      @item_5 = FactoryBot.create(:item, merchant: @merchant_1, status: 0)
+      @item_1 = FactoryBot.create(:item, merchant: @merchant_1, status: 1)
+      @item_2 = FactoryBot.create(:item, merchant: @merchant_1, status: 1)
+      @item_3 = FactoryBot.create(:item, merchant: @merchant_1, status: 1)
+      @item_4 = FactoryBot.create(:item, merchant: @merchant_1)
+      @item_5 = FactoryBot.create(:item, merchant: @merchant_1)
     end
 
     it "enabled_items" do
