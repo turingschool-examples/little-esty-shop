@@ -11,13 +11,21 @@ class Invoice < ApplicationRecord
 
   def self.find_and_sort_incomplete_invoices
     joins(:invoice_items).where('invoice_items.status != ?', '2').group(:id).order(:created_at)
+   end
+
+  def self.order_by_id
+    order(:id)
   end
 
   def customer_name
     customer.first_name + " " + customer.last_name
   end
 
-  def format_creation_date
-    "#{created_at.strftime("%A")}, #{created_at.to_date.to_formatted_s(:long)}"
+  def convert_created_at
+    created_at.strftime("%A, %B %d, %Y")
+  end
+
+  def total_revenue
+    invoice_items.sum('unit_price * quantity')
   end
 end
