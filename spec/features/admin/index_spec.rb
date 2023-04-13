@@ -1,28 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
-  it 'has a header' do
-    visit admin_path
+  describe 'User Story 19 - Admin Dashboard' do
+    it 'has a header' do
+      visit admin_path
 
-    expect(page).to have_content('Admin Dashboard')
-    expect(page).to have_selector('h2')
+      expect(page).to have_content('Admin Dashboard')
+      expect(page).to have_selector('h2')
+    end
   end
 
-  it 'has links to the admin merchants index and admin invoices index' do
-    visit admin_path
+  describe 'User Story 20 - Admin Dashboard Links' do
+    it 'has links to the admin merchants index and admin invoices index' do
+      visit admin_path
 
-    expect(page).to have_link('Admin Merchants Index')
-    expect(page).to have_link('Admin Invoices Index')
+      expect(page).to have_link('Admin Merchants Index')
+      expect(page).to have_link('Admin Invoices Index')
 
-    click_link('Admin Merchants Index')
-    expect(current_path).to eq(admin_merchants_path)
+      click_link('Admin Merchants Index')
+      expect(current_path).to eq(admin_merchants_path)
 
-    visit admin_path
-    click_link('Admin Invoices Index')
-    expect(current_path).to eq(admin_invoices_path)
+      visit admin_path
+      click_link('Admin Invoices Index')
+      expect(current_path).to eq(admin_invoices_path)
+    end
   end
 
-  describe 'User Story 21' do
+  describe 'User Story 21 - Admin Dashboard Stats - Top Customers' do
     before(:each) do
       @customer_1 = create(:customer) # 5 successful transactions
       @customer_2 = create(:customer) # 4 successful transactions
@@ -63,7 +67,6 @@ RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
 
     it 'displays the top 5 customers with their names and number of successful transactions' do
       visit admin_path
-      save_and_open_page
 
       expect(page).to have_content("Top Customers")
 
@@ -101,5 +104,51 @@ RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
       expect(page).to_not have_content(@customer_6.last_name)
     end
   end
-end
 
+  describe 'User Story 22 - Admin Dashboard Incomplete Invoices' do
+    before(:each) do
+      merchant = create(:merchant)
+      customer = create(:customer)
+
+      item_1 = create(:item, merchant: merchant)
+      item_2 = create(:item, merchant: merchant)
+      item_3 = create(:item, merchant: merchant)
+      item_4 = create(:item, merchant: merchant)
+      item_5 = create(:item, merchant: merchant)
+      item_6 = create(:item, merchant: merchant)
+
+      @invoice_1 = create(:invoice, customer: customer) # 2 items that have not shipped
+      @invoice_2 = create(:invoice, customer: customer) # 1 item shipped, 1 not shipped
+      @invoice_3 = create(:invoice, customer: customer) # 2 items that have shipped
+
+      @invoice_item_1 = create(:invoice_item, status: "Pending", item: item_1, invoice: @invoice_1)
+      @invoice_item_2 = create(:invoice_item, status: "Packaged", item: item_2, invoice: @invoice_1)
+      @invoice_item_2 = create(:invoice_item, status: "Pending", item: item_3, invoice: @invoice_2)
+      @invoice_item_2 = create(:invoice_item, status: "Shipped", item: item_4, invoice: @invoice_2)
+      @invoice_item_2 = create(:invoice_item, status: "Shipped", item: item_5, invoice: @invoice_3)
+      @invoice_item_2 = create(:invoice_item, status: "Shipped", item: item_6, invoice: @invoice_3)
+    end
+
+    it 'has a section for Incomplete Invoices that displays linked ids' do
+      visit admin_path
+      save_and_open_page
+
+      expect(page).to have_content("Incomplete Invoices")
+      expect(page).to_not have_content("Invoice ##{@invoice_3.id}")
+
+      within("#incomplete-invoices") do
+        expect(page).to have_content("Invoice ##{@invoice_1.id}")
+        click_link "Invoice ##{@invoice_1.id}"
+        expect(current_path).to eq(admin_invoice_path(@invoice_1))
+      end
+
+      visit admin_path
+
+      within("#incomplete-invoices") do
+        expect(page).to have_content("Invoice ##{@invoice_2.id}")
+        click_link "Invoice ##{@invoice_2.id}"
+        expect(current_path).to eq(admin_invoice_path(@invoice_2))
+      end
+    end
+  end
+end
