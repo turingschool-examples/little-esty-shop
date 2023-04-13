@@ -8,8 +8,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
     @invoice_3 = create(:invoice, customer_id: @customer_1.id)
   end
 
-  #User Story 32
-  describe "Admin Invoices Index Page" do
+  describe "Admin Invoices Index Page (User Story 32)" do
     it "displays all Invoice ids in system" do
       visit admin_invoices_path
       expect(page).to have_content("Admin Invoices Index Page")
