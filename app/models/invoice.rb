@@ -7,4 +7,8 @@ class Invoice < ApplicationRecord
   validates :status, presence: true
  
   enum status: ["In Progress", "Completed", "Cancelled"]
+
+  def customer_name
+    customer.first_name + " " + customer.last_name
+  end
 end

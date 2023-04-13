@@ -12,4 +12,12 @@ RSpec.describe Invoice, type: :model do
     it { should validate_presence_of(:status)}
     it { should define_enum_for(:status)}
   end
+
+  describe "instance methods" do
+    describe 'customer_name' do
+      it 'returns the name of the customer' do
+        expect(@invoice_1.customer_name).to eq(@customer_1.first_name + " " + @customer_1.last_name)
+      end
+    end
+  end
 end
