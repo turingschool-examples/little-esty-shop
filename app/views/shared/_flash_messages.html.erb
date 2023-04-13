@@ -9,3 +9,15 @@
     <%= flash[:success] %>
   </div>
 <% end %>
+
+<% if flash[:created] %>
+  <div class="alert alert-created">
+    <%= flash[:created] %>
+  </div>
+<% end %>
+
+<% if flash[:failed] %>
+  <div class="alert alert-failed">
+    <%= flash[:failed] %>
+  </div>
+<% end %>
