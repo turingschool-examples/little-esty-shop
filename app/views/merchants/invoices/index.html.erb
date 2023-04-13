@@ -1,0 +1,9 @@
+<h1><%= @merchant.name %></h1>
+<br>
+<section id="items">
+  <h2>My Invoices</h2>
+  <ul>
+    <% @merchant.invoices.each do |invoice| %>
+      <li><%= link_to invoice.id, merchant_invoice_path(@merchant, invoice) %></li>
+    <% end %>
+  </ul>
