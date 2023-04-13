@@ -18,7 +18,10 @@ RSpec.describe 'Merchant Items Index Page' do
 
     it 'when I click on an item name, I am taken to that merchants items show page' do
       visit merchant_items_path(@merchant_1)
-      click_link(@item_1.name)
+
+      within '#enabled-items-list' do
+        click_link(@item_1.name)
+      end
 
       expect(current_path).to eq(merchant_item_path(@merchant_1, @item_1))
     end
@@ -52,6 +55,16 @@ RSpec.describe 'Merchant Items Index Page' do
           expect(page).to have_button('Enable')
           expect(page).to_not have_button('Disable')
         end
+    end
+
+    it 'I see a list of the top 5 most popular items by revenue' do
+      visit merchant_items_path(@merchant_1)
+      
+      within '#top-items' do
+        expect(page).to have_content('Top Items')
+        
+
+      end
     end
   end
 end
