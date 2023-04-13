@@ -9,22 +9,22 @@ RSpec.describe "Merchant Invoices Index Page" do
       visit merchant_invoices_path(@merchant_2)
 
       expect(page).to have_content("#{@merchant_2.name}'s Invoices")
-      expect(page).to have_content("Invoice ##{@invoice_1.id}")
-      expect(page).to have_content("Invoice ##{@invoice_2.id}")
-      expect(page).to have_content("Invoice ##{@invoice_3.id}")
-      expect(page).to have_content("Invoice ##{@invoice_4.id}")
-      expect(page).to have_content("Invoice ##{@invoice_5.id}")
-      expect(page).to have_content("Invoice ##{@invoice_6.id}")
-      expect(page).to have_link(@invoice_1.id, href: merchant_invoice_path(@merchant_2.id, @invoice_1.id))
-      expect(page).to have_link(@invoice_2.id, href: merchant_invoice_path(@merchant_2, @invoice_2))
-      expect(page).to have_link(@invoice_3.id, href: merchant_invoice_path(@merchant_2, @invoice_3))
-      expect(page).to have_link(@invoice_4.id, href: merchant_invoice_path(@merchant_2, @invoice_4))
-      expect(page).to have_link(@invoice_5.id, href: merchant_invoice_path(@merchant_2, @invoice_5))
-      expect(page).to have_link(@invoice_6.id, href: merchant_invoice_path(@merchant_2, @invoice_6))
-      expect(page).to_not have_content(@invoice_7.id)
-      expect(page).to_not have_content(@invoice_8.id)
-      expect(page).to_not have_content(@invoice_9.id)
-      expect(page).to_not have_content(@invoice_10.id)
+      expect(page).to have_content("Invoice ##{@invoice_7.id}")
+      expect(page).to have_content("Invoice ##{@invoice_8.id}")
+      expect(page).to have_content("Invoice ##{@invoice_9.id}")
+      expect(page).to have_content("Invoice ##{@invoice_10.id}")
+      expect(page).to have_content("Invoice ##{@invoice_11.id}")
+
+      expect(page).to have_link(@invoice_7.id, href: merchant_invoice_path(@merchant_2, @invoice_7))
+      expect(page).to have_link(@invoice_8.id, href: merchant_invoice_path(@merchant_2, @invoice_8))
+      expect(page).to have_link(@invoice_9.id, href: merchant_invoice_path(@merchant_2, @invoice_9))
+      expect(page).to have_link(@invoice_10.id, href: merchant_invoice_path(@merchant_2, @invoice_10))
+      expect(page).to have_link(@invoice_11.id, href: merchant_invoice_path(@merchant_2, @invoice_11))
+    
+      expect(page).to_not have_content(@invoice_1.id)
+      expect(page).to_not have_content(@invoice_2.id)
+      expect(page).to_not have_content(@invoice_3.id)
+      expect(page).to_not have_content(@invoice_4.id)
     end
 
     it "merchant_3" do
