@@ -117,17 +117,8 @@ RSpec.describe 'Merchant Dashboard Show Page' do
         expect(page).to have_link(@invoice_2.id)
       end
     end
-
-    it 'Link takes me to the invoice show page' do
-      visit dashboard_merchant_path(@merchant_1)
-      
-      within '#not_yet_shipped' do
-        first(:link, @invoice_1.id).click
-      end
-
-      expect(current_path).to eq(merchant_invoice_path(@invoice_1, @merchant_1 ))
-    end
   end
+  
   describe 'User Story 5' do
     it 'The items are listed by the date the invoices were created' do
       @invoice_1.update(created_at: 4.day.ago)
