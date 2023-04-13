@@ -24,53 +24,63 @@ RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
 
   describe 'User Story 21' do
     before(:each) do
-      5.times do
-        customer = create(:customer)
+      @customer_1 = create(:customer)
+      @customer_2 = create(:customer)
+      @customer_3 = create(:customer)
+      @customer_4 = create(:customer)
+      @customer_5 = create(:customer)
+
+      @customers = [@customer_1, @customer_2, @customer_3, @customer_4, @customer_5]
+
+      @customers.each do |customer|
         2.times do
           invoice = create(:invoice, customer: customer)
           create(:transaction, result: true, invoice: invoice)
         end
       end
 
-      @most_transactions_customer = Customer.first
-      invoice = @most_transactions_customer.invoices.first
+      invoice = @customer_5.invoices.first
       create(:transaction, result: true, invoice: invoice)
 
-      @no_invoice_customer = create(:customer)
+      @customer_6 = create(:customer)
+      2.times do
+        invoice = create(:invoice, customer: @customer_6)
+        create(:transaction, result: false, invoice: invoice)
+      end
     end
 
     it 'displays the top 5 customers with their names and number of successful transactions' do
-      require 'pry'; binding.pry
-      # within("#customer-#{.id}") do # add customer variable
-      #   expect(page).to have_content() #customer name 1
-      #   expect(page).to have_content() #add number of successful transactions
-      #   expect().to_appear_before()  #name to appear before transactions count
-      # end
+      expect(page).to_not have_content(@customer_6.name)
 
-      # within("#customer-#{.id}") do # add customer variable
-      #   expect(page).to have_content() #customer name 2
-      #   expect(page).to have_content() #add number of successful transactions
-      #   expect().to_appear_before()  #name to appear before transactions count
-      # end
+      within("#customer-#{@customer_1.id}") do
+        expect(page).to have_content(@customer_1.name)
+        expect(page).to have_content('2')
+        expect(@customer_1.name).to_appear_before('2')
+      end
 
-      # within("#customer-#{.id}") do # add customer variable
-      #   expect(page).to have_content() #customer name 3
-      #   expect(page).to have_content() #add number of successful transactions
-      #   expect().to_appear_before()  #name to appear before transactions count
-      # end
+      within("#customer-#{@customer_2.id}") do
+        expect(page).to have_content(@customer_2.name)
+        expect(page).to have_content('2')
+        expect(@customer_2.name).to_appear_before('2')
+      end
 
-      # within("#customer-#{.id}") do # add customer variable
-      #   expect(page).to have_content() #customer name 4
-      #   expect(page).to have_content() #add number of successful transactions
-      #   expect().to_appear_before()  #name to appear before transactions count
-      # end
+      within("#customer-#{@customer_3.id}") do
+        expect(page).to have_content(@customer_3.name)
+        expect(page).to have_content('2')
+        expect(@customer_3.name).to_appear_before('2')
+      end
 
-      # within("#customer-#{.id}") do # add customer variable
-      #   expect(page).to have_content() #customer name 5
-      #   expect(page).to have_content() #add number of successful transactions
-      #   expect().to_appear_before()  #name to appear before transactions count
-        expect(true).to eq(false)
-      # end
+      within("#customer-#{@customer_4.id}") do
+        expect(page).to have_content(@customer_4.name)
+        expect(page).to have_content('2')
+        expect(@customer_4.name).to_appear_before('2')
+      end
+
+      within("#customer-#{@customer_5.id}") do
+        expect(page).to have_content(@customer_5.name)
+        expect(page).to have_content('3')
+        expect(@customer_5.name).to_appear_before('3')
+      end
     end
   end
 end
