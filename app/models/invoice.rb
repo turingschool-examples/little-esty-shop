@@ -11,4 +11,5 @@ class Invoice < ApplicationRecord
   def convert_created_at
     created_at.strftime("%A, %B %d, %Y")
   end
+
 end

@@ -10,6 +10,5 @@ RSpec.describe 'Merchant Index Page', type: :feature do
   end
 
   it 'shows all the merchant names as links' do
-    require 'pry'; binding.pry
   end
 end
