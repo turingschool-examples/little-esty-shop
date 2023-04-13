@@ -32,7 +32,7 @@ RSpec.describe 'Merchant Items Index Page' do
         
         click_button('Disable')
       end
-save_and_open_page
+
       expect(current_path).to eq(merchant_items_path(@merchant_1))
       
       within '#disabled-items-list' do
