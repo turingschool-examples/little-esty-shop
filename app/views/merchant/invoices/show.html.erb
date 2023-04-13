@@ -1,0 +1,10 @@
+<h1>Invoice Show Page</h1>
+<h2> Merchant: <%= @merchant.name %> </h2>
+<section id="invoice_info">
+  <ul>
+    <li> Invoice ID: <%= @invoice.id %> </li>
+    <li> Current Status: <%= @invoice.status %> </li>
+    <li> Invoice Creation Date: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </li>
+    <li> Customer Name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %> </li>
+  </ul>
+</section>
