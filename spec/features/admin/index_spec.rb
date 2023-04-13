@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
-  describe 'User Story 19 - Admin Dashboard' do
+  describe 'Admin Dashboard main page (User Story 19)' do
     it 'has a header' do
       visit admin_path
 
@@ -10,7 +10,7 @@ RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
     end
   end
 
-  describe 'User Story 20 - Admin Dashboard Links' do
+  describe 'Admin Dashboard Links (User Story 20)' do
     it 'has links to the admin merchants index and admin invoices index' do
       visit admin_path
 
@@ -26,7 +26,7 @@ RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
     end
   end
 
-  describe 'User Story 21 - Admin Dashboard Stats - Top Customers' do
+  describe 'Admin Dashboard Stats - Top Customers (User Story 21)' do
     before(:each) do
       @customer_1 = create(:customer) # 5 successful transactions
       @customer_2 = create(:customer) # 4 successful transactions
@@ -105,7 +105,7 @@ RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
     end
   end
 
-  describe 'User Story 22 - Admin Dashboard Incomplete Invoices' do
+  describe 'Admin Dashboard Incomplete Invoices (User Story 22)' do
     before(:each) do
       merchant = create(:merchant)
       customer = create(:customer)
@@ -147,6 +147,44 @@ RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
         expect(page).to have_content("Invoice ##{@invoice_2.id}")
         click_link "Invoice ##{@invoice_2.id}"
         expect(current_path).to eq(admin_invoice_path(@invoice_2))
+      end
+    end
+  end
+
+  describe 'Admin Dashboard Invoices Sorted by Least Recent (User Story 23)' do
+    before(:each) do
+      merchant = create(:merchant)
+      customer = create(:customer)
+
+      item_1 = create(:item, merchant: merchant)
+      item_2 = create(:item, merchant: merchant)
+      item_3 = create(:item, merchant: merchant)
+      item_4 = create(:item, merchant: merchant)
+      item_5 = create(:item, merchant: merchant)
+      item_6 = create(:item, merchant: merchant)
+
+      @invoice_1 = create(:invoice, created_at: '2023-03-26 09:54:09 UTC', customer: customer) #newest creation date
+      @invoice_2 = create(:invoice, created_at: '2023-03-24 09:54:09 UTC', customer: customer) #oldest creation date
+      @invoice_3 = create(:invoice, created_at: '2023-03-25 09:54:09 UTC', customer: customer) #middle creation date
+
+      @invoice_item_1 = create(:invoice_item, status: "Pending", item: item_1, invoice: @invoice_1)
+      @invoice_item_2 = create(:invoice_item, status: "Packaged", item: item_2, invoice: @invoice_1)
+      @invoice_item_3 = create(:invoice_item, status: "Pending", item: item_3, invoice: @invoice_2)
+      @invoice_item_4 = create(:invoice_item, status: "Shipped", item: item_4, invoice: @invoice_2)
+      @invoice_item_5 = create(:invoice_item, status: "Packaged", item: item_5, invoice: @invoice_3)
+      @invoice_item_6 = create(:invoice_item, status: "Shipped", item: item_6, invoice: @invoice_3)
+    end
+
+    it 'lists incomplete invoices with formatted creation dates in order from oldest to newest' do
+      visit admin_path
+
+      within("#incomplete-invoices") do
+        expect("##{@invoice_2.id}").to appear_before("##{@invoice_3.id}")
+        expect("##{@invoice_3.id}").to appear_before("##{@invoice_1.id}")
+
+        expect(page).to have_content("Friday, March 24, 2023")
+        expect(page).to have_content("Saturday, March 25, 2023")
+        expect(page).to have_content("Sunday, March 26, 2023")
       end
     end
   end
