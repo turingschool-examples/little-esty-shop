@@ -2,15 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
   describe "relationships" do
-    it {should belong_to(:customer)}
-    it {should have_many(:transactions)}
-    it {should have_many(:invoice_items)}
-    it {should have_many(:items).through(:invoice_items)}
+    it { should belong_to(:customer) }
+    it { should have_many(:transactions) }
+    it { should have_many(:invoice_items) }
+    it { should have_many(:items).through(:invoice_items) }
+    it { should have_many(:merchants).through(:items) }
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:status)}
-    it { should define_enum_for(:status)}
+    it { should validate_presence_of(:status) }
+    it { should define_enum_for(:status) }
   end
 
   describe 'class methods' do
@@ -38,6 +39,14 @@ RSpec.describe Invoice, type: :model do
         @invoice_item_6 = create(:invoice_item, status: "Shipped", item: item_6, invoice: @invoice_3)
 
         expect(Invoice.find_incomplete_invoices).to eq([@invoice_1, @invoice_2])
+      end
+    end
+  end
+
+  describe "instance methods" do
+    describe 'customer_name' do
+      it 'returns the name of the customer' do
+        expect(@invoice_1.customer_name).to eq(@customer_1.first_name + " " + @customer_1.last_name)
       end
     end
   end
