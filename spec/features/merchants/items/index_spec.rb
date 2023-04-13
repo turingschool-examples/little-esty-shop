@@ -44,6 +44,10 @@ RSpec.describe 'Merchant Items Index Page' do
         expect(page).to have_content(@item_1.name)
       end
 
+      within '#enabled-items-list' do
+        expect(page).to_not have_content(@item_1.name)
+      end
+
         within "#disabled-item-#{@item_1.id}" do
           expect(page).to have_button('Enable')
           expect(page).to_not have_button('Disable')
