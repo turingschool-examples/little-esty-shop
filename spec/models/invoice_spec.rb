@@ -32,10 +32,10 @@ RSpec.describe Invoice, type: :model do
 
         @invoice_item_1 = create(:invoice_item, status: "Pending", item: item_1, invoice: @invoice_1)
         @invoice_item_2 = create(:invoice_item, status: "Packaged", item: item_2, invoice: @invoice_1)
-        @invoice_item_2 = create(:invoice_item, status: "Pending", item: item_3, invoice: @invoice_2)
-        @invoice_item_2 = create(:invoice_item, status: "Shipped", item: item_4, invoice: @invoice_2)
-        @invoice_item_2 = create(:invoice_item, status: "Shipped", item: item_5, invoice: @invoice_3)
-        @invoice_item_2 = create(:invoice_item, status: "Shipped", item: item_6, invoice: @invoice_3)
+        @invoice_item_3 = create(:invoice_item, status: "Pending", item: item_3, invoice: @invoice_2)
+        @invoice_item_4 = create(:invoice_item, status: "Shipped", item: item_4, invoice: @invoice_2)
+        @invoice_item_5 = create(:invoice_item, status: "Shipped", item: item_5, invoice: @invoice_3)
+        @invoice_item_6 = create(:invoice_item, status: "Shipped", item: item_6, invoice: @invoice_3)
 
         expect(Invoice.find_incomplete_invoices).to eq([@invoice_1, @invoice_2])
       end

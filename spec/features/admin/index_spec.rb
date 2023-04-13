@@ -123,15 +123,14 @@ RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
 
       @invoice_item_1 = create(:invoice_item, status: "Pending", item: item_1, invoice: @invoice_1)
       @invoice_item_2 = create(:invoice_item, status: "Packaged", item: item_2, invoice: @invoice_1)
-      @invoice_item_2 = create(:invoice_item, status: "Pending", item: item_3, invoice: @invoice_2)
-      @invoice_item_2 = create(:invoice_item, status: "Shipped", item: item_4, invoice: @invoice_2)
-      @invoice_item_2 = create(:invoice_item, status: "Shipped", item: item_5, invoice: @invoice_3)
-      @invoice_item_2 = create(:invoice_item, status: "Shipped", item: item_6, invoice: @invoice_3)
+      @invoice_item_3 = create(:invoice_item, status: "Pending", item: item_3, invoice: @invoice_2)
+      @invoice_item_4 = create(:invoice_item, status: "Shipped", item: item_4, invoice: @invoice_2)
+      @invoice_item_5 = create(:invoice_item, status: "Shipped", item: item_5, invoice: @invoice_3)
+      @invoice_item_6 = create(:invoice_item, status: "Shipped", item: item_6, invoice: @invoice_3)
     end
 
     it 'has a section for Incomplete Invoices that displays linked ids' do
       visit admin_path
-      save_and_open_page
 
       expect(page).to have_content("Incomplete Invoices")
       expect(page).to_not have_content("Invoice ##{@invoice_3.id}")
