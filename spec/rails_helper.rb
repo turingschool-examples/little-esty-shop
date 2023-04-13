@@ -27,7 +27,7 @@ def test_data
   @merchant_4 = Merchant.create!(name: "Fourth Merchant")
   @merchant_5 = Merchant.create!(name: "Fifth Merchant")
 
-  @item_1 = Item.create!(name: "Item", description: "Description_1", unit_price: 100, merchant: @merchant_1)
+  @item_1 = Item.create!(name: "Speed", description: "Description_1", unit_price: 100, merchant: @merchant_1)
   @item_2 = Item.create!(name: "LSD", description: "Description_2", unit_price: 15000, merchant: @merchant_2)
   @item_3 = Item.create!(name: "Cocaine", description: "Description_3", unit_price: 50000, merchant: @merchant_3)
   @item_4 = Item.create!(name: "Heroin", description: "Description_4", unit_price: 20000, merchant: @merchant_4)
