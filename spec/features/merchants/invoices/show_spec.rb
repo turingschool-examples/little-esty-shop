@@ -8,7 +8,7 @@ RSpec.describe 'merchant invoice show page' do
   describe 'As a merchant when I visit my merchant invoice show page' do
     it 'I see all of my items on the invoice including the item name, 
       quantity of item ordered,the price the Item sold for, and The Invoice Item status' do
-      save_and_open_page
+      
       within "#invoice_item_#{@invoice_item_11.id}" do
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content(@invoice_item_11.quantity)
