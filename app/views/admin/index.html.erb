@@ -3,10 +3,22 @@
 <%= link_to "Admin Merchants Index", admin_merchants_path %>
 <%= link_to "Admin Invoices Index", admin_invoices_path %>
 
-<h3>Top Customers</h3>
+<div id="top-customers">
+  <h3>Top Customers</h3>
 
-<ol type="1">
-  <% @customers.each do |customer| %>
-    <div id="customer-<%= customer.id %>"><li><%= customer.get_name %> - <%= customer.count_successful_transactions %> purchases</li></div>
-  <% end %>
-</ol>
+  <ol type="1">
+    <% @customers.each do |customer| %>
+      <div id="customer-<%= customer.id %>"><li><%= customer.get_name %> - <%= customer.count_successful_transactions %> purchases</li></div>
+    <% end %>
+  </ol>
+</div>
+
+<div id="incomplete-invoices">
+  <h3>Incomplete Invoices</h3>
+
+  <ul>
+    <% @invoices.each do |invoice| %>
+      <li><%= link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice) %></li>
+    <% end %>
+  </ul>
+</div>
