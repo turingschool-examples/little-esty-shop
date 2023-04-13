@@ -12,4 +12,12 @@ class Item < ApplicationRecord
     dollars = unit_price_in_cents / 100.0
     format('%.2f', dollars)
   end
+
+  def enabled
+    self.status == 'enabled'
+  end
+
+  def disabled
+    self.status == 'disabled'
+  end
 end

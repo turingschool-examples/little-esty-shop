@@ -28,5 +28,25 @@ RSpec.describe Item, type: :model do
       expect(@item_3.unit_price).to eq(50000)
       expect(@item_3.unit_price_to_dollars).to eq('500.00')
     end
+
+    it '#enabled' do
+      expect(@item_1.enabled).to eq(true)
+      expect(@item_2.enabled).to eq(true)
+      @item_1.update(status: 1)
+      expect(@item_1.enabled).to eq(false)
+      expect(@item_2.enabled).to eq(true)
+      @item_2.update(status: 1)
+      expect(@item_2.enabled).to eq(false)
+    end
+
+    it '#disabled' do 
+      expect(@item_1.disabled).to eq(false)
+      expect(@item_2.disabled).to eq(false)
+      @item_1.update(status: 1)
+      expect(@item_1.disabled).to eq(true)
+      expect(@item_2.disabled).to eq(false)
+      @item_2.update(status: 1)
+      expect(@item_2.disabled).to eq(true)
+    end
   end
 end
