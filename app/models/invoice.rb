@@ -8,7 +8,7 @@ class Invoice < ApplicationRecord
  
   enum status: ["In Progress", "Completed", "Cancelled"]
 
-  def created_at_date
+  def convert_created_at
     created_at.strftime("%A, %B %d, %Y")
   end
 end

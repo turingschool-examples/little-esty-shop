@@ -1,5 +1,7 @@
 <h1>Admin Invoice Show Page</h1>
+<div id = "<%=@invoice.id%>_id">
 <p>Invoice ID: <%= @invoice.id %></p>
 <p>Invoice Status: <%= @invoice.status %></p>
-<p>Invoice Created At: <%= @invoice.created_at_date %></p>
+<p>Invoice Created At: <%= @invoice.convert_created_at %></p>
 <p>Customer Name: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
+<div>
