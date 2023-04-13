@@ -32,7 +32,6 @@ class ItemsController < ApplicationController
       redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}/edit"
       flash[:alert] = "Error: #{error_message(@item.errors)}"
     end
-
   end
   
   private

@@ -96,6 +96,30 @@ RSpec.describe 'merchant items index' do
       expect(page).to have_no_content("enabled")
       expect(page).to have_current_path("/merchants/#{@merchant_1.id}/items/")
     end
-  
+  end
+
+  it 'I see two sections for enabled/disabled items in there appropriate sections' do
+    @merchant_10 = Merchant.create!(name: 'Etsy')
+    @merchant_20 = Merchant.create!(name: 'Build-a-Bear')
+    @item_10 = @merchant_10.items.create!(name: 'Axe', description: 'Chop stuff', unit_price: 1000, status: "enabled")
+    @item_20 = @merchant_10.items.create!(name: 'Hammer', description: 'Hit stuff', unit_price: 1500, status: "disabled")
+    @item_30 = @merchant_10.items.create!(name: 'Drill', description: 'Drill stuff', unit_price: 5000, status: "enabled")
+    @item_40 = @merchant_10.items.create!(name: 'Wrench', description: 'Turn stuff', unit_price: 900, status: "disabled")
+
+    visit "/merchants/#{@merchant_10.id}/items"
+
+    within "#Disabled" do
+      expect(page).to have_content(@item_20.name)
+      expect(page).to have_no_content(@item_10.name)
+      expect(page).to have_content(@item_40.name)
+      expect(page).to have_no_content(@item_30.name)
+    end
+
+    within "#Enabled" do
+      expect(page).to have_content(@item_10.name)
+      expect(page).to have_no_content(@item_20.name)
+      expect(page).to have_content(@item_30.name)
+      expect(page).to have_no_content(@item_40.name)
+    end
   end
 end
