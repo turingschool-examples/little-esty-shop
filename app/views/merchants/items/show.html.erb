@@ -1,0 +1,8 @@
+<%= render 'shared/flash_messages' %>
+<h1><%= @item.name %></h1>
+<br>
+<p> Description: <%= @item.description %></p>
+<br>
+<p>Current Price: $<%= @item.unit_price_to_dollars %></p>
+<br>
+<%= button_to 'Update Item', edit_merchant_item_path(@merchant, @item), method: :get %>
