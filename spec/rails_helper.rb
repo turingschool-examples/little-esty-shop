@@ -9,6 +9,7 @@ def test_data
   @customer_8 = Customer.create!(first_name: "Sally", last_name: "Williams")
   @customer_9 = Customer.create!(first_name: "Sue", last_name: "Williams")
   @customer_10 = Customer.create!(first_name: "Sally", last_name: "Brown")
+
   @invoice_1 = Invoice.create!(status: "cancelled", customer: @customer_1)
   @invoice_2 = Invoice.create!(status: "in progress", customer: @customer_2)
   @invoice_3 = Invoice.create!(status: "completed", customer: @customer_3)
@@ -19,11 +20,13 @@ def test_data
   @invoice_8 = Invoice.create!(status: "completed", customer: @customer_8)
   @invoice_9 = Invoice.create!(status: "completed", customer: @customer_9)
   @invoice_10 = Invoice.create!(status: "completed", customer: @customer_10)
+
   @merchant_1 = Merchant.create!(name: "First Merchant")
   @merchant_2 = Merchant.create!(name: "Second Merchant")
   @merchant_3 = Merchant.create!(name: "Third Merchant")
   @merchant_4 = Merchant.create!(name: "Fourth Merchant")
   @merchant_5 = Merchant.create!(name: "Fifth Merchant")
+
   @item_1 = Item.create!(name: "Item", description: "Description_1", unit_price: 100, merchant: @merchant_1)
   @item_2 = Item.create!(name: "LSD", description: "Description_2", unit_price: 15000, merchant: @merchant_2)
   @item_3 = Item.create!(name: "Cocaine", description: "Description_3", unit_price: 50000, merchant: @merchant_3)
@@ -34,6 +37,7 @@ def test_data
   @item_8 = Item.create!(name: "Marijuana", description: "Description_8", unit_price: 100000, merchant: @merchant_5)
   @item_9 = Item.create!(name: "Shrooms", description: "Description_9", unit_price: 56465, merchant: @merchant_1)
   @item_10 = Item.create!(name: "Opium", description: "Description_10", unit_price: 54134, merchant: @merchant_2)
+
   @invoice_item_1 = InvoiceItem.create!(quantity: 1, unit_price: 100, status: "pending", item: @item_1, invoice: @invoice_1)
   @invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 15000, status: "packaged", item: @item_2, invoice: @invoice_2)
   @invoice_item_3 = InvoiceItem.create!(quantity: 10, unit_price: 50000, status: "shipped", item: @item_3, invoice: @invoice_3)
@@ -54,6 +58,7 @@ def test_data
   @invoice_item_18 = InvoiceItem.create!(quantity: 85, unit_price: 100000, status: "packaged", item: @item_8, invoice: @invoice_9)
   @invoice_item_19 = InvoiceItem.create!(quantity: 90, unit_price: 56465, status: "shipped", item: @item_9, invoice: @invoice_10)
   @invoice_item_20 = InvoiceItem.create!(quantity: 95, unit_price: 54134, status: "shipped", item: @item_10, invoice: @invoice_1)
+  
   @transaction_1 = Transaction.create!(credit_card_number: "1234567890145446", credit_card_expiration_date: "2024-03-06", result: 1, invoice: @invoice_1)
   @transaction_2 = Transaction.create!(credit_card_number: "1234567890123456", credit_card_expiration_date: "2025-01-01", result: 1, invoice: @invoice_2)
   @transaction_3 = Transaction.create!(credit_card_number: "1234146541543155", credit_card_expiration_date: "2025-01-11", result: 0, invoice: @invoice_3)

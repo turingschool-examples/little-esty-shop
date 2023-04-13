@@ -12,3 +12,4 @@ class Merchant < ApplicationRecord
     items.where(status: 1)
   end
 end
+
