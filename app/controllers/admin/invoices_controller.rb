@@ -1,6 +1,6 @@
 class Admin::InvoicesController < ApplicationController
   def index
-    @invoices = Invoice.all
+    @invoices = Invoice.order_by_id
   end
 
   def show

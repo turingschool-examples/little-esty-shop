@@ -9,6 +9,10 @@ class Invoice < ApplicationRecord
 
   enum status: ["In Progress", "Completed", "Cancelled"]
 
+  def self.order_by_id
+    order(:id)
+  end
+
   def customer_name
     customer.first_name + " " + customer.last_name
   end
