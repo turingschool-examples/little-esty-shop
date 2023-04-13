@@ -8,12 +8,12 @@
 <ol id="top_customers">
   <h2>Top Customers</h2>
   <% @merchant.top_five_customers.each do |customer| %> 
-    <li><%= customer.first_name %> <%= customer.last_name %> * Number of Transactions: <%= customer.transaction_count %> </li>
+    <li><%= customer.first_name %> <%= customer.last_name %> - Purchases: <%= customer.transaction_count %> </li>
   <% end %> 
 </ol>
 
 <ol id="not_yet_shipped">
   <h2>Items Ready to Ship</h2>
-  <% @items_not_yet_shipped.each do |invoice| %> 
-    <li><%= invoice.item.name %> * <%= link_to "#{invoice.invoice_id}", merchant_invoice_path(invoice.invoice_id) %> <%= invoice.invoice.created_at.strftime("%A, %B %d, %Y") %></li>
+  <% @items_not_yet_shipped.each do |invoice_item| %> 
+    <li><%= invoice_item.item.name %> - <%= link_to "#{invoice_item.invoice_id}", merchant_invoice_path(invoice_item.invoice_id) %> - <%= invoice_item.invoice.created_at.strftime("%A, %B %d, %Y") %></li>
   <% end %>
