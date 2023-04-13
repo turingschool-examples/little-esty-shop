@@ -12,11 +12,10 @@ RSpec.describe Item, type: :model do
     test_data
   end
 
-  describe 'status enum' do
-    it 'has a default status of :enabled' do
-      expect(@item_1.status).to eq('enabled')
-      @item_1.disabled!
-      expect(@item_1.status).to eq('disabled')
+  describe 'enums' do
+    it do
+      should define_enum_for(:status).
+     with_values(["enabled", "disabled"])
     end
   end
 

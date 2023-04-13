@@ -1,12 +1,23 @@
 <h1><%= @merchant.name %></h1>
 <br>
-<section id="items">
+<section id="my-items">
   <h2>My Items</h2>
-  <ul>
-    <% @merchant.items.each do |item| %>
-      <section id="<%= item.id %>">
+  <h3>Enabled Items</h3>
+  <ul id="enabled-items-list">
+    <% @enabled_items.each do |item| %>
+      <div id="enabled-item-<%= item.id %>">
       <li><%= link_to item.name, merchant_item_path(@merchant, item) %></li>
-      </section>
+      <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: { status: :disabled }%>
+      </div>
+    <% end %>
+  </ul>
+  <h3>Disabled Items</h3>
+  <ul id="disabled-items-list">
+    <% @disabled_items.each do |item| %>
+      <div id="disabled-item-<%= item.id %>">
+      <li><%= link_to item.name, merchant_item_path(@merchant, item) %></li>
+      <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: { status: :enabled }%>
+      </div>
     <% end %>
   </ul>
 </section>
