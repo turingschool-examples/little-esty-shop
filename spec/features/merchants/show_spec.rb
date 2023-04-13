@@ -16,7 +16,7 @@ RSpec.describe 'merchant show page' do
 
     it 'displays a link to merchant items index' do
       visit "/merchants/#{@merch_1.id}/dashboard"
-      within("#My-Items") do
+      within("#my-items") do
        expect(page).to have_link('My Items')
 
        click_link('My Items')
@@ -26,7 +26,7 @@ RSpec.describe 'merchant show page' do
 
     it 'displays a link to merchant invoices index' do
       visit "/merchants/#{@merch_1.id}/dashboard"
-      within("#My-Invoices") do
+      within("#my-invoices") do
        expect(page).to have_link('My Invoices')
 
        click_link('My Invoices')
