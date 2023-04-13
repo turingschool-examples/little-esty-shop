@@ -12,4 +12,6 @@ class Item < ApplicationRecord
     self.status = new_status
     self.save
   end
+
+  
 end
