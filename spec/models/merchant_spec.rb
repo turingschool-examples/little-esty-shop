@@ -12,7 +12,7 @@ RSpec.describe Invoice, type: :model do
     end
 
     it 'can find top 5 customers' do
-      expect(@merchant_1.top_five_customers).to eq([@customer_6, @customer_5, @customer_1, @customer_2, @customer_3])  
+      expect(@merchant_1.top_five_customers).to eq([@customer_6, @customer_1, @customer_2, @customer_5, @customer_3])  
       expect(@merchant_1.top_five_customers.first.transaction_count).to eq(7)
       
       @invoice_21 = Invoice.create!(customer_id: @customer_5.id, status: 1)
