@@ -119,4 +119,38 @@ RSpec.describe "Index page", type: :feature do
       end
     end
   end
+  describe "Create New Item" do
+    before do
+      test_data
+    end
+    it "has a link to create a new item" do
+      visit merchant_items_path(@merchant_1)
+
+      expect(page).to have_link("Create New Item", href: new_merchant_item_path(@merchant_1))
+
+      click_link("Create New Item")
+
+      expect(current_path).to eq(new_merchant_item_path(@merchant_1))
+    end
+
+    it "can create a new item" do
+      visit new_merchant_item_path(@merchant_1)
+
+      expect(page).to have_content("Name")
+      expect(page).to have_content("Description")
+      expect(page).to have_content("Unit Price")
+      expect(page).to have_field(:name)
+      expect(page).to have_field(:description)
+      expect(page).to have_field(:unit_price)
+      expect(page).to have_button("Create Item")
+
+      fill_in :name, with: "Cookies"
+      fill_in :description, with: "Yummy"
+      fill_in :unit_price, with: 500
+
+      click_button("Create Item")
+
+      expect(current_path).to eq(merchant_items_path(@merchant_1))
+    end
+  end
 end

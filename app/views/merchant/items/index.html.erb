@@ -18,4 +18,5 @@
       <%= form.submit "Enable", id: "enable_#{item.id}" %>
   <% end %>
 <% end %>
-</div>
+</div><br>
+<p><%= link_to "Create New Item", new_merchant_item_path(@merchant.id) %></p>
