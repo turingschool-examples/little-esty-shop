@@ -28,4 +28,18 @@ RSpec.describe 'Merchant Invoice Show Page' do
       end
     end
   end
+
+  describe 'User Story 17' do
+    it 'I see the total revenue that will be generated from this invoice' do
+      visit merchant_invoice_path(@merchant_1, @invoice_1)
+      within "#invoice_revenue" do
+        expect(page).to have_content(@invoice_1.total_revenue)
+      end
+
+      visit merchant_invoice_path(@merchant_2, @invoice_7)
+      within "#invoice_revenue" do
+        expect(page).to have_content(@invoice_7.total_revenue)
+      end
+    end
+  end
 end

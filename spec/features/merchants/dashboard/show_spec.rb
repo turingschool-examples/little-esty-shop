@@ -113,8 +113,8 @@ RSpec.describe 'Merchant Dashboard Show Page' do
       visit dashboard_merchant_path(@merchant_1)
 
       within '#not_yet_shipped' do
-        expect(page).to have_link(@invoice_1.id)
-        expect(page).to have_link(@invoice_2.id)
+        expect(page).to have_link("#{@invoice_1.id}")
+        expect(page).to have_link("#{@invoice_2.id}")
       end
     end
   end
