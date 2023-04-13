@@ -64,23 +64,23 @@ RSpec.describe "Index page", type: :feature do
     it "has enable/disable buttons" do
       visit merchant_items_path(@merchant_1)
       
-      expect(page.all(:button, "Disable").count).to eq(5)
-      expect(page).to_not have_button("Enable")
+      expect(page.all(:button, "Enable").count).to eq(5)
+      expect(page).to_not have_button("Disable")
     end
 
     it "disable button changes item status" do
       visit merchant_items_path(@merchant_1)
 
-      expect(@item_1.status).to eq("enabled")
+      expect(@item_1.status).to eq("disabled")
 
-      click_button "disable_#{@item_1.id}"
+      click_button "enable_#{@item_1.id}"
       expect(current_path).to eq(merchant_items_path(@merchant_1))
       
-      expect(page.all(:button, "Disable").count).to eq(4)
-      expect(page).to have_button("Enable")
+      expect(page.all(:button, "Enable").count).to eq(4)
+      expect(page).to have_button("Disable")
       @item_1.reload
       
-      expect(@item_1.status).to eq("disabled")
+      expect(@item_1.status).to eq("enabled")
     end
   end
   describe "Items grouped by status" do
@@ -89,8 +89,8 @@ RSpec.describe "Index page", type: :feature do
       @item_1 = FactoryBot.create(:item, merchant: @merchant_1)
       @item_2 = FactoryBot.create(:item, merchant: @merchant_1)
       @item_3 = FactoryBot.create(:item, merchant: @merchant_1)
-      @item_4 = FactoryBot.create(:item, merchant: @merchant_1, status: 0)
-      @item_5 = FactoryBot.create(:item, merchant: @merchant_1, status: 0)
+      @item_4 = FactoryBot.create(:item, merchant: @merchant_1, status: 1)
+      @item_5 = FactoryBot.create(:item, merchant: @merchant_1, status: 1)
     end
     it "displays a section for 'Enabled Items' and 'Disabled Items'" do
       visit merchant_items_path(@merchant_1)
@@ -103,9 +103,9 @@ RSpec.describe "Index page", type: :feature do
       visit merchant_items_path(@merchant_1)
 
       within "#enabled-items" do
-        expect(page).to have_content(@item_1.name)
-        expect(page).to have_content(@item_2.name)
-        expect(page).to have_content(@item_3.name)
+        expect(page).to have_content(@item_4.name)
+        expect(page).to have_content(@item_5.name)
+
       end
     end
 
@@ -113,8 +113,9 @@ RSpec.describe "Index page", type: :feature do
       visit merchant_items_path(@merchant_1)
 
       within "#disabled-items" do
-        expect(page).to have_content(@item_4.name)
-        expect(page).to have_content(@item_5.name)
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_content(@item_3.name)
       end
     end
   end
