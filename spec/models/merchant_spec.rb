@@ -39,11 +39,9 @@ RSpec.describe Merchant, type: :model do
       InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_5.id)
     end
 
-    describe '.top_5_customers' do
-      it "returns the top 5 customers with most transactions for a merchant" do
-        expect(@merchant_1.top_5_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
-        expect(@merchant_1.top_5_customers).to_not eq([@customer_6])
-      end
+    it "returns the top 5 customers with most transactions for a merchant" do
+      expect(@merchant_1.top_5_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
+      expect(@merchant_1.top_5_customers).to_not eq([@customer_6])
     end
   end
 end
