@@ -9,11 +9,15 @@ class Invoice < ApplicationRecord
 
   enum status: ["In Progress", "Completed", "Cancelled"]
 
-  def self.find_incomplete_invoices
-    joins(:invoice_items).where('invoice_items.status != ?', '2').group(:id).order(:id)
+  def self.find_and_sort_incomplete_invoices
+    joins(:invoice_items).where('invoice_items.status != ?', '2').group(:id).order(:created_at)
   end
 
   def customer_name
     customer.first_name + " " + customer.last_name
+  end
+
+  def format_creation_date
+    "#{created_at.strftime("%A")}, #{created_at.to_date.to_formatted_s(:long)}"
   end
 end
