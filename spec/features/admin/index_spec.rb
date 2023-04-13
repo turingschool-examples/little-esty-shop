@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
-  before(:each) do
-    visit admin_path
-  end
-
   it 'has a header' do
+    visit admin_path
+
     expect(page).to have_content('Admin Dashboard')
-    expect(page).to have_selector('h1')
+    expect(page).to have_selector('h2')
   end
 
   it 'has links to the admin merchants index and admin invoices index' do
+    visit admin_path
+
     expect(page).to have_link('Admin Merchants Index')
     expect(page).to have_link('Admin Invoices Index')
 
@@ -24,25 +24,37 @@ RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
 
   describe 'User Story 21' do
     before(:each) do
-      @customer_1 = create(:customer)
-      @customer_2 = create(:customer)
-      @customer_3 = create(:customer)
-      @customer_4 = create(:customer)
-      @customer_5 = create(:customer)
+      @customer_1 = create(:customer) # 5 successful transactions
+      @customer_2 = create(:customer) # 4 successful transactions
+      @customer_3 = create(:customer) # 3 successful transactions
+      @customer_4 = create(:customer) # 2 successful transactions
+      @customer_5 = create(:customer) # 1 successful transaction
 
-      @customers = [@customer_1, @customer_2, @customer_3, @customer_4, @customer_5]
-
-      @customers.each do |customer|
-        2.times do
-          invoice = create(:invoice, customer: customer)
-          create(:transaction, result: true, invoice: invoice)
-        end
+      5.times do
+        invoice = create(:invoice, customer: @customer_1)
+        create(:transaction, result: true, invoice: invoice)
       end
 
-      invoice = @customer_5.invoices.first
-      create(:transaction, result: true, invoice: invoice)
+      4.times do
+        invoice = create(:invoice, customer: @customer_2)
+        create(:transaction, result: true, invoice: invoice)
+      end
 
-      @customer_6 = create(:customer)
+      3.times do
+        invoice = create(:invoice, customer: @customer_3)
+        create(:transaction, result: true, invoice: invoice)
+      end
+
+      2.times do
+        invoice = create(:invoice, customer: @customer_4)
+        create(:transaction, result: true, invoice: invoice)
+      end
+
+      invoice = create(:invoice, customer: @customer_5)
+      create(:transaction, result: true, invoice: invoice)
+      create(:transaction, result: false, invoice: invoice)
+
+      @customer_6 = create(:customer) # no successful transactions
       2.times do
         invoice = create(:invoice, customer: @customer_6)
         create(:transaction, result: false, invoice: invoice)
@@ -50,37 +62,43 @@ RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
     end
 
     it 'displays the top 5 customers with their names and number of successful transactions' do
-      expect(page).to_not have_content(@customer_6.name)
+      visit admin_path
+      save_and_open_page
+
+      expect(page).to have_content("Top Customers")
 
       within("#customer-#{@customer_1.id}") do
-        expect(page).to have_content(@customer_1.name)
-        expect(page).to have_content('2')
-        expect(@customer_1.name).to_appear_before('2')
+        expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name}")
+        expect(page).to have_content("5 purchases")
       end
 
       within("#customer-#{@customer_2.id}") do
-        expect(page).to have_content(@customer_2.name)
-        expect(page).to have_content('2')
-        expect(@customer_2.name).to_appear_before('2')
+        expect(page).to have_content("#{@customer_2.first_name} #{@customer_2.last_name}")
+        expect(page).to have_content("4 purchases")
       end
 
       within("#customer-#{@customer_3.id}") do
-        expect(page).to have_content(@customer_3.name)
-        expect(page).to have_content('2')
-        expect(@customer_3.name).to_appear_before('2')
+        expect(page).to have_content("#{@customer_3.first_name} #{@customer_3.last_name}")
+        expect(page).to have_content("3 purchases")
       end
 
       within("#customer-#{@customer_4.id}") do
-        expect(page).to have_content(@customer_4.name)
-        expect(page).to have_content('2')
-        expect(@customer_4.name).to_appear_before('2')
+        expect(page).to have_content("#{@customer_4.first_name} #{@customer_4.last_name}")
+        expect(page).to have_content("2 purchases")
       end
 
       within("#customer-#{@customer_5.id}") do
-        expect(page).to have_content(@customer_5.name)
-        expect(page).to have_content('3')
-        expect(@customer_5.name).to_appear_before('3')
+        expect(page).to have_content("#{@customer_5.first_name} #{@customer_5.last_name}")
+        expect(page).to have_content("1 purchases")
       end
+
+      expect(@customer_1.first_name).to appear_before(@customer_2.first_name)
+      expect(@customer_2.first_name).to appear_before(@customer_3.first_name)
+      expect(@customer_3.first_name).to appear_before(@customer_4.first_name)
+      expect(@customer_4.first_name).to appear_before(@customer_5.first_name)
+
+      expect(page).to_not have_content(@customer_6.first_name)
+      expect(page).to_not have_content(@customer_6.last_name)
     end
   end
 end
