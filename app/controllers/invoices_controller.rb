@@ -1,8 +1,7 @@
 class InvoicesController < ApplicationController
   def update
     invoice = Invoice.find(params[:id])
-    status = params[:status]
-    invoice.update(status: status)
+    invoice.update(status: params[:status])
     redirect_to admin_invoice_path(invoice)
   end
 end
