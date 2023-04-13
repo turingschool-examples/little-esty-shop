@@ -31,7 +31,7 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
   end
 
   it 'has a list of the top 5 customers' do
-
+    expect(page).to have_content('Top 5 Customers')
   end
 # When I visit my merchant dashboard
 # Then I see the names of the top 5 customers
