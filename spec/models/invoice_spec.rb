@@ -14,7 +14,40 @@ RSpec.describe Invoice, type: :model do
     it { should define_enum_for(:status) }
   end
 
-  describe "Class methods" do
+  describe 'class methods' do
+    describe '.find_and_sort_incomplete_invoices' do
+      it 'returns all invoices that have items that have not yet shipped, sorted by creation date (oldest to newest)' do
+        merchant = create(:merchant)
+        customer = create(:customer)
+
+        item_1 = create(:item, merchant: merchant)
+        item_2 = create(:item, merchant: merchant)
+        item_3 = create(:item, merchant: merchant)
+        item_4 = create(:item, merchant: merchant)
+        item_5 = create(:item, merchant: merchant)
+        item_6 = create(:item, merchant: merchant)
+        item_7 = create(:item, merchant: merchant)
+        item_8 = create(:item, merchant: merchant)
+
+        @invoice_1 = create(:invoice, created_at: '2023-03-26 09:54:09 UTC', customer: customer) # newest creation date
+        @invoice_2 = create(:invoice, created_at: '2023-03-24 09:54:09 UTC', customer: customer) # oldest creation date
+        @invoice_3 = create(:invoice, created_at: '2023-03-25 09:54:09 UTC', customer: customer) # middle creation date
+        @invoice_4 = create(:invoice, created_at: '2023-03-26 09:54:09 UTC', customer: customer) # 2 shipped items - expect to be excluded
+
+
+        @invoice_item_1 = create(:invoice_item, status: "Pending", item: item_1, invoice: @invoice_1)
+        @invoice_item_2 = create(:invoice_item, status: "Packaged", item: item_2, invoice: @invoice_1)
+        @invoice_item_3 = create(:invoice_item, status: "Pending", item: item_3, invoice: @invoice_2)
+        @invoice_item_4 = create(:invoice_item, status: "Shipped", item: item_4, invoice: @invoice_2)
+        @invoice_item_5 = create(:invoice_item, status: "Packaged", item: item_5, invoice: @invoice_3)
+        @invoice_item_6 = create(:invoice_item, status: "Shipped", item: item_6, invoice: @invoice_3)
+        @invoice_item_7 = create(:invoice_item, status: "Shipped", item: item_7, invoice: @invoice_4)
+        @invoice_item_8 = create(:invoice_item, status: "Shipped", item: item_8, invoice: @invoice_4)
+
+        expect(Invoice.find_and_sort_incomplete_invoices).to eq([@invoice_2, @invoice_3, @invoice_1])
+      end
+    end
+    
     describe ":order_by_id" do
       it "orders all invoices by id" do
         customer_1 = create(:customer)
@@ -26,9 +59,8 @@ RSpec.describe Invoice, type: :model do
         expect(Invoice.order_by_id.third).to eq(invoice_1)
       end
     end
-
   end
-  
+
   describe "instance methods" do
 
     describe 'customer_name' do
@@ -36,18 +68,17 @@ RSpec.describe Invoice, type: :model do
         expect(@invoice_1.customer_name).to eq(@customer_1.first_name + " " + @customer_1.last_name)
       end
     end
-    
 
-    describe "#created_at_date" do
+    describe "#convert_created_at" do
       it "converts timestamp format to a readable date" do
-      customer_1 = create(:customer)
-      invoice_1 = create(:invoice, customer_id: @customer_1.id, created_at: '2011-01-08 20:54:10 UTC')
-      invoice_2 = create(:invoice, customer_id: @customer_1.id, created_at: '2012-05-11 13:54:10 UTC')
-      invoice_3 = create(:invoice, customer_id: @customer_1.id, created_at: '2013-08-21 08:54:10 UTC')
+        customer_1 = create(:customer)
+        invoice_1 = create(:invoice, customer_id: @customer_1.id, created_at: '2011-01-08 20:54:10 UTC')
+        invoice_2 = create(:invoice, customer_id: @customer_1.id, created_at: '2012-05-11 13:54:10 UTC')
+        invoice_3 = create(:invoice, customer_id: @customer_1.id, created_at: '2013-08-21 08:54:10 UTC')
 
-      expect(invoice_1.convert_created_at).to eq('Saturday, January 08, 2011')
-      expect(invoice_2.convert_created_at).to eq('Friday, May 11, 2012')
-      expect(invoice_3.convert_created_at).to eq('Wednesday, August 21, 2013')
+        expect(invoice_1.convert_created_at).to eq('Saturday, January 08, 2011')
+        expect(invoice_2.convert_created_at).to eq('Friday, May 11, 2012')
+        expect(invoice_3.convert_created_at).to eq('Wednesday, August 21, 2013')
       end
     end
 
@@ -72,7 +103,5 @@ RSpec.describe Invoice, type: :model do
         expect(invoice_2.total_revenue).to eq(56)
       end
     end
-
   end
-
 end
