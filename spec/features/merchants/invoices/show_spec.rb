@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchant invoices index', type: :feature do
+RSpec.describe 'merchant invoices show', type: :feature do
   before(:each) do
     @merchant_1 = Merchant.create!(name: 'Etsy')
     @merchant_2 = Merchant.create!(name: 'Build-a-Bear')
@@ -49,42 +49,29 @@ RSpec.describe 'merchant invoices index', type: :feature do
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_10.id) 
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_11.id)
 
-    visit "merchants/#{@merchant_1.id}/invoices"
+    visit "merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
   end
-  describe 'as a merchant when i visit my merchant invoices index' do
-    it 'displays all of the invoices that includes at least one of my merchants items' do
+
+  describe "Then I see information related to that invoice including:" do
+    it "displays the invoice id" do
       expect(page).to have_content(@invoice_1.id)
-      expect(page).to have_content(@invoice_2.id)
-      expect(page).to have_content(@invoice_3.id)
-      expect(page).to have_content(@invoice_4.id)
-      expect(page).to have_content(@invoice_5.id)
-      expect(page).to have_content(@invoice_6.id)
-      expect(page).to have_content(@item_1.name)
-      expect(page).to have_content(@item_2.name)
-      expect(page).to have_content(@item_3.name)
-      expect(page).to_not have_content(@item_4.name)
-      expect(page).to_not have_content(@item_5.name)
+      expect(page).to_not have_content(@invoice_2.id)
+      expect(page).to_not have_content(@invoice_3.id)
     end
 
-    it 'creates a link to the merchant invoices show page from the invoice id' do
-      
-      within "##{@invoice_1.id}"
-        expect(page).to have_link("#{@invoice_1.id}")
-      
-      within "##{@invoice_2.id}"
-        expect(page).to have_link("#{@invoice_2.id}")
-      
-      within "##{@invoice_3.id}"
-        expect(page).to have_link("#{@invoice_3.id}")
-      
-      within "##{@invoice_4.id}"
-        expect(page).to have_link("#{@invoice_4.id}")
-      
-      within "##{@invoice_5.id}"
-        expect(page).to have_link("#{@invoice_5.id}")
-      
-      within "##{@invoice_6.id}"
-        expect(page).to have_link("#{@invoice_6.id}")
+    it "displays the invoice status" do
+      expect(page).to have_content(@invoice_1.status)
+    end
+
+    it "displays the invoice created at" do
+      expect(page).to have_content(@invoice_1.custom_date)
+    end
+
+    it "displays the customer's first and last name" do
+      expect(page).to have_content(@customer_1.first_name)
+      expect(page).to have_content(@customer_1.last_name)
+      expect(page).to_not have_content(@customer_2.first_name)
+      expect(page).to_not have_content(@customer_3.first_name)
     end
   end
 end
