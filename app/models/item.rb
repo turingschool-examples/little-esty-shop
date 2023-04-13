@@ -13,5 +13,11 @@ class Item < ApplicationRecord
     self.save
   end
 
-  
+  def self.enabled_items
+    Item.where(status: "enabled")
+  end
+
+  def self.disabled_items
+    Item.where(status: "disabled")
+  end
 end

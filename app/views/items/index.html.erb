@@ -6,9 +6,21 @@
   </div>
 <% end %>
 
-<div id="right-container">
-  <h2>Disabled Items:</h2>
-  </div>
-<div id="left-container">
+<div id="Enabled">
   <h2>Enabled Items:</h2>
+    <% Item.enabled_items.each do |item| %>
+      <div id="enabled_item<%= item.id %>">
+      <%= item.name%>
+      
+      </div>
+    <% end %>  
+  </div>
+<div id="Disabled">
+  <h2>Disabled Items:</h2>
+    <% Item.disabled_items.each do |item| %>
+      <div id="disabled_item<%= item.id %>">
+      <%= item.name%>
+      
+      </div>
+    <% end %>  
   </div>
