@@ -10,8 +10,7 @@
   <h2>Enabled Items:</h2>
     <% Item.enabled_items.each do |item| %>
       <div id="enabled_item<%= item.id %>">
-      <%= item.name%>
-      
+      <%= item.name%>     
       </div>
     <% end %>  
   </div>
@@ -20,7 +19,7 @@
     <% Item.disabled_items.each do |item| %>
       <div id="disabled_item<%= item.id %>">
       <%= item.name%>
-      
       </div>
     <% end %>  
   </div>
+<%= link_to "New Item", "/merchants/#{@merchant.id}/items/new" %>
