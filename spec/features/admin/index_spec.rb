@@ -127,5 +127,64 @@ RSpec.describe 'admin_dashboard', type: :feature do
         expect(page).to have_content(@customer_5.last_name)
       end
     end
+
+    it 'has links for unshipped invoices that links to admin invoice show page' do
+      visit '/admin'
+      expect(page).to have_content("Incomplete Invoices")
+      within "##{@invoice_1.id}" do
+        expect(page).to have_link("#{@invoice_1.id}")
+      end
+      within "##{@invoice_2.id}" do
+        expect(page).to have_link("#{@invoice_2.id}")
+      end
+      within "##{@invoice_3.id}" do
+        expect(page).to have_link("#{@invoice_3.id}")
+      end
+      within "##{@invoice_4.id}" do
+        expect(page).to have_link("#{@invoice_4.id}")
+      end
+      within "##{@invoice_5.id}" do
+        expect(page).to have_link("#{@invoice_5.id}")
+      end
+      within "##{@invoice_6.id}" do
+        expect(page).to have_link("#{@invoice_6.id}")
+      end
+      within "##{@invoice_7.id}" do
+        expect(page).to have_link("#{@invoice_7.id}")
+      end
+      within "##{@invoice_8.id}" do
+        expect(page).to have_link("#{@invoice_8.id}")
+      end
+      within "##{@invoice_9.id}" do
+        expect(page).to have_link("#{@invoice_9.id}")
+      end
+      within "##{@invoice_10.id}" do
+        expect(page).to have_link("#{@invoice_10.id}")
+      end
+      within "##{@invoice_11.id}" do
+        expect(page).to have_link("#{@invoice_11.id}")
+      end
+      within "##{@invoice_12.id}" do
+        expect(page).to have_link("#{@invoice_12.id}")
+      end
+      within "##{@invoice_13.id}" do
+        expect(page).to have_link("#{@invoice_13.id}")
+      end
+      within "##{@invoice_14.id}" do
+        expect(page).to have_link("#{@invoice_14.id}")
+      end
+      within "##{@invoice_15.id}" do
+        expect(page).to have_link("#{@invoice_15.id}")
+      end
+      within "##{@invoice_16.id}" do
+        expect(page).to have_link("#{@invoice_16.id}")
+      end
+      within "##{@invoice_17.id}" do
+        expect(page).to have_link("#{@invoice_17.id}")
+      end
+      within "##{@invoice_18.id}" do
+        expect(page).to have_link("#{@invoice_18.id}")
+      end
+    end
   end
 end
