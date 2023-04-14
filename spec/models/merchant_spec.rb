@@ -43,5 +43,9 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant_1.top_5_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
       expect(@merchant_1.top_5_customers).to_not eq([@customer_6])
     end
+
+    it 'reutrns the top 5 items for a merchant' do
+      expect(@merchant_1.top_5_items).to eq([@item_3, @item_2, @item_1, @item_4, @item_5])
+    end
   end
 end
