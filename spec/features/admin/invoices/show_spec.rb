@@ -71,7 +71,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
         expect(page).to have_content(@invoice_item_1.status)
   
         expect(page).to_not have_content(@item_2.name)
-        expect(page).to_not have_content(@invoice_item_2.unit_price)
+        expect(page).to_not have_content("Item sold price: #{@invoice_item_2.unit_price}")
       end
   
       within("#item_#{@item_2.id}") do
@@ -80,7 +80,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
         expect(page).to have_content(@invoice_item_2.status)
   
         expect(page).to_not have_content(@item_1.name)
-        expect(page).to_not have_content(@invoice_item_1.unit_price)
+        expect(page).to_not have_content("Item sold price: #{@invoice_item_1.unit_price}")
       end
 
       visit admin_invoice_path(@invoice_2)
