@@ -24,18 +24,19 @@ RSpec.describe Invoice, type: :model do
       @item_2 = @merchant_1.items.create!(name: 'Hammer', description: 'Hit stuff', unit_price: 1500)
       @customer_1 = Customer.create!(first_name: 'Jon', last_name: 'Jones')
       @invoice_1 = @customer_1.invoices.create!(status: 1, created_at: '2012-03-25')
+      @invoice_2 = @customer_1.invoices.create!(status: 1, created_at: '2012-03-25')
       InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id)
       InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id)
       InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id)
       InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_1.id)
     end
     
-    # describe '.item_name' do
-    #   it 'returns the name of the item within given invoice' do
-    #     expect(@item_1.name).to eq('Axe')
-    #     expect(@item_2.item_name).to eq('Hammer')
-    #   end
-    # end
+    describe '.total_invoice_invoice_revenue' do
+      it 'returns the total revenue from all the items' do
+        expect(@invoice_1.total_invoice_revenue).to eq(4500)
+        expect(@invoice_2.total_invoice_revenue).to eq(0)
+      end
+    end
 
     describe '.item_quantity' do
       it 'returns the quantity of items within given invoice' do

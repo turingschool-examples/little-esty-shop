@@ -5,13 +5,18 @@
 <p><b>Customers Name: </b><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %>
 <p><small>Created At: <%= @invoice.custom_date %></p></small>
 
-<h3>Item List</h3>
-<% @invoice.unique_items.each do |item| %>
-<div id="item-<%= item.id %>">
-<p><b>Name: </b><%= item.name %></p>
-<p><b>Quantity: </b><%= @invoice.item_quantity(item) %></p>
-<p><b>Price: </b><%= item.unit_price %></p>
-<p><b>Status: </b><%= item.status %></p>
-</div><br>
-<% end %>
+<section id="items" >
+  <h3>Item List:</h3>
+  <ul>
+  <% @invoice.unique_items.each do |item| %>
+    <div id="item-<%= item.id %>">
+    <li><p><b>Name: </b><%= item.name %></p></li>
+    <li><p><b>Quantity: </b><%= @invoice.item_quantity(item) %></p></li>
+    <li><p><b>Price: </b><%= item.unit_price %></p></li>
+    <li><p><b>Status: </b><%= item.status %></p></li>
+    </div><br>
+  <% end %>
+  <p><b>Total Revenue: </b><%= @invoice.total_invoice_revenue %></p>
+  </ul>
+</section>
 
