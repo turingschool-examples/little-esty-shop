@@ -5,6 +5,8 @@ class Merchants::InvoicesController < ApplicationController
   end
 
   def show
+    # @item = Item.all
     @invoice = Invoice.find(params[:id])
+    # require 'pry'; binding.pry
   end
 end

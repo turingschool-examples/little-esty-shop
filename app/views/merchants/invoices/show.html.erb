@@ -5,3 +5,10 @@
 <p><b>Customers Name: </b><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %>
 <p><small>Created At: <%= @invoice.custom_date %></p></small>
 
+<h3>Item List</h3>
+<% @invoice.items.each do |item| %>
+<div id="item-<%= item.id %>">
+<p><b>Name: </b><%= item.name %></p>
+</div>
+<% end %>
+

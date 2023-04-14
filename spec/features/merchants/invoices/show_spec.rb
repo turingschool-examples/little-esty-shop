@@ -48,8 +48,10 @@ RSpec.describe 'merchant invoices show', type: :feature do
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_9.id) 
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_10.id) 
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_11.id)
+    InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_4.id) 
+    InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_4.id)
 
-    visit "merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
   end
 
   describe "Then I see information related to that invoice including:" do
@@ -72,6 +74,40 @@ RSpec.describe 'merchant invoices show', type: :feature do
       expect(page).to have_content(@customer_1.last_name)
       expect(page).to_not have_content(@customer_2.first_name)
       expect(page).to_not have_content(@customer_3.first_name)
+    end
+  end
+
+  describe "I see all of my items on the invoice including:" do
+    before(:each) do
+      visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_4.id}"
+    end
+    it "displays item name" do
+      within "#item-#{@item_1}"
+        expect(page).to have_content(@item_1.name)
+        expect(page).to_not have_content(@item_4.name)
+        expect(page).to_not have_content(@item_5.name)
+
+      within "#item-#{@item_2}"
+        expect(page).to have_content(@item_2.name)
+        expect(page).to_not have_content(@item_4.name)
+        expect(page).to_not have_content(@item_5.name)
+
+      within "#item-#{@item_3}"
+        expect(page).to have_content(@item_3.name)
+        expect(page).to_not have_content(@item_4.name)
+        expect(page).to_not have_content(@item_5.name)
+    end
+
+    xit "displays the quantity of the item ordered" do
+
+    end
+
+    xit "displays the price item sold for" do
+
+    end
+
+    xit "displays invoice item status" do
+
     end
   end
 end

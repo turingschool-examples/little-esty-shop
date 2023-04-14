@@ -49,7 +49,7 @@ RSpec.describe 'merchant invoices index', type: :feature do
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_10.id) 
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_11.id)
 
-    visit "merchants/#{@merchant_1.id}/invoices"
+    visit "/merchants/#{@merchant_1.id}/invoices"
   end
   describe 'as a merchant when i visit my merchant invoices index' do
     it 'displays all of the invoices that includes at least one of my merchants items' do
