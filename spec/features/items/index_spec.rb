@@ -4,11 +4,14 @@ RSpec.describe 'merchant items index' do
   before(:each) do
     @merchant_1 = Merchant.create!(name: 'Etsy')
     @merchant_2 = Merchant.create!(name: 'Build-a-Bear')
-    @item_1 = @merchant_1.items.create!(name: 'Axe', description: 'Chop stuff', unit_price: 1000)
+    @item_1 = @merchant_1.items.create!(name: 'Axe', description: 'Chop stuff', unit_price: 10000)
     @item_2 = @merchant_1.items.create!(name: 'Hammer', description: 'Hit stuff', unit_price: 1500)
     @item_3 = @merchant_1.items.create!(name: 'Drill', description: 'Drill stuff', unit_price: 5000)
-    @item_4 = @merchant_2.items.create!(name: 'Wrench', description: 'Turn stuff', unit_price: 900)
-    @item_5 = @merchant_2.items.create!(name: 'Nail', description: 'Nail stuff', unit_price: 50)
+    @item_4 = @merchant_1.items.create!(name: 'Staple_gun', description: 'Staple stuff', unit_price: 3000)
+    @item_5 = @merchant_1.items.create!(name: 'Sledge_hammer', description: 'Smash stuff', unit_price: 6000)
+    @item_6 = @merchant_1.items.create!(name: 'Saw', description: 'Saw stuff', unit_price: 9000)
+    @item_7 = @merchant_2.items.create!(name: 'Wrench', description: 'Turn stuff', unit_price: 900)
+    @item_8 = @merchant_2.items.create!(name: 'Nail', description: 'Nail stuff', unit_price: 50)
     @customer_1 = Customer.create!(first_name: 'Jon', last_name: 'Jones')
     @customer_2 = Customer.create!(first_name: 'Jan', last_name: 'Jones')
     @customer_3 = Customer.create!(first_name: 'Jin', last_name: 'Jones')
@@ -59,6 +62,12 @@ RSpec.describe 'merchant items index' do
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_3.id) 
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_2.id) 
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_1.id) 
+    InvoiceItem.create!(item_id: @item_6.id, invoice_id: @invoice_1.id) 
+    InvoiceItem.create!(item_id: @item_6.id, invoice_id: @invoice_1.id) 
+    InvoiceItem.create!(item_id: @item_6.id, invoice_id: @invoice_1.id) 
+    InvoiceItem.create!(item_id: @item_6.id, invoice_id: @invoice_1.id) 
+    InvoiceItem.create!(item_id: @item_6.id, invoice_id: @invoice_1.id) 
+
   end
 
   it 'lists correct merchant items' do
@@ -66,14 +75,14 @@ RSpec.describe 'merchant items index' do
     expect(page).to have_content(@item_1.name)
     expect(page).to have_content(@item_2.name)
     expect(page).to have_content(@item_3.name)
-    expect(page).to have_no_content(@item_4.name)
-    expect(page).to have_no_content(@item_5.name)
+    expect(page).to have_no_content(@item_7.name)
+    expect(page).to have_no_content(@item_8.name)
     visit "/merchants/#{@merchant_2.id}/items"
     expect(page).to have_no_content(@item_1.name)
     expect(page).to have_no_content(@item_2.name)
     expect(page).to have_no_content(@item_3.name)
-    expect(page).to have_content(@item_4.name)
-    expect(page).to have_content(@item_5.name)
+    expect(page).to have_content(@item_7.name)
+    expect(page).to have_content(@item_8.name)
   end
   it 'has a button to disable or enable item' do
     visit "/merchants/#{@merchant_1.id}/items"
@@ -118,6 +127,36 @@ RSpec.describe 'merchant items index' do
       expect(page).to have_no_content(@item_20.name)
       expect(page).to have_content(@item_30.name)
       expect(page).to have_no_content(@item_40.name)
+    end
+  end
+
+  it 'I see the top 5 most popular items names ranked by total revenue generated' do
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    within "#Top_5_items" do
+      expect(@item_6.name).to appear_before(@item_1.name)
+      expect(@item_1.name).to appear_before(@item_5.name)
+      expect(@item_5.name).to appear_before(@item_3.name)
+      expect(@item_3.name).to appear_before(@item_4.name)
+      expect(page).to have_no_content(@item_2.name)
+    end
+  end
+
+  it 'I see that each item name links to the merchant item show page' do
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    expect(page).to have_link(@item_1.name, href: "/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+    expect(page).to have_link(@item_3.name, href: "/merchants/#{@merchant_1.id}/items/#{@item_3.id}")
+    expect(page).to have_link(@item_4.name, href: "/merchants/#{@merchant_1.id}/items/#{@item_4.id}")
+    expect(page).to have_link(@item_5.name, href: "/merchants/#{@merchant_1.id}/items/#{@item_5.id}")
+    expect(page).to have_link(@item_6.name, href: "/merchants/#{@merchant_1.id}/items/#{@item_6.id}")
+  end
+
+  it 'I see the total revenue generated next to each item' do 
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    within "#top_item#{@item_1.id}" do
+      expect(page).to have_content(40000)
     end
   end
 end
