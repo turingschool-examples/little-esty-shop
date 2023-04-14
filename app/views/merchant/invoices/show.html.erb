@@ -12,3 +12,15 @@
 <section id="invoice_revenue">
   <h3> Total Potential Revenue: <%= @invoice.total_revenue %> </h3>
 </section>
+
+<section id="items_info">
+  <ul> 
+    <% @items.each do |item|  %>
+      <li> Item Name: <%= item.name %> </li>
+      <li> Item Quantity: <%= item.quantity %> </li>
+      <li> Item Price: <%= item.unit_price %> </li>
+      <li> Item Status: <%= item.invoice_item_status %> </li>
+      <br>
+    <% end %>
+  </ul>
+
