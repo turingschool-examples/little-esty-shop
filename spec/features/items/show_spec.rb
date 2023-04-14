@@ -63,35 +63,45 @@ RSpec.describe 'merchant items index' do
 
   it 'shows item attributes' do
     visit "/merchants/#{@merchant_1.id}/items"
-    click_on 'Axe'
+    within "#merchant_items" do
+      click_on ('Axe')
+    end
     expect(page).to have_current_path("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
     expect(page).to have_content(@item_1.name)
     expect(page).to have_content(@item_1.description)
     expect(page).to have_content(@item_1.unit_price)
 
     visit "/merchants/#{@merchant_1.id}/items"
-    click_on 'Hammer'
+    within "#merchant_items" do
+      click_on 'Hammer'
+    end
     expect(page).to have_current_path("/merchants/#{@merchant_1.id}/items/#{@item_2.id}")
     expect(page).to have_content(@item_2.name)
     expect(page).to have_content(@item_2.description)
     expect(page).to have_content(@item_2.unit_price)
 
     visit "/merchants/#{@merchant_1.id}/items"
-    click_on 'Drill'
+    within "#merchant_items" do
+      click_on 'Drill'
+    end
     expect(page).to have_current_path("/merchants/#{@merchant_1.id}/items/#{@item_3.id}")
     expect(page).to have_content(@item_3.name)
     expect(page).to have_content(@item_3.description)
     expect(page).to have_content(@item_3.unit_price)
 
     visit "/merchants/#{@merchant_2.id}/items"
-    click_on 'Wrench'
+    within "#merchant_items" do
+      click_on 'Wrench'
+    end
     expect(page).to have_current_path("/merchants/#{@merchant_2.id}/items/#{@item_4.id}")
     expect(page).to have_content(@item_4.name)
     expect(page).to have_content(@item_4.description)
     expect(page).to have_content(@item_4.unit_price)
 
     visit "/merchants/#{@merchant_2.id}/items"
-    click_on 'Nail'
+    within "#merchant_items" do
+      click_on 'Nail'
+    end
     expect(page).to have_current_path("/merchants/#{@merchant_2.id}/items/#{@item_5.id}")
     expect(page).to have_content(@item_5.name)
     expect(page).to have_content(@item_5.description)
