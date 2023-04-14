@@ -31,8 +31,8 @@ RSpec.describe 'merchant show page' do
     it 'displays the names of top five customers based on successful transactions' do
       visit "/merchants/#{@merch_1.id}/dashboard"
 
-      expect(page).to have_content(@cust_1.first_name)
-      expect(page).to have_content(@cust_1.last_name)
+      expect(page).to have_content(@cust_6.first_name)
+      expect(page).to have_content(@cust_6.last_name)
       expect(page).to have_content(@cust_2.first_name)
       expect(page).to have_content(@cust_2.last_name)
       expect(page).to have_content(@cust_3.first_name)
@@ -41,8 +41,8 @@ RSpec.describe 'merchant show page' do
       expect(page).to have_content(@cust_4.last_name)
       expect(page).to have_content(@cust_5.first_name)
       expect(page).to have_content(@cust_5.last_name)
-      expect(page).to have_no_content(@cust_6.first_name)
-      expect(page).to have_no_content(@cust_6.last_name)
+      expect(page).to have_no_content(@cust_1.first_name)
+      expect(page).to have_no_content(@cust_1.last_name)
 
       expect(@cust_1.last_name).to appear_before(@cust_2.last_name)
       expect(@cust_2.last_name).to appear_before(@cust_3.last_name)
@@ -52,7 +52,7 @@ RSpec.describe 'merchant show page' do
 
     it 'displays the number of successful transactions next to the customer name' do
       visit "/merchants/#{@merch_1.id}/dashboard"
-      within("#customer-#{@cust_1.id}") do
+      within("#customer-#{@cust_6.id}") do
         expect(page).to have_content("6")
       end
 
