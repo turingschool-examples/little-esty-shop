@@ -114,7 +114,35 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
     expect(page).to have_content('Items Ready to Ship')
   end
 
-  it 'lists the names of all of my items that have been ordered and have not yet been shipped (User Story 4)'
-  it 'next to each Item I see the id of the invoice that ordered my item (User Story 4)'
-  it 'each invoice id is a link to my merchant invoice show page (User Story 4)'
+  it 'lists the names of all of my items that have been ordered and have not yet been shipped, its invoice id as a link (User Story 4)' do
+    within "#invoice-item-#{@invoice_item_1.id}" do
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content(@invoice_1.id)
+    end
+    
+    within "#invoice-item-#{@invoice_item_2.id}" do
+      expect(page).to have_content(@item_2.name)
+      expect(page).to have_content(@invoice_2.id)
+    end
+    
+    within "#invoice-item-#{@invoice_item_3.id}" do
+      expect(page).to have_content(@item_3.name)
+      expect(page).to have_content(@invoice_3.id)
+    end
+
+    within "#invoice-item-#{@invoice_item_4.id}" do
+      expect(page).to have_content(@item_4.name)
+      expect(page).to have_content(@invoice_4.id)
+    end
+  end
+  
+  it 'the links will take me to my merchant invoice show page (User Story 4)' do
+    within "#invoice-item-#{@invoice_item_1.id}" do
+      expect(page).to have_link(@invoice_1.id)
+
+      click_link(@invoice_1.id)
+
+      expect(current_path).to eq(merchant_invoice_path(@merchant_1, @invoice_1))
+    end
+  end
 end
