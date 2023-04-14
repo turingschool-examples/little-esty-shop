@@ -1,0 +1,10 @@
+<h1>Admin Invoice Show Page</h1>
+<h2><%= @invoice.id %></h2>
+<% @items.each do |item| %>
+  <h3><%= item.name %></h3>
+  <p><%= item.description %></p>
+  <p><%= item.unit_price %></p>
+  <p><%= item.status %></p>
+<% end %>
+
+ 
