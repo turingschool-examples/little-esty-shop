@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/merchants/:id/invoices', to: 'merchants/invoices#index'
   get '/merchants/:id/invoices/:id', to: 'merchants/invoices#show'
   
+  get '/admin', to: 'admin#index' 
+
   resources :merchants do
     resources :items, only: [:index, :show, :edit, :update, :new, :create]
     resources :invoices, only: [:index, :show]

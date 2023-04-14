@@ -55,6 +55,7 @@ RSpec.describe 'admin_dashboard', type: :feature do
     end
 
     it 'displays a header indicating that I am on the admin dashboard' do
+      visit '/admin'
       expect(page).to have_content('Admin Dashboard')
     end
   end
