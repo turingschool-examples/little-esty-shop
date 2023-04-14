@@ -37,12 +37,12 @@ RSpec.describe 'Merchant Invoice Show Page' do
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content(@invoice_item_1.quantity)
         expect(page).to have_content(@invoice_item_1.unit_price)
-        expect(page).to have_content("Item Status: 1")
+        expect(page).to have_content("Item Status: Packaged")
 
         expect(page).to have_content(@item_7.name)
         expect(page).to have_content(@invoice_item_7.quantity)
         expect(page).to have_content(@invoice_item_7.unit_price)
-        expect(page).to have_content("Item Status: 1")
+        expect(page).to have_content("Item Status: Packaged")
       end
 
       visit merchant_invoice_path(@merchant_2, @invoice_7)
@@ -51,7 +51,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
         expect(page).to have_content(@item_14.name)
         expect(page).to have_content(@invoice_item_27.quantity)
         expect(page).to have_content(@invoice_item_27.unit_price)
-        expect(page).to have_content("Item Status: 1")
+        expect(page).to have_content("Item Status: Packaged")
       end
     end
   end
