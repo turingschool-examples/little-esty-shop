@@ -18,6 +18,6 @@ class Item < ApplicationRecord
   end
 
   def self.disabled_items
-  where(status: "disabled")
+    where(status: "disabled")
   end
 end
