@@ -19,4 +19,10 @@
   <% end %>
 <% end %>
 </div><br>
+<%= content_tag :div, id: "statistics" do %>
+  <h2> Top 5 items </h2>
+  <% @top_five.each do |item| %>
+    <p><%= link_to item.name, merchant_item_path(@merchant, item) %><%= "Total revenue: #{item.product}" %></p>
+  <% end %>
+<% end %>
 <p><%= link_to "Create New Item", new_merchant_item_path(@merchant.id) %></p>
