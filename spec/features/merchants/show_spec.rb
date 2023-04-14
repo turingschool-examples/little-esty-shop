@@ -50,11 +50,11 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
     @transaction_23 = create(:transaction, invoice_id: @invoice_7.id, result: false) #customer_6
 
     @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id)
-    @invoice_item_2 =  create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id)
-    @invoice_item_3 =  create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_3.id)
-    @invoice_item_4 =  create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_4.id)
-    @invoice_item_5 =  create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id)
-    @invoice_item_6 =  create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id)
+    @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id)
+    @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_3.id)
+    @invoice_item_4 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_4.id)
+    @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id)
+    @invoice_item_6 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id)
     @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id)
 
     visit merchant_dashboard_path(@merchant_1.id)
@@ -89,11 +89,23 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
   end
 
   it 'lists all five customers with the most successful transactions' do
-    within "#top-five-customers" do
+    within "#top-five-#{@customer_1.id}" do
       expect(page).to have_content(@customer_1.first_name + " " + @customer_1.last_name + " - 6 transactions")
+    end
+
+    within "#top-five-#{@customer_2.id}" do
       expect(page).to have_content(@customer_2.first_name + " " + @customer_2.last_name + " - 5 transactions")
+    end
+
+    within "#top-five-#{@customer_3.id}" do
       expect(page).to have_content(@customer_3.first_name + " " + @customer_3.last_name + " - 4 transactions")
+    end
+
+    within "#top-five-#{@customer_4.id}" do
       expect(page).to have_content(@customer_4.first_name + " " + @customer_4.last_name + " - 3 transactions")
+    end
+
+    within "#top-five-#{@customer_5.id}" do
       expect(page).to have_content(@customer_5.first_name + " " + @customer_5.last_name + " - 2 transactions")
     end
   end
