@@ -24,5 +24,12 @@ RSpec.describe Item, type: :model do
     it "disabled_items" do
       expect(@merchant_1.items.disabled_items).to eq([@item_4, @item_5])
     end
+
+    it "merchant_invoice_items_details" do
+      test_data
+
+      expect(@merchant_1.items.invoice_items_details(@invoice_1).first).to eq(@item_1)
+      expect(@merchant_1.items.invoice_items_details(@invoice_1)).to eq([@item_1, @item_7])
+    end
   end
 end
