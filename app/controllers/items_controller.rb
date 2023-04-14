@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @items = @merchant.items
-    @top_items = @merchant.items.select("items.*, unit_price * count(*) AS revenue").joins(:invoice_items).group("items.id").order("unit_price * count(*) desc").limit(5)
+    @top_items = @merchant.top_5_items
     @enabled_items = @items.enabled_items
     @disabled_items = @items.disabled_items
   end

@@ -1,10 +1,12 @@
 <h2> Merchant Items: </h2>
+<div id='merchant_items'>
 <% @items.each do |item| %>
   <div id="<%= item.id%>" %>
   <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}"%>, <%=item.status%></p>
 <p><%= button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", type: "submit", name: "status", item_status: "enabled", method: :patch %><%= button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}", type: "submit", name: "status", item_status: "disabled", method: :patch %></p>
   </div>
 <% end %>
+</div>
 <div id="Top_5_items"%>
   <h2>Top 5 Items(By Revenue): </h2>
     <% @top_items.each do |item| %>

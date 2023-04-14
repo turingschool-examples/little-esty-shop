@@ -49,6 +49,7 @@ group :development, :test do
   gem 'faker'
   gem 'csv'
   gem 'factory_bot_rails'
+  gem 'net-http'
 end
 
 group :development do
