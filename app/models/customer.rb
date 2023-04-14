@@ -6,4 +6,8 @@ class Customer < ApplicationRecord
   def transaction_count(merchant)
     items.where(merchant_id: merchant.id).count
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
