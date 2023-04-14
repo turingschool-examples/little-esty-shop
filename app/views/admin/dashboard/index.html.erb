@@ -1,6 +1,16 @@
 <h2>Admin Dashboard</h2>
+
 <%= link_to "Merchants", admin_merchants_path %>
 <%= link_to "Invoices", admin_invoices_path %>
+
+<%= content_tag :div, id: "statistics" do %>
+  <h2> Top Five Customers </h2>
+  <ol>
+    <% @top_five_customers.each do |customer| %>
+      <li><%= "#{customer.full_name} - transactions: #{customer.transaction_count}" %>
+    <% end %>
+  </ol>
+<% end %>
 
 <section id="incomplete_invoices">
   <h2>Incomplete Invoices</h2>
@@ -10,3 +20,4 @@
     </ul>
   <% end %>
 </section>
+
