@@ -65,6 +65,7 @@ RSpec.describe 'merchant items index' do
     visit "/merchants/#{@merchant_1.id}/items"
     expect(page).to have_content(@item_1.name)
     expect(page).to have_content(@item_2.name)
+    save_and_open_page
     expect(page).to have_content(@item_3.name)
     expect(page).to have_no_content(@item_4.name)
     expect(page).to have_no_content(@item_5.name)
@@ -75,7 +76,6 @@ RSpec.describe 'merchant items index' do
     expect(page).to have_content(@item_4.name)
     expect(page).to have_content(@item_5.name)
   end
-
   it 'has a button to disable or enable item' do
     visit "/merchants/#{@merchant_1.id}/items"
 

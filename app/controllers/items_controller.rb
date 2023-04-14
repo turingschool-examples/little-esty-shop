@@ -33,10 +33,20 @@ class ItemsController < ApplicationController
       flash[:alert] = "Error: #{error_message(@item.errors)}"
     end
   end
+
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def create
+    item = Item.new(item_params)
+    item.save
+    redirect_to "/merchants/#{item_params[:merchant_id]}/items"
+  end
   
   private
 
   def item_params
-    params.permit(:id, :name, :description, :unit_price)
+    params.permit(:id, :name, :description, :unit_price, :merchant_id)
   end
 end
