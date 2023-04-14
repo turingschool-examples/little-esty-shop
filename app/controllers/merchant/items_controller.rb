@@ -3,6 +3,7 @@ class Merchant::ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @enabled_items = @merchant.items.enabled_items
     @disabled_items = @merchant.items.disabled_items
+    @top_five = @merchant.items.top_five_items
   end
 
   def show

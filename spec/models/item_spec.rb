@@ -32,4 +32,14 @@ RSpec.describe Item, type: :model do
       expect(@merchant_1.items.invoice_items_details(@invoice_1)).to eq([@item_1, @item_7])
     end
   end
+
+  describe "class methods" do
+     before do
+      test_data
+    end
+
+    it "top_five_items" do
+      expect(@merchant_3.items.top_five_items.all).to eq([@item_21, @item_20, @item_19, @item_18, @item_17,])
+    end
+  end
 end
