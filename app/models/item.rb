@@ -11,4 +11,8 @@ class Item < ApplicationRecord
   def self.disabled_items
     Item.where(status: 0)
   end
+
+  def self.invoice_items_details(invoice)
+    joins(:invoice_items).where("invoice_items.invoice_id = #{invoice.id}").select("items.*, invoice_items.quantity, invoice_items.unit_price, invoice_items.status AS invoice_item_status")
+  end
 end
