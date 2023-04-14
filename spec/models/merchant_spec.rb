@@ -37,41 +37,42 @@ RSpec.describe Merchant, type: :model do
       @invoice_5 = create(:invoice, customer_id: @customer_4.id)
       @invoice_6 = create(:invoice, customer_id: @customer_5.id)
       @invoice_7 = create(:invoice, customer_id: @customer_6.id)
+    
+      @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: true) #customer_1 
+      @transaction_2 = create(:transaction, invoice_id: @invoice_1.id, result: true) #customer_1
+      @transaction_3 = create(:transaction, invoice_id: @invoice_2.id, result: true) #customer_1
+      @transaction_4 = create(:transaction, invoice_id: @invoice_2.id, result: true) #customer_1
+      @transaction_5 = create(:transaction, invoice_id: @invoice_2.id, result: true) #customer_1
+      @transaction_6 = create(:transaction, invoice_id: @invoice_2.id, result: true) #customer_1
+      @transaction_7 = create(:transaction, invoice_id: @invoice_3.id, result: true) #customer_2
+      @transaction_8 = create(:transaction, invoice_id: @invoice_3.id, result: true) #customer_2
+      @transaction_9 = create(:transaction, invoice_id: @invoice_3.id, result: true) #customer_2
+      @transaction_10 = create(:transaction, invoice_id: @invoice_3.id, result: true) #customer_2
+      @transaction_11 = create(:transaction, invoice_id: @invoice_3.id, result: true) #customer_2
+      @transaction_12 = create(:transaction, invoice_id: @invoice_4.id, result: true) #customer_3
+      @transaction_13 = create(:transaction, invoice_id: @invoice_4.id, result: true) #customer_3
+      @transaction_14 = create(:transaction, invoice_id: @invoice_4.id, result: true) #customer_3
+      @transaction_15 = create(:transaction, invoice_id: @invoice_4.id, result: true) #customer_3
+      @transaction_16 = create(:transaction, invoice_id: @invoice_5.id, result: true) #customer_4
+      @transaction_17 = create(:transaction, invoice_id: @invoice_5.id, result: true) #customer_4
+      @transaction_18 = create(:transaction, invoice_id: @invoice_5.id, result: true) #customer_4
+      @transaction_19 = create(:transaction, invoice_id: @invoice_6.id, result: true) #customer_5
+      @transaction_20 = create(:transaction, invoice_id: @invoice_6.id, result: true) #customer_5
+      @transaction_21= create(:transaction, invoice_id: @invoice_6.id, result: false) #customer_5
+      @transaction_22 = create(:transaction, invoice_id: @invoice_7.id, result: true) #customer_6
+      @transaction_23 = create(:transaction, invoice_id: @invoice_7.id, result: false) #customer_6
+
+      @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id)
+      @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id)
+      @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_3.id)
+      @invoice_item_4 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_4.id)
+      @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id)
+      @invoice_item_6 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id)
+      @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id)
     end
+
     describe 'top_five_customers' do
       it 'returns the top five customers' do
-        create(:transaction, invoice_id: @invoice_1.id, result: true) #customer_1
-        create(:transaction, invoice_id: @invoice_1.id, result: true) #customer_1
-        create(:transaction, invoice_id: @invoice_2.id, result: true) #customer_1
-        create(:transaction, invoice_id: @invoice_2.id, result: true) #customer_1
-        create(:transaction, invoice_id: @invoice_2.id, result: true) #customer_1
-        create(:transaction, invoice_id: @invoice_2.id, result: true) #customer_1
-        create(:transaction, invoice_id: @invoice_3.id, result: true) #customer_2
-        create(:transaction, invoice_id: @invoice_3.id, result: true) #customer_2
-        create(:transaction, invoice_id: @invoice_3.id, result: true) #customer_2
-        create(:transaction, invoice_id: @invoice_3.id, result: true) #customer_2
-        create(:transaction, invoice_id: @invoice_3.id, result: true) #customer_2
-        create(:transaction, invoice_id: @invoice_4.id, result: true) #customer_3
-        create(:transaction, invoice_id: @invoice_4.id, result: true) #customer_3
-        create(:transaction, invoice_id: @invoice_4.id, result: true) #customer_3
-        create(:transaction, invoice_id: @invoice_4.id, result: true) #customer_3
-        create(:transaction, invoice_id: @invoice_5.id, result: true) #customer_4
-        create(:transaction, invoice_id: @invoice_5.id, result: true) #customer_4
-        create(:transaction, invoice_id: @invoice_5.id, result: true) #customer_4
-        create(:transaction, invoice_id: @invoice_6.id, result: true) #customer_5
-        create(:transaction, invoice_id: @invoice_6.id, result: true) #customer_5
-        create(:transaction, invoice_id: @invoice_6.id, result: false) #customer_5
-        create(:transaction, invoice_id: @invoice_7.id, result: true) #customer_6
-        create(:transaction, invoice_id: @invoice_7.id, result: false) #customer_6
-
-        create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id)
-        create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id)
-        create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_3.id)
-        create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_4.id)
-        create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id)
-        create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id)
-        create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id)
-
         expect(@merchant_1.top_five_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
       end
     end
