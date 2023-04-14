@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Merchants Index', type: :feature do
   before(:each) do
-    @merchant_1 = create(:merchant)
-    @merchant_2 = create(:merchant)
-    @merchant_3 = create(:merchant)
+    @merchant_1 = create(:merchant, is_enabled: true) #enabled to start
+    @merchant_2 = create(:merchant, is_enabled: true) #enabled to start
+    @merchant_3 = create(:merchant) #disabled to start (is_enabled: false by default)
   end
+
   describe "Admin Merchant Index Page (User Story 24)" do
     it "displays each merchant in system" do
       visit admin_merchants_path
@@ -45,4 +46,51 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
     end
   end
 
+  describe "Admin Merchant Enable / Disable (User Story 27)" do
+    it 'shows a button to either enable or disable a merchant, based on their current activity status' do
+      visit admin_merchants_path
+
+      within ("#merchant-#{@merchant_1.id}") do
+        expect(page).to have_button("Disable")
+      end
+
+      within ("#merchant-#{@merchant_2.id}") do
+        expect(page).to have_button("Disable")
+      end
+
+      within ("#merchant-#{@merchant_3.id}") do
+        expect(page).to have_button("Enable")
+      end
+    end
+
+    it 'updates the activity status of the given merchant when clicked, and returns admin merchant index' do
+      visit admin_merchants_path
+
+      expect(@merchant_1.is_enabled).to be(true)
+      expect(@merchant_2.is_enabled).to be(true)
+      expect(@merchant_3.is_enabled).to be(false)
+
+      within ("#merchant-#{@merchant_1.id}") do
+        click_button("Disable")
+        expect(current_path).to eq(admin_merchants_path)
+        expect(page).to have_button("Enable")
+      end
+
+      within ("#merchant-#{@merchant_2.id}") do
+        click_button("Disable")
+        expect(current_path).to eq(admin_merchants_path)
+        expect(page).to have_button("Enable")
+      end
+
+      within ("#merchant-#{@merchant_3.id}") do
+        click_button("Enable")
+        expect(current_path).to eq(admin_merchants_path)
+        expect(page).to have_button("Disable")
+      end
+
+      expect(@merchant_1.reload.is_enabled).to be(false)
+      expect(@merchant_2.reload.is_enabled).to be(false)
+      expect(@merchant_3.reload.is_enabled).to be(true)
+    end
+  end
 end
