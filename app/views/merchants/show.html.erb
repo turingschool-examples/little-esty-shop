@@ -1,4 +1,4 @@
-<h1><%= @merchant.name %></h1>
+<h4><%= @merchant.name %></h4>
 
 <div id="my-items">
   <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
@@ -8,6 +8,11 @@
   <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
 </div>
 
-<%# <div id="favorite-customers">
-  <% @merchant.favorite_customers.each do |favorite_customer|%>
-  <%# <div id="customer-<%= favorite_customer.id"> %> 
+<ol>
+<div id="favorite-customers">
+  <% @merchant.favorite_customers.each do |customer| %>
+   <div id="customer-<%= customer.id %>">
+   <li><%= "#{customer.full_name} - #{customer.transaction_count(@merchant)} purchases" %></li>
+   </div>
+  <% end %> 
+  </ol>
