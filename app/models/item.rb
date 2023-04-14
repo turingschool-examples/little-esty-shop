@@ -16,11 +16,11 @@ class Item < ApplicationRecord
   def self.invoice_items_details(invoice)
     joins(:invoice_items).where("invoice_items.invoice_id = #{invoice.id}")
                          .select("items.*, invoice_items.quantity, invoice_items.unit_price,
-                         CASE invoice_items.status 
-                          WHEN '0' THEN 'Pending' 
-                          WHEN '1' THEN 'Packaged' 
-                          WHEN '2' THEN 'Shipped' 
-                         END AS invoice_item_status")
+                                  CASE invoice_items.status 
+                                    WHEN '0' THEN 'Pending' 
+                                    WHEN '1' THEN 'Packaged' 
+                                    WHEN '2' THEN 'Shipped' 
+                                  END AS invoice_item_status")
   end
   
   def self.top_five_items
