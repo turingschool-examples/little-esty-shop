@@ -8,6 +8,6 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
 
   def top_five_customers
-    customers.joins(:transactions).where(transactions: {result: 'success'}).select("customers.*, count(DISTINCT transactions.id) as transactions_count").group("customers.id").order("transactions_count desc").limit(5)
+    customers.joins(:transactions).where(transactions: {result: 'success'}).select("customers.*, CONCAT(first_name,' ',last_name) as name, count(DISTINCT transactions.id) as transactions_count").group("customers.id").order("transactions_count desc").limit(5)
   end
 end
