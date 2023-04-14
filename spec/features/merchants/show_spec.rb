@@ -45,17 +45,17 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
     @transaction_18 = create(:transaction, invoice_id: @invoice_5.id, result: true) #customer_4
     @transaction_19 = create(:transaction, invoice_id: @invoice_6.id, result: true) #customer_5
     @transaction_20 = create(:transaction, invoice_id: @invoice_6.id, result: true) #customer_5
-    @transaction_21= create(:transaction, invoice_id: @invoice_6.id, result: false) #customer_5
+    @transaction_21 = create(:transaction, invoice_id: @invoice_6.id, result: false) #customer_5
     @transaction_22 = create(:transaction, invoice_id: @invoice_7.id, result: true) #customer_6
     @transaction_23 = create(:transaction, invoice_id: @invoice_7.id, result: false) #customer_6
 
-    @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id)
-    @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id)
-    @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_3.id)
-    @invoice_item_4 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_4.id)
-    @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id)
-    @invoice_item_6 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id)
-    @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id)
+    @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, status: 0)
+    @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id, status: 0)
+    @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_3.id, status: 1)
+    @invoice_item_4 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_4.id, status: 1)
+    @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id, status: 2)
+    @invoice_item_6 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id, status: 2)
+    @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id, status: 2)
 
     visit merchant_dashboard_path(@merchant_1.id)
   end
@@ -84,11 +84,11 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
     expect(current_path).to eq(merchant_invoices_path(@merchant_1.id))
   end
 
-  it 'has a list of the top 5 customers' do
+  it 'has a list of the top 5 customers (User Story 3)' do
     expect(page).to have_content('Top 5 Customers')
   end
 
-  it 'lists all five customers with the most successful transactions' do
+  it 'lists all five customers with the most successful transactions (User Story 3)' do
     within "#top-five-#{@customer_1.id}" do
       expect(page).to have_content(@customer_1.first_name + " " + @customer_1.last_name + " - 6 transactions")
     end
@@ -109,4 +109,12 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
       expect(page).to have_content(@customer_5.first_name + " " + @customer_5.last_name + " - 2 transactions")
     end
   end
+
+  it 'has a section for "Items Ready to Ship" (User Story 4)' do
+    expect(page).to have_content('Items Ready to Ship')
+  end
+
+  it 'lists the names of all of my items that have been ordered and have not yet been shipped (User Story 4)'
+  it 'next to each Item I see the id of the invoice that ordered my item (User Story 4)'
+  it 'each invoice id is a link to my merchant invoice show page (User Story 4)'
 end
