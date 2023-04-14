@@ -50,6 +50,8 @@ RSpec.describe 'merchant invoices show', type: :feature do
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_11.id)
     InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_4.id) 
     InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_4.id)
+    InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_4.id) 
+    InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_4.id)
 
     visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
   end
@@ -82,6 +84,7 @@ RSpec.describe 'merchant invoices show', type: :feature do
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_4.id}"
     end
     it "displays item name" do
+      save_and_open_page
       within "#item-#{@item_1.id}" do
         expect(page).to have_content(@item_1.name)
         expect(page).to_not have_content(@item_2.name)
@@ -93,7 +96,6 @@ RSpec.describe 'merchant invoices show', type: :feature do
         expect(page).to_not have_content(@item_1.name)
         expect(page).to_not have_content(@item_3.name)
       end
-
       within "#item-#{@item_3.id}" do
         expect(page).to have_content(@item_3.name)
         expect(page).to_not have_content(@item_1.name)
@@ -101,11 +103,28 @@ RSpec.describe 'merchant invoices show', type: :feature do
       end
     end
 
-    xit "displays the quantity of the item ordered" do
+    it "displays the quantity of the item ordered" do
+      
+      within "#item-#{@item_1.id}" do
+        expect(page).to have_content(5)
+        expect(page).to_not have_content(1)
+        expect(page).to_not have_content(2)
+      end
 
+      within "#item-#{@item_2.id}" do
+        expect(page).to have_content(2)
+        expect(page).to_not have_content(3)
+        expect(page).to_not have_content(4)
+      end
+
+      within "#item-#{@item_3.id}" do
+        expect(page).to have_content(3)
+        expect(page).to_not have_content(6)
+        expect(page).to_not have_content(5)
+      end
     end
 
-    xit "displays the price item sold for" do
+    it "displays the price item sold for" do
 
     end
 

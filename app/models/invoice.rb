@@ -8,4 +8,12 @@ class Invoice < ApplicationRecord
   def custom_date
     self.created_at.strftime("%A, %B %d, %Y")
   end
+
+  def unique_items
+    items.distinct
+  end
+
+  def item_quantity(item)
+    Merchant.first.invoices.where("item_id = #{item.id}").count
+  end
 end
