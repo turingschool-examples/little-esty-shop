@@ -1,8 +1,19 @@
 <h1>Little Esty Shop</h1>
+<h3><%= @merchant.name %>'s Shop</h3>
 <br>
-<h2><%= @merchant.name %>'s Shop</h2>
-<div id=total_revenue>
-  <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p>
+<div id="invoice_id_header">
+  <h4>Invoice #<%= @invoice.id %></h4>
+</div >
+<div id="invoice_info">
+  <p>Status: <%= @invoice.status %></p>
+  <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+  <div id=total_revenue>
+    <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p>
+  </div>
+  <div id="customer_info">
+    <h3>Customer:</h3>
+    <p><%= @invoice.customer_full_name %></p>
+  </div>
 </div>
 <section id=items_on_invoice>
   <h3>Items on this Invoice:</h3>
@@ -10,7 +21,7 @@
     <div id="invoice_item_<%=invoice_item.id%>">
     <h4>Name: <%= invoice_item.item_name %></h4>
     <p>Quantity: <%= invoice_item.quantity %></p>
-    <p>Sold For: <%= invoice_item.unit_price %></p>
+    <p>Sold For: <%= number_to_currency(invoice_item.unit_price) %></p>
     <p>Status: <%= invoice_item.status %></p>
     <br>
     </div>
