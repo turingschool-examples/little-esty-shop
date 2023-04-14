@@ -126,21 +126,21 @@ RSpec.describe "Index page", type: :feature do
     end
 
     it "5 most popular items" do
-      visit merchant_items_path(@merchant_3)
+      visit merchant_items_path(@merchant_3)  
 
       within('#statistics') do
         expect(page).to have_content("Top 5 items")
 
         expect(page).to have_link(@item_21.name, href: merchant_item_path(@merchant_3, @item_21))
-        expect(page).to have_content("6300")
-        expect(page).to have_content(@item_20.name, href: merchant_item_path(@merchant_3, @item_20))
-        expect(page).to have_content("6000")
-        expect(page).to have_content(@item_19.name, href: merchant_item_path(@merchant_3, @item_19))
-        expect(page).to have_content("5700")
-        expect(page).to have_content(@item_18.name, href: merchant_item_path(@merchant_3, @item_18))
-        expect(page).to have_content("5400")
-        expect(page).to have_content(@item_17.name, href: merchant_item_path(@merchant_3, @item_17))
-        expect(page).to have_content("5100")
+        expect(page).to have_content("Total revenue: 6300")
+        expect(page).to have_link(@item_20.name, href: merchant_item_path(@merchant_3, @item_20))
+        expect(page).to have_content("Total revenue: 6000")
+        expect(page).to have_link(@item_19.name, href: merchant_item_path(@merchant_3, @item_19))
+        expect(page).to have_content("Total revenue: 5700")
+        expect(page).to have_link(@item_18.name, href: merchant_item_path(@merchant_3, @item_18))
+        expect(page).to have_content("Total revenue: 5400")
+        expect(page).to have_link(@item_17.name, href: merchant_item_path(@merchant_3, @item_17))
+        expect(page).to have_content("Total revenue: 5100")
       end
     end
   end
