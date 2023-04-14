@@ -17,10 +17,10 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
     @customer_5 = create(:customer)
     @customer_6 = create(:customer)
 
-    @invoice_1 = create(:invoice, customer_id: @customer_1.id)
-    @invoice_2 = create(:invoice, customer_id: @customer_1.id)
-    @invoice_3 = create(:invoice, customer_id: @customer_2.id)
-    @invoice_4 = create(:invoice, customer_id: @customer_3.id)
+    @invoice_1 = create(:invoice, customer_id: @customer_1.id, created_at: "2012-03-27 14:54:09")
+    @invoice_2 = create(:invoice, customer_id: @customer_1.id, created_at: "2011-03-27 14:54:09")
+    @invoice_3 = create(:invoice, customer_id: @customer_2.id, created_at: "2009-03-27 14:54:09")
+    @invoice_4 = create(:invoice, customer_id: @customer_3.id, created_at: "2010-03-27 14:54:09")
     @invoice_5 = create(:invoice, customer_id: @customer_4.id)
     @invoice_6 = create(:invoice, customer_id: @customer_5.id)
     @invoice_7 = create(:invoice, customer_id: @customer_6.id)
@@ -129,7 +129,7 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
       expect(page).to have_content(@item_3.name)
       expect(page).to have_content(@invoice_3.id)
     end
-
+    
     within "#invoice-item-#{@invoice_item_4.id}" do
       expect(page).to have_content(@item_4.name)
       expect(page).to have_content(@invoice_4.id)
@@ -139,10 +139,22 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
   it 'the links will take me to my merchant invoice show page (User Story 4)' do
     within "#invoice-item-#{@invoice_item_1.id}" do
       expect(page).to have_link(@invoice_1.id)
-
+      
       click_link(@invoice_1.id)
-
+      
       expect(current_path).to eq(merchant_invoice_path(@merchant_1, @invoice_1))
     end
+  end
+  
+  it 'has the date the invoice was created at formatted like "Tuesday, March 27, 2012" (User Story 5)' do
+    within "#invoice-item-#{@invoice_item_1.id}" do
+      expect(page).to have_content("Tuesday, March 27, 2012")
+    end
+  end
+
+  it 'should order them from oldest to newest (User Story 5)' do
+    expect(@item_3.name).to appear_before(@item_4.name)
+    expect(@item_4.name).to appear_before(@item_2.name)
+    expect(@item_2.name).to appear_before(@item_1.name)
   end
 end
