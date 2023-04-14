@@ -62,19 +62,21 @@ RSpec.describe Merchant, type: :model do
       @transaction_22 = create(:transaction, invoice_id: @invoice_7.id, result: true) #customer_6
       @transaction_23 = create(:transaction, invoice_id: @invoice_7.id, result: false) #customer_6
 
-      @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id)
-      @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id)
-      @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_3.id)
-      @invoice_item_4 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_4.id)
-      @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id)
-      @invoice_item_6 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id)
-      @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id)
+      @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, status: 0)
+      @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id, status: 0)
+      @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_3.id, status: 1)
+      @invoice_item_4 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_4.id, status: 2)
+      @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id, status: 2)
+      @invoice_item_6 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id, status: 2)
+      @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id, status: 2)
     end
 
-    describe 'top_five_customers' do
-      it 'returns the top five customers' do
-        expect(@merchant_1.top_five_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
-      end
+    it '#top_five_customers' do
+      expect(@merchant_1.top_five_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
+    end
+
+    it '#items_not_shipped' do
+      expect(@merchant_1.items_not_shipped).to eq([@invoice_item_1, @invoice_item_2, @invoice_item_3])
     end
   end
 end
