@@ -17,8 +17,6 @@ RSpec.describe 'create merchant items' do
     within "#Disabled" do
       expect(page).to have_content("Sledge Hammer")
     end
-
     expect(page).to have_current_path("/merchants/#{@merchant_1.id}/items")
-
   end
 end
