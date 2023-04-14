@@ -37,7 +37,7 @@ RSpec.describe 'Admin Dashboard Index Page' do
       @transaction_27 = @invoice_1.transactions.create!(credit_card_number: 1, credit_card_expiration_date: 1, result: 1)
       
       visit admin_dashboard_path
-      save_and_open_page
+    
 
       within("#statistics") do
 
