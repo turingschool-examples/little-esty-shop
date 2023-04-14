@@ -7,7 +7,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
     @customer_2 = create(:customer)
     @invoice_1 = create(:invoice, customer_id: @customer_1.id,status: 'In Progress')
     @invoice_2 = create(:invoice, customer_id: @customer_2.id,status: 'Cancelled')
-    @invoice_3= create(:invoice, customer_id: @customer_2.id, status: 'Completed')
+    @invoice_3 = create(:invoice, customer_id: @customer_2.id, status: 'Completed')
     @item_1 = create(:item, merchant_id: @merchant_1.id)
     @item_2 = create(:item, merchant_id: @merchant_1.id)
     @item_3 = create(:item, merchant_id: @merchant_1.id)
