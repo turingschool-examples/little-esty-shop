@@ -15,5 +15,5 @@
 <ol id="not_yet_shipped">
   <h2>Items Ready to Ship</h2>
   <% @items_not_yet_shipped.each do |invoice_item| %> 
-    <li><%= invoice_item.item.name %> - <%= link_to "#{invoice_item.invoice_id}", merchant_invoice_path(invoice_item.invoice_id) %> - <%= invoice_item.invoice.created_at.strftime("%A, %B %d, %Y") %></li>
+    <li><%= invoice_item.item.name %> - <%= link_to "#{invoice_item.invoice_id}", merchant_invoice_path(invoice_item.invoice_id, merchant_id: @merchant.id) %> - <%= invoice_item.invoice.created_at.strftime("%A, %B %d, %Y") %></li>
   <% end %>
