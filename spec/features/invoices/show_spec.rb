@@ -160,5 +160,12 @@ RSpec.describe 'merchant invoices show', type: :feature do
         expect(page).to_not have_content("disabled")
       end
     end
+
+    it "displays the total revenue that will be generated from all of my items on the invoice" do
+      within "#items" do 
+        expect(page).to have_content("Total Revenue: 9500")
+        expect(page).to_not have_content("Total Revenue: 56500")
+      end
+    end
   end
 end

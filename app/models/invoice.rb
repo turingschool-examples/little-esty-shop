@@ -16,4 +16,8 @@ class Invoice < ApplicationRecord
   def item_quantity(item)
     Merchant.first.invoices.where("item_id = #{item.id}").count
   end
+
+  def total_invoice_revenue 
+    items.total_revenue
+  end
 end

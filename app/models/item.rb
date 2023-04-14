@@ -20,4 +20,8 @@ class Item < ApplicationRecord
   def self.disabled_items
     where(status: "disabled")
   end
+
+  def self.total_revenue
+    sum("unit_price")
+  end
 end
