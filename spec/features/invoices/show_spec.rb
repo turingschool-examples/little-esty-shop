@@ -106,29 +106,45 @@ RSpec.describe 'merchant invoices show', type: :feature do
     it "displays the quantity of the item ordered" do
       
       within "#item-#{@item_1.id}" do
-        expect(page).to have_content(5)
-        expect(page).to_not have_content(1)
-        expect(page).to_not have_content(2)
+        expect(page).to have_content("Quantity: 5")
+        expect(page).to_not have_content("Quantity: 1")
+        expect(page).to_not have_content("Quantity: 2")
       end
 
       within "#item-#{@item_2.id}" do
-        expect(page).to have_content(2)
-        expect(page).to_not have_content(3)
-        expect(page).to_not have_content(4)
+        expect(page).to have_content("Quantity: 2")
+        expect(page).to_not have_content("Quantity: 3")
+        expect(page).to_not have_content("Quantity: 4")
       end
 
       within "#item-#{@item_3.id}" do
-        expect(page).to have_content(3)
-        expect(page).to_not have_content(6)
-        expect(page).to_not have_content(5)
+        expect(page).to have_content("Quantity: 3")
+        expect(page).to_not have_content("Quantity: 6")
+        expect(page).to_not have_content("Quantity: 5")
       end
     end
 
     it "displays the price item sold for" do
+      within "#item-#{@item_1.id}" do
+      expect(page).to have_content(@item_1.unit_price)
+      expect(page).to_not have_content(@item_2.unit_price)
+      expect(page).to_not have_content(@item_3.unit_price)
+      end
 
+      within "#item-#{@item_2.id}" do
+        expect(page).to have_content(@item_2.unit_price)
+        expect(page).to_not have_content(@item_1.unit_price)
+        expect(page).to_not have_content(@item_3.unit_price)
+      end
+
+      within "#item-#{@item_3.id}" do
+        expect(page).to have_content(@item_3.unit_price)
+        expect(page).to_not have_content(@item_1.unit_price)
+        expect(page).to_not have_content(@item_2.unit_price)
+      end
     end
 
-    xit "displays invoice item status" do
+    it "displays invoice item status" do
 
     end
   end

@@ -9,7 +9,8 @@
 <% @invoice.unique_items.each do |item| %>
 <div id="item-<%= item.id %>">
 <p><b>Name: </b><%= item.name %></p>
-<p><b>Quantity: </b><%= @invoice.item_quantity(item) %>
-</div>
+<p><b>Quantity: </b><%= @invoice.item_quantity(item) %></p>
+<p><b>Price: </b><%= item.unit_price %></p>
+</div><br>
 <% end %>
 
