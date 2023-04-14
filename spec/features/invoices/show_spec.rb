@@ -4,11 +4,11 @@ RSpec.describe 'merchant invoices show', type: :feature do
   before(:each) do
     @merchant_1 = Merchant.create!(name: 'Etsy')
     @merchant_2 = Merchant.create!(name: 'Build-a-Bear')
-    @item_1 = @merchant_1.items.create!(name: 'Axe', description: 'Chop stuff', unit_price: 1000)
-    @item_2 = @merchant_1.items.create!(name: 'Hammer', description: 'Hit stuff', unit_price: 1500)
-    @item_3 = @merchant_1.items.create!(name: 'Drill', description: 'Drill stuff', unit_price: 5000)
-    @item_4 = @merchant_2.items.create!(name: 'Wrench', description: 'Turn stuff', unit_price: 900)
-    @item_5 = @merchant_2.items.create!(name: 'Nail', description: 'Nail stuff', unit_price: 50)
+    @item_1 = @merchant_1.items.create!(name: 'Axe', description: 'Chop stuff', unit_price: 1000, status: 1)
+    @item_2 = @merchant_1.items.create!(name: 'Hammer', description: 'Hit stuff', unit_price: 1500, status: 0)
+    @item_3 = @merchant_1.items.create!(name: 'Drill', description: 'Drill stuff', unit_price: 5000, status: 1)
+    @item_4 = @merchant_2.items.create!(name: 'Wrench', description: 'Turn stuff', unit_price: 900, status: 0)
+    @item_5 = @merchant_2.items.create!(name: 'Nail', description: 'Nail stuff', unit_price: 50, status: 1)
     @customer_1 = Customer.create!(first_name: 'Jon', last_name: 'Jones')
     @customer_2 = Customer.create!(first_name: 'Jan', last_name: 'Jones')
     @customer_3 = Customer.create!(first_name: 'Jin', last_name: 'Jones')
@@ -59,8 +59,8 @@ RSpec.describe 'merchant invoices show', type: :feature do
   describe "Then I see information related to that invoice including:" do
     it "displays the invoice id" do
       expect(page).to have_content(@invoice_1.id)
-      expect(page).to_not have_content(@invoice_2.id)
-      expect(page).to_not have_content(@invoice_3.id)
+      expect(page).to_not have_content(@invoice_4.id)
+      expect(page).to_not have_content(@invoice_5.id)
     end
 
     it "displays the invoice status" do
@@ -84,7 +84,7 @@ RSpec.describe 'merchant invoices show', type: :feature do
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_4.id}"
     end
     it "displays item name" do
-      save_and_open_page
+      
       within "#item-#{@item_1.id}" do
         expect(page).to have_content(@item_1.name)
         expect(page).to_not have_content(@item_2.name)
@@ -145,7 +145,20 @@ RSpec.describe 'merchant invoices show', type: :feature do
     end
 
     it "displays invoice item status" do
+      within "#item-#{@item_1.id}" do
+        expect(page).to have_content(@item_1.status)
+        expect(page).to_not have_content("disabled")
+      end
 
+      within "#item-#{@item_2.id}" do
+        expect(page).to have_content(@item_2.status)
+        expect(page).to_not have_content("enabled")
+      end
+
+      within "#item-#{@item_3.id}" do
+        expect(page).to have_content(@item_3.status)
+        expect(page).to_not have_content("disabled")
+      end
     end
   end
 end
