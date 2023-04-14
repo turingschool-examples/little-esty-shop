@@ -1,7 +1,9 @@
 <h1>Little Esty Shop</h1>
 <br>
 <h2><%= @merchant.name %>'s Shop</h2>
-
+<div id=total_revenue>
+  <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p>
+</div>
 <section id=items_on_invoice>
   <h3>Items on this Invoice:</h3>
   <% @invoice.invoice_items.each do |invoice_item| %>

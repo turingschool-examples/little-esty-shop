@@ -2,6 +2,8 @@
 <br>
 <section id="my-items">
   <h2>My Items</h2>
+  <%= render 'shared/flash_messages'  %>
+  <%= link_to "Create New Item", new_merchant_item_path(@merchant) %>
   <h3>Enabled Items</h3>
   <ul id="enabled-items-list">
     <% @items.enabled.each do |item| %>
