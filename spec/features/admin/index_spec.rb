@@ -131,59 +131,97 @@ RSpec.describe 'admin_dashboard', type: :feature do
     it 'has links for unshipped invoices that links to admin invoice show page' do
       visit '/admin'
       expect(page).to have_content("Incomplete Invoices")
+      within "#invoices" do
+        expect("#{@invoice_1.id}").to appear_before("#{@invoice_12.id}")
+        expect("#{@invoice_12.id}").to appear_before("#{@invoice_13.id}")
+        expect("#{@invoice_13.id}").to appear_before("#{@invoice_14.id}")
+        expect("#{@invoice_14.id}").to appear_before("#{@invoice_15.id}")
+        expect("#{@invoice_15.id}").to appear_before("#{@invoice_16.id}")
+        expect("#{@invoice_16.id}").to appear_before("#{@invoice_17.id}")
+        expect("#{@invoice_17.id}").to appear_before("#{@invoice_18.id}")
+        expect("#{@invoice_18.id}").to appear_before("#{@invoice_2.id}")
+        expect("#{@invoice_2.id}").to appear_before("#{@invoice_3.id}")
+        expect("#{@invoice_3.id}").to appear_before("#{@invoice_4.id}")
+        expect("#{@invoice_4.id}").to appear_before("#{@invoice_5.id}")
+        expect("#{@invoice_5.id}").to appear_before("#{@invoice_6.id}")
+        expect("#{@invoice_6.id}").to appear_before("#{@invoice_7.id}")
+        expect("#{@invoice_7.id}").to appear_before("#{@invoice_8.id}")
+        expect("#{@invoice_8.id}").to appear_before("#{@invoice_9.id}")
+        expect("#{@invoice_9.id}").to appear_before("#{@invoice_10.id}")
+        expect("#{@invoice_10.id}").to appear_before("#{@invoice_11.id}")
+      end
+
       within "##{@invoice_1.id}" do
         expect(page).to have_link("#{@invoice_1.id}")
+        expect(page).to have_content(@invoice_1.custom_date)
       end
       within "##{@invoice_2.id}" do
         expect(page).to have_link("#{@invoice_2.id}")
+        expect(page).to have_content(@invoice_2.custom_date)
       end
       within "##{@invoice_3.id}" do
         expect(page).to have_link("#{@invoice_3.id}")
+        expect(page).to have_content(@invoice_3.custom_date)
       end
       within "##{@invoice_4.id}" do
         expect(page).to have_link("#{@invoice_4.id}")
+        expect(page).to have_content(@invoice_4.custom_date)
       end
       within "##{@invoice_5.id}" do
         expect(page).to have_link("#{@invoice_5.id}")
+        expect(page).to have_content(@invoice_5.custom_date)
       end
       within "##{@invoice_6.id}" do
         expect(page).to have_link("#{@invoice_6.id}")
+        expect(page).to have_content(@invoice_6.custom_date)
       end
       within "##{@invoice_7.id}" do
         expect(page).to have_link("#{@invoice_7.id}")
+        expect(page).to have_content(@invoice_7.custom_date)
       end
       within "##{@invoice_8.id}" do
         expect(page).to have_link("#{@invoice_8.id}")
+        expect(page).to have_content(@invoice_8.custom_date)
       end
       within "##{@invoice_9.id}" do
         expect(page).to have_link("#{@invoice_9.id}")
+        expect(page).to have_content(@invoice_9.custom_date)
       end
       within "##{@invoice_10.id}" do
         expect(page).to have_link("#{@invoice_10.id}")
+        expect(page).to have_content(@invoice_10.custom_date)
       end
       within "##{@invoice_11.id}" do
         expect(page).to have_link("#{@invoice_11.id}")
+        expect(page).to have_content(@invoice_11.custom_date)
       end
       within "##{@invoice_12.id}" do
         expect(page).to have_link("#{@invoice_12.id}")
+        expect(page).to have_content(@invoice_12.custom_date)
       end
       within "##{@invoice_13.id}" do
         expect(page).to have_link("#{@invoice_13.id}")
+        expect(page).to have_content(@invoice_13.custom_date)
       end
       within "##{@invoice_14.id}" do
         expect(page).to have_link("#{@invoice_14.id}")
+        expect(page).to have_content(@invoice_14.custom_date)
       end
       within "##{@invoice_15.id}" do
         expect(page).to have_link("#{@invoice_15.id}")
+        expect(page).to have_content(@invoice_15.custom_date)
       end
       within "##{@invoice_16.id}" do
         expect(page).to have_link("#{@invoice_16.id}")
+        expect(page).to have_content(@invoice_16.custom_date)
       end
       within "##{@invoice_17.id}" do
         expect(page).to have_link("#{@invoice_17.id}")
+        expect(page).to have_content(@invoice_17.custom_date)
       end
       within "##{@invoice_18.id}" do
         expect(page).to have_link("#{@invoice_18.id}")
+        expect(page).to have_content(@invoice_18.custom_date)
       end
     end
   end
