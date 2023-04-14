@@ -1,3 +1,10 @@
 <h3>Admin Dashboard</h3>
 <%= link_to "Admin Merchants", "/admin/merchants" %>
 <%= link_to "Admin Invoices", "/admin/invoices" %>
+
+<h4>Top 5 Customers</h4>
+<% @customers.each do |customer| %>
+  <div id="<%=customer.id%>">
+  <%= customer.first_name %> <%= customer.last_name %>, <%= customer.transaction_count %>
+  </div>
+<% end %>
