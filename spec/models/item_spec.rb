@@ -34,7 +34,7 @@ RSpec.describe Item, type: :model do
   end
 
   describe "class methods" do
-     before do
+    before do
       test_data
     end
 
