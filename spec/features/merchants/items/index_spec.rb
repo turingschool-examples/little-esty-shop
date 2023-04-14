@@ -119,38 +119,29 @@ RSpec.describe "Index page", type: :feature do
       end
     end
   end
-  describe "Create New Item" do
+
+  describe "statistics" do
     before do
       test_data
     end
-    it "has a link to create a new item" do
-      visit merchant_items_path(@merchant_1)
 
-      expect(page).to have_link("Create New Item", href: new_merchant_item_path(@merchant_1))
+    it "5 most popular items" do
+      visit merchant_items_path(@merchant_3)
 
-      click_link("Create New Item")
+      within('#statistics') do
+        expect(page).to have_content("Top 5 items")
 
-      expect(current_path).to eq(new_merchant_item_path(@merchant_1))
-    end
-
-    it "can create a new item" do
-      visit new_merchant_item_path(@merchant_1)
-
-      expect(page).to have_content("Name")
-      expect(page).to have_content("Description")
-      expect(page).to have_content("Unit Price")
-      expect(page).to have_field(:name)
-      expect(page).to have_field(:description)
-      expect(page).to have_field(:unit_price)
-      expect(page).to have_button("Create Item")
-
-      fill_in :name, with: "Cookies"
-      fill_in :description, with: "Yummy"
-      fill_in :unit_price, with: 500
-
-      click_button("Create Item")
-
-      expect(current_path).to eq(merchant_items_path(@merchant_1))
+        expect(page).to have_link(@item_21.name, href: merchant_item_path(@merchant_3, @item_21))
+        expect(page).to have_content("6300")
+        expect(page).to have_content(@item_20.name, href: merchant_item_path(@merchant_3, @item_20))
+        expect(page).to have_content("6000")
+        expect(page).to have_content(@item_19.name, href: merchant_item_path(@merchant_3, @item_19))
+        expect(page).to have_content("5700")
+        expect(page).to have_content(@item_18.name, href: merchant_item_path(@merchant_3, @item_18))
+        expect(page).to have_content("5400")
+        expect(page).to have_content(@item_17.name, href: merchant_item_path(@merchant_3, @item_17))
+        expect(page).to have_content("5100")
+      end
     end
   end
 end
