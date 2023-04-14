@@ -82,20 +82,23 @@ RSpec.describe 'merchant invoices show', type: :feature do
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_4.id}"
     end
     it "displays item name" do
-      within "#item-#{@item_1}"
+      within "#item-#{@item_1.id}" do
         expect(page).to have_content(@item_1.name)
-        expect(page).to_not have_content(@item_4.name)
-        expect(page).to_not have_content(@item_5.name)
+        expect(page).to_not have_content(@item_2.name)
+        expect(page).to_not have_content(@item_3.name)
+      end
 
-      within "#item-#{@item_2}"
+      within "#item-#{@item_2.id}" do
         expect(page).to have_content(@item_2.name)
-        expect(page).to_not have_content(@item_4.name)
-        expect(page).to_not have_content(@item_5.name)
+        expect(page).to_not have_content(@item_1.name)
+        expect(page).to_not have_content(@item_3.name)
+      end
 
-      within "#item-#{@item_3}"
+      within "#item-#{@item_3.id}" do
         expect(page).to have_content(@item_3.name)
-        expect(page).to_not have_content(@item_4.name)
-        expect(page).to_not have_content(@item_5.name)
+        expect(page).to_not have_content(@item_1.name)
+        expect(page).to_not have_content(@item_2.name)
+      end
     end
 
     xit "displays the quantity of the item ordered" do

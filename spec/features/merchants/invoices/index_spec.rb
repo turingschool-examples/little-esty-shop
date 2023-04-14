@@ -68,23 +68,41 @@ RSpec.describe 'merchant invoices index', type: :feature do
 
     it 'creates a link to the merchant invoices show page from the invoice id' do
       
-      within "##{@invoice_1.id}"
+      within "##{@invoice_1.id}" do
         expect(page).to have_link("#{@invoice_1.id}")
+        expect(page).to_not have_link("#{@invoice_2.id}")
+        expect(page).to_not have_link("#{@invoice_3.id}")
+      end
       
-      within "##{@invoice_2.id}"
+      within "##{@invoice_2.id}" do
         expect(page).to have_link("#{@invoice_2.id}")
+        expect(page).to_not have_link("#{@invoice_1.id}")
+        expect(page).to_not have_link("#{@invoice_3.id}")
+      end
       
-      within "##{@invoice_3.id}"
+      within "##{@invoice_3.id}" do
         expect(page).to have_link("#{@invoice_3.id}")
+        expect(page).to_not have_link("#{@invoice_1.id}")
+        expect(page).to_not have_link("#{@invoice_2.id}")
+      end
       
-      within "##{@invoice_4.id}"
+      within "##{@invoice_4.id}" do
         expect(page).to have_link("#{@invoice_4.id}")
+        expect(page).to_not have_link("#{@invoice_5.id}")
+        expect(page).to_not have_link("#{@invoice_6.id}")
+      end
       
-      within "##{@invoice_5.id}"
+      within "##{@invoice_5.id}" do
         expect(page).to have_link("#{@invoice_5.id}")
+        expect(page).to_not have_link("#{@invoice_4.id}")
+        expect(page).to_not have_link("#{@invoice_6.id}")
+      end
       
-      within "##{@invoice_6.id}"
+      within "##{@invoice_6.id}" do
         expect(page).to have_link("#{@invoice_6.id}")
+        expect(page).to_not have_link("#{@invoice_4.id}")
+        expect(page).to_not have_link("#{@invoice_5.id}")
+      end
     end
   end
 end
