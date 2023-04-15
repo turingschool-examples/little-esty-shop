@@ -8,14 +8,6 @@ class Item < ApplicationRecord
 
   scope :enabled_items, -> { where(status: 1) }
   scope :disabled_items, -> { where(status: 0) }
-
-  # def self.enabled_items
-  #   Item.where(status: 1)
-  # end
-
-  # def self.disabled_items
-  #   Item.where(status: 0)
-  # end
   
   def self.top_five_items
     Item.select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) AS product").joins(:transactions).where("transactions.result = 1").group("items.id").order(product: :desc).limit(5)
