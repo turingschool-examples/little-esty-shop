@@ -49,9 +49,3 @@ RSpec.describe 'Admin Invoice Show Page' do
     end
   end
 end
-
-
-# Admin Invoice Show Page: Total Revenue
-# As an admin
-# When I visit an admin invoice show page
-# Then I see the total revenue that will be generated from this invoice
