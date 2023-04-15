@@ -1,0 +1,15 @@
+<h1> Welcome to Little Esty(sic) Shop! </h1>
+<body>
+<section id="admin_login">
+<%= link_to "Login as Admin", "/admin/dashboard" %>
+</section>
+<br/>
+<section id="merchant_login">
+<%= form_with url: "/merchants/login", method: :get do |form| %>
+  <%= form.label :merchant_id %>
+  <%= form.text_field :merchant_id %>
+  <%= form.submit "Login" %>
+<% end %>
+</section>
+<h4>THIS PAGE DOES NOT FULLY WORK YET - BRANDON</h4>
+</body>
