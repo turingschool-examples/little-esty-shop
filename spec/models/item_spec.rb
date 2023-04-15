@@ -15,16 +15,28 @@ RSpec.describe Item, type: :model do
     expect(@item_1.status).to eq('enabled')
   end
 
-  it 'can list enabled and disabled items' do
-    @merchant_1 = Merchant.create!(name: 'Etsy')
-    @merchant_2 = Merchant.create!(name: 'Walmart')
-    @item_1 = @merchant_1.items.create!(name: 'Axe', description: 'Chop stuff', unit_price: 1000)
-    @item_2 = @merchant_1.items.create!(name: 'Hammer', description: 'Hit stuff', unit_price: 1500)
-    @item_3 = @merchant_1.items.create!(name: 'Drill', description: 'Drill stuff', unit_price: 5000)
-    @item_4 = @merchant_2.items.create!(name: 'Wrench', description: 'Turn stuff', unit_price: 900)
-    @item_5 = @merchant_2.items.create!(name: 'Nail', description: 'Nail stuff', unit_price: 50)
+  describe "class methods" do 
+    before :each do
+      @merchant_1 = Merchant.create!(name: 'Etsy')
+      @merchant_2 = Merchant.create!(name: 'Walmart')
+      @item_1 = @merchant_1.items.create!(name: 'Axe', description: 'Chop stuff', unit_price: 1000)
+      @item_2 = @merchant_1.items.create!(name: 'Hammer', description: 'Hit stuff', unit_price: 1500)
+      @item_3 = @merchant_1.items.create!(name: 'Drill', description: 'Drill stuff', unit_price: 5000)
+      @item_4 = @merchant_2.items.create!(name: 'Wrench', description: 'Turn stuff', unit_price: 900)
+      @item_5 = @merchant_2.items.create!(name: 'Nail', description: 'Nail stuff', unit_price: 50)
+    end
 
-    expect(Item.enabled_items).to eq([])
-    expect(Item.disabled_items).to eq([@item_1, @item_2, @item_3, @item_4, @item_5])
+    it 'can list enabled and disabled items' do
+      expect(Item.enabled_items).to eq([])
+      expect(Item.disabled_items).to eq([@item_1, @item_2, @item_3, @item_4, @item_5])
+    end
+
+    describe '.total_revenue' do
+      it "returns the sum of item's unit price" do
+        expect(@merchant_1.items.total_revenue).to eq(7500)
+        expect(@merchant_2.items.total_revenue).to eq(950)
+        expect(Item.total_revenue).to eq(8450)
+      end
+    end
   end
 end

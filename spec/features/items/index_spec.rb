@@ -18,27 +18,27 @@ RSpec.describe 'merchant items index' do
     @customer_4 = Customer.create!(first_name: 'Joon', last_name: 'Jones')
     @customer_5 = Customer.create!(first_name: 'Joc', last_name: 'Jones')
     @customer_6 = Customer.create!(first_name: 'JakJak', last_name: 'Jones')
-    @invoice_1 = @customer_1.invoices.create!(status: 'completed')
+    @invoice_1 = @customer_1.invoices.create!(status: 'completed', created_at: "2012-7-7")
     @transaction_1 = @invoice_1.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '2012-03-27', result: 'success')
-    @invoice_2 = @customer_2.invoices.create!(status: 'completed')
+    @invoice_2 = @customer_2.invoices.create!(status: 'completed', created_at: "2012-7-7")
     @transaction_2 = @invoice_2.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '2012-03-27', result: 'success')
-    @invoice_3 = @customer_2.invoices.create!(status: 'completed')
+    @invoice_3 = @customer_2.invoices.create!(status: 'completed', created_at: "2009-6-8")
     @transaction_3 = @invoice_3.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '2012-03-27', result: 'success')
-    @invoice_4 = @customer_3.invoices.create!(status: 'completed')
+    @invoice_4 = @customer_3.invoices.create!(status: 'completed', created_at: "2009-6-8")
     @transaction_4 = @invoice_4.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '2012-03-27', result: 'success')
-    @invoice_5 = @customer_3.invoices.create!(status: 'completed')
+    @invoice_5 = @customer_3.invoices.create!(status: 'completed', created_at: "2009-2-3")
     @transaction_5 = @invoice_5.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '2012-03-27', result: 'success')
-    @invoice_6 = @customer_6.invoices.create!(status: 'completed')
+    @invoice_6 = @customer_6.invoices.create!(status: 'completed', created_at: "2009-2-3")
     @transaction_6 = @invoice_6.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '2012-03-27', result: 'success')
-    @invoice_7 = @customer_5.invoices.create!(status: 'completed')
+    @invoice_7 = @customer_5.invoices.create!(status: 'completed', created_at: "2001-10-10")
     @transaction_7 = @invoice_7.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '2012-03-27', result: 'success')
-    @invoice_8 = @customer_4.invoices.create!(status: 'completed')
+    @invoice_8 = @customer_4.invoices.create!(status: 'completed', created_at: "2008-10-11")
     @transaction_8 = @invoice_8.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '2012-03-27', result: 'success')
-    @invoice_9 = @customer_4.invoices.create!(status: 'completed')
+    @invoice_9 = @customer_4.invoices.create!(status: 'completed', created_at: "2008-1-2")
     @transaction_9 = @invoice_9.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '2012-03-27', result: 'success')
-    @invoice_10 = @customer_5.invoices.create!(status: 'completed')
+    @invoice_10 = @customer_5.invoices.create!(status: 'completed', created_at: "2010-7-7")
     @transaction_10 = @invoice_10.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '2012-03-27', result: 'success')
-    @invoice_11 = @customer_6.invoices.create!(status: 'completed')
+    @invoice_11 = @customer_6.invoices.create!(status: 'completed', created_at: "2009-7-8")
     @transaction_11 = @invoice_11.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '2012-03-27', result: 'success')
     InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id) 
     InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id) 
@@ -160,11 +160,14 @@ RSpec.describe 'merchant items index' do
     end
   end
 
-  # it 'I can see the date with the most sales for each item' do 
-  #   visit "/merchants/#{@merchant_1.id}/items"
-
-  #   within "#Top_5_items" do
-  #     expect(page).to have_content("Top selling date for #{item_1.name} was March 27, 2012")
-  #   end
-  # end
+  it 'I see the date with the most sales for each item' do
+    visit "/merchants/#{@merchant_1.id}/items"
+    
+    within "#top_item#{@item_1.id}" do
+      expect(page).to have_content(@invoice_1.created_at)
+      expect(page).to have_content(@invoice_2.created_at)
+      expect(page).to have_no_content(@invoice_10.created_at)
+      expect(page).to have_no_content(@invoice_11.created_at)
+    end
+  end
 end

@@ -166,37 +166,37 @@ RSpec.describe 'merchant dashboard' do
     within "##{@invoice_1.id}" do
       expect(page).to have_content(@invoice_1.custom_date)
     end
-      within "##{@invoice_2.id}" do
+    within "##{@invoice_2.id}" do
       expect(page).to have_content(@invoice_2.custom_date)
     end
-      within "##{@invoice_3.id}" do
+    within "##{@invoice_3.id}" do
       expect(page).to have_content(@invoice_3.custom_date)
     end
-      within "##{@invoice_4.id}" do
+    within "##{@invoice_4.id}" do
       expect(page).to have_content(@invoice_4.custom_date)
     end
-      within "##{@invoice_5.id}" do
+    within "##{@invoice_5.id}" do
       expect(page).to have_content(@invoice_5.custom_date)
     end
-      within all("##{@invoice_6.id}")[0] do
+    within all("##{@invoice_6.id}")[0] do
       expect(page).to have_content(@invoice_6.custom_date)
     end
-      within all("##{@invoice_6.id}")[1] do
+    within all("##{@invoice_6.id}")[1] do
       expect(page).to have_content(@invoice_6.custom_date)
     end
-      within "##{@invoice_7.id}" do
+    within "##{@invoice_7.id}" do
       expect(page).to have_content(@invoice_7.custom_date)
     end
-      within "##{@invoice_8.id}" do
+    within "##{@invoice_8.id}" do
       expect(page).to have_content(@invoice_8.custom_date)
     end
-      within "##{@invoice_9.id}" do
+    within "##{@invoice_9.id}" do
       expect(page).to have_content(@invoice_9.custom_date)
     end
-      within "##{@invoice_10.id}" do
+    within "##{@invoice_10.id}" do
       expect(page).to have_content(@invoice_10.custom_date)
     end
-      within "##{@invoice_11.id}" do
+    within "##{@invoice_11.id}" do
       expect(page).to have_content(@invoice_11.custom_date)
     end
   end

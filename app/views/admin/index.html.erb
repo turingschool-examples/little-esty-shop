@@ -8,3 +8,12 @@
   <%= customer.first_name %> <%= customer.last_name %>, <%= customer.transaction_count %>
   </div>
 <% end %>
+
+<h4>Incomplete Invoices</h4>
+<div id="invoices">
+<% @invoices.each do |invoice| %>
+  <div id="<%=invoice.id%>">
+  <p> Invoice id: <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %>, Created at: <%= invoice.custom_date %> </p>
+  </div>
+<% end %>
+</div>
