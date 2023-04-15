@@ -50,7 +50,7 @@ RSpec.describe Invoice, type: :model do
     
     describe ":order_by_id" do
       it "orders all invoices by id" do
-        customer_1 = create(:customer)
+        @customer_1 = create(:customer)
         invoice_3 = create(:invoice, id: 1, customer_id: @customer_1.id)
         invoice_2 = create(:invoice, id: 2 ,customer_id: @customer_1.id)
         invoice_1 = create(:invoice, id: 3 ,customer_id: @customer_1.id)
@@ -65,13 +65,16 @@ RSpec.describe Invoice, type: :model do
 
     describe 'customer_name' do
       it 'returns the name of the customer' do
-        expect(@invoice_1.customer_name).to eq(@customer_1.first_name + " " + @customer_1.last_name)
+        @customer = create(:customer, first_name: "Bob", last_name: "Smith")
+        @invoice = create(:invoice, customer_id: @customer.id)
+
+        expect(@invoice.customer_name).to eq("Bob Smith")
       end
     end
 
     describe "#convert_created_at" do
       it "converts timestamp format to a readable date" do
-        customer_1 = create(:customer)
+        @customer_1 = create(:customer)
         invoice_1 = create(:invoice, customer_id: @customer_1.id, created_at: '2011-01-08 20:54:10 UTC')
         invoice_2 = create(:invoice, customer_id: @customer_1.id, created_at: '2012-05-11 13:54:10 UTC')
         invoice_3 = create(:invoice, customer_id: @customer_1.id, created_at: '2013-08-21 08:54:10 UTC')

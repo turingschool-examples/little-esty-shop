@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Merchant Items Index Page', type: :feature do
   before(:each) do
+    @merchant_1 = create(:merchant)
+    @item_1 = create(:item, merchant: @merchant_1)
+    
     visit merchant_items_path(@merchant_1.id)
   end
 
@@ -10,8 +13,6 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
   end
 
   it 'it has invoice ids as links' do
-  
-
     visit merchant_items_path(@merchant_1)
 
     within "#item-#{@item_1.id}" do

@@ -7,7 +7,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
     @customer_2 = create(:customer)
     @invoice_1 = create(:invoice, customer_id: @customer_1.id,status: 'In Progress')
     @invoice_2 = create(:invoice, customer_id: @customer_2.id,status: 'Cancelled')
-    @invoice_3= create(:invoice, customer_id: @customer_2.id, status: 'Completed')
+    @invoice_3 = create(:invoice, customer_id: @customer_2.id, status: 'Completed')
     @item_1 = create(:item, merchant_id: @merchant_1.id)
     @item_2 = create(:item, merchant_id: @merchant_1.id)
     @item_3 = create(:item, merchant_id: @merchant_1.id)
@@ -71,7 +71,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
         expect(page).to have_content(@invoice_item_1.status)
   
         expect(page).to_not have_content(@item_2.name)
-        expect(page).to_not have_content(@invoice_item_2.unit_price)
+        expect(page).to_not have_content("Item sold price: #{@invoice_item_2.unit_price}")
       end
   
       within("#item_#{@item_2.id}") do
@@ -80,7 +80,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
         expect(page).to have_content(@invoice_item_2.status)
   
         expect(page).to_not have_content(@item_1.name)
-        expect(page).to_not have_content(@invoice_item_1.unit_price)
+        expect(page).to_not have_content("Item sold price: #{@invoice_item_1.unit_price}")
       end
 
       visit admin_invoice_path(@invoice_2)
