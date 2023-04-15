@@ -29,5 +29,9 @@ RSpec.describe Invoice, type: :model do
 
       expect(Invoice.incomplete_invoices.count).to eq(19)
     end
+
+    it 'can order the invoices by their creation date' do
+      expect(Invoice.incomplete_invoices.first.created_at).to be < (Invoice.incomplete_invoices.last.created_at)
+    end
   end
 end
