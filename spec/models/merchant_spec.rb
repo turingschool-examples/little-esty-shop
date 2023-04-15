@@ -34,5 +34,17 @@ RSpec.describe Invoice, type: :model do
       expect(@merchant_1.top_five_customers.first.transaction_count).to eq(9)
       expect(@merchant_1.top_five_customers).to eq([@customer_5, @customer_6, @customer_1, @customer_2, @customer_3])
     end
+
+    it "#update_status" do
+      expect(@merchant_3.status).to eq("disabled")
+
+      @merchant_3.update_status("enabled")
+
+      expect(@merchant_3.status).to eq("enabled")
+
+      @merchant_3.update_status("disabled")
+
+      expect(@merchant_3.status).to eq("disabled")
+    end
   end
 end

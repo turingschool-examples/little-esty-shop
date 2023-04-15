@@ -14,11 +14,15 @@ class Admin::MerchantsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:id])
     @merchant.update(admin_merchant_params)
-    redirect_to admin_merchant_path(@merchant)
+    if !params[:merchant][:status].nil?
+      redirect_to admin_merchants_path
+    else
+      redirect_to admin_merchant_path(@merchant)
+    end
   end
 
   private
   def admin_merchant_params
-    params.require(:merchant).permit(:name)
+    params.require(:merchant).permit(:name, :status)
   end
 end
