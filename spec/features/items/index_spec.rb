@@ -162,7 +162,7 @@ RSpec.describe 'merchant items index' do
 
   it 'I see the date with the most sales for each item' do
     visit "/merchants/#{@merchant_1.id}/items"
-save_and_open_page
+    
     within "#top_item#{@item_1.id}" do
       expect(page).to have_content(@invoice_1.created_at)
       expect(page).to have_content(@invoice_2.created_at)
