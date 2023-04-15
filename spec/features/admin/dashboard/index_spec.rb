@@ -51,6 +51,8 @@ RSpec.describe 'Admin Dashboard Index Page' do
         expect(page).to have_content("Customer Five - transactions: 4")
         expect(page).to have_content("Customer Two - transactions: 3")
       end
+    end
+  end
 
   describe 'User Story 22' do 
 
@@ -66,8 +68,10 @@ RSpec.describe 'Admin Dashboard Index Page' do
 
     it 'displays a list of the ids of all invoices that have items that have not yet been shipped' do
       visit admin_dashboard_path
-
-      expect(page).to have_content(@invoice_1.id)
+      
+      within("#incomplete_invoices") do
+        expect(page).to have_content(@invoice_1.id)
+      end
 
       @invoice_item_1.update(status: 2)
       @invoice_item_21.update(status: 2)
@@ -84,7 +88,47 @@ RSpec.describe 'Admin Dashboard Index Page' do
       click_on "#{@invoice_1.id}"
 
       expect(current_path).to eq(admin_invoice_path(@invoice_1))
+    end
+  end
 
+  describe 'User Story 23' do
+    before (:each) do
+      test_data
+    end
+
+    it 'displays the date that the invoice was created' do
+      visit admin_dashboard_path
+      
+     
+      within("#incomplete_invoices") do
+        expect(page).to have_content(@invoice_1.created_at.strftime("%A, %B %d, %Y"))
+      end
+    end
+
+    it 'displays the date formatted like "Monday, July 18, 2019"' do
+      visit admin_dashboard_path
+
+      within("#incomplete_invoices") do
+        expect(page).to have_content(@invoice_1.created_at.strftime("%A, %B %d, %Y"))
+      end
+    end
+
+    it 'displays that the list is ordered from oldest to newest' do  
+      @invoice_1.update(created_at: 4.day.ago)
+      @invoice_2.update(created_at: 3.day.ago)
+      @invoice_3.update(created_at: 2.day.ago)
+      @invoice_4.update!(created_at: 1.day.ago)
+
+      visit admin_dashboard_path 
+
+      within("#incomplete_invoices") do
+        expect("#{@invoice_1.id}").to appear_before("#{@invoice_2.id}")
+        expect("#{@invoice_2.id}").to appear_before("#{@invoice_3.id}")
+        expect("#{@invoice_3.id}").to appear_before("#{@invoice_4.id}")
+      end
     end
   end
 end
+
+
+
