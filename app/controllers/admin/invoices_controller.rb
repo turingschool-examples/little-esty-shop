@@ -8,4 +8,10 @@ class Admin::InvoicesController < ApplicationController
     @items = @invoice.items
     @invoice_items = @invoice.invoice_items
   end
+
+  def update
+    @invoice = Invoice.find(params[:id])
+    @invoice.update(status: params[:invoice_status])
+    redirect_to admin_invoice_path(@invoice)
+  end
 end
