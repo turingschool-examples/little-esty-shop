@@ -15,6 +15,28 @@ RSpec.describe Invoice, type: :model do
     end
   end
 
+  describe 'class methods' do
+    before :each do
+      test_data
+    end
+    describe 'invoice#incomplete' do
+      it 'returns invoice items where status is not shipped' do
+        @invoice_11 = Invoice.create!(status: "completed", customer: @customer_8)
+        # @invoice_item_21 = InvoiceItem.create!(quantity: 95, unit_price: 54134, status: "packaged", item: @item_10, invoice: @invoice_11)
+        expect(Invoice.incomplete).to eq([@invoice_1.id, @invoice_2.id, @invoice_3.id, @invoice_4.id, @invoice_5.id, @invoice_7.id, @invoice_8.id, @invoice_9.id])
+      end
+    end
+
+    describe 'incomplete_id' do
+      xit 'plucks id from incomplete' do
+        @invoice_11 = Invoice.create!(status: "completed", customer: @customer_8)
+        @invoice_item_21 = InvoiceItem.create!(quantity: 95, unit_price: 54134, status: "shipped", item: @item_10, invoice: @invoice_11)
+        expect(Invoice.incomplete_id).to eq([@invoice_1.id, @invoice_2.id, @invoice_3.id, @invoice_4.id,
+          @invoice_5.id, @invoice_6.id, @invoice_7.id, @invoice_8.id, @invoice_9.id, @invoice_10.id])
+      end
+    end
+  end
+
   describe 'instance methods' do
     before :each do
       test_data
@@ -22,6 +44,12 @@ RSpec.describe Invoice, type: :model do
     describe 'total revenue' do
       it 'returns the total revenue from all items on the invoice.' do
         expect(@invoice_4.total_revenue).to eq(3300000)
+      end
+    end
+
+    describe '#created_at_formatted' do
+      it 'shows date format correctly' do
+        expect(@invoice_4.created_at_formatted).to eq(Date.today.strftime("%A, %B %d, %Y"))
       end
     end
   end

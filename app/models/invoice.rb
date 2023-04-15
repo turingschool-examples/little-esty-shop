@@ -13,4 +13,13 @@ class Invoice < ApplicationRecord
     end
     accumulated_revenue
   end
+
+  
+
+  def self.incomplete
+    joins(:invoice_items)
+    .where(invoice_items: {status: [0, 2]})
+    .distinct
+    .pluck(:id)
+  end
 end
