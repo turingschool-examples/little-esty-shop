@@ -10,7 +10,7 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
     @item_3 = create(:item, merchant_id: @merchant_1.id)
     @item_4 = create(:item, merchant_id: @merchant_1.id)
     @item_5 = create(:item, merchant_id: @merchant_1.id)
-    @item_6 = create(:item, name: "Does not belong to merchant", merchant_id: @merchant_2.id)
+    @item_6 = create(:item, name: "Does not belong to merchant 1", merchant_id: @merchant_2.id)
     
     @customer_1 = create(:customer)
     @customer_2 = create(:customer)
@@ -75,13 +75,13 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
   end
 
   it 'when I visit a merchant invoice index page, I see all invoices with at least one of my merchant items (User Story 14)' do
-    expect(page).to have_link(@invoice_1.id)
-    expect(page).to have_link(@invoice_2.id)
-    expect(page).to have_link(@invoice_3.id)
-    expect(page).to have_link(@invoice_4.id)
-    expect(page).to have_link(@invoice_5.id)
-    expect(page).to have_link(@invoice_6.id)
-    expect(page).to have_link(@invoice_7.id)
-    expect(page).to_not have_link(@invoice_8.id)
+    expect(page).to have_link("ID: #{@invoice_1.id}")
+    expect(page).to have_link("ID: #{@invoice_2.id}")
+    expect(page).to have_link("ID: #{@invoice_3.id}")
+    expect(page).to have_link("ID: #{@invoice_4.id}")
+    expect(page).to have_link("ID: #{@invoice_5.id}")
+    expect(page).to have_link("ID: #{@invoice_6.id}")
+    expect(page).to have_link("ID: #{@invoice_7.id}")
+    expect(page).to_not have_link("ID: #{@invoice_8.id}")
   end
 end
