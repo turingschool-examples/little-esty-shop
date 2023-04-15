@@ -27,9 +27,9 @@ RSpec.describe Invoice, type: :model do
 
     describe 'created_at_formatted' do
       it "formats the created at attribute" do 
-        @customer_1 = Customer.create!(first_name: "John", last_name: "Doe")
-        invoice_1 = Invoice.create!(status: "cancelled", customer: @customer_1, created_at: '2023-14-04 20:54:10 UTC' )
-        expect(invoice_1.created_at_formatted).to eq("Friday, April 14, 2023")
+        customer = Customer.create!(first_name: "John", last_name: "Doe")
+        invoice = Invoice.create!(status: "cancelled", customer: customer)
+        expect(invoice.created_at_formatted).to eq(Date.today.strftime("%A, %B %d, %Y"))
       end
     end
 
