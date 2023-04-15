@@ -51,6 +51,8 @@ RSpec.describe 'Admin Dashboard Index Page' do
         expect(page).to have_content("Customer Five - transactions: 4")
         expect(page).to have_content("Customer Two - transactions: 3")
       end
+    end
+  end
 
   describe 'User Story 22' do 
 
