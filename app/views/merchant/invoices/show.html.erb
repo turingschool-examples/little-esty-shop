@@ -1,1 +1,12 @@
 <h3>Merchant Invoice Show Page</h3>
+
+<div id="invoice-info">
+  <h3>Invoice #<%= @invoice.id %></h3>
+  <p>Status: <%= @invoice.status %></p>
+  <p>Created on: <%= @invoice.convert_created_at %></p>
+</div>
+
+<div id="customer-info">
+  <h3>Customer:</h3>
+  <p><%= @invoice.customer_name %></p>
+</div>
