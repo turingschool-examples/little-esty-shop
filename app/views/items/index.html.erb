@@ -10,7 +10,7 @@
 <div id="Top_5_items"%>
   <h2>Top 5 Items(By Revenue): </h2>
     <% @top_items.each do |item| %>
-      <div id="top_item<%= item.id %>"><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>, <%= item.revenue %></div>
+      <div id="top_item<%= item.id %>"><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>, <%= item.revenue %> ,<%= item.most_sales_day %></div>
     <% end %>
 </div>  
 <div id="Enabled">
