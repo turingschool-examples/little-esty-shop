@@ -27,6 +27,12 @@ RSpec.describe "admin/merchants index", type: :feature do
       expect(page).to have_link(@merchant_5.name, href: admin_merchant_path(@merchant_5))
       expect(page).to have_link(@merchant_6.name, href: admin_merchant_path(@merchant_6))
     end
+  end
+
+  describe "functionality" do 
+    before do
+      test_data
+    end
 
     it "links to show pages are functional" do
       visit admin_merchants_path
@@ -38,6 +44,28 @@ RSpec.describe "admin/merchants index", type: :feature do
 
       click_link(@merchant_2.name)
       expect(current_path).to eq(admin_merchant_path(@merchant_2))
+    end
+
+    it "has buttons to enable/disable merchants" do
+      visit admin_merchants_path 
+
+      expect(page.all(:button, "Enable").count).to eq(6)
+    end
+
+    it "enable/disable buttons are functional" do
+      visit admin_merchants_path
+
+      expect(@merchant_1.status).to eq("disabled")
+
+      click_button("enable_#{@merchant_1.id}")
+      expect(current_path).to eq(admin_merchants_path)
+      expect(@merchant_1.status).to eq("disabled")
+
+      @merchant_1.reload
+      visit admin_merchants_path
+
+      expect(page.all(:button, "Enable").count).to eq(5)
+      expect(page.all(:button, "Disable").count).to eq(1)
     end
   end
 end
