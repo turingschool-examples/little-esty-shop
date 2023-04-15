@@ -20,4 +20,13 @@ class Item < ApplicationRecord
   def disabled
     self.status == 'disabled'
   end
+
+  def self.top_five_by_revenue(merchant)
+    joins(invoice_items: { invoice: :transactions })
+      .where(merchant_id: merchant.id, transactions: {result: Transaction.results[:success]})
+      .group('items.id')
+      .select('items.*, SUM(invoice_items.quantity * invoice_items.unit_price/100) AS revenue')
+      .order('revenue DESC')
+      .limit(5)
+  end
 end

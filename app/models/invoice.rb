@@ -7,11 +7,15 @@ class Invoice < ApplicationRecord
   enum status: ["in progress", "completed", "cancelled"]
 
   def total_revenue
-    accumulated_revenue = 0
-    invoice_items.each do |invoice_item|
-      accumulated_revenue += (invoice_item.quantity * invoice_item.unit_price)
-    end
-    accumulated_revenue
+    invoice_items.sum("quantity * unit_price")
+  end
+
+  def created_at_formatted
+    created_at.strftime("%A, %B %d, %Y")
+  end
+
+  def customer_full_name
+    "#{customer.first_name} #{customer.last_name}"
   end
 
   def created_at_formatted

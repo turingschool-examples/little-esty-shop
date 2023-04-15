@@ -56,9 +56,17 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
-    describe '#created_at_formatted' do
-      it 'shows date format correctly' do
-        expect(@invoice_4.created_at_formatted).to eq(Date.today.strftime("%A, %B %d, %Y"))
+    describe 'created_at_formatted' do
+      it "formats the created at attribute" do 
+        customer = Customer.create!(first_name: "John", last_name: "Doe")
+        invoice = Invoice.create!(status: "cancelled", customer: customer)
+        expect(invoice.created_at_formatted).to eq(Date.today.strftime("%A, %B %d, %Y"))
+      end
+    end
+
+    describe 'customer_full_name' do
+      it 'returns customers first and last name' do
+        expect(@invoice_8.customer_full_name).to eq("Sally Williams")
       end
     end
   end
