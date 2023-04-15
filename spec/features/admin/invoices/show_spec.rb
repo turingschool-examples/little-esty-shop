@@ -60,4 +60,26 @@ RSpec.describe 'Admin Invoice Show Page' do
       end
     end
   end
+
+  describe 'User Story 36' do
+    it 'I see the invoice status is a select field' do
+      visit admin_invoice_path(@invoice_1)
+
+      within "#invoice_details" do
+        expect(page).to have_select('invoice_status', selected: 'in progress')
+      end
+    end
+
+    it 'I can update the invoice status' do
+      visit admin_invoice_path(@invoice_1)
+
+        within "#invoice-status" do
+          select 'completed', from: 'invoice_status'
+          click_button 'Update Status'
+        end
+        
+      @invoice_1.reload
+      expect(@invoice_1.status).to eq('completed')
+    end
+  end
 end
