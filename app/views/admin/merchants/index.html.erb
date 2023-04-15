@@ -1,4 +1,17 @@
 <h2>Admin Dashboard</h2>
 <% @merchants.each do |merchant| %>
-  <%= link_to merchant.name, admin_merchant_path(merchant) %>
+  <%= link_to merchant.name, admin_merchant_path(merchant) %><br/>
+  <% if merchant.status == "disabled" %>
+    <%= form_with model: merchant, url: "/admin/merchants/#{merchant.id}", local: true do |form| %>
+      <%= form.hidden_field :_method, value: "patch" %>
+      <%= form.hidden_field :status, value: "enabled" %>
+      <%= form.submit "Enable", id: "enable_#{merchant.id}" %>
+    <% end %>
+  <% else %>
+    <%= form_with model: merchant, url: "/admin/merchants/#{merchant.id}", local: true do |form| %>
+      <%= form.hidden_field :_method, value: "patch" %>
+      <%= form.hidden_field :status, value: "disabled" %>
+      <%= form.submit "Disable" %>
+    <% end %>
+  <% end %>
 <% end %>
