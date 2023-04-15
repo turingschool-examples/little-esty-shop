@@ -18,14 +18,19 @@ class Invoice < ApplicationRecord
     created_at.strftime("%A, %B %d, %Y")
   end
 
-  def incomplete_formatted
-
-  end
-
   def self.incomplete
-    select("id, created_at AS 'created_at.strftime('%A, %B %d, %Y')'")
+    select("id, created_at")
     joins(:invoice_items)
     .where(invoice_items: {status: [0, 2]})
     .distinct
+  end
+
+  def self.incomplete_id
+    incomplete
+    .pluck(:id)
+  end
+
+  def method_name
+    
   end
 end
