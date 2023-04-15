@@ -1,4 +1,4 @@
 <h3>Admin Merchants</h3>
 <% @merchants.each do |merchant|%>
-  <%= merchant.name%>
+<p><%= link_to merchant.name, "admin/merchants/#{merchant.id}/"%></p>
 <% end %>
