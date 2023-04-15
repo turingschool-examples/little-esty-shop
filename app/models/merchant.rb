@@ -6,4 +6,13 @@ class Merchant < ApplicationRecord
   has_many :customers, -> { distinct }, through: :invoices
 
   validates :name, presence: true
+
+  def enabled_status
+    if is_enabled?
+      "Enabled"
+    else
+      "Disabled"
+    end
+  end
+  
 end

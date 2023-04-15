@@ -54,36 +54,36 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
 
       expect(page).to have_link("Create New Merchant")
       click_link("Create New Merchant")
-      expect(page).to have_current_path(new_admin_merchant_path)
-      expect(page).to have_field('name')
+      expect(page).to have_current_path(new_merchant_path)
+      expect(page).to have_field('merchant_name')
       expect(page).to have_button('Submit')
 
     end
 
     it "filling information and submitting redirects to admin merchant index page" do
-      visit new_admin_merchant_path
-      fill_in 'name', with: 'Test Merchant 1'
+      visit new_merchant_path
+      fill_in 'merchant_name', with: 'Test Merchant 1'
       click_button('Submit')
       expect(page).to have_current_path(admin_merchants_path)
       expect(page).to have_content("New merchant has been successfully created")
     end
 
     it "failing to fill the form displays error message" do
-      visit new_admin_merchant_path
-      fill_in 'name', with: ''
+      visit new_merchant_path
+      fill_in 'merchant_name', with: ''
       click_button('Submit')
-      expect(page).to have_current_path(new_admin_merchant_path)
+      expect(page).to have_current_path(new_merchant_path)
       expect(page).to have_content("Error: Name can't be blank")
     end
 
-    xit "new merchant is displayed with a status of disabled" do
-      visit admin_merchants_path
+    it "new merchant is displayed with a status of disabled" do
+      visit new_merchant_path
+      fill_in 'merchant_name', with: 'Test Merchant 1'
+      click_button('Submit')
       expect(page).to have_content('Test Merchant 1 Status: Disabled')
-
     end
-    
   end
-end
+
 
   describe "Admin Merchant Enable / Disable (User Story 27)" do
     it 'shows a button to either enable or disable a merchant, based on their current activity status' do
@@ -132,4 +132,5 @@ end
       expect(@merchant_3.reload.is_enabled).to be(true)
     end
   end
+
 end

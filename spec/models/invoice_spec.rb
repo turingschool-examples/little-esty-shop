@@ -65,7 +65,14 @@ RSpec.describe Invoice, type: :model do
 
     describe 'customer_name' do
       it 'returns the name of the customer' do
-        expect(@invoice_1.customer_name).to eq(@customer_1.first_name + " " + @customer_1.last_name)
+        customer_1 = create(:customer)
+        customer_2 = create(:customer)
+        invoice_1 = create(:invoice,customer: customer_1)
+        invoice_2 = create(:invoice,customer: customer_2)
+        expect(invoice_1.customer_name).to eq(customer_1.first_name + " " + customer_1.last_name)
+
+        @customer_2 = create(:customer)
+        expect(invoice_2.customer_name).to eq(customer_2.first_name + " " + customer_2.last_name)
       end
     end
 

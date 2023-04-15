@@ -10,14 +10,14 @@ class Item < ApplicationRecord
   validates :unit_price, presence: true, numericality: true
 
   def find_sold_price(invoice)
-    invoice_items.where(invoice_id: invoice.id).pluck(:unit_price).first
+    invoice_items.where(invoice_id: invoice.id).pluck(:unit_price).to_sentence
   end
 
   def quantity_sold(invoice)
-    invoice_items.where(invoice_id: invoice.id).pluck(:quantity).first
+    invoice_items.where(invoice_id: invoice.id).pluck(:quantity).to_sentence
   end
 
   def invoice_item_status(invoice)
-    invoice_items.where(invoice_id: invoice.id).pluck(:status).first
+    invoice_items.where(invoice_id: invoice.id).pluck(:status).to_sentence
   end
 end

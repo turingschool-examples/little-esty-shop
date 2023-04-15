@@ -1,8 +1,8 @@
 <h1>Admin Merchants Index</h1>
-<%= link_to "Create New Merchant", new_admin_merchant_path %>
+<%= link_to "Create New Merchant", new_merchant_path %>
 <% @merchants.each do |merchant|%>
   <div id = "merchant-<%=merchant.id%>">
-  <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %><p>
+  <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %> Status: <%= merchant.enabled_status %><p>
   <% if merchant.is_enabled %>
     <p><%= form_with model: merchant, url: merchant_path(merchant), local: true, method: :patch do |form| %>
       <%= form.hidden_field :is_enabled, value: false %>

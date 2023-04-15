@@ -23,7 +23,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
       within("##{@invoice_1.id}_id") do
         expect(page).to have_content("Invoice ID: #{@invoice_1.id}")
         expect(page).to have_content("Invoice Status:")
-        expect(page).to have_field(:status, with: "#{@invoice_1.status}")
+        expect(page).to have_field('invoice_status', with: "#{@invoice_1.status}")
         expect(page).to have_content("Invoice Created At: #{@invoice_1.convert_created_at}")
         expect(page).to have_content("Customer Name: #{@invoice_1.customer.first_name} #{@invoice_1.customer.last_name}")
 
@@ -132,12 +132,12 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
       visit admin_invoice_path(@invoice_1)
       within ("##{@invoice_1.id}_id") do
         expect(page).to have_content("Invoice Status:")
-        expect(page).to have_field(:status, with: "#{@invoice_1.status}")
+        expect(page).to have_field('invoice_status', with: "#{@invoice_1.status}")
       end
       visit admin_invoice_path(@invoice_2)
       within ("##{@invoice_2.id}_id") do
         expect(page).to have_content("Invoice Status:")
-        expect(page).to have_field(:status, with: "#{@invoice_2.status}")
+        expect(page).to have_field('invoice_status', with: "#{@invoice_2.status}")
       end
     end
 
@@ -145,7 +145,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
       visit admin_invoice_path(@invoice_1)
       within ("##{@invoice_1.id}_id") do
         expect(@invoice_1.status).to eq("In Progress")
-        select "Completed", from: 'status'
+        select "Completed", from: 'invoice_status'
         click_button "Update Invoice Status"
         expect(@invoice_1.reload.status).to eq("Completed")
         expect(current_path).to eq(admin_invoice_path(@invoice_1))
@@ -153,7 +153,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
       visit admin_invoice_path(@invoice_2)
       within ("##{@invoice_2.id}_id") do
         expect(@invoice_2.status).to eq("Cancelled")
-        select "In Progress", from: 'status'
+        select "In Progress", from: 'invoice_status'
         click_button "Update Invoice Status"
         expect(@invoice_2.reload.status).to eq("In Progress")
         expect(current_path).to eq(admin_invoice_path(@invoice_2))
