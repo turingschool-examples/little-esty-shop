@@ -11,4 +11,11 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show, :edit, :update, :new, :create]
     resources :invoices, only: [:index, :show]
   end
+
+  namespace :admin do
+    resources :merchants, only: [:index]
+  
+  end
+
+
 end

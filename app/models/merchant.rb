@@ -18,4 +18,6 @@ class Merchant < ApplicationRecord
     .group("items.id").
     order(revenue: :desc).limit(5)
   end
+
+  
 end
