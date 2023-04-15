@@ -48,16 +48,16 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
     it "displays all items on the invoice" do
       visit admin_invoice_path(@invoice_1)
       within ("##{@invoice_1.id}_id") do
-        expect(page).to have_content(@item_1.name)
-        expect(page).to have_content(@item_2.name)
+        expect(page).to have_content("Item name: #{@item_1.name}")
+        expect(page).to have_content("Item name: #{@item_2.name}")
 
         expect(page).to_not have_content(@item_3.name)
       end
 
       visit admin_invoice_path(@invoice_2)
       within ("##{@invoice_2.id}_id") do
-        expect(page).to have_content(@item_1.name)
-        expect(page).to have_content(@item_3.name)
+        expect(page).to have_content("Item name: #{@item_1.name}")
+        expect(page).to have_content("Item name: #{@item_3.name}")
 
         expect(page).to_not have_content(@item_2.name)
       end
@@ -66,17 +66,17 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
     it "displays item name, quantity ordered, price sold, and Invoice Item status" do
       visit admin_invoice_path(@invoice_1)
       within("#item_#{@item_1.id}") do
-        expect(page).to have_content(@invoice_item_1.quantity)
-        expect(page).to have_content(@invoice_item_1.unit_price)
-        expect(page).to have_content(@invoice_item_1.status)
+        expect(page).to have_content("Quantity Ordered: #{@invoice_item_1.quantity}")
+        expect(page).to have_content("Item sold price: #{@invoice_item_1.unit_price}")
+        expect(page).to have_content("Invoice Item status: #{@invoice_item_1.status}")
   
         expect(page).to_not have_content(@item_2.name)
         expect(page).to_not have_content(@invoice_item_2.unit_price)
       end
   
       within("#item_#{@item_2.id}") do
-        expect(page).to have_content(@invoice_item_2.quantity)
-        expect(page).to have_content(@invoice_item_2.unit_price)
+        expect(page).to have_content("Quantity Ordered: #{@invoice_item_2.quantity}")
+        expect(page).to have_content("Item sold price: #{@invoice_item_2.unit_price}")
         expect(page).to have_content(@invoice_item_2.status)
   
         expect(page).to_not have_content(@item_1.name)
@@ -85,9 +85,9 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
 
       visit admin_invoice_path(@invoice_2)
       within("#item_#{@item_1.id}") do
-        expect(page).to have_content(@invoice_item_3.quantity)
-        expect(page).to have_content(@invoice_item_3.unit_price)
-        expect(page).to have_content(@invoice_item_3.status)
+        expect(page).to have_content("Quantity Ordered: #{@invoice_item_3.quantity}")
+        expect(page).to have_content("Item sold price: #{@invoice_item_3.unit_price}")
+        expect(page).to have_content("Invoice Item status: #{@invoice_item_3.status}")
   
         expect(page).to_not have_content(@item_3.name)
         expect(page).to_not have_content(@invoice_item_4.quantity)
@@ -95,9 +95,9 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
       end
 
       within("#item_#{@item_3.id}") do
-        expect(page).to have_content(@invoice_item_4.quantity)
-        expect(page).to have_content(@invoice_item_4.unit_price)
-        expect(page).to have_content(@invoice_item_4.status)
+        expect(page).to have_content("Quantity Ordered: #{@invoice_item_4.quantity}")
+        expect(page).to have_content("Item sold price: #{@invoice_item_4.unit_price}")
+        expect(page).to have_content("Invoice Item status: #{@invoice_item_4.status}")
 
         expect(page).to_not have_content(@item_1.name)
         expect(page).to_not have_content(@invoice_item_3.quantity)
