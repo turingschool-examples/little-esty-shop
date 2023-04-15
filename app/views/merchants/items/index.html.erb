@@ -32,6 +32,8 @@
       <li><%= link_to item.name, merchant_item_path(@merchant, item) %>
       <br>
       Revenue: $<%= item.revenue/100 %>
+      <br>
+      Top Selling Date: <%= item.top_selling_date %>
       </li>
       </div>
     <% end %>
