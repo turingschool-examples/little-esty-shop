@@ -6,4 +6,24 @@
 <p><b>Customer: </b><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 </section>
 
+<section id="items_table">
+<table style="border:1px solid black;margin-right:auto">
+<h2> Items on this Invoice </h2>
+<tr>
+  <th>Item Name</th>
+  <th>Item Quantity</th>
+  <th>Item Price</th>
+  <th>Item Status</th>
+</tr>
+<% @invoice_items.each_with_index do |item, index| %>
+  <tr>
+    <td><%= item.item_name %></td>
+    <td><%= item.quantity %></td>
+    <td><%= item.unit_price %></td>
+    <td><%= item.status %></td>
+    <% end %>
+  </tr>
+</table>
+  
+
  
