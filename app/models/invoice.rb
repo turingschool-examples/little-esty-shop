@@ -29,8 +29,4 @@ class Invoice < ApplicationRecord
     incomplete
     .pluck(:id)
   end
-
-  def method_name
-    
-  end
 end

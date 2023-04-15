@@ -89,4 +89,19 @@ RSpec.describe "Admin Dashboard" do
       expect(page).to have_content("#{@customer_4.first_name} #{@customer_4.last_name}'s Transactions: 3")
       expect(page).to have_content("#{@customer_5.first_name} #{@customer_5.last_name}'s Transactions: 2")
    end
+
+   it 'lists incomplete invoice_id with created_at' do
+      visit '/admin'
+      expect(page).to have_content("#{@invoice_1.id} Created: #{@invoice_1.created_at_formatted}")
+      expect(page).to have_content("#{@invoice_2.id} Created: #{@invoice_2.created_at_formatted}")
+      expect(page).to have_content("#{@invoice_3.id} Created: #{@invoice_3.created_at_formatted}")
+      expect(page).to have_content("#{@invoice_4.id} Created: #{@invoice_4.created_at_formatted}")
+      expect(page).to have_content("#{@invoice_5.id} Created: #{@invoice_5.created_at_formatted}")
+      expect(page).to_not have_content("#{@invoice_6.id} Created: #{@invoice_6.created_at_formatted}")
+      expect(page).to have_content("#{@invoice_7.id} Created: #{@invoice_7.created_at_formatted}")
+      expect(page).to have_content("#{@invoice_8.id} Created: #{@invoice_8.created_at_formatted}")
+      expect(page).to have_content("#{@invoice_9.id} Created: #{@invoice_9.created_at_formatted}")
+      expect(page).to_not have_content("#{@invoice_10.id} Created: #{@invoice_10.created_at_formatted}")
+
+   end
   end
