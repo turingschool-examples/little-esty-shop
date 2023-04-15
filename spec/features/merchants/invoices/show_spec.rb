@@ -8,7 +8,6 @@ RSpec.describe 'merchant invoice show page' do
   describe 'As a merchant, when I visit my merchant invoice show page' do
     it 'I see all of my items on the invoice including the item name, 
       quantity of item ordered,the price the Item sold for, and The Invoice Item status' do
-  
       within "#invoice_item_#{@invoice_item_11.id}" do
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content(@invoice_item_11.quantity)
@@ -46,13 +45,11 @@ RSpec.describe 'merchant invoice show page' do
     it "I see information related to that invoice including
       the Invoice id, Invoice status, Invoice created_at date in the format
       'Monday, July 18, 2019', and the Customer first and last name" do
-      save_and_open_page
       within "#invoice_id_header" do
         expect(page).to have_content(@invoice_2.id)
       end
 
       within "#invoice_info" do
-        save_and_open_page
         expect(page).to have_content(@invoice_2.status)
         expect(page).to have_content(@invoice_2.created_at.strftime("%A, %B %d, %Y"))
       end
