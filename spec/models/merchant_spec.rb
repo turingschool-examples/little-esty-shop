@@ -58,7 +58,7 @@ RSpec.describe Merchant, type: :model do
       @transaction_18 = create(:transaction, invoice_id: @invoice_5.id, result: true) #customer_4
       @transaction_19 = create(:transaction, invoice_id: @invoice_6.id, result: true) #customer_5
       @transaction_20 = create(:transaction, invoice_id: @invoice_6.id, result: true) #customer_5
-      @transaction_21= create(:transaction, invoice_id: @invoice_6.id, result: false) #customer_5
+      @transaction_21 = create(:transaction, invoice_id: @invoice_6.id, result: false) #customer_5
       @transaction_22 = create(:transaction, invoice_id: @invoice_7.id, result: true) #customer_6
       @transaction_23 = create(:transaction, invoice_id: @invoice_7.id, result: false) #customer_6
 

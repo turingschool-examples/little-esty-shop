@@ -3,12 +3,14 @@ require 'rails_helper'
 RSpec.describe 'Merchant Invoices Index Page', type: :feature do
   before(:each) do
     @merchant_1 = create(:merchant)
+    @merchant_2 = create(:merchant)
 
     @item_1 = create(:item, merchant_id: @merchant_1.id)
     @item_2 = create(:item, merchant_id: @merchant_1.id)
     @item_3 = create(:item, merchant_id: @merchant_1.id)
     @item_4 = create(:item, merchant_id: @merchant_1.id)
     @item_5 = create(:item, merchant_id: @merchant_1.id)
+    @item_6 = create(:item, name: "Does not belong to merchant", merchant_id: @merchant_2.id)
     
     @customer_1 = create(:customer)
     @customer_2 = create(:customer)
@@ -24,6 +26,7 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
     @invoice_5 = create(:invoice, customer_id: @customer_4.id)
     @invoice_6 = create(:invoice, customer_id: @customer_5.id)
     @invoice_7 = create(:invoice, customer_id: @customer_6.id)
+    @invoice_8 = create(:invoice, customer_id: @customer_6.id)
     
     @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: true) #customer_1 
     @transaction_2 = create(:transaction, invoice_id: @invoice_1.id, result: true) #customer_1
@@ -56,6 +59,7 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
     @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id, status: 2)
     @invoice_item_6 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id, status: 2)
     @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id, status: 2)
+    @invoice_item_8 = create(:invoice_item, item_id: @item_6.id, invoice_id: @invoice_8.id, status: 0)
 
     visit merchant_invoices_path(@merchant_1.id)
   end
@@ -64,9 +68,20 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
     expect(page).to have_content("#{@merchant_1.name} Invoices")
   end
 
-  it 'it has invoice ids as links' do
+  it 'it has invoice ids as links, User Story 14' do
     within "#invoice-#{@invoice_1.id}" do
       expect(page).to have_link("ID: #{@invoice_1.id}")
     end
+  end
+
+  it 'when I visit a merchant invoice index page, I see all invoices with at least one of my merchant items (User Story 14)' do
+    expect(page).to have_link(@invoice_1.id)
+    expect(page).to have_link(@invoice_2.id)
+    expect(page).to have_link(@invoice_3.id)
+    expect(page).to have_link(@invoice_4.id)
+    expect(page).to have_link(@invoice_5.id)
+    expect(page).to have_link(@invoice_6.id)
+    expect(page).to have_link(@invoice_7.id)
+    expect(page).to_not have_link(@invoice_8.id)
   end
 end
