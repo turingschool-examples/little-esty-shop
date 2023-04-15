@@ -14,12 +14,18 @@ class Invoice < ApplicationRecord
     accumulated_revenue
   end
 
-  
+  def created_at_formatted
+    created_at.strftime("%A, %B %d, %Y")
+  end
+
+  def incomplete_formatted
+
+  end
 
   def self.incomplete
+    select("id, created_at AS 'created_at.strftime('%A, %B %d, %Y')'")
     joins(:invoice_items)
     .where(invoice_items: {status: [0, 2]})
     .distinct
-    .pluck(:id)
   end
 end
