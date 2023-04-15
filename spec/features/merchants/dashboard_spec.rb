@@ -118,35 +118,35 @@ RSpec.describe 'merchant dashboard' do
   it 'displays items ready to ship' do
     expect(page).to have_content('Items Ready to Ship')
     within all("##{@invoice_6.id}")[0] do
-      expect(page).to have_link(@invoice_6.id)
+      expect(page).to have_link(@invoice_6.id.to_s)
       expect(page).to have_content(@item_3.name)
     end
     within all("##{@invoice_6.id}")[1] do
-      expect(page).to have_link(@invoice_6.id)
+      expect(page).to have_link(@invoice_6.id.to_s)
       expect(page).to have_content(@item_3.name)
     end
     within "##{@invoice_1.id}" do
-      expect(page).to have_link(@invoice_1.id)
+      expect(page).to have_link(@invoice_1.id.to_s)
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@item_5.name)
     end
     within "##{@invoice_2.id}" do
-      expect(page).to have_link(@invoice_2.id)
+      expect(page).to have_link(@invoice_2.id.to_s)
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@item_5.name)
     end
     within "##{@invoice_3.id}" do
-      expect(page).to have_link(@invoice_3.id)
+      expect(page).to have_link(@invoice_3.id.to_s)
       expect(page).to have_content(@item_2.name)
       expect(page).to have_content(@item_5.name)
     end
     within "##{@invoice_4.id}" do
-      expect(page).to have_link(@invoice_4.id)
+      expect(page).to have_link(@invoice_4.id.to_s)
       expect(page).to have_content(@item_4.name)
       expect(page).to have_content(@item_2.name)
     end
     within "##{@invoice_5.id}" do
-      expect(page).to have_link(@invoice_5.id)
+      expect(page).to have_link(@invoice_5.id.to_s)
       expect(page).to have_content(@item_4.name)
       expect(page).to have_content(@item_3.name)
     end

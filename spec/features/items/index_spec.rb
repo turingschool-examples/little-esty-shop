@@ -159,4 +159,12 @@ RSpec.describe 'merchant items index' do
       expect(page).to have_content(40000)
     end
   end
+
+  # it 'I can see the date with the most sales for each item' do 
+  #   visit "/merchants/#{@merchant_1.id}/items"
+
+  #   within "#Top_5_items" do
+  #     expect(page).to have_content("Top selling date for #{item_1.name} was March 27, 2012")
+  #   end
+  # end
 end
