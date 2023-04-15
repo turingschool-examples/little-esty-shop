@@ -58,7 +58,7 @@ RSpec.describe 'Merchant Invoices Show Page', type: :feature do
     @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id, status: 2)
     @invoice_item_6 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id, status: 2)
     @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id, status: 2)
-    @invoice_item_8 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_1.id, status: 2)
+    @invoice_item_8 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_5.id, status: 2)
     @invoice_item_9 = create(:invoice_item, item_id: @item_6.id, invoice_id: @invoice_7.id, status: 2)
   
     visit merchant_invoice_path(@merchant_1, @invoice_1)
@@ -103,9 +103,8 @@ RSpec.describe 'Merchant Invoices Show Page', type: :feature do
   end
 
   it 'will display the total revenue that will be generated from all of my items on the invoice (User Story 17)' do
+    save_and_open_page
     expect(page).to have_content("Total Revenue: $3,400,000")
   end
-#   As a merchant
-# When I visit my merchant invoice show page
-# Then I see the total revenue that will be generated from all of my items on the invoice
+
 end

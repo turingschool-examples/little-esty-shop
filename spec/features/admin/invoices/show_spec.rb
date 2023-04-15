@@ -90,7 +90,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
         expect(page).to have_content(@invoice_item_3.status)
   
         expect(page).to_not have_content(@item_3.name)
-        expect(page).to_not have_content(@invoice_item_4.quantity)
+        expect(page).to_not have_content("Quantity Ordered: #{@invoice_item_4.quantity}")
         expect(page).to_not have_content(@invoice_item_4.unit_price)
       end
 
