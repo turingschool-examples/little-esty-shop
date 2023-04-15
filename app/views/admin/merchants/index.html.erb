@@ -1,4 +1,4 @@
 <h2>Admin Dashboard</h2>
 <% @merchants.each do |merchant| %>
-  <%= merchant.name %>
+  <%= link_to merchant.name, admin_merchant_path(merchant) %>
 <% end %>

@@ -4,4 +4,5 @@ class Admin::DashboardController < ApplicationController
     @top_five_customers = Customer.top_five
     @incomplete_invoices = Invoice.incomplete_invoices
   end
+
 end

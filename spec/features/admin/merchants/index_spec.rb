@@ -15,6 +15,29 @@ RSpec.describe "admin/merchants index", type: :feature do
       expect(page).to have_content(@merchant_4.name)
       expect(page).to have_content(@merchant_5.name)
       expect(page).to have_content(@merchant_6.name)
-    end   
+    end
+
+    it "has links to merchant show pages" do
+      visit admin_merchants_path
+
+      expect(page).to have_link(@merchant_1.name, href: admin_merchant_path(@merchant_1))
+      expect(page).to have_link(@merchant_2.name, href: admin_merchant_path(@merchant_2))
+      expect(page).to have_link(@merchant_3.name, href: admin_merchant_path(@merchant_3))
+      expect(page).to have_link(@merchant_4.name, href: admin_merchant_path(@merchant_4))
+      expect(page).to have_link(@merchant_5.name, href: admin_merchant_path(@merchant_5))
+      expect(page).to have_link(@merchant_6.name, href: admin_merchant_path(@merchant_6))
+    end
+
+    it "links to show pages are functional" do
+      visit admin_merchants_path
+
+      click_link(@merchant_1.name)
+      expect(current_path).to eq(admin_merchant_path(@merchant_1))
+
+      visit admin_merchants_path
+
+      click_link(@merchant_2.name)
+      expect(current_path).to eq(admin_merchant_path(@merchant_2))
+    end
   end
 end
