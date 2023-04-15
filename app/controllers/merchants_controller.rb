@@ -3,6 +3,12 @@ class MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
+  def update
+    merchant = Merchant.find(params[:id])
+    merchant.update(merchant_params)
+    redirect_to admin_merchants_path
+  end
+
   def show
     @merchant = Merchant.find(params[:merchant_id])
   end
@@ -35,12 +41,12 @@ class MerchantsController < ApplicationController
 
 
   private
-  def merchant_params
-    params.require(:merchant).permit(:name)
-  end
 
   def merchant_create_params
     params.permit(:name)
   end
 
+  def merchant_params
+    params.require(:merchant).permit(:name, :is_enabled)
+  end
 end
