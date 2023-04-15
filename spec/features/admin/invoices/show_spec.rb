@@ -77,9 +77,10 @@ RSpec.describe 'Admin Invoice Show Page' do
           select 'completed', from: 'invoice_status'
           click_button 'Update Status'
         end
-        
+
       @invoice_1.reload
       expect(@invoice_1.status).to eq('completed')
+      expect(current_path).to eq(admin_invoice_path(@invoice_1))
     end
   end
 end
