@@ -60,7 +60,7 @@ RSpec.describe 'merchant invoices show', type: :feature do
     it "displays the invoice id" do
       expect(page).to have_content(@invoice_1.id)
       expect(page).to_not have_content(@invoice_4.id)
-      expect(page).to_not have_content(@invoice_5.id)
+      expect(page).to_not have_content(@invoice_11.id)
     end
 
     it "displays the invoice status" do
@@ -126,9 +126,9 @@ RSpec.describe 'merchant invoices show', type: :feature do
 
     it "displays the price item sold for" do
       within "#item-#{@item_1.id}" do
-      expect(page).to have_content(@item_1.unit_price)
-      expect(page).to_not have_content(@item_2.unit_price)
-      expect(page).to_not have_content(@item_3.unit_price)
+        expect(page).to have_content(@item_1.unit_price)
+        expect(page).to_not have_content(@item_2.unit_price)
+        expect(page).to_not have_content(@item_3.unit_price)
       end
 
       within "#item-#{@item_2.id}" do
@@ -167,5 +167,40 @@ RSpec.describe 'merchant invoices show', type: :feature do
         expect(page).to_not have_content("Total Revenue: 56500")
       end
     end
+  
+
+    describe 'update item status' do
+      it "can change the current status of an item to another status" do
+        within "#item-#{@item_1.id}" do
+          expect(page).to have_button("Update Item Status")
+
+          click_button("Update Item Status")
+
+          expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_4.id}/edit")
+          # expect(page).to have_content(@item_1.status)
+          # expect(page).to have_content("enabled")
+        end
+
+        within "#item-#{@item_2.id}" do
+          expect(page).to have_button("Update Item Status")
+
+          click_button("Update Item Status")
+
+          expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_4.id}/edit")
+          # expect(page).to have_content(@item_2.status)
+          # expect(page).to have_content("disabled")
+        end
+
+        within "#item-#{@item_3.id}" do
+          expect(page).to have_button("Update Item Status")
+
+          click_button("Update Item Status")
+
+          expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_4.id}/edit")
+          # expect(page).to have_content(@item_3.status)
+          # expect(page).to have_content("enabled")
+        end
+      end
+    end 
   end
 end

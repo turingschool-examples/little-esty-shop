@@ -6,6 +6,6 @@ Rails.application.routes.draw do
 
   resources :merchants do
     resources :items, only: [:index, :show, :edit, :update, :new, :create]
-    resources :invoices, only: [:index, :show]
+    resources :invoices, only: [:index, :show, :update]
   end
 end

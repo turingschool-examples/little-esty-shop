@@ -14,6 +14,10 @@
     <li><p><b>Quantity: </b><%= @invoice.item_quantity(item) %></p></li>
     <li><p><b>Price: </b><%= item.unit_price %></p></li>
     <li><p><b>Status: </b><%= item.status %></p></li>
+    <%= form_with model: @item, local: true do |form| %>
+      <%= form.label :update_status %>
+      <%= form.submit "Update Item Status" %>
+    <% end %>
     </div><br>
   <% end %>
   <p><b>Total Revenue: </b><%= @invoice.total_invoice_revenue %></p>
