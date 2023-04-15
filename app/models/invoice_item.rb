@@ -8,4 +8,8 @@ class InvoiceItem < ApplicationRecord
   def self.not_yet_shipped
     joins(:invoice).where.not(status: 2).order('invoices.created_at')
   end
+
+  def item_name
+    item.name
+  end
 end

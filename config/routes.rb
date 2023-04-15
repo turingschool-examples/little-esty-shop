@@ -9,4 +9,5 @@ Rails.application.routes.draw do
     resources :invoices, controller: 'merchant/invoices'
     get 'dashboard', to:'merchant/dashboard#show', on: :member
   end
+  patch 'invoice_items/:id', to: 'invoice_items#update', as: 'update_invoice_item'
 end
