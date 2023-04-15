@@ -21,7 +21,7 @@ RSpec.describe 'Admin Invoice Index Page' do
       expect(current_path).to eq(admin_invoice_path(@invoice_1))
 
       visit '/admin/invoices'
-      save_and_open_page
+      
       within "#invoice-#{@invoice_2.id}" do
         click_link @invoice_2.id
       end
