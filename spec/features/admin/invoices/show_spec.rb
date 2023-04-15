@@ -32,4 +32,26 @@ RSpec.describe 'Admin Invoice Show Page' do
       end
     end
   end
+
+  describe 'User Story 35' do
+    it 'I see the total revenue that will be generated from this invoice' do
+      visit admin_invoice_path(@invoice_1)
+
+      within("#invoice_details") do
+        expect(page).to have_content(@invoice_1.total_revenue)
+      end
+
+      visit admin_invoice_path(@invoice_2)
+
+      within("#invoice_details") do
+        expect(page).to have_content(@invoice_2.total_revenue)
+      end
+    end
+  end
 end
+
+
+# Admin Invoice Show Page: Total Revenue
+# As an admin
+# When I visit an admin invoice show page
+# Then I see the total revenue that will be generated from this invoice
