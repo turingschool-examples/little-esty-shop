@@ -33,14 +33,31 @@ RSpec.describe 'Admin Invoice Show Page' do
     end
   end
 
+
   describe 'User Story 34' do
     it 'I see the information for all relevant items' do
       visit admin_invoice_path(@invoice_1)
-      save_and_open_page
+     
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@invoice_item_1.quantity)
       expect(page).to have_content(@invoice_item_1.unit_price)
       expect(page).to have_content(@invoice_item_1.status)
+    end
+  end
+
+  describe 'User Story 35' do
+    it 'I see the total revenue that will be generated from this invoice' do
+      visit admin_invoice_path(@invoice_1)
+
+      within("#invoice_details") do
+        expect(page).to have_content(@invoice_1.total_revenue)
+      end
+
+      visit admin_invoice_path(@invoice_2)
+
+      within("#invoice_details") do
+        expect(page).to have_content(@invoice_2.total_revenue)
+      end
     end
   end
 end
