@@ -17,4 +17,20 @@ class Invoice < ApplicationRecord
   def customer_full_name
     "#{customer.first_name} #{customer.last_name}"
   end
+
+  def created_at_formatted
+    created_at.strftime("%A, %B %d, %Y")
+  end
+
+  def self.incomplete
+    select("id, created_at")
+    joins(:invoice_items)
+    .where(invoice_items: {status: [0, 2]})
+    .distinct
+  end
+
+  def self.incomplete_id
+    incomplete
+    .pluck(:id)
+  end
 end
