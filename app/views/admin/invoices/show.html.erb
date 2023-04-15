@@ -4,6 +4,7 @@
 <p><b>Status: </b><%= @invoice.status %></p>
 <p><b>Creation Date: </b><%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 <p><b>Customer: </b><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
+<p><b>Total Revenue: </b><%= @invoice.total_revenue %>
 </section>
 
  
