@@ -1,1 +1,9 @@
-<h2>Admin Dashboard</h2>
+<h2>Admin Invoice Index <h2>
+
+
+<ul> All Invoices </ul>
+<% @invoices.each do |invoice| %>
+  <p id="invoice-<%= invoice.id %>">
+    <%= link_to "#{invoice.id}", admin_invoice_path(invoice) %>
+  </p>
+<% end %>
