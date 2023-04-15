@@ -9,7 +9,10 @@ class InvoicesController < ApplicationController
   end
   
   def update
+    require 'pry'; binding.pry
     item = Item.find(params[:id])
+    item.update(item_params)
+    redirect_to merchants_invoice_path
   end
 
   private
