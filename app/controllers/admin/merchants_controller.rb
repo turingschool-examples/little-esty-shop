@@ -22,6 +22,14 @@ class Admin::MerchantsController < ApplicationController
     end
   end
 
+  def new
+    @merchant = Merchant.new
+  end
+
+  def create
+    Merchant.create(admin_merchant_params)
+  end
+
   private
   def admin_merchant_params
     params.require(:merchant).permit(:name, :status)
