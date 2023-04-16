@@ -16,6 +16,6 @@ class Merchant < ApplicationRecord
     items.select("items.*, unit_price * count(*) AS revenue, mode() within group (order by invoices.created_at desc) AS most_sales_day")
     .left_outer_joins(invoice_items: :invoice)
     .group("items.id").
-    order(revenue: :desc).limit(5)
+    order("revenue desc").limit(5)
   end
 end
