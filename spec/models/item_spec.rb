@@ -41,5 +41,19 @@ RSpec.describe Item, type: :model do
     it "top_five_items" do
       expect(@merchant_3.items.top_five_items.all).to eq([@item_21, @item_20, @item_19, @item_18, @item_17,])
     end
+
+    it "top_day" do
+      @invoice_12.update(created_at: 10.day.ago)
+      @invoice_item_50.update(quantity: 10)
+      @invoice_7.update(created_at: 2.day.ago)
+      @item_19.update(created_at: 5.day.ago)
+      @item_18.update(created_at: 14.day.ago)
+      @item_17.update(created_at: 8.day.ago)
+      expect(@item_21.top_day).to eq("04/04/2023")
+      expect(@item_20.top_day).to eq("04/12/2023")
+      expect(@item_19.top_day).to eq("04/09/2023")
+      expect(@item_18.top_day).to eq("03/31/2023")
+      expect(@item_17.top_day).to eq("04/06/2023")
+    end
   end
 end

@@ -143,5 +143,40 @@ RSpec.describe "Index page", type: :feature do
         expect(page).to have_content("Total revenue: 5100")
       end
     end
+
+    it "Next to each of the 5 most popular items, I see the date 
+        with the most sales for that item. I also see the label 
+        'Top selling date for was'" do
+      @invoice_1.update(created_at: 1.day.ago)
+      @invoice_2.update(created_at: 2.days.ago)
+      @invoice_3.update(created_at: 3.days.ago)
+      @invoice_4.update(created_at: 4.days.ago)
+      @invoice_5.update(created_at: 5.days.ago)
+      @invoice_6.update(created_at: 6.days.ago)
+      @invoice_7.update(created_at: 7.days.ago)
+      @invoice_8.update(created_at: 8.days.ago)
+      @invoice_9.update(created_at: 9.days.ago)
+      @invoice_10.update(created_at: 10.days.ago)
+      @invoice_11.update(created_at: 11.days.ago)
+      @invoice_12.update(created_at: 12.days.ago)
+      @invoice_13.update(created_at: 13.days.ago)
+      @invoice_14.update(created_at: 14.days.ago)
+      @invoice_15.update(created_at: 15.days.ago)
+      @invoice_16.update(created_at: 16.days.ago)
+      @invoice_17.update(created_at: 17.days.ago)
+      @invoice_18.update(created_at: 18.days.ago)
+      @invoice_19.update(created_at: 19.days.ago)
+      @invoice_20.update(created_at: 20.days.ago)
+      @invoice_item_50.update(quantity: 10)
+      visit merchant_items_path(@merchant_3)
+          save_and_open_page
+      within('#statistics') do
+        expect(page).to have_content("Top day for Item 21 was 04/02/2023")
+        expect(page).to have_content("Top day for Item 20 was 04/05/2023")
+        expect(page).to have_content("Top day for Item 19 was 04/08/2023")
+        expect(page).to have_content("Top day for Item 18 was 04/11/2023")
+        expect(page).to have_content("Top day for Item 17 was 03/25/2023")
+      end
+    end
   end
 end
