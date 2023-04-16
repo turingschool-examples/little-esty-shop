@@ -5,6 +5,7 @@ RSpec.describe 'Admin Merchants Show', type: :feature do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
   end
+
   describe "Admin Merchant Update (User Story 26)" do
     it "displays a link to update merchant information" do
       visit admin_merchant_path(@merchant_1)
@@ -12,6 +13,7 @@ RSpec.describe 'Admin Merchants Show', type: :feature do
       visit admin_merchant_path(@merchant_2)
       expect(page).to have_link("Update Merchant Information")
     end
+
     it "clicking redirects me to a prefilled form to update merchant information" do
       visit admin_merchant_path(@merchant_1)
       click_link("Update Merchant Information")
@@ -27,6 +29,7 @@ RSpec.describe 'Admin Merchants Show', type: :feature do
       expect(page).to have_field('merchant_name')
       expect(page).to have_button("Update Merchant")
     end
+
     it "clicking submit updates information,redirects to admin merchant show page, and displays a flash message" do
       visit edit_admin_merchant_path(@merchant_1)
       expect(page).to have_content("Edit #{@merchant_1.name}")
@@ -36,6 +39,7 @@ RSpec.describe 'Admin Merchants Show', type: :feature do
       expect(page).to have_content("Information has been successfully updated")
       expect(page).to have_content("Merchant Name: New Name")
     end
+
     it "cannot update merchant information with an empty name field" do
       visit edit_admin_merchant_path(@merchant_2)
       expect(page).to have_content("Edit #{@merchant_2.name}")
@@ -45,5 +49,4 @@ RSpec.describe 'Admin Merchants Show', type: :feature do
       expect(page).to have_content("Error: Name can't be blank")
     end
   end
-  
 end
