@@ -1,0 +1,12 @@
+<h1>Merchant Admin</h1>
+<br>
+<section id="merchants">
+  <h2>Merchants</h2>
+  <ul id="merchants-list">
+    <% @merchants.each do |merchant| %>
+      <div id="merchant-<%= merchant.id %>">
+      <li><%= merchant.name %></li>
+      </div>
+    <% end %>
+  </ul>
+</section>
