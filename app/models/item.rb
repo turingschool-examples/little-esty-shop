@@ -21,8 +21,18 @@ class Item < ApplicationRecord
                           WHEN '1' THEN 'Packaged' 
                           WHEN '2' THEN 'Shipped' 
                          END AS invoice_item_status")
+  end
   
   def self.top_five_items
     Item.select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) AS product").joins(:transactions).where("transactions.result = 1").group("items.id").order(product: :desc).limit(5)
+  end
+
+  def top_day
+  invoices.joins(:invoice_items)
+  .where('invoice.status = 2')
+  .select('invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+  .group('invoices.created_at')
+  .order('revenue desc', 'invoices.created_at desc')
+  .first.created_at.strftime("%m/%d/%Y")
   end
 end
