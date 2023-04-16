@@ -22,4 +22,12 @@ class Merchant < ApplicationRecord
       "Disabled"
     end
   end
+
+  def highest_revenue_date
+    invoices.find_with_successful_transactions
+      .joins(:invoice_items)
+      .select("invoices.id, invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity) as total_rev")
+      .group(:id)
+      .order("total_rev DESC").first.created_at
+  end
 end
