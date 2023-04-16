@@ -6,7 +6,7 @@ RSpec.describe Invoice, type: :model do
     it { should have_many :items }
   end
 
-  describe '#instance methods' do
+  describe 'methods' do
     before(:each) do
       test_data
       @transaction_21 = @invoice_1.transactions.create!(credit_card_number: 1, credit_card_expiration_date: 1, result: 1)
@@ -39,12 +39,12 @@ RSpec.describe Invoice, type: :model do
       @invoice_item_60 = @invoice_20.invoice_items.create!(item: @item_35, quantity: 1, unit_price: 2400, status: 1)
     end
 
-    it 'can find top 5 customers' do
+    it '#can find top 5 customers' do
       expect(@merchant_1.top_five_customers).to eq([@customer_6, @customer_1, @customer_2, @customer_5, @customer_3])  
       expect(@merchant_1.top_five_customers.first.transaction_count).to eq(14)
     end
 
-    it 'can find a merchants total revenue' do
+    it '#can find a merchants total revenue' do
       expect(@merchant_3.total_revenue).to eq(226800)
       expect(@merchant_1.total_revenue).to eq(151200)
       expect(@merchant_5.total_revenue).to eq(70200)
@@ -53,7 +53,7 @@ RSpec.describe Invoice, type: :model do
       expect(@merchant_6.total_revenue).to eq(0)
     end
 
-    it 'can find top 5 merchants' do
+    it '::can find top 5 merchants' do
       expect(Merchant.top_five_merchants.first).to eq(@merchant_3)
     end
   end
