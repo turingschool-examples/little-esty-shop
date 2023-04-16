@@ -7,6 +7,14 @@ class Merchant < ApplicationRecord
 
   validates :name, presence: true
 
+  def self.all_enabled
+    where(is_enabled: true).order(:name)
+  end
+
+  def self.all_disabled
+    where(is_enabled: false).order(:name)
+  end
+
   def enabled_status
     if is_enabled?
       "Enabled"
@@ -14,5 +22,4 @@ class Merchant < ApplicationRecord
       "Disabled"
     end
   end
-  
 end
