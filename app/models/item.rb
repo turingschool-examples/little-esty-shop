@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
 
-  validates_presence_of :name, :description, :unit_price
+  validates_presence_of :name, :description, :unit_price, :status
 
   enum status: [:enabled, :disabled]
 
@@ -28,5 +28,16 @@ class Item < ApplicationRecord
       .select('items.*, SUM(invoice_items.quantity * invoice_items.unit_price/100) AS revenue')
       .order('revenue DESC')
       .limit(5)
+  end
+
+  def top_selling_date
+    self.invoices.joins(:transactions, :invoice_items)
+      .where(transactions: {result: Transaction.results[:success]})
+      .group('invoices.created_at')
+      .order(Arel.sql('SUM(invoice_items.quantity * invoice_items.unit_price/100) DESC'))
+      .limit(1)
+      .pluck(:created_at)
+      .first
+      .strftime("%A, %B %d, %Y")
   end
 end
