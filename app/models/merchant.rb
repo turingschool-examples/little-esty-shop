@@ -17,8 +17,28 @@ class Merchant < ApplicationRecord
            .limit(5)
   end
 
+  def total_revenue
+    invoices.joins(:transactions, :invoice_items)
+            .where("transactions.result = 1")
+            .group("invoices.id")
+            .sum('invoice_items.unit_price * invoice_items.quantity')
+            .values
+            .sum
+  end
+
+  def self.top_five_merchants
+          joins(invoices: [:transactions, :invoice_items])
+          .where("transactions.result = 1")
+          .group("merchants.id")
+          .select('merchants.*, SUM(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
+          .order('total_revenue DESC')
+          .limit(5)
+          
+  end
+
   def update_status(status_update)
     update(status: status_update)
     save
   end
+
 end
