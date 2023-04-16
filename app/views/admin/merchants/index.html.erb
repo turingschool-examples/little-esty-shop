@@ -1,6 +1,17 @@
 <h1>Admin Merchants Index</h1>
 <%= link_to "Create New Merchant", new_merchant_path %>
 
+<div id = "top_5">
+<h2>Top 5 Merchants by Revenue</h2>
+<% Merchant.find_top_5.each do |m| %>
+<ul>
+  <li>Name: <%= link_to m.name, merchant_path(m) %></li>
+  <li>Total Revenue: <%= m.revenue %></li>
+</ul>
+<% end %>
+</div>
+
+
 <div id = "enabled-merchants">
 <h2>Enabled Merchants</h2>
   <% @merchants.all_enabled.each do |merchant|%>

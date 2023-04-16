@@ -15,6 +15,15 @@ class Merchant < ApplicationRecord
     where(is_enabled: false).order(:name)
   end
 
+  def self.find_top_5
+    joins(items: { invoice_items: { invoice: :transactions }})
+    .where(transactions: { result: "success" })
+    .group('merchants.id')
+    .select('merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+    .order('revenue DESC')
+    .limit(5)
+  end
+
   def enabled_status
     if is_enabled?
       "Enabled"
@@ -22,4 +31,6 @@ class Merchant < ApplicationRecord
       "Disabled"
     end
   end
+
+
 end

@@ -4,7 +4,39 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
   before(:each) do
     @merchant_1 = create(:merchant, is_enabled: true) #enabled to start
     @merchant_2 = create(:merchant, is_enabled: true) #enabled to start
-    @merchant_3 = create(:merchant) #disabled to start (is_enabled: false by default)
+    @merchant_3 = create(:merchant, is_enabled: true)
+    @merchant_4 = create(:merchant, is_enabled: true)
+    @merchant_5 = create(:merchant, is_enabled: true)
+    @merchant_6 = create(:merchant, is_enabled: true)
+    @merchant_7 = create(:merchant, is_enabled: false) #disabled to start (is_enabled: false by default)
+
+    @customer_1 = create(:customer)
+    @customer_2 = create(:customer)
+    @customer_3 = create(:customer)
+    @invoice_1 = create(:invoice, customer_id: @customer_1.id,status: 'In Progress')
+    @invoice_2 = create(:invoice, customer_id: @customer_2.id,status: 'In Progress')
+    @invoice_3= create(:invoice, customer_id: @customer_3.id, status: 'In Progress')
+    @invoice_4= create(:invoice, customer_id: @customer_1.id, status: 'In Progress')
+    @invoice_5= create(:invoice, customer_id: @customer_2.id, status: 'In Progress')
+    @invoice_6= create(:invoice, customer_id: @customer_3.id, status: 'In Progress')
+    @item_1 = create(:item, merchant_id: @merchant_1.id)
+    @item_2 = create(:item, merchant_id: @merchant_2.id)
+    @item_3 = create(:item, merchant_id: @merchant_3.id)
+    @item_4 = create(:item, merchant_id: @merchant_4.id)
+    @item_5 = create(:item, merchant_id: @merchant_5.id)
+    @item_6 = create(:item, merchant_id: @merchant_6.id)
+    @invoice_item_1 = create(:invoice_item, invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 1, unit_price: 1)
+    @invoice_item_2 = create(:invoice_item, invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 2, unit_price: 2)
+    @invoice_item_3 = create(:invoice_item, invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 3, unit_price: 3)
+    @invoice_item_4 = create(:invoice_item, invoice_id: @invoice_4.id, item_id: @item_4.id, quantity: 4, unit_price: 4)
+    @invoice_item_5 = create(:invoice_item, invoice_id: @invoice_5.id, item_id: @item_5.id, quantity: 5, unit_price: 5)
+    @invoice_item_6 = create(:invoice_item, invoice_id: @invoice_6.id, item_id: @item_6.id, quantity: 6, unit_price: 6)
+    @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: "success")
+    @transaction_2 = create(:transaction, invoice_id: @invoice_2.id, result: "success")
+    @transaction_3 = create(:transaction, invoice_id: @invoice_3.id, result: "success")
+    @transaction_4 = create(:transaction, invoice_id: @invoice_4.id, result: "success")
+    @transaction_5 = create(:transaction, invoice_id: @invoice_5.id, result: "success")
+    @transaction_6 = create(:transaction, invoice_id: @invoice_6.id, result: false)
   end
 
   describe "Admin Merchant Index Page (User Story 24)" do
@@ -20,16 +52,20 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
   describe "Admin Merchant Show (User Story 25)" do
     it "Each merchant name is a link that takes you to their admin show page and it shows their name" do
       visit admin_merchants_path
-      click_link(@merchant_1.name)
-      expect(current_path).to eq(admin_merchant_path(@merchant_1))
-      expect(page).to have_content(@merchant_1.name)
-
-      expect(page).to_not have_content(@merchant_2.name)
-      expect(page).to_not have_content(@merchant_3.name)
+      within ("#enabled-merchants") do
+        click_link(@merchant_1.name)
+      end
+        expect(current_path).to eq(admin_merchant_path(@merchant_1))
+        expect(page).to have_content(@merchant_1.name)
+  
+        expect(page).to_not have_content(@merchant_2.name)
+        expect(page).to_not have_content(@merchant_3.name)
 
 
       visit admin_merchants_path
-      click_link(@merchant_2.name)
+      within ("#enabled-merchants") do
+        click_link(@merchant_2.name)
+      end
       expect(current_path).to eq(admin_merchant_path(@merchant_2))
       expect(page).to have_content(@merchant_2.name)
 
@@ -37,7 +73,9 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
       expect(page).to_not have_content(@merchant_3.name)
 
       visit admin_merchants_path
-      click_link(@merchant_3.name)
+      within ("#enabled-merchants") do
+        click_link(@merchant_3.name)
+      end
       expect(page).to have_current_path(admin_merchant_path(@merchant_3))
       expect(page).to have_content(@merchant_3.name)
 
@@ -96,7 +134,7 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
         expect(page).to have_button("Disable")
       end
 
-      within ("#merchant-#{@merchant_3.id}") do
+      within ("#merchant-#{@merchant_7.id}") do
         expect(page).to have_button("Enable")
       end
     end
@@ -106,7 +144,7 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
 
       expect(@merchant_1.is_enabled).to be(true)
       expect(@merchant_2.is_enabled).to be(true)
-      expect(@merchant_3.is_enabled).to be(false)
+      expect(@merchant_7.is_enabled).to be(false)
 
       within ("#merchant-#{@merchant_1.id}") do
         click_button("Disable")
@@ -120,7 +158,7 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
         expect(page).to have_button("Enable")
       end
 
-      within ("#merchant-#{@merchant_3.id}") do
+      within ("#merchant-#{@merchant_7.id}") do
         click_button("Enable")
         expect(current_path).to eq(admin_merchants_path)
         expect(page).to have_button("Disable")
@@ -141,7 +179,7 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
 
         expect(page).to have_content(@merchant_1.name)
         expect(page).to have_content(@merchant_2.name)
-        expect(page).to_not have_content(@merchant_3.name)
+        expect(page).to_not have_content(@merchant_7.name)
 
         expect(page).to have_content("Status: Enabled")
         expect(page).to_not have_content("Status: Disabled")
@@ -153,7 +191,7 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
       within ("#disabled-merchants") do
         expect(page).to have_content("Disabled Merchants")
 
-        expect(page).to have_content(@merchant_3.name)
+        expect(page).to have_content(@merchant_7.name)
         expect(page).to_not have_content(@merchant_1.name)
         expect(page).to_not have_content(@merchant_2.name)
 
@@ -165,4 +203,45 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
       end
     end
   end
+
+  describe "Admin Merchants: Top 5 Merchants by Revenue (User Story 30)" do
+    it "displays the names of the top 5 merchants by revenue" do
+      visit admin_merchants_path
+      within("#top_5") do
+        expect(page).to have_content("Top 5 Merchants by Revenue")
+        expect(page).to have_content("Name: #{@merchant_5.name}")
+        expect(page).to have_content("Name: #{@merchant_4.name}")
+        expect(page).to have_content("Name: #{@merchant_3.name}")
+        expect(page).to have_content("Name: #{@merchant_2.name}")
+        expect(page).to have_content("Name: #{@merchant_1.name}")
+
+        expect(page).to_not have_content("Name: #{@merchant_6.name}")
+        expect(page).to_not have_content("Name: #{@merchant_7.name}")
+      end
+    end
+    it "each merchant name links to the admin merchant show page for that merchant" do
+      visit admin_merchants_path
+      within("#top_5") do
+        expect(page).to have_link("#{@merchant_5.name}")
+        expect(page).to have_link("#{@merchant_4.name}")
+        expect(page).to have_link("#{@merchant_3.name}")
+        expect(page).to have_link("#{@merchant_2.name}")
+        expect(page).to have_link("#{@merchant_1.name}")
+
+        expect(page).to_not have_link("#{@merchant_6.name}")
+        expect(page).to_not have_link("#{@merchant_7.name}")
+      end
+    end
+    it "displays the total revenue generated next to each merchant name" do
+      visit admin_merchants_path
+      within("#top_5") do
+        expect(page).to have_content("Total Revenue: 1")
+        expect(page).to have_content("Total Revenue: 4")
+        expect(page).to have_content("Total Revenue: 9")
+        expect(page).to have_content("Total Revenue: 16")
+        expect(page).to have_content("Total Revenue: 25")
+      end
+    end
+  end
+
 end
