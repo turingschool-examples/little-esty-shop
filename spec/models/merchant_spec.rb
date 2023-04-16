@@ -89,13 +89,14 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe "#highest_revenue_date" do
-      it 'returns the date of the invoice with the greatest revenue for the given merchant' do
+      it 'returns the most recent day with the greatest revenue for the given merchant' do
         customer = create(:customer)
         merchant = create(:merchant)
 
-        invoice_1 = create(:invoice, created_at: '2023-01-01 20:54:10 UTC', customer: customer) # has only successful transactions
+        invoice_1 = create(:invoice, created_at: '2023-01-01 20:54:10 UTC', customer: customer) # has only successful transactions, newer / more recent date
         invoice_2 = create(:invoice, created_at: '2023-01-02 20:54:10 UTC', customer: customer) # has 2 successful transactions and 1 un-successful transaction
         invoice_3 = create(:invoice, created_at: '2023-01-03 20:54:10 UTC', customer: customer) # has no successful transactions
+        invoice_4 = create(:invoice, created_at: '2022-01-01 20:54:10 UTC', customer: customer) # has only successful transactions, older / less recent date
 
         item_1 = create(:item, merchant: merchant)
         item_2 = create(:item, merchant: merchant)
@@ -110,6 +111,9 @@ RSpec.describe Merchant, type: :model do
         transaction_7 = create(:transaction, result: false, invoice: invoice_3)
         transaction_8 = create(:transaction, result: false, invoice: invoice_3)
         transaction_9 = create(:transaction, result: false, invoice: invoice_3)
+        transaction_10 = create(:transaction, result: true, invoice: invoice_4)
+        transaction_11 = create(:transaction, result: true, invoice: invoice_4)
+        transaction_12 = create(:transaction, result: true, invoice: invoice_4)
 
         invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_1.id, quantity: 1, unit_price: 100)
         invoice_item_2= create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 100, unit_price: 10)
@@ -120,6 +124,9 @@ RSpec.describe Merchant, type: :model do
         invoice_item_7 = create(:invoice_item, invoice_id: invoice_3.id, item_id: item_1.id, quantity: 2, unit_price: 100)
         invoice_item_8= create(:invoice_item, invoice_id: invoice_3.id, item_id: item_2.id, quantity: 100, unit_price: 10)
         invoice_item_9 = create(:invoice_item, invoice_id: invoice_3.id, item_id: item_3.id, quantity: 5, unit_price: 50)
+        invoice_item_10 = create(:invoice_item, invoice_id: invoice_4.id, item_id: item_1.id, quantity: 1, unit_price: 100)
+        invoice_item_11= create(:invoice_item, invoice_id: invoice_4.id, item_id: item_2.id, quantity: 100, unit_price: 10)
+        invoice_item_12 = create(:invoice_item, invoice_id: invoice_4.id, item_id: item_3.id, quantity: 5, unit_price: 50)
 
         expect(merchant.highest_revenue_date).to eq(invoice_1.created_at)
       end
