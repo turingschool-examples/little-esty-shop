@@ -35,5 +35,16 @@ RSpec.describe 'Admin Merchants Show Page' do
       expect(current_path).to eq(admin_merchant_path(@merchant_2))
       expect(page).to have_content('New Merchant Name')
     end
+
+    it 'fails to submit name' do
+      visit "admin/merchants/#{@merchant_1.id}/edit"
+      
+      fill_in 'Name', with: ''
+      click_button('Update')
+
+      expect(page).to have_content('Merchant Update Failed')
+      expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}/edit")
+      expect(page).to have_content("First Merchant")
+    end
   end
 end

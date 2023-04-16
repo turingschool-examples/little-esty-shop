@@ -1,4 +1,7 @@
-<%= render 'shared/flash_messages' %>
+<%= render '/shared/flash_messages' %>
+<% flash.each do |type, message|%>
+  <p><%= message %> </p>
+  <% end %>
 <h1>Update: <%=@merchant.name%></h1>
 <%=form_with url: admin_merchant_path(@merchant), method: :patch, local: true do |f|%>
   <%= f.label :name %>
