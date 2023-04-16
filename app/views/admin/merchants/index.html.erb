@@ -5,7 +5,7 @@
   <ul id="merchants-list">
     <% @merchants.each do |merchant| %>
       <div id="merchant-<%= merchant.id %>">
-      <li><%= merchant.name %></li>
+      <li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
       </div>
     <% end %>
   </ul>
