@@ -56,5 +56,17 @@ RSpec.describe Invoice, type: :model do
     it '::can find top 5 merchants' do
       expect(Merchant.top_five_merchants.first).to eq(@merchant_3)
     end
+
+    it "#update_status" do
+      expect(@merchant_3.status).to eq("disabled")
+
+      @merchant_3.update_status("enabled")
+
+      expect(@merchant_3.status).to eq("enabled")
+
+      @merchant_3.update_status("disabled")
+
+      expect(@merchant_3.status).to eq("disabled")
+    end
   end
 end

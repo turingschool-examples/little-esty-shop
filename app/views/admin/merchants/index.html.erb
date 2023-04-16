@@ -1,4 +1,28 @@
-<h2>Admin Dashboard</h2>
-<% @merchants.each do |merchant| %>
-  <%= link_to merchant.name, admin_merchant_path(merchant) %>
-<% end %>
+<h1>Admin Merchant Index</h1>
+<br/>
+
+<ul id="enabled_merchants">
+<h2>Enabled Merchants</h2>
+<% @enabled_merchants.each do |merchant| %>
+  <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> 
+  <%= form_with model: merchant, url: "/admin/merchants/#{merchant.id}", local: true do |form| %>
+      <%= form.hidden_field :_method, value: "patch" %>
+      <%= form.hidden_field :status, value: "disabled" %>
+      <%= form.submit "Disable" %>
+    <% end %>
+  <% end %></li>
+</ul>
+
+<br/>
+
+<ul id="disabled_merchants">
+<h2>Disabled Merchants</h2>
+<% @disabled_merchants.each do |merchant| %>
+  <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> 
+   <%= form_with model: merchant, url: "/admin/merchants/#{merchant.id}", local: true do |form| %>
+      <%= form.hidden_field :_method, value: "patch" %>
+      <%= form.hidden_field :status, value: "enabled" %>
+      <%= form.submit "Enable", id: "enable_#{merchant.id}" %>
+    <% end %></li>
+  <% end %>
+</ul>

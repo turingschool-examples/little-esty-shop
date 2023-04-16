@@ -6,7 +6,7 @@ RSpec.describe "admin/merchant edit page", type: :feature do
       test_data
     end
 
-    it "edit page exists" do
+    it "edit page" do
       visit edit_admin_merchant_path(@merchant_3)
 
       expect(page).to have_no_content("This is the name now")
