@@ -17,4 +17,13 @@ class Item < ApplicationRecord
     .order(product: :desc)
     .limit(5)
   end
+
+  def top_day
+  invoices.joins(:invoice_items, :transactions)
+  .where('transactions.result = 1')
+  .select('invoices.created_at, invoice_items.quantity as sales')
+  .group('invoices.created_at, sales')
+  .order(sales: :desc, created_at: :desc)
+  .first.created_at.strftime("%d/%m/%Y")
+  end
 end
