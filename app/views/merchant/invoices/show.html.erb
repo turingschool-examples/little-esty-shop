@@ -4,6 +4,7 @@
   <h3>Invoice #<%= @invoice.id %></h3>
   <p>Status: <%= @invoice.status %></p>
   <p>Created on: <%= @invoice.convert_created_at %></p>
+  <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p>
 </div>
 
 <div id="customer-info">
@@ -12,11 +13,18 @@
 </div>
 
 <h3>Items on this Invoice:</h3>
-<% @invoice.items.each do |item| %>
-  <div id="item-info-<%= item.id %>">
-    <p>Item Name: <%= item.name %></p>
-    <p>Quantity: <%= item.quantity_sold(@invoice).first %></p>
-    <p>Unit Price: <%= number_to_currency(item.find_sold_price(@invoice)) %></p>
-    <p>Status: <%= item.invoice_item_status(@invoice).first %></p><br>
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <div id="item-info-<%= invoice_item.item.id %>">
+    <p>Item Name: <%= invoice_item.item.name %></p>
+    <p>Quantity: <%= invoice_item.item.quantity_sold(@invoice).first %></p>
+    <p>Unit Price: <%= number_to_currency(invoice_item.item.find_sold_price(@invoice)) %></p>
+    <p>Status: <%= invoice_item.item.invoice_item_status(@invoice).first %></p>
+    
+    <p>Update Invoice Item Status</p>
+    <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
+      <%= form.select :status, ['pending', 'packaged', 'shipped'], selected: invoice_item.status %>
+      <%= form.submit "Update Item Status" %>
+      <br>
+    <% end %>
   </div>
 <% end %>
