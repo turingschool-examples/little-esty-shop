@@ -9,7 +9,7 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
     @item_3 = create(:item, merchant_id: @merchant_1.id)
     @item_4 = create(:item, merchant_id: @merchant_1.id)
     @item_5 = create(:item, merchant_id: @merchant_1.id)
-    
+
     @customer_1 = create(:customer)
     @customer_2 = create(:customer)
     @customer_3 = create(:customer)
@@ -24,8 +24,8 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
     @invoice_5 = create(:invoice, customer_id: @customer_4.id)
     @invoice_6 = create(:invoice, customer_id: @customer_5.id)
     @invoice_7 = create(:invoice, customer_id: @customer_6.id)
-    
-    @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: true) #customer_1 
+
+    @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: true) #customer_1
     @transaction_2 = create(:transaction, invoice_id: @invoice_1.id, result: true) #customer_1
     @transaction_3 = create(:transaction, invoice_id: @invoice_2.id, result: true) #customer_1
     @transaction_4 = create(:transaction, invoice_id: @invoice_2.id, result: true) #customer_1
@@ -119,33 +119,33 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@invoice_1.id)
     end
-    
+
     within "#invoice-item-#{@invoice_item_2.id}" do
       expect(page).to have_content(@item_2.name)
       expect(page).to have_content(@invoice_2.id)
     end
-    
+
     within "#invoice-item-#{@invoice_item_3.id}" do
       expect(page).to have_content(@item_3.name)
       expect(page).to have_content(@invoice_3.id)
     end
-    
+
     within "#invoice-item-#{@invoice_item_4.id}" do
       expect(page).to have_content(@item_4.name)
       expect(page).to have_content(@invoice_4.id)
     end
   end
-  
+
   it 'the links will take me to my merchant invoice show page (User Story 4)' do
     within "#invoice-item-#{@invoice_item_1.id}" do
-      expect(page).to have_link(@invoice_1.id)
-      
-      click_link(@invoice_1.id)
-      
+      expect(page).to have_link(@invoice_1.id.to_s)
+
+      click_link(@invoice_1.id.to_s)
+
       expect(current_path).to eq(merchant_invoice_path(@merchant_1, @invoice_1))
     end
   end
-  
+
   it 'has the date the invoice was created at formatted like "Tuesday, March 27, 2012" (User Story 5)' do
     within "#invoice-item-#{@invoice_item_1.id}" do
       expect(page).to have_content("Tuesday, March 27, 2012")

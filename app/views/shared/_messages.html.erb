@@ -1,0 +1,7 @@
+<% flash.each do |name, message| %>
+  <% if message.is_a? String %>
+    <p class=<%= name %>>
+      <%= message %>
+    </p>
+  <% end %>
+<% end %>
