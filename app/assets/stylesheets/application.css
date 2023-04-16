@@ -14,15 +14,19 @@
  *= require_self
  */
 
- .notice {
+.notice {
   background-color: lightgreen;
- }
+}
 
- .alert {
+.alert {
   background-color: lightcoral;
- }
+}
 
- input {
+input {
   display: block;
   margin: 5px;
- }
+}
+
+.toggle_item form, .toggle_item input {
+  display: inline-block;
+}

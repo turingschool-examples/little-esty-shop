@@ -1,7 +1,12 @@
 <h2><%= @merchant.name %> Items</h2>
 
 <% @merchant.items.each do |item| %>
-  <h3 id="item-<%= item.id %>">
+  <div class="toggle_item" id="item-<%= item.id %>">
     <%= link_to item.name, merchant_item_path(@merchant.id, item) %>
-  </h3>
+    <%= form_with url: merchant_toggle_item_path(@merchant.id, item), method: :patch, local: true do |form| %>
+      <%= form.hidden_field :item, value: item.id %>
+
+      <%= form.submit "#{item.enabled ? 'Disable' : 'Enable'} Item" %>
+    <% end %>
+  </div>
 <% end %>

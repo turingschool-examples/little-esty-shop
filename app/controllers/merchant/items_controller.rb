@@ -1,5 +1,5 @@
 class Merchant::ItemsController < ApplicationController
-  before_action :find_merchant, only: [:index, :show, :edit, :update]
+  before_action :find_merchant, only: [:index, :show, :edit, :update, :destroy, :toggle_item]
   before_action :find_item, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -20,6 +20,14 @@ class Merchant::ItemsController < ApplicationController
     end
   end
 
+  def toggle_item
+    item = Item.find(toggle_item_params[:item])
+    if item.update(enabled: !item.enabled)
+      flash.now[:notice] = "Item successfully #{item.enabled ? 'enabled' : 'disabled'}!"
+    end
+    render :index
+  end
+
   private
 
   def find_merchant
@@ -32,5 +40,9 @@ class Merchant::ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :description, :unit_price)
+  end
+
+  def toggle_item_params
+    params.permit(:item)
   end
 end

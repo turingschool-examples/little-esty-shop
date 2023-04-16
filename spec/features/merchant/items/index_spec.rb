@@ -13,7 +13,7 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
       expect(page).to have_content("#{@merchant_1.name} Items")
     end
 
-    it 'it lists all of the merchan item names as links' do
+    it 'it lists all of the merchant item names as links' do
       visit merchant_items_path(@merchant_1)
 
       within "#item-#{@item_1.id}" do
@@ -26,6 +26,45 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
       item_2 = create(:item, merchant: merchant_2)
 
       expect(page).to_not have_link(item_2.name)
+    end
+  end
+
+  describe 'Merchant Item Disable/Enable (User Story 9)' do
+    it 'has a button next to each item for enabling or disabling that item' do
+      within "#item-#{@item_1.id}" do
+        expect(page).to have_button('Disable Item')
+
+        click_button 'Disable Item'
+
+        expect(page).to have_button('Enable Item')
+      end
+      expect(page).to have_content("#{@merchant_1.name} Items")
+    end
+
+    it 'enabling or disabling a button changes its enabled status in the database' do
+      expect(@item_1.enabled).to eq(true)
+      within "#item-#{@item_1.id}" do
+        expect(page).to have_button('Disable Item')
+
+        click_button 'Disable Item'
+      end
+      expect(@item_1.reload.enabled).to eq(false)
+    end
+
+    it 'displays a flash message that the item has been successfully enabled or disabled ' do
+      within "#item-#{@item_1.id}" do
+        expect(page).to have_button('Disable Item')
+
+        click_button 'Disable Item'
+      end
+      expect(page).to have_content("Item successfully disabled!")
+
+      within "#item-#{@item_1.id}" do
+        expect(page).to have_button('Enable Item')
+
+        click_button 'Enable Item'
+      end
+      expect(page).to have_content("Item successfully enabled!")
     end
   end
 end
