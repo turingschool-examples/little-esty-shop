@@ -14,4 +14,12 @@ class Merchant < ApplicationRecord
   def items_not_shipped
     invoice_items.select('invoice_items.*').where(status: [0, 1]).joins(:invoice).order('invoices.created_at')
   end
+
+  def enabled_items
+    items.where(enabled: true)
+  end
+
+  def disabled_items
+    items.where(enabled: false)
+  end
 end

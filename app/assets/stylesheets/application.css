@@ -27,6 +27,6 @@ input {
   margin: 5px;
 }
 
-.toggle_item form, .toggle_item input {
+.toggle-item form, .toggle-item input {
   display: inline-block;
 }
