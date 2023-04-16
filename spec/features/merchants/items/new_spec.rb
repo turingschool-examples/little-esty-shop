@@ -35,5 +35,16 @@ RSpec.describe 'Merchant Items New Page' do
         expect(page).to have_content('Banana')
       end
     end
+
+    it 'I cannot create an item without a name, description, and unit price' do
+      visit new_merchant_item_path(@merchant_1)
+
+      within '#new-item-form' do
+        click_button 'Submit'
+      end
+
+      expect(current_path).to eq(new_merchant_item_path(@merchant_1))
+      expect(page).to have_content("Item Creation Failed")
+    end
   end
 end

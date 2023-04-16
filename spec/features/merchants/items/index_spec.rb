@@ -51,6 +51,7 @@ RSpec.describe 'Merchant Items Index Page' do
       visit merchant_items_path(@merchant_1)
 
       within '#enabled-items-list' do
+        expect(@merchant_1.items.find(@item_1.id).enabled).to eq(true)
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content(@item_9.name)
       end
@@ -65,6 +66,7 @@ RSpec.describe 'Merchant Items Index Page' do
       expect(current_path).to eq(merchant_items_path(@merchant_1))
       
       within '#disabled-items-list' do
+        expect(@merchant_1.items.find(@item_1.id).disabled).to eq(true)
         expect(page).to have_content(@item_1.name)
       end
 

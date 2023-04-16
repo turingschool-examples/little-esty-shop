@@ -9,6 +9,5 @@ class CreateInvoiceItems < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_column :invoice_items, :status, :integers, default: 0
   end
 end
