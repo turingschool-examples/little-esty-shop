@@ -3,10 +3,10 @@
 
 <div id = "top_5">
 <h2>Top 5 Merchants by Revenue</h2>
-<% Merchant.find_top_5.each do |m| %>
+<% @top_5.each do |merchant| %>
 <ul>
-  <li>Name: <%= link_to m.name, merchant_path(m) %></li>
-  <li>Total Revenue: <%= m.revenue %></li>
+  <li>Name: <%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+  <li>Total Revenue: <%= merchant.revenue %></li>
 </ul>
 <% end %>
 </div>
@@ -14,7 +14,7 @@
 
 <div id = "enabled-merchants">
 <h2>Enabled Merchants</h2>
-  <% @merchants.all_enabled.each do |merchant|%>
+  <% @enabled_merchants.each do |merchant|%>
     <div id = "merchant-<%=merchant.id%>">
       <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %> Status: <%= merchant.enabled_status %><p>
 
@@ -28,7 +28,7 @@
 
 <div id = "disabled-merchants">
 <h2>Disabled Merchants</h2>
-  <% @merchants.all_disabled.each do |merchant|%>
+  <% @disabled_merchants.each do |merchant|%>
     <div id = "merchant-<%=merchant.id%>">
       <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %> Status: <%= merchant.enabled_status %><p>
 
