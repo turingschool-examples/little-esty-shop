@@ -22,6 +22,9 @@ RSpec.describe Item, type: :model do
     @item_19 = Item.create!(name: "Item 19", description: "Item 19 description", unit_price: 13600, merchant: @merchant_2)
     @item_20 = Item.create!(name: "Item 20", description: "Item 20 description", unit_price: 13200, merchant: @merchant_2)
 
+    @invoice_11 = Invoice.create!(status: "completed", customer: @customer_1, created_at: "2012-03-06 14:54:09 UTC")
+    @invoice_12 = Invoice.create!(status: "completed", customer: @customer_1, created_at: "2012-03-06 14:54:09 UTC")
+
     @invoice_item_21 = InvoiceItem.create!(quantity: 40, unit_price: 1700, status: "packaged", item: @item_11, invoice: @invoice_1)
     @invoice_item_22 = InvoiceItem.create!(quantity: 12, unit_price: 1800, status: "packaged", item: @item_12, invoice: @invoice_1)
     @invoice_item_23 = InvoiceItem.create!(quantity: 10, unit_price: 1900, status: "packaged", item: @item_13, invoice: @invoice_1)
@@ -32,6 +35,8 @@ RSpec.describe Item, type: :model do
     @invoice_item_28 = InvoiceItem.create!(quantity: 10, unit_price: 44100, status: "packaged", item: @item_18, invoice: @invoice_2)
     @invoice_item_29 = InvoiceItem.create!(quantity: 20, unit_price: 13600, status: "packaged", item: @item_19, invoice: @invoice_2)
     @invoice_item_30 = InvoiceItem.create!(quantity: 30, unit_price: 13200, status: "packaged", item: @item_20, invoice: @invoice_2)
+    @invoice_item_31 = InvoiceItem.create!(quantity: 20, unit_price: 1700, status: "packaged", item: @item_11, invoice: @invoice_11)
+    @invoice_item_32 = InvoiceItem.create!(quantity: 9, unit_price: 1800, status: "packaged", item: @item_12, invoice: @invoice_12)
   end
 
   describe 'enums' do
@@ -52,21 +57,25 @@ RSpec.describe Item, type: :model do
     end
     
     it '#enabled' do
-      expect(@merchant_1.items.enabled).to eq([@item_1, @item_9, @item_11, @item_12, @item_13, @item_14, @item_15])
-      @item_1.disabled!
-      @item_9.disabled!
-      expect(@merchant_1.items.enabled).to eq([@item_11, @item_12, @item_13, @item_14, @item_15])
-      @item_1.enabled!
-      expect(@merchant_1.items.enabled).to eq([@item_11, @item_12, @item_13, @item_14, @item_15, @item_1])
+      expect(@item_1.enabled).to eq(true)
+      expect(@item_2.enabled).to eq(true)
+      @item_2.disabled!
+      expect(@item_2.enabled).to eq(false)
     end
     
     it '#disabled' do 
-      expect(@merchant_2.items.disabled).to eq([])
+      expect(@item_1.disabled).to eq(false)
+      expect(@item_2.disabled).to eq(false)
       @item_2.disabled!
-      @item_10.disabled!
-      expect(@merchant_2.items.disabled).to eq([@item_2, @item_10])
-      @item_2.enabled!
-      expect(@merchant_2.items.disabled).to eq([@item_10])
+      expect(@item_2.disabled).to eq(true)
+    end
+
+    it '#top_selling_date' do
+      expect(@item_11.top_selling_date).to eq(@invoice_1.created_at.strftime("%A, %B %d, %Y"))
+      expect(@item_11.top_selling_date).to_not eq(@invoice_11.created_at.strftime("%A, %B %d, %Y"))
+      expect(@item_12.top_selling_date).to eq(@invoice_1.created_at.strftime("%A, %B %d, %Y"))
+      expect(@item_12.top_selling_date).to_not eq(@invoice_12.created_at.strftime("%A, %B %d, %Y"))
+      
     end
   end
 
