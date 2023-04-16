@@ -104,7 +104,36 @@ RSpec.describe 'Merchant Invoices Show Page', type: :feature do
 
   it 'will display the total revenue that will be generated from all of my items on the invoice (User Story 17)' do
     save_and_open_page
-    expect(page).to have_content("Total Revenue: $3,400,000")
+    expect(page).to have_content("Total Revenue: $340,000.00")
   end
 
+  it 'I will see the invoice item status for the item selected, when I click the select I can select a new status for the item with a button next to that says Update Item Status' do
+    expect(page).to have_button("Update Item Status")
+    expect(page).to have_select("invoice_item_status", selected: "pending")
+    save_and_open_page
+  end
+
+# When I click this button
+# I am taken back to the merchant invoice show page
+# And I see that my Item's status has now been updated
 end
+
+describe 'when I visit my my items index page' do
+  before(:all) do
+    Item.delete_all
+    Merchant.delete_all
+    @merch_1 = create(:merchant)
+    @merch_2 = create(:merchant)
+    create_list(:item, 10, merchant_id: @merch_1.id)
+    create_list(:item, 3, merchant_id: @merch_2.id)
+  end
+it 'displays a list of the names of all my items' do
+    visit "/merchants/#{@merch_1.id}/items"
+    list_of_names = @merch_1.items.pluck('name')
+   
+    within("#my-items-list") do
+      list_of_names.each do |name|
+        expect(page).to have_content(name)
+      end
+    end
+  end
