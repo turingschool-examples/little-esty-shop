@@ -1,4 +1,5 @@
 <h1>Admin Invoice Show Page</h1>
+
 <section id="invoice_details">
 <h2><b>Invoice ID: </b><%= @invoice.id %></h2>
 <p><b>Status: </b><%= form_with url: "#{@invoice.id}", method: :patch, id: "invoice-status" do |form| %>

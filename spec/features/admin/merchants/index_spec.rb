@@ -19,7 +19,7 @@ RSpec.describe "admin/merchants index", type: :feature do
 
     it "has links to merchant show pages" do
       visit admin_merchants_path
-
+      
       expect(page).to have_link(@merchant_1.name, href: admin_merchant_path(@merchant_1))
       expect(page).to have_link(@merchant_2.name, href: admin_merchant_path(@merchant_2))
       expect(page).to have_link(@merchant_3.name, href: admin_merchant_path(@merchant_3))
@@ -66,6 +66,36 @@ RSpec.describe "admin/merchants index", type: :feature do
 
       expect(page.all(:button, "Enable").count).to eq(5)
       expect(page.all(:button, "Disable").count).to eq(1)
+    end
+  end
+
+  describe 'User Story 28' do
+    before(:each) do
+      test_data
+    end
+
+    it 'shows a list of enabled merchants' do
+      @merchant_1.update(status: "enabled")
+      @merchant_2.update(status: "enabled")
+      visit admin_merchants_path
+      within "#enabled_merchants" do
+        expect(page).to have_content(@merchant_1.name)
+        expect(page).to have_content(@merchant_2.name)
+        expect(page).to_not have_content(@merchant_3.name)
+        expect(page).to_not have_content(@merchant_4.name)
+      end
+    end
+
+    it 'shows a list of disabled merchants' do
+      @merchant_1.update(status: "enabled")
+      @merchant_2.update(status: "enabled")
+      visit admin_merchants_path
+      within "#disabled_merchants" do
+        expect(page).to have_content(@merchant_3.name)
+        expect(page).to have_content(@merchant_4.name)
+        expect(page).to_not have_content(@merchant_1.name)
+        expect(page).to_not have_content(@merchant_2.name)
+      end
     end
   end
 end
