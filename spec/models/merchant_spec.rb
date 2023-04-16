@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Invoice, type: :model do
+RSpec.describe Merchant, type: :model do
 
   describe 'relationships' do
     it { should have_many :items }
