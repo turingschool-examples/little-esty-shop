@@ -37,6 +37,6 @@ class Merchant < ApplicationRecord
       .joins(:invoice_items)
       .select("invoices.id, invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity) as total_rev")
       .group(:id)
-      .order("total_rev DESC").first.created_at
+      .order("total_rev DESC, created_at DESC").first.created_at
   end
 end
