@@ -42,7 +42,9 @@ RSpec.describe Merchant, type: :model do
       @invoice_item_3 = create(:invoice_item, invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 3, unit_price: 3)
       @invoice_item_4 = create(:invoice_item, invoice_id: @invoice_4.id, item_id: @item_4.id, quantity: 4, unit_price: 4)
       @invoice_item_5 = create(:invoice_item, invoice_id: @invoice_5.id, item_id: @item_5.id, quantity: 5, unit_price: 5)
-      @invoice_item_6 = create(:invoice_item, invoice_id: @invoice_6.id, item_id: @item_6.id, quantity: 6, unit_price: 6)
+      @invoice_item_6 = create(:invoice_item, invoice_id: @invoice_5.id, item_id: @item_5.id, quantity: 2, unit_price: 2)#Testing merchant with multiple invoices
+      @invoice_item_7 = create(:invoice_item, invoice_id: @invoice_5.id, item_id: @item_5.id, quantity: 1, unit_price: 1)#Testing merchant with multiple invoices
+      @invoice_item_8 = create(:invoice_item, invoice_id: @invoice_6.id, item_id: @item_6.id, quantity: 6, unit_price: 6)
       @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: "success")
       @transaction_2 = create(:transaction, invoice_id: @invoice_2.id, result: "success")
       @transaction_3 = create(:transaction, invoice_id: @invoice_3.id, result: "success")
@@ -70,6 +72,12 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.find_top_5[2].name).to eq("#{@merchant_3.name}")
         expect(Merchant.find_top_5[3].name).to eq("#{@merchant_2.name}")
         expect(Merchant.find_top_5[4].name).to eq("#{@merchant_1.name}")
+
+        expect(Merchant.find_top_5[0].revenue).to eq(30)
+        expect(Merchant.find_top_5[1].revenue).to eq(16)
+        expect(Merchant.find_top_5[2].revenue).to eq(9)
+        expect(Merchant.find_top_5[3].revenue).to eq(4)
+        expect(Merchant.find_top_5[4].revenue).to eq(1)
       end
     end
 
