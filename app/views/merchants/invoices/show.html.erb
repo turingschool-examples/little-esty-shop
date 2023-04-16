@@ -6,7 +6,7 @@
 </div >
 <div id="invoice_info">
   <p>Status: <%= @invoice.status %></p>
-  <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+  <p>Created on: <%= @invoice.created_at_formatted %></p>
   <div id=total_revenue>
     <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p>
   </div>
@@ -19,11 +19,17 @@
   <h3>Items on this Invoice:</h3>
   <% @invoice.invoice_items.each do |invoice_item| %>
     <div id="invoice_item_<%=invoice_item.id%>">
-    <h4>Name: <%= invoice_item.item_name %></h4>
-    <p>Quantity: <%= invoice_item.quantity %></p>
-    <p>Sold For: <%= number_to_currency(invoice_item.unit_price) %></p>
-    <p>Status: <%= invoice_item.status %></p>
-    <br>
+      <h4>Name: <%= invoice_item.item_name %></h4>
+      <p>Quantity: <%= invoice_item.quantity %></p>
+      <p>Sold For: <%= number_to_currency(invoice_item.unit_price) %></p>
+      <%= form_with model: invoice_item do |f| %>
+        <%= f.label "Status"%>
+        <%= f.select :status, ["pending", "packaged", "shipped"], selected: invoice_item.status %>
+        <%= f.hidden_field :invoice_id, value: @invoice.id %>
+        <%= f.hidden_field :merchant_id, value: @merchant.id %>
+        <%= f.submit %>
+      <% end %>
+      <br>
     </div>
   <% end %>
 </section>
