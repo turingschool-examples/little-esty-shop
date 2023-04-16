@@ -16,13 +16,13 @@ RSpec.describe 'Admin Merchants Show Page' do
       expect(find_field('Name').value).to eq(@merchant_2.name)
     end
 
-    xit 'submits new data' do
+    it 'submits new data' do
       visit "admin/merchants/#{@merchant_1.id}/edit"
       
       fill_in 'Name', with: 'New Merchant Name'
       click_button('Update')
 
-      expect(current_path).to eq("admin/merchants/#{@merchant_1.id}")
+      expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
       expect(page).to have_content('New Merchant Name')
 
       visit edit_admin_merchant_path(@merchant_2)
@@ -30,8 +30,9 @@ RSpec.describe 'Admin Merchants Show Page' do
       
       fill_in 'Name', with: 'New Merchant Name'
       click_button('Update')
+      expect(page).to have_content('Merchant Updated')
 
-      expect(current_path).to eq(admin_merchant(@merchant_2))
+      expect(current_path).to eq(admin_merchant_path(@merchant_2))
       expect(page).to have_content('New Merchant Name')
     end
   end
