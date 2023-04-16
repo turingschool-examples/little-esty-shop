@@ -13,24 +13,28 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
     @customer_1 = create(:customer)
     @customer_2 = create(:customer)
     @customer_3 = create(:customer)
+
     @invoice_1 = create(:invoice, customer_id: @customer_1.id,status: 'In Progress')
     @invoice_2 = create(:invoice, customer_id: @customer_2.id,status: 'In Progress')
     @invoice_3= create(:invoice, customer_id: @customer_3.id, status: 'In Progress')
     @invoice_4= create(:invoice, customer_id: @customer_1.id, status: 'In Progress')
     @invoice_5= create(:invoice, customer_id: @customer_2.id, status: 'In Progress')
     @invoice_6= create(:invoice, customer_id: @customer_3.id, status: 'In Progress')
+
     @item_1 = create(:item, merchant_id: @merchant_1.id)
     @item_2 = create(:item, merchant_id: @merchant_2.id)
     @item_3 = create(:item, merchant_id: @merchant_3.id)
     @item_4 = create(:item, merchant_id: @merchant_4.id)
     @item_5 = create(:item, merchant_id: @merchant_5.id)
     @item_6 = create(:item, merchant_id: @merchant_6.id)
+
     @invoice_item_1 = create(:invoice_item, invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 1, unit_price: 1)
     @invoice_item_2 = create(:invoice_item, invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 2, unit_price: 2)
     @invoice_item_3 = create(:invoice_item, invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 3, unit_price: 3)
     @invoice_item_4 = create(:invoice_item, invoice_id: @invoice_4.id, item_id: @item_4.id, quantity: 4, unit_price: 4)
     @invoice_item_5 = create(:invoice_item, invoice_id: @invoice_5.id, item_id: @item_5.id, quantity: 5, unit_price: 5)
     @invoice_item_6 = create(:invoice_item, invoice_id: @invoice_6.id, item_id: @item_6.id, quantity: 6, unit_price: 6)
+
     @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: "success")
     @transaction_2 = create(:transaction, invoice_id: @invoice_2.id, result: "success")
     @transaction_3 = create(:transaction, invoice_id: @invoice_3.id, result: "success")
@@ -57,7 +61,7 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
       end
         expect(current_path).to eq(admin_merchant_path(@merchant_1))
         expect(page).to have_content(@merchant_1.name)
-  
+
         expect(page).to_not have_content(@merchant_2.name)
         expect(page).to_not have_content(@merchant_3.name)
 
@@ -207,6 +211,7 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
   describe "Admin Merchants: Top 5 Merchants by Revenue (User Story 30)" do
     it "displays the names of the top 5 merchants by revenue" do
       visit admin_merchants_path
+
       within("#top_5") do
         expect(page).to have_content("Top 5 Merchants by Revenue")
         expect(page).to have_content("Name: #{@merchant_5.name}")
@@ -219,8 +224,10 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
         expect(page).to_not have_content("Name: #{@merchant_7.name}")
       end
     end
+
     it "each merchant name links to the admin merchant show page for that merchant" do
       visit admin_merchants_path
+
       within("#top_5") do
         expect(page).to have_link("#{@merchant_5.name}")
         expect(page).to have_link("#{@merchant_4.name}")
@@ -231,9 +238,16 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
         expect(page).to_not have_link("#{@merchant_6.name}")
         expect(page).to_not have_link("#{@merchant_7.name}")
       end
+
+      within("#top_5") do
+        click_link("#{@merchant_5.name}")
+        expect(current_path).to eq(admin_merchant_path(@merchant_5))
+      end
     end
+
     it "displays the total revenue generated next to each merchant name" do
       visit admin_merchants_path
+
       within("#top_5") do
         expect(page).to have_content("Total Revenue: 1")
         expect(page).to have_content("Total Revenue: 4")
@@ -243,5 +257,4 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
       end
     end
   end
-
 end
