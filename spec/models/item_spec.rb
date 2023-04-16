@@ -36,16 +36,21 @@ RSpec.describe Item, type: :model do
     end
 
     it "top_day" do
-      @invoice_12.update(created_at: 10.day.ago)
+      @invoice_10.update(created_at: "04/06/2023")
       @invoice_item_50.update(quantity: 10)
-      @invoice_7.update(created_at: 2.day.ago)
-      @item_19.update(created_at: 5.day.ago)
-      @item_18.update(created_at: 14.day.ago)
-      @item_17.update(created_at: 8.day.ago)
-      expect(@item_21.top_day).to eq("04/04/2023")
+      @invoice_7.update(created_at: "04/12/2023")
+      @invoice_item_47.update(quantity: 10)
+      @invoice_4.update(created_at: "04/09/2023")
+      @invoice_item_44.update(quantity: 10)
+      @invoice_1.update(created_at: "04/11/2023")
+      @invoice_item_41.update(quantity: 10)
+      @invoice_20.update(created_at: "04/06/2023")
+      @invoice_item_40.update(quantity: 10)
+      
+      expect(@item_21.top_day).to eq("04/06/2023")
       expect(@item_20.top_day).to eq("04/12/2023")
       expect(@item_19.top_day).to eq("04/09/2023")
-      expect(@item_18.top_day).to eq("03/31/2023")
+      expect(@item_18.top_day).to eq("04/11/2023")
       expect(@item_17.top_day).to eq("04/06/2023")
     end
   end
