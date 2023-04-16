@@ -6,21 +6,30 @@
     <li> Current Status: <%= @invoice.status %> </li>
     <li> Invoice Creation Date: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </li>
     <li> Customer Name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %> </li>
+    <li> Total Potential Revenue: <%= @invoice.total_revenue %> </li>
   </ul>
 </section>
 
-<section id="invoice_revenue">
-  <h3> Total Potential Revenue: <%= @invoice.total_revenue %> </h3>
-</section>
 
-<section id="items_info">
-  <ul> 
-    <% @items.each do |item|  %>
-      <li> Item Name: <%= item.name %> </li>
-      <li> Item Quantity: <%= item.quantity %> </li>
-      <li> Item Price: <%= item.unit_price %> </li>
-      <li> Item Status: <%= item.invoice_item_status %> </li>
-      <br>
+<table style="border:1px solid black;margin-right:auto" id="items_table">
+<h2> Items on this Invoice </h2>
+  <tr>
+    <th>Item Name</th>
+    <th>Item Quantity</th>
+    <th>Item Price</th>
+    <th>Item Status</th>
+  </tr>
+  <% @invoice_items.each_with_index do |item, index| %>
+    <td><%= item.item_name %></td>
+    <td><%= item.quantity %></td>
+    <td><%= item.unit_price %></td>
+    <td>
+    <%= form_with  url: update_invoice_item_path(item), method: :patch, id: "item-#{item.id}-status" do |form|%>
+    <%= form.label :status %>
+    <%= form.select :invoice_item_status, options_for_select({"Pending" => "pending", "Packaged" => "packaged", "Shipped" => "shipped"}, item.status) %>
+    <%= form.submit "Update Status", params: {id: item.id}, remote: true %>
     <% end %>
-  </ul>
-
+    </td>
+  </tr>
+<% end %>
+</table>
