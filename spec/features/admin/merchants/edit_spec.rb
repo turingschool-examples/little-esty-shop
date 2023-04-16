@@ -18,8 +18,7 @@ RSpec.describe "admin/merchant edit page", type: :feature do
 
       expect(current_path).to eq(admin_merchant_path(@merchant_3))
 
-      visit admin_merchant_path(@merchant_3)
-
+      expect(page).to have_content("This Merchant's information has been updated")
       expect(page).to have_content("This is the name now")
     end
   end
