@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get 'admin/invoices', to: 'admin/invoices#index',  as: 'admin_invoices'
   get 'merchants/:id/dashboard', to: 'merchants#dashboard', as: 'merchant_dashboard'
 
-  resources :admin, only: [:index]
+  resources :admin, only: [:index] do
+    resources :merchants, only: [:index]
+  end
   resources :merchants, only: [] do
     resources :items, except: [:destroy], controller: 'merchants/items'
     resources :invoices, only: [:index, :show], controller: 'merchants/invoices'
