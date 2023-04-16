@@ -1,11 +1,25 @@
 class Merchant::ItemsController < ApplicationController
-  before_action :find_merchant, only: [:index, :show, :edit, :update, :destroy, :toggle_item]
-  before_action :find_item, only: [:show, :edit, :update, :destroy]
+  before_action :find_merchant, only: [:index, :show, :new, :create, :edit, :update, :destroy, :toggle_item]
+  before_action :find_item, only: [:show, :edit, :update, :destroy, :toggle_item]
 
   def index
   end
 
   def show
+  end
+
+  def new
+    @item = Item.new
+  end
+
+  def create
+    item = Item.new(item_params.merge(merchant_id: @merchant.id))
+    if item.save
+      redirect_to merchant_items_path(@merchant.id), notice: "Item successfully saved!"
+    else
+      flash.now[:alert] = "Error: #{error_message(item.errors)}"
+      render :new
+    end
   end
 
   def edit
@@ -21,11 +35,8 @@ class Merchant::ItemsController < ApplicationController
   end
 
   def toggle_item
-    item = Item.find(toggle_item_params[:item])
-    if item.update(enabled: !item.enabled)
-      flash.now[:notice] = "Item successfully #{item.enabled ? 'enabled' : 'disabled'}!"
-    end
-    render :index
+    @item.update(enabled: !@item.enabled)
+    redirect_to merchant_items_path(@merchant.id), notice: "Item successfully #{@item.enabled ? 'enabled' : 'disabled'}!"
   end
 
   private
@@ -40,9 +51,5 @@ class Merchant::ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :description, :unit_price)
-  end
-
-  def toggle_item_params
-    params.permit(:item)
   end
 end

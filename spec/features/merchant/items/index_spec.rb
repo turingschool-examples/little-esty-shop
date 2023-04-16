@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Merchant Items Index Page', type: :feature do
   before(:each) do
     @merchant_1 = create(:merchant)
-    @item_1 = create(:item, merchant: @merchant_1)
-    @item_2 = create(:item, merchant: @merchant_1)
-    @item_3 = create(:item, merchant: @merchant_1)
-    @item_4 = create(:item, merchant: @merchant_1, enabled: false)
-    @item_5 = create(:item, merchant: @merchant_1, enabled: false)
+    @item_1 = create(:item, merchant: @merchant_1, enabled: true)
+    @item_2 = create(:item, merchant: @merchant_1, enabled: true)
+    @item_3 = create(:item, merchant: @merchant_1, enabled: true)
+    @item_4 = create(:item, merchant: @merchant_1)
+    @item_5 = create(:item, merchant: @merchant_1)
 
     visit merchant_items_path(@merchant_1.id)
   end
