@@ -3,13 +3,14 @@
 
 <div id = "top_5">
 <h2>Top Merchants</h2>
+<ol>
 <% @top_5.each do |merchant| %>
-<ul>
+
   <li>Name: <%= link_to merchant.name, admin_merchant_path(merchant) %></li>
-  <li>Total Revenue: <%= merchant.revenue %></li>
-  <li>Top selling date for <%= merchant.name %> was <%= format_date(merchant.highest_revenue_date) %></li>
-</ul>
+  <p>Total Revenue: <%= format_revenue(merchant.revenue) %></p>
+  <p>Top selling date for <%= merchant.name %> was <%= format_date(merchant.highest_revenue_date) %></p>
 <% end %>
+</ol>
 </div>
 
 
