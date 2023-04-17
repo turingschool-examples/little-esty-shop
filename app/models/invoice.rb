@@ -13,6 +13,10 @@ class Invoice < ApplicationRecord
     joins(:invoice_items).where('invoice_items.status != ?', '2').group(:id).order(:created_at)
   end
 
+  def self.find_with_successful_transactions
+    joins(:transactions).where('transactions.result = true').distinct
+  end
+
   def self.order_by_id
     order(:id)
   end

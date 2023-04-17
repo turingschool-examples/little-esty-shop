@@ -48,12 +48,40 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
+    describe '.find_with_successful_transactions' do
+      it 'returns all invoices with at least one successful transaction' do
+        customer = create(:customer)
+
+        invoice_1 = create(:invoice, created_at: '2023-01-01 20:54:10 UTC', customer: customer) # has only successful transactions
+        invoice_2 = create(:invoice, created_at: '2023-01-02 20:54:10 UTC', customer: customer) # has 2 successful transactions and 1 un-successful transaction
+        invoice_3 = create(:invoice, created_at: '2023-01-03 20:54:10 UTC', customer: customer) # has 1 successful transactions and 2 un-successful transactions
+        invoice_4 = create(:invoice, created_at: '2023-01-04 20:54:10 UTC', customer: customer) # has no successful transactions
+
+        transaction_1 = create(:transaction, result: true, invoice: invoice_1)
+        transaction_2 = create(:transaction, result: true, invoice: invoice_1)
+        transaction_3 = create(:transaction, result: true, invoice: invoice_1)
+        transaction_4 = create(:transaction, result: true, invoice: invoice_2)
+        transaction_5 = create(:transaction, result: true, invoice: invoice_2)
+        transaction_6 = create(:transaction, result: false, invoice: invoice_2)
+        transaction_7 = create(:transaction, result: true, invoice: invoice_3)
+        transaction_8 = create(:transaction, result: false, invoice: invoice_3)
+        transaction_9 = create(:transaction, result: false, invoice: invoice_3)
+        transaction_10 = create(:transaction, result: false, invoice: invoice_4)
+        transaction_11 = create(:transaction, result: false, invoice: invoice_4)
+        transaction_12 = create(:transaction, result: false, invoice: invoice_4)
+
+        expect(Invoice.find_with_successful_transactions).to include(invoice_1, invoice_2, invoice_3)
+      end
+    end
+
     describe ":order_by_id" do
       it "orders all invoices by id" do
-        @customer_1 = create(:customer)
-        invoice_3 = create(:invoice, id: 1, customer_id: @customer_1.id)
-        invoice_2 = create(:invoice, id: 2 ,customer_id: @customer_1.id)
-        invoice_1 = create(:invoice, id: 3 ,customer_id: @customer_1.id)
+
+        customer_1 = create(:customer)
+        invoice_3 = create(:invoice, id: 1, customer_id: customer_1.id)
+        invoice_2 = create(:invoice, id: 2 ,customer_id: customer_1.id)
+        invoice_1 = create(:invoice, id: 3 ,customer_id: customer_1.id)
+
         expect(Invoice.order_by_id.first).to eq(invoice_3)
         expect(Invoice.order_by_id.second).to eq(invoice_2)
         expect(Invoice.order_by_id.third).to eq(invoice_1)

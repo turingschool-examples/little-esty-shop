@@ -1,7 +1,7 @@
 <h1>Admin Invoice Show Page</h1>
 <div id = "<%=@invoice.id%>_id">
 <p>Invoice ID: <%= @invoice.id %></p>
-<p>Invoice Status: <%= form_with url: "/invoices/#{@invoice.id}", method: :patch, local: true do |form| %></p>
+<p>Invoice Status: <%= form_with model: @invoice, local: true do |form| %></p>
                    <%= form.collection_select :status, ["In Progress", "Completed", "Cancelled"], :to_s, :titleize, selected: @invoice.status %>
                    <%= form.submit "Update Invoice Status"%>
                    <% end %>
