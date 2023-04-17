@@ -16,10 +16,10 @@ class Merchant < ApplicationRecord
   end
 
   def enabled_items
-    items.where(enabled: true)
+    items.where(is_enabled: true)
   end
 
   def disabled_items
-    items.where(enabled: false)
+    items.where(is_enabled: false)
   end
 end

@@ -8,7 +8,7 @@
     <div class="toggle-item" id="item-<%= item.id %>">
       <%= link_to item.name, merchant_item_path(@merchant.id, item) %>
       <%= form_with url: merchant_toggle_item_path(@merchant.id, item), method: :patch, local: true do |form| %>
-        <%= form.submit "#{item.enabled ? 'Disable' : 'Enable'} Item" %>
+        <%= form.submit "#{item.is_enabled ? 'Disable' : 'Enable'} Item" %>
       <% end %>
     </div>
   <% end %>
@@ -22,7 +22,7 @@
       <%= form_with url: merchant_toggle_item_path(@merchant.id, item), method: :patch, local: true do |form| %>
         <%= form.hidden_field :item, value: item.id %>
 
-        <%= form.submit "#{item.enabled ? 'Disable' : 'Enable'} Item" %>
+        <%= form.submit "#{item.is_enabled ? 'Disable' : 'Enable'} Item" %>
       <% end %>
     </div>
   <% end %>

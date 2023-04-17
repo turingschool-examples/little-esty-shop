@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe 'Merchant Items Index Page', type: :feature do
   before(:each) do
     @merchant_1 = create(:merchant)
-    @item_1 = create(:item, merchant: @merchant_1, enabled: true)
-    @item_2 = create(:item, merchant: @merchant_1, enabled: true)
-    @item_3 = create(:item, merchant: @merchant_1, enabled: true)
+    @item_1 = create(:item, merchant: @merchant_1, is_enabled: true)
+    @item_2 = create(:item, merchant: @merchant_1, is_enabled: true)
+    @item_3 = create(:item, merchant: @merchant_1, is_enabled: true)
     @item_4 = create(:item, merchant: @merchant_1)
     @item_5 = create(:item, merchant: @merchant_1)
 
@@ -46,13 +46,13 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
     end
 
     it 'enabling or disabling a button changes its enabled status in the database' do
-      expect(@item_1.enabled).to eq(true)
+      expect(@item_1.is_enabled).to eq(true)
       within "#item-#{@item_1.id}" do
         expect(page).to have_button('Disable Item')
 
         click_button 'Disable Item'
       end
-      expect(@item_1.reload.enabled).to eq(false)
+      expect(@item_1.reload.is_enabled).to eq(false)
     end
 
     it 'displays a flash message that the item has been successfully enabled or disabled ' do

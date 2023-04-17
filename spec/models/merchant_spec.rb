@@ -16,9 +16,9 @@ RSpec.describe Merchant, type: :model do
   before(:each) do
     @merchant_1 = create(:merchant)
 
-    @item_1 = create(:item, merchant_id: @merchant_1.id, enabled: true)
-    @item_2 = create(:item, merchant_id: @merchant_1.id, enabled: true)
-    @item_3 = create(:item, merchant_id: @merchant_1.id, enabled: true)
+    @item_1 = create(:item, merchant_id: @merchant_1.id, is_enabled: true)
+    @item_2 = create(:item, merchant_id: @merchant_1.id, is_enabled: true)
+    @item_3 = create(:item, merchant_id: @merchant_1.id, is_enabled: true)
     @item_4 = create(:item, merchant_id: @merchant_1.id)
     @item_5 = create(:item, merchant_id: @merchant_1.id)
 

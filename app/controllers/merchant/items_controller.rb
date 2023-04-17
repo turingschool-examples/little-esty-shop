@@ -35,8 +35,8 @@ class Merchant::ItemsController < ApplicationController
   end
 
   def toggle_item
-    @item.update(enabled: !@item.enabled)
-    redirect_to merchant_items_path(@merchant.id), notice: "Item successfully #{@item.enabled ? 'enabled' : 'disabled'}!"
+    @item.update(is_enabled: !@item.is_enabled)
+    redirect_to merchant_items_path(@merchant.id), notice: "Item successfully #{@item.is_enabled ? 'enabled' : 'disabled'}!"
   end
 
   private
