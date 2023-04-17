@@ -94,13 +94,13 @@ RSpec.describe Invoice, type: :model do
         item_1 = create(:item, merchant_id: merchant_1.id)
         item_2 = create(:item, merchant_id: merchant_1.id)
         item_3 = create(:item, merchant_id: merchant_1.id)
-        invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_1.id, quantity: 1, unit_price: 100)
-        invoice_item_2 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 100, unit_price: 10)
-        invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_3.id, quantity: 5, unit_price: 50)
+        invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_1.id, quantity: 10, unit_price: 1000)
+        invoice_item_2 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 1000, unit_price: 100)
+        invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_3.id, quantity: 50, unit_price: 500)
 
         invoice_item_4 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item_1.id, quantity: 0, unit_price: 0)
-        invoice_item_5= create(:invoice_item, invoice_id: invoice_2.id, item_id: item_2.id, quantity: 6, unit_price: 6)
-        invoice_item_6 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item_3.id, quantity: 5, unit_price: 4)
+        invoice_item_5= create(:invoice_item, invoice_id: invoice_2.id, item_id: item_2.id, quantity: 60, unit_price: 60)
+        invoice_item_6 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item_3.id, quantity: 50, unit_price: 40)
 
         expect(invoice_1.total_revenue).to eq(1350)
         expect(invoice_2.total_revenue).to eq(56)
