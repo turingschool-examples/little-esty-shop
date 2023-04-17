@@ -1,11 +1,19 @@
 <h1>Merchant Admin</h1>
 <br>
+<%= render '/shared/flash_messages' %>
+
 <section id="merchants">
   <h2>Merchants</h2>
   <ul id="merchants-list">
     <% @merchants.each do |merchant| %>
-      <div id="merchant-<%= merchant.id %>">
-      <li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+      <div id="merchant-<%=merchant.id%>"> 
+      <li><%= link_to merchant.name, admin_merchant_path(merchant) %>
+      <%= merchant.status%>
+       <%= form_with(model: merchant, url: admin_merchant_path(merchant), method: :put) do |form| %>
+            <%= form.hidden_field :status, value: merchant.enabled? ? 'disabled' : 'enabled' %>
+            <%= form.submit merchant.enabled? ? 'Disable' : 'Enable' %>
+          <% end %>
+          </li>
       </div>
     <% end %>
   </ul>
