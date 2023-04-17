@@ -18,10 +18,6 @@ class Invoice < ApplicationRecord
     "#{customer.first_name} #{customer.last_name}"
   end
 
-  def created_at_formatted
-    created_at.strftime("%A, %B %d, %Y")
-  end
-
   def self.incomplete
     select("id, created_at")
     joins(:invoice_items)
