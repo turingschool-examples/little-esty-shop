@@ -18,15 +18,22 @@ class ItemsController < ApplicationController
   end
 
   def update
+    require 'pry'; binding.pry
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
     if @item.update(item_params)
-      if params[:status] == "Enable"
+      if params[:status] == "Enable"  
         @item.status_update(1)      
         redirect_to "/merchants/#{@merchant.id}/items/"
-      elsif params[:status] == "Disable"
+      elsif params[:item][:status] == "1" 
+        @item.status_update(0)
+        redirect_to merchant_invoice_path(@merchant, params[:item][:invoice])
+      elsif params[:status] == "Disable" 
         @item.status_update(0)      
         redirect_to "/merchants/#{@merchant.id}/items/"
+      elsif params[:item][:status] == "0"
+        @item.status_update(1)
+        redirect_to merchant_invoice_path(@merchant, params[:item][:invoice])
       else
         redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}"
       end

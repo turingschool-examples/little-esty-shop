@@ -13,8 +13,9 @@
     <li><p><b>Name: </b><%= item.name %></p></li>
     <li><p><b>Quantity: </b><%= @invoice.item_quantity(item) %></p></li>
     <li><p><b>Price: </b><%= item.unit_price %></p></li>
-    <li><%= form_with model: @item do |form| %>
-      <p><b>Status: </b><%= form.select(:status, [['disabled', 0], ['enabled', 1]],{}) %>
+    <li><%= form_with method: :patch, model: [@merchant, item], local: true do |form| %>
+        <%= form.hidden_field :invoice, value: @invoice.id %>
+      <p><b>Status: </b><%= form.select(:status, [['Disable', 0], ['Enable', 1]],{}) %><%= form.submit "Update" %>
     <% end %></p></li>
     </div><br>
   <% end %>
