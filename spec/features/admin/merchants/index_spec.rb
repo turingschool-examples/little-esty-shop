@@ -213,7 +213,7 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
       visit admin_merchants_path
 
       within("#top_5") do
-        expect(page).to have_content("Top 5 Merchants by Revenue")
+        expect(page).to have_content("Top Merchants")
         expect(page).to have_content("Name: #{@merchant_5.name}")
         expect(page).to have_content("Name: #{@merchant_4.name}")
         expect(page).to have_content("Name: #{@merchant_3.name}")
