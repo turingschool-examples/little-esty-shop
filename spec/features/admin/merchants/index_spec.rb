@@ -14,12 +14,12 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
     @customer_2 = create(:customer)
     @customer_3 = create(:customer)
 
-    @invoice_1 = create(:invoice, customer_id: @customer_1.id,status: 'In Progress')
-    @invoice_2 = create(:invoice, customer_id: @customer_2.id,status: 'In Progress')
-    @invoice_3= create(:invoice, customer_id: @customer_3.id, status: 'In Progress')
-    @invoice_4= create(:invoice, customer_id: @customer_1.id, status: 'In Progress')
-    @invoice_5= create(:invoice, customer_id: @customer_2.id, status: 'In Progress')
-    @invoice_6= create(:invoice, customer_id: @customer_3.id, status: 'In Progress')
+    @invoice_1 = create(:invoice, customer_id: @customer_1.id, status: 'In Progress', created_at: '2023-01-01 20:54:10 UTC')
+    @invoice_2 = create(:invoice, customer_id: @customer_2.id, status: 'In Progress', created_at: '2023-01-02 20:54:10 UTC')
+    @invoice_3 = create(:invoice, customer_id: @customer_3.id, status: 'In Progress', created_at: '2023-01-03 20:54:10 UTC')
+    @invoice_4 = create(:invoice, customer_id: @customer_1.id, status: 'In Progress', created_at: '2023-01-04 20:54:10 UTC')
+    @invoice_5 = create(:invoice, customer_id: @customer_2.id, status: 'In Progress', created_at: '2023-01-05 20:54:10 UTC')
+    @invoice_6 = create(:invoice, customer_id: @customer_3.id, status: 'In Progress', created_at: '2023-01-06 20:54:10 UTC')
 
     @item_1 = create(:item, merchant_id: @merchant_1.id)
     @item_2 = create(:item, merchant_id: @merchant_2.id)
@@ -28,19 +28,19 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
     @item_5 = create(:item, merchant_id: @merchant_5.id)
     @item_6 = create(:item, merchant_id: @merchant_6.id)
 
-    @invoice_item_1 = create(:invoice_item, invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 1, unit_price: 1)
-    @invoice_item_2 = create(:invoice_item, invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 2, unit_price: 2)
-    @invoice_item_3 = create(:invoice_item, invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 3, unit_price: 3)
-    @invoice_item_4 = create(:invoice_item, invoice_id: @invoice_4.id, item_id: @item_4.id, quantity: 4, unit_price: 4)
-    @invoice_item_5 = create(:invoice_item, invoice_id: @invoice_5.id, item_id: @item_5.id, quantity: 5, unit_price: 5)
-    @invoice_item_6 = create(:invoice_item, invoice_id: @invoice_6.id, item_id: @item_6.id, quantity: 6, unit_price: 6)
+    @invoice_item_1 = create(:invoice_item, invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 6, unit_price: 6)
+    @invoice_item_2 = create(:invoice_item, invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 5, unit_price: 5)
+    @invoice_item_3 = create(:invoice_item, invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 4, unit_price: 4)
+    @invoice_item_4 = create(:invoice_item, invoice_id: @invoice_4.id, item_id: @item_4.id, quantity: 3, unit_price: 3)
+    @invoice_item_5 = create(:invoice_item, invoice_id: @invoice_5.id, item_id: @item_5.id, quantity: 2, unit_price: 2)
+    @invoice_item_6 = create(:invoice_item, invoice_id: @invoice_6.id, item_id: @item_6.id, quantity: 1, unit_price: 1)
 
     @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: "success")
     @transaction_2 = create(:transaction, invoice_id: @invoice_2.id, result: "success")
     @transaction_3 = create(:transaction, invoice_id: @invoice_3.id, result: "success")
     @transaction_4 = create(:transaction, invoice_id: @invoice_4.id, result: "success")
     @transaction_5 = create(:transaction, invoice_id: @invoice_5.id, result: "success")
-    @transaction_6 = create(:transaction, invoice_id: @invoice_6.id, result: false)
+    @transaction_6 = create(:transaction, invoice_id: @invoice_6.id, result: "success")
   end
 
   describe "Admin Merchant Index Page (User Story 24)" do
@@ -254,6 +254,21 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
         expect(page).to have_content("Total Revenue: 9")
         expect(page).to have_content("Total Revenue: 16")
         expect(page).to have_content("Total Revenue: 25")
+      end
+    end
+  end
+
+  describe "Admin Merchants: Top Merchant's Best Day (User Story 31)" do
+    it 'displays a formatted date with the most revenue and label for each merchant in the top 5' do
+      visit admin_merchants_path
+
+      within("#top_5") do
+        expect(page).to have_content("Top selling date for #{@merchant_1.name} was 1/1/23")
+        expect(page).to have_content("Top selling date for #{@merchant_2.name} was 1/2/23")
+        expect(page).to have_content("Top selling date for #{@merchant_3.name} was 1/3/23")
+        expect(page).to have_content("Top selling date for #{@merchant_4.name} was 1/4/23")
+        expect(page).to have_content("Top selling date for #{@merchant_5.name} was 1/5/23")
+        expect(page).to_not have_content("1/6/23")
       end
     end
   end
