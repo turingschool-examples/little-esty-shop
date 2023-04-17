@@ -76,10 +76,12 @@ RSpec.describe Invoice, type: :model do
 
     describe ":order_by_id" do
       it "orders all invoices by id" do
+
         customer_1 = create(:customer)
         invoice_3 = create(:invoice, id: 1, customer_id: customer_1.id)
         invoice_2 = create(:invoice, id: 2 ,customer_id: customer_1.id)
         invoice_1 = create(:invoice, id: 3 ,customer_id: customer_1.id)
+
         expect(Invoice.order_by_id.first).to eq(invoice_3)
         expect(Invoice.order_by_id.second).to eq(invoice_2)
         expect(Invoice.order_by_id.third).to eq(invoice_1)
@@ -91,14 +93,10 @@ RSpec.describe Invoice, type: :model do
 
     describe 'customer_name' do
       it 'returns the name of the customer' do
-        customer_1 = create(:customer)
-        customer_2 = create(:customer)
-        invoice_1 = create(:invoice,customer: customer_1)
-        invoice_2 = create(:invoice,customer: customer_2)
-        expect(invoice_1.customer_name).to eq(customer_1.first_name + " " + customer_1.last_name)
+        @customer = create(:customer, first_name: "Bob", last_name: "Smith")
+        @invoice = create(:invoice, customer_id: @customer.id)
 
-        @customer_2 = create(:customer)
-        expect(invoice_2.customer_name).to eq(customer_2.first_name + " " + customer_2.last_name)
+        expect(@invoice.customer_name).to eq("Bob Smith")
       end
     end
 

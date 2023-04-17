@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Invoices Index Page', type: :feature do
+RSpec.describe 'Merchant Invoices Show Page', type: :feature do
   before(:each) do
     @merchant_1 = create(:merchant)
 
@@ -56,17 +56,11 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
     @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id, status: 2)
     @invoice_item_6 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id, status: 2)
     @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id, status: 2)
-
-    visit merchant_invoices_path(@merchant_1.id)
+  
+    visit merchant_invoice_path(@merchant_1, @invoice_1)
   end
 
   it 'has a header' do
-    expect(page).to have_content("#{@merchant_1.name} Invoices")
-  end
-
-  it 'it has invoice ids as links' do
-    within "#invoice-#{@invoice_1.id}" do
-      expect(page).to have_link("ID: #{@invoice_1.id}")
-    end
+    expect(page).to have_content('Merchant Invoice Show Page')
   end
 end

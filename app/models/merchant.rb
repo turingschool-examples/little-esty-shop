@@ -38,5 +38,12 @@ class Merchant < ApplicationRecord
       .select("invoices.id, invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity) as total_rev")
       .group(:id)
       .order("total_rev DESC, created_at DESC").first.created_at
+
+  def top_five_customers
+    customers.joins(:transactions).where(transactions: {result: 'success'}).select("customers.*, CONCAT(first_name,' ',last_name) as name, count(DISTINCT transactions.id) as transactions_count").group("customers.id").order("transactions_count desc").limit(5)
+  end
+
+  def items_not_shipped
+    invoice_items.select('invoice_items.*').where(status: [0, 1]).joins(:invoice).order('invoices.created_at')
   end
 end

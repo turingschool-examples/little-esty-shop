@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :merchants, only: [:index, :update] do
     get 'dashboard', action: :show, as: 'dashboard'
     resources :items, only: :index, as: 'items', controller: 'merchant/items'
-    resources :invoices, only: :index, as: 'invoices', controller: 'merchant/invoices'
+    resources :invoices, only: [:index, :show], as: 'invoices', controller: 'merchant/invoices'
   end
 
   # get "/merchants/:merchant_id/items", to: "merchant/items#index", as: 'merchant_items'
