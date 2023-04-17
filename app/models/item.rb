@@ -14,11 +14,11 @@ class Item < ApplicationRecord
   end
 
   def quantity_sold(invoice)
-    invoice_items.where(invoice_id: invoice.id).pluck(:quantity).to_sentence
+    invoice_items.where(invoice_id: invoice.id).pluck(:quantity)
   end
 
   def invoice_item_status(invoice)
-    invoice_items.where(invoice_id: invoice.id).pluck(:status).to_sentence
+    invoice_items.where(invoice_id: invoice.id).pluck(:status)
   end
 
   def paid_invoices

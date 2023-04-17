@@ -3,7 +3,7 @@
 <div id="invoice-info">
   <h3>Invoice #<%= @invoice.id %></h3>
   <p>Status: <%= @invoice.status %></p>
-  <p>Created on: <%= @invoice.convert_created_at %></p>
+  <p>Created on: <%= format_date(@invoice.created_at) %></p>
   <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p>
 </div>
 
@@ -16,10 +16,10 @@
 <% @invoice.invoice_items.each do |invoice_item| %>
   <div id="item-info-<%= invoice_item.item.id %>">
     <p>Item Name: <%= invoice_item.item.name %></p>
-    <p>Quantity: <%= invoice_item.item.quantity_sold(@invoice).first %></p>
-    <p>Unit Price: <%= number_to_currency(invoice_item.item.find_sold_price(@invoice)) %></p>
-    <p>Status: <%= invoice_item.item.invoice_item_status(@invoice).first %></p>
-    
+    <p>Quantity: <%= format_item_info(invoice_item.item.quantity_sold(@invoice)) %></p>
+    <p>Unit Price: <%= format_currency(format_item_info(invoice_item.item.find_sold_price(@invoice))) %></p>
+    <p>Status: <%= format_item_info(invoice_item.item.invoice_item_status(@invoice)) %></p>
+
     <div id="selector">
       <p>Update Invoice Item Status</p>
       <%= form_with model: invoice_item, url: invoice_item_path(invoice_item), method: :patch, local: true do |form| %>
