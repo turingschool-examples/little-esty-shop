@@ -29,6 +29,7 @@ namespace :csv_load do
     file = "db/data/items.csv"
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
       details = row.to_hash
+      details[:name] = convert_item_name(details[:name])
       Item.create!(details)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!(:items)
@@ -102,4 +103,8 @@ def convert_invoice_item_status(status)
     when 'packaged' then 1
     when 'shipped' then 2
   end
+end
+
+def convert_item_name(name)
+  name.delete('Item').strip
 end

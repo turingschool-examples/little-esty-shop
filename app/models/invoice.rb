@@ -25,10 +25,6 @@ class Invoice < ApplicationRecord
     customer.first_name + " " + customer.last_name
   end
 
-  def convert_created_at
-    created_at.strftime("%A, %B %d, %Y")
-  end
-
   def total_revenue
     invoice_items.sum('unit_price * quantity / 100')
   end

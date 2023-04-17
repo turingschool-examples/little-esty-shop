@@ -1,0 +1,10 @@
+<h2><%= link_to @merchant.name, merchant_dashboard_path(@merchant.id) %> Item Details </h2>
+
+<h3><%= link_to "#{@merchant.name} Item Index", merchant_items_path(@merchant.id) %></h3>
+
+<%= link_to "Edit Item", edit_merchant_item_path(@merchant.id, @item) %>
+
+<h3><%= @item.name %></h3>
+
+<p>Description: <%= @item.description %></p>
+<p>Current Unit Price: <%= @item.unit_price %></p>

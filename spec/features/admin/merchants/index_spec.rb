@@ -263,12 +263,12 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
       visit admin_merchants_path
 
       within("#top_5") do
-        expect(page).to have_content("Top selling date for #{@merchant_1.name} was 1/1/23")
-        expect(page).to have_content("Top selling date for #{@merchant_2.name} was 1/2/23")
-        expect(page).to have_content("Top selling date for #{@merchant_3.name} was 1/3/23")
-        expect(page).to have_content("Top selling date for #{@merchant_4.name} was 1/4/23")
-        expect(page).to have_content("Top selling date for #{@merchant_5.name} was 1/5/23")
-        expect(page).to_not have_content("1/6/23")
+        expect(page).to have_content("Top selling date for #{@merchant_1.name} was #{format_date(Time.new(2023, 1, 1))}")
+        expect(page).to have_content("Top selling date for #{@merchant_2.name} was #{format_date(Time.new(2023, 1, 2))}")
+        expect(page).to have_content("Top selling date for #{@merchant_3.name} was #{format_date(Time.new(2023, 1, 3))}")
+        expect(page).to have_content("Top selling date for #{@merchant_4.name} was #{format_date(Time.new(2023, 1, 4))}")
+        expect(page).to have_content("Top selling date for #{@merchant_5.name} was #{format_date(Time.new(2023, 1, 5))}")
+        expect(page).to_not have_content(format_date(Time.new(2023, 1, 6)))
       end
     end
   end

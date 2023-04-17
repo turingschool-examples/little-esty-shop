@@ -24,7 +24,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
         expect(page).to have_content("Invoice ID: #{@invoice_1.id}")
         expect(page).to have_content("Invoice Status:")
         expect(page).to have_field('invoice_status', with: "#{@invoice_1.status}")
-        expect(page).to have_content("Invoice Created At: #{@invoice_1.convert_created_at}")
+        expect(page).to have_content("Invoice Created At: #{format_date(@invoice_1.created_at)}")
         expect(page).to have_content("Customer Name: #{@invoice_1.customer.first_name} #{@invoice_1.customer.last_name}")
 
         expect(page).to_not have_content("Invoice ID: #{@invoice_2.id}")
@@ -35,7 +35,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
       within("##{@invoice_2.id}_id") do
         expect(page).to have_content("Invoice ID: #{@invoice_2.id}")
         expect(page).to have_content("Invoice Status:")
-        expect(page).to have_content("Invoice Created At: #{@invoice_2.convert_created_at}")
+        expect(page).to have_content("Invoice Created At: #{format_date(@invoice_2.created_at)}")
         expect(page).to have_content("Customer Name: #{@invoice_2.customer.first_name} #{@invoice_2.customer.last_name}")
 
         expect(page).to_not have_content("Invoice ID: #{@invoice_1.id}")
@@ -68,41 +68,41 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
 
       within("#item_#{@item_1.id}") do
         expect(page).to have_content("Quantity Ordered: #{@invoice_item_1.quantity}")
-        expect(page).to have_content("Item sold price: #{@invoice_item_1.unit_price}")
+        expect(page).to have_content("Item sold price: #{format_currency(@invoice_item_1.unit_price)}")
         expect(page).to have_content("Invoice Item status: #{@invoice_item_1.status}")
 
         expect(page).to_not have_content("Item name: #{@item_2.name}")
-        expect(page).to_not have_content("Item sold price: #{@invoice_item_2.unit_price}")
+        expect(page).to_not have_content("Item sold price: #{format_currency(@invoice_item_2.unit_price)}")
       end
 
       within("#item_#{@item_2.id}") do
         expect(page).to have_content("Quantity Ordered: #{@invoice_item_2.quantity}")
-        expect(page).to have_content("Item sold price: #{@invoice_item_2.unit_price}")
+        expect(page).to have_content("Item sold price: #{format_currency(@invoice_item_2.unit_price)}")
         expect(page).to have_content("Invoice Item status: #{@invoice_item_2.status}")
 
         expect(page).to_not have_content("Item name: #{@item_1.name}")
-        expect(page).to_not have_content("Item sold price: #{@invoice_item_1.unit_price}")
+        expect(page).to_not have_content("Item sold price: #{format_currency(@invoice_item_1.unit_price)}")
       end
 
       visit admin_invoice_path(@invoice_2)
       within("#item_#{@item_1.id}") do
         expect(page).to have_content("Quantity Ordered: #{@invoice_item_3.quantity}")
-        expect(page).to have_content("Item sold price: #{@invoice_item_3.unit_price}")
+        expect(page).to have_content("Item sold price: #{format_currency(@invoice_item_3.unit_price)}")
         expect(page).to have_content("Invoice Item status: #{@invoice_item_3.status}")
 
         expect(page).to_not have_content("Item name: #{@item_3.name}")
         expect(page).to_not have_content("Quantity Ordered: #{@invoice_item_4.quantity}")
-        expect(page).to_not have_content("Item sold price: #{@invoice_item_4.unit_price}")
+        expect(page).to_not have_content("Item sold price: #{format_currency(@invoice_item_4.unit_price)}")
       end
 
       within("#item_#{@item_3.id}") do
         expect(page).to have_content("Quantity Ordered: #{@invoice_item_4.quantity}")
-        expect(page).to have_content("Item sold price: #{@invoice_item_4.unit_price}")
+        expect(page).to have_content("Item sold price: #{format_currency(@invoice_item_4.unit_price)}")
         expect(page).to have_content("Invoice Item status: #{@invoice_item_4.status}")
 
         expect(page).to_not have_content("Item name: #{@item_1.name}")
         expect(page).to_not have_content("Quantity Ordered: #{@invoice_item_3.quantity}")
-        expect(page).to_not have_content("Item sold price: #{@invoice_item_3.unit_price}")
+        expect(page).to_not have_content("Item sold price: #{format_currency(@invoice_item_3.unit_price)}")
       end
     end
   end

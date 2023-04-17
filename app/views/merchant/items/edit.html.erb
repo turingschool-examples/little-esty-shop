@@ -1,0 +1,6 @@
+<h2>Edit Item</h2>
+
+<%= render partial: 'form', locals: {
+  model: [@merchant, @item],
+  path: merchant_item_path(@merchant.id, @item)
+} %>

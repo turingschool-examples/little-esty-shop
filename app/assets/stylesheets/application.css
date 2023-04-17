@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+.notice {
+  background-color: lightgreen;
+}
+
+.alert {
+  background-color: lightcoral;
+}
+
+input {
+  display: block;
+  margin: 5px;
+}
+
+.toggle-item form, .toggle-item input {
+  display: inline-block;
+}
