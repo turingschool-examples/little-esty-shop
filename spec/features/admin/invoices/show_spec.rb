@@ -23,8 +23,8 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
       within("##{@invoice_1.id}_id") do
         expect(page).to have_content("Invoice ID: #{@invoice_1.id}")
         expect(page).to have_content("Invoice Status:")
-        expect(page).to have_field(:status, with: "#{@invoice_1.status}")
-        expect(page).to have_content("Invoice Created At: #{format_created_at(@invoice_1.created_at)}")
+        expect(page).to have_field('invoice_status', with: "#{@invoice_1.status}")
+        expect(page).to have_content("Invoice Created At: #{format_date(@invoice_1.created_at)}")
         expect(page).to have_content("Customer Name: #{@invoice_1.customer.first_name} #{@invoice_1.customer.last_name}")
 
         expect(page).to_not have_content("Invoice ID: #{@invoice_2.id}")
@@ -35,7 +35,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
       within("##{@invoice_2.id}_id") do
         expect(page).to have_content("Invoice ID: #{@invoice_2.id}")
         expect(page).to have_content("Invoice Status:")
-        expect(page).to have_content("Invoice Created At: #{format_created_at(@invoice_2.created_at)}")
+        expect(page).to have_content("Invoice Created At: #{format_date(@invoice_2.created_at)}")
         expect(page).to have_content("Customer Name: #{@invoice_2.customer.first_name} #{@invoice_2.customer.last_name}")
 
         expect(page).to_not have_content("Invoice ID: #{@invoice_1.id}")
@@ -157,7 +157,5 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
         expect(current_path).to eq(admin_invoice_path(@invoice_2))
       end
     end
-
   end
-
 end

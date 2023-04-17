@@ -3,7 +3,7 @@ module ApplicationHelper
     sprintf('$%0.2f', number/100.0).gsub(/\B(?=(\d{3})*\b)/, ',')
   end
 
-  def format_created_at(date)
+  def format_date(date)
     date.strftime("%A, %B %d, %Y")
   end
 end

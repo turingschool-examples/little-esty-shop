@@ -5,7 +5,7 @@
                    <%= form.collection_select :status, ["In Progress", "Completed", "Cancelled"], :to_s, :titleize, selected: @invoice.status %>
                    <%= form.submit "Update Invoice Status"%>
                    <% end %>
-<p>Invoice Created At: <%= format_created_at(@invoice.created_at) %></p>
+<p>Invoice Created At: <%= format_date(@invoice.created_at) %></p>
 <p>Customer Name: <%= "#{@invoice.customer_name}" %></p>
 <p>Total Revenue: <%= @invoice.total_revenue %></p>
 <p>Items: <% @invoice.items.each do |i| %></p>

@@ -158,7 +158,7 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
 
       it 'displays the top selling date for each of the top 5 items' do
         within("#top-five-items-1") do
-          expect(page).to have_content(format_created_at(@item_1.top_selling_date))
+          expect(page).to have_content(format_date(@item_1.top_selling_date))
         end
       end
     end

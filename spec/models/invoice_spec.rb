@@ -90,7 +90,6 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe "instance methods" do
-
     describe 'customer_name' do
       it 'returns the name of the customer' do
         @customer = create(:customer, first_name: "Bob", last_name: "Smith")

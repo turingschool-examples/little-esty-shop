@@ -18,7 +18,7 @@
 
   <ul>
     <% @invoices.each do |invoice| %>
-      <li><%= link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice) %> | <%= format_created_at(invoice.created_at) %></li>
+      <li><%= link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice) %> | <%= format_date(invoice.created_at) %></li>
     <% end %>
   </ul>
 </div>
