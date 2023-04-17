@@ -15,7 +15,6 @@ RSpec.describe '/admin/merchants', type: :feature do
 
   it 'I can click on the name of the merchant' do
     visit "/admin/merchants"
-    save_and_open_page
 
     expect(page).to have_link(@merchant_1.name, href: "admin/merchants/#{@merchant_1.id}/")
   end
