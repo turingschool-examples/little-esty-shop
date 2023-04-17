@@ -28,12 +28,12 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
     @item_5 = create(:item, merchant_id: @merchant_5.id)
     @item_6 = create(:item, merchant_id: @merchant_6.id)
 
-    @invoice_item_1 = create(:invoice_item, invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 6, unit_price: 6)
-    @invoice_item_2 = create(:invoice_item, invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 5, unit_price: 5)
-    @invoice_item_3 = create(:invoice_item, invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 4, unit_price: 4)
-    @invoice_item_4 = create(:invoice_item, invoice_id: @invoice_4.id, item_id: @item_4.id, quantity: 3, unit_price: 3)
-    @invoice_item_5 = create(:invoice_item, invoice_id: @invoice_5.id, item_id: @item_5.id, quantity: 2, unit_price: 2)
-    @invoice_item_6 = create(:invoice_item, invoice_id: @invoice_6.id, item_id: @item_6.id, quantity: 1, unit_price: 1)
+    @invoice_item_1 = create(:invoice_item, invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 1000, unit_price: 6)
+    @invoice_item_2 = create(:invoice_item, invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 1000, unit_price: 5)
+    @invoice_item_3 = create(:invoice_item, invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 1000, unit_price: 4)
+    @invoice_item_4 = create(:invoice_item, invoice_id: @invoice_4.id, item_id: @item_4.id, quantity: 1000, unit_price: 3)
+    @invoice_item_5 = create(:invoice_item, invoice_id: @invoice_5.id, item_id: @item_5.id, quantity: 1000, unit_price: 2)
+    @invoice_item_6 = create(:invoice_item, invoice_id: @invoice_6.id, item_id: @item_6.id, quantity: 1000, unit_price: 1)
 
     @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: "success")
     @transaction_2 = create(:transaction, invoice_id: @invoice_2.id, result: "success")
@@ -249,11 +249,11 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
       visit admin_merchants_path
 
       within("#top_5") do
-        expect(page).to have_content("Total Revenue: 1")
-        expect(page).to have_content("Total Revenue: 4")
-        expect(page).to have_content("Total Revenue: 9")
-        expect(page).to have_content("Total Revenue: 16")
-        expect(page).to have_content("Total Revenue: 25")
+        expect(page).to have_content("Total Revenue: $60")
+        expect(page).to have_content("Total Revenue: $50")
+        expect(page).to have_content("Total Revenue: $40")
+        expect(page).to have_content("Total Revenue: $30")
+        expect(page).to have_content("Total Revenue: $20")
       end
     end
   end
