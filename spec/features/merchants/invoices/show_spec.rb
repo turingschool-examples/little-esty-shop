@@ -83,8 +83,20 @@ RSpec.describe 'merchant invoice show page' do
           
           find("#invoice_item_status option[value='shipped']").select_option
           click_button("Update Invoice item")
-
+          
           @invoice_item_2.reload
+          expect(page).to have_content("shipped")
+          expect(current_path).to eq(merchant_invoice_path(@merchant_2, @invoice_2))
+        end
+
+        within "#invoice_item_#{@invoice_item_2.id}" do
+          expect(page).to have_content("packaged")
+          
+          find("#invoice_item_status option[value='pending']").select_option
+          click_button("Update Invoice item")
+          
+          @invoice_item_2.reload
+          expect(page).to have_content("pending")
           expect(current_path).to eq(merchant_invoice_path(@merchant_2, @invoice_2))
         end
       end
