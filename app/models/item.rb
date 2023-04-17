@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   validates :unit_price, presence: true, numericality: true
 
   def find_sold_price(invoice)
-    invoice_items.where(invoice_id: invoice.id).pluck(:unit_price).to_sentence
+    invoice_items.where(invoice_id: invoice.id).pluck(:unit_price)
   end
 
   def quantity_sold(invoice)

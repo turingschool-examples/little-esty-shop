@@ -8,12 +8,12 @@ Rails.application.routes.draw do
     resources :invoices, only: [:index, :show], as: 'invoices', controller: 'merchant/invoices'
   end
 
-  # get "/merchants/:merchant_id/items", to: "merchant/items#index", as: 'merchant_items'
-  # get "/merchants/:merchant_id/invoices", to: "merchant/invoices#index", as: 'merchant_invoices'
-
   get '/admin', to: 'admin#index'
 
   resources :invoices, only: [:update]
+  
+  resources :invoice_items, only: [:update]
+  
   resources :merchants, only: [:update, :create, :new]
 
   namespace :admin do

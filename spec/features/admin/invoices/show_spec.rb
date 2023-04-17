@@ -11,10 +11,10 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
     @item_1 = create(:item, merchant_id: @merchant_1.id)
     @item_2 = create(:item, merchant_id: @merchant_1.id)
     @item_3 = create(:item, merchant_id: @merchant_1.id)
-    @invoice_item_1 = create(:invoice_item, invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 5, unit_price: 5)
-    @invoice_item_2 = create(:invoice_item, invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 10, unit_price: 10)
-    @invoice_item_3 = create(:invoice_item, invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 15, unit_price: 15)
-    @invoice_item_4 = create(:invoice_item, invoice_id: @invoice_2.id, item_id: @item_3.id, quantity: 20, unit_price: 20)
+    @invoice_item_1 = create(:invoice_item, invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 50, unit_price: 50)
+    @invoice_item_2 = create(:invoice_item, invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 100, unit_price: 100)
+    @invoice_item_3 = create(:invoice_item, invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 150, unit_price: 150)
+    @invoice_item_4 = create(:invoice_item, invoice_id: @invoice_2.id, item_id: @item_3.id, quantity: 200, unit_price: 200)
   end
 
   describe "Admin Invoice Show Page (User Story 33)" do
@@ -93,7 +93,6 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
         expect(page).to_not have_content("Item name: #{@item_3.name}")
         expect(page).to_not have_content("Quantity Ordered: #{@invoice_item_4.quantity}")
         expect(page).to_not have_content("Item sold price: #{@invoice_item_4.unit_price}")
-
       end
 
       within("#item_#{@item_3.id}") do
@@ -158,7 +157,5 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
         expect(current_path).to eq(admin_invoice_path(@invoice_2))
       end
     end
-
   end
-
 end
