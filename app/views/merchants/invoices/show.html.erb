@@ -6,7 +6,7 @@
 </div >
 <div id="invoice_info">
   <p>Status: <%= @invoice.status %></p>
-  <p>Created on: <%= @invoice.created_at_formatted %></p>
+  <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
   <div id=total_revenue>
     <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p>
   </div>
