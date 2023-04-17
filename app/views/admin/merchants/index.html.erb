@@ -7,6 +7,7 @@
 <ul>
   <li>Name: <%= link_to merchant.name, admin_merchant_path(merchant) %></li>
   <li>Total Revenue: <%= merchant.revenue %></li>
+  <li>Top selling date for <%= merchant.name %> was <%= format_date(merchant.highest_revenue_date) %></li>
 </ul>
 <% end %>
 </div>
