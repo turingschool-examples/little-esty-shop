@@ -8,5 +8,6 @@
 <% @invoice.items.each do |item| %>
 <li><p><b>Name: </b><%= item.name %></p></li>
 <li><p><b>Quantity: </b><%= @invoice.item_quantity(item) %></p></li>
+<li><p><b>Price: </b><%= item.unit_price %></p></li>
 <% end %>
 </ul>

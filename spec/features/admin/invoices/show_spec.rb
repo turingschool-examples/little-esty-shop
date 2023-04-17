@@ -42,6 +42,12 @@ RSpec.describe 'Admin Invoices Show Page', type: :feature do
 
         expect(page).to have_content("Quantity: 2")
       end
+
+      it 'displays the price of the item sold for' do
+        visit "admin/invoices/#{@invoice_1.id}"
+
+        expect(page).to have_content(@item_1.unit_price)
+      end
     end
   end
 end
