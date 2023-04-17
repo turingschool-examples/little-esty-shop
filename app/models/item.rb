@@ -20,4 +20,12 @@ class Item < ApplicationRecord
   def invoice_item_status(invoice)
     invoice_items.where(invoice_id: invoice.id).pluck(:status)
   end
+
+  def paid_invoices
+    invoices.joins(:transactions).where(transactions: {result: "success"})
+  end
+
+  def total_revenue
+    paid_invoices.select("SUM(invoice_items.unit_price * invoice_items.quantity) AS revenue").order(revenue: :desc).first.revenue
+  end
 end

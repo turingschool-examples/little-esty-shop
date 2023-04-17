@@ -1,0 +1,21 @@
+<section id="<%= is_enabled ? 'enabled' : 'disabled' %>-items">
+  <h3><%= is_enabled ? 'Enabled' : 'Disabled' %> Items</h3>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Toggle</th>
+    </tr>
+    <% items.each do |item| %>
+      <tr class="toggle-item" id="item-<%= item.id %>">
+        <td>
+          <%= link_to item.name, merchant_item_path(@merchant.id, item) %>
+        </td>
+        <td>
+          <%= form_with url: merchant_toggle_item_path(@merchant.id, item), method: :patch, local: true do |form| %>
+            <%= form.submit "#{item.is_enabled ? 'Disable' : 'Enable'} Item" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</section>

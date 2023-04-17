@@ -97,5 +97,61 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
         expect(page).to_not have_content(@item_3.name)
       end
     end
+
+    describe 'Merchant Items Index: 5 most popular items (User Story 12)' do
+      before(:each) do
+        @customer_1 = create(:customer)
+        @invoice_1 = create(:invoice, customer_id: @customer_1.id)
+        @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: true)
+
+        @item_6 = create(:item, merchant: @merchant_1)
+        @item_7 = create(:item, merchant: @merchant_1)
+
+        @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 70000)
+        @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 60000)
+        @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 50000)
+        @invoice_item_4 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 40000)
+        @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 30000)
+        @invoice_item_6 = create(:invoice_item, item_id: @item_6.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 20000)
+        @invoice_item_7 = create(:invoice_item, item_id: @item_7.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 10000)
+
+        visit merchant_items_path(@merchant_1.id)
+      end
+
+      it 'has a header for the top 5 items' do
+        within("#top-five-items") do
+          expect(page).to have_content("Top 5 Most Popular Items By Revenue")
+          expect(page).to have_content("Item Name")
+          expect(page).to have_content("Total Revenue")
+        end
+      end
+
+      it 'displays the 5 most popular items by revenue' do
+        within("#top-five-items-1") do
+          expect(page).to have_content(@item_1.name)
+          expect(page).to have_content(format_currency(@item_1.total_revenue))
+        end
+        within("#top-five-items-2") do
+          expect(page).to have_content(@item_2.name)
+          expect(page).to have_content(format_currency(@item_2.total_revenue))
+        end
+        within("#top-five-items-3") do
+          expect(page).to have_content(@item_3.name)
+          expect(page).to have_content(format_currency(@item_3.total_revenue))
+        end
+        within("#top-five-items-4") do
+          expect(page).to have_content(@item_4.name)
+          expect(page).to have_content(format_currency(@item_4.total_revenue))
+        end
+        within("#top-five-items-5") do
+          expect(page).to have_content(@item_5.name)
+          expect(page).to have_content(format_currency(@item_5.total_revenue))
+        end
+        within("#top-five-items") do
+          expect(page).to_not have_content(@item_6.name)
+          expect(page).to_not have_content(@item_7.name)
+        end
+      end
+    end
   end
 end

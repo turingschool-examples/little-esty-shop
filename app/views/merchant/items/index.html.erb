@@ -2,28 +2,28 @@
 
 <%= link_to "Create New Item", new_merchant_item_path(@merchant.id) %>
 
-<section id="enabled-items">
-  <h3>Enabled Items</h3>
-  <% @merchant.enabled_items.each do |item| %>
-    <div class="toggle-item" id="item-<%= item.id %>">
-      <%= link_to item.name, merchant_item_path(@merchant.id, item) %>
-      <%= form_with url: merchant_toggle_item_path(@merchant.id, item), method: :patch, local: true do |form| %>
-        <%= form.submit "#{item.is_enabled ? 'Disable' : 'Enable'} Item" %>
-      <% end %>
-    </div>
-  <% end %>
+<section id="top-five-items">
+  <h3>Top 5 Most Popular Items By Revenue</h3>
+  <table>
+    <tr>
+      <th>Item Name</th>
+      <th>Total Revenue</th>
+    </tr>
+    <% @merchant.top_five_items_by_revenue.each_with_index do |item, index| %>
+      <tr id="top-five-items-<%= index + 1 %>">
+        <td><%= link_to item.name, merchant_item_path(@merchant.id, item) %></td>
+        <td><%= format_currency(item.total_revenue) %></td>
+      </tr>
+    <% end %>
+  </table>
 </section>
 
-<section id="disabled-items">
-  <h3>Disabled Items</h3>
-  <% @merchant.disabled_items.each do |item| %>
-    <div class="toggle-item" id="item-<%= item.id %>">
-      <%= link_to item.name, merchant_item_path(@merchant.id, item) %>
-      <%= form_with url: merchant_toggle_item_path(@merchant.id, item), method: :patch, local: true do |form| %>
-        <%= form.hidden_field :item, value: item.id %>
+<%= render partial: 'items', locals: {
+  is_enabled: true,
+  items: @merchant.enabled_items
+} %>
 
-        <%= form.submit "#{item.is_enabled ? 'Disable' : 'Enable'} Item" %>
-      <% end %>
-    </div>
-  <% end %>
-</section>
+<%= render partial: 'items', locals: {
+  is_enabled: false,
+  items: @merchant.disabled_items
+} %>

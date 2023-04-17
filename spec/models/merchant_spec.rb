@@ -61,13 +61,13 @@ RSpec.describe Merchant, type: :model do
     @transaction_22 = create(:transaction, invoice_id: @invoice_7.id, result: true) #customer_6
     @transaction_23 = create(:transaction, invoice_id: @invoice_7.id, result: false) #customer_6
 
-    @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, status: 0)
-    @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id, status: 0)
-    @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_3.id, status: 1)
-    @invoice_item_4 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_4.id, status: 2)
-    @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id, status: 2)
-    @invoice_item_6 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id, status: 2)
-    @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id, status: 2)
+    @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, status: 0, quantity: 1, unit_price: 100000)
+    @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id, status: 0, quantity: 1, unit_price: 90000)
+    @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_3.id, status: 1, quantity: 1, unit_price: 80000)
+    @invoice_item_4 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_4.id, status: 2, quantity: 1, unit_price: 70000)
+    @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id, status: 2, quantity: 1, unit_price: 10000)
+    @invoice_item_6 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id, status: 2, quantity: 1, unit_price: 10000)
+    @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id, status: 2, quantity: 1, unit_price: 10000)
   end
 
   describe "instance methods" do
@@ -92,6 +92,12 @@ RSpec.describe Merchant, type: :model do
     describe '#disabled_items' do
       it 'returns only the merchant\'s items that are disabled' do
         expect(@merchant_1.disabled_items).to eq([@item_4, @item_5])
+      end
+    end
+
+    describe '#top_five_items_by_revenue' do
+      it 'returns the top five items by revenue' do
+        expect(@merchant_1.top_five_items_by_revenue).to eq([@item_1, @item_2, @item_3, @item_4, @item_5])
       end
     end
   end
