@@ -20,11 +20,13 @@
     <p>Unit Price: <%= number_to_currency(invoice_item.item.find_sold_price(@invoice)) %></p>
     <p>Status: <%= invoice_item.item.invoice_item_status(@invoice).first %></p>
     
-    <p>Update Invoice Item Status</p>
-    <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
-      <%= form.select :status, ['pending', 'packaged', 'shipped'], selected: invoice_item.status %>
-      <%= form.submit "Update Item Status" %>
-      <br>
-    <% end %>
+    <div id="selector">
+      <p>Update Invoice Item Status</p>
+      <%= form_with model: invoice_item, url: invoice_item_path(invoice_item), method: :patch, local: true do |form| %>
+        <%= form.select :status, ['Pending', 'Packaged', 'Shipped'], selected: invoice_item.status %>
+        <%= form.submit "Update Item Status" %>
+        <br>
+      <% end %>
+    </div>
   </div>
 <% end %>
