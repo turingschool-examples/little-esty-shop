@@ -30,7 +30,8 @@ RSpec.describe 'Admin Invoices Show Page', type: :feature do
         expect(page).to have_content("Created At: Saturday, March 24, 2012")
         expect(page).to have_content("Customer Name: Carl Weathers")
       end
-
+    end
+    describe 'item section for admin invoice show' do
       it 'displays the item name' do
         visit "admin/invoices/#{@invoice_1.id}"
 
@@ -54,6 +55,12 @@ RSpec.describe 'Admin Invoices Show Page', type: :feature do
         visit "admin/invoices/#{@invoice_1.id}"
 
         expect(page).to have_content(@item_1.status)
+      end
+
+      it 'displays the total revenue that will be generated from this invoice' do
+        visit "admin/invoices/#{@invoice_1.id}"
+
+        expect(page).to have_content("Total Revenue: 1000")
       end
     end
   end
