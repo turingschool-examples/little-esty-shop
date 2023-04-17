@@ -37,9 +37,9 @@ RSpec.describe Item, type: :model do
 
     describe "#find_sold_price" do
       it "finds the price the item sold for in a particular invoice_item" do
-        expect(@item_1.find_sold_price(@invoice_1)).to eq("#{@invoice_item_1.unit_price}")
-        expect(@item_2.find_sold_price(@invoice_1)).to eq("#{@invoice_item_2.unit_price}")
-        expect(@item_1.find_sold_price(@invoice_2)).to eq("#{@invoice_item_3.unit_price}")
+        expect(@item_1.find_sold_price(@invoice_1)).to eq(@invoice_item_1.unit_price)
+        expect(@item_2.find_sold_price(@invoice_1)).to eq(@invoice_item_2.unit_price)
+        expect(@item_1.find_sold_price(@invoice_2)).to eq(@invoice_item_3.unit_price)
       end
     end
 
