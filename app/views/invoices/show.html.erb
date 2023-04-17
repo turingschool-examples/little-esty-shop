@@ -2,7 +2,7 @@
 
 <p><b>Invoice ID: </b><%= @invoice.id %></p>
 <p><b>Invoice Status: </b> <%= @invoice.status %></p>
-<p><b>Customers Name: </b><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %>
+<p><b>Customers Name: </b><%= @invoice.customer.full_name %>
 <p><small>Created At: <%= @invoice.custom_date %></p></small>
 
 <section id="items" >
@@ -13,7 +13,10 @@
     <li><p><b>Name: </b><%= item.name %></p></li>
     <li><p><b>Quantity: </b><%= @invoice.item_quantity(item) %></p></li>
     <li><p><b>Price: </b><%= item.unit_price %></p></li>
-    <li><p><b>Status: </b><%= item.status %></p></li>
+    <li><%= form_with method: :patch, model: [@merchant, item], local: true do |form| %>
+        <%= form.hidden_field :invoice, value: @invoice.id %>
+      <p><b>Status: </b><%= form.select(:status, [['Disable', 0], ['Enable', 1]],{}) %><%= form.submit "Update" %>
+    <% end %></p></li>
     </div><br>
   <% end %>
   <p><b>Total Revenue: </b><%= @invoice.total_invoice_revenue %></p>
