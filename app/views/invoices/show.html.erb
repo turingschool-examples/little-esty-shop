@@ -15,8 +15,10 @@
     <li><p><b>Price: </b><%= item.unit_price %></p></li>
     <li><%= form_with method: :patch, model: [@merchant, item], local: true do |form| %>
         <%= form.hidden_field :invoice, value: @invoice.id %>
-      <p><b>Status: </b><%= form.select(:status, [['Disable', 0], ['Enable', 1]],{}) %><%= form.submit "Update" %>
-    <% end %></p></li>
+        <div id='status_options'>
+      <p><b>Status: </b><%= form.select :status, ['disabled','enabled'], selected: item.status %><%= form.submit "Update" %>
+      </div>
+      <% end %></p></li>
     </div><br>
   <% end %>
   <p><b>Total Revenue: </b><%= @invoice.total_invoice_revenue %></p>
