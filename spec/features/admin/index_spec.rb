@@ -58,7 +58,7 @@ RSpec.describe 'Admin Index (Dashboard) Page', type: :feature do
       create(:transaction, result: true, invoice: invoice)
       create(:transaction, result: false, invoice: invoice)
 
-      @customer_6 = create(:customer) # no successful transactions
+      @customer_6 = create(:customer, first_name: "Test", last_name: "Example") # no successful transactions
       2.times do
         invoice = create(:invoice, customer: @customer_6)
         create(:transaction, result: false, invoice: invoice)
