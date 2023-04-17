@@ -15,7 +15,7 @@
         <td><%= link_to item.name, merchant_item_path(@merchant.id, item) %></td>
         <td><%= format_currency(item.total_revenue) %></td>
         <td>
-          Top selling date for <%= item.name %> was <%= convert_created_at(item.top_selling_date) %>
+          Top selling date for <%= item.name %> was <%= format_created_at(item.top_selling_date) %>
         </td>
       </tr>
     <% end %>

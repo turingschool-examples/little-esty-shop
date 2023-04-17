@@ -8,7 +8,7 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:items).through(:invoice_items) }
     it { should have_many(:merchants).through(:items) }
   end
-  
+
   describe 'validations' do
     it { should validate_presence_of(:status) }
     it { should define_enum_for(:status) }
@@ -47,7 +47,7 @@ RSpec.describe Invoice, type: :model do
         expect(Invoice.find_and_sort_incomplete_invoices).to eq([@invoice_2, @invoice_3, @invoice_1])
       end
     end
-    
+
     describe ":order_by_id" do
       it "orders all invoices by id" do
         @customer_1 = create(:customer)
@@ -69,19 +69,6 @@ RSpec.describe Invoice, type: :model do
         @invoice = create(:invoice, customer_id: @customer.id)
 
         expect(@invoice.customer_name).to eq("Bob Smith")
-      end
-    end
-
-    describe "#convert_created_at" do
-      it "converts timestamp format to a readable date" do
-        @customer_1 = create(:customer)
-        invoice_1 = create(:invoice, customer_id: @customer_1.id, created_at: '2011-01-08 20:54:10 UTC')
-        invoice_2 = create(:invoice, customer_id: @customer_1.id, created_at: '2012-05-11 13:54:10 UTC')
-        invoice_3 = create(:invoice, customer_id: @customer_1.id, created_at: '2013-08-21 08:54:10 UTC')
-
-        expect(invoice_1.convert_created_at).to eq('Saturday, January 08, 2011')
-        expect(invoice_2.convert_created_at).to eq('Friday, May 11, 2012')
-        expect(invoice_3.convert_created_at).to eq('Wednesday, August 21, 2013')
       end
     end
 

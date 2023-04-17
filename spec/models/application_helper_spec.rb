@@ -18,9 +18,12 @@ RSpec.describe ApplicationHelper do
     end
   end
 
-  describe '#convert_created_at' do
+  describe '#format_created_at' do
     it 'formats a date as the full day name, month name, day of the month, and year' do
-      expect(convert_created_at(Time.new(2019, 1, 1))).to eq('Tuesday, January 01, 2019')
+      expect(format_created_at(DateTime.parse('2011-01-08 20:54:10 UTC'))).to eq('Saturday, January 08, 2011')
+      expect(format_created_at(DateTime.parse('2012-05-11 13:54:10 UTC'))).to eq('Friday, May 11, 2012')
+      expect(format_created_at(DateTime.parse('2013-08-21 08:54:10 UTC'))).to eq('Wednesday, August 21, 2013')
+      expect(format_created_at(Time.new(2019, 1, 1))).to eq('Tuesday, January 01, 2019')
     end
   end
 end

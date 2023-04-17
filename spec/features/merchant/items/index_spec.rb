@@ -8,6 +8,20 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
     @item_3 = create(:item, merchant: @merchant_1, is_enabled: true)
     @item_4 = create(:item, merchant: @merchant_1)
     @item_5 = create(:item, merchant: @merchant_1)
+    @item_6 = create(:item, merchant: @merchant_1)
+    @item_7 = create(:item, merchant: @merchant_1)
+
+    @customer_1 = create(:customer)
+    @invoice_1 = create(:invoice, customer_id: @customer_1.id)
+    @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: true)
+
+    @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 70000)
+    @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 60000)
+    @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 50000)
+    @invoice_item_4 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 40000)
+    @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 30000)
+    @invoice_item_6 = create(:invoice_item, item_id: @item_6.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 20000)
+    @invoice_item_7 = create(:invoice_item, item_id: @item_7.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 10000)
 
     visit merchant_items_path(@merchant_1.id)
   end
@@ -99,25 +113,6 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
     end
 
     describe 'Merchant Items Index: 5 most popular items (User Story 12)' do
-      before(:each) do
-        @customer_1 = create(:customer)
-        @invoice_1 = create(:invoice, customer_id: @customer_1.id)
-        @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: true)
-
-        @item_6 = create(:item, merchant: @merchant_1)
-        @item_7 = create(:item, merchant: @merchant_1)
-
-        @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 70000)
-        @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 60000)
-        @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 50000)
-        @invoice_item_4 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 40000)
-        @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 30000)
-        @invoice_item_6 = create(:invoice_item, item_id: @item_6.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 20000)
-        @invoice_item_7 = create(:invoice_item, item_id: @item_7.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 10000)
-
-        visit merchant_items_path(@merchant_1.id)
-      end
-
       it 'has a header for the top 5 items' do
         within("#top-five-items") do
           expect(page).to have_content("Top 5 Most Popular Items By Revenue")
@@ -150,6 +145,20 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
         within("#top-five-items") do
           expect(page).to_not have_content(@item_6.name)
           expect(page).to_not have_content(@item_7.name)
+        end
+      end
+    end
+
+    describe 'Merchant Items Index: Top Item\'s Best Day (User Story 13)' do
+      it 'has a header for the top selling date for each of the top 5 items' do
+        within("#top-five-items") do
+          expect(page).to have_content("Top Selling Date")
+        end
+      end
+
+      it 'displays the top selling date for each of the top 5 items' do
+        within("#top-five-items-1") do
+          expect(page).to have_content(format_created_at(@item_1.top_selling_date))
         end
       end
     end
