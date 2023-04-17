@@ -28,4 +28,8 @@ class Item < ApplicationRecord
   def total_revenue
     paid_invoices.select("SUM(invoice_items.unit_price * invoice_items.quantity) AS revenue").order(revenue: :desc).first.revenue
   end
+
+  def top_selling_date
+    paid_invoices.select("invoices.*").select("SUM(invoice_items.unit_price * invoice_items.quantity) AS revenue").group("invoices.id").order(revenue: :desc, created_at: :desc).first.created_at
+  end
 end

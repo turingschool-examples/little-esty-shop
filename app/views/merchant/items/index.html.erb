@@ -8,11 +8,15 @@
     <tr>
       <th>Item Name</th>
       <th>Total Revenue</th>
+      <th>Top Selling Date</th>
     </tr>
     <% @merchant.top_five_items_by_revenue.each_with_index do |item, index| %>
       <tr id="top-five-items-<%= index + 1 %>">
         <td><%= link_to item.name, merchant_item_path(@merchant.id, item) %></td>
         <td><%= format_currency(item.total_revenue) %></td>
+        <td>
+          Top selling date for <%= item.name %> was <%= convert_created_at(item.top_selling_date) %>
+        </td>
       </tr>
     <% end %>
   </table>

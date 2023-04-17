@@ -86,5 +86,18 @@ RSpec.describe Item, type: :model do
         expect(@item_1.total_revenue).to eq(100000)
       end
     end
+
+    describe '#top_selling_date' do
+      it 'finds the date with the most revenue for an item' do
+        expect(@item_1.top_selling_date).to eq(@invoice_2.created_at)
+      end
+
+      it 'does not count revenue from unpaid invoices' do
+        invoice_3 = create(:invoice, customer_id: @customer_1.id, created_at: '2011-01-08 20:54:10 UTC')
+        invoice_item_4 = create(:invoice_item, invoice_id: invoice_3.id, item_id: @item_1.id, quantity: 5, unit_price: 50000)
+
+        expect(@item_1.top_selling_date).to eq(@invoice_2.created_at)
+      end
+    end
   end
 end

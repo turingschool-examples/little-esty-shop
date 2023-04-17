@@ -17,4 +17,10 @@ RSpec.describe ApplicationHelper do
       expect(format_currency(10000000000)).to eq('$100,000,000.00')
     end
   end
+
+  describe '#convert_created_at' do
+    it 'formats a date as the full day name, month name, day of the month, and year' do
+      expect(convert_created_at(Time.new(2019, 1, 1))).to eq('Tuesday, January 01, 2019')
+    end
+  end
 end
