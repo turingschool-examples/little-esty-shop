@@ -91,4 +91,5 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.unsplash_api_key = ENV.fetch('UNSPLASH_API_KEY') # added during API setup
 end
