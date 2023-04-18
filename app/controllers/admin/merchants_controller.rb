@@ -3,19 +3,23 @@ class Admin::MerchantsController < ApplicationController
     @enabled_merchants = Merchant.enabled_merchants
     @disabled_merchants = Merchant.disabled_merchants
     @top_five_merchants = Merchant.top_five_merchants
+    @app_logo = PhotoBuilder.app_photo_info
   end
 
   def show
     @merchant = Merchant.find(params[:id])
     @photo = PhotoBuilder.merchant_photo_info
+    @app_logo = PhotoBuilder.app_photo_info
   end
 
   def edit
     @merchant = Merchant.find(params[:id])
+    @app_logo = PhotoBuilder.app_photo_info
   end
 
   def new
     @merchant = Merchant.new
+    @app_logo = PhotoBuilder.app_photo_info
   end
 
   def create

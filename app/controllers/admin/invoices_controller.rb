@@ -8,6 +8,7 @@ class Admin::InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @items = @invoice.items
     @invoice_items = @invoice.invoice_items
+    @app_logo = PhotoBuilder.app_photo_info
   end
 
   def update
