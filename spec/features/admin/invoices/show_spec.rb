@@ -63,5 +63,31 @@ RSpec.describe 'Admin Invoices Show Page', type: :feature do
         expect(page).to have_content("Total Revenue: 1000")
       end
     end
+
+    describe 'Invoice Status Update' do
+      it "has a form to update the invoice status by selecting new status and clicking submit.
+        I am taken back to show page and see updated invoice status" do
+        visit admin_invoice_path(@invoice_1)
+        within "#invoice-status" do
+          expect(page).to have_select("invoice[status]", selected: "completed") 
+          select('in_progress', from:'invoice_status')
+          click_on 'Update'
+          expect(current_path).to eq(admin_invoice_path(@invoice_1))
+          expect(page).to have_content("Status: in_progress")
+          select('completed', from:'invoice_status')
+          click_on 'Update'
+          expect(page).to have_content("Status: completed")
+        end
+
+        visit admin_invoice_path(@invoice_2)
+        within "#invoice-status" do
+          expect(page).to have_select("invoice[status]", selected: "in_progress")
+          select('cancelled', from:'invoice_status')
+          click_on 'Update'
+          expect(current_path).to eq(admin_invoice_path(@invoice_2))
+          expect(page).to have_content("Status: cancelled")
+        end
+      end
+    end
   end
 end
