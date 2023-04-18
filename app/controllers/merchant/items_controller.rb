@@ -6,6 +6,7 @@ class Merchant::ItemsController < ApplicationController
   end
 
   def show
+    @photo = PhotoSearch.new.search_result(@item.name)
   end
 
   def new

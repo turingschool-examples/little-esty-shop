@@ -7,4 +7,8 @@
 <h3><%= @item.name %></h3>
 
 <p>Description: <%= @item.description %></p>
-<p>Current Unit Price: <%= @item.unit_price %></p>
+<p>Current Unit Price: <%= format_currency(@item.unit_price) %></p>
+
+<div id="item-image">
+  <%= image_tag @photo.small_url %>
+</div>
