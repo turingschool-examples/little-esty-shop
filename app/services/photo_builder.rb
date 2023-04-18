@@ -15,4 +15,8 @@ class PhotoBuilder
   def self.app_photo_info
     Photo.new(service.app_logo)
   end
+
+  def self.item_photo_info(item_name)
+    Photo.new(service.item(item_name))
+  end
 end
