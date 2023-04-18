@@ -22,4 +22,12 @@ class Merchant < ApplicationRecord
     self.status = new_status
     self.save
   end
+
+  def self.enabled_merchants
+    where(status: "enabled")
+  end
+
+  def self.disabled_merchants
+    where(status: "disabled")
+  end
 end

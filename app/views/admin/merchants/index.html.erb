@@ -5,3 +5,21 @@
 <p><%= button_to "Enable", "/admin/merchants/#{merchant.id}", type: "submit", name: "status", merchant_status: "enabled", method: :patch %><%= button_to "Disable", "/admin/merchants/#{merchant.id}", type: "submit", name: "status", merchant_status: "disabled", method: :patch %></p>
 </div>
 <% end %>
+
+
+<div id="Enabled">
+  <h2>Enabled Merchants:</h2>
+  <% @merchants.enabled_merchants.each do |merchant| %>
+    <div id="enabled_merchant<%= merchant.id %>">
+    <%= merchant.name%>     
+    </div>
+  <% end %>  
+</div>
+<div id="Disabled">
+  <h2>Disabled Merchants:</h2>
+  <% @merchants.disabled_merchants.each do |merchant| %>
+    <div id="disabled_merchant<%= merchant.id %>">
+    <%= merchant.name%>
+    </div>
+  <% end %>  
+</div>
