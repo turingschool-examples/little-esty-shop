@@ -1,6 +1,8 @@
 class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
+    @merchants_enabled = Merchant.where(status: 'enabled')
+    @merchants_disabled = Merchant.where(status: 'disabled')
   end
 
   def show
@@ -13,6 +15,7 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     @merchant = Merchant.find(params[:id])
+
     if params[:status].present?
       toggle_status
       redirect_to admin_merchants_path
