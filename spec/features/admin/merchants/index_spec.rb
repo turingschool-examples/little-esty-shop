@@ -4,6 +4,8 @@ RSpec.describe '/admin/merchants', type: :feature do
   before(:each) do
     @merchant_1 = Merchant.create!(name: 'Etsy', status: 0)
     @merchant_2 = Merchant.create!(name: 'Build-a-Bear', status: 0)
+    @merchant_3 = Merchant.create!(name: 'Target', status: 1)
+    @merchant_4 = Merchant.create!(name: 'Toys-R-Us', status: 1)
     visit "/admin/merchants"
   end
 
@@ -39,6 +41,19 @@ RSpec.describe '/admin/merchants', type: :feature do
       @merchant_1.reload
       expect(@merchant_1.status).to eq("disabled")
       expect(page).to have_current_path("/admin/merchants")
+    end
+  end
+
+  it 'has Enabled and Disabled sections with appropriate merchants' do 
+    expect(page).to have_content("Enabled Merchants")
+    expect(page).to have_content("Disabled Merchants")
+    within "#Enabled" do
+      expect(page).to have_content(@merchant_3.name)  
+      expect(page).to have_content(@merchant_4.name)  
+    end
+    within "#Disabled" do
+      expect(page).to have_content(@merchant_1.name)  
+      expect(page).to have_content(@merchant_2.name)  
     end
   end
 end

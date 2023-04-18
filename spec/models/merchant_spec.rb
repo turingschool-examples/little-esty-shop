@@ -10,8 +10,10 @@ RSpec.describe Merchant, type: :model do
 
   describe '#instance methods' do
     before :each do
-      @merchant_1 = Merchant.create!(name: 'Etsy')
-      @merchant_2 = Merchant.create!(name: 'Walmart')
+      @merchant_1 = Merchant.create!(name: 'Etsy', status: 0)
+      @merchant_2 = Merchant.create!(name: 'Build-a-Bear', status: 0)
+      @merchant_3 = Merchant.create!(name: 'Target', status: 1)
+      @merchant_4 = Merchant.create!(name: 'Toys-R-Us', status: 1)
       @item_1 = @merchant_1.items.create!(name: 'Axe', description: 'Chop stuff', unit_price: 1000)
       @item_2 = @merchant_1.items.create!(name: 'Hammer', description: 'Hit stuff', unit_price: 1500)
       @item_3 = @merchant_1.items.create!(name: 'Drill', description: 'Drill stuff', unit_price: 5000)
@@ -75,6 +77,11 @@ RSpec.describe Merchant, type: :model do
 
       @merchant_1.status_update(1)
       expect(@merchant_1.status).to eq('enabled')
+    end
+
+    it 'can sort by status' do
+      expect(Merchant.enabled_merchants).to eq([@merchant_3, @merchant_4])
+      expect(Merchant.disabled_merchants).to eq([@merchant_1, @merchant_2])
     end
   end
 end
