@@ -1,3 +1,4 @@
+require 'photo_builder'
 class Merchant::ItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
@@ -10,6 +11,7 @@ class Merchant::ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @merchant = Merchant.find(params[:merchant_id])
+    @item_photo = PhotoBuilder.item_photo_info(@item.name)
     @app_logo = PhotoBuilder.app_photo_info
   end
 
@@ -43,6 +45,7 @@ class Merchant::ItemsController < ApplicationController
       redirect_to merchant_item_path(@item.merchant, @item)
     end
   end
+
 
 
   def item_params
