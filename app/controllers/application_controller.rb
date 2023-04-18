@@ -1,9 +1,10 @@
-#require './config/environment'
-
 class ApplicationController < ActionController::Base
   def welcome
-    # api_key = Rails.application.secrets.UNSPLASH_API_KEY
-    api_key = Rails.application.config.unsplash_api_key
+    # test = PhotoSearch.new
+    # result_1 = test.random_photo
+    # result_2 = test.logo
+    # result_3 = test.search_result("cat")
+    # result_4 = test.search_result("Assumenda Animi")
   end
 
   private
