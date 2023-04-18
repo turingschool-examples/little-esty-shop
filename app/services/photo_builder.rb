@@ -11,4 +11,8 @@ class PhotoBuilder
   def self.merchant_photo_info
     Photo.new(service.merchant)
   end
+
+  def self.app_photo_info
+    Photo.new(service.app_logo)
+  end
 end

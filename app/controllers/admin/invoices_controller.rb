@@ -1,6 +1,7 @@
 class Admin::InvoicesController < ApplicationController
   def index
     @invoices = Invoice.all
+    @app_logo = PhotoBuilder.app_photo_info
   end
 
   def show

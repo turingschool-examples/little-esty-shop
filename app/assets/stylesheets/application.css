@@ -60,3 +60,16 @@
   margin-left: auto;
 }
 
+.app_logo {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  size-adjust: 40%;
+}
+
+.app_logo_likes {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-left: 10px;
+}
