@@ -69,5 +69,12 @@ RSpec.describe Merchant, type: :model do
     it 'reutrns the top 5 items for a merchant' do
       expect(@merchant_1.top_5_items).to eq([@item_3, @item_2, @item_1, @item_4, @item_5])
     end
+
+    it 'can update merchant status' do
+      @merchant_1 = Merchant.create!(name: 'Etsy')
+
+      @merchant_1.status_update(1)
+      expect(@merchant_1.status).to eq('enabled')
+    end
   end
 end
