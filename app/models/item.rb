@@ -19,11 +19,19 @@ class Item < ApplicationRecord
   end
 
   def top_day
+    # @item = Item.top_five_items.first
+    # @item.invoice_items
+  # invoices.joins(:invoice_items, :transactions)
+  #         .where('transactions.result = 1')
+  #         .select('invoices.created_at, invoice_items.quantity as sales')
+  #         .group('invoices.created_at, sales')
+  #         .order(sales: :desc, created_at: :desc)
+  #         .first.created_at.strftime("%m/%d/%Y")
   invoices.joins(:invoice_items, :transactions)
-  .where('transactions.result = 1')
-  .select('invoices.created_at, invoice_items.quantity as sales')
-  .group('invoices.created_at, sales')
-  .order(sales: :desc, created_at: :desc)
-  .first.created_at.strftime("%d/%m/%Y")
+          .where('transactions.result = 1')
+          .select('invoices.*, invoice_items.quantity as sales')
+          .group('invoices.id, invoices.created_at, sales')
+          .order(sales: :desc)
+          .first.created_at.strftime("%m/%d/%Y")
   end
 end

@@ -27,3 +27,12 @@
     <% end %></li>
   <% end %>
 </ul>
+<section id="top_five_merchants">
+  <h2>Top Five Merchants</h2>
+  <% @top_five_merchants.each do |merchant| %>
+    <ul>
+      <li><%= link_to merchant.name, admin_merchant_path(merchant) %> - Total Revenue: <%= merchant.total_revenue %></li><br>
+      <p>Top day for <%= merchant.name %> was <%= merchant.top_day %></p>
+    </ul>
+  <% end %>
+</section>
