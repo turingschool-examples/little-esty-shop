@@ -1,4 +1,7 @@
 <h3>Admin Merchants</h3>
 <% @merchants.each do |merchant|%>
-<p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}/edit"%></p>
+<div id="<%=merchant.id%>"
+<p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}/edit"%>, <%= merchant.status %></p>
+<p><%= button_to "Enable", "/admin/merchants/#{merchant.id}", type: "submit", name: "status", merchant_status: "enabled", method: :patch %><%= button_to "Disable", "/admin/merchants/#{merchant.id}", type: "submit", name: "status", merchant_status: "disabled", method: :patch %></p>
+</div>
 <% end %>

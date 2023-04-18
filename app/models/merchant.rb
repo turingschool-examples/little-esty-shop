@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
+  enum status: { disabled: 0, enabled: 1 }
+
   def top_5_customers
     customers.top_customers
   end
@@ -14,5 +16,10 @@ class Merchant < ApplicationRecord
     .left_outer_joins(invoice_items: :invoice)
     .group("items.id").
     order("revenue desc").limit(5)
+  end
+
+  def status_update(new_status)
+    self.status = new_status
+    self.save
   end
 end
