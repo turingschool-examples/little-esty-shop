@@ -44,5 +44,11 @@ RSpec.describe Invoice, type: :model do
         expect(@invoice_1.item_quantity(@item_2)).to eq(1)
       end
     end
+
+    it 'can show distinct invoice items' do
+      expect(@invoice_1.items.length).to eq(4)
+      expect(@invoice_1.unique_items.first).to eq(@item_1)
+      expect(@invoice_1.unique_items.length).to eq(2)
+    end
   end
 end
