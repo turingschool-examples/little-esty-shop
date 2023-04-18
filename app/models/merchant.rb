@@ -2,6 +2,7 @@ class Merchant < ApplicationRecord
   has_many :items
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
+  has_many :transactions, through: :invoices
   
   enum status: ["disabled", "enabled"]
 
@@ -38,7 +39,16 @@ class Merchant < ApplicationRecord
 
   def update_status(status_update)
     update(status: status_update)
-    save
+    save   
   end
-
+  def top_day
+    invoices.joins(:transactions, :invoice_items)
+            .where("transactions.result = 1")
+            .group("invoices.id")
+            .select('invoices.*, sum(invoice_items.unit_price * invoice_items.quantity) As total_revenue')
+            .order('total_revenue DESC')
+            .first.created_at
+            .strftime("%m/%d/%Y")
+    
+  end
 end
