@@ -56,5 +56,11 @@ RSpec.describe '/admin/merchants', type: :feature do
       expect(page).to have_content(@merchant_2.name)  
     end
   end
+
+  it 'has link for new merchant' do
+    expect(page).to have_link("New Merchant")
+    click_on "New Merchant"
+    expect(current_path).to eq("/admin/merchants/new")
+  end
 end
 

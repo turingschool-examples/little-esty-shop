@@ -32,6 +32,12 @@ class Admin::MerchantsController < ApplicationController
     end
   end
 
+  def create 
+    merchant = Merchant.new(merchant_params)
+    merchant.save
+    redirect_to "/admin/merchants"
+  end
+
   private
 
   def merchant_params
