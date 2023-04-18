@@ -7,6 +7,7 @@ class Admin::MerchantsController < ApplicationController
 
   def show
     @merchant = Merchant.find(params[:id])
+    @photo = PhotoBuilder.merchant_photo_info
   end
 
   def edit

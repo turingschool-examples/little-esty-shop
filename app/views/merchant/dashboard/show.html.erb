@@ -1,5 +1,5 @@
 <h1><%= @merchant.name %></h1>
-
+<img src = <%= @photo.url %> > 
 <section id="links">
 <%= link_to "My Items", merchant_items_path(@merchant) %>
 <%= link_to "My Invoices", merchant_invoices_path(@merchant) %>

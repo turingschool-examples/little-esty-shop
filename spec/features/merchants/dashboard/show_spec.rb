@@ -8,7 +8,7 @@ RSpec.describe 'Merchant Dashboard Show Page' do
   describe 'User Story 1' do
     it 'I can see my merchant dashboard' do
       visit dashboard_merchant_path(@merchant_1)
-
+save_and_open_page
       expect(page).to have_content(@merchant_1.name)
 
       visit dashboard_merchant_path(@merchant_2)
