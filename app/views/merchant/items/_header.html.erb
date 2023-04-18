@@ -1,0 +1,11 @@
+<header>
+  <div class = "merchantItemHeader">
+    <h1> Little Esty Shop </h1>
+  </div>
+  <div class = "subHead" >
+    <h2 class = "left"><%= "#{@merchant.name}'s items" %></h2>
+    <p class = "right">
+      <%= link_to "Dashboard", dashboard_merchant_path(@merchant) %>
+      <%= link_to "My Items", merchant_items_path(@merchant) %>
+      <%= link_to "My Invoices", merchant_invoices_path(@merchant) %></p>
+  </div>
