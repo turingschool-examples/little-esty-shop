@@ -1,19 +1,17 @@
 <%= render "shared/admin_header" %>
 
-<h1>Admin Invoice Show Page</h1>
-
 <div id = "<%=@invoice.id%>_id">
-  <p>Invoice ID: <%= @invoice.id %></p>
+  <div class="center-header"><p>Invoice ID: <%= @invoice.id %></p></div>
   <p>Invoice Status: <%= form_with model: @invoice, local: true do |form| %></p>
                     <%= form.collection_select :status, ["In Progress", "Completed", "Cancelled"], :to_s, :titleize, selected: @invoice.status %>
                     <%= form.submit "Update Invoice Status"%>
                     <% end %>
   <p>Invoice Created At: <%= format_date(@invoice.created_at) %></p>
-  <p>Customer Name: <%= "#{@invoice.customer_name}" %></p>
   <p>Total Revenue: <%= format_currency(@invoice.total_revenue) %></p>
+  <p>Customer Name: <%= "#{@invoice.customer_name}" %></p>
   <p>Items: <% @invoice.items.each do |i| %></p>
             <ul id = "item_<%=i.id%>">
-            <li>ID:<%= i.id %></li>
+            <p>ID:<%= i.id %></p>
             <li>Item name: <%= i.name %></li>
             <li>Quantity Ordered: <%= format_item_info(i.quantity_sold(@invoice)) %></li>
             <li>Item sold price: <%= format_currency(format_item_info(i.find_sold_price(@invoice))) %></li>
