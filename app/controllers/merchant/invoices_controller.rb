@@ -10,5 +10,6 @@ class Merchant::InvoicesController < ApplicationController
     @invoice = @merchant.invoices.find(params[:id])
     @invoice_items = @merchant.invoice_items
     @app_logo = PhotoBuilder.app_photo_info
+    @title_string = "#{@merchant.name}"
   end
 end

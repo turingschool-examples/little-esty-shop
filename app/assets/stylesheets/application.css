@@ -74,6 +74,12 @@
   margin-left: 10px;
 }
 
+.invoice_table {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
 .padLeft {
   padding-left: 100px;
 }
