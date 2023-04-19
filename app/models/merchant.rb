@@ -48,15 +48,4 @@ class Merchant < ApplicationRecord
   end
 end
 
-def update
-  @merchant = Merchant.find(params[:id])
-  if @merchant.update(merchant_params)
-    flash[:success] = "Merchant Updated"
-    redirect_to admin_merchant_path(@merchant)
-  else
-    flash[:notice] = "Merchant Update Failed"
-    redirect_to edit_admin_merchant_path(@merchant)
-  end
-end
-
 
