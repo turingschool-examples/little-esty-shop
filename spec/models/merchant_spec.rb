@@ -54,6 +54,15 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant_6.total_revenue).to eq(0)
     end
 
+    it '#revenue_usd' do
+      expect(@merchant_3.revenue_usd).to eq(2268.0)
+      expect(@merchant_1.revenue_usd).to eq(1512.0)
+      expect(@merchant_5.revenue_usd).to eq(702.0)
+      expect(@merchant_2.revenue_usd).to eq(420.0)
+      expect(@merchant_4.revenue_usd).to eq(396.0)
+      expect(@merchant_6.revenue_usd).to eq(0)
+    end
+
     it '::can find top 5 merchants' do
       expect(Merchant.top_five_merchants.first).to eq(@merchant_3)
     end

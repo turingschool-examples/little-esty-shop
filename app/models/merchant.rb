@@ -41,6 +41,7 @@ class Merchant < ApplicationRecord
     update(status: status_update)
     save   
   end
+
   def top_day
     invoices.joins(:transactions, :invoice_items)
             .where("transactions.result = 1")
@@ -50,5 +51,9 @@ class Merchant < ApplicationRecord
             .first.created_at
             .strftime("%m/%d/%Y")
     
+  end
+
+  def revenue_usd
+    total_revenue / 100
   end
 end
