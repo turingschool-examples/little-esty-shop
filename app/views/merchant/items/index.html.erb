@@ -3,6 +3,9 @@
 <div style="display: flex; background-color: #D3D3D3; width: 100%; border-top: 1px solid black; height: 30px; align-items: center; justify-content: center;" >
   <h3> My Items </h3>
 </div>
+<div style="display: flex; width: 100%; border-top: 1px solid black; height: 30px; align-items: center; justify-content: center;" >
+  <p><%= link_to "Create New Item", new_merchant_item_path(@merchant.id) %><p>
+</div>
 
 <aside class = 'leftSection'>
   <div id="enabled-items">
@@ -36,5 +39,4 @@
       <p>Top day for <%= item.name %> was <%= item.top_day %></p>
     <% end %>
   <% end %>
-  <p><%= link_to "Create New Item", new_merchant_item_path(@merchant.id) %></p>
 </article>

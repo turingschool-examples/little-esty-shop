@@ -1,35 +1,40 @@
-<h1>Invoice Show Page</h1>
+<%= render partial: "header" %>
 <h2> Merchant: <%= @merchant.name %> </h2>
+<div style="display: flex; background-color: #D3D3D3; width: 100%; border-top: 1px solid black; height: 30px; align-items: center; justify-content: center;" >
+  <p>Invoice ID: <%= @invoice.id %><p>
+</div>
+
 <section id="invoice_info">
   <ul>
-    <li> Invoice ID: <%= @invoice.id %> </li>
     <li> Current Status: <%= @invoice.status %> </li>
     <li> Invoice Creation Date: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </li>
     <li> Customer Name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %> </li>
     <li> Total Potential Revenue: <%= @invoice.total_revenue %> </li>
   </ul>
 </section>
-
-
-<table style="border:1px solid black;margin-right:auto" id="items_table">
-<h2> Items on this Invoice </h2>
-  <tr>
-    <th>Item Name</th>
-    <th>Item Quantity</th>
-    <th>Item Price</th>
-    <th>Item Status</th>
-  </tr>
-  <% @invoice_items.each_with_index do |item, index| %>
-    <td><%= item.item_name %></td>
-    <td><%= item.quantity %></td>
-    <td><%= item.unit_price %></td>
-    <td>
-    <%= form_with  url: update_invoice_item_path(item), method: :patch, id: "item-#{item.id}-status" do |form|%>
-    <%= form.label :status %>
-    <%= form.select :invoice_item_status, options_for_select({"Pending" => "pending", "Packaged" => "packaged", "Shipped" => "shipped"}, item.status) %>
-    <%= form.submit "Update Status", params: {id: item.id}, remote: true %>
-    <% end %>
-    </td>
-  </tr>
-<% end %>
-</table>
+<div class = "invoice_table">
+  <h2> Items on this Invoice </h2>
+</div>
+<div class = "invoice_table">
+  <table style="border:1px solid black;" id="items_table">
+    <tr>
+      <th>Item Name</th>
+      <th>Item Quantity</th>
+      <th>Item Price</th>
+      <th>Item Status</th>
+    </tr>
+    <% @invoice_items.each_with_index do |item, index| %>
+      <td style="display:flex; margin-left: 9px" ><%= item.item_name %></td>
+      <td><%= item.quantity %></td>
+      <td><%= item.unit_price %></td>
+      <td>
+      <%= form_with  url: update_invoice_item_path(item), method: :patch, id: "item-#{item.id}-status" do |form|%>
+      <%= form.label :status %>
+      <%= form.select :invoice_item_status, options_for_select({"Pending" => "pending", "Packaged" => "packaged", "Shipped" => "shipped"}, item.status) %>
+      <%= form.submit "Update Status", params: {id: item.id}, remote: true %>
+      <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>

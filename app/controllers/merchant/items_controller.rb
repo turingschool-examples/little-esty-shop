@@ -6,7 +6,6 @@ class Merchant::ItemsController < ApplicationController
     @disabled_items = @merchant.items.disabled_items
     @top_five = @merchant.items.top_five_items
     @app_logo = PhotoBuilder.app_photo_info
-    @title_string = "#{@merchant.name}'s items"
   end
 
   def show
@@ -14,7 +13,6 @@ class Merchant::ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @item_photo = PhotoBuilder.item_photo_info(@item.name)
     @app_logo = PhotoBuilder.app_photo_info
-    @title_string = @merchant.name
   end
 
   def new
