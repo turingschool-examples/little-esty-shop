@@ -40,7 +40,7 @@ RSpec.describe 'Admin Invoice Show Page' do
      
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@invoice_item_1.quantity)
-      expect(page).to have_content(@invoice_item_1.unit_price)
+      expect(page).to have_content(@invoice_item_1.price_usd)
       expect(page).to have_content(@invoice_item_1.status)
     end
   end
