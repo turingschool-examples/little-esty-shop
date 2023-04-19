@@ -1,4 +1,5 @@
 <%= render 'shared/nav_bar_admin' %>
+
 <%= render '/shared/flash_messages' %>
 
 <section id="merchants-enabled">
@@ -6,6 +7,7 @@
   <ul id="merchants-enabled-list">
     <% @merchants_enabled.each do |merchant| %>
       <div id="merchant-<%=merchant.id%>"> 
+       <%= image_tag(@images.sample.thumb) %>
       <li><%= link_to merchant.name, admin_merchant_path(merchant) %>
       <%= merchant.status%>
        <%= form_with(model: merchant, url: admin_merchant_path(merchant), method: :put) do |form| %>
@@ -18,13 +20,12 @@
   </ul>
 </section>
 
-
-
 <section id="merchants-disabled">
   <h2>Disabled Merchants</h2>
   <ul id="merchants-disabled-list">
     <% @merchants_disabled.each do |merchant| %>
-      <div id="merchant-<%=merchant.id%>"> 
+      <div id="merchant-<%=merchant.id%>">
+      <%= image_tag(@images.sample.thumb) %>
       <li><%= link_to merchant.name, admin_merchant_path(merchant) %>
       <%= merchant.status%>
        <%= form_with(model: merchant, url: admin_merchant_path(merchant), method: :put) do |form| %>

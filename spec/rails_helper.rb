@@ -21,11 +21,11 @@ def test_data
   @invoice_9 = Invoice.create!(status: "completed", customer: @customer_9)
   @invoice_10 = Invoice.create!(status: "completed", customer: @customer_10)
 
-  @merchant_1 = Merchant.create!(name: "First Merchant")
-  @merchant_2 = Merchant.create!(name: "Second Merchant")
-  @merchant_3 = Merchant.create!(name: "Third Merchant")
-  @merchant_4 = Merchant.create!(name: "Fourth Merchant")
-  @merchant_5 = Merchant.create!(name: "Fifth Merchant")
+  @merchant_1 = Merchant.create!(name: "Drug Testing Store")
+  @merchant_2 = Merchant.create!(name: "Pharmacy By U")
+  @merchant_3 = Merchant.create!(name: "Little Pharma")
+  @merchant_4 = Merchant.create!(name: "Drugs R US")
+  @merchant_5 = Merchant.create!(name: "DARE You To Try This")
 
   @item_1 = Item.create!(name: "Speed", description: "Description_1", unit_price: 100, merchant: @merchant_1)
   @item_2 = Item.create!(name: "LSD", description: "Description_2", unit_price: 15000, merchant: @merchant_2)
