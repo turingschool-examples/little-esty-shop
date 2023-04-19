@@ -16,7 +16,7 @@ class Merchant < ApplicationRecord
   
   def disabled!
     update(status: :disabled)
-
+  end
   
   def self.top_five_merch_by_revenue
     Merchant.select("merchants.name, merchants.id, 
