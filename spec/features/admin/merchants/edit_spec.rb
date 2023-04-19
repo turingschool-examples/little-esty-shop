@@ -44,7 +44,7 @@ RSpec.describe 'Admin Merchants Show Page' do
 
       expect(page).to have_content('Merchant Update Failed')
       expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}/edit")
-      expect(page).to have_content("First Merchant")
+      expect(page).to have_content(@merchant_1.name)
     end
   end
 end

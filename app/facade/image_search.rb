@@ -1,7 +1,6 @@
 class ImageSearch
   def images(query)
     service.images(query).map do |data|
-      # require 'pry'; binding.pry
       Image.new(data)
     end
   end
