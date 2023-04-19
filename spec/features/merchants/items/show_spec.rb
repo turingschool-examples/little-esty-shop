@@ -54,7 +54,7 @@ RSpec.describe "Item show page", type: :feature do
       expect(page).to have_content("Cookies")
       expect(page).to have_content("Description: Yummy")
       expect(page).to have_content("Unit price: 750")
-   save_and_open_page
+   
     end
     it "visit item show page, see a link to update that item" do
       stub_request(:get, "https://api.unsplash.com/photos/random?client_id=mj7CJdgJJnWWE_PL83njw8RsU79x54iA4g5bHKlM_wA&query=Item_4")
