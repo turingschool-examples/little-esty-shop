@@ -1,28 +1,40 @@
-<h1><%= "#{@merchant.name}'s items" %></h1>
-<div id="enabled-items">
-<h2>Enabled Items</h2>
-<% @enabled_items.each do |item|%>
-<><p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p>
-<%= form_with url: merchant_item_path(@merchant.id, item.id), method: :patch, local: true do |form| %>
-    <%= form.hidden_field :status, value: "disabled" %>
-    <%= form.submit "Disable", id: "disable_#{item.id}" %>
-    <% end %>
-  <% end %>
+<%= render partial: "header" %>
+
+<div style="display: flex; background-color: #D3D3D3; width: 100%; border-top: 1px solid black; height: 30px; align-items: center; justify-content: center;" >
+  <h3> My Items </h3>
 </div>
-<div id="disabled-items">
-<h2>Disabled Items</h2>
-<% @disabled_items.each do |item| %>
+
+<aside class = 'leftSection'>
+  <div id="enabled-items">
+  <h2>Enabled Items</h2>
+  <% @enabled_items.each do |item|%>
   <p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p>
   <%= form_with url: merchant_item_path(@merchant.id, item.id), method: :patch, local: true do |form| %>
-      <%= form.hidden_field :status, value: "enabled" %>
-      <%= form.submit "Enable", id: "enable_#{item.id}" %>
+      <%= form.hidden_field :status, value: "disabled" %>
+      <%= form.submit "Disable", id: "disable_#{item.id}" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div id="disabled-items">
+  <h2>Disabled Items</h2>
+  <% @disabled_items.each do |item| %>
+    <p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p>
+    <%= form_with url: merchant_item_path(@merchant.id, item.id), method: :patch, local: true do |form| %>
+        <%= form.hidden_field :status, value: "enabled" %>
+        <%= form.submit "Enable", id: "enable_#{item.id}" %>
+    <% end %>
   <% end %>
-<% end %>
-</div><br>
-<%= content_tag :div, id: "statistics" do %>
-  <h2> Top 5 items </h2>
-  <% @top_five.each do |item| %>
-    <p><%= link_to item.name, merchant_item_path(@merchant, item) %><%= "Total revenue: #{item.product}" %></p>
+  </div><br>
+</aside>
+
+<article class = 'rightSection' >
+  <%= content_tag :div, id: "statistics" do %>
+    <h2> Top 5 items </h2>
+    <% @top_five.each do |item| %>
+      <p><%= link_to item.name, merchant_item_path(@merchant, item) %><%= "Total revenue: #{item.product}" %></p>
+      <p>Top day for <%= item.name %> was <%= item.top_day %></p>
+    <% end %>
   <% end %>
-<% end %>
-<p><%= link_to "Create New Item", new_merchant_item_path(@merchant.id) %></p>
+  <p><%= link_to "Create New Item", new_merchant_item_path(@merchant.id) %></p>
+</article>

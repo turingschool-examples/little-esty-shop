@@ -13,3 +13,67 @@
  *= require_tree .
  *= require_self
  */
+ .merchantItemHeader {
+  display: flex;
+  font-size: 14px;
+  color: black;
+  background-color: gray;
+  padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+}
+
+.subHead {
+  display: flex;
+  padding: 10px;
+  font-size: 20px;
+  color: black;
+  background-color: white;
+  align-items: center;
+  height: 30px;
+  justify-content: flex-end;
+}
+
+.right {
+  margin-left: auto;
+  color: black;
+}
+
+.left {
+  margin-left: 20px;
+  margin-right: auto;
+}
+
+.leftSection {
+  float: left;
+  margin-left: 10%;
+  margin-right: auto;
+}
+
+.rightSection {
+  float: right;
+  margin-right: 10%;
+  margin-left: auto;
+}
+
+.app_logo {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  size-adjust: 40%;
+}
+
+.app_logo_likes {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-left: 10px;
+}
+
+.padLeft {
+  padding-left: 100px;
+}

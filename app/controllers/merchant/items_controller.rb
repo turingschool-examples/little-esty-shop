@@ -1,18 +1,23 @@
+require 'photo_builder'
 class Merchant::ItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @enabled_items = @merchant.items.enabled_items
     @disabled_items = @merchant.items.disabled_items
     @top_five = @merchant.items.top_five_items
+    @app_logo = PhotoBuilder.app_photo_info
   end
 
   def show
     @item = Item.find(params[:id])
     @merchant = Merchant.find(params[:merchant_id])
+    @item_photo = PhotoBuilder.item_photo_info(@item.name)
+    @app_logo = PhotoBuilder.app_photo_info
   end
 
   def new
     @merchant = Merchant.find(params[:merchant_id])
+    @app_logo = PhotoBuilder.app_photo_info
   end
 
   def create
@@ -25,6 +30,7 @@ class Merchant::ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    @app_logo = PhotoBuilder.app_photo_info
   end
 
   def update
@@ -39,6 +45,7 @@ class Merchant::ItemsController < ApplicationController
       redirect_to merchant_item_path(@item.merchant, @item)
     end
   end
+
 
 
   def item_params

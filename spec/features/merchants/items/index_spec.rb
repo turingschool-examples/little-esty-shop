@@ -143,5 +143,30 @@ RSpec.describe "Index page", type: :feature do
         expect(page).to have_content("Total revenue: 5100")
       end
     end
+
+    it "Next to each of the 5 most popular items, I see the date 
+        with the most sales for that item. I also see the label 
+        'Top selling date for was'" do
+      @invoice_item_50.update(quantity: 10)
+      @invoice_10.update(created_at: "06/04/2023")
+      @invoice_item_50.update(quantity: 10)
+      @invoice_7.update(created_at: "31/03/2023")
+      @invoice_item_47.update(quantity: 10)
+      @invoice_4.update(created_at: "09/04/2023")
+      @invoice_item_44.update(quantity: 10)
+      @invoice_1.update(created_at: "15/04/2023")
+      @invoice_item_41.update(quantity: 10)
+      @invoice_20.update(created_at: "06/04/2023")
+      @invoice_item_40.update(quantity: 10)
+      visit merchant_items_path(@merchant_3)
+
+      within('#statistics') do
+        expect(page).to have_content("Top day for Item 21 was 04/06/2023")
+        expect(page).to have_content("Top day for Item 20 was 03/31/2023")
+        expect(page).to have_content("Top day for Item 19 was 04/09/2023")
+        expect(page).to have_content("Top day for Item 18 was 04/15/2023")
+        expect(page).to have_content("Top day for Item 17 was 04/06/2023")
+      end
+    end
   end
 end

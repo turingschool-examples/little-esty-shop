@@ -1,12 +1,14 @@
 class Admin::InvoicesController < ApplicationController
   def index
     @invoices = Invoice.all
+    @app_logo = PhotoBuilder.app_photo_info
   end
 
   def show
     @invoice = Invoice.find(params[:id])
     @items = @invoice.items
     @invoice_items = @invoice.invoice_items
+    @app_logo = PhotoBuilder.app_photo_info
   end
 
   def update

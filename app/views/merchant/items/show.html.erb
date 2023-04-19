@@ -1,4 +1,5 @@
 <h1><%= @item.name %></h1>
+<img src = <%= @item_photo.url %>>
 <p><%= "Description: #{@item.description}" %></p>
 <p><%= "Unit price: #{@item.unit_price}" %></p>
 <p><%= link_to "Update #{@item.name}", edit_merchant_item_path(@merchant.id, @item.id)%>

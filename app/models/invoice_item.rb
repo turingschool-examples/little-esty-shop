@@ -12,4 +12,8 @@ class InvoiceItem < ApplicationRecord
   def item_name
     item.name
   end
+
+  def price_usd
+    unit_price / 100.0
+  end
 end

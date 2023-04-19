@@ -1,1 +1,6 @@
-<%= "#{@merchant.name}'s shop" %>
+<%= render partial: "header"%>
+<section style="text-align: center">
+<h1 style="text-align: center"><%= "#{@merchant.name}'s shop" %><br/></h1>
+<%= image_tag @photo.url, size: "150x150" %><br/>
+<%= link_to "Edit #{@merchant.name}", edit_admin_merchant_path(@merchant) %>
+</section>

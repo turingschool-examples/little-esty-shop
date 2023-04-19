@@ -1,4 +1,45 @@
-<h2>Admin Dashboard</h2>
-<% @merchants.each do |merchant| %>
-  <%= link_to merchant.name, admin_merchant_path(merchant) %>
-<% end %>
+<%= render partial: "header" %>
+<br>
+<div class = "padLeft">
+  <%= link_to "Add New Merchant", new_admin_merchant_path %>
+</div>
+
+<aside class = 'leftSection'>
+  <ul id="enabled_merchants">
+  <h2>Enabled Merchants</h2>
+  <% @enabled_merchants.each do |merchant| %>
+    <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> 
+    <%= form_with model: merchant, url: "/admin/merchants/#{merchant.id}", local: true do |form| %>
+        <%= form.hidden_field :_method, value: "patch" %>
+        <%= form.hidden_field :status, value: "disabled" %>
+        <%= form.submit "Disable" %>
+      <% end %>
+    <% end %></li>
+  </ul>
+
+<br/>
+
+  <ul id="disabled_merchants">
+  <h2>Disabled Merchants</h2>
+  <% @disabled_merchants.each do |merchant| %>
+    <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> 
+    <%= form_with model: merchant, url: "/admin/merchants/#{merchant.id}", local: true do |form| %>
+        <%= form.hidden_field :_method, value: "patch" %>
+        <%= form.hidden_field :status, value: "enabled" %>
+        <%= form.submit "Enable", id: "enable_#{merchant.id}" %>
+      <% end %></li>
+    <% end %>
+  </ul>
+</aside>
+
+<article class = 'rightSection' >
+  <section id="top_five_merchants">
+    <h2>Top Five Merchants</h2>
+    <% @top_five_merchants.each do |merchant| %>
+      <ul>
+        <li><%= link_to merchant.name, admin_merchant_path(merchant) %> - Total Revenue: <%= number_to_currency(merchant.revenue_usd) %></li>
+        <p>Top day for <%= merchant.name %> was <%= merchant.top_day %></p>
+      </ul>
+    <% end %>
+  </section>
+</article>

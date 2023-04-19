@@ -1,4 +1,7 @@
-<h2><%= @merchant.name %>'s Invoices</h2>
+<%= render partial: "header" %>
+<div style="display: flex; background-color: #D3D3D3; width: 100%; border-top: 1px solid black; height: 30px; align-items: center; justify-content: center;" >
+  <h3> My Invoices </h3>
+</div>
 <% @invoices.each do |invoice| %>
-<p>Invoice #<%= link_to invoice.id, merchant_invoice_path(@merchant.id, invoice.id) %></p>
+<p class = "padLeft">Invoice #<%= link_to invoice.id, merchant_invoice_path(@merchant.id, invoice.id) %></p>
 <% end %>
