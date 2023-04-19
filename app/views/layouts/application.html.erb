@@ -9,6 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <div class="page-border">
   <header>
     <div class="header-image"><img src = "<%=@logo.thumb_url%>" id="logo_img" height="50", width="auto"></div>
     <h1 class="header-title"><span>Little Esty Shop<span></h1>
@@ -18,4 +19,5 @@
     <%= render 'shared/messages' %>
     <%= yield %>
   </body>
+  </div>
 </html>

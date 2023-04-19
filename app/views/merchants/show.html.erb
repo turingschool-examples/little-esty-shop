@@ -1,24 +1,22 @@
-<h2>Merchant Dashboard</h2>
+<%= render "shared/merchant_header" %>
 
-<h3><%= @merchant.name %></h3>
+<div class="flex-parent">
 
-<h3><%= link_to "Items Index", merchant_items_path(@merchant.id) %></h3>
-<h3><%= link_to "Invoices Index", merchant_invoices_path(@merchant.id) %></h3>
+  <section id="items-ready-to-ship" class="flex-child">
+    <h3 class="center-header">Items Ready to Ship</h3>
+    <% @merchant.items_not_shipped.each do |invoice_item| %>
+      <div id="invoice-item-<%= invoice_item.id %>">
+        <p><%= invoice_item.item.name %> - Invoice #<%= link_to invoice_item.invoice.id, merchant_invoice_path(@merchant, invoice_item.invoice) %> - <%= format_date(invoice_item.invoice.created_at) %></p>
+      </div>
+    <% end %>
+  </section>
 
-<section id="top-five-cutomers">
-  <h3>Top 5 Customers</h3>
-  <% @merchant.top_five_customers.each do |customer| %>
-    <div id="top-five-<%= customer.id %>">
-      <p><%= customer.name %> - <%= customer.transactions_count %> transactions</p>
-    </div>
-  <% end %>
-</section>
-
-<section id="items-ready-to-ship">
-  <h3>Items Ready to Ship</h3>
-  <% @merchant.items_not_shipped.each do |invoice_item| %>
-    <div id="invoice-item-<%= invoice_item.id %>">
-      <p><%= invoice_item.item.name %> - Invoice #<%= link_to invoice_item.invoice.id, merchant_invoice_path(@merchant, invoice_item.invoice) %> - <%= format_date(invoice_item.invoice.created_at) %></p>
-    </div>
-  <% end %>
-</section>
+  <section id="top-five-cutomers" class="flex-child">
+    <h3 class="center-header">Top 5 Customers</h3>
+    <% @merchant.top_five_customers.each do |customer| %>
+      <div id="top-five-<%= customer.id %>">
+        <p><%= customer.name %> - <%= customer.transactions_count %> transactions</p>
+      </div>
+    <% end %>
+  </section>
+</div>
