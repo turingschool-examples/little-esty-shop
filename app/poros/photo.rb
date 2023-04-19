@@ -5,6 +5,5 @@ class Photo
     @data = data
     @url = data[:urls][:small]
     @likes = data[:likes]
-    # require 'pry'; binding.pry
   end
 end
