@@ -15,7 +15,6 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     @merchant = Merchant.find(params[:id])
-
     if @merchant.update(merchant_params)
        if params[:name].nil?
         toggle_status

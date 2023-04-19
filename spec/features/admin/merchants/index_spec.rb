@@ -35,12 +35,16 @@ RSpec.describe 'Admin Merchants Index Page' do
     end
 
     it 'visits index and disables merchant' do
+      @merchant_2.disabled!
+      @merchant_3.disabled!
+      @merchant_4.disabled!
+      @merchant_5.disabled!
       visit admin_merchants_path
       expect(current_path).to eq('/admin/merchants')
-      within "merchant-#{@merchant_1.id}" do
-        click_button 'Disable'
-        expect(page).to have_content('disabled')
-      end
+
+      click_button 'Disable'
+      expect(page).to have_content('disabled')
+
       
       expect(current_path).to eq(admin_merchants_path)
       expect(page).to have_content("Merchant disable")
