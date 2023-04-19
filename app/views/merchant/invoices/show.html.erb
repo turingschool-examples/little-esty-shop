@@ -4,7 +4,7 @@
   <h3>Invoice #<%= @invoice.id %></h3>
   <p>Status: <%= @invoice.status %></p>
   <p>Created on: <%= format_date(@invoice.created_at) %></p>
-  <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p>
+  <p>Total Revenue: <%= format_currency(@invoice.total_revenue) %></p>
 </div>
 
 <div id="customer-info">
