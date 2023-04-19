@@ -6,6 +6,17 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   validates_presence_of :name
+
+
+  enum status: [:enabled, :disabled]
+
+  def enabled!
+    update(status: :enabled)
+  end
+  
+  def disabled!
+    update(status: :disabled)
+  end
   
   def self.top_five_merch_by_revenue
     Merchant.select("merchants.name, merchants.id, 
@@ -37,4 +48,5 @@ class Merchant < ApplicationRecord
     .strftime("%A, %B %d, %Y")
   end
 end
+
 
