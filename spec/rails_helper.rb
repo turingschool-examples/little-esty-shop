@@ -1,3 +1,6 @@
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
+
 require 'SimpleCov'
 SimpleCov.start
 # This file is copied to spec/ when you run 'rails generate rspec:install'

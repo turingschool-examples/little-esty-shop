@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "admin/merchants index", type: :feature do
+  before (:each) do
+    stub_request(:get, "https://api.unsplash.com/photos/random?client_id=FlgsxiCZm-o34965PDOwh6xVsDINZFbzSwcz0__LKZQ&query=merchant")
+      .to_return(status: 200, body: File.read('./spec/fixtures/merchant.json'))
+    stub_request(:get, "https://api.unsplash.com/photos/5Fxuo7x-eyg?client_id=aOXB56mTdUD88zHCvISJODxwbTPyRRsOk0rA8Ha-cbc")
+      .to_return(status: 200, body: File.read('./spec/fixtures/app_logo.json'))
+  end
   describe "display" do
     before do
       test_data
@@ -166,10 +172,10 @@ RSpec.describe "admin/merchants index", type: :feature do
       
       within("#top_five_merchants") do
         expect(page).to have_content(@merchant_3.name)
-        expect(page).to have_content(@merchant_3.total_revenue)
+        expect(page).to have_content("$2,268.00")
         expect(page).to have_content(@merchant_1.name)
-        expect(page).to have_content(@merchant_1.total_revenue)
-        expect("#{@merchant_3.total_revenue}").to appear_before("#{@merchant_1.total_revenue}")
+        expect(page).to have_content("$1,512.00")
+        expect("$2,268.00").to appear_before("$1,512.00")
       end
     end
     
