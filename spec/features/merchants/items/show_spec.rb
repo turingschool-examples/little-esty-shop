@@ -8,7 +8,7 @@ RSpec.describe 'Merchant Items Show Page' do
   describe 'As a merchant, when I visit my merchant items show page' do
     it 'I see all of my items information' do
       visit merchant_item_path(@merchant_1, @item_1)
-
+save_and_open_page
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@item_1.description)
       expect(page).to have_content(@item_1.unit_price_to_dollars)

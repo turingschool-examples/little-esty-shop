@@ -1,6 +1,8 @@
 <%= render 'shared/flash_messages' %>
 <h1><%= @item.name %></h1>
 <br>
+<%= image_tag(@images.first.small) %>
+<br>
 <p> Description: <%= @item.description %></p>
 <br>
 <p>Current Price: $<%= @item.unit_price_to_dollars %></p>
