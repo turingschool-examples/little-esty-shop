@@ -1,4 +1,6 @@
-<h1>Merchant Admin</h1>
+<h1><center>Little Esty Shop</h1>
+<h3> Admin Dashboard</h3>
+<br>
 <br>
 <%= render '/shared/flash_messages' %>
 
@@ -20,6 +22,7 @@
 </section>
 
 
+
 <section id="merchants-disabled">
   <h2>Disabled Merchants</h2>
   <ul id="merchants-disabled-list">
@@ -35,5 +38,18 @@
       </div>
     <% end %>
   </ul>
+
+<section id="top_merchants">
+  <h3>Top Merchants</h3>
+  <ol>
+    <% @merchants.top_five_merch_by_revenue.each do |merchant| %>
+      <div id="top_merchant_<%= merchant.id %>">
+      <li><%= link_to merchant.name, admin_merchant_path(merchant) %> - 
+      <%= number_to_currency(merchant.total_merch_revenue) %> in sales</li>
+      <p>Top day for <%= merchant.name %> was <%= merchant.top_selling_date %></p>
+      <br>
+      </div>
+    <% end %>
+  </ol>
 </section>
 

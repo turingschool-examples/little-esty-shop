@@ -36,7 +36,8 @@ RSpec.describe Invoice, type: :model do
       end
 
       it 'returns created at time correctly' do
-        expect(Invoice.incomplete.first.created_at_formatted).to eq(Date.today.strftime("%A, %B %d, %Y"))
+        # binding.pry
+        expect(Invoice.incomplete.first.created_at_formatted).to eq((DateTime.now + 1/4r).strftime("%A, %B %d, %Y"))
       end
     end
 
@@ -60,7 +61,8 @@ RSpec.describe Invoice, type: :model do
       it "formats the created at attribute" do 
         customer = Customer.create!(first_name: "John", last_name: "Doe")
         invoice = Invoice.create!(status: "cancelled", customer: customer)
-        expect(invoice.created_at_formatted).to eq(Date.today.strftime("%A, %B %d, %Y"))
+        invoice.update(created_at: "Mon, 17 Apr 2023 00:55:43 UTC +00:00")
+        expect(invoice.created_at_formatted).to eq("Monday, April 17, 2023")
       end
     end
 

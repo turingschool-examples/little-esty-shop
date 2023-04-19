@@ -4,13 +4,6 @@ class Merchants::InvoiceItemsController < ApplicationController
     invoice = Invoice.find(params[:invoice_item][:invoice_id])
     invoice_item = InvoiceItem.find(params[:id])
     invoice_item.update(invoice_items_params)
-    if (params[:invoice_item][:status] == "packaged")
-      invoice_item.update(status: "packaged")
-    elsif (params[:invoice_item][:status] == "shipped")
-      invoice_item.update(status: "shipped")
-    else (params[:invoice_item][:status] == "pending")
-      invoice_item.update(status: "pending")
-    end
     redirect_to merchant_invoice_path(merchant, invoice)
   end
 
