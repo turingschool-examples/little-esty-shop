@@ -34,4 +34,4 @@ RSpec.describe 'Merchant Items Show Page' do
       expect(current_path).to eq(edit_merchant_item_path(@merchant_2, @item_10))
     end
   end
-end
+endgac

@@ -47,6 +47,7 @@ group :development, :test do
   gem 'net-http'
   gem 'faker'
   gem 'simplecov'
+  gem 'httparty'
 end
 
 group :development do
