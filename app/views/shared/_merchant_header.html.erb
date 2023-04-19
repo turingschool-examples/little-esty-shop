@@ -1,0 +1,7 @@
+<div class="flex-parent">
+  <div class="flex-child"><h2><%= @merchant.name%></h2></div>
+  <div class="flex-child">
+    <div><%= link_to "Items Index", merchant_items_path(@merchant.id) %></div>
+    <div><%= link_to "Invoices Index", merchant_invoices_path(@merchant.id) %></div>
+  </div>
+</div>

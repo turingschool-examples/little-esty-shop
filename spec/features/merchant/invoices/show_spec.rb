@@ -11,7 +11,7 @@ RSpec.describe 'Merchant Invoices Show Page', type: :feature do
     @item_4 = create(:item, merchant_id: @merchant_1.id)
     @item_5 = create(:item, merchant_id: @merchant_1.id)
     @item_6 = create(:item, merchant_id: @merchant_2.id)
-    
+
     @customer_1 = create(:customer)
     @customer_2 = create(:customer)
     @customer_3 = create(:customer)
@@ -26,8 +26,8 @@ RSpec.describe 'Merchant Invoices Show Page', type: :feature do
     @invoice_5 = create(:invoice, customer_id: @customer_4.id)
     @invoice_6 = create(:invoice, customer_id: @customer_5.id)
     @invoice_7 = create(:invoice, customer_id: @customer_6.id)
-    
-    @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: true) #customer_1 
+
+    @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: true) #customer_1
     @transaction_2 = create(:transaction, invoice_id: @invoice_1.id, result: true) #customer_1
     @transaction_3 = create(:transaction, invoice_id: @invoice_2.id, result: true) #customer_1
     @transaction_4 = create(:transaction, invoice_id: @invoice_2.id, result: true) #customer_1
@@ -60,16 +60,16 @@ RSpec.describe 'Merchant Invoices Show Page', type: :feature do
     @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_7.id, status: 2)
     @invoice_item_8 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_5.id, status: 2)
     @invoice_item_9 = create(:invoice_item, item_id: @item_6.id, invoice_id: @invoice_7.id, status: 2)
-  
+
     visit merchant_invoice_path(@merchant_1, @invoice_1)
   end
 
   it 'has a header' do
-    expect(page).to have_content('Merchant Invoice Show Page')
+    expect(page).to have_content('Little Esty Shop')
   end
 
-  it 'has the related invoice information, id, status, created at date in the format "Monday, July 18, 2019 (User Story 15)' do 
-    within '#invoice-info' do  
+  it 'has the related invoice information, id, status, created at date in the format "Monday, July 18, 2019 (User Story 15)' do
+    within '#invoice-info' do
       expect(page).to have_content(@invoice_1.id)
       expect(page).to have_content(@invoice_1.status)
       expect(page).to have_content('Tuesday, March 27, 2012')

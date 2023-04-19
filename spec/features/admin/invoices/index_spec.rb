@@ -11,7 +11,6 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
   describe "Admin Invoices Index Page (User Story 32)" do
     it "displays all Invoice ids in system" do
       visit admin_invoices_path
-      expect(page).to have_content("Admin Invoices Index Page")
       expect(page).to have_content("All Invoices:")
       expect(page).to have_content(@invoice_1.id)
       expect(page).to have_content(@invoice_2.id)

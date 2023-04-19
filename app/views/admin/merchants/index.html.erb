@@ -1,43 +1,35 @@
-<h1>Admin Merchants Index</h1>
+<%= render "shared/admin_header" %>
+
 <%= link_to "Create New Merchant", new_merchant_path %>
 
-<div id = "top_5">
-<h2>Top Merchants</h2>
-<ol>
-<% @top_5.each do |merchant| %>
+<div class="flex-parent">
 
-  <li>Name: <%= link_to merchant.name, admin_merchant_path(merchant) %></li>
-  <p>Total Revenue: <%= format_currency(merchant.revenue) %></p>
-  <p>Top selling date for <%= merchant.name %> was <%= format_date(merchant.highest_revenue_date) %></p>
-<% end %>
-</ol>
-</div>
+  <div class="flex-child">
 
+    <%= render partial: 'merchants', locals: {
+      is_enabled: true,
+      edit_value: false,
+      merchants: @enabled_merchants
+    } %>
 
-<div id = "enabled-merchants">
-<h2>Enabled Merchants</h2>
-  <% @enabled_merchants.each do |merchant|%>
-    <div id = "merchant-<%=merchant.id%>">
-      <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %> Status: <%= merchant.enabled_status %><p>
+    <%= render partial: 'merchants', locals: {
+      is_enabled: false,
+      edit_value: true,
+      merchants: @disabled_merchants
+    } %>
 
-      <p><%= form_with model: merchant, url: merchant_path(merchant), local: true, method: :patch do |form| %>
-        <%= form.hidden_field :is_enabled, value: false %>
-        <%= form.submit "Disable" %>
-      <% end %></p>
-    </div>
+  </div>
+
+  <div class="flex-child" id = "top_5">
+  <h2>Top Merchants</h2>
+  <ol>
+  <% @top_5.each do |merchant| %>
+
+    <li>Name: <%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+    <p>Total Revenue: <%= format_currency(merchant.revenue) %></p>
+    <p>Top selling date for <%= merchant.name %> was <%= format_date(merchant.highest_revenue_date) %></p>
   <% end %>
-</div>
+  </ol>
+  </div>
 
-<div id = "disabled-merchants">
-<h2>Disabled Merchants</h2>
-  <% @disabled_merchants.each do |merchant|%>
-    <div id = "merchant-<%=merchant.id%>">
-      <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %> Status: <%= merchant.enabled_status %><p>
-
-      <p><%= form_with model: merchant, url: merchant_path(merchant), local: true, method: :patch do |form| %>
-        <%= form.hidden_field :is_enabled, value: true %>
-        <%= form.submit "Enable" %>
-      <% end %></p>
-    </div>
-  <% end %>
 </div>

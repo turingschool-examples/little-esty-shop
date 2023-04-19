@@ -1,10 +1,10 @@
-<h3>Merchant Invoice Show Page</h3>
+<%= render "shared/merchant_header" %>
 
 <div id="invoice-info">
-  <h3>Invoice #<%= @invoice.id %></h3>
+  <h3 class="center-header">Invoice #<%= @invoice.id %></h3>
   <p>Status: <%= @invoice.status %></p>
   <p>Created on: <%= format_date(@invoice.created_at) %></p>
-  <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p>
+  <p>Total Revenue: <%= format_currency(@invoice.total_revenue) %></p>
 </div>
 
 <div id="customer-info">

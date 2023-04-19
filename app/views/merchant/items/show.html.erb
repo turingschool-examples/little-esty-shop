@@ -1,14 +1,14 @@
+<%= render "shared/merchant_header" %>
+
 <h2><%= link_to @merchant.name, merchant_dashboard_path(@merchant.id) %> Item Details </h2>
 
-<h3><%= link_to "#{@merchant.name} Item Index", merchant_items_path(@merchant.id) %></h3>
-
-<%= link_to "Edit Item", edit_merchant_item_path(@merchant.id, @item) %>
-
-<h3><%= @item.name %></h3>
+<h3 class="center-header"><%= @item.name %></h3>
 
 <p>Description: <%= @item.description %></p>
 <p>Current Unit Price: <%= format_currency(@item.unit_price) %></p>
 
-<div id="item-image">
+<%= link_to "Edit Item", edit_merchant_item_path(@merchant.id, @item) %>
+
+<div id="item-image" class="image">
   <%= image_tag @photo.small_url %>
 </div>

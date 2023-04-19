@@ -1,4 +1,6 @@
-<h2><%= @merchant.name %> Invoices</h2>
+<%= render "shared/merchant_header" %>
+
+<h2 class="center-header"><%= @merchant.name %> Invoices</h2>
 <% @merchant.invoices.each do |invoice| %>
   <div id="invoice-<%= invoice.id %>">
     <h3><%= link_to "ID: #{invoice.id}", merchant_invoice_path(@merchant, invoice) %></h3>

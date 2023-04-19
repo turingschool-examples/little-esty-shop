@@ -46,7 +46,6 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
   describe "Admin Merchant Index Page (User Story 24)" do
     it "displays each merchant in system" do
       visit admin_merchants_path
-      expect(page).to have_content("Admin Merchants Index")
       expect(page).to have_content(@merchant_1.name)
       expect(page).to have_content(@merchant_2.name)
       expect(page).to have_content(@merchant_3.name)
@@ -119,10 +118,13 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
     end
 
     it "new merchant is displayed with a status of disabled" do
+      test_merchant = create(:merchant, name: "Test Merchant 1")
       visit new_merchant_path
-      fill_in 'merchant_name', with: 'Test Merchant 1'
+      fill_in 'merchant_name', with: test_merchant.name
       click_button('Submit')
-      expect(page).to have_content('Test Merchant 1 Status: Disabled')
+      within("#merchant-#{test_merchant.id}") do
+        expect(page).to have_content('Status: Disabled')
+      end
     end
   end
 

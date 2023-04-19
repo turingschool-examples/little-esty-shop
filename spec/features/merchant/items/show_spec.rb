@@ -17,9 +17,9 @@ RSpec.describe 'Merchant Item Show Page', type: :feature do
     end
 
     it 'it has a link to the merchant item index' do
-      expect(page).to have_link("#{@merchant_1.name} Item Index")
+      expect(page).to have_link("Items Index")
 
-      click_link("#{@merchant_1.name} Item Index")
+      click_link("Items Index")
 
       expect(current_path).to eq(merchant_items_path(@merchant_1.id))
     end

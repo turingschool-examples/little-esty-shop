@@ -61,7 +61,7 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
   end
 
   it 'has a header' do
-    expect(page).to have_content('Merchant Dashboard')
+    expect(page).to have_content('Little Esty Shop')
   end
 
   it 'has the merchant name; User Story 1' do

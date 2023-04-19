@@ -111,16 +111,16 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
     it "displays the total revenue that will be generated from this invoice"do
       visit admin_invoice_path(@invoice_1)
       within("##{@invoice_1.id}_id") do
-        expect(page).to have_content("Total Revenue: 125")
+        expect(page).to have_content("Total Revenue: $125.00")
 
-        expect(page).to_not have_content("Total Revenue: 625")
+        expect(page).to_not have_content("Total Revenue: $625.00")
       end
 
       visit admin_invoice_path(@invoice_2)
       within("##{@invoice_2.id}_id") do
-        expect(page).to have_content("Total Revenue: 625")
+        expect(page).to have_content("Total Revenue: $625.00")
 
-        expect(page).to_not have_content("Total Revenue: 125")
+        expect(page).to_not have_content("Total Revenue: $125.00")
       end
     end
   end

@@ -1,33 +1,40 @@
-<h2><%= @merchant.name %> Items</h2>
+<%= render "shared/merchant_header" %>
+
+<h2 class="center-header"><%= @merchant.name %> Items</h2>
 
 <%= link_to "Create New Item", new_merchant_item_path(@merchant.id) %>
 
-<section id="top-five-items">
-  <h3>Top 5 Most Popular Items By Revenue</h3>
-  <table>
-    <tr>
-      <th>Item Name</th>
-      <th>Total Revenue</th>
-      <th>Top Selling Date</th>
-    </tr>
-    <% @merchant.top_five_items_by_revenue.each_with_index do |item, index| %>
-      <tr id="top-five-items-<%= index + 1 %>">
-        <td><%= link_to item.name, merchant_item_path(@merchant.id, item) %></td>
-        <td><%= format_currency(item.total_revenue) %></td>
-        <td>
-          Top selling date for <%= item.name %> was <%= format_date(item.top_selling_date) %>
-        </td>
+<div class="flex-parent">
+
+  <div class="flex-child">
+    <%= render partial: 'items', locals: {
+      is_enabled: true,
+      items: @merchant.enabled_items
+    } %>
+
+    <%= render partial: 'items', locals: {
+      is_enabled: false,
+      items: @merchant.disabled_items
+    } %>
+  </div>
+
+  <section id="top-five-items" class="flex-child">
+    <h3>Top 5 Most Popular Items By Revenue</h3>
+    <table>
+      <tr>
+        <th>Item Name</th>
+        <th>Total Revenue</th>
+        <th>Top Selling Date</th>
       </tr>
-    <% end %>
-  </table>
-</section>
-
-<%= render partial: 'items', locals: {
-  is_enabled: true,
-  items: @merchant.enabled_items
-} %>
-
-<%= render partial: 'items', locals: {
-  is_enabled: false,
-  items: @merchant.disabled_items
-} %>
+      <% @merchant.top_five_items_by_revenue.each_with_index do |item, index| %>
+        <tr id="top-five-items-<%= index + 1 %>">
+          <td><%= link_to item.name, merchant_item_path(@merchant.id, item) %></td>
+          <td><%= format_currency(item.total_revenue) %></td>
+          <td>
+            Top selling date for <%= item.name %> was <%= format_date(item.top_selling_date) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </section>
+</div>

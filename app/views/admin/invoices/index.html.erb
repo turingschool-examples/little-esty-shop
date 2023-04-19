@@ -1,5 +1,7 @@
-<h1>Admin Invoices Index Page</h1>
-<p>All Invoices:</p>
+<%= render "shared/admin_header" %>
+
+<div class="center-header"><p>All Invoices:</p></div>
+
 <% @invoices.each do |i| %>
-  <%= link_to "#{i.id}", admin_invoice_path(i.id) %>
+  <p>Invoice #<%= link_to "#{i.id}", admin_invoice_path(i.id) %><p>
 <% end %>
