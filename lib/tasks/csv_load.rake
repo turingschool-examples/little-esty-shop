@@ -106,5 +106,5 @@ def convert_invoice_item_status(status)
 end
 
 def convert_item_name(name)
-  name.delete('Item').strip
+  name[5...] if name.start_with?("Item ")
 end
