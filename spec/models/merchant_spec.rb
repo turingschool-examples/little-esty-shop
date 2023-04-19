@@ -31,7 +31,6 @@ RSpec.describe Merchant, type: :model do
       expect(merchant.status).to eq('disabled')
     end
   end
-end
 
   describe 'class methods' do
     describe '.top_five_merch_by_revenue' do
