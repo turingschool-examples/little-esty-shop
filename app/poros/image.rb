@@ -1,5 +1,12 @@
 class Image
-  attr_reader :width, :height, :regular, :full, :thumb, :small, :alt_description, :likes
+  attr_reader :width, 
+              :height, 
+              :regular, 
+              :full, 
+              :thumb, 
+              :small, 
+              :alt_description, 
+              :likes
 
   def initialize(data)
     @width = data[:width]
