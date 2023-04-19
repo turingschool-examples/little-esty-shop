@@ -80,20 +80,20 @@ Merchants can visit their own dashboard to view their items and invoices, examin
 
 Merchants can view details about their items on dedicated item pages, can create and update item information and change the enabled status of their items.
 
-Administrators can visit their own dashboard to see an overview of merchants and invoices, along with statistics about the global top 5 customers and invoice statuses across the entire application. Administrators can see details about merchants, create and update merchant information, and change the enabled status of a given merchant. These users can also manage invoices and view total revenue generated from a given invoice.
+Administrators can visit their own dashboard to see an overview of merchants and invoices, along with statistics about the global top 5 customers and invoice statuses across the entire application. Administrators can see details about merchants, create and update merchant information, and change the enabled status of a given merchant. These users can also manage invoices and view the total revenue generated from a given invoice.
 
 Administrators can access statistics about merchant performance, including the top 5 merchants by revenue along with their best sales day.
 
 Additionally, this application is connected to the [Unsplash API](https://unsplash.com/developers). Hitting these API endpoints allows the application to display a logo image on all pages, display related images for each item, and display a random photo for each merchant. The application also displays the number of likes that the logo has across all pages.
 
-More infomration on the User Stories that guide this functionality can be found [here](https://github.com/turingschool-examples/little-esty-shop/blob/main/doc/user_stories.md).
+More information on the User Stories that guide this functionality can be found [here](https://github.com/turingschool-examples/little-esty-shop/blob/main/doc/user_stories.md).
 
 ### Looking Ahead
 
 Potential contributors to this application may want to address any of the following:
 
 - Styling to implement a more consistent look and feel throughout the application
-- Filtering items, invoices, merchants, or other data to customize views for specific users and allow for additional searching / querying. This could be implemented with search boxes, check boxes, or comparative filters.
+- Filtering items, invoices, merchants, or other data to customize views for specific users and allow for additional searching/querying. This could be implemented with search boxes, check boxes, or comparative filters.
 - Authentication and authorization, for either or both of the Merchant and Administrator user types.
 - Additional e-commerce site functionality, including a shopping cart and communication with users such as a chat feature or personalized e-mails to users.
 
