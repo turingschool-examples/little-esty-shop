@@ -50,6 +50,9 @@ group :development, :test do
   gem 'csv'
   gem 'factory_bot_rails'
   gem 'net-http'
+  gem 'httparty'
+  gem 'json'
+  gem 'unsplash'
 end
 
 group :development do
