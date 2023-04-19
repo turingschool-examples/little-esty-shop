@@ -1,19 +1,30 @@
-<h1><%= @merchant.name %></h1>
-<img src = <%= @photo.url %> > 
-<section id="links">
-<%= link_to "My Items", merchant_items_path(@merchant) %>
-<%= link_to "My Invoices", merchant_invoices_path(@merchant) %>
-</section>
+<header>
+  <div class = "subHead" >
+    <h3 class = "left"><%= @merchant.name %> </h3>
+    <%= image_tag @photo.url, size: "25x25" %>
+    <p class = "right">
+      <section id="links">
+        <%= link_to "Dashboard", dashboard_merchant_path(@merchant) %>
+        <%= link_to "My Items", merchant_items_path(@merchant) %>
+        <%= link_to "My Invoices", merchant_invoices_path(@merchant) %></p>
+      </section>
+  </div>
+</header>
 
-<ol id="top_customers">
-  <h2>Top Customers</h2>
-  <% @merchant.top_five_customers.each do |customer| %> 
-    <li><%= customer.first_name %> <%= customer.last_name %> - Purchases: <%= customer.transaction_count %> </li>
-  <% end %> 
-</ol>
+<article class = 'rightSection' >
+  <ol id="top_customers">
+    <h2>Top Customers</h2>
+    <% @merchant.top_five_customers.each do |customer| %> 
+      <li><%= customer.first_name %> <%= customer.last_name %> - Purchases: <%= customer.transaction_count %> </li>
+    <% end %> 
+  </ol>
+</article>
 
-<ol id="not_yet_shipped">
-  <h2>Items Ready to Ship</h2>
-  <% @items_not_yet_shipped.each do |invoice_item| %> 
-    <li><%= invoice_item.item.name %> - <%= link_to "#{invoice_item.invoice_id}", merchant_invoice_path(invoice_item.invoice_id, merchant_id: @merchant.id) %> - <%= invoice_item.invoice.created_at.strftime("%A, %B %d, %Y") %></li>
-  <% end %>
+<aside class = 'leftSection'>
+  <ol id="not_yet_shipped">
+    <h2>Items Ready to Ship</h2>
+    <% @items_not_yet_shipped.each do |invoice_item| %> 
+      <li><%= invoice_item.item.name %> - <%= link_to "#{invoice_item.invoice_id}", merchant_invoice_path(invoice_item.invoice_id, merchant_id: @merchant.id) %> - <%= invoice_item.invoice.created_at.strftime("%A, %B %d, %Y") %></li>
+    <% end %>
+  </ol>
+</aside>
