@@ -97,7 +97,7 @@ RSpec.describe 'Admin Merchants Index Page' do
 
       
       expect(current_path).to eq(admin_merchants_path)
-      expect(page).to have_content("Merchant disable")
+      expect(page).to have_content("Merchant Disabled")
     end
 
     it 'has section for enabled merchants' do
