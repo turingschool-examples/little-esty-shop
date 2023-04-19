@@ -1,7 +1,4 @@
-<h3>Admin Dashboard</h3>
-
-<%= link_to "Merchants", admin_merchants_path %>
-<%= link_to "Invoices", admin_invoices_path %>
+<%= render 'shared/nav_bar_admin' %>
 <div id="Top_customers">
 Top 5 Customers: <% @top_customers.each do |customer| %>
   <%="#{customer.first_name} #{customer.last_name}'s Transactions: #{customer.transaction_count}" %> <br>
