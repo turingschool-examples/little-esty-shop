@@ -14,8 +14,8 @@ RSpec.describe Invoice, type: :model do
 
   describe '#total_revenue' do
     it 'can calculate the total revenue of an invoice' do
-      expect(@invoice_1.total_revenue).to eq(2600)
-      expect(@invoice_2.total_revenue).to eq(2700)
+      expect(@invoice_1.total_revenue).to eq(26.0)
+      expect(@invoice_2.total_revenue).to eq(27.0)
     end
   end
 
