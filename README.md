@@ -70,6 +70,8 @@ This application is deployed with Render [here](https://little-esty-shop.onrende
 
 ## Project Status and Potential Next Steps
 
+View the project management tracker and any open issues on [GitHub Projects](https://github.com/users/Brianisthebest/projects/2).
+
 ### Completed Functionality as of April 2023
 
 The application currently has ten distinct pages built out, along with a general Welcome page accessible at the root path. These include simulated functionality for both Merchant users and Admin users.
