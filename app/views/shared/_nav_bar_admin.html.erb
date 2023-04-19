@@ -1,0 +1,18 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <a class="navbar-brand">Admin Dashboard</a>
+  </div>
+  <div class="navbar-right">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link"><%= link_to 'Dashboard', admin_dashboard_path(@merchant) %></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"><%= link_to 'Merchants', admin_merchants_path %></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"><%= link_to 'Invoices', admin_invoices_path %></a>
+      </li>
+    </ul>
+  </div>
+</nav>

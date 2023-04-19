@@ -1,14 +1,5 @@
-<h1><center>Little Esty Shop</h1>
-<h3> Admin Dashboard</h3>
-<br>
-<br>
-<section id="merchants">
-  <h2>Merchants</h2>
-  <ul id="merchants-list">
-    <% @merchants.each do |merchant| %>
-      <div id="merchant-<%= merchant.id %>">
-      <li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
-     
+<%= render 'shared/nav_bar_admin' %>
+
 <%= render '/shared/flash_messages' %>
 
 <section id="merchants-enabled">
