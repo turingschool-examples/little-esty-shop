@@ -136,5 +136,9 @@ RSpec.describe Merchant, type: :model do
     it 'can list top 5 merchants' do
       expect(Merchant.top_5_merchants).to eq([@merchant_1, @merchant_2, @merchant_6, @merchant_4, @merchant_3])
     end
+
+    it 'list by highest revenue day' do
+      expect(@merchant_1.high_rev_day).to eq("2012-03-30")
+    end
   end
 end
