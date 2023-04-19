@@ -16,18 +16,20 @@ class Admin::MerchantsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:id])
 
-    if params[:status].present?
-      toggle_status
-      redirect_to admin_merchants_path
-    elsif @merchant.update(merchant_params)
-      flash[:success] = "Merchant Updated"
-      redirect_to admin_merchant_path(@merchant)
+    if @merchant.update(merchant_params)
+       if params[:name].nil?
+        toggle_status
+        redirect_to admin_merchants_path
+      else
+        flash[:success] = "Merchant Updated"
+        redirect_to admin_merchant_path(@merchant)
+      end
     else
       flash[:notice] = "Merchant Update Failed"
       redirect_to edit_admin_merchant_path(@merchant)
     end
   end
-  
+
   def toggle_status
     @merchant = Merchant.find(params[:id])
     if @merchant.enabled?
@@ -41,6 +43,6 @@ class Admin::MerchantsController < ApplicationController
 
   private
   def merchant_params
-    params.permit(:name, :status)
+    params.permit(:name, :status, :update_form)
   end
 end
