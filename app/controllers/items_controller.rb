@@ -8,6 +8,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @merchant = Merchant.find(params[:merchant_id])
+    @item_img = PhotoBuilder.item_img(@item.name)
   end
   
   def edit

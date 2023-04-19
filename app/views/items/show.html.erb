@@ -3,3 +3,7 @@
 <p>Price: <%= @item.unit_price %></p>
 
 <%= link_to "Update Information", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %>
+
+<header>
+<%= image_tag @item_img.url, size: "100x100" %>
+</header>
