@@ -1,6 +1,8 @@
 class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
+    @image_search = ImageSearch.new
+    @images = @image_search.images("street corner")
   end
 
   def show

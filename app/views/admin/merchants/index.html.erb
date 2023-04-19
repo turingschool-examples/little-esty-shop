@@ -8,6 +8,7 @@
     <% @merchants.each do |merchant| %>
       <div id="merchant-<%= merchant.id %>">
       <li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+      <%= image_tag(@images.sample.thumb) %>
       </div>
     <% end %>
   </ul>

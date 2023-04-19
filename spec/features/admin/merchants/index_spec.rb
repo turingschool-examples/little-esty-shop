@@ -61,7 +61,7 @@ RSpec.describe 'Admin Merchants Index Page' do
 
   
     it 'I see the total revenue generated next to each merchant name' do
-
+      
       within "#top_merchant_#{@merchant_2.id}" do
         expect(page).to have_content(@merchant_2.name)
         expect(page).to have_content("$15,307,520.00")
