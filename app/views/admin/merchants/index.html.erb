@@ -27,8 +27,8 @@
 <div id="top_merchants">
 <h3>Top 5 Merchants by Revenue</h3>
 <% @merchants.top_5_merchants.each do |merchant| %>
-<p><%= merchant.name %>, <%= merchant.revenue %></p>
-<% end %>
+<p><%= merchant.name %>, <%= merchant.revenue %>, <%= "Top selling date for #{merchant.name} was #{merchant.high_rev_day}" %></p>
+<% end %> 
 </div>
 
 
