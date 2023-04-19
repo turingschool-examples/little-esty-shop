@@ -83,6 +83,7 @@ RSpec.describe "Index page", type: :feature do
       expect(@item_1.status).to eq("enabled")
     end
   end
+  
   describe "Items grouped by status" do
     before do 
       @merchant_1 = FactoryBot.create(:merchant)
