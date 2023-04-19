@@ -39,4 +39,9 @@ class Merchant < ApplicationRecord
     .order('revenue DESC')
     .limit(5)
   end
+
+  def high_rev_day
+    invoices.joins(:items)
+    .group(:id, :created_at).order(Arel.sql("SUM(items.unit_price) desc, created_at desc")).first.created_at
+  end
 end
