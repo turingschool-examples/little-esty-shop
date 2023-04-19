@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LittleEstyShop</title>
+    <title>Little Esty Shop</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,12 +9,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-
   <body class="page-border">
-    <header>
-      <div class="header-image"><img src = "<%=@logo.thumb_url%>" id="logo_img" height="50", width="auto"></div>
-      <h1 class="header-title"><span>Little Esty Shop<span></h1>
-    </header>
+    <%= render 'shared/header' %>
     <%= render 'shared/messages' %>
     <%= yield %>
   </body>
