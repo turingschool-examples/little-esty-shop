@@ -8,7 +8,7 @@ class Invoice < ApplicationRecord
   enum status: ["cancelled", "in progress", "completed"]
   
   def total_revenue
-    invoice_items.sum('quantity * unit_price')
+    invoice_items.sum('quantity * unit_price') / 100.0
   end
 
   def self.incomplete_invoices

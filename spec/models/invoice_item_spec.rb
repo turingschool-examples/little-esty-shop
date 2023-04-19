@@ -26,6 +26,10 @@ RSpec.describe InvoiceItem, type: :model do
     it '#item_name' do
       expect(@invoice_item_1.item_name).to eq(@item_1.name)
     end
+
+    it '#price_usd' do
+      expect(@invoice_item_1.price_usd).to eq(@invoice_item_1.unit_price / 100.0)
+    end
   end
 end
 
