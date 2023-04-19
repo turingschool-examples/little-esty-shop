@@ -1,5 +1,12 @@
-<h1><%= @item.name %></h1>
-<img src = <%= @item_photo.url %>>
+<%= render partial: "header" %>
+
+<div style="display: flex; background-color: #D3D3D3; width: 100%; border-top: 1px solid black; height: 30px; align-items: center; justify-content: center;" >
+  <h3> <%= @item.name %> </h3>
+</div>
+
+<div class = "app_logo">
+  <img src = <%= @item_photo.url %>>
+</div>
 <p><%= "Description: #{@item.description}" %></p>
 <p><%= "Unit price: #{@item.unit_price}" %></p>
 <p><%= link_to "Update #{@item.name}", edit_merchant_item_path(@merchant.id, @item.id)%>

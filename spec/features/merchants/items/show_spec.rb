@@ -21,6 +21,7 @@ RSpec.describe "Item show page", type: :feature do
     
     it "visit item show page, see a link to update that item" do
       visit merchant_item_path(@merchant_2, @item_4)
+      save_and_open_page
 
       expect(page).to have_link("Update #{@item_4.name}", href: "/merchants/#{@merchant_2.id}/items/#{@item_4.id}/edit")
 
