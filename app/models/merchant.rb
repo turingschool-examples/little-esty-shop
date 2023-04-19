@@ -42,6 +42,6 @@ class Merchant < ApplicationRecord
 
   def high_rev_day
     invoices.joins(:items)
-    .group(:id, :created_at).order(Arel.sql("SUM(items.unit_price) desc, created_at desc")).first.created_at
+    .group(:id, :created_at).order(Arel.sql("SUM(items.unit_price) desc, created_at desc")).first.created_at.strftime("%A, %B %d, %Y")
   end
 end
