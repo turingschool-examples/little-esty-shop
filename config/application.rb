@@ -11,6 +11,12 @@ module LittleEtsyShop
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    # Unsplash.configure do |config|
+    #   config.application_access_key = "_VRZaA4Cz8JuLunDFcNISWMY36sxkTdZA6cEeqMGq50"
+    #   config.application_secret = "MvRhSvVZn8xEuyHXFsoO_mlMYeu5TQejFKTpImm9uas"
+    #   config.application_redirect_uri = "https://unsplash.com/oauth/applications/438268"
+    #   config.utm_source = "alices_terrific_client_app"
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

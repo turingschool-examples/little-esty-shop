@@ -9,6 +9,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header>
+  <%= image_tag @logo_photo.url, size: "300x300" %>
+  </header>
+  
   <body>
   <% flash.each do |type, msg| %>
     <div id=flash_message>
