@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "Item show page", type: :feature do
+  before(:each) do
+    stub_request(:get, "https://api.unsplash.com/photos/random?client_id=FlgsxiCZm-o34965PDOwh6xVsDINZFbzSwcz0__LKZQ&query=merchant")
+      .to_return(status: 200, body: File.read('./spec/fixtures/merchant.json'))
+    stub_request(:get, "https://api.unsplash.com/photos/5Fxuo7x-eyg?client_id=aOXB56mTdUD88zHCvISJODxwbTPyRRsOk0rA8Ha-cbc")
+      .to_return(status: 200, body: File.read('./spec/fixtures/app_logo.json'))
+  end
   describe "display" do
     before do
       @merchant_1 = Merchant.create!(name: "Merchant_1")
@@ -20,8 +26,12 @@ RSpec.describe "Item show page", type: :feature do
     end
     
     it "visit item show page, see a link to update that item" do
+      stub_request(:get, "https://api.unsplash.com/photos/random?client_id=mj7CJdgJJnWWE_PL83njw8RsU79x54iA4g5bHKlM_wA&query=Item_4")
+        .to_return(status: 200, body: File.read('./spec/fixtures/item.json'))
+      stub_request(:get, "https://api.unsplash.com/photos/random?client_id=mj7CJdgJJnWWE_PL83njw8RsU79x54iA4g5bHKlM_wA&query=Cookies")
+        .to_return(status: 200, body: File.read('./spec/fixtures/item.json'))
       visit merchant_item_path(@merchant_2, @item_4)
-      save_and_open_page
+      
 
       expect(page).to have_link("Update #{@item_4.name}", href: "/merchants/#{@merchant_2.id}/items/#{@item_4.id}/edit")
 
@@ -44,9 +54,13 @@ RSpec.describe "Item show page", type: :feature do
       expect(page).to have_content("Cookies")
       expect(page).to have_content("Description: Yummy")
       expect(page).to have_content("Unit price: 750")
-   
+   save_and_open_page
     end
     it "visit item show page, see a link to update that item" do
+      stub_request(:get, "https://api.unsplash.com/photos/random?client_id=mj7CJdgJJnWWE_PL83njw8RsU79x54iA4g5bHKlM_wA&query=Item_4")
+        .to_return(status: 200, body: File.read('./spec/fixtures/item.json'))
+      stub_request(:get, "https://api.unsplash.com/photos/random?client_id=mj7CJdgJJnWWE_PL83njw8RsU79x54iA4g5bHKlM_wA&query=Cookies")
+        .to_return(status: 200, body: File.read('./spec/fixtures/item.json'))
       visit merchant_item_path(@merchant_2, @item_4)
 
       expect(page).to have_link("Update #{@item_4.name}", href: "/merchants/#{@merchant_2.id}/items/#{@item_4.id}/edit")

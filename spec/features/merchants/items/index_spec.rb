@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "Index page", type: :feature do
+  before (:each) do
+    stub_request(:get, "https://api.unsplash.com/photos/random?client_id=FlgsxiCZm-o34965PDOwh6xVsDINZFbzSwcz0__LKZQ&query=merchant")
+      .to_return(status: 200, body: File.read('./spec/fixtures/merchant.json'))
+    stub_request(:get, "https://api.unsplash.com/photos/5Fxuo7x-eyg?client_id=aOXB56mTdUD88zHCvISJODxwbTPyRRsOk0rA8Ha-cbc")
+      .to_return(status: 200, body: File.read('./spec/fixtures/app_logo.json'))
+  end
   describe "display" do
     before do
       @merchant_1 = Merchant.create!(name: "Merchant_1")
@@ -37,7 +43,10 @@ RSpec.describe "Index page", type: :feature do
     end
 
     it "item names are links to item show page" do
+      stub_request(:get, "https://api.unsplash.com/photos/random?client_id=mj7CJdgJJnWWE_PL83njw8RsU79x54iA4g5bHKlM_wA&query=Item_7")
+        .to_return(status: 200, body: File.read('./spec/fixtures/item.json'))
       visit merchant_items_path(@merchant_3)
+  
 
       expect(page).to have_link(@item_7.name, href: "/merchants/#{@merchant_3.id}/items/#{@item_7.id}")
       expect(page).to have_link(@item_8.name, href: "/merchants/#{@merchant_3.id}/items/#{@item_8.id}")
@@ -185,6 +194,8 @@ RSpec.describe "Index page", type: :feature do
     end
 
     it "can create a new item" do
+      stub_request(:get, "https://api.unsplash.com/photos/random?client_id=mj7CJdgJJnWWE_PL83njw8RsU79x54iA4g5bHKlM_wA&query=Cookies")
+        .to_return(status: 200, body: File.read('./spec/fixtures/item.json'))
       visit new_merchant_item_path(@merchant_1)
 
       expect(page).to have_content("Name")

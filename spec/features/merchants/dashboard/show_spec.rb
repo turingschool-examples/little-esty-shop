@@ -3,12 +3,16 @@ require 'rails_helper'
 RSpec.describe 'Merchant Dashboard Show Page' do
  before(:each) do
   test_data
+  stub_request(:get, "https://api.unsplash.com/photos/random?client_id=FlgsxiCZm-o34965PDOwh6xVsDINZFbzSwcz0__LKZQ&query=merchant")
+    .to_return(status: 200, body: File.read('./spec/fixtures/merchant.json'))
+  stub_request(:get, "https://api.unsplash.com/photos/5Fxuo7x-eyg?client_id=aOXB56mTdUD88zHCvISJODxwbTPyRRsOk0rA8Ha-cbc")
+    .to_return(status: 200, body: File.read('./spec/fixtures/app_logo.json'))
  end
 
   describe 'User Story 1' do
     it 'I can see my merchant dashboard' do
       visit dashboard_merchant_path(@merchant_1)
-save_and_open_page
+
       expect(page).to have_content(@merchant_1.name)
 
       visit dashboard_merchant_path(@merchant_2)
