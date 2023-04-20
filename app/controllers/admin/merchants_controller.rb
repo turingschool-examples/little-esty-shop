@@ -5,7 +5,6 @@ class Admin::MerchantsController < ApplicationController
     @images = @image_search.images("street corner")
     @merchants_enabled = Merchant.where(status: 'enabled')
     @merchants_disabled = Merchant.where(status: 'disabled')
-
   end
 
   def show
