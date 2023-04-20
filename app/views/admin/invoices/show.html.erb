@@ -2,6 +2,16 @@
 <li>Status: <%=@invoice.status%></li>
 <li>Created at: <%=@invoice_created%></li>
 <li>Customer: <%=@invoice.customer_full_name%></li>
+Total Invoice Revenue: <%=@invoice.total_revenue%>
+<section id=update_invoice_status>
+      <%= form_with model: @invoices, method: :patch do |f| %>
+        <%= f.label "Status"%>
+        <%= f.select :status, ["in progress", "completed", "cancelled"], selected: @invoice.status %>
+        <%= f.submit "Update Invoice" %>
+      <% end %>
+      <br>
+    </div>
+</section>
 
 <% @invoice.invoice_items.each do |invoice_item| %>
   <%=invoice_item.item.name%><br>
@@ -10,4 +20,3 @@
   Status: <%=invoice_item.status%><br>
 <% end %>
 
-Total Invoice Revenue: <%=@invoice.total_revenue%>
