@@ -3,6 +3,11 @@
 <li>Created at: <%=@invoice_created%></li>
 <li>Customer: <%=@invoice.customer_full_name%></li>
 
-<% @invoice.items.each do |item| %>
-  <%=item.name%><br>
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <%=invoice_item.item.name%><br>
+  Quantity: <%=invoice_item.quantity%><br>
+  Unit Price: <%=invoice_item.unit_price%><br>
+  Status: <%=invoice_item.status%><br>
 <% end %>
+
+Total Invoice Revenue: <%=@invoice.total_revenue%>

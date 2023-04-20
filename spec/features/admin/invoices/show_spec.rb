@@ -37,32 +37,32 @@ RSpec.describe "admin/invoices#show" do
     expect(page).to have_content("#{@item_10.name}")
   end
 
-  xit 'lists quantity' do
+  it 'lists Total Invoice Revenue' do
     visit admin_invoice_path(@invoice_1)
     
     #probably a within here
     expect(page).to have_content("Quantity: #{@invoice_item_1.quantity}")
-    expect(page).to have_content("Quantity: #{@invoice_item_10.quantity}")
+    expect(page).to have_content("Quantity: #{@invoice_item_20.quantity}")
   end
 
-  xit 'shows price sold for' do
+  it 'shows price sold for' do
     visit admin_invoice_path(@invoice_1)
     
-    expect(page).to have_content("Quantity: #{@invoice_item_1.unit_price}")
-    expect(page).to have_content("Quantity: #{@invoice_item_10.unit_price}")
+    expect(page).to have_content("Unit Price: #{@invoice_item_1.unit_price}")
+    expect(page).to have_content("Unit Price: #{@invoice_item_20.unit_price}")
   end
 
-  xit 'shows invoice_item status' do
+  it 'shows invoice_item status' do
     visit admin_invoice_path(@invoice_1)
-    
-    expect(page).to have_content("Quantity: #{@invoice_item_1.status}")
-    expect(page).to have_content("Quantity: #{@invoice_item_10.status}")
+    save_and_open_page
+    expect(page).to have_content("Status: #{@invoice_item_1.status}")
+    expect(page).to have_content("Status: #{@invoice_item_20.status}")
   end
 
-  xit 'shows the total revenue' do
+  it 'shows the total revenue' do
     visit admin_invoice_path(@invoice_1)
     
-    expect(page).to have_content("Quantity: #{@invoice_item_1.total_revenue}")
-    expect(page).to have_content("Quantity: #{@invoice_item_10.total_revenue}")
+    expect(page).to have_content("Total Invoice Revenue: #{@invoice_1.total_revenue}")
+   
   end
 end
