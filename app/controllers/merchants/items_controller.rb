@@ -1,24 +1,29 @@
 class Merchants::ItemsController < ApplicationController
   def index
+    @image_search = ImageSearch.new
+    @logo = @image_search.images("Big Pharma")
     @merchant = Merchant.find(params[:merchant_id])
     @items = @merchant.items
   end
 
   def show
+    @image_search = ImageSearch.new
+    @logo = @image_search.images("Big Pharma")
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
-    @image_search = ImageSearch.new
     @images = @image_search.images(@item.name)
   end
 
   def edit
+    @image_search = ImageSearch.new
+    @logo = @image_search.images("Big Pharma")
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
   end
 
   def update
     @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(params[:id])  
+    @item = Item.find(params[:id])
     if item_params[:status].present?
       @item.update(item_params)
       redirect_to merchant_items_path(@item.merchant)
@@ -34,6 +39,8 @@ class Merchants::ItemsController < ApplicationController
   def new
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.new
+    @image_search = ImageSearch.new
+    @logo = @image_search.images("Big Pharma")
   end
 
   def create
