@@ -1,0 +1,19 @@
+.column {
+  width: 50%; /* Set the width of each column to 50% to create a two-column layout */
+  float: left; /* Float the columns to the left to align them horizontally */
+  box-sizing: border-box; /* Include padding and borders in the width of the columns */
+}
+
+#my-items-column {
+  padding: 20px; /* Add padding to the my-items section for spacing */
+}
+
+#top-items-column {
+  padding: 20px; /* Add padding to the top-items section for spacing */
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both; /* Clear the floats after the columns to prevent layout issues */
+}

@@ -1,41 +1,46 @@
 <%= render 'shared/nav_bar_merchant' %>
+<%= render 'shared/two_columns' %>
 <br>
-<section id="my-items">
-  <h2>My Items</h2>
-  <%= render 'shared/flash_messages'  %>
-  <%= link_to "Create New Item", new_merchant_item_path(@merchant) %>
-  <h3>Enabled Items</h3>
-  <ul id="enabled-items-list">
-    <% @items.enabled.each do |item| %>
-      <div id="enabled-item-<%= item.id %>">
-      <li><%= link_to item.name, merchant_item_path(@merchant, item) %></li>
-      <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: { status: :disabled }%>
-      </div>
-    <% end %>
-  </ul>
-  <h3>Disabled Items</h3>
-  <ul id="disabled-items-list">
-    <% @items.disabled.each do |item| %>
-      <div id="disabled-item-<%= item.id %>">
-      <li><%= link_to item.name, merchant_item_path(@merchant, item) %></li>
-      <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: { status: :enabled }%>
-      </div>
-    <% end %>
-  </ul>
-</section>
+<div id="left-column" class="column">
+  <section id="my-items">
+    <h2>My Items</h2>
+    <%= render 'shared/flash_messages'  %>
+    <%= link_to "Create New Item", new_merchant_item_path(@merchant) %>
+    <h3>Enabled Items</h3>
+    <ul id="enabled-items-list">
+      <% @items.enabled.each do |item| %>
+        <div id="enabled-item-<%= item.id %>">
+        <li><%= link_to item.name, merchant_item_path(@merchant, item) %></li>
+        <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: { status: :disabled }%>
+        </div>
+      <% end %>
+    </ul>
+    <h3>Disabled Items</h3>
+    <ul id="disabled-items-list">
+      <% @items.disabled.each do |item| %>
+        <div id="disabled-item-<%= item.id %>">
+        <li><%= link_to item.name, merchant_item_path(@merchant, item) %></li>
+        <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: { status: :enabled }%>
+        </div>
+      <% end %>
+    </ul>
+  </section>
+</div>
 
-<section id="top-items">
-  <h3>Top Items</h3>
-  <ol id="top-items-list">
-    <% @items.top_five_by_revenue(@merchant).each do |item| %>
-      <div id="top-item-<%= item.id %>">
-      <li><%= link_to item.name, merchant_item_path(@merchant, item) %>
-      <br>
-      Revenue: $<%= item.revenue/100 %>
-      <br>
-      Top Selling Date: <%= item.top_selling_date %>
-      </li>
-      </div>
-    <% end %>
-  </ol>
-</section>
+<div id="right-column" class="column">
+  <section id="top-items">
+    <h2>Top Items</h2>
+    <ol id="top-items-list">
+      <% @items.top_five_by_revenue(@merchant).each do |item| %>
+        <div id="top-item-<%= item.id %>">
+        <li><%= link_to item.name, merchant_item_path(@merchant, item) %>
+        <br>
+        Revenue: $<%= item.revenue/100 %>
+        <br>
+        Top Selling Date: <%= item.top_selling_date %>
+        </li>
+        </div>
+      <% end %>
+    </ol>
+  </section>
+</div>

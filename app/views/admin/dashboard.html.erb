@@ -1,12 +1,17 @@
 <%= render 'shared/nav_bar_admin' %>
-<div id="Top_customers">
-Top 5 Customers: <% @top_customers.each do |customer| %>
-  <%="#{customer.first_name} #{customer.last_name}'s Transactions: #{customer.transaction_count}" %> <br>
-<% end %></div> <br>
+<%= render 'shared/two_columns' %>
 
-<div id="Incomplete_invoices">
-Incomplete Invoices: <br
-> <% @incomplete_invoices.each do |invoice| %>
-    <%=invoice.id%> 
-    Created: <%=invoice.created_at_formatted%> <br>
-  <% end %></div>
+<div id="left-column" class="column">
+  <div id="Top_customers">
+  Top 5 Customers: <% @top_customers.each do |customer| %>
+    <%="#{customer.first_name} #{customer.last_name}'s Transactions: #{customer.transaction_count}" %> <br>
+  <% end %></div> <br>
+</div>
+<div id="left-column" class="column">
+  <div id="Incomplete_invoices">
+  Incomplete Invoices: <br
+  > <% @incomplete_invoices.each do |invoice| %>
+      <%=invoice.id%> 
+      Created: <%=invoice.created_at_formatted%> <br>
+    <% end %></div>
+</div>
