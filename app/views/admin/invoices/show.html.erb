@@ -1,4 +1,14 @@
 <li>ID: <%=@invoice.id%></li>
 <li>Status: <%=@invoice.status%></li>
-<li>Created at: <%=@invoice_created%></li>
+<li>Created at: <%= @invoice.created_at_formatted%></li>
 <li>Customer: <%=@invoice.customer_full_name%></li>
+
+<section id=update_invoice_status>
+      <%= form_with model: @invoices, method: :patch do |f| %>
+        <%= f.label "Status"%>
+        <%= f.select :status, ["in progress", "completed", "cancelled"], selected: @invoice.status %>
+        <%= f.submit "Update Invoice" %>
+      <% end %>
+      <br>
+    </div>
+</section>
