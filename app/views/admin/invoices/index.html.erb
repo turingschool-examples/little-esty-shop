@@ -1,0 +1,10 @@
+<%= render 'shared/nav_bar_admin' %>
+<br>
+<section id="invoices">
+  <h3>Invoices</h3>
+  <% @invoices.each do |invoice| %>
+    <div id="invoice_<%= invoice.id %>">
+    <p>Invoice #<%= link_to invoice.id, admin_invoice_path(invoice) %></p>
+    </div>
+  <% end %>
+</section>
