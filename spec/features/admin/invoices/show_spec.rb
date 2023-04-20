@@ -54,7 +54,7 @@ RSpec.describe "admin/invoices#show" do
 
   it 'shows invoice_item status' do
     visit admin_invoice_path(@invoice_1)
-    save_and_open_page
+
     expect(page).to have_content("Status: #{@invoice_item_1.status}")
     expect(page).to have_content("Status: #{@invoice_item_20.status}")
   end
