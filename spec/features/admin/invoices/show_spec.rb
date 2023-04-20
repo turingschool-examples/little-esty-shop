@@ -38,7 +38,6 @@ RSpec.describe "admin/invoices#show" do
 
         within "#update_invoice_status" do
           expect(@invoice_1.status).to eq("cancelled")
-          save_and_open_page
           find("#status option[value='in progress']").select_option
           click_button("Update Invoice")
           
@@ -49,27 +48,28 @@ RSpec.describe "admin/invoices#show" do
       end
     end
   end
-
+  
   it 'lists item names' do
     visit admin_invoice_path(@invoice_1)
     
     expect(page).to have_content("#{@item_1.name}")
     expect(page).to have_content("#{@item_10.name}")
   end
-
+  
   it 'lists Total Invoice Revenue' do
     visit admin_invoice_path(@invoice_1)
     
     #probably a within here
     expect(page).to have_content("Quantity: #{@invoice_item_1.quantity}")
     expect(page).to have_content("Quantity: #{@invoice_item_20.quantity}")
+    save_and_open_page
   end
 
   it 'shows price sold for' do
     visit admin_invoice_path(@invoice_1)
     
-    expect(page).to have_content("Unit Price: #{@invoice_item_1.unit_price}")
-    expect(page).to have_content("Unit Price: #{@invoice_item_20.unit_price}")
+    expect(page).to have_content("Unit Price: $100.00")
+    expect(page).to have_content("Unit Price: $54,134.00")
   end
 
   it 'shows invoice_item status' do
@@ -82,7 +82,7 @@ RSpec.describe "admin/invoices#show" do
   it 'shows the total revenue' do
     visit admin_invoice_path(@invoice_1)
     
-    expect(page).to have_content("Total Invoice Revenue: #{@invoice_1.total_revenue}")
+    expect(page).to have_content("Total Invoice Revenue: $5,142,830.00")
    
   end
 end
