@@ -7,26 +7,26 @@ RSpec.describe "admin/invoices#show" do
 
 
   it 'has invoice ID' do
-    visit admin_invoice(@invoice_1)
+    visit admin_invoice_path(@invoice_1)
 
     expect(page).to have_content(@invoice_1.id)
   end
 
-  xit 'has status' do
-    visit admin_invoice(@invoice_1)
+  it 'has status' do
+    visit admin_invoice_path(@invoice_1)
 
     expect(page).to have_content(@invoice_1.status)
   end
 
-  xit 'has created at formatted' do
-    visit admin_invoice(@invoice_1)
+  it 'has created at formatted' do
+    visit admin_invoice_path(@invoice_1)
 
     expect(page).to have_content(@invoice_1.created_at_formatted)
   end
 
-  xit 'has customer first and last name' do
-    visit admin_invoice(@invoice_1)
+  it 'has customer first and last name' do
+    visit admin_invoice_path(@invoice_1)
 
-    expect(page).to have_content(@invoice_1.id)
+    expect(page).to have_content("#{@invoice_1.customer.first_name} #{@invoice_1.customer.last_name}")
   end
 end
