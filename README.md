@@ -1,5 +1,8 @@
 # Little Esty Shop
 
+## Archival Notice
+As of May 2023, this project has been archived/retired from Rails 5. Please find and use the Rails 7/Ruby 3 project [here](https://github.com/turingschool-examples/little-shop-7). 
+
 ## Background and Description
 
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
